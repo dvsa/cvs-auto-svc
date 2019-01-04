@@ -3,11 +3,13 @@ package steps;
 import clients.DefectsClient;
 import io.restassured.response.Response;
 import model.defects.Defect;
+import model.defects.Deficiencies;
+import model.defects.Items;
 import net.thucydides.core.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.*;
 
 public class DefectsSteps {
@@ -53,104 +55,38 @@ public class DefectsSteps {
         response.then().body("additionalInfo.psv.location.axelNumber", hasItem(nullValue()));
 
 
-
-        List<String> itemDescription = new ArrayList<>();
-        for (int i = 0; i < defect.getItems().size(); i++) {
-            itemDescription.add(defect.getItems().get(i).getItemDescription());
-        }
+        List<String> itemDescription = defect.getItems().stream().map(Items::getItemDescription).collect(toList());
         response.then().body("items.itemDescription", hasItem(contains(itemDescription.toArray())));
 
-        List<Integer> itemNumber = new ArrayList<>();
-        for (int i = 0; i < defect.getItems().size(); i++) {
-            itemNumber.add(defect.getItems().get(i).getItemNumber());
-        }
+        List<Integer> itemNumber = defect.getItems().stream().map(Items::getItemNumber).collect(toList());
         response.then().body("items.itemNumber", hasItem(contains(itemNumber.toArray())));
 
-        List<List<String>> vehicleType = new ArrayList<>();
-        for (int i = 0; i < defect.getItems().size(); i++) {
-            vehicleType.add(defect.getItems().get(i).getForVehicleType());
-        }
+        List<List<String>> vehicleType = defect.getItems().stream().map(Items::getForVehicleType).collect(toList());
         response.then().body("items.forVehicleType", hasItem(contains(vehicleType.toArray())));
 
-        List<List<String>> refList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<String> currentRefList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentRefList.add(defect.getItems().get(j).getDeficiencies().get(i).getRef());
-            }
-            refList.add(currentRefList);
-        }
+        List<List<String>> refList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getRef).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.ref", hasItem(contains(refList.toArray())));
 
-        List<List<String>> deficiencyIdList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<String> currentDeficiencyIdList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentDeficiencyIdList.add(defect.getItems().get(j).getDeficiencies().get(i).getDeficiencyId());
-            }
-            deficiencyIdList.add(currentDeficiencyIdList);
-        }
-
+        List<List<String>> deficiencyIdList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getDeficiencyId).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.deficiencyId", hasItem(contains(deficiencyIdList.toArray())));
 
-
-        List<List<String>> deficiencySubIdList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<String> currentDeficiencySubIdList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentDeficiencySubIdList.add(defect.getItems().get(j).getDeficiencies().get(i).getDeficiencySubId());
-            }
-            deficiencySubIdList.add(currentDeficiencySubIdList);
-        }
-
+        List<List<String>> deficiencySubIdList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getDeficiencySubId).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.deficiencySubId", hasItem(contains(deficiencySubIdList.toArray())));
 
-        List<List<String>> deficiencyCategoryList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<String> currentDeficiencyCategoryList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentDeficiencyCategoryList.add(defect.getItems().get(j).getDeficiencies().get(i).getDeficiencyCategory());
-            }
-            deficiencyCategoryList.add(currentDeficiencyCategoryList);
-        }
-
+        List<List<String>> deficiencyCategoryList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getDeficiencyCategory).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.deficiencyCategory", hasItem(contains(deficiencyCategoryList.toArray())));
 
 
-
-        List<List<String>> deficiencyTextList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<String> currentDeficiencyTextList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentDeficiencyTextList.add(defect.getItems().get(j).getDeficiencies().get(i).getDeficiencyText());
-            }
-            deficiencyTextList.add(currentDeficiencyTextList);
-        }
-
+        List<List<String>> deficiencyTextList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getDeficiencyText).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.deficiencyText", hasItem(contains(deficiencyTextList.toArray())));
 
 
-        List<List<Boolean>> stdForProhibitionList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<Boolean> currentStdForProhibitionList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentStdForProhibitionList.add(defect.getItems().get(j).getDeficiencies().get(i).getStdForProhibition());
-            }
-            stdForProhibitionList.add(currentStdForProhibitionList);
-        }
-
+        List<List<Boolean>> stdForProhibitionList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getStdForProhibition).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.stdForProhibition", hasItem(contains(stdForProhibitionList.toArray())));
 
-        List<List<List<String>>> forVehicleTypeList = new ArrayList<>();
-        for (int j = 0; j < defect.getItems().size(); j++) {
-            List<List<String>> currentForVehicleTypeList = new ArrayList<>();
-            for (int i = 0; i < defect.getItems().get(j).getDeficiencies().size(); i++) {
-                currentForVehicleTypeList.add(defect.getItems().get(j).getDeficiencies().get(i).getForVehicleType());
-            }
-            forVehicleTypeList.add(currentForVehicleTypeList);
-        }
-
+        List<List<List<String>>> forVehicleTypeList = defect.getItems().stream().map(s -> s.getDeficiencies().stream().map(Deficiencies::getForVehicleType).collect(toList())).collect(toList());
         response.then().body("items.deficiencies.forVehicleType", hasItem(contains(forVehicleTypeList.toArray())));
+
     }
 
 }
