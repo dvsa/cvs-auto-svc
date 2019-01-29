@@ -10,12 +10,12 @@ public class DefectsData {
     public static Defect buildDefectsData() {
 
         Location location = new Location()
-                .setVertical(Arrays.asList("upper"))
-                .setHorizontal(Collections.emptyList())
-                .setLateral(Arrays.asList("nearside"))
-                .setLongitudinal(Collections.emptyList())
-                .setRowNumber(Arrays.asList(2))
-                .setSeatNumber(Arrays.asList(2))
+                .setVertical(Arrays.asList("upper", "lower"))
+                .setHorizontal(null)
+                .setLateral(Arrays.asList("nearside", "offside", "centre"))
+                .setLongitudinal(null)
+                .setRowNumber(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20))
+                .setSeatNumber(Arrays.asList(1,2,3,4,5,6))
                 .setAxelNumber(Collections.emptyList());
 
         Psv psv = new Psv()
@@ -31,7 +31,7 @@ public class DefectsData {
                 .setRef("3.1.a")
                 .setDeficiencyId("a")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("missing.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -40,7 +40,7 @@ public class DefectsData {
                 .setRef("3.1.b")
                 .setDeficiencyId("b")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("of an incorrect type.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -49,7 +49,7 @@ public class DefectsData {
                 .setRef("3.2.a.i")
                 .setDeficiencyId("a")
                 .setDeficiencySubId("i")
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("with excessive corrosion, serious deterioration or a fracture in a load bearing member of the vehicle structure within 30cm of the anchorage (where a seat belt is attached to a seat frame this will apply to all seat mounting points).")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -58,7 +58,7 @@ public class DefectsData {
                 .setRef("3.2.a.ii")
                 .setDeficiencyId("a")
                 .setDeficiencySubId("ii")
-                .setDeficiencyCategory("Dangerous")
+                .setDeficiencyCategory("dangerous")
                 .setDeficiencyText("with excessive corrosion, serious deterioration or a fracture in a load bearing member of the vehicle structure within 30cm of the anchorage (where a seat belt is attached to a seat frame this will apply to all seat mounting points) and is likely to detach.")
                 .setStdForProhibition(Boolean.TRUE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -67,7 +67,7 @@ public class DefectsData {
                 .setRef("3.2.b")
                 .setDeficiencyId("b")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("a seat belt not securely fixed to the seat or to the vehicle structure.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -76,7 +76,7 @@ public class DefectsData {
                 .setRef("3.3.a")
                 .setDeficiencyId("a")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("locking mechanism of a seat belt does not secure or release as intended.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -85,7 +85,7 @@ public class DefectsData {
                 .setRef("3.3.b")
                 .setDeficiencyId("b")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("an attachment or adjustment fitting fractured, badly deteriorated or not operating effectively.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -94,7 +94,7 @@ public class DefectsData {
                 .setRef("3.3.c")
                 .setDeficiencyId("c")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("corrosion or deterioration of a flexible stalk likely to lead to failure under load.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -103,7 +103,7 @@ public class DefectsData {
                 .setRef("3.3.d")
                 .setDeficiencyId("d")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("broken flexible stalk strands")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -112,7 +112,7 @@ public class DefectsData {
                 .setRef("3.3.e")
                 .setDeficiencyId("e")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("a retracting mechanism that does not retract the webbing sufficiently to remove all of the slack from the belt with the locking mechanism fastened and the seat unoccupied.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -121,7 +121,7 @@ public class DefectsData {
                 .setRef("3.4.a.i")
                 .setDeficiencyId("a")
                 .setDeficiencySubId("i")
-                .setDeficiencyCategory("Minor")
+                .setDeficiencyCategory("minor")
                 .setDeficiencyText("a cut or damage or fluffing or fraying, which is not sufficient to obstruct correct operation of the belt or which has not clearly weakened the webbing.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -130,25 +130,25 @@ public class DefectsData {
                 .setRef("3.4.a.ii")
                 .setDeficiencyId("a")
                 .setDeficiencySubId("ii")
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("a cut or damage or fluffing or fraying or overstretching sufficient to obstruct correct operation of the belt or significantly weaken the webbing.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
 
         Deficiencies fourthItemDeficiencyThree = new Deficiencies()
                 .setRef("3.4.b")
-                .setDeficiencyId("a")
-                .setDeficiencySubId("ii")
-                .setDeficiencyCategory("Major")
+                .setDeficiencyId("b")
+                .setDeficiencySubId(null)
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("stitching badly frayed, insecure, incomplete or repaired.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
 
         Deficiencies fifthItemDeficiencyOne = new Deficiencies()
-                .setRef("3.5")
+                .setRef("3.5.")
                 .setDeficiencyId(null)
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("such that failure is likely.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -157,7 +157,7 @@ public class DefectsData {
                 .setRef("3.6.a")
                 .setDeficiencyId("a")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Dangerous")
+                .setDeficiencyCategory("dangerous")
                 .setDeficiencyText("insecure.")
                 .setStdForProhibition(Boolean.TRUE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -166,7 +166,7 @@ public class DefectsData {
                 .setRef("3.6.b")
                 .setDeficiencyId("b")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("with a cracked or fractured leg or frame.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -175,7 +175,7 @@ public class DefectsData {
                 .setRef("3.7.a")
                 .setDeficiencyId("a")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("load limiter or pretensioner obviously missing where fitted as original equipment.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -184,7 +184,7 @@ public class DefectsData {
                 .setRef("3.7.b")
                 .setDeficiencyId("b")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("pretensioner or a ‘folded type’ webbing load limiter obviously deployed.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -193,7 +193,7 @@ public class DefectsData {
                 .setRef("3.8.a")
                 .setDeficiencyId("a")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("missing.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -202,17 +202,17 @@ public class DefectsData {
                 .setRef("3.8.b")
                 .setDeficiencyId("b")
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("deployed or disconnected.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
 
 
         Deficiencies ninthItemDeficiencyOne = new Deficiencies()
-                .setRef("3.9")
+                .setRef("3.9.")
                 .setDeficiencyId(null)
                 .setDeficiencySubId(null)
-                .setDeficiencyCategory("Major")
+                .setDeficiencyCategory("major")
                 .setDeficiencyText("indicates any kind of failure of the system.")
                 .setStdForProhibition(Boolean.FALSE)
                 .setForVehicleType(Arrays.asList("psv", "hgv"));
@@ -243,7 +243,7 @@ public class DefectsData {
 
         Items fifthItem = new Items()
                 .setItemNumber(5)
-                .setItemDescription("Obvious signs of structural weakness in a Seat belt; fitting, guide, stalk or pivot")
+                .setItemDescription("Obvious signs of structural weakness in a Seat belt; fitting, guide,stalk or pivot")
                 .setForVehicleType(Arrays.asList("psv", "hgv"))
                 .setDeficiencies(Arrays.asList(fifthItemDeficiencyOne));
 
@@ -275,7 +275,7 @@ public class DefectsData {
         Defect defect = new Defect()
                 .setImNumber(3)
                 .setImDescription("Seat Belts & Supplementary Restraint Systems")
-                .setForVehicleType(Arrays.asList("psv"))
+                .setForVehicleType(Arrays.asList("psv", "hgv"))
                 .setAdditionalInfo(additionalInfo)
                 .setItems(Arrays.asList(firstItem, secondItem, thirdItem, forthItem, fifthItem, sixthItem, seventhItem, eightItem, ninthItem));
 
