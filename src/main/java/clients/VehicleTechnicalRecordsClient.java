@@ -24,8 +24,8 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
-                .pathParam("status", status)
-                .get("/vehicles/{searchIdentifier}/tech-records/{status}");
+                .queryParam("status", status)
+                .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }

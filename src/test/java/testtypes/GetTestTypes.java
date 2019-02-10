@@ -35,5 +35,13 @@ public class GetTestTypes {
         testTypeSteps.validateData(TestTypeData.buildTestTypeData());
     }
 
+    @Title("CVSB-1073 / CVSB-2206 - AC5 The endpoint to retrieve all the test types reference data does not return the 'testTypeClassification' 'defaultTestCode' and 'linkedTestCode' attributes")
+    @Test
+    public void testTypesAttributesFromTestTypeIdNotPresent() {
+        testTypeSteps.getTestTypesWithData();
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateTestTypeDataNotExisting();
+    }
+
 
 }

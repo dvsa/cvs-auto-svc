@@ -6,11 +6,11 @@ public class TestType {
 
     private String id;
     private String name;
+    private String testTypeName;
     private List<String> forVehicleType;
     private List<String> forVehicleSize;
     private List<String> forVehicleConfiguration;
-    //TODO: update automation after data fix from development side
-//    private List<Integer> forVehicleAxles;
+    private List<Integer> forVehicleAxles;
     private List<TestType> nextTestTypesOrCategories;
 
     public String getId() {
@@ -28,6 +28,15 @@ public class TestType {
 
     public TestType setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getTestTypeName() {
+        return testTypeName;
+    }
+
+    public TestType setTestTypeName(String testTypeName) {
+        this.testTypeName = testTypeName;
         return this;
     }
 
@@ -58,14 +67,14 @@ public class TestType {
         return this;
     }
 
-//    public List<Integer> getForVehicleAxles() {
-//        return forVehicleAxles;
-//    }
-//
-//    public TestType setForVehicleAxles(List<Integer> forVehicleAxles) {
-//        this.forVehicleAxles = forVehicleAxles;
-//        return this;
-//    }
+    public List<Integer> getForVehicleAxles() {
+        return forVehicleAxles;
+    }
+
+    public TestType setForVehicleAxles(List<Integer> forVehicleAxles) {
+        this.forVehicleAxles = forVehicleAxles;
+        return this;
+    }
 
     public List<TestType> getNextTestTypesOrCategories() {
         return nextTestTypesOrCategories;
@@ -81,9 +90,11 @@ public class TestType {
         return "TestType{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", testTypeName='" + testTypeName + '\'' +
                 ", forVehicleType=" + forVehicleType +
                 ", forVehicleSize=" + forVehicleSize +
                 ", forVehicleConfiguration=" + forVehicleConfiguration +
+                ", forVehicleAxles=" + forVehicleAxles +
                 ", nextTestTypesOrCategories=" + nextTestTypesOrCategories +
                 '}';
     }

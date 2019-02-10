@@ -8,21 +8,21 @@ import util.NoDataPathFilter;
 
 import static io.restassured.RestAssured.given;
 
-public class AtfClient {
+public class TestStationsClient {
 
-    public Response getATFsWithData() {
-        return callGetATFs(new BasePathFilter());
+    public Response getTestStationsWithData() {
+        return callGetTestStations(new BasePathFilter());
     }
 
-    public Response getATFsWithNoData() {
-        return callGetATFs(new NoDataPathFilter());
+    public Response getTestStationsWithNoData() {
+        return callGetTestStations(new NoDataPathFilter());
     }
 
 
-    private Response callGetATFs(Filter filter) {
+    private Response callGetTestStations(Filter filter) {
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
-                .get("/atf");
+                .get("/test-stations");
 
         return response;
 

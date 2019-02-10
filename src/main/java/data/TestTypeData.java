@@ -11,48 +11,54 @@ public class TestTypeData {
 
         TestType levelThreeFirst = new TestType()
                 .setId("7")
-                .setName("Public Service Vehicle Annual Testing")
+                .setName("Any PSV")
+                .setTestTypeName("Paid retest")
                 .setForVehicleType(Arrays.asList("psv"))
                 .setForVehicleConfiguration(Arrays.asList("rigid"))
-                .setForVehicleSize(Arrays.asList("large"));
+                .setForVehicleSize(Arrays.asList("large", "small"));
 
         TestType levelThreeSecond = new TestType()
                 .setId("8")
-                .setName("Public Service Vehicle Annual Testing")
+                .setName("Class 6A (seatbelt installation check)")
+                .setTestTypeName("Paid retest with Class 6A seatbelt installation check")
                 .setForVehicleType(Arrays.asList("psv"))
                 .setForVehicleConfiguration(Arrays.asList("rigid"))
-                .setForVehicleSize(Arrays.asList("small"));
+                .setForVehicleSize(Arrays.asList("small","large"));
 
         TestType levelThreeThird = new TestType()
                 .setId("10")
-                .setName("Public Service Vehicle Annual Testing")
+                .setName("Any PSV")
+                .setTestTypeName("Part-paid retest")
                 .setForVehicleType(Arrays.asList("psv"))
-                .setForVehicleConfiguration(Arrays.asList("rigid"))
-                .setForVehicleSize(Arrays.asList("large"));
+                .setForVehicleConfiguration(Arrays.asList("rigid","articulated"))
+                .setForVehicleSize(Arrays.asList("large","small"));
 
 
         TestType levelTwoFirst = new TestType()
                 .setId("6")
-                .setName("ANNUAL")
+                .setName("Paid")
                 .setForVehicleType(Arrays.asList("psv"))
-                .setForVehicleConfiguration(Arrays.asList("rigid"))
-                .setForVehicleSize(Arrays.asList("small","large"))
+                .setForVehicleConfiguration(Arrays.asList("rigid","articulated"))
+                .setForVehicleSize(Arrays.asList("large","small"))
+                .setForVehicleAxles(null)
                 .setNextTestTypesOrCategories(Arrays.asList(levelThreeFirst,levelThreeSecond));
 
         TestType levelTwoSecond = new TestType()
                 .setId("9")
-                .setName("FIRST TEST")
+                .setName("Part paid")
                 .setForVehicleType(Arrays.asList("psv"))
-                .setForVehicleConfiguration(Arrays.asList("rigid"))
-                .setForVehicleSize(Arrays.asList("large"))
+                .setForVehicleConfiguration(Arrays.asList("rigid","articulated"))
+                .setForVehicleSize(Arrays.asList("large","small"))
+                .setForVehicleAxles(null)
                 .setNextTestTypesOrCategories(Arrays.asList(levelThreeThird));
 
         TestType levelOneFirst = new TestType()
                 .setId("5")
-                .setName("Class 6A (Seatbelt Installation Check)")
+                .setName("Retest")
                 .setForVehicleType(Arrays.asList("psv"))
-                .setForVehicleConfiguration(Arrays.asList("rigid"))
-                .setForVehicleSize(Arrays.asList("small","large"))
+                .setForVehicleConfiguration(Arrays.asList("rigid","articulated"))
+                .setForVehicleSize(Arrays.asList("large","small"))
+                .setForVehicleAxles(null)
                 .setNextTestTypesOrCategories(Arrays.asList(levelTwoFirst,levelTwoSecond));
 
 

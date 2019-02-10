@@ -5,7 +5,7 @@ public class Tyres {
     private String tyreSize;
     private String plyRating;
     private String fitmentCode;
-    private Integer dataTrPsvAxles;
+    private Integer dataTrAxles;
     private String speedCategorySymbol;
     private Integer tyreCode;
 
@@ -36,12 +36,12 @@ public class Tyres {
         return this;
     }
 
-    public Integer getDataTrPsvAxles() {
-        return dataTrPsvAxles;
+    public Integer getDataTrAxles() {
+        return dataTrAxles;
     }
 
-    public Tyres setDataTrPsvAxles(Integer dataTrPsvAxles) {
-        this.dataTrPsvAxles = dataTrPsvAxles;
+    public Tyres setDataTrAxles(Integer dataTrAxles) {
+        this.dataTrAxles = dataTrAxles;
         return this;
     }
 
@@ -69,7 +69,7 @@ public class Tyres {
                 "tyreSize='" + tyreSize + '\'' +
                 ", plyRating='" + plyRating + '\'' +
                 ", fitmentCode='" + fitmentCode + '\'' +
-                ", dataTrPsvAxles=" + dataTrPsvAxles +
+                ", dataTrAxles=" + dataTrAxles +
                 ", speedCategorySymbol='" + speedCategorySymbol + '\'' +
                 ", tyreCode=" + tyreCode +
                 '}';

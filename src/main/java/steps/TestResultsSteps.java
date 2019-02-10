@@ -2,9 +2,9 @@ package steps;
 
 import clients.TestResultsClient;
 import io.restassured.response.Response;
-import model.testresults.Defects;
-import model.testresults.TestResults;
-import model.testresults.TestTypes;
+import model.TestType;
+import model.testresults.*;
+import model.vehicles.Vehicle;
 import net.thucydides.core.annotations.Step;
 
 import java.util.List;
@@ -23,13 +23,54 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void getTestResults(String vin, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getVehicleTechnicalRecords(vin, testResultsStatus.getStatus());
+    }
+
+    @Step
+    public void postTestResults(TestResults testResults) {
+        response = testResultsClient.postTestResults(testResults);
+    }
+
+    @Step
+    public void getTestResultsFromDate(String vin, String fromDate) {
+        response = testResultsClient.getTestResultsFromDateTime(vin, fromDate);
+    }
+
+    @Step
+    public void getTestResultsFromDate(String vin, String fromDate, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsFromDateTime(vin, fromDate, testResultsStatus.getStatus());
+    }
+
+    @Step
+    public void getTestResultsToDate(String vin, String toDate) {
+        response = testResultsClient.getTestResultsToDateTime(vin, toDate);
+    }
+
+    @Step
+    public void getTestResultsToDate(String vin, String toDate, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsToDateTime(vin, toDate, testResultsStatus.getStatus());
+    }
+
+    @Step
+    public void getTestResultsBetweenDate(String vin, String fromDate, String toDate) {
+        response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate);
+    }
+
+    @Step
+    public void getTestResultsBetweenDate(String vin, String fromDate, String toDate, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate, testResultsStatus.getStatus());
+    }
+
+
+    @Step
     public void statusCodeShouldBe(int statusCode) {
         response.then().statusCode(statusCode);
     }
 
     @Step
     public void validateData(String stringData) {
-        response.then().body("", is(stringData));
+        response.then().body(is("\"" + stringData + "\""));
     }
 
     @Step
@@ -48,6 +89,9 @@ public class TestResultsSteps {
 
     @Step
     private void validateTestResultsData(TestResults testResults) {
+
+        response.then().body("size()", is(1));
+        response.then().body("[0].size()", is(TestResults.class.getDeclaredFields().length));
 
         response.then().body("vrm", hasItem(equalTo(testResults.getVrm())));
         response.then().body("vin", hasItem(equalTo(testResults.getVin())));
@@ -76,6 +120,10 @@ public class TestResultsSteps {
 
     @Step
     private void validateTestTypesData(TestResults testResults) {
+        response.then().body("[0].testTypes.size()", is(1));
+        response.then().body("[0].testTypes[0].size()", is(TestTypes.class.getDeclaredFields().length));
+
+
         List<String> createdAt = testResults.getTestTypes().stream().map(TestTypes::getCreatedAt).collect(toList());
         List<String> lastUpdatedAt = testResults.getTestTypes().stream().map(TestTypes::getLastUpdatedAt).collect(toList());
         List<String> testCode = testResults.getTestTypes().stream().map(TestTypes::getTestCode).collect(toList());
@@ -115,6 +163,9 @@ public class TestResultsSteps {
     @Step
     private void validateDefectsData(TestResults testResults) {
 
+        response.then().body("[0].testTypes.defects.size()", is(1));
+        response.then().body("[0].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
+
         List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
         List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
         List<List<List<String>>> forVehicleType = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getForVehicleType).collect(toList())).collect(toList());
@@ -128,6 +179,9 @@ public class TestResultsSteps {
     @Step
     private void validateAdditionalInformation(TestResults testResults) {
 
+        response.then().body("[0].testTypes.defects.additionalInformation.size()", is(1));
+        response.then().body("[0].testTypes[0].defects[0].additionalInformation.size()", is(AdditionalInformation.class.getDeclaredFields().length));
+
         List<List<String>> additionalInformation = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getNotes()).collect(toList())).collect(toList());
         response.then().body("testTypes.defects.additionalInformation.notes", hasItem(contains(additionalInformation.toArray())));
 
@@ -136,6 +190,9 @@ public class TestResultsSteps {
 
     @Step
     private void validateLocation(TestResults testResults) {
+
+        response.then().body("[0].testTypes.defects.additionalInformation.location.size()", is(1));
+        response.then().body("[0].testTypes[0].defects[0].additionalInformation.location.size()", is(Location.class.getDeclaredFields().length));
 
         List<List<String>> vertical = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getVertical()).collect(toList())).collect(toList());
         List<List<String>> horizontal = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getHorizontal()).collect(toList())).collect(toList());
@@ -157,6 +214,9 @@ public class TestResultsSteps {
 
     @Step
     private void validateItem(TestResults testResults) {
+
+        response.then().body("[0].testTypes.defects.item.size()", is(1));
+        response.then().body("[0].testTypes[0].defects[0].item.size()", is(Item.class.getDeclaredFields().length));
 
         List<List<Integer>> item = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getItem().getItemNumber()).collect(toList())).collect(toList());
         List<List<String>> itemDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getItem().getItemDescription()).collect(toList())).collect(toList());
@@ -180,6 +240,9 @@ public class TestResultsSteps {
         List<List<Boolean>> prs = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getItem().getDeficiency().getPrs()).collect(toList())).collect(toList());
         List<List<List<String>>> forVehicleTypeDeficiency = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getItem().getDeficiency().getForVehicleType()).collect(toList())).collect(toList());
 
+
+        response.then().body("[0].testTypes.defects.item.deficiency.size()", is(1));
+        response.then().body("[0].testTypes[0].defects[0].item.deficiency.size()", is(Deficiency.class.getDeclaredFields().length));
 
         response.then().body("testTypes.defects.item.deficiency.ref", hasItem(contains(ref.toArray())));
         response.then().body("testTypes.defects.item.deficiency.deficiencyId", hasItem(contains(deficiencyId.toArray())));
