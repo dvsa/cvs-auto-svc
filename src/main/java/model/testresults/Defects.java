@@ -1,20 +1,21 @@
-package model.defects;
+package model.testresults;
+
 
 import java.util.List;
 
-public class Defect {
+public class Defects {
 
     private Integer imNumber;
     private String imDescription;
     private List<String> forVehicleType;
-    private AdditionalInfo additionalInfo;
-    private List<Items> items;
+    private AdditionalInformation additionalInformation;
+    private Item item;
 
     public Integer getImNumber() {
         return imNumber;
     }
 
-    public Defect setImNumber(Integer imNumber) {
+    public Defects setImNumber(Integer imNumber) {
         this.imNumber = imNumber;
         return this;
     }
@@ -23,7 +24,7 @@ public class Defect {
         return imDescription;
     }
 
-    public Defect setImDescription(String imDescription) {
+    public Defects setImDescription(String imDescription) {
         this.imDescription = imDescription;
         return this;
     }
@@ -32,26 +33,26 @@ public class Defect {
         return forVehicleType;
     }
 
-    public Defect setForVehicleType(List<String> forVehicleType) {
+    public Defects setForVehicleType(List<String> forVehicleType) {
         this.forVehicleType = forVehicleType;
         return this;
     }
 
-    public AdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
+    public AdditionalInformation getAdditionalInformation() {
+        return additionalInformation;
     }
 
-    public Defect setAdditionalInfo(AdditionalInfo additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public Defects setAdditionalInformation(AdditionalInformation additionalInformation) {
+        this.additionalInformation = additionalInformation;
         return this;
     }
 
-    public List<Items> getItems() {
-        return items;
+    public Item getItem() {
+        return item;
     }
 
-    public Defect setItems(List<Items> items) {
-        this.items = items;
+    public Defects setItem(Item item) {
+        this.item = item;
         return this;
     }
 
@@ -61,8 +62,8 @@ public class Defect {
                 "imNumber=" + imNumber +
                 ", imDescription='" + imDescription + '\'' +
                 ", forVehicleType=" + forVehicleType +
-                ", additionalInfo=" + additionalInfo +
-                ", items=" + items +
+                ", additionalInformation=" + additionalInformation +
+                ", item=" + item +
                 '}';
     }
 }

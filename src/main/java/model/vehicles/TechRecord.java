@@ -4,6 +4,8 @@ import java.util.List;
 
 public class TechRecord {
 
+    private String createdAt;
+    private String lastUpdatedAt;
     private String chassisMake;
     private String chassisModel;
     private String bodyMake;
@@ -29,7 +31,6 @@ public class TechRecord {
     private Integer grossLadenWeight;
     private Integer grossGbWeight;
     private Integer grossDesignWeight;
-    private Integer grossUnladenWeight;
     private Integer noOfAxles;
     private String brakeCode;
     private String vehicleClass;
@@ -38,6 +39,25 @@ public class TechRecord {
     private String vehicleConfiguration;
     private Brakes brakes;
     private List<Axles> axles;
+
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public TechRecord setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    public String getLastUpdatedAt() {
+        return lastUpdatedAt;
+    }
+
+    public TechRecord setLastUpdatedAt(String lastUpdatedAt) {
+        this.lastUpdatedAt = lastUpdatedAt;
+        return this;
+    }
 
     public String getChassisMake() {
         return chassisMake;
@@ -264,14 +284,6 @@ public class TechRecord {
         return this;
     }
 
-    public Integer getGrossUnladenWeight() {
-        return grossUnladenWeight;
-    }
-
-    public TechRecord setGrossUnladenWeight(Integer grossUnladenWeight) {
-        this.grossUnladenWeight = grossUnladenWeight;
-        return this;
-    }
 
     public Integer getNoOfAxles() {
         return noOfAxles;
@@ -348,6 +360,8 @@ public class TechRecord {
     @Override
     public String toString() {
         return "TechRecord{" +
+                "createdAt='" + createdAt + '\'' +
+                "lastUpdatedAt='" + lastUpdatedAt + '\'' +
                 "chassisMake='" + chassisMake + '\'' +
                 ", chassisModel='" + chassisModel + '\'' +
                 ", bodyMake='" + bodyMake + '\'' +
@@ -373,7 +387,6 @@ public class TechRecord {
                 ", grossLadenWeight=" + grossLadenWeight +
                 ", grossGbWeight=" + grossGbWeight +
                 ", grossDesignWeight=" + grossDesignWeight +
-                ", grossladenWeight=" + grossUnladenWeight +
                 ", noOfAxles=" + noOfAxles +
                 ", brakeCode='" + brakeCode + '\'' +
                 ", vehicleClass='" + vehicleClass + '\'' +

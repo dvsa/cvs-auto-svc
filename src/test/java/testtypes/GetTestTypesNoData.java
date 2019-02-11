@@ -14,7 +14,7 @@ import steps.TestTypeSteps;
         {
                 @WithTag(type = "TestTypes", name = "All"),
                 @WithTag(type = "TestTypes", name = "Negative"),
-                @WithTag(type = "Suite", name = "Negative"),
+                @WithTag(type = "Service", name = "One"),
 
         }
 )
@@ -25,7 +25,7 @@ public class GetTestTypesNoData {
     @Steps
     TestTypeSteps testTypeSteps;
 
-    @Title("CVSB-579 / CVSB-747 - AC2 - No data returned")
+    @Title("CVSB-996 / CVSB-1869 - CVSB-579 / CVSB-747 - AC2 - No data returned")
     @Test
     public void testTypeNoData() {
         testTypeSteps.getTestTypesWithNoData();
