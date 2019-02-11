@@ -14,7 +14,7 @@ import steps.DefectsSteps;
         {
                 @WithTag(type = "Defects", name = "All"),
                 @WithTag(type = "Defects", name = "Negative"),
-                @WithTag(type = "Suite", name = "Negative"),
+                @WithTag(type = "Service", name = "Two"),
 
         }
 )

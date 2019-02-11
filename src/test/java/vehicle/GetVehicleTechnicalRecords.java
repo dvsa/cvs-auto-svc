@@ -19,7 +19,7 @@ import steps.VehicleTechnicalRecordsSteps;
         {
                 @WithTag(type = "VehicleTechnicalRecords", name = "All"),
                 @WithTag(type = "VehicleTechnicalRecords", name = "Positive"),
-                @WithTag(type = "Suite", name = "Positive"),
+                @WithTag(type = "Service", name = "One"),
 
         }
 )

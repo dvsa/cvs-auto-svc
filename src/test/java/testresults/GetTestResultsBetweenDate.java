@@ -18,7 +18,7 @@ import util.DataUtil;
         {
                 @WithTag(type = "TestResults", name = "All"),
                 @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Suite", name = "Positive"),
+                @WithTag(type = "Service", name = "One"),
 
         }
 )
@@ -33,7 +33,7 @@ public class GetTestResultsBetweenDate {
     private TestResults vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
 
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data found and status default")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2434 - Between Date data found and status default")
     @Test
     public void testResultsBetweenDateExisting() {
 
@@ -42,7 +42,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData(vehicleSubmittedData);
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data not found (date higher than existing data) and status default")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2435 - Between Date data not found (date higher than existing data) and status default")
     @Test
     public void testResultsBetweenDateNotExistingHigher() {
 
@@ -51,7 +51,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data not found (date lower than existing data) and status default")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2436 - Between Date data not found (date lower than existing data) and status default")
     @Test
     public void testResultsBetweenDateNotExistingLower() {
 
@@ -61,7 +61,7 @@ public class GetTestResultsBetweenDate {
     }
 
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date invalid (fromDateTime, toDateTime invalid values) and status default")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2437 - Between Date invalid (fromDateTime, toDateTime invalid values) and status default")
     @Test
     public void testResultsBetweenDateInvalid() {
 
@@ -71,7 +71,7 @@ public class GetTestResultsBetweenDate {
     }
 
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data found and status submitted")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2438 - Between Date data found and status submitted")
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {
 
@@ -80,7 +80,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData(vehicleSubmittedData);
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data not found (date higher than existing data) and status submitted")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2439 - Between Date data not found (date higher than existing data) and status submitted")
     @Test
     public void testResultsBetweenDateNotExistingWithStatusSubmittedHigher() {
 
@@ -89,7 +89,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data not found (date lower than existing data) and status submitted")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2440 - Between Date data not found (date lower than existing data) and status submitted")
     @Test
     public void testResultsBetweenDateNotExistingWithStatusSubmittedLower() {
 
@@ -98,7 +98,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date invalid (fromDateTime, toDateTime invalid values) and status submitted")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2441 - Between Date invalid (fromDateTime, toDateTime invalid values) and status submitted")
     @Test
     public void testResultsBetweenDateInvalidWithStatusSubmitted() {
 
@@ -107,7 +107,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data found and status cancelled")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2442 - Between Date data found and status cancelled")
     @Test
     public void testResultsBetweenDateExistingWithStatusCancelled() {
 
@@ -116,7 +116,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData(vehicleCancelledData);
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data not found (date higher than existing data) and status canceled")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2443 - Between Date data not found (date higher than existing data) and status canceled")
     @Test
     public void testResultsBetweenDateNotExistingWithStatusCancelledHigher() {
 
@@ -125,7 +125,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date data not found (date lower than existing data) and status canceled")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2444 - Between Date data not found (date lower than existing data) and status canceled")
     @Test
     public void testResultsBetweenDateNotExistingWithStatusCancelledLower() {
 
@@ -134,7 +134,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB- - Between Date invalid (fromDateTime, toDateTime invalid values) and status canceled")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2445 - Between Date invalid (fromDateTime, toDateTime invalid values) and status canceled")
     @Test
     public void testResultsBetweenDateInvalidWithStatusCancelled() {
 

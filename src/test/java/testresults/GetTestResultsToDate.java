@@ -18,7 +18,7 @@ import util.DataUtil;
         {
                 @WithTag(type = "TestResults", name = "All"),
                 @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Suite", name = "Positive"),
+                @WithTag(type = "Service", name = "One"),
 
         }
 )
@@ -32,81 +32,81 @@ public class GetTestResultsToDate {
     private TestResults vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
 
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2455 - To Date data found and status default")
     @Test
-    public void testResultsSubmittedFromDateExisting() {
+    public void testResultsSubmittedToDateExisting() {
 
         testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2456 - To Date data not found and status default")
     @Test
-    public void testResultsSubmittedFromDateNotExisting() {
+    public void testResultsSubmittedToDateNotExisting() {
 
         testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1));
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2457 - To Date data invalid and status default")
     @Test
-    public void testResultsSubmittedFromDateInvalid() {
+    public void testResultsSubmittedToDateInvalid() {
 
         testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), RandomStringUtils.randomAlphanumeric(4));
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2458 - To Date data found and status submitted")
     @Test
-    public void testResultsSubmittedFromDateExistingWithStatusSubmitted() {
+    public void testResultsSubmittedToDateExistingWithStatusSubmitted() {
 
         testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2459 - To Date data not found and status submitted")
     @Test
-    public void testResultsSubmittedFromDateNotExistingWithStatusSubmitted() {
+    public void testResultsSubmittedToDateNotExistingWithStatusSubmitted() {
 
         testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2460 - To Date data invalid and status submitted")
     @Test
-    public void testResultsSubmittedFromDateInvalidWithStatusSubmitted() {
+    public void testResultsSubmittedToDateInvalidWithStatusSubmitted() {
 
         testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), RandomStringUtils.randomAlphanumeric(4), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2461 - To Date data found and status canceled")
     @Test
-    public void testResultsSubmittedFromDateExistingWithStatusCancelled() {
+    public void testResultsSubmittedToDateExistingWithStatusCancelled() {
 
         testResultsSteps.getTestResultsToDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELLED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2462 - To Date data not found and status canceled")
     @Test
-    public void testResultsSubmittedFromDateNotExistingWithStatusCancelled() {
+    public void testResultsSubmittedToDateNotExistingWithStatusCancelled() {
 
         testResultsSteps.getTestResultsToDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), TestResultsStatus.CANCELLED);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2463 - To Date data invalid and status canceled")
     @Test
-    public void testResultsSubmittedFromDateInvalidWithStatusCancelled() {
+    public void testResultsSubmittedToDateInvalidWithStatusCancelled() {
 
         testResultsSteps.getTestResultsToDate(vehicleCancelledData.getVin(), RandomStringUtils.randomAlphanumeric(4), TestResultsStatus.CANCELLED);
         testResultsSteps.statusCodeShouldBe(404);

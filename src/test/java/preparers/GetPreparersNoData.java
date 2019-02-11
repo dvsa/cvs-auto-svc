@@ -14,7 +14,7 @@ import steps.PreparersSteps;
         {
                 @WithTag(type = "Preparers", name = "All"),
                 @WithTag(type = "Preparers", name = "Negative"),
-                @WithTag(type = "Suite", name = "Negative"),
+                @WithTag(type = "Service", name = "Two"),
 
         }
 )

@@ -17,8 +17,8 @@ import java.util.Arrays;
 @WithTags(
         {
                 @WithTag(type = "TestTypes", name = "All"),
-                @WithTag(type = "TestTypes", name = "Negative"),
-                @WithTag(type = "Suite", name = "Negative"),
+                @WithTag(type = "TestTypes", name = "Positive"),
+                @WithTag(type = "Service", name = "One"),
 
         }
 )

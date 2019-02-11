@@ -14,7 +14,7 @@ import steps.TestStationSteps;
         {
                 @WithTag(type = "TestStations", name = "All"),
                 @WithTag(type = "TestStations", name = "Negative"),
-                @WithTag(type = "Suite", name = "Negative"),
+                @WithTag(type = "Service", name = "Two"),
 
         }
 )
