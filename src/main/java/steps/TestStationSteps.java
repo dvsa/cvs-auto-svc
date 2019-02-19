@@ -42,7 +42,7 @@ public class TestStationSteps {
 
         response.then().body("[" + index + "].size()", is(TestStations.class.getDeclaredFields().length));
         response.then().body("testStationId", hasItem(equalTo(testStation.getTestStationId())));
-        response.then().body("testStationNumber", hasItem(equalTo(testStation.getTestStationNumber())));
+        response.then().body("testStationPNumber", hasItem(equalTo(testStation.getTestStationNumber())));
         response.then().body("testStationName", hasItem(equalTo(testStation.getTestStationName())));
         response.then().body("testStationContactNumber", hasItem(equalTo(testStation.getTestStationContactNumber())));
         response.then().body("testStationAccessNotes", hasItem(equalTo(testStation.getTestStationAccessNotes())));

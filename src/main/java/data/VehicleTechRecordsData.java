@@ -29,7 +29,7 @@ public class VehicleTechRecordsData {
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
                 .setDataTrBrakeThree("None")
-                .setParkingBrakeMrk(null)
+                .setParkingBrakeMrk(false)
                 .setRetarderBrakeOne("exhaust")
                 .setRetarderBrakeTwo("exhaust")
                 .setBrakeForceWheelsNotLocked(brakeForceWheelsNotLocked)
@@ -46,7 +46,7 @@ public class VehicleTechRecordsData {
                 .setPlyRating("A")
                 .setFitmentCode("single")
                 .setDataTrAxles(0)
-                .setSpeedCategorySymbol("J")
+                .setSpeedCategorySymbol("j")
                 .setTyreCode(456);
 
         Weights weightsTwo = new Weights()
@@ -60,7 +60,7 @@ public class VehicleTechRecordsData {
                 .setPlyRating("A")
                 .setFitmentCode("double")
                 .setDataTrAxles(0)
-                .setSpeedCategorySymbol("J")
+                .setSpeedCategorySymbol("j")
                 .setTyreCode(456);
 
         Axles axleOne = new Axles()
@@ -73,6 +73,14 @@ public class VehicleTechRecordsData {
                 .setWeights(weightsTwo)
                 .setTyres(tyresTwo);
 
+        BodyType bodyType = new BodyType()
+                .setCode("s")
+                .setDescription("single decker");
+
+        VehicleClass vehicleClass = new VehicleClass()
+                .setCode("s")
+                .setDescription("small psv (ie: less than or equal to 22 seats)");
+
         TechRecord techRecord = new TechRecord()
                 .setCreatedAt("2019-01-16T12:24:38.027Z")
                 .setLastUpdatedAt("2019-01-16T12:24:38.027Z")
@@ -80,8 +88,8 @@ public class VehicleTechRecordsData {
                 .setChassisModel("632,01")
                 .setBodyMake("Plaxton")
                 .setBodyModel("Tourismo")
-                .setBodyType("single Decker")
-                .setManufactureDate(2010)
+                .setBodyType(bodyType)
+                .setManufactureYear(2010)
                 .setRegnDate("2011-01-05")
                 .setCoifDate("2010-12-20")
                 .setNtaNumber("7")
@@ -103,8 +111,8 @@ public class VehicleTechRecordsData {
                 .setGrossDesignWeight(19000)
                 .setNoOfAxles(2)
                 .setBrakeCode("171202")
-                .setVehicleClass("S")
-                .setVehicleType("PSV")
+                .setVehicleClass(vehicleClass)
+                .setVehicleType("psv")
                 .setVehicleSize("small")
                 .setVehicleConfiguration("rigid")
                 .setBrakes(brakes)
@@ -115,6 +123,7 @@ public class VehicleTechRecordsData {
         return new Vehicle()
                 .setVrms(Arrays.asList(vrms))
                 .setVim("1B7GG36N12S678410")
+                .setVehicleId(1)
                 .setTechRecord(Arrays.asList(techRecord));
     }
 
@@ -142,7 +151,7 @@ public class VehicleTechRecordsData {
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
                 .setDataTrBrakeThree("None")
-                .setParkingBrakeMrk(null)
+                .setParkingBrakeMrk(false)
                 .setRetarderBrakeOne("hydraulic")
                 .setRetarderBrakeTwo("hydraulic")
                 .setBrakeForceWheelsNotLocked(brakeForceWheelsNotLocked)
@@ -159,7 +168,7 @@ public class VehicleTechRecordsData {
                 .setPlyRating("A")
                 .setFitmentCode("single")
                 .setDataTrAxles(0)
-                .setSpeedCategorySymbol("L")
+                .setSpeedCategorySymbol("l")
                 .setTyreCode(438);
 
         Weights weightsTwo = new Weights()
@@ -173,7 +182,7 @@ public class VehicleTechRecordsData {
                 .setPlyRating("A")
                 .setFitmentCode("double")
                 .setDataTrAxles(0)
-                .setSpeedCategorySymbol("L")
+                .setSpeedCategorySymbol("l")
                 .setTyreCode(438);
 
         Axles axleOne = new Axles()
@@ -186,6 +195,14 @@ public class VehicleTechRecordsData {
                 .setWeights(weightsTwo)
                 .setTyres(tyresTwo);
 
+        BodyType bodyType = new BodyType()
+                .setCode("s")
+                .setDescription("single decker");
+
+        VehicleClass vehicleClass = new VehicleClass()
+                .setCode("s")
+                .setDescription("small psv (ie: less than or equal to 22 seats)");
+
         TechRecord techRecord = new TechRecord()
                 .setCreatedAt("2018-04-20T04:20:00.027Z")
                 .setLastUpdatedAt("2018-10-01T00:00:00.027Z")
@@ -193,8 +210,8 @@ public class VehicleTechRecordsData {
                 .setChassisModel("Olympian")
                 .setBodyMake("Northen Counties")
                 .setBodyModel("Palatine 1")
-                .setBodyType("double Decker")
-                .setManufactureDate(1996)
+                .setBodyType(bodyType)
+                .setManufactureYear(1996)
                 .setRegnDate("1996-10-17")
                 .setCoifDate("1996-09-01")
                 .setNtaNumber("3")
@@ -216,8 +233,8 @@ public class VehicleTechRecordsData {
                 .setGrossDesignWeight(17000)
                 .setNoOfAxles(2)
                 .setBrakeCode("167202")
-                .setVehicleClass("L")
-                .setVehicleType("PSV")
+                .setVehicleClass(vehicleClass)
+                .setVehicleType("psv")
                 .setVehicleSize("large")
                 .setVehicleConfiguration("rigid")
                 .setBrakes(brakes)
@@ -227,7 +244,8 @@ public class VehicleTechRecordsData {
 
         return new Vehicle()
                 .setVrms(Arrays.asList(vrms))
-                .setVim("XMGDE02FS0H012356")
+                .setVim("XMGDE02FS0H012461")
+                .setVehicleId(2)
                 .setTechRecord(Arrays.asList(techRecord));
     }
 
@@ -254,7 +272,7 @@ public class VehicleTechRecordsData {
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
                 .setDataTrBrakeThree("None")
-                .setParkingBrakeMrk(null)
+                .setParkingBrakeMrk(false)
                 .setRetarderBrakeOne("hydraulic")
                 .setRetarderBrakeTwo("hydraulic")
                 .setBrakeForceWheelsNotLocked(brakeForceWheelsNotLocked)
@@ -271,7 +289,7 @@ public class VehicleTechRecordsData {
                 .setPlyRating("A")
                 .setFitmentCode("single")
                 .setDataTrAxles(0)
-                .setSpeedCategorySymbol("M")
+                .setSpeedCategorySymbol("m")
                 .setTyreCode(735);
 
         Weights weightsTwo = new Weights()
@@ -285,7 +303,7 @@ public class VehicleTechRecordsData {
                 .setPlyRating("A")
                 .setFitmentCode("single")
                 .setDataTrAxles(0)
-                .setSpeedCategorySymbol("M")
+                .setSpeedCategorySymbol("m")
                 .setTyreCode(735);
 
         Axles axleOne = new Axles()
@@ -298,6 +316,14 @@ public class VehicleTechRecordsData {
                 .setWeights(weightsTwo)
                 .setTyres(tyresTwo);
 
+        BodyType bodyType = new BodyType()
+                .setCode("s")
+                .setDescription("single decker");
+
+        VehicleClass vehicleClass = new VehicleClass()
+                .setCode("s")
+                .setDescription("small psv (ie: less than or equal to 22 seats)");
+
         TechRecord techRecord = new TechRecord()
                 .setCreatedAt("2018-04-20T04:20:00.027Z")
                 .setLastUpdatedAt("2018-10-01T00:00:00.027Z")
@@ -305,8 +331,8 @@ public class VehicleTechRecordsData {
                 .setChassisModel("SB200")
                 .setBodyMake("Plaxton")
                 .setBodyModel("Centro")
-                .setBodyType("single Decker")
-                .setManufactureDate(2008)
+                .setBodyType(bodyType)
+                .setManufactureYear(2008)
                 .setRegnDate("2008-09-24")
                 .setCoifDate("2008-04-23")
                 .setNtaNumber("1")
@@ -328,8 +354,8 @@ public class VehicleTechRecordsData {
                 .setGrossDesignWeight(14440)
                 .setNoOfAxles(2)
                 .setBrakeCode("135202")
-                .setVehicleClass("L")
-                .setVehicleType("PSV")
+                .setVehicleClass(vehicleClass)
+                .setVehicleType("psv")
                 .setVehicleSize("small")
                 .setVehicleConfiguration("rigid")
                 .setBrakes(brakes)
@@ -340,6 +366,7 @@ public class VehicleTechRecordsData {
         return new Vehicle()
                 .setVrms(Arrays.asList(vrms))
                 .setVim("1B7GG36N12S021430")
+                .setVehicleId(3)
                 .setTechRecord(Arrays.asList(techRecord));
     }
 

@@ -2,9 +2,9 @@ package steps;
 
 import clients.DefectsClient;
 import io.restassured.response.Response;
-import model.defects.Defect;
-import model.defects.Deficiencies;
-import model.defects.Items;
+import model.defects.*;
+import model.testresults.Defects;
+import model.testresults.Deficiency;
 import net.thucydides.core.annotations.Step;
 
 import java.util.List;
@@ -38,14 +38,26 @@ public class DefectsSteps {
         response.then().body("", is(stringData));
     }
 
+    public void validateDeficiencyCategoryNotContains(String... datas) {
+        for (String data : datas) {
+            response.then().body("items.deficiencies.deficiencyCategory", not(hasItem(hasItem(hasItem(data)))));
+
+        }
+    }
+
     @Step
     public void validateData(Defect defect) {
+
+        response.then().body("[0].size()", is(Defects.class.getDeclaredFields().length));
 
         response.then().body("imDescription", hasItem(equalTo(defect.getImDescription())));
         response.then().body("imNumber", hasItem(equalTo(defect.getImNumber())));
         response.then().body("forVehicleType", hasItem(contains(defect.getForVehicleType().toArray())));
 
+        response.then().body("[0].additionalInfo.size()", is(AdditionalInfo.class.getDeclaredFields().length));
+        response.then().body("[0].additionalInfo.psv.size()", is(Psv.class.getDeclaredFields().length));
         response.then().body("additionalInfo.psv.notes", hasItem(defect.getAdditionalInfo().getPsv().getNotes()));
+        response.then().body("[0].additionalInfo.psv.location.size()", is(Location.class.getDeclaredFields().length));
         response.then().body("additionalInfo.psv.location.vertical", hasItem(defect.getAdditionalInfo().getPsv().getLocation().getVertical()));
         response.then().body("additionalInfo.psv.location.horizontal", hasItem(defect.getAdditionalInfo().getPsv().getLocation().getHorizontal()));
         response.then().body("additionalInfo.psv.location.lateral", hasItem(defect.getAdditionalInfo().getPsv().getLocation().getLateral()));
@@ -54,6 +66,15 @@ public class DefectsSteps {
         response.then().body("additionalInfo.psv.location.seatNumber", hasItem(defect.getAdditionalInfo().getPsv().getLocation().getSeatNumber()));
         response.then().body("additionalInfo.psv.location.axelNumber", hasItem(nullValue()));
 
+
+        for (int i = 0; i < (Integer) response.jsonPath().get("items.size()"); i++) {
+            for (int j = 0; j < (Integer) response.jsonPath().get("items[" + i + "].size()"); j++) {
+                response.then().body("items[" + i + "][" + j + "].size()", is(equalTo(Items.class.getDeclaredFields().length)));
+                for (int z = 0; z < (Integer) response.jsonPath().get("items[" + i + "][" + j + "].deficiencies.size()"); z++) {
+                    response.then().body("items[" + i + "][" + j + "].deficiencies[" + z + "].size()", is(equalTo(Deficiencies.class.getDeclaredFields().length)));
+                }
+            }
+        }
 
         List<String> itemDescription = defect.getItems().stream().map(Items::getItemDescription).collect(toList());
         response.then().body("items.itemDescription", hasItem(contains(itemDescription.toArray())));
@@ -88,5 +109,6 @@ public class DefectsSteps {
         response.then().body("items.deficiencies.forVehicleType", hasItem(contains(forVehicleTypeList.toArray())));
 
     }
+
 
 }

@@ -67,6 +67,7 @@ public class TestTypesClient {
 
         Response response = responseSpec.get("/test-types/{id}");
 
+
         return response;
 
     }
