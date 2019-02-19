@@ -34,6 +34,7 @@ public class GetTestTypesByIdData {
     private TestTypeById annualCertificatePsvLargeRigid = TestTypeByIdData.buildAnnualCertificatePsvLargeRigid();
     private TestTypeById annualNoCertificatePsvSmallRigid = TestTypeByIdData.buildAnnualNoCertificatePsvSmallRigid();
     private TestTypeById nonAnnualPsvLargeRigid = TestTypeByIdData.buildNonAnnualPsvLargeRigid();
+    private TestTypeById nonAnnualPsvSmallRigidTwoAxles = TestTypeByIdData.buildNonAnnualPsvSmallRigidTwoAxles();
 
 
     @Title("CVSB-1073 / CVSB-2403 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'small', forVehicleConfiguration 'rigid')")
@@ -109,5 +110,21 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(nonAnnualPsvLargeRigid.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData(nonAnnualPsvLargeRigid, testTypeQueryParam.getFields());
+    }
+
+    @Title("CVSB-1073 / CVSB-2835 - API Consumer retrieves data for Test Type Classification 'NON ANNUAL' (forVehicleType 'psv', forVehicleSize 'small', forVehicleConfiguration 'rigid', vehicleAxles 2)")
+    @Test
+    public void testTypeNonAnnualPsvLargeRigidTwoAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById(nonAnnualPsvSmallRigidTwoAxles.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData(nonAnnualPsvSmallRigidTwoAxles, testTypeQueryParam.getFields());
     }
 }

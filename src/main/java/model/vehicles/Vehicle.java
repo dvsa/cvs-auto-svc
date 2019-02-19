@@ -5,6 +5,7 @@ import java.util.List;
 public class Vehicle {
 
     private List<Vrms> vrms;
+    private Integer vehicleId;
     private String vim;
     private List<TechRecord> techRecord;
 
@@ -35,11 +36,21 @@ public class Vehicle {
         return this;
     }
 
+    public Integer getVehicleId() {
+        return vehicleId;
+    }
+
+    public Vehicle setVehicleId(Integer vehicleId) {
+        this.vehicleId = vehicleId;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
                 "vrms=" + vrms +
                 ", vim='" + vim + '\'' +
+                ", vehicleId='" + vehicleId + '\'' +
                 ", techRecord=" + techRecord +
                 '}';
     }

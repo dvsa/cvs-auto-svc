@@ -65,7 +65,10 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("vrms.vrm", hasItem(equalTo(vehicle.getVrms().get(0).getVrm())));
         response.then().body("vrms.isPrimary", hasItem(equalTo(vehicle.getVrms().get(0).getPrimary())));
 
+        response.then().body("vehicleId", equalTo(vehicle.getVehicleId()));
         response.then().body("vin", equalTo(vehicle.getVim()));
+
+
 
         response.then().body("techRecord.size", equalTo(1));
         response.then().body("techRecord[0].size()", is(TechRecord.class.getDeclaredFields().length));
@@ -75,8 +78,7 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("techRecord.chassisModel", hasItem(equalTo(vehicle.getTechRecord().get(index).getChassisModel())));
         response.then().body("techRecord.bodyMake", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyMake())));
         response.then().body("techRecord.bodyModel", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyModel())));
-        response.then().body("techRecord.bodyType", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyType())));
-        response.then().body("techRecord.manufactureDate", hasItem(equalTo(vehicle.getTechRecord().get(index).getManufactureDate())));
+        response.then().body("techRecord.manufactureYear", hasItem(equalTo(vehicle.getTechRecord().get(index).getManufactureYear())));
         response.then().body("techRecord.regnDate", hasItem(equalTo(vehicle.getTechRecord().get(index).getRegnDate())));
         response.then().body("techRecord.coifDate", hasItem(equalTo(vehicle.getTechRecord().get(index).getCoifDate())));
         response.then().body("techRecord.ntaNumber", hasItem(equalTo(vehicle.getTechRecord().get(index).getNtaNumber())));
@@ -98,10 +100,19 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("techRecord.grossDesignWeight", hasItem(equalTo(vehicle.getTechRecord().get(index).getGrossDesignWeight())));
         response.then().body("techRecord.noOfAxles", hasItem(equalTo(vehicle.getTechRecord().get(index).getNoOfAxles())));
         response.then().body("techRecord.brakeCode", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakeCode())));
-        response.then().body("techRecord.vehicleClass", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleClass())));
         response.then().body("techRecord.vehicleType", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleType())));
         response.then().body("techRecord.vehicleSize", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleSize())));
         response.then().body("techRecord.vehicleConfiguration", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleConfiguration())));
+
+        response.then().body("techRecord[0].vehicleClass.size()", is(VehicleClass.class.getDeclaredFields().length));
+        response.then().body("techRecord.vehicleClass.code", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleClass().getCode())));
+        response.then().body("techRecord.vehicleClass.description", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleClass().getDescription())));
+
+        response.then().body("techRecord[0].bodyType.size()", is(BodyType.class.getDeclaredFields().length));
+        response.then().body("techRecord.bodyType.code", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyType().getCode())));
+        response.then().body("techRecord.bodyType.description", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyType().getDescription())));
+
+
 
         response.then().body("techRecord.brakes[0].size()", is(Brakes.class.getDeclaredFields().length));
         response.then().body("techRecord.brakes.brakeCode", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getBrakeCode())));

@@ -6,7 +6,7 @@ public class Brakes {
     private String dataTrBrakeOne;
     private String dataTrBrakeTwo;
     private String dataTrBrakeThree;
-    private String parkingBrakeMrk;
+    private Boolean parkingBrakeMrk;
     private String retarderBrakeOne;
     private String retarderBrakeTwo;
     private BrakeForceWheelsNotLocked brakeForceWheelsNotLocked;
@@ -48,11 +48,11 @@ public class Brakes {
         return this;
     }
 
-    public String getParkingBrakeMrk() {
+    public Boolean getParkingBrakeMrk() {
         return parkingBrakeMrk;
     }
 
-    public Brakes setParkingBrakeMrk(String parkingBrakeMrk) {
+    public Brakes setParkingBrakeMrk(Boolean parkingBrakeMrk) {
         this.parkingBrakeMrk = parkingBrakeMrk;
         return this;
     }

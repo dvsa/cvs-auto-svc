@@ -1,10 +1,10 @@
 package steps;
 
 import clients.TestResultsClient;
+import clients.util.ToTypeConvertor;
+import clients.util.testresult.TestResultsLevel;
 import io.restassured.response.Response;
-import model.TestType;
 import model.testresults.*;
-import model.vehicles.Vehicle;
 import net.thucydides.core.annotations.Step;
 
 import java.util.List;
@@ -31,6 +31,17 @@ public class TestResultsSteps {
     public void postTestResults(TestResults testResults) {
         response = testResultsClient.postTestResults(testResults);
     }
+
+    @Step
+    public void postTestResultsFieldChange(TestResults testResults, String propertyField, String value, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
+        response = testResultsClient.postTestResultsFieldChange(testResults, propertyField, value, toType, testResultsLevel);
+    }
+
+    @Step
+    public void postTestResultsFieldChange(TestResults testResults, String propertyField, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
+        response = testResultsClient.postTestResultsFieldChange(testResults, propertyField, null, toType, testResultsLevel);
+    }
+
 
     @Step
     public void getTestResultsFromDate(String vin, String fromDate) {
@@ -256,4 +267,10 @@ public class TestResultsSteps {
 
     }
 
+    @Step
+    public void validatePostErrorData(String field, String errorMessage) {
+        response.then().body("size()", is(1));
+        response.then().body("errors.size()", is(1));
+        response.then().body("errors[0]", equalTo("\"" + field + "\" " + errorMessage));
+    }
 }

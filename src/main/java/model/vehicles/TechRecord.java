@@ -10,8 +10,8 @@ public class TechRecord {
     private String chassisModel;
     private String bodyMake;
     private String bodyModel;
-    private String bodyType;
-    private Integer manufactureDate;
+    private BodyType bodyType;
+    private Integer manufactureYear;
     private String regnDate;
     private String coifDate;
     private String ntaNumber;
@@ -33,7 +33,7 @@ public class TechRecord {
     private Integer grossDesignWeight;
     private Integer noOfAxles;
     private String brakeCode;
-    private String vehicleClass;
+    private VehicleClass vehicleClass;
     private String vehicleType;
     private String vehicleSize;
     private String vehicleConfiguration;
@@ -95,21 +95,21 @@ public class TechRecord {
         return this;
     }
 
-    public String getBodyType() {
+    public BodyType getBodyType() {
         return bodyType;
     }
 
-    public TechRecord setBodyType(String bodyType) {
+    public TechRecord setBodyType(BodyType bodyType) {
         this.bodyType = bodyType;
         return this;
     }
 
-    public Integer getManufactureDate() {
-        return manufactureDate;
+    public Integer getManufactureYear() {
+        return manufactureYear;
     }
 
-    public TechRecord setManufactureDate(Integer manufactureDate) {
-        this.manufactureDate = manufactureDate;
+    public TechRecord setManufactureYear(Integer manufactureYear) {
+        this.manufactureYear = manufactureYear;
         return this;
     }
 
@@ -303,11 +303,11 @@ public class TechRecord {
         return this;
     }
 
-    public String getVehicleClass() {
+    public VehicleClass getVehicleClass() {
         return vehicleClass;
     }
 
-    public TechRecord setVehicleClass(String vehicleClass) {
+    public TechRecord setVehicleClass(VehicleClass vehicleClass) {
         this.vehicleClass = vehicleClass;
         return this;
     }
@@ -367,7 +367,7 @@ public class TechRecord {
                 ", bodyMake='" + bodyMake + '\'' +
                 ", bodyModel='" + bodyModel + '\'' +
                 ", bodyType='" + bodyType + '\'' +
-                ", manufactureDate=" + manufactureDate +
+                ", manufactureYear=" + manufactureYear +
                 ", regnDate='" + regnDate + '\'' +
                 ", coifDate='" + coifDate + '\'' +
                 ", ntaNumber='" + ntaNumber + '\'' +

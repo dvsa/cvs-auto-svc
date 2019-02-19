@@ -35,6 +35,10 @@ public class PreparersSteps {
     @Step
     public void validateData(Preparer preparer) {
 
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+                response.then().body("[" + i + "].size()", is(equalTo(Preparer.class.getDeclaredFields().length)));
+        }
+
         response.then().body("preparerId", hasItem(equalTo(preparer.getPreparerId())));
         response.then().body("preparerName", hasItem(equalTo(preparer.getPreparerName())));
     }

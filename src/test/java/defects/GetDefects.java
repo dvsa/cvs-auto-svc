@@ -1,6 +1,7 @@
 package defects;
 
 import data.DefectsData;
+import model.defects.Defect;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -33,6 +34,13 @@ public class GetDefects {
         defectsSteps.validateData(DefectsData.buildDefectsData());
     }
 
+    @Title("CVSB-1906 / CVSB-2554 - API Consumer does not get 'advisory' and 'prs' data for deficiencyCategory")
+    @Test
+    public void defectsReferenceData2() {
+        defectsSteps.callDefectsWithData();
+        defectsSteps.statusCodeShouldBe(200);
+        defectsSteps.validateDeficiencyCategoryNotContains("advisory", "prs");
+    }
 
 }
 

@@ -89,5 +89,17 @@ public class TestTypeByIdData {
         return testTypeById;
     }
 
+    public static TestTypeById buildNonAnnualPsvSmallRigidTwoAxles() {
+
+        TestTypeById testTypeById = new TestTypeById();
+
+        testTypeById.setId("30")
+                .setTestTypeClassification("NON ANNUAL")
+                .setDefaultTestCode("qas")
+                .setLinkedTestCode(null);
+
+        return testTypeById;
+    }
+
 
 }
