@@ -7,6 +7,7 @@ import util.BasePathFilter;
 import util.NoDataPathFilter;
 
 import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 public class PreparersClient {
 
@@ -19,11 +20,22 @@ public class PreparersClient {
     }
 
     private Response getPreparers(Filter filter) {
+        Response response = callGetPreparers(filter);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetPreparers(filter);
+        }
+
+        return response;
+
+    }
+
+    private Response callGetPreparers(Filter filter) {
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
                 .get("/preparers");
 
         return response;
-
     }
 }

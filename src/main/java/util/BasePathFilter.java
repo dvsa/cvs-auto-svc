@@ -1,19 +1,46 @@
 package util;
 
+import exceptions.AutomationException;
 import io.restassured.config.SSLConfig;
 import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
 import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import static io.restassured.RestAssured.config;
+import static util.TypeLoader.*;
 
 public class BasePathFilter implements Filter {
+
+    private static Loader loader;
+
+    static {
+        EnvironmentType envType = TypeLoader.getType();
+
+        switch (envType) {
+            case CI_DEVELOP:
+                loader = new CIDevelopLoaderImpl();
+                break;
+            case LOCAL:
+                loader = new LocalLoaderImpl();
+                break;
+            default:
+                throw new AutomationException("Environment configuration not found");
+        }
+    }
+
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
-        filterableRequestSpecification.given().baseUri(BackEndLoader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
 
-        return filterContext.next(filterableRequestSpecification,filterableResponseSpecification);
+        filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
+        if (!isWrongAtuh() && !isMissingtuh()) {
+            filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken());
+        } else if (isWrongAtuh()) {
+            filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));
+        }
+
+        return filterContext.next(filterableRequestSpecification, filterableResponseSpecification);
     }
 }

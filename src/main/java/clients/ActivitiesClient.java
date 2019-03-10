@@ -10,6 +10,7 @@ import model.Activities;
 import util.BasePathFilter;
 
 import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 public class ActivitiesClient {
 
@@ -17,19 +18,22 @@ public class ActivitiesClient {
 
         Response response;
         if (activities != null) {
-            response = given().filters(new BasePathFilter())
-                    .contentType(ContentType.JSON)
-                    .body(activities)
-                    .post("/activities");
+            response = callPostActivities(activities);
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPostActivities(activities);
+            }
 
         } else {
-            response = given().filters(new BasePathFilter())
-                    .contentType(ContentType.JSON)
-                    .body("{ }")
-                    .post("/activities");
+            response = callPostActivities("{ }");
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPostActivities("{ }");
+            }
         }
 
-        response.prettyPrint();
         return response;
     }
 
@@ -51,18 +55,19 @@ public class ActivitiesClient {
                 node.remove(propertyField);
                 break;
             case NEW_PROPERTY:
-                node.put(propertyField,value);
+                node.put(propertyField, value);
                 break;
             default:
                 throw new AutomationException("Convert type not supported for Activities");
 
         }
 
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .body(node)
-                .post("/activities");
+        Response response = callPostActivities(node);
 
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPostActivities(node);
+        }
 
         return response;
     }
@@ -70,11 +75,34 @@ public class ActivitiesClient {
 
     public Response putActivities(String id) {
 
+        Response response = callPutActivities(id);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPutActivities(id);
+        }
+
+        return response;
+
+    }
+
+
+    private Response callPostActivities(Object object) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(object)
+                .post("/activities");
+
+        return response;
+    }
+
+    private Response callPutActivities(String id) {
+
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("id", id)
                 .put("/activities/{id}/end");
-
 
         return response;
     }

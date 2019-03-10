@@ -1,7 +1,7 @@
 package testresults;
 
 import data.TestResultsData;
-import model.testresults.TestResults;
+import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -29,8 +29,8 @@ public class GetTestResultsBetweenDate {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-    private TestResults vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
+    private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
+    private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2434 - Between Date data found and status default")
@@ -61,13 +61,22 @@ public class GetTestResultsBetweenDate {
     }
 
 
-    @Title("CVSB-416 - CVSB-949 / CVSB-2437 - Between Date invalid (fromDateTime, toDateTime invalid values) and status default")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2437 - Between Date invalid (fromDateTime, toDateTime invalid values) and status default - random")
     @Test
     public void testResultsBetweenDateInvalid() {
 
         testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), RandomStringUtils.randomAlphanumeric(4), RandomStringUtils.randomAlphanumeric(4));
-        testResultsSteps.statusCodeShouldBe(404);
-        testResultsSteps.validateData("No resources match the search criteria");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Bad request");
+    }
+
+    @Title("CVSB-416 - CVSB-949 / CVSB-2437 - Between Date invalid (fromDateTime, toDateTime invalid values) and status default - empty")
+    @Test
+    public void testResultsBetweenDateInvalidEmpty() {
+
+        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), "", "");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Bad Request");
     }
 
 
@@ -98,20 +107,29 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB-2441 - Between Date invalid (fromDateTime, toDateTime invalid values) and status submitted")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2441 - Between Date invalid (fromDateTime, toDateTime invalid values) and status submitted - random")
     @Test
     public void testResultsBetweenDateInvalidWithStatusSubmitted() {
 
         testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), RandomStringUtils.randomAlphanumeric(4), RandomStringUtils.randomAlphanumeric(4), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(404);
-        testResultsSteps.validateData("No resources match the search criteria");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Bad request");
+    }
+
+    @Title("CVSB-416 - CVSB-949 / CVSB-2441 - Between Date invalid (fromDateTime, toDateTime invalid values) and status submitted - empty")
+    @Test
+    public void testResultsBetweenDateInvalidRandomWithStatusSubmitted() {
+
+        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), "", "", TestResultsStatus.SUBMITTED);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Bad Request");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2442 - Between Date data found and status cancelled")
     @Test
     public void testResultsBetweenDateExistingWithStatusCancelled() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELLED);
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }
@@ -120,7 +138,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateNotExistingWithStatusCancelledHigher() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 2), TestResultsStatus.CANCELLED);
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 2), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
@@ -129,18 +147,27 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateNotExistingWithStatusCancelledLower() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -2), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), TestResultsStatus.CANCELLED);
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -2), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @Title("CVSB-416 - CVSB-949 / CVSB-2445 - Between Date invalid (fromDateTime, toDateTime invalid values) and status canceled")
+    @Title("CVSB-416 - CVSB-949 / CVSB-2445 - Between Date invalid (fromDateTime, toDateTime invalid values) and status canceled - random")
     @Test
     public void testResultsBetweenDateInvalidWithStatusCancelled() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), RandomStringUtils.randomAlphanumeric(4), RandomStringUtils.randomAlphanumeric(4), TestResultsStatus.CANCELLED);
-        testResultsSteps.statusCodeShouldBe(404);
-        testResultsSteps.validateData("No resources match the search criteria");
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), RandomStringUtils.randomAlphanumeric(4), RandomStringUtils.randomAlphanumeric(4), TestResultsStatus.CANCELED);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Bad request");
+    }
+
+    @Title("CVSB-416 - CVSB-949 / CVSB-2445 - Between Date invalid (fromDateTime, toDateTime invalid values) and status canceled - empty")
+    @Test
+    public void testResultsBetweenDateInvalidEmptyWithStatusCancelled() {
+
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), "", "", TestResultsStatus.CANCELED);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Bad Request");
     }
 
 }

@@ -2,7 +2,8 @@ package clients.util.testresult;
 
 public enum TestResultsLevel {
 
-    MAIN_LEVEL("mainLevel"),TEST_TYPES("testTypes"), DEFECTS("defects"), ADDITIONAL_INFORMATION("additionalInformation"), LOCATION("location"), ITEM("item"), DEFICIENCY("deficiency");
+    MAIN_LEVEL("mainLevel"),TEST_TYPES("testTypes"), DEFECTS("defects"), ADDITIONAL_INFORMATION("additionalInformation"),
+    LOCATION("location"), ITEM("item"), DEFICIENCY("deficiency"), VEHICLE_CLASS("vehicleClass");
 
     private String level;
 

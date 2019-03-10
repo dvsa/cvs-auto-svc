@@ -5,10 +5,39 @@ import io.restassured.response.Response;
 import util.BasePathFilter;
 
 import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 public class VehicleTechnicalRecordsClient {
 
     public Response getVehicleTechnicalRecords(String searchIdentifier) {
+
+        Response response = callGetVehicleTechnicalRecords(searchIdentifier);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecords(searchIdentifier);
+        }
+
+        return response;
+
+    }
+
+
+    public Response getVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
+
+        Response response = callGetVehicleTechnicalRecordsByStatus(searchIdentifier, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsByStatus(searchIdentifier, status);
+        }
+
+        return response;
+
+    }
+
+
+    private Response callGetVehicleTechnicalRecords(String searchIdentifier) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
@@ -18,8 +47,7 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
-
-    public Response getVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
+    public Response callGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)

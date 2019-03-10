@@ -3,8 +3,6 @@ package steps;
 import clients.DefectsClient;
 import io.restassured.response.Response;
 import model.defects.*;
-import model.testresults.Defects;
-import model.testresults.Deficiency;
 import net.thucydides.core.annotations.Step;
 
 import java.util.List;
@@ -48,7 +46,7 @@ public class DefectsSteps {
     @Step
     public void validateData(Defect defect) {
 
-        response.then().body("[0].size()", is(Defects.class.getDeclaredFields().length));
+        response.then().body("[0].size()", is(Defect.class.getDeclaredFields().length));
 
         response.then().body("imDescription", hasItem(equalTo(defect.getImDescription())));
         response.then().body("imNumber", hasItem(equalTo(defect.getImNumber())));

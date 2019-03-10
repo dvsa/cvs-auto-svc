@@ -7,6 +7,7 @@ import util.BasePathFilter;
 import util.NoDataPathFilter;
 
 import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 public class DefectsClient {
 
@@ -20,12 +21,24 @@ public class DefectsClient {
     }
 
     private Response getDefects(Filter filter) {
+        Response response = callGetDefects(filter);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetDefects(filter);
+        }
+
+        return response;
+
+    }
+
+    private Response callGetDefects(Filter filter) {
+
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
                 .get("/defects");
 
         return response;
-
     }
 
 

@@ -1,19 +1,17 @@
 package clients;
 
-import clients.model.TestTypeField;
 import clients.model.TestTypeQueryParam;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import util.BasePathFilter;
 import util.NoDataPathFilter;
 
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 public class TestTypesClient {
 
@@ -26,9 +24,12 @@ public class TestTypesClient {
     }
 
     private Response getTestTypes(Filter filter) {
-        Response response = given().filters(filter)
-                .contentType(ContentType.JSON)
-                .get("/test-types");
+        Response response = callGetTestTypes(filter);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestTypes(filter);
+        }
 
         return response;
 
@@ -67,10 +68,21 @@ public class TestTypesClient {
 
         Response response = responseSpec.get("/test-types/{id}");
 
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = responseSpec.get("/test-types/{id}");
+        }
 
         return response;
 
     }
 
+    private Response callGetTestTypes(Filter filter) {
+        Response response = given().filters(filter)
+                .contentType(ContentType.JSON)
+                .get("/test-types");
 
+        return response;
+
+    }
 }
