@@ -22,7 +22,7 @@ import static util.DataUtil.generateRandomExcludingValues;
 @WithTags(
         {
                 @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Negative"),
+                @WithTag(type = "TestResults", name = "Positive"),
                 @WithTag(type = "Service", name = "One"),
 
         }
@@ -673,6 +673,5 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
-
 
 }

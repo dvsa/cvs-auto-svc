@@ -19,7 +19,7 @@ import java.util.Random;
 @WithTags(
         {
                 @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Positive"),
+                @WithTag(type = "TestResults", name = "Negative"),
                 @WithTag(type = "Service", name = "One"),
 
         }
