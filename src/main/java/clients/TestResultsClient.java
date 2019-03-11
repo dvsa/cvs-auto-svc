@@ -9,29 +9,38 @@ import exceptions.AutomationException;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import model.testresults.TestResults;
+import model.testresults.TestResultsGet;
+import model.testresults.TestTypesGet;
 import util.BasePathFilter;
 
+import java.lang.reflect.Field;
+
 import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 public class TestResultsClient {
 
     public Response getTestResults(String vin) {
 
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
-                .get("/test-results/{vin}");
+        Response response = callGetTestResults(vin);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResults(vin);
+        }
 
         return response;
+
     }
 
-    public Response getVehicleTechnicalRecords(String vin, String status) {
+    public Response getTestResultsWithStatus(String vin, String status) {
 
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
-                .queryParam("status", status)
-                .get("/test-results/{vin}");
+        Response response = callFetTestResultsWithStatus(vin, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callFetTestResultsWithStatus(vin, status);
+        }
 
         return response;
     }
@@ -39,22 +48,42 @@ public class TestResultsClient {
 
     public Response postTestResults(TestResults testResults) {
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode node = objectMapper.valueToTree(testResults);
+
+
         Response response;
         if (testResults != null) {
-            response = given().filters(new BasePathFilter())
-                    .contentType(ContentType.JSON)
-                    .body(testResults)
-                    .post("/test-results");
+
+            for (Field field : TestResultsGet.class.getDeclaredFields()) {
+                node.remove(field.getName());
+            }
+
+            for (Field field : TestTypesGet.class.getDeclaredFields()) {
+                JsonNode nodeToUpdate = node.get("testTypes").get(0);
+                if (nodeToUpdate != null) {
+                    ((ObjectNode) nodeToUpdate).remove(field.getName());
+                }
+
+            }
+
+            response = callPostTestResults(node);
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPostTestResults(node);
+            }
+
 
         } else {
-            response = given().filters(new BasePathFilter())
-                    .contentType(ContentType.JSON)
-                    .body("{ }")
-                    .post("/test-results");
+            response = callPostTestResults("{ }");
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPostTestResults("{ }");
+            }
         }
 
-
-        response.prettyPrint();
         return response;
     }
 
@@ -67,10 +96,21 @@ public class TestResultsClient {
 
         JsonNode nodeToUpdate;
 
+        for (Field field : TestResultsGet.class.getDeclaredFields()) {
+            node.remove(field.getName());
+        }
+
+        for (Field field : TestTypesGet.class.getDeclaredFields()) {
+            nodeToUpdate = node.get("testTypes").get(0);
+            ((ObjectNode) nodeToUpdate).remove(field.getName());
+        }
 
         switch (testResultsLevel) {
             case MAIN_LEVEL:
                 nodeToUpdate = node;
+                break;
+            case VEHICLE_CLASS:
+                nodeToUpdate = node.get("vehicleClass");
                 break;
             case TEST_TYPES:
                 nodeToUpdate = node.get("testTypes").get(0);
@@ -93,7 +133,6 @@ public class TestResultsClient {
             default:
                 throw new AutomationException("Level not recognized");
         }
-
 
 
         switch (toType) {
@@ -120,36 +159,38 @@ public class TestResultsClient {
 
         }
 
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .body(node)
-                .post("/test-results");
 
+        Response response = callPostTestResults(node);
 
-        response.prettyPrint();
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPostTestResults(node);
+        }
+
         return response;
     }
 
 
     public Response getTestResultsFromDateTime(String vin, String fromDateTime) {
 
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
-                .queryParam("fromDateTime", fromDateTime)
-                .get("/test-results/{vin}");
+        Response response = callGetTestResultsFromDateTime(vin, fromDateTime);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsFromDateTime(vin, fromDateTime);
+        }
 
         return response;
     }
 
     public Response getTestResultsFromDateTime(String vin, String fromDateTime, String status) {
 
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
-                .queryParam("status", status)
-                .queryParam("fromDateTime", fromDateTime)
-                .get("/test-results/{vin}");
+        Response response = callGetTestResultsFromDateTime(vin, fromDateTime, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsFromDateTime(vin, fromDateTime, status);
+        }
 
         return response;
     }
@@ -157,6 +198,112 @@ public class TestResultsClient {
 
     public Response getTestResultsToDateTime(String vin, String toDateTime) {
 
+        Response response = callGetTestResultsToDateTime(vin, toDateTime);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsToDateTime(vin, toDateTime);
+        }
+
+        return response;
+    }
+
+    public Response getTestResultsToDateTime(String vin, String toDateTime, String status) {
+
+        Response response = callGetTestResultsToDateTime(vin, toDateTime, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsToDateTime(vin, toDateTime, status);
+        }
+
+        return response;
+    }
+
+    public Response getTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime) {
+
+        Response response = callGetTestResultsBetweenDate(vin, fromDateTime, toDateTime);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsBetweenDate(vin, fromDateTime, toDateTime);
+        }
+
+        return response;
+    }
+
+    public Response getTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime, String status) {
+
+        Response response = callGetTestResultsBetweenDate(vin, fromDateTime, toDateTime, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsBetweenDate(vin, fromDateTime, toDateTime, status);
+        }
+
+        return response;
+    }
+
+
+    public Response callPostTestResults(Object object) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(object)
+                .post("/test-results");
+
+        return response;
+    }
+
+
+    public Response callGetTestResults(String vin) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("vin", vin)
+                .get("/test-results/{vin}");
+
+        return response;
+    }
+
+    private Response callFetTestResultsWithStatus(String vin, String status) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("vin", vin)
+                .queryParam("status", status)
+                .get("/test-results/{vin}");
+
+
+        return response;
+    }
+
+    private Response callGetTestResultsFromDateTime(String vin, String fromDateTime) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("vin", vin)
+                .queryParam("fromDateTime", fromDateTime)
+                .get("/test-results/{vin}");
+
+        return response;
+    }
+
+    private Response callGetTestResultsFromDateTime(String vin, String fromDateTime, String status) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("vin", vin)
+                .queryParam("status", status)
+                .queryParam("fromDateTime", fromDateTime)
+                .get("/test-results/{vin}");
+
+        return response;
+    }
+
+
+    private Response callGetTestResultsToDateTime(String vin, String toDateTime) {
+
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
@@ -166,7 +313,7 @@ public class TestResultsClient {
         return response;
     }
 
-    public Response getTestResultsToDateTime(String vin, String toDateTime, String status) {
+    private Response callGetTestResultsToDateTime(String vin, String toDateTime, String status) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
@@ -178,7 +325,7 @@ public class TestResultsClient {
         return response;
     }
 
-    public Response getTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime) {
+    private Response callGetTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
@@ -190,7 +337,7 @@ public class TestResultsClient {
         return response;
     }
 
-    public Response getTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime, String status) {
+    private Response callGetTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime, String status) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)

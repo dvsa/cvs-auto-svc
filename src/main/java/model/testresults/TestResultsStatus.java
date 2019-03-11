@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public enum TestResultsStatus {
 
-    SUBMITTED("submitted"), CANCELLED("cancelled"),
+    SUBMITTED("submitted"), CANCELED("cancelled"),
     INVALID("invalid") {
         @Override
         public String getStatus() {

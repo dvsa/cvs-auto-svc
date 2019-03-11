@@ -1,15 +1,20 @@
 package model.testresults;
 
 
-import java.util.List;
-
 public class Defects {
 
     private Integer imNumber;
     private String imDescription;
-    private List<String> forVehicleType;
     private AdditionalInformation additionalInformation;
-    private Item item;
+    private Integer itemNumber;
+    private String itemDescription;
+    private String deficiencyRef;
+    private String deficiencyId;
+    private String deficiencySubId;
+    private String deficiencyCategory;
+    private String deficiencyText;
+    private Boolean stdForProhibition;
+    private Boolean prs;
 
     public Integer getImNumber() {
         return imNumber;
@@ -29,15 +34,6 @@ public class Defects {
         return this;
     }
 
-    public List<String> getForVehicleType() {
-        return forVehicleType;
-    }
-
-    public Defects setForVehicleType(List<String> forVehicleType) {
-        this.forVehicleType = forVehicleType;
-        return this;
-    }
-
     public AdditionalInformation getAdditionalInformation() {
         return additionalInformation;
     }
@@ -47,12 +43,84 @@ public class Defects {
         return this;
     }
 
-    public Item getItem() {
-        return item;
+    public Integer getItemNumber() {
+        return itemNumber;
     }
 
-    public Defects setItem(Item item) {
-        this.item = item;
+    public Defects setItemNumber(Integer itemNumber) {
+        this.itemNumber = itemNumber;
+        return this;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public Defects setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+        return this;
+    }
+
+    public String getDeficiencyRef() {
+        return deficiencyRef;
+    }
+
+    public Defects setDeficiencyRef(String deficiencyRef) {
+        this.deficiencyRef = deficiencyRef;
+        return this;
+    }
+
+    public String getDeficiencyId() {
+        return deficiencyId;
+    }
+
+    public Defects setDeficiencyId(String deficiencyId) {
+        this.deficiencyId = deficiencyId;
+        return this;
+    }
+
+    public String getDeficiencySubId() {
+        return deficiencySubId;
+    }
+
+    public Defects setDeficiencySubId(String deficiencySubId) {
+        this.deficiencySubId = deficiencySubId;
+        return this;
+    }
+
+    public String getDeficiencyCategory() {
+        return deficiencyCategory;
+    }
+
+    public Defects setDeficiencyCategory(String deficiencyCategory) {
+        this.deficiencyCategory = deficiencyCategory;
+        return this;
+    }
+
+    public String getDeficiencyText() {
+        return deficiencyText;
+    }
+
+    public Defects setDeficiencyText(String deficiencyText) {
+        this.deficiencyText = deficiencyText;
+        return this;
+    }
+
+    public Boolean getStdForProhibition() {
+        return stdForProhibition;
+    }
+
+    public Defects setStdForProhibition(Boolean stdForProhibition) {
+        this.stdForProhibition = stdForProhibition;
+        return this;
+    }
+
+    public Boolean getPrs() {
+        return prs;
+    }
+
+    public Defects setPrs(Boolean prs) {
+        this.prs = prs;
         return this;
     }
 
@@ -61,9 +129,16 @@ public class Defects {
         return "Defects{" +
                 "imNumber=" + imNumber +
                 ", imDescription='" + imDescription + '\'' +
-                ", forVehicleType=" + forVehicleType +
                 ", additionalInformation=" + additionalInformation +
-                ", item=" + item +
+                ", itemNumber=" + itemNumber +
+                ", itemDescription='" + itemDescription + '\'' +
+                ", deficiencyRef='" + deficiencyRef + '\'' +
+                ", deficiencyId='" + deficiencyId + '\'' +
+                ", deficiencySubId='" + deficiencySubId + '\'' +
+                ", deficiencyCategory='" + deficiencyCategory + '\'' +
+                ", deficiencyText='" + deficiencyText + '\'' +
+                ", stdForProhibition=" + stdForProhibition +
+                ", prs=" + prs +
                 '}';
     }
 }

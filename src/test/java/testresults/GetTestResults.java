@@ -2,7 +2,7 @@ package testresults;
 
 
 import data.TestResultsData;
-import model.testresults.TestResults;
+import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -29,9 +29,24 @@ public class GetTestResults {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-    private TestResults vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
+    private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
+    private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
+    @Title("CVSB-416 - CVSB-949 / CVSB-3513 - Un-authorised consumer retrieves results for submitted tests.")
+    @Test
+    public void testResultsNoAuthorised() {
+        testResultsSteps.getTestResultsNotAuthorised(vehicleSubmittedData.getVin());
+        testResultsSteps.statusCodeShouldBe(403);
+        testResultsSteps.validateMessage("User is not authorized to access this resource with an explicit deny");
+    }
+
+    @Title("CVSB-416 - CVSB-949 / CVSB-1578 - Un-authenticated consumer retrieves results for submitted tests.")
+    @Test
+    public void testResultsNoAuth() {
+        testResultsSteps.getTestResultsNotAuthenticated(vehicleSubmittedData.getVin());
+        testResultsSteps.statusCodeShouldBe(401);
+        testResultsSteps.validateMessage("Unauthorized");
+    }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2215 - API Consumer retrieve the Test results for the input Vin (DEFAULT)")
     @Test
@@ -55,7 +70,7 @@ public class GetTestResults {
     @Test
     public void testResultsWithStatusCanceledReferenceData() {
 
-        testResultsSteps.getTestResults(vehicleCancelledData.getVin(), TestResultsStatus.CANCELLED);
+        testResultsSteps.getTestResults(vehicleCancelledData.getVin(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }
@@ -91,7 +106,7 @@ public class GetTestResults {
     @Test
     public void testResultsWithStatusCanceledAndNotExistingVin() {
 
-        testResultsSteps.getTestResults(RandomStringUtils.randomAlphanumeric(17), TestResultsStatus.CANCELLED);
+        testResultsSteps.getTestResults(RandomStringUtils.randomAlphanumeric(17), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
     }
