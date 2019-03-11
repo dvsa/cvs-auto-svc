@@ -13,16 +13,9 @@ public class WriterReader {
 
 
         FileUtils p1 = new FileUtils(WebDriverBrowsertack.getToken());
-
-        try {
-            FileOutputStream f = new FileOutputStream(new File(FILE_NAME));
-            ObjectOutputStream o = new ObjectOutputStream(f);
+        try(FileOutputStream f = new FileOutputStream(new File(FILE_NAME));ObjectOutputStream o = new ObjectOutputStream(f) ) {
 
             o.writeObject(p1);
-
-            o.close();
-            f.close();
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -36,31 +29,24 @@ public class WriterReader {
 
     public static String getToken() {
 
-        FileUtils pr1 = null;
-        try {
+        FileUtils fileUtils;
+        File file = new File(FILE_NAME);
+        if (!file.exists()) {
+            saveUtils();
+        }
 
-            File file = new File(FILE_NAME);
+        try(FileInputStream fi = new FileInputStream(file); ObjectInputStream oi = new ObjectInputStream(fi)) {
 
-            if (!file.exists()) {
-                saveUtils();
-            }
-
-            FileInputStream fi = new FileInputStream(file);
-            ObjectInputStream oi = new ObjectInputStream(fi);
-
-            pr1 = (FileUtils) oi.readObject();
-
-            oi.close();
-            fi.close();
+            fileUtils = (FileUtils) oi.readObject();
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new AutomationException("File Utils not found");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            throw new AutomationException("Error initializing stream");
         }
-
-        return pr1.getToken();
-
+        return fileUtils.getToken();
     }
 
 
