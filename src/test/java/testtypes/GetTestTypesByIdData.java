@@ -18,7 +18,7 @@ import java.util.Arrays;
         {
                 @WithTag(type = "TestTypes", name = "All"),
                 @WithTag(type = "TestTypes", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
+                @WithTag(type = "Service", name = "Local"),
 
         }
 )
@@ -124,7 +124,7 @@ public class GetTestTypesByIdData {
                 .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById(nonAnnualPsvSmallRigidTwoAxles.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.statusCodeShouldBe(400);
         testTypeSteps.validateData(nonAnnualPsvSmallRigidTwoAxles, testTypeQueryParam.getFields());
     }
 }

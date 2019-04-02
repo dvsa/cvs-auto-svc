@@ -66,6 +66,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setTestTypeName("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -92,6 +93,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setName("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setName(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -120,6 +122,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setTestTypeId("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -148,6 +151,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setCertificateNumber("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setCertificateNumber(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -173,7 +177,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
 
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
-                .getTestTypes().get(0).setTestTypeStartTimestamp(DataUtil.buildCurrentDate());
+                .getTestTypes().get(0).setTestTypeStartTimestamp(DataUtil.buildCurrentDateTime());
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
         testResultsSteps.statusCodeShouldBe(201);
@@ -187,7 +191,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
 
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
-                .getTestTypes().get(0).setTestTypeEndTimestamp(DataUtil.buildCurrentDate());
+                .getTestTypes().get(0).setTestTypeEndTimestamp(DataUtil.buildCurrentDateTime());
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
         testResultsSteps.statusCodeShouldBe(201);
@@ -245,7 +249,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
 
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
-                .getTestTypes().get(0).setLastSeatbeltInstallationCheckDate(DataUtil.buildCurrentDate());
+                .getTestTypes().get(0).setLastSeatbeltInstallationCheckDate(DataUtil.buildCurrentDateTime());
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
         testResultsSteps.statusCodeShouldBe(201);
@@ -413,13 +417,14 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - reasonForAbandoning with testResult abandoned")
     @Test
-    public void testResultsReasonForAbandoningAbandoned() {
+    public void testResultsReasonForAbandoningAbandonedEmpty() {
 
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("abandoned").setReasonForAbandoning("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -434,6 +439,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setTestResult("fail").setReasonForAbandoning("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -448,6 +454,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -462,6 +469,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setTestResult("prs").setReasonForAbandoning("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -591,6 +599,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setAdditionalNotesRecorded("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalNotesRecorded(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -633,6 +642,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();

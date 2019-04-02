@@ -1,13 +1,14 @@
 package data;
 
-import model.Activities;
+import model.activities.Activities;
+import model.activities.ActivitiesGet;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class ActivitiesData {
 
-    public static Activities buildActivitiesData() {
+    public static ActivitiesGet.Builder buildActivitiesData() {
 
-        return new Activities()
+        return new ActivitiesGet.Builder()
                 .setActivityType("visit")
                 .setTestStationName("string")
                 .setTestStationPNumber("string")

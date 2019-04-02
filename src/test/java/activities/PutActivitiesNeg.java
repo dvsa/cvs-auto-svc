@@ -1,7 +1,7 @@
 package activities;
 
 import data.ActivitiesData;
-import model.Activities;
+import model.activities.Activities;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -25,7 +25,7 @@ public class PutActivitiesNeg {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    private Activities activitiesData = ActivitiesData.buildActivitiesData();
+    private Activities activitiesData = ActivitiesData.buildActivitiesData().build();
     private String id;
 
 
@@ -37,7 +37,7 @@ public class PutActivitiesNeg {
 
         activitiesSteps.putActivities(id);
         activitiesSteps.statusCodeShouldBe(404);
-        activitiesSteps.validateActivityErrorTypeWithoutProperty("Activity id " + id, "does not exist");
+        activitiesSteps.validateActivityErrorMessage("Activity id does not exist");
 
     }
 
@@ -50,7 +50,7 @@ public class PutActivitiesNeg {
 
         activitiesSteps.putActivities(id);
         activitiesSteps.statusCodeShouldBe(404);
-        activitiesSteps.validateActivityErrorTypeWithoutProperty("Activity id " + id, "does not exist");
+        activitiesSteps.validateActivityErrorMessage("Activity id does not exist");
 
     }
 
@@ -65,7 +65,7 @@ public class PutActivitiesNeg {
         activitiesSteps.statusCodeShouldBe(204);
         activitiesSteps.putActivities(id);
         activitiesSteps.statusCodeShouldBe(403);
-        activitiesSteps.validateActivityErrorTypeWithoutProperty("Activity id " + id, "has already ended");
+        activitiesSteps.validateActivityErrorMessage("Activity already ended");
 
     }
 }

@@ -64,7 +64,6 @@ public class TestResultsSteps {
     }
 
 
-
     @Step
     public void postTestResultsFieldChange(TestResults testResults, String propertyField, String value, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
         response = testResultsClient.postTestResultsFieldChange(testResults, propertyField, value, toType, testResultsLevel);
@@ -131,6 +130,45 @@ public class TestResultsSteps {
         validateAdditionalInformation(testResults);
         validateLocation(testResults);
 
+
+    }
+
+
+    @Step
+    public void validateDataForAnniversary(List<String> expectedDataList) {
+        if (expectedDataList != null) {
+            for (String expectedData : expectedDataList) {
+                if (expectedData != null) {
+                    response.then().body("testTypes.testAnniversaryDate", hasItem(hasItem(startsWith(expectedData))));
+                } else {
+                    response.then().body("testTypes.testAnniversaryDate", hasItem(hasItem(nullValue())));
+                }
+                response.then().body("testTypes.size()", is(expectedDataList.size()));
+            }
+        } else {
+            response.then().body("testTypes.testAnniversaryDate", hasItem(hasItem(nullValue())));
+            response.then().body("testTypes.size()", is(1));
+        }
+    }
+
+    @Step
+    public void validateDataForExpiry(List<String> expectedDataList) {
+
+        if (expectedDataList != null) {
+            for (String expectedData : expectedDataList) {
+                if (expectedData != null) {
+                    response.then().body("testTypes.testExpiryDate", hasItem(hasItem(startsWith(expectedData))));
+                } else {
+                    response.then().body("testTypes.testExpiryDate", hasItem(hasItem(nullValue())));
+                }
+                response.then().body("testTypes.size()", is(expectedDataList.size()));
+            }
+        } else {
+            response.then().body("testTypes.testExpiryDate", hasItem(hasItem(nullValue())));
+            response.then().body("testTypes.size()", is(1));
+        }
+
+
     }
 
 
@@ -160,6 +198,7 @@ public class TestResultsSteps {
 
         response.then().body("vehicleType", hasItem(equalTo(testResults.getVehicleType())));
         response.then().body("numberOfSeats", hasItem(equalTo(testResults.getNumberOfSeats())));
+        response.then().body("noOfAxles", hasItem(equalTo(testResults.getNoOfAxles())));
         response.then().body("vehicleConfiguration", hasItem(equalTo(testResults.getVehicleConfiguration())));
         response.then().body("odometerReading", hasItem(equalTo(testResults.getOdometerReading())));
         response.then().body("odometerReadingUnits", hasItem(equalTo(testResults.getOdometerReadingUnits())));
@@ -175,7 +214,6 @@ public class TestResultsSteps {
     private void validateTestTypesData(TestResultsGet testResults) {
         response.body().prettyPrint();
         response.then().body("[0].testTypes.size()", is(1));
-        response.then().body("[0].testTypes[0].size()", is(TestTypes.class.getDeclaredFields().length + TestTypesGet.class.getDeclaredFields().length - 3));
 
         List<String> createdAt = testResults.getTestTypes().stream().map(TestTypesGet::getCreatedAt).collect(toList());
         List<String> lastUpdatedAt = testResults.getTestTypes().stream().map(TestTypesGet::getLastUpdatedAt).collect(toList());
@@ -204,14 +242,18 @@ public class TestResultsSteps {
         response.then().body("[0].testTypes[0]", hasKey("lastUpdatedAt"));
         response.then().body("[0].testTypes[0]", hasKey("testCode"));
         response.then().body("[0].testTypes[0]", hasKey("testNumber"));
-        response.then().body("testTypes.certificateLink", hasItem(contains(certificateLink.toArray())));
-        response.then().body("testTypes.testExpiryDate", hasItem(contains(testExpiryDate.toArray())));
-        response.then().body("testTypes.testAnniversaryDate", hasItem(contains(testAnniversaryDate.toArray())));
+
+
+
+        // TODO: separate Tests for below properties
+        //        response.then().body("[0].testTypes[0]", hasKey("certificateLink"));
+//        response.then().body("testTypes.certificateLink", hasItem(contains(certificateLink.toArray())));
+//        response.then().body("testTypes.certificateNumber", hasItem(contains(certificateNumber.toArray())));
 
 
         response.then().body("testTypes.testTypeName", hasItem(contains(testTypeName.toArray())));
         response.then().body("testTypes.testTypeId", hasItem(contains(testTypeId.toArray())));
-        response.then().body("testTypes.certificateNumber", hasItem(contains(certificateNumber.toArray())));
+        response.then().body("[0].testTypes[0]", hasKey("certificateNumber"));
         response.then().body("testTypes.testTypeStartTimestamp", hasItem(contains(testTypeStartTimestamp.toArray())));
         response.then().body("testTypes.testTypeEndTimestamp", hasItem(contains(testTypeEndTimestamp.toArray())));
         response.then().body("testTypes.numberOfSeatbeltsFitted", hasItem(contains(numberOfSeatbeltsFitted.toArray())));
@@ -274,7 +316,6 @@ public class TestResultsSteps {
     private void validateLocation(TestResults testResults) {
 
         response.then().body("[0].testTypes.defects.additionalInformation.location.size()", is(1));
-        response.then().body("[0].testTypes[0].defects[0].additionalInformation.location.size()", is(Location.class.getDeclaredFields().length));
 
         List<List<String>> vertical = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getVertical()).collect(toList())).collect(toList());
         List<List<String>> horizontal = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getHorizontal()).collect(toList())).collect(toList());

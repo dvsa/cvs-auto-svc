@@ -84,7 +84,7 @@ public class TestResultsData {
                 .setAdditionalCommentsForAbandon("none");
 
         VehicleClass vehicleClass = new VehicleClass()
-                .setDescription("over 200cc or with a sidecar")
+                .setDescription("motorbikes over 200cc or with a sidecar")
                 .setCode("2");
 
         return new TestResultsGet.Builder()
@@ -103,6 +103,7 @@ public class TestResultsData {
                 .setVehicleClass(vehicleClass)
                 .setVehicleType("psv")
                 .setNumberOfSeats(45)
+                .setNoOfAxles(2)
                 .setVehicleConfiguration("rigid")
                 .setOdometerReading(350000)
                 .setOdometerReadingUnits("kilometres")
@@ -164,7 +165,7 @@ public class TestResultsData {
                 .setAdditionalCommentsForAbandon("none");
 
         VehicleClass vehicleClass = new VehicleClass()
-                .setDescription("over 200cc or with a sidecar")
+                .setDescription("motorbikes over 200cc or with a sidecar")
                 .setCode("2");
 
         return new TestResultsGet.Builder()
@@ -183,6 +184,7 @@ public class TestResultsData {
                 .setVehicleClass(vehicleClass)
                 .setVehicleType("psv")
                 .setNumberOfSeats(45)
+                .setNoOfAxles(2)
                 .setVehicleConfiguration("rigid")
                 .setOdometerReading(350000)
                 .setOdometerReadingUnits("kilometres")

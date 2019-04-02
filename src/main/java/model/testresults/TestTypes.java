@@ -208,8 +208,9 @@ public class TestTypes {
         this.name = name;
     }
 
-    public void setTestTypeId(String testTypeId) {
+    public TestTypes setTestTypeId(String testTypeId) {
         this.testTypeId = testTypeId;
+        return this;
     }
 
     public void setCertificateNumber(String certificateNumber) {

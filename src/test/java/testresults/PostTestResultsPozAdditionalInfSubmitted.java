@@ -78,6 +78,7 @@ public class PostTestResultsPozAdditionalInfSubmitted {
                 .getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes("");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();

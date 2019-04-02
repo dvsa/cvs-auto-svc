@@ -79,6 +79,7 @@ public class PostTestResultsPozAdditionalInfCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }

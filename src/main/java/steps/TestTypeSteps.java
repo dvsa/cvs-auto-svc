@@ -45,6 +45,10 @@ public class TestTypeSteps {
     }
 
     @Step
+    public void validateRawData(String stringData) {
+        response.then().body(is(stringData));
+    }
+    @Step
     public void validateWrongSetOfFields(String stringData) {
 
         response.then().body(containsString(stringData));

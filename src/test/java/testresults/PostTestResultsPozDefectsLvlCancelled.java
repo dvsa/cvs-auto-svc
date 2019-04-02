@@ -78,6 +78,7 @@ public class PostTestResultsPozDefectsLvlCancelled {
         testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.build().getTestTypes().get(0).getDefects().get(0).setImDescription(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -104,6 +105,7 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build());
+        vehicleCancelledData.build().getTestTypes().get(0).getDefects().get(0).setItemDescription(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -132,6 +134,7 @@ public class PostTestResultsPozDefectsLvlCancelled {
         testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyRef(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -345,6 +348,7 @@ public class PostTestResultsPozDefectsLvlCancelled {
                 .getTestTypes().get(0).getDefects().get(0).setDeficiencyText("");
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
+        vehicleCancelledData.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyText(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();

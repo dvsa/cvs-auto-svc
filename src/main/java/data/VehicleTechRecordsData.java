@@ -29,7 +29,6 @@ public class VehicleTechRecordsData {
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
                 .setDataTrBrakeThree("None")
-                .setParkingBrakeMrk(false)
                 .setRetarderBrakeOne("exhaust")
                 .setRetarderBrakeTwo("exhaust")
                 .setBrakeForceWheelsNotLocked(brakeForceWheelsNotLocked)
@@ -39,7 +38,8 @@ public class VehicleTechRecordsData {
                 .setKerbWeight(5018)
                 .setLadenWeight(7100)
                 .setGbWeight(7100)
-                .setDesignWeight(7100);
+                .setDesignWeight(7100)
+                .setParkingBrakeMrk(false);
 
         Tyres tyresOne = new Tyres()
                 .setTyreSize("295/80-22.5")
@@ -123,7 +123,6 @@ public class VehicleTechRecordsData {
         return new Vehicle()
                 .setVrms(Arrays.asList(vrms))
                 .setVim("1B7GG36N12S678410")
-                .setVehicleId(1)
                 .setTechRecord(Arrays.asList(techRecord));
     }
 
@@ -151,7 +150,6 @@ public class VehicleTechRecordsData {
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
                 .setDataTrBrakeThree("None")
-                .setParkingBrakeMrk(false)
                 .setRetarderBrakeOne("hydraulic")
                 .setRetarderBrakeTwo("hydraulic")
                 .setBrakeForceWheelsNotLocked(brakeForceWheelsNotLocked)
@@ -161,7 +159,8 @@ public class VehicleTechRecordsData {
                 .setKerbWeight(3630)
                 .setLadenWeight(6014)
                 .setGbWeight(6300)
-                .setDesignWeight(6500);
+                .setDesignWeight(6500)
+                .setParkingBrakeMrk(false);
 
         Tyres tyresOne = new Tyres()
                 .setTyreSize("11-22.5")
@@ -245,7 +244,6 @@ public class VehicleTechRecordsData {
         return new Vehicle()
                 .setVrms(Arrays.asList(vrms))
                 .setVim("XMGDE02FS0H012461")
-                .setVehicleId(2)
                 .setTechRecord(Arrays.asList(techRecord));
     }
 
@@ -272,7 +270,6 @@ public class VehicleTechRecordsData {
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
                 .setDataTrBrakeThree("None")
-                .setParkingBrakeMrk(false)
                 .setRetarderBrakeOne("hydraulic")
                 .setRetarderBrakeTwo("hydraulic")
                 .setBrakeForceWheelsNotLocked(brakeForceWheelsNotLocked)
@@ -366,7 +363,6 @@ public class VehicleTechRecordsData {
         return new Vehicle()
                 .setVrms(Arrays.asList(vrms))
                 .setVim("1B7GG36N12S021430")
-                .setVehicleId(3)
                 .setTechRecord(Arrays.asList(techRecord));
     }
 

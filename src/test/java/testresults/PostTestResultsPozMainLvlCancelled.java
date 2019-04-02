@@ -1,5 +1,7 @@
 package testresults;
 
+import clients.util.ToTypeConvertor;
+import clients.util.testresult.TestResultsLevel;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -64,6 +66,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setTestStationName("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setTestStationName(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -91,6 +94,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setTestStationPNumber("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setTestStationPNumber(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -156,6 +160,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setTesterName("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setTesterName(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -184,6 +189,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setTesterStaffId("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setTesterStaffId(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -211,6 +217,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setTesterEmailAddress("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setTesterEmailAddress(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -221,7 +228,7 @@ public class PostTestResultsPozMainLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
-                .setTestStartTimestamp(DataUtil.buildCurrentDate()).build());
+                .setTestStartTimestamp(DataUtil.buildCurrentDateTime()).build());
 
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -234,7 +241,7 @@ public class PostTestResultsPozMainLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
-                .setTestEndTimestamp(DataUtil.buildCurrentDate()).build());
+                .setTestEndTimestamp(DataUtil.buildCurrentDateTime()).build());
 
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -264,6 +271,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setReasonForCancellation("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setReasonForCancellation(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -388,7 +396,7 @@ public class PostTestResultsPozMainLvlCancelled {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
-                .getVehicleClass().setDescription("over 200cc or with a sidecar");
+                .getVehicleClass().setDescription("motorbikes over 200cc or with a sidecar");
         testResultsSteps.postTestResults(vehicleCancelledData.build());
 
         testResultsSteps.statusCodeShouldBe(201);
@@ -530,6 +538,46 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
                 .setVehicleType("trl").build());
 
+        testResultsSteps.statusCodeShouldBe(404);
+        testResultsSteps.validateData("Test types not found");
+
+    }
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - numberOfSeats")
+    @Test
+    public void testResultsRandomNumberOfSeats() {
+
+        testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setNumberOfSeats(Integer.valueOf(RandomStringUtils.randomNumeric(5))).build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedData();
+    }
+
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - noOfAxles")
+    @Test
+    public void testResultsRandomNumberNoOfAxles2() {
+
+        testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setNoOfAxles(2).build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedData();
+    }
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - noOfAxles")
+    @Test
+    public void testResultsRandomNumberNoOfAxles3() {
+
+        testResultsSteps.postTestResults(vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setNoOfAxles(3).build());
+
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -653,6 +701,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setPreparerId("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setPreparerId(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -679,6 +728,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setPreparerName("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setPreparerName(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -864,6 +914,7 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setCountryOfRegistration("").build());
 
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledData.setCountryOfRegistration(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }

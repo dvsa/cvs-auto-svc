@@ -6,6 +6,7 @@ public class Weights {
     private Integer ladenWeight;
     private Integer gbWeight;
     private Integer designWeight;
+    private Boolean parkingBrakeMrk;
 
     public Integer getKerbWeight() {
         return kerbWeight;
@@ -43,6 +44,15 @@ public class Weights {
         return this;
     }
 
+    public Boolean getParkingBrakeMrk() {
+        return parkingBrakeMrk;
+    }
+
+    public Weights setParkingBrakeMrk(Boolean parkingBrakeMrk) {
+        this.parkingBrakeMrk = parkingBrakeMrk;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Weights{" +
@@ -50,6 +60,7 @@ public class Weights {
                 ", ladenWeight=" + ladenWeight +
                 ", gbWeight=" + gbWeight +
                 ", designWeight=" + designWeight +
+                ", parkingBrakeMrk=" + parkingBrakeMrk +
                 '}';
     }
 }

@@ -10,14 +10,29 @@ import java.util.List;
 
 public class DataUtil {
 
-    public static String buildDate(String date, long offset) {
+
+    public static String buildDate(String date, long offsetYears,long offsetMounts, long offsetDays) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-        LocalDate localDate = LocalDate.parse(date, formatter).plusYears(offset);
+        LocalDate localDate = LocalDate.parse(date, formatter).plusYears(offsetYears).plusMonths(offsetMounts).plusDays(offsetDays);
         return localDate.toString();
     }
 
-    public static String buildCurrentDate() {
+    public static String buildDate(String date, long offsetYears, long offsetDays) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+        LocalDate localDate = LocalDate.parse(date, formatter).plusYears(offsetYears).plusDays(offsetDays);
+        return localDate.toString();
+    }
+
+    public static String buildDate(String date, long offsetYears) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+        LocalDate localDate = LocalDate.parse(date, formatter).plusYears(offsetYears);
+        return localDate.toString();
+    }
+
+    public static String buildCurrentDateTime() {
 
         LocalDateTime currentDate = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -25,20 +40,26 @@ public class DataUtil {
 
     }
 
+
+    public static String buildCurrentDateTime(long days) {
+
+        LocalDateTime currentDate = LocalDateTime.now().plusDays(days);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        return currentDate.format(formatter);
+
+    }
+
     public static String generateRandomExcludingValues(int count, String... values) {
 
-        List<String> list = Arrays.asList(values);
         String value = RandomStringUtils.randomAlphabetic(count);
-        if( list.stream().anyMatch(s-> s.equalsIgnoreCase(value))) {
-            generateRandomExcludingValues(count,values);
+        for (String currentListValue : values) {
+            if (value.equalsIgnoreCase(currentListValue)) {
+                value = generateRandomExcludingValues(count,values);
+            }
         }
 
         return value;
     }
 
-
-    public static void main(String[] args) {
-        generateRandomExcludingValues(2,"m","d","c","l","x","v","i");
-    }
 
 }
