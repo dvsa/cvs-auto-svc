@@ -3,10 +3,10 @@ package model.vehicles;
 public class Brakes {
 
     private String brakeCode;
+    private String brakeCodeOriginal;
     private String dataTrBrakeOne;
     private String dataTrBrakeTwo;
     private String dataTrBrakeThree;
-    private Boolean parkingBrakeMrk;
     private String retarderBrakeOne;
     private String retarderBrakeTwo;
     private BrakeForceWheelsNotLocked brakeForceWheelsNotLocked;
@@ -45,15 +45,6 @@ public class Brakes {
 
     public Brakes setDataTrBrakeThree(String dataTrBrakeThree) {
         this.dataTrBrakeThree = dataTrBrakeThree;
-        return this;
-    }
-
-    public Boolean getParkingBrakeMrk() {
-        return parkingBrakeMrk;
-    }
-
-    public Brakes setParkingBrakeMrk(Boolean parkingBrakeMrk) {
-        this.parkingBrakeMrk = parkingBrakeMrk;
         return this;
     }
 
@@ -97,10 +88,10 @@ public class Brakes {
     public String toString() {
         return "Brakes{" +
                 "brakeCode='" + brakeCode + '\'' +
+                "brakeCodeOriginal='" + brakeCodeOriginal + '\'' +
                 ", dataTrBrakeOne='" + dataTrBrakeOne + '\'' +
                 ", dataTrBrakeTwo='" + dataTrBrakeTwo + '\'' +
                 ", dataTrBrakeThree='" + dataTrBrakeThree + '\'' +
-                ", parkingBrakeMrk='" + parkingBrakeMrk + '\'' +
                 ", retarderBrakeOne='" + retarderBrakeOne + '\'' +
                 ", retarderBrakeTwo='" + retarderBrakeTwo + '\'' +
                 ", brakeForceWheelsNotLocked=" + brakeForceWheelsNotLocked +

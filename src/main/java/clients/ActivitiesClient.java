@@ -1,13 +1,20 @@
 package clients;
 
 import clients.util.ToTypeConvertor;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import exceptions.AutomationException;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import model.Activities;
+import io.restassured.specification.RequestSpecification;
+import model.activities.Activities;
+import model.activities.ActivitiesGet;
+import model.testresults.TestResultsGet;
+import model.testresults.TestTypesGet;
 import util.BasePathFilter;
+
+import java.lang.reflect.Field;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
@@ -17,12 +24,23 @@ public class ActivitiesClient {
     public Response postActivities(Activities activities) {
 
         Response response;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode node = objectMapper.valueToTree(activities);
+
         if (activities != null) {
-            response = callPostActivities(activities);
+
+            for (Field field : ActivitiesGet.class.getDeclaredFields()) {
+                node.remove(field.getName());
+            }
+        }
+
+        if (activities != null) {
+            response = callPostActivities(node);
 
             if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
                 saveUtils();
-                response = callPostActivities(activities);
+                response = callPostActivities(node);
             }
 
         } else {
@@ -43,6 +61,12 @@ public class ActivitiesClient {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode node = objectMapper.valueToTree(activities);
 
+        if (activities != null) {
+
+            for (Field field : ActivitiesGet.class.getDeclaredFields()) {
+                node.remove(field.getName());
+            }
+        }
 
         switch (toType) {
             case INTEGER:
@@ -86,6 +110,18 @@ public class ActivitiesClient {
 
     }
 
+    public Response getActivities(String activityType, String testerStaffId, String testStationPNumber, String fromStartTime, String toStartTime) {
+
+        Response response = callGetActivities(activityType, testerStaffId, testStationPNumber, fromStartTime, toStartTime);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetActivities(activityType, testerStaffId, testStationPNumber, fromStartTime, toStartTime);
+        }
+        return response;
+
+    }
+
 
     private Response callPostActivities(Object object) {
 
@@ -107,5 +143,36 @@ public class ActivitiesClient {
         return response;
     }
 
+
+    private Response callGetActivities(String activityType, String testerStaffId, String testStationPNumber, String fromStartTime, String toStartTime) {
+
+        RequestSpecification requestSpecification = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON);
+
+        if (activityType != null) {
+            requestSpecification.queryParam("activityType", activityType);
+        }
+
+        if (testerStaffId != null) {
+            requestSpecification.queryParam("testerStaffId", testerStaffId);
+        }
+
+        if (testStationPNumber != null) {
+            requestSpecification.queryParam("testStationPNumber", testStationPNumber);
+        }
+
+        if (fromStartTime != null) {
+            requestSpecification.queryParam("fromStartTime", fromStartTime);
+        }
+
+        if (toStartTime != null) {
+            requestSpecification.queryParam("toStartTime", toStartTime);
+        }
+
+        Response response = requestSpecification
+                .get("/activities/details");
+
+        return response;
+    }
 
 }

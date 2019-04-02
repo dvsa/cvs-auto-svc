@@ -1,7 +1,7 @@
 package activities;
 
 import data.ActivitiesData;
-import model.Activities;
+import model.activities.Activities;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -27,7 +27,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: visit")
     @Test
     public void postActivitiesActivityTypeVisit() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("visit"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("visit").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -35,7 +35,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: wait")
     @Test
     public void postActivitiesActivityTypeWait() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("wait"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("wait").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -44,7 +44,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: atf")
     @Test
     public void postActivitiesTestStationTypeAtf() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("atf"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("atf").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -52,7 +52,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: gvts")
     @Test
     public void postActivitiesTestStationTypeGvts() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("gvts"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("gvts").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -60,7 +60,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: hq")
     @Test
     public void postActivitiesTestStationTypeHq() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("hq"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("hq").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -70,7 +70,7 @@ public class PostActivities {
     @Test
     public void postActivitiesAfterActivityEnded() {
 
-        Activities activitiesData = ActivitiesData.buildActivitiesData();
+        Activities activitiesData = ActivitiesData.buildActivitiesData().build();
 
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);

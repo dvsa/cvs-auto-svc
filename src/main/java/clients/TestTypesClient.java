@@ -36,6 +36,18 @@ public class TestTypesClient {
     }
 
     public Response getTestTypes(String id, TestTypeQueryParam testTypeQueryParam) {
+        Response response = callTestTypes(id, testTypeQueryParam);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callTestTypes(id, testTypeQueryParam);
+        }
+
+        return response;
+
+    }
+
+    private Response callTestTypes(String id, TestTypeQueryParam testTypeQueryParam) {
         RequestSpecification responseSpec = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("id", id);
@@ -67,11 +79,6 @@ public class TestTypesClient {
 
 
         Response response = responseSpec.get("/test-types/{id}");
-
-        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
-            saveUtils();
-            response = responseSpec.get("/test-types/{id}");
-        }
 
         return response;
 

@@ -3,7 +3,7 @@ package activities;
 
 import clients.util.ToTypeConvertor;
 import data.ActivitiesData;
-import model.Activities;
+import model.activities.Activities;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -29,14 +29,14 @@ public class PostActivitiesNeg {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    private Activities activitiesData = ActivitiesData.buildActivitiesData();
+    private Activities.Builder activitiesData = ActivitiesData.buildActivitiesData();
 
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - activityType")
     @Test
     public void activityActivityTypeMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "activityType", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "activityType", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "is required");
     }
@@ -46,7 +46,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityActivityTypeNull() {
 
-        activitiesSteps.postActivities(activitiesData, "activityType", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "activityType", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
     }
@@ -55,7 +55,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityActivityTypeInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "activityType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "activityType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
     }
@@ -64,7 +64,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityActivityTypeRandomString() {
 
-        activitiesSteps.postActivities(activitiesData.setActivityType(RandomStringUtils.randomAlphanumeric(6)));
+        activitiesSteps.postActivities(activitiesData.setActivityType(RandomStringUtils.randomAlphanumeric(6)).build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
     }
@@ -73,7 +73,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationNameMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationName", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationName", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationName", "is required");
     }
@@ -83,7 +83,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationNameNull() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationName", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationName", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationName", "must be a string");
     }
@@ -92,7 +92,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationNameInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationName", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationName", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationName", "must be a string");
     }
@@ -101,7 +101,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationPNumberMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationPNumber", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationPNumber", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationPNumber", "is required");
     }
@@ -111,7 +111,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationPNumberNull() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationPNumber", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationPNumber", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationPNumber", "must be a string");
     }
@@ -120,7 +120,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationPNumberInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationPNumber", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationPNumber", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationPNumber", "must be a string");
     }
@@ -129,7 +129,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationEmailMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationEmail", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationEmail", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "is required");
     }
@@ -139,7 +139,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationEmailNull() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationEmail", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationEmail", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a string");
     }
@@ -148,7 +148,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationEmailInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationEmail", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationEmail", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a string");
     }
@@ -158,7 +158,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationEmailRandomString() {
 
-        activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6)));
+        activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6)).build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a valid email");
     }
@@ -168,7 +168,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationEmailRandomString2() {
 
-        activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6) + "@" + RandomStringUtils.randomAlphanumeric(6) + "."));
+        activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6) + "@" + RandomStringUtils.randomAlphanumeric(6) + ".").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a valid email");
     }
@@ -177,7 +177,7 @@ public class PostActivitiesNeg {
     @Test
     public void testStationEmailRandomString3() {
 
-        activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6) + "@." + RandomStringUtils.randomAlphanumeric(6)));
+        activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6) + "@." + RandomStringUtils.randomAlphanumeric(6)).build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a valid email");
     }
@@ -186,7 +186,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityTestStationTypeMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationType", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationType", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "is required");
     }
@@ -196,7 +196,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityTestStationTypeNull() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationType", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationType", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -205,7 +205,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityTestStationTypeInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "testStationType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "testStationType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -214,7 +214,7 @@ public class PostActivitiesNeg {
     @Test
     public void activityTestStationTypeString() {
 
-        activitiesSteps.postActivities(activitiesData.setTestStationType(RandomStringUtils.randomAlphanumeric(6)));
+        activitiesSteps.postActivities(activitiesData.setTestStationType(RandomStringUtils.randomAlphanumeric(6)).build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -223,7 +223,7 @@ public class PostActivitiesNeg {
     @Test
     public void testerNameMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "testerName", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "testerName", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testerName", "is required");
     }
@@ -233,7 +233,7 @@ public class PostActivitiesNeg {
     @Test
     public void testerNameNull() {
 
-        activitiesSteps.postActivities(activitiesData, "testerName", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "testerName", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testerName", "must be a string");
     }
@@ -242,7 +242,7 @@ public class PostActivitiesNeg {
     @Test
     public void testerNameInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "testerName", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "testerName", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testerName", "must be a string");
     }
@@ -251,7 +251,7 @@ public class PostActivitiesNeg {
     @Test
     public void testerStaffIdMissing() {
 
-        activitiesSteps.postActivities(activitiesData, "testerStaffId", ToTypeConvertor.MISSING);
+        activitiesSteps.postActivities(activitiesData.build(), "testerStaffId", ToTypeConvertor.MISSING);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testerStaffId", "is required");
     }
@@ -261,7 +261,7 @@ public class PostActivitiesNeg {
     @Test
     public void testerStaffIdNull() {
 
-        activitiesSteps.postActivities(activitiesData, "testerStaffId", ToTypeConvertor.NULL);
+        activitiesSteps.postActivities(activitiesData.build(), "testerStaffId", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testerStaffId", "must be a string");
     }
@@ -270,7 +270,7 @@ public class PostActivitiesNeg {
     @Test
     public void testerStaffIdInteger() {
 
-        activitiesSteps.postActivities(activitiesData, "testerStaffId", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
+        activitiesSteps.postActivities(activitiesData.build(), "testerStaffId", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testerStaffId", "must be a string");
     }
@@ -280,7 +280,7 @@ public class PostActivitiesNeg {
     @Test
     public void extraPropertyStartTime() {
 
-        activitiesSteps.postActivities(activitiesData, "startTime", DataUtil.buildCurrentDate(), ToTypeConvertor.NEW_PROPERTY);
+        activitiesSteps.postActivities(activitiesData.build(), "startTime", DataUtil.buildCurrentDateTime(), ToTypeConvertor.NEW_PROPERTY);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("startTime", "is not allowed");
     }
@@ -292,7 +292,7 @@ public class PostActivitiesNeg {
 
         String propertyName = RandomStringUtils.randomAlphanumeric(10);
 
-        activitiesSteps.postActivities(activitiesData, propertyName, RandomStringUtils.randomAlphanumeric(6), ToTypeConvertor.NEW_PROPERTY);
+        activitiesSteps.postActivities(activitiesData.build(), propertyName, RandomStringUtils.randomAlphanumeric(6), ToTypeConvertor.NEW_PROPERTY);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty(propertyName, "is not allowed");
     }
@@ -301,7 +301,7 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityTypeVisitCaseSensitive() {
 
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Visit"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Visit").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
 
@@ -311,7 +311,7 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityTypeWaitCaseSensitive() {
 
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Wait"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Wait").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
     }
@@ -319,7 +319,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType atf")
     @Test
     public void postActivitiesTestStationTypeAtfCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Atf"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Atf").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -327,7 +327,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType gvts")
     @Test
     public void postActivitiesTestStationTypeGvtsCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Gvts"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Gvts").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -335,7 +335,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType hq")
     @Test
     public void postActivitiesTestStationTypeHqCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Hq"));
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Hq").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -343,11 +343,12 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2882 - AC9 API Consumer tries to create an already existent activity")
     @Test
     public void postActivitiesExisting() {
-        activitiesSteps.postActivities(activitiesData);
+        Activities activities = activitiesData.build();
+        activitiesSteps.postActivities(activities);
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.postActivities(activitiesData);
+        activitiesSteps.postActivities(activities);
         activitiesSteps.statusCodeShouldBe(403);
-        activitiesSteps.validateActivityErrorTypeWithoutProperty("Staff ID " + activitiesData.getTesterStaffId(), "already has an ongoing activity");
+        activitiesSteps.validateActivityErrorTypeWithoutProperty("Staff ID " + activities.getTesterStaffId(), "already has an ongoing activity");
     }
 
 }

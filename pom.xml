@@ -114,7 +114,7 @@
                         <version>2.22.1</version>
                         <configuration>
                             <includes>
-                                <include>**/*.java</include>
+                                <!--<include>**/*.java</include>-->
                             </includes>
                             <testFailureIgnore>true</testFailureIgnore>
                             <systemPropertyVariables>

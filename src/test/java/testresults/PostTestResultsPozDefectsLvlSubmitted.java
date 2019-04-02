@@ -77,6 +77,7 @@ public class PostTestResultsPozDefectsLvlSubmitted {
 
         testResultsSteps.postTestResults(vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build());
+        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).setImDescription(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -104,6 +105,7 @@ public class PostTestResultsPozDefectsLvlSubmitted {
 
         testResultsSteps.postTestResults(vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build());
+        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).setItemDescription(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -132,6 +134,7 @@ public class PostTestResultsPozDefectsLvlSubmitted {
         testResultsSteps.postTestResults(vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
+        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyRef(null);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -367,6 +370,7 @@ public class PostTestResultsPozDefectsLvlSubmitted {
 
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyText(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();

@@ -56,7 +56,7 @@ public class VehicleTechnicalRecordsSteps {
             index++;
         }
         if (!found) {
-            throw new AutomationException("Vehicle with vim " + vehicleTechnicalRecordsData.getVim() + " has't got expected status "  + vehicleTechnicalRecordStatus.getStatus() +" please check data");
+            throw new AutomationException("Vehicle with vim " + vehicleTechnicalRecordsData.getVim() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
         }
     }
 
@@ -65,9 +65,7 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("vrms.vrm", hasItem(equalTo(vehicle.getVrms().get(0).getVrm())));
         response.then().body("vrms.isPrimary", hasItem(equalTo(vehicle.getVrms().get(0).getPrimary())));
 
-        response.then().body("vehicleId", equalTo(vehicle.getVehicleId()));
         response.then().body("vin", equalTo(vehicle.getVim()));
-
 
 
         response.then().body("techRecord.size", equalTo(1));
@@ -113,13 +111,11 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("techRecord.bodyType.description", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyType().getDescription())));
 
 
-
         response.then().body("techRecord.brakes[0].size()", is(Brakes.class.getDeclaredFields().length));
         response.then().body("techRecord.brakes.brakeCode", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getBrakeCode())));
         response.then().body("techRecord.brakes.dataTrBrakeOne", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getDataTrBrakeOne())));
         response.then().body("techRecord.brakes.dataTrBrakeTwo", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getDataTrBrakeTwo())));
         response.then().body("techRecord.brakes.dataTrBrakeThree", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getDataTrBrakeThree())));
-        response.then().body("techRecord.brakes.parkingBrakeMrk", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getParkingBrakeMrk())));
         response.then().body("techRecord.brakes.retarderBrakeOne", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getRetarderBrakeOne())));
         response.then().body("techRecord.brakes.retarderBrakeTwo", hasItem(equalTo(vehicle.getTechRecord().get(index).getBrakes().getRetarderBrakeTwo())));
 
@@ -149,6 +145,7 @@ public class VehicleTechnicalRecordsSteps {
 
             response.then().body("techRecord[0].axles[" + listIndex + "].weights.size()", is(Weights.class.getDeclaredFields().length));
             response.then().body("techRecord.axles.weights.kerbWeight", hasItem(hasItem(equalTo(vehicle.getTechRecord().get(index).getAxles().get(0).getWeights().getKerbWeight()))));
+            response.then().body("techRecord.axles.weights.parkingBrakeMrk", hasItem(hasItem(equalTo(vehicle.getTechRecord().get(index).getAxles().get(0).getWeights().getParkingBrakeMrk()))));
             response.then().body("techRecord.axles.weights.ladenWeight", hasItem(hasItem(equalTo(vehicle.getTechRecord().get(index).getAxles().get(0).getWeights().getLadenWeight()))));
             response.then().body("techRecord.axles.weights.gbWeight", hasItem(hasItem(equalTo(vehicle.getTechRecord().get(index).getAxles().get(0).getWeights().getGbWeight()))));
             response.then().body("techRecord.axles.weights.designWeight", hasItem(hasItem(equalTo(vehicle.getTechRecord().get(index).getAxles().get(0).getWeights().getDesignWeight()))));

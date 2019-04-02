@@ -33,12 +33,13 @@ public class BrakeForceWheelsNotLocked {
         return this;
     }
 
+
     @Override
     public String toString() {
         return "BrakeForceWheelsNotLocked{" +
                 "serviceBrakeForceA=" + serviceBrakeForceA +
                 ", secondaryBrakeForceA=" + secondaryBrakeForceA +
-                ", parkingBrakeForceA=" + parkingBrakeForceA +
+                ", secondaryBrakeForceA=" + secondaryBrakeForceA +
                 '}';
     }
 }

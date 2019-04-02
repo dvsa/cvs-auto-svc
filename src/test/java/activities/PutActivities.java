@@ -1,7 +1,7 @@
 package activities;
 
 import data.ActivitiesData;
-import model.Activities;
+import model.activities.Activities;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -29,7 +29,7 @@ public class PutActivities {
     @Test
     public void putActivities() {
 
-        Activities activitiesData = ActivitiesData.buildActivitiesData();
+        Activities activitiesData = ActivitiesData.buildActivitiesData().build();
 
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
@@ -44,7 +44,7 @@ public class PutActivities {
     @Test
     public void putActivitiesOnNewActivitySameTesterStaffId() {
 
-        Activities activitiesData = ActivitiesData.buildActivitiesData();
+        Activities activitiesData = ActivitiesData.buildActivitiesData().build();
 
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
