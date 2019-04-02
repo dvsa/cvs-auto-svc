@@ -124,7 +124,7 @@ public class GetTestTypesByIdData {
                 .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById(nonAnnualPsvSmallRigidTwoAxles.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
+        testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData(nonAnnualPsvSmallRigidTwoAxles, testTypeQueryParam.getFields());
     }
 }
