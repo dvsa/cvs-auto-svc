@@ -13,6 +13,9 @@
         <junit.version>4.12</junit.version>
         <serenity.version>2.0.20</serenity.version>
         <sl4j.version>1.7.7</sl4j.version>
+        <assertj.version>3.11.1</assertj.version>
+        <jackson.version>2.9.8</jackson.version>
+        <sl4j.version>1.7.7</sl4j.version>
     </properties>
 
     <dependencies>
@@ -45,33 +48,17 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.11.1</version>
+            <version>${assertj.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.8</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.141.59</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-server</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>1.5.0</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
     </dependencies>
@@ -82,7 +69,18 @@
             <id>CI-develop</id>
             <build>
                 <plugins>
-
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>test-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>net.serenity-bdd.maven.plugins</groupId>
                         <artifactId>serenity-maven-plugin</artifactId>
@@ -114,7 +112,7 @@
                         <version>2.22.1</version>
                         <configuration>
                             <includes>
-                                <!--<include>**/*.java</include>-->
+                                <include>**/*.java</include>
                             </includes>
                             <testFailureIgnore>true</testFailureIgnore>
                             <systemPropertyVariables>

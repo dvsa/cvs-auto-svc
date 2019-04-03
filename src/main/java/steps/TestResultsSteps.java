@@ -212,7 +212,7 @@ public class TestResultsSteps {
 
     @Step
     private void validateTestTypesData(TestResultsGet testResults) {
-        response.body().prettyPrint();
+
         response.then().body("[0].testTypes.size()", is(1));
 
         List<String> createdAt = testResults.getTestTypes().stream().map(TestTypesGet::getCreatedAt).collect(toList());
