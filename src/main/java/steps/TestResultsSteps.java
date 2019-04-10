@@ -12,7 +12,9 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static util.TestNumberUtils.isTestNumberChecksumValid;
 import static util.TypeLoader.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestResultsSteps {
 
@@ -38,7 +40,6 @@ public class TestResultsSteps {
         setRightAtuh();
     }
 
-
     @Step
     public void getTestResults(String vin, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsWithStatus(vin, testResultsStatus.getStatus());
@@ -56,14 +57,13 @@ public class TestResultsSteps {
         setRightAtuh();
     }
 
-
     @Step
     public void postTestResultsNotAuthenticated(TestResults testResults) {
+        setMissingAtuh();
         setMissingAtuh();
         response = testResultsClient.callPostTestResults(testResults);
         setRightAtuh();
     }
-
 
     @Step
     public void postTestResultsFieldChange(TestResults testResults, String propertyField, String value, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
@@ -74,7 +74,6 @@ public class TestResultsSteps {
     public void postTestResultsFieldChange(TestResults testResults, String propertyField, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
         response = testResultsClient.postTestResultsFieldChange(testResults, propertyField, null, toType, testResultsLevel);
     }
-
 
     @Step
     public void getTestResultsFromDate(String vin, String fromDate) {
@@ -106,7 +105,6 @@ public class TestResultsSteps {
         response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate, testResultsStatus.getStatus());
     }
 
-
     @Step
     public void statusCodeShouldBe(int statusCode) {
         response.then().statusCode(statusCode);
@@ -124,16 +122,12 @@ public class TestResultsSteps {
 
     @Step
     public void validateData(TestResultsGet testResults) {
-
         validateTestResultsData(testResults);
         validateTestTypesData(testResults);
         validateDefectsData(testResults);
         validateAdditionalInformation(testResults);
         validateLocation(testResults);
-
-
     }
-
 
     @Step
     public void validateDataForAnniversary(List<String> expectedDataList) {
@@ -154,7 +148,6 @@ public class TestResultsSteps {
 
     @Step
     public void validateDataForExpiry(List<String> expectedDataList) {
-
         if (expectedDataList != null) {
             for (String expectedData : expectedDataList) {
                 if (expectedData != null) {
@@ -168,14 +161,10 @@ public class TestResultsSteps {
             response.then().body("testTypes.testExpiryDate", hasItem(hasItem(nullValue())));
             response.then().body("testTypes.size()", is(1));
         }
-
-
     }
-
 
     @Step
     private void validateTestResultsData(TestResultsGet testResults) {
-
         response.then().body("[0].size()", is(TestResultsGet.class.getDeclaredFields().length + TestResultsGet.class.getSuperclass().getDeclaredFields().length));
 
         response.then().body("vrm", hasItem(equalTo(testResults.getVrm())));
@@ -191,11 +180,9 @@ public class TestResultsSteps {
         response.then().body("testStatus", hasItem(equalTo(testResults.getTestStatus())));
         response.then().body("reasonForCancellation", hasItem(equalTo(testResults.getReasonForCancellation())));
 
-
         response.then().body("[0].vehicleClass.size()", is(VehicleClass.class.getDeclaredFields().length));
         response.then().body("vehicleClass.description", hasItem(equalTo(testResults.getVehicleClass().getDescription())));
         response.then().body("vehicleClass.code", hasItem(equalTo(testResults.getVehicleClass().getCode())));
-
 
         response.then().body("vehicleType", hasItem(equalTo(testResults.getVehicleType())));
         response.then().body("numberOfSeats", hasItem(equalTo(testResults.getNumberOfSeats())));
@@ -208,7 +195,6 @@ public class TestResultsSteps {
         response.then().body("euVehicleCategory", hasItem(equalTo(testResults.getEuVehicleCategory())));
         response.then().body("countryOfRegistration", hasItem(equalTo(testResults.getCountryOfRegistration())));
         response.then().body("vehicleSize", hasItem(equalTo(testResults.getVehicleSize())));
-
     }
 
     @Step
@@ -265,12 +251,10 @@ public class TestResultsSteps {
         response.then().body("testTypes.additionalNotesRecorded", hasItem(contains(additionalNotesRecorded.toArray())));
         response.then().body("testTypes.name", hasItem(contains(name.toArray())));
         response.then().body("testTypes.additionalCommentsForAbandon", hasItem(contains(additionalCommentsForAbandon.toArray())));
-
     }
 
     @Step
     private void validateDefectsData(TestResults testResults) {
-
         response.then().body("[0].testTypes.defects.size()", is(1));
         response.then().body("[0].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
 
@@ -299,22 +283,17 @@ public class TestResultsSteps {
         response.then().body("testTypes.defects.prs", hasItem(contains(prs.toArray())));
     }
 
-
     @Step
     private void validateAdditionalInformation(TestResults testResults) {
-
         response.then().body("[0].testTypes.defects.additionalInformation.size()", is(1));
         response.then().body("[0].testTypes[0].defects[0].additionalInformation.size()", is(AdditionalInformation.class.getDeclaredFields().length));
 
         List<List<String>> additionalInformation = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getNotes()).collect(toList())).collect(toList());
         response.then().body("testTypes.defects.additionalInformation.notes", hasItem(contains(additionalInformation.toArray())));
-
     }
-
 
     @Step
     private void validateLocation(TestResults testResults) {
-
         response.then().body("[0].testTypes.defects.additionalInformation.location.size()", is(1));
 
         List<List<String>> vertical = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getVertical()).collect(toList())).collect(toList());
@@ -332,12 +311,10 @@ public class TestResultsSteps {
         response.then().body("testTypes.defects.additionalInformation.location.rowNumber", hasItem(contains(rowNumber.toArray())));
         response.then().body("testTypes.defects.additionalInformation.location.seatNumber", hasItem(contains(seatNumber.toArray())));
         response.then().body("testTypes.defects.additionalInformation.location.axleNumber", hasItem(contains(axleNumber.toArray())));
-
     }
 
     @Step
     public void validatePostErrorData(String field, String errorMessage) {
-
         response.then().body("size()", is(1));
         response.then().body("errors.size()", is(1));
         response.then().body("errors[0]", equalTo("\"" + field + "\" " + errorMessage));
@@ -351,5 +328,24 @@ public class TestResultsSteps {
             assertThat(testCode, is(equalTo(expectedTestCodes[i])));
         }
 
+    }
+
+    @Step
+    public void validateTestNumberIsNotNull() {
+        assertThat(validateTestNumber()).isTrue();
+    }
+
+    @Step
+    public void validateTestNumberIsNull() {
+        assertThat(validateTestNumber()).isFalse();
+    }
+
+    private boolean validateTestNumber() {
+        String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        if (testNumber != null && !testNumber.isEmpty()) {
+            assertThat(isTestNumberChecksumValid(testNumber)).isTrue();
+            assertThat(testNumber.length() == 9).isTrue();
+            return true;
+        } else return false;
     }
 }
