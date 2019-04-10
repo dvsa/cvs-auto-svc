@@ -40,7 +40,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.validateTestCode((TestResultsGet) vehicleSubmittedDataOne.build(), testCodes);
     }
 
-    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type")
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 1")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet1() {
         // data set: testTypeId:1 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:2 ;
@@ -58,6 +58,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("aal");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 2")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet2() {
         // data set: testTypeId:1 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
@@ -75,6 +76,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("aas");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 3")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet3() {
         // data set: testTypeId:1 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:2 ;
@@ -92,6 +94,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("adl");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 4")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet4() {
         // data set: testTypeId:30 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:2 ;
@@ -109,6 +112,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qal");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 5")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet5() {
         // data set: testTypeId:30 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
@@ -126,6 +130,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qgs");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 6")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet6() {
         // data set: testTypeId:30 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:3 ;
@@ -143,6 +148,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qgl");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 7")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet7() {
         // data set: testTypeId:39 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:2 ;
@@ -160,6 +166,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lbp");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 8")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet8() {
         // data set: testTypeId:39 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
@@ -177,6 +184,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lbp");
     }
 
+    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 9")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet9() {
         // data set: testTypeId:7 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:3 ;
@@ -194,7 +202,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("rhl");
     }
 
-    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code")
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 1 - Data Set 1")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario1DataSet1() {
         // scenario 1
@@ -217,6 +225,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("aal", "lcp");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 1 - Data Set 2")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario1DataSet2() {
         // scenario 1
@@ -239,6 +248,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("aas", "lcp");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 1 - Data Set 3")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario1DataSet3() {
         // scenario 1
@@ -261,6 +271,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lcp", "aal");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 1 - Data Set 4")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario1DataSet4() {
         // scenario 1
@@ -283,6 +294,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lcp", "aas");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 2 - Data Set 1")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario2DataSet1() {
         // scenario 2
@@ -305,6 +317,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qal", "lcp");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 2 - Data Set 2")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario2DataSet2() {
         // scenario 2
@@ -327,6 +340,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qas", "lcp");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 2 - Data Set 3")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario2DataSet3() {
         // scenario 2
@@ -349,6 +363,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lcp", "qal");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 2 - Data Set 4")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario2DataSet4() {
         // scenario 2
@@ -371,6 +386,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lcp", "qas");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 3 - Data Set 1")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario3DataSet1() {
         // scenario 3
@@ -393,6 +409,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qgl", "lcp");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 3 - Data Set 2")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario3DataSet2() {
         // scenario 3
@@ -415,6 +432,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qgs", "lcp");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 3 - Data Set 3")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario3DataSet3() {
         // scenario 3
@@ -437,6 +455,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lcp", "qgl");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 3 - Data Set 4")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario3DataSet4() {
         // scenario 3
@@ -459,6 +478,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("lcp", "qgs");
     }
 
+    @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 4")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario4() {
         // scenario 4
@@ -481,7 +501,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData(  "lcp", "lcp");
     }
 
-    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code")
+    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 1")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet1() {
         // testTypeOne: testTypeId:1 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:2 ;
@@ -503,6 +523,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("aal", "qal");
     }
 
+    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 2")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet2() {
         // testTypeOne: testTypeId:1 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
@@ -524,6 +545,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("aas", "qgs");
     }
 
+    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 3")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet3() {
         // testTypeOne: testTypeId:1 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:2 ;
@@ -545,6 +567,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("adl", "rhl");
     }
 
+    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 4")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet4() {
         // testTypeOne: testTypeId:30 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:2 ;
@@ -566,6 +589,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qal", "aal");
     }
 
+    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 5")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet5() {
         // testTypeOne: testTypeId:30 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
@@ -587,6 +611,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         validateSavedData("qgs", "aas");
     }
 
+    @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 6")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet6() {
         // testTypeOne: testTypeId:7 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:2 ;
