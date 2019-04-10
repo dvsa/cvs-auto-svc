@@ -104,9 +104,4 @@ public class ActivitiesSteps {
         return response.jsonPath().get("id");
     }
 
-    public void printStatusAndBody() {
-        System.out.println("status code is " + response.getStatusCode() + " and body is:");
-        response.prettyPrint();
-    }
-
 }
