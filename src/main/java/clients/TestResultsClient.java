@@ -248,7 +248,7 @@ public class TestResultsClient {
 
     public Response callPostTestResults(Object object) {
 
-        Response response = given().filters(new BasePathFilter()).log().all()
+        Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
                 .post("/test-results");
@@ -259,7 +259,7 @@ public class TestResultsClient {
 
     public Response callGetTestResults(String vin) {
 
-        Response response = given().filters(new BasePathFilter()).log().all()
+        Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
                 .get("/test-results/{vin}");
