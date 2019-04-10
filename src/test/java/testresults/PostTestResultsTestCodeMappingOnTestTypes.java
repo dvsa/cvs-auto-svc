@@ -37,7 +37,6 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
 
         testResultsSteps.getTestResults(vehicleSubmittedDataOne.build().getVin(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-//        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOne.build());
         testResultsSteps.validateTestCode((TestResultsGet) vehicleSubmittedDataOne.build(), testCodes);
     }
 
