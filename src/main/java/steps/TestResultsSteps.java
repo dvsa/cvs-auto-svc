@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Step;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static util.TypeLoader.*;
 
@@ -244,7 +245,6 @@ public class TestResultsSteps {
         response.then().body("[0].testTypes[0]", hasKey("testNumber"));
 
 
-
         // TODO: separate Tests for below properties
         //        response.then().body("[0].testTypes[0]", hasKey("certificateLink"));
 //        response.then().body("testTypes.certificateLink", hasItem(contains(certificateLink.toArray())));
@@ -341,5 +341,15 @@ public class TestResultsSteps {
         response.then().body("size()", is(1));
         response.then().body("errors.size()", is(1));
         response.then().body("errors[0]", equalTo("\"" + field + "\" " + errorMessage));
+    }
+
+    @Step
+    public void validateTestCode(TestResultsGet data, String... expectedTestCodes) {
+
+        for (int i = 0; i < data.getTestTypes().size(); i++) {
+            String testCode = response.jsonPath().setRoot("[0].testTypes").getList(" findAll { it.testTypeId == '" + data.getTestTypes().get(i).getTestTypeId() + "' }.testCode ").get(0).toString();
+            assertThat(testCode, is(equalTo(expectedTestCodes[i])));
+        }
+
     }
 }

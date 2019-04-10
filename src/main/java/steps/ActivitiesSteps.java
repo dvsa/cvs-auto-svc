@@ -41,8 +41,9 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public void statusCodeShouldBe(int statusCode) {
+    public int statusCodeShouldBe(int statusCode) {
         response.then().statusCode(statusCode);
+        return response.statusCode();
     }
 
     @Step
@@ -101,6 +102,11 @@ public class ActivitiesSteps {
     public String checkAndGetResponseId() {
         response.then().body("$", hasKey("id"));
         return response.jsonPath().get("id");
+    }
+
+    public void printStatusAndBody() {
+        System.out.println("status code is " + response.getStatusCode() + " and body is:");
+        response.prettyPrint();
     }
 
 }
