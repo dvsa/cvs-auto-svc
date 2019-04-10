@@ -59,12 +59,13 @@ public class TestResultsClient {
                 node.remove(field.getName());
             }
 
-            for (Field field : TestTypesGet.class.getDeclaredFields()) {
-                JsonNode nodeToUpdate = node.get("testTypes").get(0);
-                if (nodeToUpdate != null) {
-                    ((ObjectNode) nodeToUpdate).remove(field.getName());
+            for (int i = 0; i < node.get("testTypes").size(); i++) {
+                for (Field field : TestTypesGet.class.getDeclaredFields()) {
+                    JsonNode nodeToUpdate = node.get("testTypes").get(i);
+                    if (nodeToUpdate != null) {
+                        ((ObjectNode) nodeToUpdate).remove(field.getName());
+                    }
                 }
-
             }
 
             response = callPostTestResults(node);
