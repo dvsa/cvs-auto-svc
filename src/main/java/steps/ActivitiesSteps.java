@@ -41,9 +41,8 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public int statusCodeShouldBe(int statusCode) {
+    public void statusCodeShouldBe(int statusCode) {
         response.then().statusCode(statusCode);
-        return response.statusCode();
     }
 
     @Step
