@@ -12,9 +12,7 @@ import net.thucydides.core.annotations.WithTags;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
-
 import java.util.Arrays;
-
 import static util.DataUtil.generateRandomExcludingValues;
 
 @WithTags(
@@ -22,7 +20,6 @@ import static util.DataUtil.generateRandomExcludingValues;
                 @WithTag(type = "TestResults", name = "All"),
                 @WithTag(type = "TestResults", name = "Positive"),
                 @WithTag(type = "Service", name = "One"),
-
         }
 )
 
