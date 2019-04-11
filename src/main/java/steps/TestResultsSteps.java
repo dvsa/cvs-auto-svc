@@ -12,6 +12,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static util.TestNumberUtils.computeNextTestNumber;
 import static util.TestNumberUtils.isTestNumberChecksumValid;
 import static util.TypeLoader.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,6 +21,7 @@ public class TestResultsSteps {
 
     TestResultsClient testResultsClient = new TestResultsClient();
     Response response;
+    private static String nextTestNumber = "";
 
     @Step
     public void getTestResults(String vin) {
@@ -59,7 +61,6 @@ public class TestResultsSteps {
 
     @Step
     public void postTestResultsNotAuthenticated(TestResults testResults) {
-        setMissingAtuh();
         setMissingAtuh();
         response = testResultsClient.callPostTestResults(testResults);
         setRightAtuh();
@@ -331,6 +332,28 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void validateTestNumberEqualsCertificateNumber() {
+        String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
+        assertThat(certificateNumber.equals(testNumber)).isTrue();
+    }
+
+    @Step
+    public void validateTestNumberNotEqualCertificateNumber() {
+        String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
+        assertThat(certificateNumber.equals(testNumber)).isFalse();
+    }
+
+    @Step
+    public void validateTestNumberIsDifferentForTwoTestTypes(){
+        String testNumberOne = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        String testNumberTwo = response.jsonPath().getString("[0].testTypes[1].testNumber");
+        assertThat(testNumberOne.equals(testNumberTwo)).isFalse();
+
+    }
+
+    @Step
     public void validateTestNumberIsNotNull() {
         assertThat(validateTestNumber()).isTrue();
     }
@@ -347,5 +370,34 @@ public class TestResultsSteps {
             assertThat(testNumber.length() == 9).isTrue();
             return true;
         } else return false;
+    }
+
+    @Step
+    public void validateCertificateNumberIsNotNull() {
+        assertThat(validateCertificateNumber()).isTrue();
+    }
+
+    @Step
+    public void validateCertificateNumberIsNull() {
+        assertThat(validateCertificateNumber()).isFalse();
+    }
+
+    private boolean validateCertificateNumber() {
+        String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
+        if (certificateNumber != null && !certificateNumber.isEmpty()) {
+            return true;
+        } else return false;
+    }
+
+    @Step
+    public void nextTestNumber() {
+        String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        nextTestNumber = computeNextTestNumber(testNumber.substring(0,3),testNumber.substring(3,4),testNumber.substring(4,7));
+    }
+
+    @Step
+    public void checkNextTestNumberIsValid(){
+        String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        assertThat(testNumber.equals(nextTestNumber)).isTrue();
     }
 }

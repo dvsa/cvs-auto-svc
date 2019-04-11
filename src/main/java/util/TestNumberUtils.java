@@ -75,4 +75,51 @@ public class TestNumberUtils {
             return false;
         }
     }
+
+    public static String computeTestNumber(String CVSID, String certLetter, String sequenceNumber) {
+        Character firstChar = CVSID.charAt(0);
+        Character secondChar = CVSID.charAt(1);
+        Character thirdChar = CVSID.charAt(2);
+        Character fourthChar = certLetter.charAt(0);
+        Character fifthChar = sequenceNumber.charAt(0);
+        Character sixthChar = sequenceNumber.charAt(1);
+        Character seventhChar = sequenceNumber.charAt(2);
+
+        Integer firstDigit = Integer.parseInt(Alphabet.valueOf(firstChar.toString()).getValue());
+        Integer secondDigit = Integer.parseInt(secondChar.toString());
+        Integer thirdDigit = Integer.parseInt(thirdChar.toString()) * 3;
+        Integer fourthDigit = Integer.parseInt(Alphabet.valueOf(fourthChar.toString()).getValue());
+        Integer fifthDigit = Integer.parseInt(fifthChar.toString());
+        Integer sixthDigit = Integer.parseInt(sixthChar.toString()) * 3;
+        Integer seventhDigit = Integer.parseInt(seventhChar.toString());
+
+        Integer sum = firstDigit + secondDigit + thirdDigit + fourthDigit + fifthDigit + sixthDigit + seventhDigit;
+        String lastTwoDigits;
+
+        if (sum >= 100) {
+            lastTwoDigits = String.valueOf(sum).substring(0, 2);
+        } else if (sum < 10) {
+            lastTwoDigits = "0" + sum;
+        } else lastTwoDigits = String.valueOf(sum);
+
+        return CVSID + certLetter + sequenceNumber + lastTwoDigits;
+    }
+
+    public static String computeNextTestNumber(String CVSID, String certLetter, String sequenceNumber) {
+        if (!certLetter.equals("Z") && !sequenceNumber.equals("999")) {
+            Integer seqNumber = Integer.valueOf(sequenceNumber) + 1;
+            return computeTestNumber(CVSID, certLetter, seqNumber.toString());
+        } else if (!certLetter.equals("Z") && sequenceNumber.equals("999")) {
+            String nextCertLetter = "";
+            Alphabet[] a = Alphabet.values();
+            for (int i = 0; i < a.length; i++) {
+                if ((a[i].toString()).equals(certLetter)) {
+                    nextCertLetter = a[i + 1].toString();
+                }
+            }
+            return computeTestNumber(CVSID, nextCertLetter, "001");
+        } else if (certLetter.equals("Z") && sequenceNumber.equals("999")) {
+            return computeTestNumber(CVSID, "A", "001");
+        } else return null;
+    }
 }
