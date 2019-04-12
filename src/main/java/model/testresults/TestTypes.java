@@ -200,12 +200,14 @@ public class TestTypes {
         return name;
     }
 
-    public void setTestTypeName(String testTypeName) {
+    public TestTypes setTestTypeName(String testTypeName) {
         this.testTypeName = testTypeName;
+        return this;
     }
 
-    public void setName(String name) {
+    public TestTypes setName(String name) {
         this.name = name;
+        return this;
     }
 
     public TestTypes setTestTypeId(String testTypeId) {
@@ -213,8 +215,9 @@ public class TestTypes {
         return this;
     }
 
-    public void setCertificateNumber(String certificateNumber) {
+    public TestTypes setCertificateNumber(String certificateNumber) {
         this.certificateNumber = certificateNumber;
+        return this;
     }
 
     public void setTestTypeStartTimestamp(String testTypeStartTimestamp) {
@@ -241,8 +244,9 @@ public class TestTypes {
         this.prohibitionIssued = prohibitionIssued;
     }
 
-    public void setReasonForAbandoning(String reasonForAbandoning) {
+    public TestTypes setReasonForAbandoning(String reasonForAbandoning) {
         this.reasonForAbandoning = reasonForAbandoning;
+        return this;
     }
 
     public void setAdditionalNotesRecorded(String additionalNotesRecorded) {

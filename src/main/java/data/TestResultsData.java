@@ -2,7 +2,9 @@ package data;
 
 import model.testresults.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TestResultsData {
 
@@ -117,7 +119,6 @@ public class TestResultsData {
     }
 
     public static TestResultsGet.Builder buildTestResultsCancelledData() {
-
         Location location = new Location()
                 .setVertical("upper")
                 .setHorizontal(null)
@@ -130,7 +131,6 @@ public class TestResultsData {
         AdditionalInformation additionalInformation = new AdditionalInformation()
                 .setLocation(location)
                 .setNotes("seatbelt missing");
-
 
         Defects defects = new Defects()
                 .setImNumber(3)
@@ -145,7 +145,6 @@ public class TestResultsData {
                 .setDeficiencyText("missing.")
                 .setStdForProhibition(false)
                 .setPrs(false);
-
 
         TestTypesGet.Builder testTypes = new TestTypesGet.Builder()
                 .setTestTypeName("Annual test")
@@ -194,8 +193,5 @@ public class TestResultsData {
                 .setCountryOfRegistration("united kingdom")
                 .setVehicleSize("small")
                 .setTestTypes(Arrays.asList(testTypes.build()));
-
-
     }
-
 }
