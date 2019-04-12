@@ -117,7 +117,8 @@
                         <version>2.22.1</version>
                         <configuration>
                             <includes>
-                                <include>**/*.java</include>
+                                <!--<include>**/*.java</include>-->
+                                <include>**/GetPreparers.java</include>
                             </includes>
                             <testFailureIgnore>true</testFailureIgnore>
                             <systemPropertyVariables>
