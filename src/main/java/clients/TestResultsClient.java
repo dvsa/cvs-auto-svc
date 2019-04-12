@@ -152,6 +152,9 @@ public class TestResultsClient {
             case NULL_ARRAY:
                 ((ObjectNode) nodeToUpdate).putArray(propertyField).addNull();
                 break;
+            case EMPTY_ARRAY:
+                ((ObjectNode) nodeToUpdate).putArray(propertyField);
+                break;
             case MISSING:
                 ((ObjectNode) nodeToUpdate).remove(propertyField);
                 break;

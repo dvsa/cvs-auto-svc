@@ -194,39 +194,4 @@ public class TestResultsData {
                 .setVehicleSize("small")
                 .setTestTypes(Arrays.asList(testTypes.build()));
     }
-
-    public static TestResultsGet.Builder buildTestResultsCancelledDataWithoutTestType() {
-        VehicleClass vehicleClass = new VehicleClass()
-                .setDescription("motorbikes over 200cc or with a sidecar")
-                .setCode("2");
-
-        List<TestTypesGet> o = new ArrayList<>();
-
-        return new TestResultsGet.Builder()
-                .setVrm("AA12BCD")
-                .setVin("XMGDE02FS0H012461")
-                .setTestStationName("Larson, Nader and Okuneva")
-                .setTestStationPNumber("84-926821")
-                .setTestStationType("atf")
-                .setTesterName("Dorel")
-                .setTesterStaffId("15")
-                .setTesterEmailAddress("dorel.ionescu@dvsagov.uk")
-                .setTestStartTimestamp("2019-01-14T10:36:33.987Z")
-                .setTestEndTimestamp("2019-01-14T10:36:33.987Z")
-                .setTestStatus("cancelled")
-                .setReasonForCancellation("mistake")
-                .setVehicleClass(vehicleClass)
-                .setVehicleType("psv")
-                .setNumberOfSeats(45)
-                .setNoOfAxles(2)
-                .setVehicleConfiguration("rigid")
-                .setOdometerReading(350000)
-                .setOdometerReadingUnits("kilometres")
-                .setPreparerId("bl5545")
-                .setPreparerName("Durrell Vehicles Limited")
-                .setEuVehicleCategory("m1")
-                .setCountryOfRegistration("united kingdom")
-                .setVehicleSize("small")
-                .setTestTypes(o);
-    }
 }

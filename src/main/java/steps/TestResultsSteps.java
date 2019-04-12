@@ -108,6 +108,7 @@ public class TestResultsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
+        response.prettyPrint();
         response.then().statusCode(statusCode);
     }
 
