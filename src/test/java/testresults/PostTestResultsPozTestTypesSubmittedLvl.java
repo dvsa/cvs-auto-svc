@@ -85,19 +85,6 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         validateSavedData();
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - name")
-    @Test
-    public void testResultsEmptyName() {
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
-                .getTestTypes().get(0).setName("");
-
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
-        vehicleSubmittedData.build().getTestTypes().get(0).setName(null);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedData();
-    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeId")
     @Test
