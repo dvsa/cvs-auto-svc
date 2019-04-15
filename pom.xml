@@ -91,7 +91,6 @@
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
-                            <!--<testFailureIgnore>true</testFailureIgnore>-->
                             <systemPropertyVariables>
                                 <environment>CI</environment>
                             </systemPropertyVariables>
@@ -129,8 +128,6 @@
                             <target>1.8</target>
                         </configuration>
                     </plugin>
-
-
                 </plugins>
             </build>
         </profile>
