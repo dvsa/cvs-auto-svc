@@ -21,6 +21,15 @@ public class Brakes {
         return this;
     }
 
+    public String getBrakeCodeOriginal() {
+        return brakeCodeOriginal;
+    }
+
+    public Brakes setBrakeCodeOriginal(String brakeCodeOriginal) {
+        this.brakeCodeOriginal = brakeCodeOriginal;
+        return this;
+    }
+
     public String getDataTrBrakeOne() {
         return dataTrBrakeOne;
     }

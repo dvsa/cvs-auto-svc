@@ -4,6 +4,7 @@ public class Axles {
 
     private Integer axleNumber;
     private Weights weights;
+    private Boolean parkingBrakeMrk;
     private Tyres tyres;
 
     public Integer getAxleNumber() {
@@ -24,6 +25,15 @@ public class Axles {
         return this;
     }
 
+    public Boolean getParkingBrakeMrk() {
+        return parkingBrakeMrk;
+    }
+
+    public Axles setParkingBrakeMrk(Boolean parkingBrakeMrk) {
+        this.parkingBrakeMrk = parkingBrakeMrk;
+        return this;
+    }
+
     public Tyres getTyres() {
         return tyres;
     }
@@ -36,6 +46,7 @@ public class Axles {
     @Override
     public String toString() {
         return "Axles{" +
+                "parkingBrakeMrk=" + parkingBrakeMrk +
                 "axleNumber=" + axleNumber +
                 ", weights=" + weights +
                 ", tyres=" + tyres +

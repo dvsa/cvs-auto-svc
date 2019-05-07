@@ -25,6 +25,7 @@ public class VehicleTechRecordsData {
 
 
         Brakes brakes = new Brakes()
+                .setBrakeCodeOriginal("123")
                 .setBrakeCode("171202")
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
@@ -38,8 +39,7 @@ public class VehicleTechRecordsData {
                 .setKerbWeight(5018)
                 .setLadenWeight(7100)
                 .setGbWeight(7100)
-                .setDesignWeight(7100)
-                .setParkingBrakeMrk(false);
+                .setDesignWeight(7100);
 
         Tyres tyresOne = new Tyres()
                 .setTyreSize("295/80-22.5")
@@ -64,6 +64,7 @@ public class VehicleTechRecordsData {
                 .setTyreCode(456);
 
         Axles axleOne = new Axles()
+                .setParkingBrakeMrk(false)
                 .setAxleNumber(1)
                 .setWeights(weightsOne)
                 .setTyres(tyresOne);
@@ -146,6 +147,7 @@ public class VehicleTechRecordsData {
 
 
         Brakes brakes = new Brakes()
+                .setBrakeCodeOriginal("123")
                 .setBrakeCode("167202")
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
@@ -159,8 +161,7 @@ public class VehicleTechRecordsData {
                 .setKerbWeight(3630)
                 .setLadenWeight(6014)
                 .setGbWeight(6300)
-                .setDesignWeight(6500)
-                .setParkingBrakeMrk(false);
+                .setDesignWeight(6500);
 
         Tyres tyresOne = new Tyres()
                 .setTyreSize("11-22.5")
@@ -266,6 +267,7 @@ public class VehicleTechRecordsData {
 
 
         Brakes brakes = new Brakes()
+                .setBrakeCodeOriginal("123")
                 .setBrakeCode("135202")
                 .setDataTrBrakeOne("None")
                 .setDataTrBrakeTwo("None")
@@ -304,6 +306,7 @@ public class VehicleTechRecordsData {
                 .setTyreCode(735);
 
         Axles axleOne = new Axles()
+                .setParkingBrakeMrk(false)
                 .setAxleNumber(1)
                 .setWeights(weightsOne)
                 .setTyres(tyresOne);
