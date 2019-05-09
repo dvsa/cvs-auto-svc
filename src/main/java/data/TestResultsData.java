@@ -1,6 +1,7 @@
 package data;
 
 import model.testresults.*;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +93,7 @@ public class TestResultsData {
         return new TestResultsGet.Builder()
                 .setVrm("BQ91YHQ")
                 .setVin("1B7GG36N12S678410")
+                .setTestResultId(RandomStringUtils.randomAlphanumeric(30))
                 .setTestStationName("Larson, Nader and Okuneva")
                 .setTestStationPNumber("84-926821")
                 .setTestStationType("atf")
@@ -170,6 +172,7 @@ public class TestResultsData {
         return new TestResultsGet.Builder()
                 .setVrm("AA12BCD")
                 .setVin("XMGDE02FS0H012461")
+                .setTestResultId(RandomStringUtils.randomAlphanumeric(30))
                 .setTestStationName("Larson, Nader and Okuneva")
                 .setTestStationPNumber("84-926821")
                 .setTestStationType("atf")

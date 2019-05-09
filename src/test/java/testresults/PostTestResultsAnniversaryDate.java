@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -179,7 +180,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -201,7 +202,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -224,7 +225,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -246,7 +247,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -270,7 +271,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -292,7 +293,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("fail");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -314,7 +315,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -336,7 +337,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -359,7 +360,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, null));
@@ -382,7 +383,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, null));
@@ -404,7 +405,7 @@ public class PostTestResultsAnniversaryDate {
         vehicleSubmittedData.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, null));

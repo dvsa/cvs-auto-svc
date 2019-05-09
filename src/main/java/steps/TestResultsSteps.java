@@ -12,6 +12,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static util.DataFilter.getElementsToRemove;
 import static util.TestNumberUtils.computeNextTestNumber;
 import static util.TestNumberUtils.isTestNumberChecksumValid;
 import static util.TypeLoader.*;
@@ -166,8 +167,9 @@ public class TestResultsSteps {
 
     @Step
     private void validateTestResultsData(TestResultsGet testResults) {
-        response.then().body("[0].size()", is(TestResultsGet.class.getDeclaredFields().length + TestResultsGet.class.getSuperclass().getDeclaredFields().length));
 
+        List<String> fieldsNotInGet = getElementsToRemove(testResults.getClass().getSuperclass());
+        response.then().body("[0].size()", is(TestResultsGet.class.getDeclaredFields().length + TestResultsGet.class.getSuperclass().getDeclaredFields().length - fieldsNotInGet.size()));
         response.then().body("vrm", hasItem(equalTo(testResults.getVrm())));
         response.then().body("vin", hasItem(equalTo(testResults.getVin())));
         response.then().body("testStationName", hasItem(equalTo(testResults.getTestStationName())));
