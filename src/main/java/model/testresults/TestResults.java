@@ -1,5 +1,7 @@
 package model.testresults;
 
+import util.PropertyNotPresent;
+
 import java.util.List;
 
 public class TestResults {
@@ -28,6 +30,10 @@ public class TestResults {
     private String euVehicleCategory;
     private String countryOfRegistration;
     private String vehicleSize;
+
+    @PropertyNotPresent
+    private String testResultId;
+
     private List<TestTypesGet> testTypes;
 
 
@@ -35,6 +41,7 @@ public class TestResults {
 
         private String vrm;
         private String vin;
+        private String testResultId;
         private String testStationName;
         private String testStationPNumber;
         private String testStationType;
@@ -69,6 +76,11 @@ public class TestResults {
 
         public T setVin(String vin) {
             this.vin = vin;
+            return (T) this;
+        }
+
+        public T setTestResultId(String testResultId) {
+            this.testResultId = testResultId;
             return (T) this;
         }
 
@@ -205,6 +217,7 @@ public class TestResults {
     protected TestResults(Builder<?> builder) {
         this.vrm = builder.vrm;
         this.vin = builder.vin;
+        this.testResultId = builder.testResultId;
         this.testStationName = builder.testStationName;
         this.testStationPNumber = builder.testStationPNumber;
         this.testStationType = builder.testStationType;
@@ -237,6 +250,10 @@ public class TestResults {
 
     public String getVin() {
         return vin;
+    }
+
+    public String getTestResultId() {
+        return testResultId;
     }
 
     public String getTestStationName() {

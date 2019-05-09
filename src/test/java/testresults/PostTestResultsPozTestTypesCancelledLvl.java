@@ -111,7 +111,6 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         vehicleCancelledData.build().getTestTypes().get(0).setTestTypeId(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - certificateNumber")
@@ -208,7 +207,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
                 .getTestTypes().get(0).setNumberOfSeatbeltsFitted(new Random().nextInt(999) + 10);
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
-        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
@@ -437,9 +436,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         vehicleCancelledData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        testResultsSteps.statusCodeShouldBe(400);
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - reasonForAbandoning with testResult fail")

@@ -541,8 +541,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     public void testResultsLengthMaxReasonForAbandoning() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "reasonForAbandoning", RandomStringUtils.randomAlphanumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("reasonForAbandoning", "length must be less than or equal to 500 characters long");
+        testResultsSteps.statusCodeShouldBe(201);
     }
 
 
