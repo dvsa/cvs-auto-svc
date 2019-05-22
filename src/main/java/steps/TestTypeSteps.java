@@ -159,8 +159,6 @@ public class TestTypeSteps {
     @Step
     private void validateLevel3Data(TestType testType, String index) {
 
-        response.then().body("[" + index + "].nextTestTypesOrCategories[0].nextTestTypesOrCategories[0].size()", is(TestType.class.getDeclaredFields().length - 1));
-
         List<List<String>> namesList = testType.getNextTestTypesOrCategories().stream().map(s -> s.getNextTestTypesOrCategories().stream().map(TestType::getName).collect(toList())).collect(toList());
         namesList.forEach(names -> response.then().body("nextTestTypesOrCategories.nextTestTypesOrCategories.name", hasItem(hasItem(contains(names.toArray())))));
 
