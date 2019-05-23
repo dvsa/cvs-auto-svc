@@ -149,8 +149,7 @@ public class GetTestTypesByIdNeg {
                 .setVehicleConfiguration(VehicleConfiguration.RIGID);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" is required");
+        testTypeSteps.statusCodeShouldBe(200);
     }
 
     @Title("CVSB-1073 / CVSB-2421 - Query param 'vehicleSize' empty")
