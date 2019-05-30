@@ -119,10 +119,10 @@ public class PostTestNumber {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build();
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestNumberIsNotNull();
     }
@@ -133,10 +133,10 @@ public class PostTestNumber {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build();
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestNumberIsNotNull();
     }
