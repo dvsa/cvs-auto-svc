@@ -50,8 +50,8 @@ public class TestStationSteps {
         response.then().body("testStationTown", hasItem(equalTo(testStation.getTestStationTown())));
         response.then().body("testStationAddress", hasItem(equalTo(testStation.getTestStationAddress())));
         response.then().body("testStationPostcode", hasItem(equalTo(testStation.getTestStationPostcode())));
-        response.then().body("testStationLongitude", hasItem(comparesEqualTo(new Float(testStation.getTestStationLongitude()))));
-        response.then().body("testStationLatitude", hasItem(comparesEqualTo(new Float(testStation.getTestStationLatitude()))));
+        response.then().body("testStationLongitude", hasItem(equalTo(new Float(testStation.getTestStationLongitude()))));
+        response.then().body("testStationLatitude", hasItem(equalTo(new Float(testStation.getTestStationLatitude()))));
         response.then().body("testStationType", hasItem(equalTo(testStation.getTestStationType())));
     }
 
