@@ -487,6 +487,34 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("stdForProhibition", "must be a boolean");
     }
 
+    @Title("CVSB-3205 - API Consumer tries to create a new test result for submitted/canceled with missing property - prohibitionIssued")
+    @Test
+    public void testResultsMissingProhibitionIssued() {
+
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "prohibitionIssued", ToTypeConvertor.MISSING, TestResultsLevel.DEFECTS);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validatePostErrorData("prohibitionIssued", "is required");
+    }
+
+
+    @Title("CVSB-3205 - API Consumer tries to create a new test result for submitted/canceled with different property type - prohibitionIssued")
+    @Test
+    public void testResultsRandomStringProhibitionIssued() {
+
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "prohibitionIssued", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validatePostErrorData("prohibitionIssued", "must be a boolean");
+    }
+
+    @Title("CVSB-3205 - API Consumer tries to create a new test result for submitted/canceled with different property type - prohibitionIssued")
+    @Test
+    public void testResultsEmptyProhibitionIssued() {
+
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "prohibitionIssued", "", ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validatePostErrorData("prohibitionIssued", "must be a boolean");
+    }
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - prs")
     @Test
     public void testResultsMissingSeatbeltInstallationCheckDate() {
