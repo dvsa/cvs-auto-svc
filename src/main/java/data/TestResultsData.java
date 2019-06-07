@@ -66,8 +66,7 @@ public class TestResultsData {
                 .setDeficiencyCategory("major")
                 .setDeficiencyText("missing.")
                 .setStdForProhibition(false)
-                .setPrs(false)
-                .setProhibitionIssued(false);
+                .setPrs(false);
 
 
         TestTypesGet.Builder testTypes = new TestTypesGet.Builder()
@@ -147,8 +146,7 @@ public class TestResultsData {
                 .setDeficiencyCategory("major")
                 .setDeficiencyText("missing.")
                 .setStdForProhibition(false)
-                .setPrs(false)
-                .setProhibitionIssued(false);
+                .setPrs(false);
 
         TestTypesGet.Builder testTypes = new TestTypesGet.Builder()
                 .setTestTypeName("Annual test")
