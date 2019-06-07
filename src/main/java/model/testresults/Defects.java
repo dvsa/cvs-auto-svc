@@ -137,7 +137,8 @@ public class Defects {
     @Override
     public String toString() {
         return "Defects{" +
-                "imNumber=" + imNumber +
+                "prohibitionIssued=" + prohibitionIssued +
+                ", imNumber=" + imNumber +
                 ", imDescription='" + imDescription + '\'' +
                 ", additionalInformation=" + additionalInformation +
                 ", itemNumber=" + itemNumber +
@@ -149,7 +150,6 @@ public class Defects {
                 ", deficiencyText='" + deficiencyText + '\'' +
                 ", stdForProhibition=" + stdForProhibition +
                 ", prs=" + prs +
-                ", prohibitionIssued=" + prohibitionIssued +
                 '}';
     }
 }
