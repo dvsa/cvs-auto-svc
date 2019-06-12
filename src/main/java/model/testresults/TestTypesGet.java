@@ -10,6 +10,10 @@ public class TestTypesGet extends TestTypes {
     private String testExpiryDate;
     private String testAnniversaryDate;
 
+    public TestTypesGet() {
+        super();
+    }
+
     public static class Builder extends TestTypes.Builder<Builder> {
 
         private String createdAt;

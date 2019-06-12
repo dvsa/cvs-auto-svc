@@ -1,13 +1,14 @@
 package data;
 
+import data.config.DataMapper;
 import model.Preparer;
+import util.DataLoader;
 
 public class PreparerData {
 
     public static Preparer buildPreparerData() {
-        Preparer preparer = new Preparer();
 
-        preparer.setPreparerId("CM6151").setPreparerName("911 Coach Services Limited");
+        Preparer preparer = DataMapper.getValue(Preparer.class, "loader/" + DataLoader.getDataLocation() + "/preparers.json");
 
         return preparer;
 

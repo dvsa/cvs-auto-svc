@@ -1,11 +1,17 @@
 package model.vehicles;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
+@JsonIgnoreProperties(value = { "primaryVrm", "secondaryVrms", "partialVin"})
 public class Vehicle {
 
+
     private List<Vrms> vrms;
-    private String vim;
+    private String vin;
     private List<TechRecord> techRecord;
 
     public List<Vrms> getVrms() {
@@ -17,12 +23,12 @@ public class Vehicle {
         return this;
     }
 
-    public String getVim() {
-        return vim;
+    public String getVin() {
+        return vin;
     }
 
-    public Vehicle setVim(String vim) {
-        this.vim = vim;
+    public Vehicle setVin(String vin) {
+        this.vin = vin;
         return this;
     }
 
@@ -40,7 +46,7 @@ public class Vehicle {
     public String toString() {
         return "Vehicle{" +
                 "vrms=" + vrms +
-                ", vim='" + vim + '\'' +
+                ", vin='" + vin + '\'' +
                 ", techRecord=" + techRecord +
                 '}';
     }

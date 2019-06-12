@@ -5,7 +5,7 @@ import java.util.List;
 public class TestStations {
 
     private String testStationId;
-    private String testStationNumber;
+    private String testStationPNumber;
     private String testStationName;
     private String testStationContactNumber;
     private String testStationAccessNotes;
@@ -27,12 +27,12 @@ public class TestStations {
         return this;
     }
 
-    public String getTestStationNumber() {
-        return testStationNumber;
+    public String getTestStationPNumber() {
+        return testStationPNumber;
     }
 
-    public TestStations setTestStationNumber(String testStationNumber) {
-        this.testStationNumber = testStationNumber;
+    public TestStations setTestStationPNumber(String testStationPNumber) {
+        this.testStationPNumber = testStationPNumber;
         return this;
     }
 
@@ -140,7 +140,7 @@ public class TestStations {
     public String toString() {
         return "TestStations{" +
                 "testStationId='" + testStationId + '\'' +
-                ", testStationNumber='" + testStationNumber + '\'' +
+                ", testStationPNumber='" + testStationPNumber + '\'' +
                 ", testStationName='" + testStationName + '\'' +
                 ", testStationContactNumber='" + testStationContactNumber + '\'' +
                 ", testStationAccessNotes='" + testStationAccessNotes + '\'' +

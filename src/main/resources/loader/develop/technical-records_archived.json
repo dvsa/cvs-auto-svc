@@ -1,0 +1,107 @@
+{
+  "primaryVrm": "AA12BCD",
+  "secondaryVrms": [
+    "SM33KR"
+  ],
+  "vin": "XMGDE02FS0H012461",
+  "partialVin": "012461",
+  "techRecord": [
+    {
+      "createdAt": "2018-04-20T04:20:00.027Z",
+      "lastUpdatedAt": "2018-10-01T00:00:00.027Z",
+      "chassisMake": "Leyland",
+      "chassisModel": "Olympian",
+      "bodyMake": "Northen Counties",
+      "bodyModel": "Palatine 1",
+      "bodyType": {
+        "code": "s",
+        "description": "single decker"
+      },
+      "manufactureYear": 1996,
+      "regnDate": "1996-10-17",
+      "coifDate": "1996-09-01",
+      "ntaNumber": "3",
+      "conversionRefNo": "5",
+      "seatsLowerDeck": 29,
+      "seatsUpperDeck": 47,
+      "standingCapacity": 17,
+      "speedRestriction": 0,
+      "speedLimiterMrk": false,
+      "tachoExemptMrk": false,
+      "dispensations": "None",
+      "remarks": "MAX GEARED SPEED 60 AXLE 2 LADEN WEIGHT EXCEEDS GB MAX BY C & U REG 78 (5)(B)(II) DRIVERS ASSAULT SCREEN FTD",
+      "reasonForCreation": "COIF",
+      "statusCode": "archived",
+      "unladenWeight": 0,
+      "grossKerbWeight": 10620,
+      "grossLadenWeight": 16730,
+      "grossGbWeight": 16800,
+      "grossDesignWeight": 17000,
+      "noOfAxles": 2,
+      "brakeCode": "167202",
+      "vehicleClass": {
+        "code": "s",
+        "description": "small psv (ie: less than or equal to 22 seats)"
+      },
+      "vehicleType": "psv",
+      "vehicleSize": "large",
+      "vehicleConfiguration": "rigid",
+      "brakes": {
+        "brakeCode": "167202",
+        "brakeCodeOriginal": "123",
+        "dataTrBrakeOne": "None",
+        "dataTrBrakeTwo": "None",
+        "dataTrBrakeThree": "None",
+        "retarderBrakeOne": "hydraulic",
+        "retarderBrakeTwo": "hydraulic",
+        "brakeForceWheelsNotLocked": {
+          "serviceBrakeForceA": 7529,
+          "secondaryBrakeForceA": 3764,
+          "parkingBrakeForceA": 2677
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "serviceBrakeForceB": 5310,
+          "secondaryBrakeForceB": 2655,
+          "parkingBrakeForceB": 1699
+        }
+      },
+      "axles": [
+        {
+          "parkingBrakeMrk": false,
+          "axleNumber": 1,
+          "weights": {
+            "kerbWeight": 3630,
+            "ladenWeight": 6014,
+            "gbWeight": 6300,
+            "designWeight": 6500
+          },
+          "tyres": {
+            "tyreSize": "11-22.5",
+            "plyRating": "A",
+            "fitmentCode": "single",
+            "dataTrAxles": 0,
+            "speedCategorySymbol": "l",
+            "tyreCode": 438
+          }
+        },
+        {
+          "axleNumber": 2,
+          "weights": {
+            "kerbWeight": 6990,
+            "ladenWeight": 10716,
+            "gbWeight": 10500,
+            "designWeight": 11000
+          },
+          "tyres": {
+            "tyreSize": "11-22.5",
+            "plyRating": "A",
+            "fitmentCode": "double",
+            "dataTrAxles": 0,
+            "speedCategorySymbol": "l",
+            "tyreCode": 438
+          }
+        }
+      ]
+    }
+  ]
+}

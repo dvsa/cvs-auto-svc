@@ -23,6 +23,9 @@ public class TestResultsGet extends TestResults {
         vehicleId = builder.vehicleId;
     }
 
+    public TestResultsGet() {
+        super();
+    }
 
     public String getVehicleId() {
         return vehicleId;

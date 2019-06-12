@@ -36,6 +36,9 @@ public class TestResults {
 
     private List<TestTypesGet> testTypes;
 
+    public TestResults() {
+
+    }
 
     public static class Builder<T extends Builder<T>> {
 

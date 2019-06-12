@@ -1,0 +1,180 @@
+{
+  "id": "5",
+  "name": "Retest",
+  "forVehicleType": [
+    "psv"
+  ],
+  "forVehicleSize": [
+    "large",
+    "small"
+  ],
+  "forVehicleConfiguration": [
+    "rigid",
+    "articulated"
+  ],
+  "forVehicleAxles": null,
+  "nextTestTypesOrCategories": [
+    {
+      "id": "6",
+      "name": "Paid",
+      "forVehicleType": [
+        "psv"
+      ],
+      "forVehicleSize": [
+        "large",
+        "small"
+      ],
+      "forVehicleConfiguration": [
+        "rigid",
+        "articulated"
+      ],
+      "forVehicleAxles": null,
+      "nextTestTypesOrCategories": [
+        {
+          "id": "7",
+          "linkedIds": ["38", "39"],
+          "name": "Any PSV",
+          "testTypeName": "Paid retest",
+          "forVehicleType": [
+            "psv"
+          ],
+          "forVehicleSize": [
+            "large",
+            "small"
+          ],
+          "forVehicleConfiguration": [
+            "rigid",
+            "articulated"
+          ],
+          "forVehicleAxles": null,
+          "testTypeClassification": "Annual With Certificate",
+          "testCodes": [
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "large",
+              "forVehicleConfiguration": "articulated",
+              "forVehicleAxles": null,
+              "defaultTestCode": "rhl",
+              "linkedTestCode": null
+            },
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "large",
+              "forVehicleConfiguration": "rigid",
+              "forVehicleAxles": null,
+              "defaultTestCode": "rpl",
+              "linkedTestCode": null
+            },
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "small",
+              "forVehicleConfiguration": "rigid",
+              "forVehicleAxles": null,
+              "defaultTestCode": "rps",
+              "linkedTestCode": null
+            }
+          ]
+        },
+        {
+          "id": "8",
+          "linkedIds": ["38", "39"],
+          "name": "Class 6A (seatbelt installation check)",
+          "testTypeName": "Paid retest with Class 6A seatbelt installation check",
+          "forVehicleType": [
+            "psv"
+          ],
+          "forVehicleSize": [
+            "small",
+            "large"
+          ],
+          "forVehicleConfiguration": [
+            "rigid"
+          ],
+          "forVehicleAxles": null,
+          "testTypeClassification": "Annual With Certificate",
+          "testCodes": [
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "large",
+              "forVehicleConfiguration": "rigid",
+              "forVehicleAxles": null,
+              "defaultTestCode": "whl",
+              "linkedTestCode": null
+            },
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "small",
+              "forVehicleConfiguration": "rigid",
+              "forVehicleAxles": null,
+              "defaultTestCode": "whs",
+              "linkedTestCode": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "Part paid",
+      "forVehicleType": [
+        "psv"
+      ],
+      "forVehicleSize": [
+        "large",
+        "small"
+      ],
+      "forVehicleConfiguration": [
+        "rigid",
+        "articulated"
+      ],
+      "forVehicleAxles": null,
+      "nextTestTypesOrCategories": [
+        {
+          "id": "10",
+          "linkedIds": ["38", "39"],
+          "name": "Any PSV",
+          "testTypeName": "Part-paid retest",
+          "forVehicleType": [
+            "psv"
+          ],
+          "forVehicleSize": [
+            "large",
+            "small"
+          ],
+          "forVehicleConfiguration": [
+            "rigid",
+            "articulated"
+          ],
+          "forVehicleAxles": null,
+          "testTypeClassification": "Annual With Certificate",
+          "testCodes": [
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "large",
+              "forVehicleConfiguration": "articulated",
+              "forVehicleAxles": null,
+              "defaultTestCode": "rgl",
+              "linkedTestCode": null
+            },
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "large",
+              "forVehicleConfiguration": "rigid",
+              "forVehicleAxles": null,
+              "defaultTestCode": "rsl",
+              "linkedTestCode": null
+            },
+            {
+              "forVehicleType": "psv",
+              "forVehicleSize": "small",
+              "forVehicleConfiguration": "rigid",
+              "forVehicleAxles": null,
+              "defaultTestCode": "rss",
+              "linkedTestCode": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

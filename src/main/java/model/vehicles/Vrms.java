@@ -1,5 +1,10 @@
 package model.vehicles;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Vrms {
 
     private String vrm;
@@ -9,6 +14,7 @@ public class Vrms {
         return vrm;
     }
 
+//    @JsonProperty("vrms")
     public Vrms setVrm(String vrm) {
         this.vrm = vrm;
         return this;

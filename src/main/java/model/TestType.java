@@ -1,7 +1,10 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(value = { "linkedIds", "testTypeClassification", "testCodes" })
 public class TestType {
 
     private String id;
