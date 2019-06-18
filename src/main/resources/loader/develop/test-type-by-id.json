@@ -1,0 +1,1099 @@
+[
+  {
+    "id": "1",
+    "linkedIds": ["38", "39"],
+    "name": "Annual test",
+    "testTypeName": "Annual test",
+    "forVehicleType": [
+      "psv"
+    ],
+    "forVehicleSize": [
+      "small",
+      "large"
+    ],
+    "forVehicleConfiguration": [
+      "articulated",
+      "rigid"
+    ],
+    "forVehicleAxles": null,
+    "testTypeClassification": "Annual With Certificate",
+    "testCodes": [
+      {
+        "forVehicleType": "psv",
+        "forVehicleSize": "large",
+        "forVehicleConfiguration": "rigid",
+        "forVehicleAxles": null,
+        "defaultTestCode": "aal",
+        "linkedTestCode": null
+      },
+      {
+        "forVehicleType": "psv",
+        "forVehicleSize": "small",
+        "forVehicleConfiguration": "rigid",
+        "forVehicleAxles": null,
+        "defaultTestCode": "aas",
+        "linkedTestCode": null
+      },
+      {
+        "forVehicleType": "psv",
+        "forVehicleSize": "large",
+        "forVehicleConfiguration": "articulated",
+        "forVehicleAxles": null,
+        "defaultTestCode": "adl",
+        "linkedTestCode": null
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Class 6A",
+    "forVehicleType": [
+      "psv"
+    ],
+    "forVehicleSize": [
+      "small",
+      "large"
+    ],
+    "forVehicleConfiguration": [
+      "rigid"
+    ],
+    "forVehicleAxles": null,
+    "nextTestTypesOrCategories": [
+      {
+        "id": "3",
+        "linkedIds": ["38", "39"],
+        "name": "Annual test",
+        "testTypeName": "Class 6A seatbelt installation check (annual test)",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "Annual With Certificate",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "wdl",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "wds",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "linkedIds": ["38", "39"],
+        "name": "First test",
+        "testTypeName": "Class 6A seatbelt installation check (first test)",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "Annual With Certificate",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "wbl",
+            "linkedTestCode": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Retest",
+    "forVehicleType": [
+      "psv"
+    ],
+    "forVehicleSize": [
+      "large",
+      "small"
+    ],
+    "forVehicleConfiguration": [
+      "rigid",
+      "articulated"
+    ],
+    "forVehicleAxles": null,
+    "nextTestTypesOrCategories": [
+      {
+        "id": "6",
+        "name": "Paid",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "large",
+          "small"
+        ],
+        "forVehicleConfiguration": [
+          "rigid",
+          "articulated"
+        ],
+        "forVehicleAxles": null,
+        "nextTestTypesOrCategories": [
+          {
+            "id": "7",
+            "linkedIds": ["38", "39"],
+            "name": "Any PSV",
+            "testTypeName": "Paid retest",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "large",
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid",
+              "articulated"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual With Certificate",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "articulated",
+                "forVehicleAxles": null,
+                "defaultTestCode": "rhl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "rpl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "rps",
+                "linkedTestCode": null
+              }
+            ]
+          },
+          {
+            "id": "8",
+            "linkedIds": ["38", "39"],
+            "name": "Class 6A (seatbelt installation check)",
+            "testTypeName": "Paid retest with Class 6A seatbelt installation check",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "small",
+              "large"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual With Certificate",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "whl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "whs",
+                "linkedTestCode": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9",
+        "name": "Part paid",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "large",
+          "small"
+        ],
+        "forVehicleConfiguration": [
+          "rigid",
+          "articulated"
+        ],
+        "forVehicleAxles": null,
+        "nextTestTypesOrCategories": [
+          {
+            "id": "10",
+            "linkedIds": ["38", "39"],
+            "name": "Any PSV",
+            "testTypeName": "Part-paid retest",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "large",
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid",
+              "articulated"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual With Certificate",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "articulated",
+                "forVehicleAxles": null,
+                "defaultTestCode": "rgl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "rsl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "rss",
+                "linkedTestCode": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Prohibition clearance",
+    "forVehicleType": [
+      "psv"
+    ],
+    "forVehicleSize": [
+      "large",
+      "small"
+    ],
+    "forVehicleConfiguration": [
+      "rigid"
+    ],
+    "forVehicleAxles": null,
+    "nextTestTypesOrCategories": [
+      {
+        "id": "12",
+        "name": "Any PSV",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "large",
+          "small"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "nextTestTypesOrCategories": [
+          {
+            "id": "13",
+            "name": "Full inspection/ full fee",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "large",
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "nextTestTypesOrCategories": [
+              {
+                "id": "14",
+                "linkedIds": ["38", "39"],
+                "name": "With certification",
+                "testTypeName": "Paid prohibition clearance (full inspection with certificate)",
+                "forVehicleType": [
+                  "psv"
+                ],
+                "forVehicleSize": [
+                  "large",
+                  "small"
+                ],
+                "forVehicleConfiguration": [
+                  "rigid"
+                ],
+                "forVehicleAxles": null,
+                "testTypeClassification": "Annual With Certificate",
+                "testCodes": [
+                  {
+                    "forVehicleType": "psv",
+                    "forVehicleSize": "large",
+                    "forVehicleConfiguration": "rigid",
+                    "forVehicleAxles": null,
+                    "defaultTestCode": "p1l",
+                    "linkedTestCode": null
+                  },
+                  {
+                    "forVehicleType": "psv",
+                    "forVehicleSize": "small",
+                    "forVehicleConfiguration": "rigid",
+                    "forVehicleAxles": null,
+                    "defaultTestCode": "p1s",
+                    "linkedTestCode": null
+                  }
+                ]
+              },
+              {
+                "id": "15",
+                "linkedIds": ["38", "39"],
+                "name": "Without certification",
+                "testTypeName": "Paid prohibition clearance (full inspection without certificate)",
+                "forVehicleType": [
+                  "psv"
+                ],
+                "forVehicleSize": [
+                  "large",
+                  "small"
+                ],
+                "forVehicleConfiguration": [
+                  "rigid"
+                ],
+                "forVehicleAxles": null,
+                "testTypeClassification": "Annual NO CERTIFICATE",
+                "testCodes": [
+                  {
+                    "forVehicleType": "psv",
+                    "forVehicleSize": "large",
+                    "forVehicleConfiguration": "rigid",
+                    "forVehicleAxles": null,
+                    "defaultTestCode": "phl",
+                    "linkedTestCode": null
+                  },
+                  {
+                    "forVehicleType": "psv",
+                    "forVehicleSize": "small",
+                    "forVehicleConfiguration": "rigid",
+                    "forVehicleAxles": null,
+                    "defaultTestCode": "phs",
+                    "linkedTestCode": null
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "16",
+            "linkedIds": ["38", "39"],
+            "name": "Full inspection/ part fee",
+            "testTypeName": "Part-paid prohibition clearance (full inspection)",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "large",
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual NO CERTIFICATE",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "prl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "prs",
+                "linkedTestCode": null
+              }
+            ]
+          },
+          {
+            "id": "23",
+            "linkedIds": ["38", "39"],
+            "name": "Part inspection/ part fee",
+            "testTypeName": "Part-paid prohibition clearance (partial inspection)",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "large",
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual NO CERTIFICATE",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "pgl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "pgs",
+                "linkedTestCode": null
+              }
+            ]
+          },
+          {
+            "id": "24",
+            "name": "PG9 retest",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "large",
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "nextTestTypesOrCategories": [
+              {
+                "id": "17",
+                "name": "Paid",
+                "forVehicleType": [
+                  "psv"
+                ],
+                "forVehicleSize": [
+                  "large",
+                  "small"
+                ],
+                "forVehicleConfiguration": [
+                  "rigid"
+                ],
+                "forVehicleAxles": null,
+                "nextTestTypesOrCategories": [
+                  {
+                    "id": "18",
+                    "name": "With certification",
+                    "linkedIds": ["38", "39"],
+                    "testTypeName": "Paid prohibition clearance (retest with certificate)",
+                    "forVehicleType": [
+                      "psv"
+                    ],
+                    "forVehicleSize": [
+                      "large",
+                      "small"
+                    ],
+                    "forVehicleConfiguration": [
+                      "rigid"
+                    ],
+                    "forVehicleAxles": null,
+                    "testTypeClassification": "Annual With Certificate",
+                    "testCodes": [
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "large",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "p8l",
+                        "linkedTestCode": null
+                      },
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "small",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "p8s",
+                        "linkedTestCode": null
+                      }
+                    ]
+                  },
+                  {
+                    "id": "19",
+                    "linkedIds": ["38", "39"],
+                    "name": "Without certification",
+                    "testTypeName": "Paid prohibition clearance (retest without certificate)",
+                    "forVehicleType": [
+                      "psv"
+                    ],
+                    "forVehicleSize": [
+                      "large",
+                      "small"
+                    ],
+                    "forVehicleConfiguration": [
+                      "rigid"
+                    ],
+                    "forVehicleAxles": null,
+                    "testTypeClassification": "Annual NO CERTIFICATE",
+                    "testCodes": [
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "large",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "pml",
+                        "linkedTestCode": null
+                      },
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "small",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "pms",
+                        "linkedTestCode": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "20",
+                "name": "Part paid",
+                "forVehicleType": [
+                  "psv"
+                ],
+                "forVehicleSize": [
+                  "large",
+                  "small"
+                ],
+                "forVehicleConfiguration": [
+                  "rigid"
+                ],
+                "forVehicleAxles": null,
+                "nextTestTypesOrCategories": [
+                  {
+                    "id": "21",
+                    "name": "With certification",
+                    "linkedIds": ["38", "39"],
+                    "testTypeName": "Part-paid prohibition clearance (retest with certificate)",
+                    "forVehicleType": [
+                      "psv"
+                    ],
+                    "forVehicleSize": [
+                      "large",
+                      "small"
+                    ],
+                    "forVehicleConfiguration": [
+                      "rigid"
+                    ],
+                    "forVehicleAxles": null,
+                    "testTypeClassification": "Annual With Certificate",
+                    "testCodes": [
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "large",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "p6l",
+                        "linkedTestCode": null
+                      },
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "small",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "p6s",
+                        "linkedTestCode": null
+                      }
+                    ]
+                  },
+                  {
+                    "id": "22",
+                    "linkedIds": ["38", "39"],
+                    "name": "Without certification",
+                    "testTypeName": "Part-paid prohibition clearance (retest without certificate)",
+                    "forVehicleType": [
+                      "psv"
+                    ],
+                    "forVehicleSize": [
+                      "large",
+                      "small"
+                    ],
+                    "forVehicleConfiguration": [
+                      "rigid"
+                    ],
+                    "forVehicleAxles": null,
+                    "testTypeClassification": "Annual NO CERTIFICATE",
+                    "testCodes": [
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "large",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "p2l",
+                        "linkedTestCode": null
+                      },
+                      {
+                        "forVehicleType": "psv",
+                        "forVehicleSize": "small",
+                        "forVehicleConfiguration": "rigid",
+                        "forVehicleAxles": null,
+                        "defaultTestCode": "p2s",
+                        "linkedTestCode": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "26",
+        "name": "Class 6A (seatbelt installation check)",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "large",
+          "small"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "nextTestTypesOrCategories": [
+          {
+            "id": "27",
+            "linkedIds": ["38", "39"],
+            "name": "Full inspection / full fee",
+            "testTypeName": "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "small",
+              "large"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual With Certificate",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "large",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "wfl",
+                "linkedTestCode": null
+              },
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "wfs",
+                "linkedTestCode": null
+              }
+            ]
+          },
+          {
+            "id": "28",
+            "linkedIds": ["38", "39"],
+            "name": "PG9 retest",
+            "testTypeName": "Prohibition clearance (retest with Class 6A seatbelt installation check)",
+            "forVehicleType": [
+              "psv"
+            ],
+            "forVehicleSize": [
+              "small"
+            ],
+            "forVehicleConfiguration": [
+              "rigid"
+            ],
+            "forVehicleAxles": null,
+            "testTypeClassification": "Annual With Certificate",
+            "testCodes": [
+              {
+                "forVehicleType": "psv",
+                "forVehicleSize": "small",
+                "forVehicleConfiguration": "rigid",
+                "forVehicleAxles": null,
+                "defaultTestCode": "wis",
+                "linkedTestCode": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "29",
+    "name": "Voluntary test",
+    "forVehicleType": [
+      "psv"
+    ],
+    "forVehicleSize": [
+      "large",
+      "small"
+    ],
+    "forVehicleConfiguration": [
+      "rigid"
+    ],
+    "forVehicleAxles": [
+      2,
+      3
+    ],
+    "nextTestTypesOrCategories": [
+      {
+        "id": "30",
+        "linkedIds": ["31", "32", "33", "34"],
+        "name": "Brake test",
+        "testTypeName": "Voluntary brake test",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": [
+          2,
+          3
+        ],
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": 2,
+            "defaultTestCode": "qal",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": 2,
+            "defaultTestCode": "qas",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": 3,
+            "defaultTestCode": "qgl",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": 3,
+            "defaultTestCode": "qgs",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "31",
+        "linkedIds": ["30", "32", "33", "34"],
+        "name": "Headlamp aim test",
+        "testTypeName": "Voluntary headlamp aim check",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "qdl",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "qds",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "32",
+        "linkedIds": ["30", "31", "33", "34"],
+        "name": "Smoke test",
+        "testTypeName": "Voluntary smoke test",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "qcl",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "qcs",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "33",
+        "linkedIds": ["30", "31", "32", "34"],
+        "name": "Multi - check",
+        "testTypeName": "Voluntary multi check (headlamp aim, smoke and brake test)",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "qbl",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "qbs",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "34",
+        "linkedIds": ["30", "31", "32", "33"],
+        "name": "Speed limiter check",
+        "testTypeName": "Voluntary speed limiter check",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": null,
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": null,
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "bif",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "36",
+        "linkedIds": [],
+        "name": "Tempo 100",
+        "testTypeName": "Voluntary Tempo 100",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "tel",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "tes",
+            "linkedTestCode": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "37",
+    "name": "Technical test",
+    "forVehicleType": [
+      "psv"
+    ],
+    "forVehicleSize": [
+      "large",
+      "small"
+    ],
+    "forVehicleConfiguration": [
+      "rigid"
+    ],
+    "forVehicleAxles": null,
+    "nextTestTypesOrCategories": [
+      {
+        "id": "38",
+        "linkedIds": ["1","3","4","7","8","10","14","15","16","23","18","19","21","22","27","28","39"],
+        "name": "Notifiable alteration",
+        "testTypeName": "Notifiable alteration check",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": [
+          "small",
+          "large"
+        ],
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "large",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "nfl",
+            "linkedTestCode": null
+          },
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": "small",
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "nfs",
+            "linkedTestCode": null
+          }
+        ]
+      },
+      {
+        "id": "39",
+        "linkedIds": ["1","3","4","7","8","10","14","15","16","23","18","19","21","22","27","28","38"],
+        "name": "LEC",
+        "testTypeName": "Low Emissions Certificate (LEC) with annual test",
+        "forVehicleType": [
+          "psv"
+        ],
+        "forVehicleSize": null,
+        "forVehicleConfiguration": [
+          "rigid"
+        ],
+        "forVehicleAxles": null,
+        "testTypeClassification": "NON ANNUAL",
+        "testCodes": [
+          {
+            "forVehicleType": "psv",
+            "forVehicleSize": null,
+            "forVehicleConfiguration": "rigid",
+            "forVehicleAxles": null,
+            "defaultTestCode": "lbp",
+            "linkedTestCode": "lcp"
+          }
+        ]
+      }
+    ]
+  }
+]

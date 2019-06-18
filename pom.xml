@@ -93,6 +93,7 @@
                             </includes>
                             <systemPropertyVariables>
                                 <environment>CI</environment>
+                                <DATA>develop</DATA>
                             </systemPropertyVariables>
                         </configuration>
                         <executions>

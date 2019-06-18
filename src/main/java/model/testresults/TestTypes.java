@@ -20,6 +20,11 @@ public class TestTypes {
     private String testResult;
     private String additionalCommentsForAbandon;
 
+
+    public TestTypes() {
+
+    }
+
     public static class Builder<T extends TestTypes.Builder<T>> {
 
         private String testTypeName;

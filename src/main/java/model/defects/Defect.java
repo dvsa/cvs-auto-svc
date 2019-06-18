@@ -1,7 +1,10 @@
 package model.defects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(value = { "id" })
 public class Defect {
 
     private Integer imNumber;

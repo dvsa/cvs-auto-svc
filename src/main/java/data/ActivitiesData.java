@@ -1,21 +1,17 @@
 package data;
 
-import model.activities.Activities;
+import data.config.DataMapper;
 import model.activities.ActivitiesGet;
 import org.apache.commons.lang3.RandomStringUtils;
+import util.DataLoader;
 
 public class ActivitiesData {
 
     public static ActivitiesGet.Builder buildActivitiesData() {
 
-        return new ActivitiesGet.Builder()
-                .setActivityType("visit")
-                .setTestStationName("string")
-                .setTestStationPNumber("string")
-                .setTestStationEmail("teststationname@dvsa.gov.uk")
-                .setTestStationType("atf")
-                .setTesterName("string")
-                .setTesterStaffId(RandomStringUtils.randomAlphanumeric(20) + RandomStringUtils.randomNumeric(20));
+        ActivitiesGet.Builder activities = DataMapper.getValue(ActivitiesGet.Builder.class, "loader/" + DataLoader.getDataLocation() + "/activities.json");
+
+        return activities.setTesterStaffId(RandomStringUtils.randomAlphanumeric(20) + RandomStringUtils.randomNumeric(20));
 
     }
 

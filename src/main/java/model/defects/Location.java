@@ -10,7 +10,7 @@ public class Location {
     private List<String> longitudinal;
     private List<Integer> rowNumber;
     private List<Integer> seatNumber;
-    private List<Integer> axelNumber;
+    private List<Integer> axleNumber;
 
     public List<String> getVertical() {
         return vertical;
@@ -66,12 +66,12 @@ public class Location {
         return this;
     }
 
-    public List<Integer> getAxelNumber() {
-        return axelNumber;
+    public List<Integer> getAxleNumber() {
+        return axleNumber;
     }
 
-    public Location setAxelNumber(List<Integer> axelNumber) {
-        this.axelNumber = axelNumber;
+    public Location setAxleNumber(List<Integer> axleNumber) {
+        this.axleNumber = axleNumber;
         return this;
     }
 
@@ -84,7 +84,7 @@ public class Location {
                 ", longitudinal=" + longitudinal +
                 ", rowNumber=" + rowNumber +
                 ", seatNumber=" + seatNumber +
-                ", axelNumber=" + axelNumber +
+                ", axleNumber=" + axleNumber +
                 '}';
     }
 }

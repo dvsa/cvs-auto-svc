@@ -2,7 +2,7 @@ package testtypes;
 
 import clients.model.*;
 import data.TestTypeByIdData;
-import model.TestTypeById;
+import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;

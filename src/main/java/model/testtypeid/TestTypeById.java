@@ -1,4 +1,6 @@
-package model;
+package model.testtypeid;
+
+import java.util.List;
 
 public class TestTypeById {
 
@@ -6,6 +8,10 @@ public class TestTypeById {
     private String testTypeClassification;
     private String defaultTestCode;
     private String linkedTestCode;
+
+    private List<TestCodes> testCodes;
+    private List<TestTypeById> nextTestTypesOrCategories;
+
 
     public String getId() {
         return id;
@@ -40,6 +46,24 @@ public class TestTypeById {
 
     public TestTypeById setLinkedTestCode(String linkedTestCode) {
         this.linkedTestCode = linkedTestCode;
+        return this;
+    }
+
+    public List<TestTypeById> getNextTestTypesOrCategories() {
+        return nextTestTypesOrCategories;
+    }
+
+    public TestTypeById setNextTestTypesOrCategories(List<TestTypeById> nextTestTypesOrCategories) {
+        this.nextTestTypesOrCategories = nextTestTypesOrCategories;
+        return this;
+    }
+
+    public List<TestCodes> getTestCodes() {
+        return testCodes;
+    }
+
+    public TestTypeById setTestCodes(List<TestCodes> testCodes) {
+        this.testCodes = testCodes;
         return this;
     }
 

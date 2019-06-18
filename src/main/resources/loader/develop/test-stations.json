@@ -1,0 +1,18 @@
+{
+  "testStationId": "2",
+  "testStationPNumber": "84-926821",
+  "testStationName": "Larson, Nader and Okuneva",
+  "testStationContactNumber": "+373 597 232 4326",
+  "testStationAccessNotes": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n\nProin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.",
+  "testStationGeneralNotes": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.\n\nCras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+  "testStationTown": "Ciorescu",
+  "testStationAddress": "61969 Texas Trail",
+  "testStationPostcode": "43547-250",
+  "testStationLongitude": 28.8905763,
+  "testStationLatitude": 47.1263592,
+  "testStationType": "atf",
+  "testStationEmails": [
+    "teststationname@dvsa.gov.uk",
+    "teststationname1@dvsa.gov.uk"
+  ]
+}

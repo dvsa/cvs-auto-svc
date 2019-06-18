@@ -56,7 +56,7 @@ public class VehicleTechnicalRecordsSteps {
             index++;
         }
         if (!found) {
-            throw new AutomationException("Vehicle with vim " + vehicleTechnicalRecordsData.getVim() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
+            throw new AutomationException("Vehicle with vim " + vehicleTechnicalRecordsData.getVin() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
         }
     }
 
@@ -65,7 +65,7 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("vrms.vrm", hasItem(equalTo(vehicle.getVrms().get(0).getVrm())));
         response.then().body("vrms.isPrimary", hasItem(equalTo(vehicle.getVrms().get(0).getPrimary())));
 
-        response.then().body("vin", equalTo(vehicle.getVim()));
+        response.then().body("vin", equalTo(vehicle.getVin()));
 
 
         response.then().body("techRecord.size", equalTo(1));

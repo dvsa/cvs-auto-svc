@@ -6,7 +6,7 @@ import clients.model.TestTypeQueryParam;
 import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.TestType;
-import model.TestTypeById;
+import model.testtypeid.TestTypeById;
 import net.thucydides.core.annotations.Step;
 
 import java.util.List;

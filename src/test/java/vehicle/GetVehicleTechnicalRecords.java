@@ -47,7 +47,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1158 - AC2 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVim() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVim(vehicleCurrentData.getVim());
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVim(vehicleCurrentData.getVin());
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
@@ -55,7 +55,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1159 - AC3 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVim() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vehicleCurrentData.getVim());
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vehicleCurrentData.getVin());
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
@@ -105,7 +105,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1265 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is archived")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVimAndStatusArchived() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleArchivedData.getVim(), VehicleTechnicalRecordStatus.ARCHIVED);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleArchivedData.getVin(), VehicleTechnicalRecordStatus.ARCHIVED);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleArchivedData, VehicleTechnicalRecordStatus.ARCHIVED);
     }
@@ -114,7 +114,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1266 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is archived")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVimAndStatusArchived() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleArchivedData.getVim(), VehicleTechnicalRecordStatus.ARCHIVED);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleArchivedData.getVin(), VehicleTechnicalRecordStatus.ARCHIVED);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleArchivedData, VehicleTechnicalRecordStatus.ARCHIVED);
     }
@@ -130,7 +130,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1268 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is provisional")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVimAndStatusProvisional() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleProvisionalData.getVim(), VehicleTechnicalRecordStatus.PROVISIONAL);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleProvisionalData.getVin(), VehicleTechnicalRecordStatus.PROVISIONAL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleProvisionalData, VehicleTechnicalRecordStatus.PROVISIONAL);
     }
@@ -139,7 +139,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1269 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is provisional")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVimAndStatusProvisional() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleProvisionalData.getVim(), VehicleTechnicalRecordStatus.PROVISIONAL);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleProvisionalData.getVin(), VehicleTechnicalRecordStatus.PROVISIONAL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleProvisionalData, VehicleTechnicalRecordStatus.PROVISIONAL);
     }
@@ -155,7 +155,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1271 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is invalid")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVimAndStatusInvalid() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleCurrentData.getVim(), VehicleTechnicalRecordStatus.INVALID);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.INVALID);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
         vehicleTechnicalRecordsSteps.validateData("No resources match the search criteria.");
     }
@@ -164,7 +164,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1272 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is invalid")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVimAndStatusInvalid() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVim(), VehicleTechnicalRecordStatus.INVALID);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.INVALID);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
         vehicleTechnicalRecordsSteps.validateData("No resources match the search criteria.");
     }
@@ -180,7 +180,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1282 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is current")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVimAndStatusCurrent() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleCurrentData.getVim(), VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
@@ -189,7 +189,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1283 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is current")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVimAndStatusCurrent() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVim(), VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
