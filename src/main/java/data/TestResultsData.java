@@ -1,8 +1,8 @@
 package data;
 
+import data.config.BaseData;
 import data.config.DataMapper;
 import model.testresults.*;
-import util.DataLoader;
 
 public class TestResultsData {
 
@@ -24,7 +24,7 @@ public class TestResultsData {
 
     public static TestResultsGet.Builder buildTestResultsSubmittedData() {
 
-        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + DataLoader.getDataLocation() + "/test-results_submitted.json");
+        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_submitted.json");
 
         return testResults;
 
@@ -33,7 +33,7 @@ public class TestResultsData {
     public static TestResultsGet.Builder buildTestResultsCancelledData() {
 
 
-        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + DataLoader.getDataLocation() + "/test-results_cancelled.json");
+        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_cancelled.json");
 
         return testResults;
     }

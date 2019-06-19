@@ -42,5 +42,9 @@ public class LocalLoaderImpl implements Loader {
         return properties.getProperty("browserstack.password");
     }
 
+    public String getDataPath() {
+        return properties.getProperty("data.location");
+    }
+
 
 }

@@ -73,4 +73,14 @@ public class CIDevelopLoaderImpl implements Loader {
             throw new AutomationException("Setup of variable BROWSERSTACK_ACCESS_KEY failed, please pass in command or configure variable");
         }
     }
+
+    @Override
+    public String getDataPath() {
+        String variable =  System.getProperty("DATA");
+        if (variable != null) {
+            return variable;
+        } else {
+            throw new AutomationException("Setup of variable DATA, default or explicit failed, please pass in command or configure variable");
+        }
+    }
 }
