@@ -8,11 +8,8 @@ import model.testtypeid.TestCodes;
 import model.testtypeid.TestTypeById;
 import model.vehicles.Vehicle;
 import model.vehicles.Vrms;
-import org.apache.commons.exec.environment.EnvironmentUtils;
-import util.DataLoader;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,13 +21,14 @@ public class DataMapper {
     public static TestTypeById getTestTypeById(String testTypeClassification, String forVehicleType, String forVehicleSize, String forVehicleConfiguration, String forVehicleAxles) {
 
         TestTypeById testTypeByIdReturned = null;
+        ClassLoader classLoader = new DataMapper().getClass().getClassLoader();
 
         try {
 
             ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-            TestTypeById[] node = objectMapper.readValue(new File(EnvironmentUtils.class.getClassLoader().getResource("loader/" + DataLoader.getDataLocation() + "/test-type-by-id.json").getFile()), TestTypeById[].class);
+            TestTypeById[] node = objectMapper.readValue(readFromInputStream( classLoader.getResourceAsStream("loader/" + BaseData.getDataLocation() + "/test-type-by-id.json")), TestTypeById[].class);
             List<TestTypeById> list = Arrays.asList(node);
 
             testTypeByIdReturned = findTestType(list, testTypeClassification, forVehicleType, forVehicleSize, forVehicleConfiguration, forVehicleAxles);
@@ -49,13 +47,14 @@ public class DataMapper {
     public static TestTypeById getNotExistingTestTypeById(String testTypeClassification, String forVehicleType, String forVehicleSize, String forVehicleConfiguration, String forVehicleAxles) {
 
         TestTypeById testTypeByIdReturned = null;
+        ClassLoader classLoader = new DataMapper().getClass().getClassLoader();
 
         try {
 
             ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
-            TestTypeById[] node = objectMapper.readValue(new File(EnvironmentUtils.class.getClassLoader().getResource("loader/" + DataLoader.getDataLocation() + "/test-type-by-id.json").getFile()), TestTypeById[].class);
+            TestTypeById[] node = objectMapper.readValue(readFromInputStream( classLoader.getResourceAsStream("loader/" + BaseData.getDataLocation() + "/test-type-by-id.json")), TestTypeById[].class);
             List<TestTypeById> list = Arrays.asList(node);
 
             testTypeByIdReturned = findNotExistingTestType(list, testTypeClassification, forVehicleType, forVehicleSize, forVehicleConfiguration, forVehicleAxles);
@@ -192,9 +191,10 @@ public class DataMapper {
     public static <T> T getValue(Class<T> cls, String path) {
 
         ObjectMapper objectMapper = new ObjectMapper();
+        ClassLoader classLoader = new DataMapper().getClass().getClassLoader();
         T object = null;
         try {
-            object = objectMapper.readValue(new File(EnvironmentUtils.class.getClassLoader().getResource(path).getFile()), cls);
+            object = objectMapper.readValue(readFromInputStream( classLoader.getResourceAsStream(path)), cls);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -202,7 +202,7 @@ public class DataMapper {
         if (object.getClass().getName().equals(Vehicle.class.getName())) {
             ObjectNode node = null;
             try {
-                node = new ObjectMapper().readValue(new File(EnvironmentUtils.class.getClassLoader().getResource(path).getFile()), ObjectNode.class);
+                node = new ObjectMapper().readValue(readFromInputStream( classLoader.getResourceAsStream(path)), ObjectNode.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -212,6 +212,20 @@ public class DataMapper {
 
         return cls.cast(object);
 
+    }
+
+
+    private static String readFromInputStream(InputStream inputStream)
+            throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
     }
 }
 

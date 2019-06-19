@@ -1,14 +1,14 @@
 package data;
 
+import data.config.BaseData;
 import data.config.DataMapper;
 import model.defects.*;
-import util.DataLoader;
 
 public class DefectsData {
 
     public static Defect buildDefectsData() {
 
-        Defect defect = DataMapper.getValue(Defect.class, "loader/" + DataLoader.getDataLocation() + "/defect.json");
+        Defect defect = DataMapper.getValue(Defect.class, "loader/" + BaseData.getDataLocation() + "/defect.json");
 
         return defect;
     }
