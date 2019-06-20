@@ -8,4 +8,9 @@ public class LogsData {
         Logs logs = new Logs().setMessage("string").setTimestamp(5).setType("string");
         return logs;
     }
+
+    public static Logs buildLogsIncompleteData() {
+        Logs logs = new Logs();
+        return logs;
+    }
 }
