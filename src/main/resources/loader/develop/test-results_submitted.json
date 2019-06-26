@@ -28,6 +28,7 @@
           "deficiencyCategory": "major",
           "deficiencyText": "missing.",
           "prs": false,
+          "prohibitionIssued": false,
           "additionalInformation": {
             "location": {
               "axleNumber": null,

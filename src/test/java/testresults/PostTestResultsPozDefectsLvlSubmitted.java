@@ -411,6 +411,39 @@ public class PostTestResultsPozDefectsLvlSubmitted {
     }
 
 
+    @Title("CVSB-3205 - Consumer creates a new test results for the submitted/cancelled test - prohibitionIssued false")
+    @Test
+    public void testResultsProhibitionIssuedFalse() {
+
+        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+                .getTestTypes().get(0).getDefects().get(0).setProhibitionIssued(false);
+
+
+        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedData();
+
+    }
+
+    @Title("CVSB-3205 - Consumer creates a new test results for the submitted/cancelled test - prohibitionIssued true")
+    @Test
+    public void testResultsProhibitionIssuedTrue() {
+
+        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+                .getTestTypes().get(0).getDefects().get(0).setProhibitionIssued(true);
+
+
+        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedData();
+
+    }
+
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - prs false")
     @Test
     public void testResultsPrsFalse() {
