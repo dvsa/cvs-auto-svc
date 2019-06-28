@@ -65,7 +65,7 @@ public class GetTestResultsFromDate {
 
         testResultsSteps.getTestResultsFromDate(vehicleSubmittedData.getVin(), "");
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2449 - From Date data found and status submitted")
@@ -101,7 +101,7 @@ public class GetTestResultsFromDate {
 
         testResultsSteps.getTestResultsFromDate(vehicleSubmittedData.getVin(), "", TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2452 - From Date data found and status canceled")
@@ -137,7 +137,7 @@ public class GetTestResultsFromDate {
 
         testResultsSteps.getTestResultsFromDate(vehicleCancelledData.getVin(), "", TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
 }

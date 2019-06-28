@@ -76,7 +76,7 @@ public class GetTestResultsBetweenDate {
 
         testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), "", "");
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
 
@@ -122,7 +122,7 @@ public class GetTestResultsBetweenDate {
 
         testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), "", "", TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2442 - Between Date data found and status cancelled")
@@ -167,7 +167,7 @@ public class GetTestResultsBetweenDate {
 
         testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), "", "", TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
 }
