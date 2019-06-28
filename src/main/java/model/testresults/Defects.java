@@ -15,7 +15,6 @@ public class Defects {
     private String deficiencyText;
     private Boolean stdForProhibition;
     private Boolean prs;
-    private Boolean prohibitionIssued;
 
     public Integer getImNumber() {
         return imNumber;
@@ -125,15 +124,6 @@ public class Defects {
         return this;
     }
 
-    public Boolean getProhibitionIssued() {
-        return prohibitionIssued;
-    }
-
-    public Defects setProhibitionIssued(Boolean prohibitionIssued) {
-        this.prohibitionIssued = prohibitionIssued;
-        return this;
-    }
-
     @Override
     public String toString() {
         return "Defects{" +
@@ -149,7 +139,6 @@ public class Defects {
                 ", deficiencyText='" + deficiencyText + '\'' +
                 ", stdForProhibition=" + stdForProhibition +
                 ", prs=" + prs +
-                ", prohibitionIssued=" + prohibitionIssued +
                 '}';
     }
 }
