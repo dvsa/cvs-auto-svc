@@ -1,5 +1,7 @@
 package model.activities;
 
+import java.util.List;
+
 public class Activities {
 
     private String activityType;
@@ -9,6 +11,8 @@ public class Activities {
     private String testStationType;
     private String testerName;
     private String testerStaffId;
+    private List<String> waitReason;
+    private String notes;
 
 
     public static class Builder<T extends Activities.Builder<T>> {
@@ -20,6 +24,8 @@ public class Activities {
         private String testStationType;
         private String testerName;
         private String testerStaffId;
+        private List<String> waitReason;
+        private String notes;
 
 
         public Builder() {
@@ -61,6 +67,16 @@ public class Activities {
             return (T) this;
         }
 
+        public T setWaitReason(List<String> waitReason) {
+            this.waitReason = waitReason;
+            return (T) this;
+        }
+
+        public T setNotes(String notes) {
+            this.notes = notes;
+            return (T) this;
+        }
+
 
         public Activities build() {
             return new Activities(this);
@@ -76,6 +92,8 @@ public class Activities {
         this.testStationType = builder.testStationType;
         this.testerName = builder.testerName;
         this.testerStaffId = builder.testerStaffId;
+        this.waitReason = builder.waitReason;
+        this.notes = builder.notes;
     }
 
 
@@ -107,6 +125,14 @@ public class Activities {
         return testerStaffId;
     }
 
+    public List<String> getWaitReason() {
+        return waitReason;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
     @Override
     public String toString() {
         return "Activities{" +
@@ -117,6 +143,8 @@ public class Activities {
                 ", testStationType='" + testStationType + '\'' +
                 ", testerName='" + testerName + '\'' +
                 ", testerStaffId='" + testerStaffId + '\'' +
+                ", waitReason='" + waitReason + '\'' +
+                ", notes='" + notes + '\'' +
                 '}';
     }
 }

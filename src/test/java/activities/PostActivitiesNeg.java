@@ -29,7 +29,7 @@ public class PostActivitiesNeg {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    private Activities.Builder activitiesData = ActivitiesData.buildActivitiesData();
+    private Activities.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - activityType")
@@ -301,7 +301,7 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityTypeVisitCaseSensitive() {
 
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Visit").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("Visit").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
 
@@ -311,7 +311,7 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityTypeWaitCaseSensitive() {
 
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Wait").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("Wait").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
     }
@@ -319,7 +319,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType atf")
     @Test
     public void postActivitiesTestStationTypeAtfCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Atf").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Atf").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -327,7 +327,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType gvts")
     @Test
     public void postActivitiesTestStationTypeGvtsCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Gvts").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Gvts").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -335,7 +335,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType hq")
     @Test
     public void postActivitiesTestStationTypeHqCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Hq").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Hq").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }

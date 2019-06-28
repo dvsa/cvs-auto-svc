@@ -25,7 +25,7 @@ public class PutActivitiesNeg {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    private Activities activitiesData = ActivitiesData.buildActivitiesData().build();
+    private Activities activitiesData = ActivitiesData.buildActivitiesIdData().build();
     private String id;
 
 
@@ -35,7 +35,7 @@ public class PutActivitiesNeg {
 
         id = RandomStringUtils.randomAlphanumeric(15);
 
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(404);
         activitiesSteps.validateActivityErrorMessage("Activity id does not exist");
 
@@ -48,7 +48,7 @@ public class PutActivitiesNeg {
 
         id = RandomStringUtils.randomNumeric(15);
 
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(404);
         activitiesSteps.validateActivityErrorMessage("Activity id does not exist");
 
@@ -61,9 +61,9 @@ public class PutActivitiesNeg {
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         String id = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(204);
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(403);
         activitiesSteps.validateActivityErrorMessage("Activity already ended");
 
