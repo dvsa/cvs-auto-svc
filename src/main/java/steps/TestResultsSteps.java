@@ -272,6 +272,7 @@ public class TestResultsSteps {
         List<List<String>> deficiencyText = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyText).collect(toList())).collect(toList());
         List<List<Boolean>> stdForProhibition = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getStdForProhibition).collect(toList())).collect(toList());
         List<List<Boolean>> prs = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getPrs).collect(toList())).collect(toList());
+        List<List<Boolean>> prohibitionIssued = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getProhibitionIssued).collect(toList())).collect(toList());
 
         response.then().body("testTypes.defects.imNumber", hasItem(contains(imNumber.toArray())));
         response.then().body("testTypes.defects.imDescription", hasItem(contains(imDescription.toArray())));
@@ -284,6 +285,8 @@ public class TestResultsSteps {
         response.then().body("testTypes.defects.deficiencyText", hasItem(contains(deficiencyText.toArray())));
         response.then().body("testTypes.defects.stdForProhibition", hasItem(contains(stdForProhibition.toArray())));
         response.then().body("testTypes.defects.prs", hasItem(contains(prs.toArray())));
+        response.then().body("testTypes.defects.prohibitionIssued", hasItem(contains(prohibitionIssued.toArray())));
+
     }
 
     @Step
