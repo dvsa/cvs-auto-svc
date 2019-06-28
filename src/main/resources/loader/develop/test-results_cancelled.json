@@ -47,8 +47,7 @@
           "imDescription": "Seat Belts & Supplementary Restraint Systems",
           "deficiencyId": "a",
           "itemDescription": "Obligatory Seat Belt:",
-          "imNumber": 3,
-          "prohibitionIssued" : false
+          "imNumber": 3
         }
       ],
       "name": "Annual test",
