@@ -27,7 +27,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: visit")
     @Test
     public void postActivitiesActivityTypeVisit() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("visit").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -35,16 +35,63 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: wait")
     @Test
     public void postActivitiesActivityTypeWait() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("wait").build());
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("wait").build());
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
+        activitiesSteps.responseShouldContainParentId();
     }
 
+    @Title("CVSB-179 / CVSB-4545 / CVSB-4547 - Save wait time in the BE (time is Equal to 5 minutes)")
+    @Test
+    public void postActivitiesActivityTypeWaitTimeIsEqualTo5Minutes() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("wait").setStartTime("2019-03-19T20:03:38.113Z").setEndTime("2019-03-19T20:08:38.113Z").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainParentId();
+    }
+
+    @Title("CVSB-179 / CVSB-4544 / CVSB-4543 - Save wait time in the BE (time is Greater than 5 minutes)")
+    @Test
+    public void postActivitiesActivityTypeWaitTimeIsGreaterThan5Minutes() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("wait").setStartTime("2019-03-18T20:03:38.113Z").setEndTime("2019-03-19T20:03:38.113Z").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainParentId();
+    }
+
+    @Title("CVSB-179 / CVSB-4545 / CVSB-4547 / CVSB-4551 / CVSB-4552 / CVSB-4554 / CVSB-4556 - Save wait time in the BE (time is Equal to 5 minutes)")
+    @Test
+    public void postActivitiesActivityTypeWaitTimeIsEqualTo5MinutesPreviousTime() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("wait").setStartTime("2019-03-19T20:08:38.113Z").setEndTime("2019-03-19T20:13:38.113Z").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainParentId();
+    }
+
+    @Title("CVSB-179 / CVSB-4548 / CVSB-4543 / CVSB-4549 / CVSB-4553 / CVSB-4555 - Save wait time in the BE (time is Greater than 5 minutes)")
+    @Test
+    public void postActivitiesActivityTypeWaitTimeIsGreaterThan5MinutesPreviousTime() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("wait").setStartTime("2019-03-19T20:03:38.113Z").setEndTime("2019-03-20T20:03:38.113Z").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainParentId();
+    }
+
+    @Title("CVSB-179 / CVSB-4557 / CVSB-4558 / CVSB-4562 - AC M5 Save wait time in the BE")
+    @Test
+    public void postActivitiesActivityTypeUnaccountableTime() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("unaccountable time").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainParentId();
+    }
+
+    @Title("CVSB-179 / CVSB-4559 / CVSB-4560 / CVSB-4561 /  - AC M6 Save wait time in the BE")
+    @Test
+    public void postActivitiesActivityTypeUnaccountableTimePreviousTime() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setActivityType("unaccountable time").setStartTime("2019-03-19T20:03:38.113Z").setEndTime("2019-03-19T20:04:38.113Z").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainParentId();
+    }
 
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: atf")
     @Test
     public void postActivitiesTestStationTypeAtf() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("atf").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("atf").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -52,7 +99,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: gvts")
     @Test
     public void postActivitiesTestStationTypeGvts() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("gvts").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("gvts").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -60,7 +107,7 @@ public class PostActivities {
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: hq")
     @Test
     public void postActivitiesTestStationTypeHq() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("hq").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("hq").build());
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
     }
@@ -70,13 +117,13 @@ public class PostActivities {
     @Test
     public void postActivitiesAfterActivityEnded() {
 
-        Activities activitiesData = ActivitiesData.buildActivitiesData().build();
+        Activities activitiesData = ActivitiesData.buildActivitiesIdData().build();
 
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
         String id = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(204);
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);

@@ -31,7 +31,7 @@ public class GetActivities {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesData();
+    ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
 
     @Title("CVSB- / CVSB- - AC7 ")

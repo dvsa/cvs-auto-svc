@@ -1,7 +1,6 @@
 package clients;
 
 import clients.util.ToTypeConvertor;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import exceptions.AutomationException;
@@ -10,10 +9,10 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import model.activities.Activities;
 import model.activities.ActivitiesGet;
-import model.testresults.TestResultsGet;
-import model.testresults.TestTypesGet;
+import model.activities.ActivitiesPost;
 import util.BasePathFilter;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 import static io.restassured.RestAssured.given;
@@ -51,6 +50,37 @@ public class ActivitiesClient {
                 response = callPostActivities("{ }");
             }
         }
+
+        response.prettyPrint();
+
+        return response;
+    }
+
+    public Response postActivitiesWithWaitReason(ActivitiesPost activities) {
+
+        Response response;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode node = objectMapper.valueToTree(activities);
+
+        if (activities != null) {
+            response = callPostActivities(node);
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPostActivities(node);
+            }
+
+        } else {
+            response = callPostActivities("{ }");
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPostActivities("{ }");
+            }
+        }
+
+        response.prettyPrint();
 
         return response;
     }
@@ -97,13 +127,26 @@ public class ActivitiesClient {
     }
 
 
-    public Response putActivities(String id) {
+    public Response putActivitiesEnd(String id) {
 
-        Response response = callPutActivities(id);
+        Response response = callPutActivitiesEnd(id);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callPutActivities(id);
+            response = callPutActivitiesEnd(id);
+        }
+
+        return response;
+
+    }
+
+    public Response putActivitiesUpdate(File JSON) {
+
+        Response response = callPutActivitiesUpdate(JSON);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPutActivitiesUpdate(JSON);
         }
 
         return response;
@@ -128,17 +171,29 @@ public class ActivitiesClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
+                .log().all()
                 .post("/activities");
 
         return response;
     }
 
-    private Response callPutActivities(String id) {
+    private Response callPutActivitiesEnd(String id) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("id", id)
                 .put("/activities/{id}/end");
+
+        return response;
+    }
+
+    private Response callPutActivitiesUpdate(File Json) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(Json)
+                .log().all()
+                .put("/activities/update");
 
         return response;
     }
@@ -171,6 +226,8 @@ public class ActivitiesClient {
 
         Response response = requestSpecification
                 .get("/activities/details");
+
+        response.prettyPrint();
 
         return response;
     }
