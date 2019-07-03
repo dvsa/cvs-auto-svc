@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -33,6 +34,7 @@ public class GetTestResultsBetweenDate {
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
+    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2434 - Between Date data found and status default")
     @Test
     public void testResultsBetweenDateExisting() {
@@ -80,6 +82,7 @@ public class GetTestResultsBetweenDate {
     }
 
 
+    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2438 - Between Date data found and status submitted")
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {

@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.PreparersSteps;
@@ -25,6 +26,7 @@ public class GetPreparersNoData {
     @Steps
     PreparersSteps preparersSteps;
 
+    @Ignore
     @Title("CVSB-579 / CVSB-743 - AC2 - The preparers IDs are not retrieved")
     @Test
     public void preparersNoData() {
