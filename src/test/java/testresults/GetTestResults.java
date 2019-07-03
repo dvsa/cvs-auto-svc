@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -48,6 +49,7 @@ public class GetTestResults {
         testResultsSteps.validateMessage("Unauthorized");
     }
 
+    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2215 - API Consumer retrieve the Test results for the input Vin (DEFAULT)")
     @Test
     public void testResultsSubmittedReferenceData() {
@@ -57,6 +59,7 @@ public class GetTestResults {
         testResultsSteps.validateData(vehicleSubmittedData);
     }
 
+    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (SUBMITTED)")
     @Test
     public void testResultsWithStatusSubmittedReferenceData() {

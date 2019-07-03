@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -32,14 +33,14 @@ public class GetTestResultsFromDate {
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
-    @Title("CVSB-416 - CVSB-949 / CVSB-2446 - From Date data found and status default")
-    @Test
-    public void testResultsSubmittedFromDateExisting() {
-
-        testResultsSteps.getTestResultsFromDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1));
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);
-    }
+//    @Title("CVSB-416 - CVSB-949 / CVSB-2446 - From Date data found and status default")
+//    @Test
+//    public void testResultsSubmittedFromDateExisting() {
+//
+//        testResultsSteps.getTestResultsFromDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1));
+//        testResultsSteps.statusCodeShouldBe(200);
+//        testResultsSteps.validateData(vehicleSubmittedData);
+//    }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2447 - From Date data not found and status default")
     @Test
@@ -65,9 +66,10 @@ public class GetTestResultsFromDate {
 
         testResultsSteps.getTestResultsFromDate(vehicleSubmittedData.getVin(), "");
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
+    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2449 - From Date data found and status submitted")
     @Test
     public void testResultsSubmittedFromDateExistingWithStatusSubmitted() {
@@ -101,7 +103,7 @@ public class GetTestResultsFromDate {
 
         testResultsSteps.getTestResultsFromDate(vehicleSubmittedData.getVin(), "", TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2452 - From Date data found and status canceled")
@@ -137,7 +139,7 @@ public class GetTestResultsFromDate {
 
         testResultsSteps.getTestResultsFromDate(vehicleCancelledData.getVin(), "", TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Bad Request");
+        testResultsSteps.validateData("Bad request");
     }
 
 }

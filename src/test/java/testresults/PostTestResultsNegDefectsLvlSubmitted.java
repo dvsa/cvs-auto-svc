@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -514,6 +515,7 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("prs", "must be a boolean");
     }
 
+    @Ignore
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
     @Test
     public void testResultsAdditionalInformationMissing() {

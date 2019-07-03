@@ -5,6 +5,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.DefectsSteps;
@@ -25,6 +26,7 @@ public class GetDefectsNoData {
     @Steps
     DefectsSteps defectsSteps;
 
+    @Ignore
     @Title("CVSB-279 / CVSB-741 - AC2 - The defects reference data are not retrieved")
     @Test
     public void defectsNoData() {
