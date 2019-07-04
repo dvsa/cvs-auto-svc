@@ -35,6 +35,7 @@ public class GetTestResultsDeletionFlag {
     public void getDeletionFlagTrueFalse() {
         testResultsSteps.getTestResults("XMGDE02FS0H012312");
         testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.testTypeLengthShouldBe(0);
     }
 
     @Title("Deletion flag is true at test record level and false at test type level")
@@ -49,5 +50,6 @@ public class GetTestResultsDeletionFlag {
     public void getDeletionFlagFalseFalse() {
         testResultsSteps.getTestResults("XMGDE02FS0H012314");
         testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.testTypeLengthShouldBe(1);
     }
 }

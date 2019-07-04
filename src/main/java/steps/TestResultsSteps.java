@@ -6,6 +6,7 @@ import clients.util.testresult.TestResultsLevel;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
 
 import java.util.List;
 
@@ -110,6 +111,11 @@ public class TestResultsSteps {
     @Step
     public void statusCodeShouldBe(int statusCode) {
         response.then().statusCode(statusCode);
+    }
+
+    @Step
+    public void testTypeLengthShouldBe(int length) {
+        response.then().body("testTypes[0].size()", is(length));
     }
 
     @Step
