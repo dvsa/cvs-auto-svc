@@ -34,7 +34,7 @@ public class GetTestResultsDeletionFlag {
     @Test
     public void getDeletionFlagTrueFalse() {
         testResultsSteps.getTestResults("XMGDE02FS0H012312");
-        testResultsSteps.statusCodeShouldBe(404);
+        testResultsSteps.statusCodeShouldBe(200);
     }
 
     @Title("Deletion flag is true at test record level and false at test type level")
