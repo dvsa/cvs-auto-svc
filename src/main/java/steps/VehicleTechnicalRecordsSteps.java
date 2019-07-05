@@ -159,4 +159,30 @@ public class VehicleTechnicalRecordsSteps {
     public void validateData(String stringData) {
         response.then().body(is("\"" + stringData + "\""));
     }
+
+    @Step
+    public void validateFieldHasValue(String filedName, String fieldValue){
+        response.then()
+                .body(filedName, hasItem(equalTo(fieldValue)));
+    }
+
+    @Step
+    public void validateFieldHasSize(String filedName, int size){
+        response.then()
+                .body(filedName+".size()", is(size));
+    }
+
+    @Step
+    public void validateFieldIs(String filedName, boolean value){
+        response.then()
+                .body(filedName, hasItem(is(value)));
+    }
+
+    @Step
+    public void validateFieldEndsWithValue(String filedName, String fieldValue){
+        response.then()
+                .body(filedName, is(endsWith(fieldValue)));
+    }
+
+
 }

@@ -194,4 +194,18 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
 
+    @Title("CVSB-1057 / CVSB-1159 / CVSB-4608 - AC3 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - no data returned")
+    @Test
+    public void testVehicleTechnicalRecordsSearchNoData() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("XXXXX", VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
+    }
+
+    @Title("CVSB-1057 / CVSB-1159 / CVSB-4608 - AC3 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - multiple records returned")
+    @Test
+    public void testVehicleTechnicalRecordsSearchMultipleRecords() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("678413", VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
+    }
+
 }
