@@ -60,7 +60,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
 
-    @Title("CVSB-1057 / CVSB-1160 - AC4 - No data returned")
+    @Title("CVSB-1057 / CVSB-1160 / CVSB-4608 - AC4 - No data returned")
     @Test
     public void testVehicleTechnicalRecordsSearchNonExisting() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(RandomStringUtils.randomAlphanumeric(15));
@@ -69,7 +69,7 @@ public class GetVehicleTechnicalRecords {
     }
 
 
-    @Title("CVSB-1057 / CVSB-1161 - AC5 - Multiple results returned")
+    @Title("CVSB-1057 / CVSB-1161 / CVSB-4608 - AC5 - Multiple results returned")
     @Test
     public void testVehicleTechnicalRecordsSearchMultipleResults() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("678413");
@@ -205,7 +205,7 @@ public class GetVehicleTechnicalRecords {
     @Test
     public void testVehicleTechnicalRecordsSearchMultipleRecords() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("678413", VehicleTechnicalRecordStatus.CURRENT);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(422);
     }
 
 }
