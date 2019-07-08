@@ -10,6 +10,7 @@ import io.restassured.specification.RequestSpecification;
 import model.activities.Activities;
 import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
+import model.activities.ActivitiesPut;
 import util.BasePathFilter;
 
 import java.io.File;
@@ -51,8 +52,6 @@ public class ActivitiesClient {
             }
         }
 
-        response.prettyPrint();
-
         return response;
     }
 
@@ -80,7 +79,32 @@ public class ActivitiesClient {
             }
         }
 
-        response.prettyPrint();
+        return response;
+    }
+
+    public Response putActivitiesUpdate(ActivitiesPut activities) {
+
+        Response response;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode node = objectMapper.valueToTree(activities);
+
+        if (activities != null) {
+            response = callPutActivitiesUpdate(node);
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPutActivitiesUpdate(node);
+            }
+
+        } else {
+            response = callPutActivitiesUpdate("{ }");
+
+            if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+                saveUtils();
+                response = callPutActivitiesUpdate("{ }");
+            }
+        }
 
         return response;
     }
@@ -140,19 +164,6 @@ public class ActivitiesClient {
 
     }
 
-    public Response putActivitiesUpdate(File JSON) {
-
-        Response response = callPutActivitiesUpdate(JSON);
-
-        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
-            saveUtils();
-            response = callPutActivitiesUpdate(JSON);
-        }
-
-        return response;
-
-    }
-
     public Response getActivities(String activityType, String testerStaffId, String testStationPNumber, String fromStartTime, String toStartTime) {
 
         Response response = callGetActivities(activityType, testerStaffId, testStationPNumber, fromStartTime, toStartTime);
@@ -171,7 +182,6 @@ public class ActivitiesClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log().all()
                 .post("/activities");
 
         return response;
@@ -187,12 +197,11 @@ public class ActivitiesClient {
         return response;
     }
 
-    private Response callPutActivitiesUpdate(File Json) {
+    private Response callPutActivitiesUpdate(Object object) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
-                .body(Json)
-                .log().all()
+                .body("[" + object + "]")
                 .put("/activities/update");
 
         return response;
@@ -226,8 +235,6 @@ public class ActivitiesClient {
 
         Response response = requestSpecification
                 .get("/activities/details");
-
-        response.prettyPrint();
 
         return response;
     }
