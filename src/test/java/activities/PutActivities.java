@@ -65,8 +65,9 @@ public class PutActivities {
     @Title("CVSB-179 / CVSB-4563 - API Consumer with ended activity ends a new activity")
     @Test
     public void putActivitiesUpdate() {
-        File f = new File("/Users/talexandru/Workspace/cvs-auto-svc/src/main/resources/loader/develop/activities_update.json");
-        activitiesSteps.putActivitiesUpdate(f);
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
+        String id =  activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.putActivitiesUpdate(ActivitiesData.buildActivitiesUpdateData().setId(id).build());
         activitiesSteps.statusCodeShouldBe(204);
 
     }

@@ -1,9 +1,7 @@
-[
-  {
-    "id": "9d71f94a-a87f-48ef-842c-adc160951808",
-    "waitReason": [
-      "Break"
-    ],
-    "notes": "I was eating a pretzel"
-  }
-]
+{
+  "id": "5e4bd304-446e-4678-8289-d34fca9256e9",
+  "waitReason": [
+    "Break"
+  ],
+  "notes": "I was eating a pretzel"
+}
