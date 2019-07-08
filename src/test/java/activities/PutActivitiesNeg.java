@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 
+import java.util.ArrayList;
+
 @WithTags(
         {
                 @WithTag(type = "PutActivities", name = "All"),
@@ -66,6 +68,30 @@ public class PutActivitiesNeg {
         activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(403);
         activitiesSteps.validateActivityErrorMessage("Activity already ended");
+
+    }
+
+    @Title("CVSB-179 / CVSB-4563 - API Consumer with ended activity ends a new activity")
+    @Test
+    public void putActivitiesUpdateInvalidReason() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
+        String id =  activitiesSteps.checkAndGetResponseId();
+        ArrayList<String> reason = new ArrayList<String>();
+        reason.add("ASdw");
+        activitiesSteps.putActivitiesUpdate(ActivitiesData.buildActivitiesUpdateData().setId(id).setWaitReason(reason).build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorTypeWithProperty("waitReason", "at position 0 does not match any of the allowed types");
+
+    }
+
+    @Title("CVSB-179 / CVSB-4563 - API Consumer with ended activity ends a new activity")
+    @Test
+    public void putActivitiesUpdateNullReason() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
+        String id =  activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.putActivitiesUpdate(ActivitiesData.buildActivitiesUpdateData().setId(id).setWaitReason(null).build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorTypeWithProperty("waitReason", "must be an array");
 
     }
 }

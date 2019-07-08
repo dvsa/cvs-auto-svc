@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import model.activities.Activities;
 import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
+import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
 
 import java.io.File;
@@ -44,8 +45,8 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public void putActivitiesUpdate(File JSON) {
-        response = activitiesClient.putActivitiesUpdate(JSON);
+    public void putActivitiesUpdate(ActivitiesPut activities) {
+        response = activitiesClient.putActivitiesUpdate(activities);
     }
 
     @Step
@@ -82,8 +83,6 @@ public class ActivitiesSteps {
     @Step
     public void validateData(ActivitiesPost activities) {
 
-        response.prettyPrint();
-
         for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
             response.then().body("[" + i + "].size()", is(equalTo(Activities.class.getDeclaredFields().length + 3)));
         }
@@ -104,52 +103,44 @@ public class ActivitiesSteps {
 
     @Step
     public void validateData(String stringData) {
-        response.prettyPrint();
         response.then().body(is("\"\\\"" + stringData + "\\\"\""));
     }
 
     @Step
     public void validateNotExistingId(ActivitiesGet activities) {
-        response.prettyPrint();
         response.then().body("id", not(hasItem(activities.getId())));
     }
 
     @Step
     public void responseShouldContainId() {
-        response.prettyPrint();
         response.then().body("$", hasKey("id"));
     }
 
     @Step
     public void responseShouldContainParentId() {
-        response.prettyPrint();
         response.then().body("$", hasKey("id"));
     }
 
     @Step
     public void validateActivityErrorTypeWithProperty(String field, String errorMessage) {
-        response.prettyPrint();
         response.then().body("size()", is(1));
         response.then().body("error", equalTo("\"" + field + "\" " + errorMessage));
     }
 
     @Step
     public void validateActivityErrorTypeWithoutProperty(String field, String errorMessage) {
-        response.prettyPrint();
         response.then().body("size()", is(1));
         response.then().body("error", equalTo(field + " " + errorMessage));
     }
 
     @Step
     public void validateActivityErrorMessage(String errorMessage) {
-        response.prettyPrint();
         response.then().body("size()", is(1));
         response.then().body("error", equalTo(errorMessage));
     }
 
     @Step
     public String checkAndGetResponseId() {
-        response.prettyPrint();
         response.then().body("$", hasKey("id"));
         return response.jsonPath().get("id");
     }
