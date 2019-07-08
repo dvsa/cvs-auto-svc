@@ -12,8 +12,11 @@ import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yecht.Data;
 import steps.ActivitiesSteps;
 import util.DataUtil;
+
+import java.util.ArrayList;
 
 @WithTags(
         {
@@ -29,7 +32,7 @@ public class PostActivitiesNeg {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    private Activities.Builder activitiesData = ActivitiesData.buildActivitiesData();
+    private Activities.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - activityType")
@@ -48,7 +51,7 @@ public class PostActivitiesNeg {
 
         activitiesSteps.postActivities(activitiesData.build(), "activityType", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - activityType")
@@ -57,7 +60,7 @@ public class PostActivitiesNeg {
 
         activitiesSteps.postActivities(activitiesData.build(), "activityType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2940 - API Consumer tries to create an activity with different range or format body property value - activityType")
@@ -66,7 +69,7 @@ public class PostActivitiesNeg {
 
         activitiesSteps.postActivities(activitiesData.setActivityType(RandomStringUtils.randomAlphanumeric(6)).build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testStationName")
@@ -281,8 +284,7 @@ public class PostActivitiesNeg {
     public void extraPropertyStartTime() {
 
         activitiesSteps.postActivities(activitiesData.build(), "startTime", DataUtil.buildCurrentDateTime(), ToTypeConvertor.NEW_PROPERTY);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("startTime", "is not allowed");
+        activitiesSteps.statusCodeShouldBe(201);
     }
 
 
@@ -301,9 +303,9 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityTypeVisitCaseSensitive() {
 
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Visit").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("Visit").build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
 
     }
 
@@ -311,15 +313,15 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityTypeWaitCaseSensitive() {
 
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setActivityType("Wait").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("Wait").build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType atf")
     @Test
     public void postActivitiesTestStationTypeAtfCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Atf").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Atf").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -327,7 +329,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType gvts")
     @Test
     public void postActivitiesTestStationTypeGvtsCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Gvts").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Gvts").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -335,7 +337,7 @@ public class PostActivitiesNeg {
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType hq")
     @Test
     public void postActivitiesTestStationTypeHqCaseSensitive() {
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesData().setTestStationType("Hq").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Hq").build());
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
     }
@@ -349,6 +351,67 @@ public class PostActivitiesNeg {
         activitiesSteps.postActivities(activities);
         activitiesSteps.statusCodeShouldBe(403);
         activitiesSteps.validateActivityErrorTypeWithoutProperty("Staff ID " + activities.getTesterStaffId(), "already has an ongoing activity");
+    }
+
+    @Title("CVSB-179 / CVSB-4588 - API Consumer tries to log wait time with missing property")
+    @Test
+    public void postActivitiesInvalidParentId() {
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId("null").setActivityType("unaccountable time").setStartTime("2019-03-19T20:03:38.113Z").setEndTime("2019-03-19T20:04:38.113Z").build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorMessage("Parent id does not exist");
+    }
+
+    @Title("CVSB-179 / CVSB-4588 - API Consumer tries to log wait time with missing property")
+    @Test
+    public void postActivitiesNullReason() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
+        String parentId = activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setWaitReason(null).build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorMessage("\"waitReason\" must be an array");
+    }
+
+    @Title("CVSB-179 / CVSB-4587 - API Consumer tries to log wait time with undefined request body property value for activityType")
+    @Test
+    public void postActivitiesInvalidReason() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
+        String parentId = activitiesSteps.checkAndGetResponseId();
+        ArrayList<String> reason = new ArrayList<String>();
+        reason.add("ASdw");
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setWaitReason(reason).build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorMessage("\"waitReason\" at position 0 does not match any of the allowed types");
+    }
+
+    @Title("CVSB-179 / CVSB-4568 - AC M12 API Consumer creates a new activity - endTime not sent")
+    @Test
+    public void postActivitiesActivityParentIdNoEndTime() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
+        String parentId = activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setEndTime(null).build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorMessage("End Time not provided.");
+    }
+
+    @Title("CVSB-179 / CVSB-4567 - AC M12 API Consumer creates a new activity - startTime not sent")
+    @Test
+    public void postActivitiesActivityParentIdNoStartTime() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
+        String parentId = activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setStartTime(null).build());
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorMessage("\"startTime\" must be a string");
+    }
+
+    @Title("CVSB-179 / CVSB-4588 - API Consumer tries to log wait time with missing property")
+    @Test
+    public void postMissingPropertyStartTime() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
+        String parentId = activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).build(), "startTime", DataUtil.buildCurrentDateTime(), ToTypeConvertor.MISSING);
+        activitiesSteps.statusCodeShouldBe(400);
+        activitiesSteps.validateActivityErrorMessage("Start Time not provided.");
+
     }
 
 }

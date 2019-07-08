@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 
+import java.io.File;
+
 @WithTags(
         {
                 @WithTag(type = "PutActivities", name = "All"),
@@ -29,13 +31,13 @@ public class PutActivities {
     @Test
     public void putActivities() {
 
-        Activities activitiesData = ActivitiesData.buildActivitiesData().build();
+        Activities activitiesData = ActivitiesData.buildActivitiesIdData().build();
 
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
         String id = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(204);
 
     }
@@ -44,18 +46,28 @@ public class PutActivities {
     @Test
     public void putActivitiesOnNewActivitySameTesterStaffId() {
 
-        Activities activitiesData = ActivitiesData.buildActivitiesData().build();
+        Activities activitiesData = ActivitiesData.buildActivitiesIdData().build();
 
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();
         String id = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(204);
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         id = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.putActivities(id);
+        activitiesSteps.putActivitiesEnd(id);
+        activitiesSteps.statusCodeShouldBe(204);
+
+    }
+
+    @Title("CVSB-179 / CVSB-4563 - API Consumer with ended activity ends a new activity")
+    @Test
+    public void putActivitiesUpdate() {
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
+        String id =  activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.putActivitiesUpdate(ActivitiesData.buildActivitiesUpdateData().setId(id).build());
         activitiesSteps.statusCodeShouldBe(204);
 
     }

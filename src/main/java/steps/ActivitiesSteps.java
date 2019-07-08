@@ -5,7 +5,11 @@ import clients.util.ToTypeConvertor;
 import io.restassured.response.Response;
 import model.activities.Activities;
 import model.activities.ActivitiesGet;
+import model.activities.ActivitiesPost;
+import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
+
+import java.io.File;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasKey;
@@ -21,6 +25,11 @@ public class ActivitiesSteps {
     }
 
     @Step
+    public void postActivitiesWithWaitReason(ActivitiesPost activities) {
+        response = activitiesClient.postActivitiesWithWaitReason(activities);
+    }
+
+    @Step
     public void postActivities(Activities activities, String propertyField, String value, ToTypeConvertor toType) {
         response = activitiesClient.postActivitiesFieldChange(activities, propertyField, value, toType);
     }
@@ -31,8 +40,13 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public void putActivities(String id) {
-        response = activitiesClient.putActivities(id);
+    public void putActivitiesEnd(String id) {
+        response = activitiesClient.putActivitiesEnd(id);
+    }
+
+    @Step
+    public void putActivitiesUpdate(ActivitiesPut activities) {
+        response = activitiesClient.putActivitiesUpdate(activities);
     }
 
     @Step
@@ -59,7 +73,30 @@ public class ActivitiesSteps {
         response.then().body("testStationType[0]", is(equalTo(activities.getTestStationType())));
         response.then().body("testerName[0]", is(equalTo(activities.getTesterName())));
         response.then().body("testerStaffId[0]", is(equalTo(activities.getTesterStaffId())));
+        response.then().body("waitReason", hasItem(contains(activities.getWaitReason().toArray())));
+        response.then().body("notes[0]", is(equalTo(activities.getNotes())));
         response.then().body("[0]", hasKey("id"));
+        response.then().body("[0]", hasKey("startTime"));
+        response.then().body("[0]", hasKey("endTime"));
+    }
+
+    @Step
+    public void validateData(ActivitiesPost activities) {
+
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            response.then().body("[" + i + "].size()", is(equalTo(Activities.class.getDeclaredFields().length + 3)));
+        }
+
+        response.then().body("activityType[0]", is(equalTo(activities.getActivityType())));
+        response.then().body("testStationName[0]", is(equalTo(activities.getTestStationName())));
+        response.then().body("testStationPNumber[0]", is(equalTo(activities.getTestStationPNumber())));
+        response.then().body("testStationEmail[0]", is(equalTo(activities.getTestStationEmail())));
+        response.then().body("testStationType[0]", is(equalTo(activities.getTestStationType())));
+        response.then().body("testerName[0]", is(equalTo(activities.getTesterName())));
+        response.then().body("testerStaffId[0]", is(equalTo(activities.getTesterStaffId())));
+        response.then().body("waitReason", hasItem(contains(activities.getWaitReason().toArray())));
+        response.then().body("notes[0]", is(equalTo(activities.getNotes())));
+        response.then().body("[0]", hasKey("parentId"));
         response.then().body("[0]", hasKey("startTime"));
         response.then().body("[0]", hasKey("endTime"));
     }
@@ -76,6 +113,11 @@ public class ActivitiesSteps {
 
     @Step
     public void responseShouldContainId() {
+        response.then().body("$", hasKey("id"));
+    }
+
+    @Step
+    public void responseShouldContainParentId() {
         response.then().body("$", hasKey("id"));
     }
 
