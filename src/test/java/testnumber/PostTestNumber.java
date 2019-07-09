@@ -237,7 +237,6 @@ public class PostTestNumber {
 
 
     @Title("CVSB-2157/CVSB-3246 AC A1. VSA submits test results (when current cert letter in database is not 'Z', and current sequence number in database is not '999') (testNumber generated)")
-    @Ignore
     @Test
     public void verifyNextTestNumberGeneration() {
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))

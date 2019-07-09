@@ -181,7 +181,7 @@ public class PostTestResultsPozMainLvlCancelled {
     }
 
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - testerStaffId")
     @Test
     public void testResultsLengthEmptyTesterStaffId() {
@@ -519,7 +519,7 @@ public class PostTestResultsPozMainLvlCancelled {
     }
 
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType hgv")
     @Test
     public void testResultsValueVehicleTypeValueTwo() {
@@ -533,7 +533,7 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedData();
     }
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType trl")
     @Test
     public void testResultsValueVehicleTypeValueThree() {
@@ -601,7 +601,7 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedData();
     }
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration articulated")
     @Test
     public void testResultsVehicleConfigurationValueTwo() {

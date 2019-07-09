@@ -178,7 +178,7 @@ public class PostTestResultsPozMainLvlSubmitted {
         validateSavedData();
     }
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - testerStaffId")
     @Test
     public void testResultsEmptyTesterStaffId() {
@@ -530,7 +530,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     }
 
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType hgv")
     @Test
     public void testResultsValueVehicleTypeValueTwo() {
@@ -538,13 +538,12 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.postTestResults(vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setVehicleType("hgv").build());
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType trl")
     @Test
     public void testResultsValueVehicleTypeValueThree() {
@@ -552,7 +551,6 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.postTestResults(vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setVehicleType("trl").build());
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -611,7 +609,8 @@ public class PostTestResultsPozMainLvlSubmitted {
         validateSavedData();
     }
 
-    @Ignore
+
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration articulated")
     @Test
     public void testResultVehicleConfigurationValueTwo() {
@@ -619,7 +618,6 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.postTestResults(vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setVehicleConfiguration("articulated").build());
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();

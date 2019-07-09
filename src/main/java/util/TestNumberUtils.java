@@ -77,6 +77,7 @@ public class TestNumberUtils {
     }
 
     public static String computeTestNumber(String CVSID, String certLetter, String sequenceNumber) {
+        if(sequenceNumber.length()<3) sequenceNumber = sequenceNumber.length()==1? "00"+sequenceNumber : "0"+sequenceNumber;
         Character firstChar = CVSID.charAt(0);
         Character secondChar = CVSID.charAt(1);
         Character thirdChar = CVSID.charAt(2);

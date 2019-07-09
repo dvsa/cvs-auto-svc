@@ -24,7 +24,7 @@ import util.DataUtil;
         }
 )
 
-@Ignore("IN progress continue when bug fix is done")
+//@Ignore("IN progress continue when bug fix is done")
 @RunWith(SerenityRunner.class)
 public class GetActivities {
 

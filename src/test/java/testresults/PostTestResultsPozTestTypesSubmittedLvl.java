@@ -87,7 +87,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     }
 
 
-    @Ignore
+    @Ignore("Ignored until CVSB-6491 is solved")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeId")
     @Test
     public void testResultsRandomTestTypeId() {
@@ -95,7 +95,6 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId(RandomStringUtils.randomAlphanumeric(50));
-
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
