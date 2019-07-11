@@ -126,7 +126,7 @@ public class TestTypeSteps {
     @Step
     private void validateLevel1Data(TestType testType, String index) {
 
-        response.then().body("[" + index + "].size()", is(TestType.class.getDeclaredFields().length - 1));
+        response.then().body("[" + index + "].size()", is(TestType.class.getDeclaredFields().length));
 
         response.then().body("id", hasItem(equalTo(testType.getId())));
         response.then().body("name", hasItem(equalTo(testType.getName())));
@@ -138,7 +138,7 @@ public class TestTypeSteps {
     @Step
     private void validateLevel2Data(TestType testType, String index) {
 
-        response.then().body("[" + index + "].nextTestTypesOrCategories[0].size()", is(TestType.class.getDeclaredFields().length - 1));
+        response.then().log().all().body("[" + index + "].nextTestTypesOrCategories[0].size()", is(TestType.class.getDeclaredFields().length));
 
         List<String> ids = testType.getNextTestTypesOrCategories().stream().map(TestType::getId).collect(toList());
         List<String> names = testType.getNextTestTypesOrCategories().stream().map(TestType::getName).collect(toList());

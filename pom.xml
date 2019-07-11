@@ -65,6 +65,12 @@
             <artifactId>maven-jar-plugin</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.azure/msal4j -->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>msal4j</artifactId>
+            <version>0.4.0-preview</version>
+        </dependency>
 
     </dependencies>
 

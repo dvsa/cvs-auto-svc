@@ -209,7 +209,7 @@ public class TestResultsSteps {
     @Step
     private void validateTestTypesData(TestResultsGet testResults) {
 
-        response.then().body("[0].testTypes.size()", is(1));
+        response.then().log().all().body("[0].testTypes.size()", is(2));
 
         List<String> createdAt = testResults.getTestTypes().stream().map(TestTypesGet::getCreatedAt).collect(toList());
         List<String> lastUpdatedAt = testResults.getTestTypes().stream().map(TestTypesGet::getLastUpdatedAt).collect(toList());
@@ -264,8 +264,8 @@ public class TestResultsSteps {
 
     @Step
     private void validateDefectsData(TestResults testResults) {
-        response.then().body("[0].testTypes.defects.size()", is(1));
-        response.then().body("[0].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
+        response.then().log().all().body("[0].testTypes.defects.size()", is(2));
+        response.then().log().all().body("[0].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
 
         List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
         List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
