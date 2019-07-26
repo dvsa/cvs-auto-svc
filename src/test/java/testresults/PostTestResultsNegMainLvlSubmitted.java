@@ -581,8 +581,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("vehicleClass", "is required");
     }
 
-    //TODO fix this
-    @Ignore("investigate later")
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleClass")
     @Test
     public void testResultsNullVehicleClass() {
