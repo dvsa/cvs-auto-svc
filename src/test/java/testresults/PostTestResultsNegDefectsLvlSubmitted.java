@@ -543,7 +543,6 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("prs", "must be a boolean");
     }
 
-    @Ignore
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
     @Test
     public void testResultsAdditionalInformationMissing() {

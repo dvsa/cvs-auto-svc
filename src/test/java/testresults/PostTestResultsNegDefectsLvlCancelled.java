@@ -226,7 +226,6 @@ public class PostTestResultsNegDefectsLvlCancelled {
         testResultsSteps.validatePostErrorData("deficiencySubId", "must be a string");
     }
 
-    @Ignore
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - deficiencySubId random")
     @Test
     public void testResultsRandomAlphabeticStringDeficiencySubId() {
@@ -546,7 +545,7 @@ public class PostTestResultsNegDefectsLvlCancelled {
         testResultsSteps.validatePostErrorData("prs", "must be a boolean");
     }
 
-    @Ignore
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
     @Test
     public void testResultsAdditionalInformationMissing() {
