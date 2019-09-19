@@ -194,4 +194,19 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
 
+    @Title("CVSB-7390 / CVSB-7933 - AC1 - API Consumer retrieve the Vehicle Technical Records")
+    @Test
+    public void testVehicleTechnicalRecordsHgvtDataMigration() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301000000");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin","P012301000000");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code","b");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.description","box");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].drawbarCouplingFitted",true);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleConfiguration","dolly");
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].brakes","dtpNumber");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("C000001");
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].axles[1].brakes", "leverLength");
+    }
+
 }
