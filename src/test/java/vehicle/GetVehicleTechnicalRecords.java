@@ -199,13 +199,9 @@ public class GetVehicleTechnicalRecords {
     public void testVehicleTechnicalRecordsHgvtDataMigration() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301000000");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin","P012301000000");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code","b");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.description","box");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].drawbarCouplingFitted",true);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleConfiguration","dolly");
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].brakes","dtpNumber");
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("C000001");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].axles[1].brakes", "leverLength");
     }
 
