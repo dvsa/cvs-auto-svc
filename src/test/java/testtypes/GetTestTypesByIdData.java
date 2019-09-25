@@ -127,4 +127,200 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData(nonAnnualPsvSmallRigidTwoAxles, testTypeQueryParam.getFields());
     }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aav2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
+    @Test
+    public void testTypeDefaultTestCodeAav2HGVTwoAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav2");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aav3' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 3)")
+    @Test
+    public void testTypeDefaultTestCodeAav3HGVThreeAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.THREE);
+
+        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav3");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aav4' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 4)")
+    @Test
+    public void testTypeDefaultTestCodeAav4HGVFourAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.FOUR);
+
+        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav4");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aav5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5)")
+    @Test
+    public void testTypeDefaultTestCodeAav5HGVFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav5");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
+    @Test
+    public void testTypeDefaultTestCodeAat1TRLOneAxle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ONE);
+
+        testTypeSteps.getTestTypesById("94", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat1");
+    }
+
+//    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat2' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 2)")
+//    @Test
+//    public void testTypeDefaultTestCodeTRLTwoAxles() {
+//
+//        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+//                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+//                .setVehicleType(VehicleType.TRL)
+//                .setVehicleConfiguration(VehicleConfiguration.NULL)
+//                .setVehicleAxles(VehicleAxles.TWO);
+//
+//        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+//        testTypeSteps.statusCodeShouldBe(200);
+//        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat2");
+//    }
+//
+//    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat3' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 3)")
+//    @Test
+//    public void testTypeDefaultTestCodeTRLThreeAxles() {
+//
+//        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+//                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+//                .setVehicleType(VehicleType.TRL)
+//                .setVehicleConfiguration(VehicleConfiguration.NULL)
+//                .setVehicleAxles(VehicleAxles.THREE);
+//
+//        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+//        testTypeSteps.statusCodeShouldBe(200);
+//        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat3");
+//    }
+//
+//    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat4' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 4)")
+//    @Test
+//    public void testTypeDefaultTestCodeTRLFourAxles() {
+//
+//        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+//                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+//                .setVehicleType(VehicleType.TRL)
+//                .setVehicleConfiguration(VehicleConfiguration.NULL)
+//                .setVehicleAxles(VehicleAxles.FOUR);
+//
+//        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+//        testTypeSteps.statusCodeShouldBe(200);
+//        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat4");
+//    }
+//
+//    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5)")
+//    @Test
+//    public void testTypeDefaultTestCodeTRLFiveAxles() {
+//
+//        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+//                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+//                .setVehicleType(VehicleType.TRL)
+//                .setVehicleConfiguration(VehicleConfiguration.NULL)
+//                .setVehicleAxles(VehicleAxles.FIVE);
+//
+//        testTypeSteps.getTestTypesById("40", testTypeQueryParam);
+//        testTypeSteps.statusCodeShouldBe(200);
+//        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat5");
+//    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
+    @Test
+    public void testTypeDefaultTestCodeFfv2HGVTwoAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById("41", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv2");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv3' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 3)")
+    @Test
+    public void testTypeDefaultTestCodeFfv3HGVThreeAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.THREE);
+
+        testTypeSteps.getTestTypesById("41", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv3");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv4' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 4)")
+    @Test
+    public void testTypeDefaultTestCodeFfv4HGVFourAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.FOUR);
+
+        testTypeSteps.getTestTypesById("41", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv4");
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5)")
+    @Test
+    public void testTypeDefaultTestCodeFfv5HGVFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById("41", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv5");
+    }
+
 }
