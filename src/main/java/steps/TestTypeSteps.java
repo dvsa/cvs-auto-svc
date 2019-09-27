@@ -40,6 +40,21 @@ public class TestTypeSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldBeNull(String path) {
+        response.then().body(path, isEmptyOrNullString());
+    }
+
+    @Step
+    public void fieldInPathShouldExist(String parentElementPath, String key) {
+        response.then().body(parentElementPath,hasKey(key));
+    }
+
+    @Step
     public void validateData(String stringData) {
         response.then().body(is("\"" + stringData + "\""));
     }
