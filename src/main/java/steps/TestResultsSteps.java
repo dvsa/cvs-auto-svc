@@ -424,14 +424,16 @@ public class TestResultsSteps {
     public void validateVehicleFieldValue(String key, String value) {
         response.then().log().all();
         validateVehicleFieldExists(key);
-        assertThat(response.then().body("$", anyOf(hasItem(hasEntry(key,value)))));
+        String returnedValue = response.jsonPath().getString("[0]." + key);
+        assertThat(returnedValue.equals(value)).isTrue();
     }
 
     @Step
     public void validateVehicleFieldValue(String key, int value) {
         response.then().log().all();
         validateVehicleFieldExists(key);
-        assertThat(response.then().body("$", anyOf(hasItem(hasEntry(key,value)))));
+        String returnedValue = response.jsonPath().getString("[0]." + key);
+        assertThat(returnedValue.equals(value)).isTrue();
     }
 
     @Step
@@ -444,7 +446,7 @@ public class TestResultsSteps {
     @Step
     public void validateVehicleFieldExists(String fieldName) {
         response.then().log().all();
-        assertThat(response.then().body("$", everyItem(hasKey(fieldName))));
+        assertThat(response.then().body("[0]", hasKey(fieldName)));
     }
 
     @Step
