@@ -133,14 +133,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAav2HGVTwoAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav2");
     }
 
@@ -149,14 +149,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAav3HGVThreeAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.THREE);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav3");
     }
 
@@ -165,14 +165,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAav4HGVFourAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FOUR);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav4");
     }
 
@@ -181,14 +181,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAav5HGVFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav5");
     }
 
@@ -197,14 +197,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAat1TRLOneAxle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.ONE);
 
         testTypeSteps.getTestTypesById("94", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat1");
     }
 
@@ -213,14 +213,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAat2TRLTwoAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat2");
     }
 
@@ -229,14 +229,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAat3TRLThreeAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.THREE);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat3");
     }
 
@@ -245,14 +245,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAat4TRLFourAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FOUR);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat4");
     }
 
@@ -261,14 +261,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeAat5TRLFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat5");
     }
 
@@ -277,14 +277,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFfv2HGVTwoAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv2");
     }
 
@@ -293,14 +293,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFfv3HGVThreeAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.THREE);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv3");
     }
 
@@ -309,14 +309,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFfv4HGVFourAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FOUR);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv4");
     }
 
@@ -325,14 +325,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFfv5HGVFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv5");
     }
 
@@ -341,14 +341,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFft1TRLOneAxle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.ONE);
 
         testTypeSteps.getTestTypesById("95", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "fft1");
     }
 
@@ -357,14 +357,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFft2HGVTwoAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "fft2");
     }
 
@@ -373,14 +373,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFft3TRLThreeAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.THREE);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "fft3");
     }
 
@@ -389,14 +389,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFft4TRLFourAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FOUR);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "fft4");
     }
 
@@ -405,14 +405,14 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeFft5TRLFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "fft5");
     }
 
@@ -541,13 +541,13 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeDdvHGV() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL);
 
         testTypeSteps.getTestTypesById("50", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ddv");
     }
 
@@ -556,13 +556,13 @@ public class GetTestTypesByIdData {
     public void testTypeDefaultTestCodeDdtTRL() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL);
 
         testTypeSteps.getTestTypesById("50", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ddt");
     }
 
@@ -909,7 +909,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("59", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "arv");
     }
 
@@ -924,7 +924,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("59", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "art");
     }
 
@@ -939,7 +939,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("60", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "drv");
     }
 
@@ -954,7 +954,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("60", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "drt");
     }
 
@@ -986,7 +986,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("101", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qkt");
     }
 
@@ -2839,7 +2839,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "bib");
     }
 
@@ -2855,7 +2855,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qav2");
     }
 
@@ -2871,7 +2871,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qav3");
     }
 
@@ -2887,7 +2887,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qav4");
     }
 
@@ -2903,7 +2903,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qav5");
     }
 
@@ -2919,7 +2919,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qat1");
     }
 
@@ -2935,7 +2935,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qat2");
     }
 
@@ -2951,7 +2951,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qat3");
     }
 
@@ -2967,7 +2967,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qat4");
     }
 
@@ -2983,7 +2983,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("85", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qat5");
     }
 
@@ -2998,7 +2998,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("86", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qbv");
     }
 
@@ -3013,7 +3013,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("87", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "bid");
     }
 
@@ -3028,7 +3028,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("87", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "bid");
     }
 
@@ -3043,7 +3043,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("88", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "bif");
     }
 
@@ -3058,7 +3058,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("89", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qcv");
     }
 
@@ -3073,7 +3073,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("90", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qdv");
     }
 
@@ -3089,7 +3089,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjv2");
     }
 
@@ -3105,7 +3105,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjv3");
     }
 
@@ -3121,7 +3121,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjv4");
     }
 
@@ -3137,7 +3137,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjv5");
     }
 
@@ -3153,7 +3153,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("122", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjt1");
     }
 
@@ -3169,7 +3169,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjt2");
     }
 
@@ -3185,7 +3185,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjt3");
     }
 
@@ -3201,7 +3201,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjt4");
     }
 
@@ -3217,7 +3217,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("91", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "NON ANNUAL");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual NO CERTIFICATE");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "qjt5");
     }
 }
