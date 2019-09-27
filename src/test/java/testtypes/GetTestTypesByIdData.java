@@ -140,7 +140,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("40", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav2");
     }
 
@@ -174,6 +174,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav4");
     }
 
@@ -191,6 +192,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav5");
     }
 
@@ -206,6 +208,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("94", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat1");
@@ -289,6 +292,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv2");
     }
 
@@ -306,6 +310,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv3");
     }
 
@@ -323,6 +328,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv4");
     }
 
@@ -338,6 +344,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById("41", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv5");
