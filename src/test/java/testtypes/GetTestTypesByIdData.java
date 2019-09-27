@@ -195,8 +195,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav5");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.AAV5.getClassification());
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAV5.getTestCode());
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
