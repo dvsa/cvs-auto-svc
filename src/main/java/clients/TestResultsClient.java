@@ -251,7 +251,8 @@ public class TestResultsClient {
 
     public Response callPostTestResults(Object object) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given()
+                .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
                 .post("/test-results");
@@ -262,7 +263,9 @@ public class TestResultsClient {
 
     public Response callGetTestResults(String vin) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given()
+                .log().all()
+                .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
                 .get("/test-results/{vin}");
@@ -354,4 +357,32 @@ public class TestResultsClient {
         return response;
     }
 
+    public Response postTestResultsTestTypeFieldsRemoved(TestResults testResults, String[] removeFields) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode node = objectMapper.valueToTree(testResults);
+
+        for(String removeField: removeFields) {
+            ((ObjectNode)node.get("testTypes").get(0)).remove(removeField);
+                System.out.println(removeField + " removed");
+            }
+
+        Response response = callPostTestResults(node);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPostTestResults(node);
+        }
+
+        return response;
+    }
+
+    public Response postTestResults(ObjectNode payload) {
+        Response response = callPostTestResults(payload);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPostTestResults(payload);
+        }
+        return response;
+    }
 }

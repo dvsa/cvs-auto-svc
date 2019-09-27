@@ -3,21 +3,22 @@ package steps;
 import clients.TestResultsClient;
 import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static util.DataFilter.getElementsToRemove;
 import static util.TestNumberUtils.computeNextTestNumber;
 import static util.TestNumberUtils.isTestNumberChecksumValid;
 import static util.TypeLoader.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestResultsSteps {
 
@@ -328,8 +329,15 @@ public class TestResultsSteps {
     @Step
     public void validatePostErrorData(String field, String errorMessage) {
         response.then().body("size()", is(1));
-        response.then().body("errors.size()", is(1));
+        response.then().body("errors.size()", greaterThanOrEqualTo(1));
         response.then().body("errors[0]", equalTo("\"" + field + "\" " + errorMessage));
+    }
+
+    @Step
+    public void validatePostErrorDataContains(String field, String errorMessage) {
+        response.then().body("size()", is(1));
+        response.then().body("errors.size()", greaterThanOrEqualTo(1));
+        response.then().content( "errors", hasItem("\"" + field + "\" " + errorMessage));
     }
 
     @Step
@@ -411,4 +419,108 @@ public class TestResultsSteps {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         assertThat(testNumber.equals(nextTestNumber)).isTrue();
     }
+
+    @Step
+    public void validateVehicleFieldValue(String key, String value) {
+        response.then().log().all();
+        validateVehicleFieldExists(key);
+        String returnedValue = response.jsonPath().getString("[0]." + key);
+        assertThat(returnedValue.equals(value)).isTrue();
+    }
+
+    @Step
+    public void validateVehicleFieldValue(String key, int value) {
+        response.then().log().all();
+        validateVehicleFieldExists(key);
+        String returnedValue = response.jsonPath().getString("[0]." + key);
+        assertThat(returnedValue.equals(value)).isTrue();
+    }
+
+    @Step
+    public void validateTestTypeFieldValue(int testNumber, String key, String value) {
+        response.then().log().all();
+        String returnedValue = response.jsonPath().getString("[0]." + key);
+        assertThat(returnedValue.equals(value)).isTrue();
+    }
+
+    @Step
+    public void validateVehicleFieldExists(String fieldName) {
+        response.then().log().all();
+        assertThat(response.then().body("[0]", hasKey(fieldName)));
+    }
+
+    @Step
+    public void validateTestFieldExists(String fieldName) {
+        response.then().log().all();
+        hasTests();
+        assertThat(response.then().body("[0].testTypes[0]", hasKey(fieldName)));
+    }
+
+    @Step
+    public void hasTests(){
+        assertThat(response.then().body("[0].testTypes", hasItems()));
+    }
+
+
+    @Step
+    public void postTestResultsTestTypesFieldsRemoved(TestResults testResults, String ...removeFields) {
+        response = testResultsClient.postTestResultsTestTypeFieldsRemoved(testResults, removeFields);
+    }
+
+    @Step
+    public void addAdditionalTestResultsFieldValue(ObjectNode payload, String fieldName, String fieldValue) {
+            payload.put(fieldName, fieldValue);
+    }
+
+    @Step
+    public void addAdditionalTestResultsFieldValue(ObjectNode payload, String fieldName, int fieldValue) {
+            payload.put(fieldName, fieldValue);
+    }
+
+    @Step
+    public void addAdditionalTestResultsTestTypesFields(ObjectNode payload, int testInArray, String field, String value) {
+        ((ObjectNode)payload.get("testTypes").get(testInArray)).put(field,value);
+    }
+
+    @Step
+    public void addAdditionalTestResultsTestTypesFields(ObjectNode payload, int testInArray, String field, int value) {
+        ((ObjectNode)payload.get("testTypes").get(testInArray)).put(field,value);
+    }
+
+    @Step
+    public void removeTestResultsFields(ObjectNode payload, String ...fields) {
+        payload.remove(Arrays.asList(fields));
+    }
+
+    @Step
+    public void removeTestResultsTestTypesFields(ObjectNode payload, int testInArray, String ...fields) {
+        ((ObjectNode)payload.get("testTypes").get(testInArray)).remove(Arrays.asList(fields));
+    }
+
+    @Step
+    public void postTestResultsPayload(ObjectNode payload) {
+        response = testResultsClient.postTestResults(payload);
+    }
+
+    @Step
+    public void changeTestResultsFieldValue(ObjectNode payload, String field, int valueAsInt) {
+        addAdditionalTestResultsFieldValue(payload, field, valueAsInt);
+    }
+
+    @Step
+    public void changeTestResultsFieldValue(ObjectNode payload, String field, String valueAsString) {
+        addAdditionalTestResultsFieldValue(payload, field, valueAsString);
+    }
+
+    @Step
+    public void changeTestResultsTestTypesFields(ObjectNode payload, int testInArray, String field, String value) {
+        addAdditionalTestResultsTestTypesFields(payload,testInArray,field,value);
+    }
+
+    @Step
+    public void changeTestResultsTestTypesFields(ObjectNode payload, int testInArray, String field, int value) {
+        addAdditionalTestResultsTestTypesFields(payload,testInArray,field,value);
+    }
+
+
 }

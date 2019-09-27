@@ -1,0 +1,69 @@
+{
+  "vin": "T12111111",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testerName": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testerStaffId": "15",
+  "testerEmailAddress": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
+  "testEndTimestamp": "2019-09-12T16:42:14.757Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "vehicleClass": {
+    "code": "t",
+    "description": "trailer"
+  },
+  "vehicleType": "trl",
+  "noOfAxles": 6,
+  "vehicleConfiguration": "articulated",
+  "preparerId": "bl5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "o3",
+  "countryOfRegistration": "a",
+  "testResultId": "2",
+  "testTypes": [
+    {
+      "testTypeName": "Paid roadworthiness retest",
+      "name": "Retest",
+      "testTypeId": "",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
+      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalNotesRecorded": "a note",
+      "defects": [
+        {
+          "imNumber": 6,
+          "imDescription": "Road Wheels and Hubs",
+          "additionalInformation": {
+            "location": {
+              "vertical": "upper",
+              "horizontal": null,
+              "lateral": "centre",
+              "longitudinal": null,
+              "rowNumber": 1,
+              "seatNumber": 2,
+              "axleNumber": null
+            },
+            "notes": "seatbelt missing"
+          },
+          "itemNumber": 2,
+          "itemDescription": "A wheel:",
+          "deficiencyRef": "6.2.a.ii",
+          "deficiencyId": "a",
+          "deficiencySubId": "ii",
+          "deficiencyCategory": "dangerous",
+          "deficiencyText": "with any visible elongation of a stud hole where secure fixing of a wheel is affected.",
+          "stdForProhibition": false,
+          "prs": false,
+          "prohibitionIssued": true
+        }
+      ],
+      "testResult": "fail",
+      "additionalCommentsForAbandon": null
+    }
+  ],
+  "trailerId": "C234567"
+}
