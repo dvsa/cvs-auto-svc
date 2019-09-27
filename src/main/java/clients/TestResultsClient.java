@@ -280,7 +280,6 @@ public class TestResultsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
                 .queryParam("status", status)
-//                .log().all()
                 .get("/test-results/{vin}");
 
 
@@ -354,7 +353,6 @@ public class TestResultsClient {
                 .queryParam("status", status)
                 .queryParam("fromDateTime", fromDateTime)
                 .queryParam("toDateTime", toDateTime)
-//                .log().all()
                 .get("/test-results/{vin}");
 
         return response;
