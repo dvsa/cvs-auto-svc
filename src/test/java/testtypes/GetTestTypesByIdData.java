@@ -836,8 +836,8 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById(TestTypes.RST2.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "rst2");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RST2.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RST2.getTestCode());
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'rst3' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 3)")
