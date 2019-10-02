@@ -59,4 +59,14 @@ public class TestStationSteps {
     public void validateData(String stringData) {
         response.then().body("", is(stringData));
     }
+
+    @Step
+    public void validateEveryRecordHasField(String field) {
+        response.then().body("$", everyItem(hasKey(field)));
+    }
+
+    @Step
+    public void validateEveryRecordHasFieldValue(String field, String value) {
+        response.then().body("$", everyItem(hasEntry(field,value)));
+    }
 }
