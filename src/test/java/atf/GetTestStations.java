@@ -32,6 +32,17 @@ public class GetTestStations {
         testStationSteps.getTestStationsWithData();
         testStationSteps.statusCodeShouldBe(200);
         testStationSteps.validateData(TestStationsData.buildTestStationData());
+
+    }
+
+    @Title("CVSB-7949 - AC1 - API Consumer retrieve test stations reference data - testStationStatus : active")
+    @Test
+    public void testStationReferenceDataStationStatus() {
+        testStationSteps.getTestStationsWithData();
+        testStationSteps.statusCodeShouldBe(200);
+        testStationSteps.validateData(TestStationsData.buildTestStationData());
+        testStationSteps.validateEveryRecordHasField("testStationStatus");
+        testStationSteps.validateEveryRecordHasFieldValue("testStationStatus", "active");
     }
 
 }
