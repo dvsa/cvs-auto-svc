@@ -4,10 +4,7 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
+import net.thucydides.core.annotations.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -34,6 +31,7 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2205 - AC4 API Consumer retrieve test types attributes ('testTypeClassification' 'defaultTestCode' and 'linkedTestCode' attributes) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeALlTestTypeFields() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -49,6 +47,7 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2397 - API Consumer retrieve test types attributes ('testTypeClassification' attribute) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeALlTestTypeClassification() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -64,6 +63,7 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2398 - API Consumer retrieve test types attributes ( ‘defaultTestCode’ attribute) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeTestTypeDefaultTestCode() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -79,13 +79,13 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2399 - API Consumer retrieve test types attributes ('linkedTestCode' attribute) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeTestTypeLinkedTestCode() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.LINKED_TEST_CODE))
                 .setVehicleType(VehicleType.PSV)
-                .setVehicleSize(VehicleSize.SMALL)
-                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+                .setVehicleSize(VehicleSize.SMALL);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -94,6 +94,7 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2400 - API Consumer retrieve test types attributes ('testTypeClassification' and 'defaultTestCode' attributes) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeTestTypeClassificationAndDefaultTestCode() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -109,6 +110,7 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2401 - API Consumer retrieve test types attributes ('testTypeClassification' and 'linkedTestCode' attributes) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeTestTypeClassificationAndLinkedTestCode() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -124,6 +126,7 @@ public class GetTestTypesByIdFields {
 
     @Title("CVSB-1073 / CVSB-2402 - API Consumer retrieve test types attributes ('defaultTestCode' and 'linkedTestCode' attributes) based on the testId")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeDefaultTestCodeAndLinkedTestCode() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
