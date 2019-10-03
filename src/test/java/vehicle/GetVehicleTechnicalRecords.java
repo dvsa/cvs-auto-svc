@@ -218,7 +218,7 @@ public class GetVehicleTechnicalRecords {
     public void testVehicleTechnicalRecordsProvisionalTrl() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("T72741234");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
     }
 
 }
