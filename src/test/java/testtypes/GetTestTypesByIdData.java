@@ -3093,7 +3093,7 @@ public class GetTestTypesByIdData {
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
 			    .setVehicleAxles(VehicleAxles.NULL);
 
-        testTypeSteps.getTestTypesById(TestTypes.BIF.getId(), testTypeQueryParam);
+        testTypeSteps.getTestTypesById(TestTypes.BIF_HGV.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BIF.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.BIF.getTestCode());
@@ -3274,4 +3274,141 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.QJT5.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QJT5.getTestCode());
     }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC2.1 API Consumer sends a valid string value for 'vehicleConfiguration' and additional filtering to return only one record")
+    @Test
+    public void validateTestTypeValidVehicleConfigurationAdditionalFiltering() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleSize(VehicleSize.LARGE)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.AAL.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAL.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC2.1 API Consumer sends a valid string value for 'vehicleConfiguration' and no other additional filtering")
+    @Test
+    public void validateTestTypeValidVehicleConfigurationNoAdditionalFiltering() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
+
+        testTypeSteps.getTestTypesById(TestTypes.ADL.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.ADL.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC2.1 API Consumer sends a random string value for 'vehicleConfiguration'")
+    @Test
+    public void validateTestTypeInvalidVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.INVALID)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.AAL.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC2.2 API Consumer sends a null value for 'vehicleConfiguration'")
+    @Test
+    public void validateTestTypeNullVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.QBV.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QBV.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC2.3 API Consumer does not send the 'vehicleConfiguration' parameter at all")
+    @Test
+    public void validateTestTypeNoVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.QBV.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QBV.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a PSV category or test type with 'forVehicleConfiguration' different than null - OK")
+    @Test
+    public void validatePSVTestTypeValidVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.AAS.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAS.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a TRL category or test type with 'forVehicleConfiguration' null - OK")
+    @Test
+    public void validateTRL1TestTypeValidVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById(TestTypes.P1T2.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P1T2.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a TRL category or test type with 'forVehicleConfiguration' null - OK")
+    @Test
+    public void validateTRL2TestTypeValidVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.ART.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.ART.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC5 API Consumer retrieves a category or test type with 'forVehicleConfiguration' different than null - NOT Found")
+    @Test
+    public void validateTestTypeValidVehicleConfigurationIncompatibleFilters() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.ADL.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+    }
+
+
 }
