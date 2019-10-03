@@ -25,8 +25,9 @@ public class TestTypeSteps {
     }
 
     @Step
-    public void getTestTypesWithData() {
+    public Response getTestTypesWithData() {
         response = testTypesClient.getTestTypesWithData();
+        return response;
     }
 
     @Step
