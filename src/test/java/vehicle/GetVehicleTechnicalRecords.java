@@ -205,4 +205,20 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].axles[1].brakes", "leverLength");
     }
 
+    @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (HGV)")
+    @Test
+    public void testVehicleTechnicalRecordsProvisionalHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301270123");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (TRL)")
+    @Test
+    public void testVehicleTechnicalRecordsProvisionalTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("T72741234");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
 }
