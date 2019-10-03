@@ -10,6 +10,7 @@ public enum TestTypes {
     AAT3("94", "aat3", TestTypeClassification.CERTIFICATE.getValue()),
     AAT4("94", "aat4", TestTypeClassification.CERTIFICATE.getValue()),
     AAT5("94", "aat5", TestTypeClassification.CERTIFICATE.getValue()),
+//    commented test types are not yet added in the test-types.json file
 //    TGV2("40", "tgv2", TestTypeClassification.CERTIFICATE.getValue()),
 //    TGV3("40", "tgv3", TestTypeClassification.CERTIFICATE.getValue()),
 //    TGV4("40", "tgv4", TestTypeClassification.CERTIFICATE.getValue()),
