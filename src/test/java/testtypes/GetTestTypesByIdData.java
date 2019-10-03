@@ -3321,9 +3321,9 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QBV.getTestCode());
     }
 
-    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a category or test type with 'forVehicleConfiguration' different than null - OK")
+    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a PSV category or test type with 'forVehicleConfiguration' different than null - OK")
     @Test
-    public void validateTestTypeValidVehicleConfiguration() {
+    public void validatePSVTestTypeValidVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
@@ -3335,6 +3335,35 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.AAS.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAS.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a TRL category or test type with 'forVehicleConfiguration' null - OK")
+    @Test
+    public void validateTRL1TestTypeValidVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById(TestTypes.P1T2.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P1T2.getTestCode());
+    }
+
+    @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a TRL category or test type with 'forVehicleConfiguration' null - OK")
+    @Test
+    public void validateTRL2TestTypeValidVehicleConfiguration() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.ART.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.ART.getTestCode());
     }
 
     @Title("CVSB-7392 / CVSB-8480 - AC5 API Consumer retrieves a category or test type with 'forVehicleConfiguration' different than null - NOT Found")
