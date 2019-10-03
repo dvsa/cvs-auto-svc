@@ -4,10 +4,7 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
+import net.thucydides.core.annotations.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -39,6 +36,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2403 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'small', forVehicleConfiguration 'rigid')")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeAnnualCertificatePsvSmallRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -54,6 +52,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2404 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'large', forVehicleConfiguration 'articulated')")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeAnnualCertificatePsvLargeArticulated() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -69,6 +68,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2405 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'large', forVehicleConfiguration 'rigid')")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeAnnualCertificatePsvLargeRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -84,13 +84,15 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2406 - API Consumer retrieves data for Test Type Classification 'Annual NO CERTIFICATE' (forVehicleType 'psv', forVehicleSize 'small', forVehicleConfiguration 'rigid')")
     @Test
+    @Issue("CVSB-8484")
     public void testTypeNoCertificatePsvSmallRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
                 .setVehicleType(VehicleType.PSV)
                 .setVehicleSize(VehicleSize.SMALL)
-                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleAxles(VehicleAxles.NULL);
 
         testTypeSteps.getTestTypesById(annualNoCertificatePsvSmallRigid.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -105,7 +107,8 @@ public class GetTestTypesByIdData {
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
                 .setVehicleType(VehicleType.PSV)
                 .setVehicleSize(VehicleSize.LARGE)
-                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleAxles(VehicleAxles.TWO);
 
         testTypeSteps.getTestTypesById(nonAnnualPsvLargeRigid.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1276,7 +1279,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.RIV3.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RIV3.getClassification());
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RIV2.getTestCode());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RIV3.getTestCode());
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'riv4' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 4)")
@@ -3265,6 +3268,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7392 / CVSB-8480 - AC2.1 API Consumer sends a valid string value for 'vehicleConfiguration' and no other additional filtering")
     @Test
+    @Issue("CVSB-8484")
     public void validateTestTypeValidVehicleConfigurationNoAdditionalFiltering() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -3354,6 +3358,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a TRL category or test type with 'forVehicleConfiguration' null - OK")
     @Test
+    @Issue("CVSB-8484")
     public void validateTRL2TestTypeValidVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
