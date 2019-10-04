@@ -255,7 +255,7 @@ public class TestResultsClient {
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log().all()
+//                .log().all()
                 .post("/test-results");
 
         return response;
@@ -265,7 +265,7 @@ public class TestResultsClient {
     public Response callGetTestResults(String vin) {
 
         Response response = given()
-                .log().all()
+//                .log().all()
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
@@ -280,7 +280,7 @@ public class TestResultsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
                 .queryParam("status", status)
-                .log().all()
+//                .log().all()
                 .get("/test-results/{vin}");
 
 
@@ -354,7 +354,7 @@ public class TestResultsClient {
                 .queryParam("status", status)
                 .queryParam("fromDateTime", fromDateTime)
                 .queryParam("toDateTime", toDateTime)
-                .log().all()
+//                .log().all()
                 .get("/test-results/{vin}");
 
         return response;

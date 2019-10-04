@@ -48,6 +48,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 {"dolly"},
                 {"rigid"},
                 {"articulated"},
+                {"full drawbar"}
 //                {"wrong", 400}
         });
     }
