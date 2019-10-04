@@ -140,16 +140,6 @@
                             <target>1.8</target>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>3.0.0-M3</version>
-                        <configuration>
-                            <!-- Parallel execution in the same JVM -->
-                            <parallel>methods</parallel>
-<!--                            <threadCount>6</threadCount>-->
-                            <forkCount>6</forkCount>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
