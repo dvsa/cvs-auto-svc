@@ -47,7 +47,8 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 {"four-in-line"},
                 {"dolly"},
                 {"rigid"},
-                {"articulated"}
+                {"articulated"},
+                {"full drawbar"}
 //                {"wrong", 400}
         });
     }
