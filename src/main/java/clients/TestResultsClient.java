@@ -352,6 +352,7 @@ public class TestResultsClient {
                 .queryParam("status", status)
                 .queryParam("fromDateTime", fromDateTime)
                 .queryParam("toDateTime", toDateTime)
+//                .log().all()
                 .get("/test-results/{vin}");
 
         return response;
