@@ -255,7 +255,6 @@ public class TestResultsClient {
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
-//                .log().all()
                 .post("/test-results");
 
         return response;
