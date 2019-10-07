@@ -5,6 +5,7 @@ import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.vehicles.*;
 import net.thucydides.core.annotations.Step;
+import org.jetbrains.annotations.NotNull;
 
 import static org.hamcrest.Matchers.*;
 
@@ -19,7 +20,7 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
+    public void getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
         this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
     }
 
