@@ -227,7 +227,6 @@ public class GetTestTypesByIdNeg {
 
     @Title("CVSB-1073 / CVSB-2026 - Query param 'vehicleConfiguration' invalid")
     @Test
-    @Issue("CVSB-8484")
     public void testTypeInvalidFieldVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
