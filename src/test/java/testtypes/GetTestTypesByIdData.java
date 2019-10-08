@@ -36,7 +36,6 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2403 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'small', forVehicleConfiguration 'rigid')")
     @Test
-    @Issue("CVSB-8484")
     public void testTypeAnnualCertificatePsvSmallRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -52,7 +51,6 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2404 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'large', forVehicleConfiguration 'articulated')")
     @Test
-    @Issue("CVSB-8484")
     public void testTypeAnnualCertificatePsvLargeArticulated() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -68,7 +66,6 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2405 - API Consumer retrieves data for Test Type Classification 'Annual With Certificate' (forVehicleType 'psv', forVehicleSize 'large', forVehicleConfiguration 'rigid')")
     @Test
-    @Issue("CVSB-8484")
     public void testTypeAnnualCertificatePsvLargeRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -84,7 +81,6 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-1073 / CVSB-2406 - API Consumer retrieves data for Test Type Classification 'Annual NO CERTIFICATE' (forVehicleType 'psv', forVehicleSize 'small', forVehicleConfiguration 'rigid')")
     @Test
-    @Issue("CVSB-8484")
     public void testTypeNoCertificatePsvSmallRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -3268,7 +3264,6 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7392 / CVSB-8480 - AC2.1 API Consumer sends a valid string value for 'vehicleConfiguration' and no other additional filtering")
     @Test
-    @Issue("CVSB-8484")
     public void validateTestTypeValidVehicleConfigurationNoAdditionalFiltering() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -3358,7 +3353,6 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7392 / CVSB-8480 - AC4 API Consumer retrieves a TRL category or test type with 'forVehicleConfiguration' null - OK")
     @Test
-    @Issue("CVSB-8484")
     public void validateTRL2TestTypeValidVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
