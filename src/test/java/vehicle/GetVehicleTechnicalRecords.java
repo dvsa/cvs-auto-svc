@@ -392,4 +392,22 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
     }
 
+    @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (TRL)")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvisionalTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("T72741999", VehicleTechnicalRecordStatus.PROVISIONAL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (HGV)")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvisionalHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("270556", VehicleTechnicalRecordStatus.PROVISIONAL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
 }
