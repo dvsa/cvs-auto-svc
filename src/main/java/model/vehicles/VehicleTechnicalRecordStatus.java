@@ -5,7 +5,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 public enum VehicleTechnicalRecordStatus {
 
     CURRENT("current"), ARCHIVED("archived"), PROVISIONAL("provisional"),
-    INVALID("invalid") {
+    PROVISIONAL_OVER_CURRENT("provisional_over_current"), INVALID("invalid")
+            {
         @Override
         public String getStatus() {
             return RandomStringUtils.randomAlphanumeric(20);

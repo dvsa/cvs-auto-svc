@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public enum VehicleConfiguration implements PropertyValued {
 
-    RIGID("rigid"), ARTICULATED("articulated"), EMPTY(""),
+    RIGID("rigid"), ARTICULATED("articulated"), EMPTY(""), NULL("null"),
     INVALID("invalid") {
         @Override
         public String getValue() {

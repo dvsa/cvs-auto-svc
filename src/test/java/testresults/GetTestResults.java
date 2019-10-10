@@ -10,7 +10,6 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -49,21 +48,17 @@ public class GetTestResults {
         testResultsSteps.validateMessage("Unauthorized");
     }
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2215 - API Consumer retrieve the Test results for the input Vin (DEFAULT)")
     @Test
     public void testResultsSubmittedReferenceData() {
-
         testResultsSteps.getTestResults(vehicleSubmittedData.getVin());
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (SUBMITTED)")
     @Test
     public void testResultsWithStatusSubmittedReferenceData() {
-
         testResultsSteps.getTestResults(vehicleSubmittedData.getVin(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
@@ -121,6 +116,45 @@ public class GetTestResults {
         testResultsSteps.getTestResults(RandomStringUtils.randomAlphanumeric(17), TestResultsStatus.INVALID);
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
+    }
+
+    @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (PSV)")
+    @Test
+    public void testResultsForVinPsv() {
+        testResultsSteps.getTestResults("1B7GG36N12S678410");
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.validateVehicleFieldValue("vin", "1B7GG36N12S678410");
+        testResultsSteps.validateVehicleFieldValue("vehicleType", "psv");
+        testResultsSteps.validateVehicleFieldExists("vrm");
+        testResultsSteps.validateVehicleFieldExists("numberOfSeats");
+        testResultsSteps.validateVehicleFieldExists("odometerReading");
+        testResultsSteps.validateVehicleFieldExists("odometerReadingUnits");
+        testResultsSteps.validateVehicleFieldExists("vehicleSize");
+        testResultsSteps.validateTestFieldExists("numberOfSeatbeltsFitted");
+        testResultsSteps.validateTestFieldExists("lastSeatbeltInstallationCheckDate");
+        testResultsSteps.validateTestFieldExists("seatbeltInstallationCheckDate");
+    }
+
+@Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
+    @Test
+
+    public void testResultsForVinHgv() {
+        testResultsSteps.getTestResults("P012301230123");
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.validateVehicleFieldValue("vin", "P012301230123");
+        testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
+        testResultsSteps.validateVehicleFieldExists("vrm");
+        testResultsSteps.validateVehicleFieldExists("odometerReading");
+        testResultsSteps.validateVehicleFieldExists("odometerReadingUnits");
+    }
+
+@Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (TRL)")
+    @Test
+    public void testResultsForVinTrl() {
+        testResultsSteps.getTestResults("T12111111");
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
+        testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
     }
 
 }

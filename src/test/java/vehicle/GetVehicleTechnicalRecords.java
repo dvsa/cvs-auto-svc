@@ -105,18 +105,20 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1265 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is archived")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVimAndStatusArchived() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleArchivedData.getVin(), VehicleTechnicalRecordStatus.ARCHIVED);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus("012461", VehicleTechnicalRecordStatus.ARCHIVED);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateData(vehicleArchivedData, VehicleTechnicalRecordStatus.ARCHIVED);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived");
     }
 
 
     @Title("CVSB-1057 / CVSB-1266 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is archived")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVimAndStatusArchived() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleArchivedData.getVin(), VehicleTechnicalRecordStatus.ARCHIVED);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("XMGDE02FS0H012461", VehicleTechnicalRecordStatus.ARCHIVED);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateData(vehicleArchivedData, VehicleTechnicalRecordStatus.ARCHIVED);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived");
     }
 
     @Title("CVSB-1057 / CVSB-1267 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - VRM when the statusCode is provisional")
@@ -192,6 +194,202 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
+    }
+
+    @Title("CVSB-7390 / CVSB-7933 - AC1 - API Consumer retrieve the Vehicle Technical Records")
+    @Test
+    public void testVehicleTechnicalRecordsHgvtDataMigration() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301000000");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].brakes","dtpNumber");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("C000001");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0].axles[1].brakes", "leverLength");
+    }
+
+    @Title("CVSB-7051 - TC - AC1.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has both 'current' and 'provisional' technical records - PSV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedCurrentProvisionalPsv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("YV31MEC18GA011911");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+
+    @Title("CVSB-7051 - TC - AC1.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has both 'current' and 'provisional' technical records HGV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedCurrentProvisionalHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301270556");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-7051 - TC - AC1.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has both 'current' and 'provisional' technical records TRL")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedCurrentProvisionalTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("T72741999");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) PSV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedCurrentPsv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("XMGDE02FS0H012345");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
+    @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) HGV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedCurrentHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301012938");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
+    @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) TRL")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedCurrentTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("T12765432");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
+    @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (PROVISIONAL) PSV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedProvisionalPsv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("YV31MEC18GA011944");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+
+    }
+
+    @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (PROVISIONAL) HGV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedProvisionalHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301270123");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+
+    }
+
+    @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (PROVISIONAL) TRL")
+    @Test
+    public void testVehicleTechnicalRecordsStatusNotProvidedProvisionalTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("T72741234");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-7051 - TC - AC2.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has both 'current' and 'provisional' technical records PSV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedCurrentProvisionalPsv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("YV31MEC18GA011911", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    //TODO HGV with BOTH Current and Provisional
+//    @Title("CVSB-7051 - TC - AC2.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has both 'current' and 'provisional' technical records HGV")
+//    @Test
+//    public void testVehicleTechnicalRecordsStatusProvidedCurrentProvisionalHgv() {
+//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("270123", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+//    }
+
+    //TODO TRL with BOTH Current and Provisional
+//    @Title("CVSB-7051 - TC - AC2.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has both 'current' and 'provisional' technical records TRL")
+//    @Test
+//    public void testVehicleTechnicalRecordsStatusProvidedCurrentProvisionalTrl() {
+//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("270123", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+//    }
+
+    @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) PSV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedCurrentPsv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("XMGDE02FS0H012345", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
+    @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) HGV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedCurrentHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("P012301012938", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
+    @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) TRL")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedCurrentTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("T12765432", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","current");
+    }
+
+    @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) PSV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedProvisionalPsv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("YV31MEC18GA011944", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) HGV")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedProvisionalHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("P012301270123", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) TRL")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvidedProvisionalTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("T72741234", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (TRL)")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvisionalTrl() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("T72741999", VehicleTechnicalRecordStatus.PROVISIONAL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (HGV)")
+    @Test
+    public void testVehicleTechnicalRecordsStatusProvisionalHgv() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("270556", VehicleTechnicalRecordStatus.PROVISIONAL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
     }
 
 }

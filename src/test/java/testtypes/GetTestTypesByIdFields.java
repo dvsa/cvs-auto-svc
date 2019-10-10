@@ -4,10 +4,7 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
+import net.thucydides.core.annotations.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -84,8 +81,7 @@ public class GetTestTypesByIdFields {
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.LINKED_TEST_CODE))
                 .setVehicleType(VehicleType.PSV)
-                .setVehicleSize(VehicleSize.SMALL)
-                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+                .setVehicleSize(VehicleSize.SMALL);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);

@@ -704,8 +704,8 @@ public class PostTestResultsNegMainLvlSubmitted {
     public void testResultsNullVehicleType() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "vehicleType", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("vehicleType", "must be one of [psv, hgv, trl]");
+        testResultsSteps.statusCodeShouldBe(502);
+        testResultsSteps.validateData("must be one of [psv, hgv, trl]");
     }
 
 

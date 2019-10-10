@@ -4,10 +4,7 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Steps;
-import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
+import net.thucydides.core.annotations.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -239,8 +236,8 @@ public class GetTestTypesByIdNeg {
                 .setVehicleConfiguration(VehicleConfiguration.INVALID);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleConfiguration\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleConfiguration.class) + "]");
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateData("No resources match the search criteria.");
     }
 
 
