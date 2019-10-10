@@ -139,9 +139,9 @@ public class GetTestResults {
     @Test
 
     public void testResultsForVinHgv() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012314");
+        testResultsSteps.getTestResults("P012301230123");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "XMGDE02FS0H012314");
+        testResultsSteps.validateVehicleFieldValue("vin", "P012301230123");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldExists("odometerReading");

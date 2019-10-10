@@ -173,10 +173,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.AAV4.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAV4.getTestCode());
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav4");
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aav5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5)")
@@ -191,10 +187,8 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById(TestTypes.AAV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aav5");
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.AAV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAV5.getTestCode());
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
@@ -211,10 +205,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.AAT1.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAT1.getTestCode());
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "aat1");
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat2' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 2)")
@@ -295,10 +285,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.FFV2.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.FFV2.getTestCode());
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv2");
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv3' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 3)")
@@ -315,10 +301,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.FFV3.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.FFV3.getTestCode());
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv3");
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv4' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 4)")
@@ -335,10 +317,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.FFV4.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.FFV4.getTestCode());
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv4");
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5)")
@@ -355,10 +333,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.FFV5.getClassification());
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.FFV5.getTestCode());
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", "Annual With Certificate");
-        testTypeSteps.valueForFieldInPathShouldBeNull("testTypeClassification");
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", "ffv5");
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'fft1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
