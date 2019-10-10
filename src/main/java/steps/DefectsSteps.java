@@ -22,8 +22,9 @@ public class DefectsSteps {
 
 
     @Step
-    public void callDefectsWithData() {
+    public Response callDefectsWithData() {
         response = defectsClient.getDefectsWithData();
+        return response;
     }
 
     @Step

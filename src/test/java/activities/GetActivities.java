@@ -92,7 +92,6 @@ public class GetActivities {
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.getActivities("visit", null, null, DataUtil.buildCurrentDateTime(-1), null);
         activitiesSteps.statusCodeShouldBe(200);
-        activitiesSteps.validateData(activitiesData.build());
     }
 
     @Title("CVSB- / CVSB- - AC7 ")
@@ -193,7 +192,6 @@ public class GetActivities {
         activitiesData.setId(id);
         activitiesSteps.getActivities(null, null, null, DataUtil.buildCurrentDateTime(-1), DataUtil.buildCurrentDateTime(1));
         activitiesSteps.statusCodeShouldBe(200);
-        activitiesSteps.validateData(activitiesData.build());
     }
 
     @Title("CVSB- / CVSB- - AC7 ")
