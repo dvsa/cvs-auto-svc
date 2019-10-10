@@ -3094,8 +3094,8 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById(TestTypes.BIF_HGV.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BIF.getClassification());
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.BIF.getTestCode());
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BIF_HGV.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.BIF_HGV.getTestCode());
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'qcv' (forVehicleType 'hgv', forVehicleConfiguration 'null')")
