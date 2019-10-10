@@ -24,7 +24,7 @@ public class VehicleTechnicalRecordsClient {
 
     public Response getAllVehicleTechnicalRecords(String searchIdentifier) {
 
-        Response response = callGetVehicleTechnicalRecords(searchIdentifier);
+        Response response = callGetAllVehicleTechnicalRecords(searchIdentifier);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
@@ -65,7 +65,8 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
-                .get("/vehicles/{searchIdentifier}/tech-records?status=all");
+                .queryParam("status", "all")
+                .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
