@@ -22,6 +22,19 @@ public class VehicleTechnicalRecordsClient {
 
     }
 
+    public Response getAllVehicleTechnicalRecords(String searchIdentifier) {
+
+        Response response = callGetVehicleTechnicalRecords(searchIdentifier);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetAllVehicleTechnicalRecords(searchIdentifier);
+        }
+
+        return response;
+
+    }
+
 
     public Response getVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
 
@@ -43,6 +56,16 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+    }
+
+    private Response callGetAllVehicleTechnicalRecords(String searchIdentifier) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .get("/vehicles/{searchIdentifier}/tech-records?status=all");
 
         return response;
     }

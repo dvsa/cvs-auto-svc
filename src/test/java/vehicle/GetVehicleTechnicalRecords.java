@@ -374,6 +374,8 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
     }
 
+
+
     @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (TRL)")
     @Test
     public void testVehicleTechnicalRecordsStatusProvisionalTrl() {
@@ -390,6 +392,14 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-1057 / CVSB-1157 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
+    @Test
+    public void testAllVehicleTechnicalRecordsSearchVim() {
+        vehicleTechnicalRecordsSteps.getAllVehicleTechnicalRecords("YV31MEC18GA011900");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
 
 }
