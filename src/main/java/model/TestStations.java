@@ -16,6 +16,13 @@ public class TestStations {
     private String testStationLongitude;
     private String testStationLatitude;
     private String testStationType;
+    private String testStationStatus;
+
+    public String getTestStationStatus() {
+        return testStationStatus;
+    }
+
+
     private List<String> testStationEmails;
 
     public String getTestStationId() {
@@ -124,6 +131,10 @@ public class TestStations {
     public TestStations setTestStationType(String testStationType) {
         this.testStationType = testStationType;
         return this;
+    }
+
+    public void setTestStationStatus(String testStationStatus) {
+        this.testStationStatus = testStationStatus;
     }
 
     public List<String> getTestStationEmails() {

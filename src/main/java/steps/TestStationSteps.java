@@ -25,7 +25,9 @@ public class TestStationSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().statusCode(statusCode);
+        response.then()
+                .log().all()
+                .statusCode(statusCode);
     }
 
     @Step
@@ -53,6 +55,7 @@ public class TestStationSteps {
         response.then().body("testStationLongitude", hasItem(equalTo(new Float(testStation.getTestStationLongitude()))));
         response.then().body("testStationLatitude", hasItem(equalTo(new Float(testStation.getTestStationLatitude()))));
         response.then().body("testStationType", hasItem(equalTo(testStation.getTestStationType())));
+        response.then().body("testStationStatus", hasItem(equalTo(testStation.getTestStationStatus())));
     }
 
     @Step

@@ -10,6 +10,9 @@ import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
 
 import java.io.File;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasKey;
@@ -61,23 +64,29 @@ public class ActivitiesSteps {
 
     @Step
     public void validateData(ActivitiesGet activities) {
-
+        int record = 0;
         for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
-            response.then().body("[" + i + "].size()", is(equalTo(Activities.class.getDeclaredFields().length + 3)));
+            System.out.println("i = " + i );
+            List<String> id = response.jsonPath().getList("id");
+            System.out.println("id is: " + id.get(i));
+            if(id.get(i).equals(activities.getId())){
+                System.out.println("id: " + id.get(i) + "activities id: " + activities.getId());
+                record = i;
+                break;
+            }
         }
-
-        response.then().body("activityType[0]", is(equalTo(activities.getActivityType())));
-        response.then().body("testStationName[0]", is(equalTo(activities.getTestStationName())));
-        response.then().body("testStationPNumber[0]", is(equalTo(activities.getTestStationPNumber())));
-        response.then().body("testStationEmail[0]", is(equalTo(activities.getTestStationEmail())));
-        response.then().body("testStationType[0]", is(equalTo(activities.getTestStationType())));
-        response.then().body("testerName[0]", is(equalTo(activities.getTesterName())));
-        response.then().body("testerStaffId[0]", is(equalTo(activities.getTesterStaffId())));
+        response.then().body("activityType[" + record + "]", is(equalTo(activities.getActivityType())));
+        response.then().body("testStationName[" + record + "]", is(equalTo(activities.getTestStationName())));
+        response.then().body("testStationPNumber[" + record + "]", is(equalTo(activities.getTestStationPNumber())));
+        response.then().body("testStationEmail[" + record + "]", is(equalTo(activities.getTestStationEmail())));
+        response.then().body("testStationType[" + record + "]", is(equalTo(activities.getTestStationType())));
+        response.then().body("testerName[" + record + "]", is(equalTo(activities.getTesterName())));
+        response.then().body("testerStaffId[" + record + "]", is(equalTo(activities.getTesterStaffId())));
         response.then().body("waitReason", hasItem(contains(activities.getWaitReason().toArray())));
-        response.then().body("notes[0]", is(equalTo(activities.getNotes())));
-        response.then().body("[0]", hasKey("id"));
-        response.then().body("[0]", hasKey("startTime"));
-        response.then().body("[0]", hasKey("endTime"));
+        response.then().body("notes[" + record + "]", is(equalTo(activities.getNotes())));
+        response.then().body("[" + record + "]", hasKey("id"));
+        response.then().body("[" + record + "]", hasKey("startTime"));
+        response.then().body("[" + record + "]", hasKey("endTime"));
     }
 
     @Step
