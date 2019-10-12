@@ -16,6 +16,7 @@ import util.BasePathFilter;
 import java.lang.reflect.Field;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.requestSpecification;
 import static util.WriterReader.saveUtils;
 
 public class TestResultsClient {
@@ -265,7 +266,6 @@ public class TestResultsClient {
     public Response callGetTestResults(String vin) {
 
         Response response = given()
-//                .log().all()
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
@@ -280,7 +280,7 @@ public class TestResultsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
                 .queryParam("status", status)
-//                .log().all()
+                .log().all()
                 .get("/test-results/{vin}");
 
 
