@@ -14,6 +14,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasKey;
 
@@ -59,7 +60,9 @@ public class ActivitiesSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().statusCode(statusCode);
+        response.then()
+                .log().all()
+                .statusCode(statusCode);
     }
 
     @Step
@@ -117,7 +120,8 @@ public class ActivitiesSteps {
 
     @Step
     public void validateNotExistingId(ActivitiesGet activities) {
-        response.then().body("id", not(hasItem(activities.getId())));
+        response.then().body("$", everyItem(hasKey("id")));
+        response.then().body("id", anyOf(not(hasItem(activities.getId()))));
     }
 
     @Step
@@ -127,7 +131,7 @@ public class ActivitiesSteps {
 
     @Step
     public void responseShouldContainParentId() {
-        response.then().body("$", hasKey("id"));
+        response.then().body("$", everyItem(hasKey("parentId")));
     }
 
     @Step
@@ -154,4 +158,18 @@ public class ActivitiesSteps {
         return response.jsonPath().get("id");
     }
 
+    @Step
+    public void responseShouldContainField(String field) {
+        assertThat(response.then().body("$", hasKey(field)));
+    }
+
+    @Step
+    public void responseElementsShouldContainField(String field) {
+        assertThat(response.then().body("$", everyItem(hasKey(field))));
+    }
+
+    @Step
+    public void responseShouldContainFieldValue(String field, String value) {
+        assertThat(response.then().body("$", anyOf(hasItem(hasEntry(field,value)))));
+    }
 }

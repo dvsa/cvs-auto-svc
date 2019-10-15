@@ -255,7 +255,6 @@ public class PostTestResultsAnniversaryDate {
 
 
     @Title("CVSB-197 / CVSB-3876 - VSA submits results for a test type which does NOT have test type classification 'Annual With Certificate'")
-
     @Test
     public void testResultsAbandonedWithTestTypeAnnualCertPrevRecWithExpiryDate() {
 

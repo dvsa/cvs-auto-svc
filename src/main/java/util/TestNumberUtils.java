@@ -108,7 +108,11 @@ public class TestNumberUtils {
     public static String computeNextTestNumber(String CVSID, String certLetter, String sequenceNumber) {
         if (!certLetter.equals("Z") && !sequenceNumber.equals("999")) {
             Integer seqNumber = Integer.valueOf(sequenceNumber) + 1;
-            return computeTestNumber(CVSID, certLetter, seqNumber.toString());
+            String seqNumbersAsString = seqNumber.toString();
+            if (seqNumbersAsString.length() < 3 ) {
+                seqNumbersAsString = String.format("%0" + (3 - seqNumbersAsString.length()) + "d%s", 0, seqNumbersAsString);
+            }
+            return computeTestNumber(CVSID, certLetter, seqNumbersAsString);
         } else if (!certLetter.equals("Z") && sequenceNumber.equals("999")) {
             String nextCertLetter = "";
             Alphabet[] a = Alphabet.values();

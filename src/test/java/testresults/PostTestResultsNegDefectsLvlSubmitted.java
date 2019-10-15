@@ -543,11 +543,11 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("prs", "must be a boolean");
     }
 
-    @Ignore
+    //TODO to be repaired - additionalInformation required
+    @Ignore("Logic is implemented in the frontend - not possible to submit without 'additionalInformation' ")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
     @Test
     public void testResultsAdditionalInformationMissing() {
-
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalInformation", ToTypeConvertor.MISSING, TestResultsLevel.DEFECTS);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalInformation", "is required");
