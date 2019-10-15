@@ -104,7 +104,7 @@ public class GetActivities {
         String parentId =  activitiesSteps.checkAndGetResponseId();
         activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setActivityType("wait").build());
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.getActivities("wait", null, null, "2018-02-13", "2018-02-13");
+        activitiesSteps.getActivities("wait", null, null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1), DataUtil.buildCurrentDateTime());
         activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.responseElementsShouldContainField("parentId");
         activitiesSteps.responseShouldContainFieldValue("activityType","wait");
