@@ -271,7 +271,7 @@ public class TestResultsClient {
                 .pathParam("vin", vin)
                 .log().all()
                 .get("/test-results/{vin}");
-        System.out.println("results: " + response.then().log().all());
+
         return response;
     }
 
