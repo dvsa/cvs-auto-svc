@@ -8,7 +8,6 @@
     <artifactId>cvs-auto-backend</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
     <properties>
         <junit.version>4.12</junit.version>
         <serenity.version>2.0.20</serenity.version>
@@ -137,16 +136,6 @@
                         <configuration>
                             <source>1.8</source>
                             <target>1.8</target>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>3.0.0-M3</version>
-                        <configuration>
-                            <!-- Parallel execution in the same JVM -->
-                            <parallel>methods</parallel>
-<!--                            <threadCount>6</threadCount>-->
-                            <forkCount>6</forkCount>
                         </configuration>
                     </plugin>
                 </plugins>

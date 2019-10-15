@@ -86,8 +86,8 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         validateSavedData();
     }
 
-
-    @Ignore
+    //TODO - possible problem with gateway
+    @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeId")
     @Test
     public void testResultsRandomTestTypeId() {

@@ -137,8 +137,6 @@ public class GetTestTypesByIdNeg {
 
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("ask BA / Backend developers")
     @Title("CVSB-1073 / CVSB-2420 - Query param 'vehicleSize' missing")
     @Test
     public void testTypeMissingRequiredFieldVehicleSize() {
@@ -146,7 +144,7 @@ public class GetTestTypesByIdNeg {
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
                 .setVehicleType(VehicleType.PSV)
-                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -168,8 +166,6 @@ public class GetTestTypesByIdNeg {
 
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("ask BA / Backend developers")
     @Title("CVSB-1073 / CVSB-2422 - Query param 'vehicleConfiguration' missing")
     @Test
     public void testTypeMissingRequiredFieldVehicleConfiguration() {
@@ -180,12 +176,10 @@ public class GetTestTypesByIdNeg {
                 .setVehicleSize(VehicleSize.SMALL);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleConfiguration\\\" is required");
+        testTypeSteps.statusCodeShouldBe(200);
+
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("ask BA / Backend developers")
     @Title("CVSB-1073 / CVSB-2423 - Query param 'vehicleConfiguration' empty")
     @Test
     public void testTypeEmptyRequiredFieldVehicleConfiguration() {
@@ -198,7 +192,7 @@ public class GetTestTypesByIdNeg {
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleConfiguration\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleConfiguration.class) + "]");
+        testTypeSteps.validateData("Query parameter \\\"vehicleConfiguration\\\" is not allowed to be empty");
     }
 
     @Title("CVSB-1073 / CVSB-2024 - Query param 'vehicleType' invalid")

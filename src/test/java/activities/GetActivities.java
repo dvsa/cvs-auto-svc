@@ -3,6 +3,7 @@ package activities;
 
 import data.ActivitiesData;
 import model.activities.ActivitiesGet;
+import model.activities.ActivitiesPost;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -30,6 +31,8 @@ public class GetActivities {
 
     @Steps
     ActivitiesSteps activitiesSteps;
+
+    ActivitiesPost.Builder activitiesPost = ActivitiesData.buildActivitiesParentIdData();
 
     ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
@@ -94,20 +97,19 @@ public class GetActivities {
         activitiesSteps.statusCodeShouldBe(200);
     }
 
-    //TODO please investigate
-    @Ignore("parentId = null not allowed - possible problem")
     @Title("CVSB- / CVSB- - AC7 ")
     @Test
     public void postActivitiesActivityTypeWait() {
-        activitiesSteps.postActivities(activitiesData.setActivityType("wait").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
+        String parentId =  activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setActivityType("wait").build());
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.getActivities("wait", null, null, DataUtil.buildCurrentDateTime(-1), null);
+        activitiesSteps.getActivities("wait", null, null, "2018-02-13", "2018-02-13");
         activitiesSteps.statusCodeShouldBe(200);
-        activitiesSteps.validateData(activitiesData.build());
+        activitiesSteps.responseElementsShouldContainField("parentId");
+        activitiesSteps.responseShouldContainFieldValue("activityType","wait");
     }
 
-    //TODO please investigate
-    @Ignore("activity not found after POST")
     @Title("CVSB- / CVSB- - AC7 ")
     @Test
     public void postActivitiesActivityTypeVisitNotVisibleForGetWait() {
@@ -115,21 +117,22 @@ public class GetActivities {
         activitiesSteps.statusCodeShouldBe(201);
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesData.setId(id);
-        activitiesSteps.getActivities("wait", null, null, DataUtil.buildCurrentDateTime(-1), null);
+        activitiesSteps.getActivities("wait", null, null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1), DataUtil.buildCurrentDateTime());
         activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.validateNotExistingId(activitiesData.build());
     }
 
-    //TODO please investigate
-    @Ignore("parentId required - possible problem")
     @Title("CVSB- / CVSB- - AC7 ")
     @Test
     public void postActivitiesActivityTypeWaitNotVisibleForGetVisit() {
-        activitiesSteps.postActivities(activitiesData.setActivityType("wait").build());
+        activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
+        String parentId =  activitiesSteps.checkAndGetResponseId();
+        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setActivityType("wait").build());
         activitiesSteps.statusCodeShouldBe(201);
         String id = activitiesSteps.checkAndGetResponseId();
+        System.out.println("id is : " + id);
         activitiesData.setId(id);
-        activitiesSteps.getActivities("visit", null, null, DataUtil.buildCurrentDateTime(-1), null);
+        activitiesSteps.getActivities("visit", null, null, DataUtil.buildCurrentDateTime(-1), DataUtil.buildCurrentDateTime());
         activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.validateNotExistingId(activitiesData.build());
     }

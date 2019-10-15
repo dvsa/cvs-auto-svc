@@ -78,7 +78,9 @@ public class TestTypesClient {
         }
 
 
-        Response response = responseSpec.get("/test-types/{id}");
+        Response response = responseSpec
+                .log().all()
+                .get("/test-types/{id}");
 
         return response;
 

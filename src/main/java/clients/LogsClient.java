@@ -74,6 +74,15 @@ public class LogsClient {
         return response;
     }
 
+    private Response callPutLogs(Filter filter, Object object) {
+
+        Response response = given().filters(filter)
+                .contentType(ContentType.JSON)
+                .body(object)
+                .log().all()
+                .put("/logs");
+        return response;
+    }
 
     private Response postLogs(Filter filter, Object logs) {
         Response response = callPostLogs(filter, logs);
@@ -96,7 +105,7 @@ public class LogsClient {
 
 
     private Response putLogs(Filter filter, Object logs) {
-        Response response = callPostLogs(filter, logs);
+        Response response = callPutLogs(filter, logs);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();

@@ -34,7 +34,6 @@ public class GetTestResultsBetweenDate {
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2434 - Between Date data found and status default")
     @Test
     public void testResultsBetweenDateExisting() {
@@ -82,7 +81,6 @@ public class GetTestResultsBetweenDate {
     }
 
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2438 - Between Date data found and status submitted")
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {
