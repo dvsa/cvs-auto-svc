@@ -248,7 +248,7 @@ public class PostTestNumber {
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.nextTestNumber();
+        String nextTestNumber = testResultsSteps.nextTestNumber();
 
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
@@ -260,6 +260,6 @@ public class PostTestNumber {
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.checkNextTestNumberIsValid();
+        testResultsSteps.checkNextTestNumberIsValid(nextTestNumber);
     }
 }

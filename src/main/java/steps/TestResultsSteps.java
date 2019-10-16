@@ -474,13 +474,14 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void nextTestNumber() {
+    public String nextTestNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         nextTestNumber = computeNextTestNumber(testNumber.substring(0,3),testNumber.substring(3,4),testNumber.substring(4,7));
+        return nextTestNumber;
     }
 
     @Step
-    public void checkNextTestNumberIsValid(){
+    public void checkNextTestNumberIsValid(String nextTestNumber){
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         assertThat(testNumber.equals(nextTestNumber)).isTrue();
     }
