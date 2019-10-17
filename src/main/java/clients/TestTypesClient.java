@@ -90,6 +90,7 @@ public class TestTypesClient {
     private Response callGetTestTypes(Filter filter) {
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
+                .log().all()
                 .get("/test-types");
 
         return response;
