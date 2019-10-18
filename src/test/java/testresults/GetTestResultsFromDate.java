@@ -69,7 +69,6 @@ public class GetTestResultsFromDate {
         testResultsSteps.validateData("Bad request");
     }
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2449 - From Date data found and status submitted")
     @Test
     public void testResultsSubmittedFromDateExistingWithStatusSubmitted() {

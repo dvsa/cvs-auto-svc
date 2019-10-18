@@ -15,6 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static util.DataUtil.generateRandomExcludingValues;
 
 
@@ -226,12 +229,11 @@ public class PostTestResultsNegDefectsLvlCancelled {
         testResultsSteps.validatePostErrorData("deficiencySubId", "must be a string");
     }
 
-    @Ignore
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - deficiencySubId random")
     @Test
     public void testResultsRandomAlphabeticStringDeficiencySubId() {
 
-        String propertyValue = RandomStringUtils.randomAlphabetic(2).toLowerCase();
+        String propertyValue = generateRandomExcludingValues(2,"m","d","c","l","x","v","i").toLowerCase();
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "deficiencySubId", propertyValue, ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
         testResultsSteps.statusCodeShouldBe(400);
@@ -546,7 +548,8 @@ public class PostTestResultsNegDefectsLvlCancelled {
         testResultsSteps.validatePostErrorData("prs", "must be a boolean");
     }
 
-    @Ignore
+    //TODO to be repaired - additionalInformation required
+    @Ignore ("error message is only available for submitted")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
     @Test
     public void testResultsAdditionalInformationMissing() {

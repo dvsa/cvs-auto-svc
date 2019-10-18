@@ -105,11 +105,15 @@ public class TestNumberUtils {
         return CVSID + certLetter + sequenceNumber + lastTwoDigits;
     }
 
+    private static String zeroPadding(String number){
+        return (number.length() < 3 )?String.format("%0" + (3 - number.length()) + "d%s", 0, number):number;
+    }
+
     public static String computeNextTestNumber(String CVSID, String certLetter, String sequenceNumber) {
-        if (!certLetter.equals("Z") && !sequenceNumber.equals("999")) {
-            Integer seqNumber = Integer.valueOf(sequenceNumber) + 1;
-            return computeTestNumber(CVSID, certLetter, seqNumber.toString());
-        } else if (!certLetter.equals("Z") && sequenceNumber.equals("999")) {
+        if (certLetter.equals("Z") && sequenceNumber.equals("999")) {
+            return computeTestNumber(CVSID, "A", "001");
+        }
+        else if (!certLetter.equals("Z") && sequenceNumber.equals("999")) {
             String nextCertLetter = "";
             Alphabet[] a = Alphabet.values();
             for (int i = 0; i < a.length; i++) {
@@ -118,8 +122,12 @@ public class TestNumberUtils {
                 }
             }
             return computeTestNumber(CVSID, nextCertLetter, "001");
-        } else if (certLetter.equals("Z") && sequenceNumber.equals("999")) {
-            return computeTestNumber(CVSID, "A", "001");
-        } else return null;
+        }
+        else {
+            int seqNumber = Integer.parseInt(sequenceNumber) + 1;
+            String seqNumbersAsString = zeroPadding(Integer.toString(seqNumber));
+            return computeTestNumber(CVSID, certLetter, seqNumbersAsString);
+        }
     }
+
 }

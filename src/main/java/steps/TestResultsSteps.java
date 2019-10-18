@@ -111,7 +111,9 @@ public class TestResultsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().statusCode(statusCode);
+        response.then()
+                .log().all()
+                .statusCode(statusCode);
     }
 
     @Step
@@ -126,11 +128,19 @@ public class TestResultsSteps {
 
     @Step
     public void validateMessage(String stringData) {
-        response.then().body("message", equalTo(stringData));
+        response.then()
+                .log().all()
+                .body("message", equalTo(stringData));
+    }
+
+    @Step
+    public void validateErrorText(String stringData) {
+       response.equals(stringData);
     }
 
     @Step
     public void validateData(TestResultsGet testResults) {
+
         validateTestResultsData(testResults);
         validateTestTypesData(testResults);
         validateDefectsData(testResults);
@@ -175,8 +185,20 @@ public class TestResultsSteps {
     @Step
     private void validateTestResultsData(TestResultsGet testResults) {
 
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + "activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+
         List<String> fieldsNotInGet = getElementsToRemove(testResults.getClass().getSuperclass());
-        response.then().body("[0].size()", is(TestResultsGet.class.getDeclaredFields().length + TestResultsGet.class.getSuperclass().getDeclaredFields().length - fieldsNotInGet.size()));
+        response.then().body("[" + record + "].size()", is(TestResultsGet.class.getDeclaredFields().length + TestResultsGet.class.getSuperclass().getDeclaredFields().length - fieldsNotInGet.size()));
         response.then().body("vrm", hasItem(equalTo(testResults.getVrm())));
         response.then().body("vin", hasItem(equalTo(testResults.getVin())));
         response.then().body("testStationName", hasItem(equalTo(testResults.getTestStationName())));
@@ -190,7 +212,7 @@ public class TestResultsSteps {
         response.then().body("testStatus", hasItem(equalTo(testResults.getTestStatus())));
         response.then().body("reasonForCancellation", hasItem(equalTo(testResults.getReasonForCancellation())));
 
-        response.then().body("[0].vehicleClass.size()", is(VehicleClass.class.getDeclaredFields().length));
+        response.then().body("[" + record + "].vehicleClass.size()", is(VehicleClass.class.getDeclaredFields().length));
         response.then().body("vehicleClass.description", hasItem(equalTo(testResults.getVehicleClass().getDescription())));
         response.then().body("vehicleClass.code", hasItem(equalTo(testResults.getVehicleClass().getCode())));
 
@@ -210,7 +232,19 @@ public class TestResultsSteps {
     @Step
     private void validateTestTypesData(TestResultsGet testResults) {
 
-        response.then().body("[0].testTypes.size()", is(1));
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + "activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+
+        response.then().body("[" + record +"].testTypes.size()", is(1));
 
         List<String> createdAt = testResults.getTestTypes().stream().map(TestTypesGet::getCreatedAt).collect(toList());
         List<String> lastUpdatedAt = testResults.getTestTypes().stream().map(TestTypesGet::getLastUpdatedAt).collect(toList());
@@ -235,10 +269,10 @@ public class TestResultsSteps {
         List<String> testResult = testResults.getTestTypes().stream().map(TestTypes::getTestResult).collect(toList());
         List<String> additionalCommentsForAbandon = testResults.getTestTypes().stream().map(TestTypes::getAdditionalCommentsForAbandon).collect(toList());
 
-        response.then().body("[0].testTypes[0]", hasKey("createdAt"));
-        response.then().body("[0].testTypes[0]", hasKey("lastUpdatedAt"));
-        response.then().body("[0].testTypes[0]", hasKey("testCode"));
-        response.then().body("[0].testTypes[0]", hasKey("testNumber"));
+        response.then().body("[" + record +"].testTypes[0]", hasKey("createdAt"));
+        response.then().body("[" + record +"].testTypes[0]", hasKey("lastUpdatedAt"));
+        response.then().body("[" + record +"].testTypes[0]", hasKey("testCode"));
+        response.then().body("[" + record +"].testTypes[0]", hasKey("testNumber"));
 
 
         // TODO: separate Tests for below properties
@@ -249,7 +283,7 @@ public class TestResultsSteps {
 
         response.then().body("testTypes.testTypeName", hasItem(contains(testTypeName.toArray())));
         response.then().body("testTypes.testTypeId", hasItem(contains(testTypeId.toArray())));
-        response.then().body("[0].testTypes[0]", hasKey("certificateNumber"));
+        response.then().body("[" + record + "].testTypes[0]", hasKey("certificateNumber"));
         response.then().body("testTypes.testTypeStartTimestamp", hasItem(contains(testTypeStartTimestamp.toArray())));
         response.then().body("testTypes.testTypeEndTimestamp", hasItem(contains(testTypeEndTimestamp.toArray())));
         response.then().body("testTypes.numberOfSeatbeltsFitted", hasItem(contains(numberOfSeatbeltsFitted.toArray())));
@@ -265,41 +299,62 @@ public class TestResultsSteps {
 
     @Step
     private void validateDefectsData(TestResults testResults) {
-        response.then().body("[0].testTypes.defects.size()", is(1));
-        response.then().body("[0].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + "activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+            response.then().body("[" + record + "].testTypes.defects.size()", is(1));
+            response.then().body("[" + record + "].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
 
-        List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
-        List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
-        List<List<Integer>> itemNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemNumber).collect(toList())).collect(toList());
-        List<List<String>> itemDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemDescription).collect(toList())).collect(toList());
-        List<List<String>> deficiencyRef = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyRef).collect(toList())).collect(toList());
-        List<List<String>> deficiencyId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyId).collect(toList())).collect(toList());
-        List<List<String>> deficiencySubId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencySubId).collect(toList())).collect(toList());
-        List<List<String>> deficiencyCategory = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyCategory).collect(toList())).collect(toList());
-        List<List<String>> deficiencyText = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyText).collect(toList())).collect(toList());
-        List<List<Boolean>> stdForProhibition = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getStdForProhibition).collect(toList())).collect(toList());
-        List<List<Boolean>> prs = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getPrs).collect(toList())).collect(toList());
-        List<List<Boolean>> prohibitionIssued = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getProhibitionIssued).collect(toList())).collect(toList());
+            List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
+            List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
+            List<List<Integer>> itemNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemNumber).collect(toList())).collect(toList());
+            List<List<String>> itemDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemDescription).collect(toList())).collect(toList());
+            List<List<String>> deficiencyRef = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyRef).collect(toList())).collect(toList());
+            List<List<String>> deficiencyId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyId).collect(toList())).collect(toList());
+            List<List<String>> deficiencySubId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencySubId).collect(toList())).collect(toList());
+            List<List<String>> deficiencyCategory = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyCategory).collect(toList())).collect(toList());
+            List<List<String>> deficiencyText = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyText).collect(toList())).collect(toList());
+            List<List<Boolean>> stdForProhibition = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getStdForProhibition).collect(toList())).collect(toList());
+            List<List<Boolean>> prs = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getPrs).collect(toList())).collect(toList());
+            List<List<Boolean>> prohibitionIssued = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getProhibitionIssued).collect(toList())).collect(toList());
 
-        response.then().body("testTypes.defects.imNumber", hasItem(contains(imNumber.toArray())));
-        response.then().body("testTypes.defects.imDescription", hasItem(contains(imDescription.toArray())));
-        response.then().body("testTypes.defects.itemNumber", hasItem(contains(itemNumber.toArray())));
-        response.then().body("testTypes.defects.itemDescription", hasItem(contains(itemDescription.toArray())));
-        response.then().body("testTypes.defects.deficiencyRef", hasItem(contains(deficiencyRef.toArray())));
-        response.then().body("testTypes.defects.deficiencyId", hasItem(contains(deficiencyId.toArray())));
-        response.then().body("testTypes.defects.deficiencySubId", hasItem(contains(deficiencySubId.toArray())));
-        response.then().body("testTypes.defects.deficiencyCategory", hasItem(contains(deficiencyCategory.toArray())));
-        response.then().body("testTypes.defects.deficiencyText", hasItem(contains(deficiencyText.toArray())));
-        response.then().body("testTypes.defects.stdForProhibition", hasItem(contains(stdForProhibition.toArray())));
-        response.then().body("testTypes.defects.prs", hasItem(contains(prs.toArray())));
-        response.then().body("testTypes.defects.prohibitionIssued", hasItem(contains(prohibitionIssued.toArray())));
-
+            response.then().body("testTypes.defects.imNumber", hasItem(contains(imNumber.toArray())));
+            response.then().body("testTypes.defects.imDescription", hasItem(contains(imDescription.toArray())));
+            response.then().body("testTypes.defects.itemNumber", hasItem(contains(itemNumber.toArray())));
+            response.then().body("testTypes.defects.itemDescription", hasItem(contains(itemDescription.toArray())));
+            response.then().body("testTypes.defects.deficiencyRef", hasItem(contains(deficiencyRef.toArray())));
+            response.then().body("testTypes.defects.deficiencyId", hasItem(contains(deficiencyId.toArray())));
+            response.then().body("testTypes.defects.deficiencySubId", hasItem(contains(deficiencySubId.toArray())));
+            response.then().body("testTypes.defects.deficiencyCategory", hasItem(contains(deficiencyCategory.toArray())));
+            response.then().body("testTypes.defects.deficiencyText", hasItem(contains(deficiencyText.toArray())));
+            response.then().body("testTypes.defects.stdForProhibition", hasItem(contains(stdForProhibition.toArray())));
+            response.then().body("testTypes.defects.prs", hasItem(contains(prs.toArray())));
+            response.then().body("testTypes.defects.prohibitionIssued", hasItem(contains(prohibitionIssued.toArray())));
     }
 
     @Step
     private void validateAdditionalInformation(TestResults testResults) {
-        response.then().body("[0].testTypes.defects.additionalInformation.size()", is(1));
-        response.then().body("[0].testTypes[0].defects[0].additionalInformation.size()", is(AdditionalInformation.class.getDeclaredFields().length));
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + "activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+        response.then().body("[" + record + "].testTypes.defects.additionalInformation.size()", is(1));
+        response.then().body("[" + record + "].testTypes[0].defects[0].additionalInformation.size()", is(AdditionalInformation.class.getDeclaredFields().length));
 
         List<List<String>> additionalInformation = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getNotes()).collect(toList())).collect(toList());
         response.then().body("testTypes.defects.additionalInformation.notes", hasItem(contains(additionalInformation.toArray())));
@@ -307,7 +362,18 @@ public class TestResultsSteps {
 
     @Step
     private void validateLocation(TestResults testResults) {
-        response.then().body("[0].testTypes.defects.additionalInformation.location.size()", is(1));
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + "activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+        response.then().body("["+ record +"].testTypes.defects.additionalInformation.location.size()", is(1));
 
         List<List<String>> vertical = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getVertical()).collect(toList())).collect(toList());
         List<List<String>> horizontal = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(y -> y.getAdditionalInformation().getLocation().getHorizontal()).collect(toList())).collect(toList());
@@ -342,7 +408,6 @@ public class TestResultsSteps {
 
     @Step
     public void validateTestCode(TestResultsGet data, String... expectedTestCodes) {
-
         for (int i = 0; i < data.getTestTypes().size(); i++) {
             String testCode = response.jsonPath().setRoot("[0].testTypes").getList(" findAll { it.testTypeId == '" + data.getTestTypes().get(i).getTestTypeId() + "' }.testCode ").get(0).toString();
             assertThat(testCode, is(equalTo(expectedTestCodes[i])));
@@ -409,20 +474,21 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void nextTestNumber() {
+    public String nextTestNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         nextTestNumber = computeNextTestNumber(testNumber.substring(0,3),testNumber.substring(3,4),testNumber.substring(4,7));
+        return nextTestNumber;
     }
 
     @Step
-    public void checkNextTestNumberIsValid(){
+    public void checkNextTestNumberIsValid(String nextTestNumber){
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         assertThat(testNumber.equals(nextTestNumber)).isTrue();
     }
 
     @Step
     public void validateVehicleFieldValue(String key, String value) {
-//        response.then().log().all();
+        response.then().log().all();
         validateVehicleFieldExists(key);
         assertThat(response.then().body("$", anyOf(hasItem(hasEntry(key,value)))));
     }

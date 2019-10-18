@@ -13,6 +13,7 @@ import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.annotation.DependsOn;
 import steps.TestResultsSteps;
 
 import java.util.Arrays;
@@ -62,6 +63,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (TRL) - submitted")
     @Test
+
     public void testTestResultsPostVehicleConfigurationSubmittedTrl() {
 
         vehicleSubmittedData

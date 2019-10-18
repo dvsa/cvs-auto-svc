@@ -33,7 +33,6 @@ public class GetTestResultsToDate {
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2455 - To Date data found and status default")
     @Test
     public void testResultsSubmittedToDateExisting() {
@@ -70,7 +69,6 @@ public class GetTestResultsToDate {
         testResultsSteps.validateData("Bad request");
     }
 
-    @Ignore
     @Title("CVSB-416 - CVSB-949 / CVSB-2458 - To Date data found and status submitted")
     @Test
     public void testResultsSubmittedToDateExistingWithStatusSubmitted() {

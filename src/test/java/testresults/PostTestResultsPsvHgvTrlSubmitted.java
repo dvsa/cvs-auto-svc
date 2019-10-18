@@ -290,8 +290,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldExists("vrm");
-        testResultsSteps.validateVehicleFieldValue("numberOfSeats", "45");
-        testResultsSteps.validateVehicleFieldValue("odometerReading", "350000");
+        testResultsSteps.validateVehicleFieldValue("numberOfSeats", 45);
+        testResultsSteps.validateVehicleFieldValue("odometerReading", 350000);
         testResultsSteps.validateVehicleFieldValue("odometerReadingUnits", "kilometres");
         testResultsSteps.validateVehicleFieldValue("vehicleSize", "small");
         testResultsSteps.validateTestFieldExists("lastSeatbeltInstallationCheckDate");
@@ -321,7 +321,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         vehicleSubmittedData.build().getTestTypes().get(0).setName("First test");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("First test");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId("41");
+        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId("95");
         vehicleSubmittedData.build().getTestTypes().get(0).setCertificateNumber(null);
         vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
         vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
@@ -370,7 +370,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
-        testResultsSteps.validateVehicleFieldValue("odometerReading", "350000");
+        testResultsSteps.validateVehicleFieldValue("odometerReading", 350000);
         testResultsSteps.validateVehicleFieldValue("odometerReadingUnits", "kilometres");
     }
 
