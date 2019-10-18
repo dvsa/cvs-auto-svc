@@ -419,7 +419,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
     @Test
     public void testAllVehicleTechnicalRecordsSearchVin() {
-        vehicleTechnicalRecordsSteps.getAllVehicleTechnicalRecords("YV31MEC18GA011900");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("YV31MEC18GA011900", VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", VehicleTechnicalRecordStatus.CURRENT.getStatus());
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", VehicleTechnicalRecordStatus.ARCHIVED.getStatus());
@@ -429,7 +429,7 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
     @Test
     public void testAllVehicleTechnicalRecordsSearchVrm() {
-        vehicleTechnicalRecordsSteps.getAllVehicleTechnicalRecords("C47WLL");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("C47WLL", VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", VehicleTechnicalRecordStatus.CURRENT.getStatus());
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", VehicleTechnicalRecordStatus.ARCHIVED.getStatus());
