@@ -415,4 +415,25 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
     }
 
+    @WithTag("Vtm")
+    @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
+    @Test
+    public void testAllVehicleTechnicalRecordsSearchVin() {
+        vehicleTechnicalRecordsSteps.getAllVehicleTechnicalRecords("YV31MEC18GA011900");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", VehicleTechnicalRecordStatus.CURRENT.getStatus());
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", VehicleTechnicalRecordStatus.ARCHIVED.getStatus());
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 2);
+    }
+
+    @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
+    @Test
+    public void testAllVehicleTechnicalRecordsSearchVrm() {
+        vehicleTechnicalRecordsSteps.getAllVehicleTechnicalRecords("C47WLL");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", VehicleTechnicalRecordStatus.CURRENT.getStatus());
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", VehicleTechnicalRecordStatus.ARCHIVED.getStatus());
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
+    }
+
 }
