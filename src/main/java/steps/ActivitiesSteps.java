@@ -9,9 +9,6 @@ import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
 
-import java.io.File;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,7 +1,5 @@
 package testresults;
 
-import clients.util.ToTypeConvertor;
-import clients.util.testresult.TestResultsLevel;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -9,8 +7,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -20,15 +16,6 @@ import util.DataUtil;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-
-@WithTags(
-        {
-                @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsPozMainLvlCancelled {

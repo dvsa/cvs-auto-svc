@@ -3,22 +3,12 @@ package atf;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestStationSteps;
 
 
-@WithTags(
-        {
-                @WithTag(type = "TestStations", name = "All"),
-                @WithTag(type = "TestStations", name = "Negative"),
-                @WithTag(type = "Service", name = "Two"),
-
-        }
-)
 @RunWith(SerenityRunner.class)
 public class GetTestStationsNoData {
 

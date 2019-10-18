@@ -2,7 +2,7 @@ package data;
 
 import data.config.BaseData;
 import data.config.DataMapper;
-import model.vehicles.*;
+import model.vehicles.Vehicle;
 
 public class VehicleTechRecordsData {
 

@@ -9,7 +9,10 @@ import model.testtypeid.TestTypeById;
 import model.vehicles.Vehicle;
 import model.vehicles.Vrms;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -215,7 +218,7 @@ public class DataMapper {
     }
 
 
-    private static String readFromInputStream(InputStream inputStream)
+    public static String readFromInputStream(InputStream inputStream)
             throws IOException {
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader br

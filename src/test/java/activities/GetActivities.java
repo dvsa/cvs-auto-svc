@@ -7,8 +7,6 @@ import model.activities.ActivitiesPost;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,14 +14,6 @@ import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.DataUtil;
 
-@WithTags(
-        {
-                @WithTag(type = "GetActivities", name = "All"),
-                @WithTag(type = "GetActivities", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 //@Ignore("IN progress continue when bug fix is done")
 @RunWith(SerenityRunner.class)

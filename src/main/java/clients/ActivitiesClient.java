@@ -13,7 +13,6 @@ import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import util.BasePathFilter;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
 import static io.restassured.RestAssured.given;

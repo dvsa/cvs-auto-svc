@@ -8,8 +8,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,14 +19,6 @@ import java.util.Collection;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTags(
-        {
-                @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsApiSpecsVehicleConfigurationTrl {

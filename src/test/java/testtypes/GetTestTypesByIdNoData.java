@@ -6,8 +6,6 @@ import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,15 +13,6 @@ import steps.TestTypeSteps;
 
 import java.util.Arrays;
 
-
-@WithTags(
-        {
-                @WithTag(type = "TestTypes", name = "All"),
-                @WithTag(type = "TestTypes", name = "Negative"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class GetTestTypesByIdNoData {
