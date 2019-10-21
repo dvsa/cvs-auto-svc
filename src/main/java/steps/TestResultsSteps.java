@@ -135,7 +135,7 @@ public class TestResultsSteps {
 
     @Step
     public void validateErrorText(String stringData) {
-       response.equals(stringData);
+        response.then().equals(stringData);
     }
 
     @Step
@@ -476,6 +476,7 @@ public class TestResultsSteps {
     @Step
     public String nextTestNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        System.out.println("\ntestNumber is: " + testNumber +"\n");
         nextTestNumber = computeNextTestNumber(testNumber.substring(0,3),testNumber.substring(3,4),testNumber.substring(4,7));
         return nextTestNumber;
     }
@@ -483,6 +484,7 @@ public class TestResultsSteps {
     @Step
     public void checkNextTestNumberIsValid(String nextTestNumber){
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        System.out.println("nextTestNumber: " + nextTestNumber + " and the actual is: " + testNumber);
         assertThat(testNumber.equals(nextTestNumber)).isTrue();
     }
 
@@ -586,5 +588,37 @@ public class TestResultsSteps {
         addAdditionalTestResultsTestTypesFields(payload,testInArray,field,value);
     }
 
+    @Step
+    public void validateCertificateNumberIsNotNull(TestResultsGet testResults) {
 
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + " activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+
+        response.then().body("[" + record + "].testTypes[0].certificateNumber", not(equalTo(nullValue())));
+    }
+
+    @Step
+    public void validateExpiryDateIsNotNull(TestResultsGet testResults) {
+        int record = 0;
+        for (int i = 0; i < (Integer) response.jsonPath().get("size()"); i++) {
+            System.out.println("i = " + i);
+            List<String> startTimeList = response.jsonPath().getList("testStartTimestamp");
+            System.out.println("testStartTimestamp is: " + startTimeList.get(i));
+            if (startTimeList.get(i).equals(testResults.getTestStartTimestamp())) {
+                System.out.println("testStartTimestamp: " + startTimeList.get(i) + "activities id: " + testResults.getTestStartTimestamp());
+                record = i;
+                break;
+            }
+        }
+        response.then().body("[" + record + "].testTypes[0].testExpiryDate", not(equalTo(nullValue())));
+    }
 }

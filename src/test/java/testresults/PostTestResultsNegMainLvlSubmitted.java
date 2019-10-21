@@ -486,7 +486,7 @@ public class PostTestResultsNegMainLvlSubmitted {
     }
 
     //TODO - possible problem with gateway
-    @Ignore ("missing testStatus should have returned an error - instead returns bad Gateway")
+    @Ignore ("missing testStatus should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testStatus")
     @Test
     public void testResultsMissingTestStatus() {
@@ -498,7 +498,7 @@ public class PostTestResultsNegMainLvlSubmitted {
 
 
     //TODO - possible problem with gateway
-    @Ignore ("null testStatus should have returned an error - instead returns 502")
+    @Ignore ("null testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStatus")
     @Test
     public void testResultsNullTestStatus() {
@@ -509,8 +509,8 @@ public class PostTestResultsNegMainLvlSubmitted {
     }
 
 
-    //TODO - possible problem with gateway
-    @Ignore ("integer testStatus should have returned an error - instead returns 502")
+
+    @Ignore ("integer testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testStatus")
     @Test
     public void testResultsIntegerTestStatus() {
@@ -520,8 +520,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("testStatus", "should be one of [\"submitted\", \"cancelled\"]");
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("random testStatus should have returned an error - instead returns 502")
+    @Ignore ("random testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStatus random")
     @Test
     public void testResultsValueTestStatus() {
@@ -531,8 +530,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("testStatus", "should be one of [\"submitted\", \"cancelled\"]");
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("empty testStatus should have returned an error - instead returns bad Gateway")
+    @Ignore ("empty testStatus should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStatus empty")
     @Test
     public void testResultsValueTestStatusEmpty() {
@@ -689,9 +687,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, t, l, s, v]");
     }
 
-
-    //TODO - possible problem with gateway
-    @Ignore ("missing vehicleType should have returned an error - instead returns bad Gateway")
+    @Ignore ("missing vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - vehicleType")
     @Test
     public void testResultsMissingVehicleType() {
@@ -701,8 +697,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("vehicleType", "is required");
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("null vehicleType should have returned an error - instead returns bad Gateway")
+    @Ignore ("null vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleType")
     @Test
     public void testResultsNullVehicleType() {
@@ -712,9 +707,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validateData("must be one of [psv, hgv, trl]");
     }
 
-
-    //TODO - possible problem with gateway
-    @Ignore ("integer vehicleType should have returned an error - instead returns bad Gateway")
+    @Ignore ("integer vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - vehicleType")
     @Test
     public void testResultsIntegerVehicleType() {
@@ -724,8 +717,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("vehicleType", "must be one of [psv, hgv, trl]");
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("random vehicleType should have returned an error - instead returns bad Gateway")
+    @Ignore ("random vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicleType random")
     @Test
     public void testResultsValueVehicleType() {
@@ -735,8 +727,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("vehicleType", "must be one of [psv, hgv, trl]");
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("empty vehicleType should have returned an error - instead returns bad Gateway")
+    @Ignore ("empty vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicleType empty")
     @Test
     public void testResultsValueVehicleTypeEmpty() {
