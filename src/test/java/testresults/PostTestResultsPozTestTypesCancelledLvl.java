@@ -135,6 +135,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         validateSavedData();
     }
 
+    @Ignore("Blocked by CVSB-9146")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - certificateNumber")
     @Test
     public void testResultsNullCertificateNumber() {
