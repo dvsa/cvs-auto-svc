@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
@@ -34,6 +35,7 @@ public class PostVehicleTechnicalRecordsNeg {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
 
 
+    @Ignore
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC2 - Can not create a new vehicle entry using an existing VIN from the DB" +
             "AC4 - can not create a new vehicle entry when the request body doesn't contain at least one element in the `techRecord` array")

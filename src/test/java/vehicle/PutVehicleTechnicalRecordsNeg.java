@@ -5,6 +5,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
@@ -32,6 +33,7 @@ public class PutVehicleTechnicalRecordsNeg {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
 
 
+    @Ignore
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC8 - can not update an existing vehicle entry when the request body doesn't contain at least one element in the `techRecord` array")
     @Test

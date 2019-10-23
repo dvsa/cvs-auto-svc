@@ -7,6 +7,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
@@ -36,6 +37,7 @@ public class PostVehicleTechnicalRecords {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationTechRecord, alterationVin));
 
 
+    @Ignore
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC1 - API Consumer creates a technical record for a vehicle with a specific vin" +
             "AC5 - Can create a new vehicle entry using a unique VIN and multiple entries in the `techRecord` array of the request body")

@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.Ignore;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
@@ -41,6 +42,7 @@ public class PutVehicleTechnicalRecords {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
 
 
+    @Ignore
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
