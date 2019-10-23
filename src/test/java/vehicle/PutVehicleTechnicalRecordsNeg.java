@@ -33,7 +33,7 @@ public class PutVehicleTechnicalRecordsNeg {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
 
 
-    @Ignore
+    @Ignore("Added @Ignore tag to test so that we can merge the code in develop but without including the test in the regression until the dev branch for 7885 is also merged in develop")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC8 - can not update an existing vehicle entry when the request body doesn't contain at least one element in the `techRecord` array")
     @Test

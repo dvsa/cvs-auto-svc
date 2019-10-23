@@ -42,7 +42,7 @@ public class PutVehicleTechnicalRecords {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
 
 
-    @Ignore
+    @Ignore("Added @Ignore tag to test so that we can merge the code in develop but without including the test in the regression until the dev branch for 7885 is also merged in develop")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
