@@ -231,6 +231,7 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("testTypeId", "must be a string");
     }
 
+    @Ignore("Blocked by CVSB-9146")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - certificateNumber")
     @Test
     public void testResultsCertificateNumber() {
