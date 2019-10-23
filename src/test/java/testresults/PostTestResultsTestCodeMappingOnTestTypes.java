@@ -46,8 +46,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 .getTestTypes().get(0).setTestTypeId("1");
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOne.build());
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Expiry date not present on ADR test type");
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedData("aal");
     }
 
     @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 2")
