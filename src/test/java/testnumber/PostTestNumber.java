@@ -163,6 +163,7 @@ public class PostTestNumber {
         testResultsSteps.validateCertificateNumberIsNull();
     }
 
+    @Ignore("Blocked by CVSB-9146")
     @Title("CVSB-2157/CVSB-3290 AC B1. VSA submits test results where at least one test type has test type classification 'Annual With Certificate' and the test type result is PASSED (testNumber populated into certificateNumber attribute)")
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificateIsEqualToCertificateNumber() {
@@ -178,6 +179,7 @@ public class PostTestNumber {
         testResultsSteps.validateTestNumberEqualsCertificateNumber();
     }
 
+    @Ignore("Blocked by CVSB-9146")
     @Title("CVSB-2157/CVSB-3292 AC B1. VSA submits test results where at least one test type has test type classification 'Annual With Certificate' and the test type result is PRS (testNumber populated into certificateNumber attribute)")
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificatePRSIsEqualToCertificateNumber() {
