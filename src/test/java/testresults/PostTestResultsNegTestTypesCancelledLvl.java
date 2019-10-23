@@ -9,6 +9,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -230,6 +231,7 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("testTypeId", "must be a string");
     }
 
+    @Ignore("Blocked by CVSB-9146")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - certificateNumber")
     @Test
     public void testResultsCertificateNumber() {
