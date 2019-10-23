@@ -126,23 +126,22 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
-                .getTestTypes().get(0).setCertificateNumber("");
+                .getTestTypes().get(0).setTestTypeId("19").setCertificateNumber("");
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
-        vehicleCancelledData.build().getTestTypes().get(0).setCertificateNumber(null);
+//        vehicleCancelledData.build().getTestTypes().get(0).setCertificateNumber(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
     }
 
-    @Ignore("Blocked by CVSB-9146")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - certificateNumber")
     @Test
     public void testResultsNullCertificateNumber() {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
-                .getTestTypes().get(0).setCertificateNumber(null);
+                .getTestTypes().get(0).setTestTypeId("19").setCertificateNumber(null);
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
