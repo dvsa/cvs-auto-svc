@@ -8,21 +8,17 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.DataUtil;
 
 
-//@Ignore("IN progress continue when bug fix is done")
 @RunWith(SerenityRunner.class)
 public class GetActivities {
 
     @Steps
     ActivitiesSteps activitiesSteps;
-
-    ActivitiesPost.Builder activitiesPost = ActivitiesData.buildActivitiesParentIdData();
 
     ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
