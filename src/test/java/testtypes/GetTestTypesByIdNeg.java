@@ -4,8 +4,9 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.*;
 import org.junit.Ignore;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -13,14 +14,6 @@ import steps.TestTypeSteps;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@WithTags(
-        {
-                @WithTag(type = "TestTypes", name = "All"),
-                @WithTag(type = "TestTypes", name = "Negative"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class GetTestTypesByIdNeg {

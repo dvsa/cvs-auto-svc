@@ -1,0 +1,124 @@
+{
+  "primaryVrm": "BQ91YHQ",
+  "secondaryVrms": [
+    "X71LTA"
+  ],
+  "vin": "1B7GG36N12S678410",
+  "partialVin": "678410",
+  "techRecord": [
+    {
+      "createdAt": "2019-01-16T12:24:38.027Z",
+      "lastUpdatedAt": "2019-01-16T12:24:38.027Z",
+      "chassisMake": "Volvo",
+      "chassisModel": "B10M",
+      "bodyMake": "Duple",
+      "bodyModel": "320",
+      "bodyType": {
+        "code": "ss",
+        "description": "single-decker"
+      },
+      "manufactureYear": 1986,
+      "regnDate": "1986-05-01",
+      "coifDate": "1986-04-18",
+      "ntaNumber": "1",
+      "conversionRefNo": "1",
+      "seatsLowerDeck": 53,
+      "seatsUpperDeck": 1,
+      "standingCapacity": 26,
+      "speedRestriction": 100,
+      "speedLimiterMrk": true,
+      "tachoExemptMrk": true,
+      "dispensations": "Some",
+      "remarks": "53 seatbelts",
+      "reasonForCreation": "COID",
+      "statusCode": "archived",
+      "unladenWeight": 1,
+      "grossKerbWeight": 11020,
+      "grossLadenWeight": 14513,
+      "grossGbWeight": 16260,
+      "grossDesignWeight": 17000,
+      "noOfAxles": 3,
+      "brakeCode": "145202",
+      "vehicleClass": {
+        "code": "l",
+        "description": "large psv(ie: greater than 23 seats)"
+      },
+      "vehicleType": "PSV",
+      "vehicleSize": "large",
+      "vehicleConfiguration": "articulated",
+      "brakes": {
+        "brakeCode": "145202",
+        "brakeCodeOriginal": "124",
+        "dataTrBrakeOne": "NONE",
+        "dataTrBrakeTwo": "NONE",
+        "dataTrBrakeThree": "NONE",
+        "retarderBrakeOne": "electric",
+        "retarderBrakeTwo": "electric",
+        "brakeForceWheelsNotLocked": {
+          "serviceBrakeForceA": 2322,
+          "secondaryBrakeForceA": 3265,
+          "parkingBrakeForceA": 6531
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "serviceBrakeForceB": 1763,
+          "secondaryBrakeForceB": 2755,
+          "parkingBrakeForceB": 5510
+        }
+      },
+      "axles": [
+        {
+          "axleNumber": 1,
+          "parkingBrakeMrk": false,
+          "tyres": {
+            "dataTrAxles": 0,
+            "fitmentCode": "single",
+            "plyRating": "A",
+            "speedCategorySymbol": "j",
+            "tyreCode": 390,
+            "tyreSize": "295/80-22.5"
+          },
+          "weights": {
+            "designWeight": 6500,
+            "gbWeight": 6500,
+            "kerbWeight": 4870,
+            "ladenWeight": 5888
+          }
+        },
+        {
+          "axleNumber": 2,
+          "tyres": {
+            "dataTrAxles": 0,
+            "fitmentCode": "double",
+            "plyRating": "A",
+            "speedCategorySymbol": "j",
+            "tyreCode": 386,
+            "tyreSize": "295/80-22.5"
+          },
+          "weights": {
+            "designWeight": 10500,
+            "gbWeight": 10170,
+            "kerbWeight": 6150,
+            "ladenWeight": 8625
+          }
+        },
+        {
+          "axleNumber": 3,
+          "tyres": {
+            "dataTrAxles": 0,
+            "fitmentCode": "double",
+            "plyRating": "A",
+            "speedCategorySymbol": "j",
+            "tyreCode": 390,
+            "tyreSize": "295/80-22.5"
+          },
+          "weights": {
+            "designWeight": 10200,
+            "gbWeight": 10100,
+            "kerbWeight": 6250,
+            "ladenWeight": 7625
+          }
+        }
+      ]
+    }
+  ]
+}

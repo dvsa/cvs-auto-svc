@@ -15,15 +15,6 @@ import steps.TestResultsSteps;
 import static util.DataUtil.generateRandomExcludingValues;
 
 
-@WithTags(
-        {
-                @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Negative"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
-
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegMainLvlSubmitted {
 

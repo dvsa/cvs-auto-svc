@@ -1,13 +1,7 @@
 package data;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import data.config.DataMapper;
 import model.testtypeid.TestTypeById;
-import org.apache.commons.exec.environment.EnvironmentUtils;
-
-import java.io.File;
-import java.io.IOException;
 
 public class TestTypeByIdData {
 

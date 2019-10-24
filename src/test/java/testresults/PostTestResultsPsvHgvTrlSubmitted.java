@@ -5,21 +5,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.*;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTags(
-        {
-                @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsPsvHgvTrlSubmitted {

@@ -10,8 +10,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +17,6 @@ import steps.TestResultsSteps;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTags(
-        {
-                @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class GetTestResults {
@@ -142,7 +132,7 @@ public class GetTestResults {
         testResultsSteps.validateTestFieldExists("seatbeltInstallationCheckDate");
     }
 
-@Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
+    @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
     @Test
 
     public void testResultsForVinHgv() {
@@ -155,8 +145,7 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldExists("odometerReadingUnits");
     }
 
-@Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (TRL)")
-
+    @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (TRL)")
     @Test
     public void testResultsForVinTrl() {
 

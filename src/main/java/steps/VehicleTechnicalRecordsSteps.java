@@ -1,11 +1,17 @@
 package steps;
 
 import clients.VehicleTechnicalRecordsClient;
+import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.vehicles.*;
 import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
+import util.JsonPathAlteration;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 
@@ -44,7 +50,12 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
+    public void valueForFieldInPathShouldBe(String path, String expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldBe(String path, int expectedValue) {
         response.then().body(path, equalTo(expectedValue));
     }
 
@@ -169,5 +180,47 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void validateData(String stringData) {
         response.then().body(is("\"" + stringData + "\""));
+    }
+
+
+    @Step
+    public void postVehicleTechnicalRecords(String requestBody) {
+        this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
+    }
+
+    @Step
+    public void postVehicleTechnicalRecordsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+    }
+
+    @Step
+    public void putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
+        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(vin, requestBody);
+    }
+
+    @Step
+    public void validateFields(List<String> techRecordFields) {
+        for (String field : techRecordFields) {
+            System.out.println("Checking value at json path techRecord[0]." + field + "\n");
+            this.valueForFieldInPathShouldBe("techRecord[0]." + field,
+                    (GenericData.getJsonValueFromFile("technical-records_psv.json","$.techRecord[0]." + field).toString()));
+        }
+    }
+
+    @Step
+    public void putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
+        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
+    }
+
+    @Step
+    public void validateResponseContainsJson(String jsonPathOfResponseExtractedField, String expectedJson) {
+        String actualJson = GenericData.getJsonStringFromHashMap(response.then().extract().path(jsonPathOfResponseExtractedField));
+        try {
+            JSONAssert.assertEquals("The response does not contain the required data", expectedJson,
+                    actualJson, false);
+        } catch (final JSONException exc) {
+            throw new RuntimeException(exc);
+        }
+
     }
 }

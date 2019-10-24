@@ -10,7 +10,8 @@ import io.restassured.specification.FilterableResponseSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import static io.restassured.RestAssured.config;
-import static util.TypeLoader.*;
+import static util.TypeLoader.isMissingtuh;
+import static util.TypeLoader.isWrongAtuh;
 
 public class BasePathFilter implements Filter {
 

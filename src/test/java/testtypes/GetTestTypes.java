@@ -5,15 +5,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import data.TestTypeData;
 import data.config.BaseData;
 import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -23,15 +19,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-
-@WithTags(
-        {
-                @WithTag(type = "TestTypes", name = "All"),
-                @WithTag(type = "TestTypes", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class GetTestTypes {

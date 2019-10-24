@@ -4,21 +4,14 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.*;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.Title;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
 
 import java.util.Arrays;
 
-@WithTags(
-        {
-                @WithTag(type = "TestTypes", name = "All"),
-                @WithTag(type = "TestTypes", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-
-        }
-)
 
 @RunWith(SerenityRunner.class)
 public class GetTestTypesByIdFields {

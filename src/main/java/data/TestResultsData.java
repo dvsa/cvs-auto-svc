@@ -2,7 +2,7 @@ package data;
 
 import data.config.BaseData;
 import data.config.DataMapper;
-import model.testresults.*;
+import model.testresults.TestResultsGet;
 
 public class TestResultsData {
 
