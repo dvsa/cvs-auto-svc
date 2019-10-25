@@ -3,7 +3,6 @@ package activities;
 
 import data.ActivitiesData;
 import model.activities.ActivitiesGet;
-import model.activities.ActivitiesPost;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
