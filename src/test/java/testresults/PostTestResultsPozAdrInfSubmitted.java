@@ -147,7 +147,7 @@ public class PostTestResultsPozAdrInfSubmitted {
         vehicleSubmittedData.build().getTestTypes().get(0).setName("Retest");
         vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
         vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("pass");
+        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestCode("arv");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId(testTypeId);
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("ADR Test");
@@ -233,12 +233,12 @@ public class PostTestResultsPozAdrInfSubmitted {
 
         testResultsSteps.addAdditionalTestResultsFieldValue(payload, "trailerId", "C000001");
         testResultsSteps.removeTestResultsFields(payload, "numberOfSeats", "odometerReading", "odometerReadingUnits", "vehicleId", "vehicleSize", "vrm");
-        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "certificateLink", "createdAt", "lastSeatbeltInstallationCheckDate", "lastUpdatedAt", "numberOfSeatbeltsFitted", "seatbeltInstallationCheckDate", "testCode", "testNumber", "testAnniversaryDate");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testExpiryDate" ,"certificateLink", "createdAt", "lastSeatbeltInstallationCheckDate", "lastUpdatedAt", "numberOfSeatbeltsFitted", "seatbeltInstallationCheckDate", "testCode", "testNumber", "testAnniversaryDate");
 
         testResultsSteps.postTestResultsPayload(payload);
 
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Expiry date not present on ADR test type");
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
     }
 
     @Title("CVSB-4927 - TC - Negative - API Consumer creates a new test results")
