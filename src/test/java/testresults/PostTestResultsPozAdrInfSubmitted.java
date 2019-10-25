@@ -233,12 +233,12 @@ public class PostTestResultsPozAdrInfSubmitted {
 
         testResultsSteps.addAdditionalTestResultsFieldValue(payload, "trailerId", "C000001");
         testResultsSteps.removeTestResultsFields(payload, "numberOfSeats", "odometerReading", "odometerReadingUnits", "vehicleId", "vehicleSize", "vrm");
-        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "certificateLink", "createdAt", "lastSeatbeltInstallationCheckDate", "lastUpdatedAt", "numberOfSeatbeltsFitted", "seatbeltInstallationCheckDate", "testCode", "testNumber", "testAnniversaryDate");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testExpiryDate" ,"certificateLink", "createdAt", "lastSeatbeltInstallationCheckDate", "lastUpdatedAt", "numberOfSeatbeltsFitted", "seatbeltInstallationCheckDate", "testCode", "testNumber", "testAnniversaryDate");
 
         testResultsSteps.postTestResultsPayload(payload);
 
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Expiry date not present on ADR test type");
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
     }
 
     @Title("CVSB-4927 - TC - Negative - API Consumer creates a new test results")
