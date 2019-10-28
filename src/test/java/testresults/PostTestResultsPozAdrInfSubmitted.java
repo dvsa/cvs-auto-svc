@@ -147,7 +147,7 @@ public class PostTestResultsPozAdrInfSubmitted {
         vehicleSubmittedData.build().getTestTypes().get(0).setName("Retest");
         vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
         vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
+        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("pass");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestCode("arv");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId(testTypeId);
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("ADR Test");
@@ -208,7 +208,6 @@ public class PostTestResultsPozAdrInfSubmitted {
         vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
         vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
         vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("pass");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestCode("arv");
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId(testTypeId);
         vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("ADR Test");
