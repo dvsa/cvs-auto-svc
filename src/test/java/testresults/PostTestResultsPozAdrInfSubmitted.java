@@ -176,7 +176,7 @@ public class PostTestResultsPozAdrInfSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
 
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Certificate number not present on LEC test type");
+        testResultsSteps.validateData("Certificate number not present on ADR test type");
     }
 
     @Title("CVSB-4927 - TC - Negative - API Consumer creates a new test results for the fail ADR test")
