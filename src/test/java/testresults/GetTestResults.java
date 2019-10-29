@@ -11,6 +11,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -216,6 +217,7 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
     }
 
+    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
     @Test
     public void testResultsForRegnDateHgv() {
@@ -226,6 +228,7 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldExists("regnDate");
     }
 
+    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - trl")
     @Test
     public void testResultsForFirstUseDateTrl() {

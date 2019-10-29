@@ -77,7 +77,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
 
     //TODO - possible problem with gateway
-    @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway")
+    @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway - defect CVSB-9011")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeId")
     @Test
     public void testResultsRandomTestTypeId() {
@@ -126,10 +126,10 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
-                .getTestTypes().get(0).setCertificateNumber("");
+                .getTestTypes().get(0).setTestTypeId("19").setCertificateNumber("");
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
-        vehicleCancelledData.build().getTestTypes().get(0).setCertificateNumber(null);
+//        vehicleCancelledData.build().getTestTypes().get(0).setCertificateNumber(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -141,7 +141,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
-                .getTestTypes().get(0).setCertificateNumber(null);
+                .getTestTypes().get(0).setTestTypeId("19").setCertificateNumber(null);
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);

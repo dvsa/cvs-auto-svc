@@ -19,10 +19,11 @@
       "createdAt": "2019-02-22T08:52:10.255Z",
       "testTypeId": "39",
       "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
-      "certificateNumber": null,
+      "certificateNumber": "50CENT",
       "testTypeName": "Annual test",
       "seatbeltInstallationCheckDate": true,
       "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+
       "defects": [
         {
           "deficiencyCategory": "advisory",

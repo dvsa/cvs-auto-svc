@@ -230,14 +230,13 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("testTypeId", "must be a string");
     }
 
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - certificateNumber")
     @Test
     public void testResultsCertificateNumber() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "certificateNumber", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("certificateNumber", "is required");
+        testResultsSteps.validateErrorText("Certificate number not present on LEC test type");
     }
 
 

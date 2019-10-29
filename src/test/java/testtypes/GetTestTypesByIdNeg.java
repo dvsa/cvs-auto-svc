@@ -130,8 +130,6 @@ public class GetTestTypesByIdNeg {
 
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("ask BA / Backend developers")
     @Title("CVSB-1073 / CVSB-2420 - Query param 'vehicleSize' missing")
     @Test
     public void testTypeMissingRequiredFieldVehicleSize() {
@@ -161,8 +159,6 @@ public class GetTestTypesByIdNeg {
 
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("ask BA / Backend developers")
     @Title("CVSB-1073 / CVSB-2422 - Query param 'vehicleConfiguration' missing")
     @Test
     public void testTypeMissingRequiredFieldVehicleConfiguration() {
@@ -177,8 +173,6 @@ public class GetTestTypesByIdNeg {
 
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("ask BA / Backend developers")
     @Title("CVSB-1073 / CVSB-2423 - Query param 'vehicleConfiguration' empty")
     @Test
     public void testTypeEmptyRequiredFieldVehicleConfiguration() {
