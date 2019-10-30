@@ -35,7 +35,6 @@ public class PostVehicleTechnicalRecordsNeg {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
 
 
-    @Ignore("Added @Ignore tag to test so that we can merge the code in develop but without including the test in the regression until the dev branch for 7885 is also merged in develop")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC2 - Can not create a new vehicle entry using an existing VIN from the DB" +
             "AC4 - can not create a new vehicle entry when the request body doesn't contain at least one element in the `techRecord` array")

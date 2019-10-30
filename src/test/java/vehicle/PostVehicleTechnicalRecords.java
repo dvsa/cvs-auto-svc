@@ -37,7 +37,6 @@ public class PostVehicleTechnicalRecords {
     private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationTechRecord, alterationVin));
 
 
-    @Ignore("Added @Ignore tag to test so that we can merge the code in develop but without including the test in the regression until the dev branch for 7885 is also merged in develop")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC1 - API Consumer creates a technical record for a vehicle with a specific vin" +
             "AC5 - Can create a new vehicle entry using a unique VIN and multiple entries in the `techRecord` array of the request body")
