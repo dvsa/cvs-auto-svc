@@ -119,6 +119,19 @@ public class GenericData {
         return builder.toString();
     }
 
+    public static String generateRandomVrm() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder builder = new StringBuilder();
+        Random rnd = new Random();
+        Random length = new Random();
+        int vinLength = length.nextInt(7 - 6 + 1) + 6;
+        while (builder.length() < vinLength) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * chars.length());
+            builder.append(chars.charAt(index));
+        }
+        return builder.toString();
+    }
+
     public static String getJsonStringFromJsonPath(String fileName, String path) {
         ClassLoader classLoader = DataMapper.class.getClassLoader();
 
