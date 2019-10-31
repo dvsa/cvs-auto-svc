@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import util.JsonPathAlteration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -496,17 +497,16 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " has value " + expectedValue);
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public void validateVehicleFieldValue(String key, int value) {
 //        response.then().log().all();
         validateVehicleFieldExists(key);
         assertThat(response.then().body("$", anyOf(hasItem(hasEntry(key,value)))));
-    }
-
-    @Step
-    public void validateTestTypeFieldValue(int testNumber, String key, String value) {
-//        response.then().log().all();
-        String returnedValue = response.jsonPath().getString("[0]." + key);
-        assertThat(returnedValue.equals(value)).isTrue();
     }
 
     @Step
@@ -620,5 +620,10 @@ public class TestResultsSteps {
             }
         }
         response.then().body("[" + record + "].testTypes[0].testExpiryDate", not(equalTo(nullValue())));
+    }
+
+    @Step
+    public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
     }
 }
