@@ -511,6 +511,7 @@ public class TestResultsSteps {
 
     @Step
     public void validateTestTypeFieldValue(int testNumber, String key, String value) {
+//        response.then().log().all();
         String returnedValue = response.jsonPath().getString("[0]." + key);
         assertThat(returnedValue.equals(value)).isTrue();
     }
