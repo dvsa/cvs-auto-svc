@@ -437,7 +437,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
     }
 
-    @WithTag("In_Test")
     @Title("CVSB-4924 - AC1 API Consumer retrieve the Vehicle Technical Records - adrDetails")
     @Test
     public void testVehicleTechnicalRecordsSearchAdrDetails() {
@@ -446,7 +445,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateTechRecordContainsField("adrDetails");
     }
 
-    @WithTag("In_Test")
     @Title("CVSB-4924 - AC1 API Consumer retrieve the Vehicle Technical Records - euroStandard")
     @Test
     public void testVehicleTechnicalRecordsSearchEuroStandard() {
