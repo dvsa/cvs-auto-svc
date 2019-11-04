@@ -69,7 +69,8 @@ public class LogsClient {
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .post("/logs");
         return response;
     }
@@ -79,7 +80,8 @@ public class LogsClient {
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .put("/logs");
         return response;
     }
