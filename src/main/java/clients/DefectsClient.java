@@ -36,7 +36,8 @@ public class DefectsClient {
 
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/defects");
 
         return response;
