@@ -41,8 +41,6 @@ public class TestStationSteps {
         } else {
             throw new AutomationException("Test Station " + testStation.getTestStationName() + " was not found ! Please check data.");
         }
-
-
         response.then().body("[" + index + "].size()", is(TestStations.class.getDeclaredFields().length));
         response.then().body("testStationId", hasItem(equalTo(testStation.getTestStationId())));
         response.then().body("testStationPNumber", hasItem(equalTo(testStation.getTestStationPNumber())));
