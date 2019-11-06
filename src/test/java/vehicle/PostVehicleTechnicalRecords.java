@@ -25,6 +25,8 @@ public class PostVehicleTechnicalRecords {
 
     //generate random Vin
     private String randomVin = GenericData.generateRandomVin();
+    //generate random Vrm
+    private String randomVrm = GenericData.generateRandomVrm();
     // read post request body from file
     private String postRequestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
     //  read another tech record entry from different file
@@ -33,8 +35,10 @@ public class PostVehicleTechnicalRecords {
     private JsonPathAlteration alterationTechRecord = new JsonPathAlteration("$.techRecord", additionalTechRecord,"","ADD_VALUE");
     // create alteration to change Vin in the request body with the random generated Vin
     private JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+    // create alteration to change primary vrm in the request body with the random generated primary vrm
+    private JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
     // initialize the alterations list with both declared alteration
-    private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationTechRecord, alterationVin));
+    private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationTechRecord, alterationVin, alterationVrm));
 
 
     @WithTag("Vtm")

@@ -24,6 +24,8 @@ public class PutVehicleTechnicalRecords {
 
     // generate random Vin
     private String randomVin = GenericData.generateRandomVin();
+    //generate random Vrm
+    private String randomVrm = GenericData.generateRandomVrm();
     // read post request body from file
     private String postRequestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
     // read put request body from file
@@ -32,14 +34,14 @@ public class PutVehicleTechnicalRecords {
     private String oldTechRecord = GenericData.readJsonValueFromFile("technical-records_current.json","$.techRecord[0]");
     // read the tech record from the file used for post request body
     private String newTechRecord = GenericData.readJsonValueFromFile("technical-records_psv.json","$.techRecord[0]");
-    // get primary Vrm from file used for post request body
-    private String primaryVrm = GenericData.getJsonValueFromFile("technical-records_current.json","$.primaryVrm");
     // create alteration to change Vin in the post request body with the random generated Vin
     private JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+    // create alteration to change primary vrm in the request body with the random generated primary vrm
+    private JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
     // create alteration to add one more tech record to in the put request body
     private JsonPathAlteration alterationAddTechRecord = new JsonPathAlteration("$.techRecord", oldTechRecord,"","ADD_VALUE");
-    // initialize the alterations list with only the alteration for changing the Vin
-    private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
+    // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+    private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
 
     @WithTag("Vtm")
@@ -59,7 +61,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", newTechRecord);
         // validate AC7
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", primaryVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", randomVrm);
         // add alteration for adding one more tech record for the randomVin used above
         alterations.add(alterationAddTechRecord);
         // validate AC9

@@ -424,7 +424,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", VehicleTechnicalRecordStatus.CURRENT.getStatus());
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", VehicleTechnicalRecordStatus.ARCHIVED.getStatus());
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
     }
 
     @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
@@ -434,7 +434,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", VehicleTechnicalRecordStatus.CURRENT.getStatus());
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", VehicleTechnicalRecordStatus.ARCHIVED.getStatus());
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
     }
 
 }
