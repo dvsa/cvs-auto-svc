@@ -25,6 +25,7 @@ public class TestStationSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
+
         response.then()
                 .log().all()
                 .statusCode(statusCode);
