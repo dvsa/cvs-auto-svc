@@ -135,7 +135,7 @@ public class GetTestResults {
         testResultsSteps.validateTestFieldExists("seatbeltInstallationCheckDate");
     }
 
-@Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
+    @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
     @Test
 
     public void testResultsForVinHgv() {
@@ -148,7 +148,7 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldExists("odometerReadingUnits");
     }
 
-@Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (TRL)")
+    @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (TRL)")
     @Test
     public void testResultsForVinTrl() {
         testResultsSteps.getTestResults("T12111111");
