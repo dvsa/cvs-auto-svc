@@ -184,6 +184,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAV5.getTestCode());
     }
 
+    @Title("CVSB-8109 - Differentiating between 5 and 5+ axles within the test type taxonomy")
+    @Test
+    public void testTypeDefaultTestCodeAav5PlusHGVFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.AAV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.AAV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAV5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'aat1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
     @Test
     public void testTypeDefaultTestCodeAat1TRLOneAxle() {
