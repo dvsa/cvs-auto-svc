@@ -11,6 +11,7 @@
   "testStationLongitude": 28.8905763,
   "testStationLatitude": 47.1263592,
   "testStationType": "atf",
+  "testStationStatus": "active",
   "testStationEmails": [
     "teststationname@dvsa.gov.uk",
     "teststationname1@dvsa.gov.uk"
