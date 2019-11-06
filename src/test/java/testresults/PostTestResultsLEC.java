@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.WithTags;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -18,14 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WithTags(
-        {
-                @WithTag(type = "TestResults", name = "All"),
-                @WithTag(type = "TestResults", name = "Positive"),
-                @WithTag(type = "Service", name = "One"),
-        }
-)
-
+@Ignore("CVSB-7964 NOT yet merged")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsLEC {
 
