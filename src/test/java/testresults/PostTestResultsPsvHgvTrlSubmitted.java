@@ -1337,7 +1337,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.validatePostErrorDataContains("seatbeltInstallationCheckDate", "must be a boolean");
     }
 
-    @Ignore("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (TRL)")
     @Test
     public void testTestResultsFirstUseDateTrl() {
@@ -1404,7 +1403,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     }
 
-    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (HGV)")
     @Test
     public void testTestResultsRegnDateHgv() {
@@ -1480,7 +1478,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     }
 
-    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (TRL - null)")
     @Test
     public void testTestResultsFirstUseDateNullTrl() {
@@ -1546,7 +1543,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     }
 
-    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (HGV - null)")
     @Test
     public void testTestResultsRegnDateNullHgv() {
@@ -1621,7 +1617,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     }
 
-    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (TRL - wrong type)")
     @Test
     public void testTestResultsFirstUseDateWrongTrl() {
@@ -1683,7 +1678,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     }
 
-    @Ignore ("8703 not merged on 4907")
+
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (HGV - wrong type)")
     @Test
     public void testTestResultsRegnDateWrongHgv() {
