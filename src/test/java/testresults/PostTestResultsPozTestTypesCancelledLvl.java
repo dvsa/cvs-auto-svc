@@ -1,5 +1,7 @@
 package testresults;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -7,6 +9,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -333,6 +336,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         validateSavedData();
     }
 
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult pass")
     @Test
     public void testResultsTestResultValueTwo() {
@@ -341,7 +345,18 @@ public class PostTestResultsPozTestTypesCancelledLvl {
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleCancelledData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
+
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -457,6 +472,19 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         vehicleCancelledData.build().getTestTypes().get(0).setReasonForAbandoning(null);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleCancelledData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
+
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -500,7 +528,17 @@ public class PostTestResultsPozTestTypesCancelledLvl {
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning(RandomStringUtils.randomAlphanumeric(1, 499));
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleCancelledData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
@@ -546,7 +584,17 @@ public class PostTestResultsPozTestTypesCancelledLvl {
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleCancelledData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData();
