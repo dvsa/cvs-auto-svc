@@ -184,9 +184,9 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAV5.getTestCode());
     }
 
-    @Title("CVSB-8109 - Differentiating between 5 and 5+ axles within the test type taxonomy")
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'aav5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
     @Test
-    public void testTypeDefaultTestCodeAav5PlusHGVFiveAxles() {
+    public void testTypeDefaultTestCodeAav5HGVOverFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
@@ -280,6 +280,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'aat5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeAat5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.AAT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.AAT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.AAT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'ffv2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeFfv2HGVTwoAxles() {
@@ -337,6 +353,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.FFV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.FFV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.FFV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'ffv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeFfv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.FFV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -417,6 +449,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.FFT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.FFT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.FFT5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'fft5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeFft5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.FFT5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -648,6 +696,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RPV5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'rpv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRpv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.RPV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RPV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RPV5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'rpt1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
     @Test
     public void testTypeDefaultTestCodeRpt1TRLOneAxle() {
@@ -727,6 +791,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RPT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'prt5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRpt5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.RPT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RPT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RPT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'rsv2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeRsv2HGVTwoAxles() {
@@ -784,6 +864,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.RSV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RSV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RSV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'rsv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRsv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.RSV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -864,6 +960,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.RST5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RST5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RST5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'rst5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRst5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.RST5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1175,6 +1287,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RGV5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'rgv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRgv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.RGV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RGV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RGV5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'rgt1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
     @Test
     public void testTypeDefaultTestCodeRgt1TRLOneAxle() {
@@ -1255,6 +1383,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RGT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'rgt5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRgt5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.RGT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RGT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RGT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'riv2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeRiv2HGVTwoAxles() {
@@ -1312,6 +1456,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.RIV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RIV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RIV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'riv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRiv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.RIV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1399,6 +1559,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RIT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'rit5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeRit5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.RIT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.RIT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.RIT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'rht' (forVehicleType 'trl', forVehicleConfiguration 'null')")
     @Test
     public void testTypeDefaultTestCodeRhtTRLFiveAxles() {
@@ -1472,6 +1648,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.P1V5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P1V5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P1V5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p1v5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP1v5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.P1V5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1559,6 +1751,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P1T5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p1t5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP1t5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.P1T5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P1T5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P1T5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'pbv2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodePbv2HGVTwoAxles() {
@@ -1616,6 +1824,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.PBV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.PBV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PBV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pbv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePbv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.PBV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1703,6 +1927,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PBT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pbt5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePbt5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.PBT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.PBT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PBT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'pov2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodePov2HGVTwoAxles() {
@@ -1760,6 +2000,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.POV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.POV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.POV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pov5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePov5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.POV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1847,6 +2103,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.POT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pot5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePot5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.POT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.POT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.POT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'pav2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodePav2HGVTwoAxles() {
@@ -1904,6 +2176,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.PAV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.PAV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PAV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pav5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePav5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.PAV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -1991,6 +2279,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PAT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pat5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePat5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.PAT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.PAT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PAT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'p3v2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeP3v2HGVTwoAxles() {
@@ -2048,6 +2352,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.P3V5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P3V5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P3V5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p3v5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP3v5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.P3V5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -2135,6 +2455,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P3T5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p3t5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP3t5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.P3T5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P3T5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P3T5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'pfv2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodePfv2HGVTwoAxles() {
@@ -2192,6 +2528,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.PFV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.PFV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PFV5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pfv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePfv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.PFV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -2279,6 +2631,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PFT5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'pft5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodePft5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.PFT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.PFT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.PFT5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'p6v2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeP6v2HGVTwoAxles() {
@@ -2336,6 +2704,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.P6V5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P6V5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P6V5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p6v5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP6v5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.P6V5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -2423,6 +2807,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P6T5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p6t5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP6t5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.P6T5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P6T5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P6T5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'p2v2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeP2v2HGVTwoAxles() {
@@ -2480,6 +2880,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.P2V5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P2V5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P2V5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p2v5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP2v5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.P2V5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -2567,6 +2983,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P2T5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p2t5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP2t5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.P2T5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P2T5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P2T5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'p7v2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeP7v2HGVTwoAxles() {
@@ -2624,6 +3056,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.P7V5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P7V5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P7V5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p1v5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP7v5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.P7V5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -2711,6 +3159,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P7T5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p7t5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP7t5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.P7T5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P7T5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P7T5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'p4v2' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 2)")
     @Test
     public void testTypeDefaultTestCodeP4v2HGVTwoAxles() {
@@ -2768,6 +3232,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.HGV)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.P4V5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P4V5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P4V5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'p4v5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP4v5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.P4V5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -2855,6 +3335,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P4T5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'P4t5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeP4t5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.P4T5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.P4T5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.P4T5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'bib' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 1)")
     @Test
     public void testTypeDefaultTestCodeBibHGVOneAxle() {
@@ -2935,6 +3431,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QAV5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'qav5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeQav5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.QAV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.QAV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QAV5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'qat1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
     @Test
     public void testTypeDefaultTestCodeQat1TRLOneAxle() {
@@ -3008,6 +3520,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.QAT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.QAT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QAT5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'qat5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeQat5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.QAT5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
@@ -3175,6 +3703,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QJV5.getTestCode());
     }
 
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'qjv5' (forVehicleType 'hgv', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeQjv5HGVOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
+
+        testTypeSteps.getTestTypesById(TestTypes.QJV5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.QJV5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QJV5.getTestCode());
+    }
+
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'qjt1' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 1)")
     @Test
     public void testTypeDefaultTestCodeQjt1TRLOneAxle() {
@@ -3248,6 +3792,22 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.TRL)
                 .setVehicleConfiguration(VehicleConfiguration.NULL)
                 .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById(TestTypes.QJT5.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.QJT5.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QJT5.getTestCode());
+    }
+
+    @Title("CVSB-8109 / CVSB-9504 - API Consumer retrieves data default test code 'qjt5' (forVehicleType 'trl', forVehicleConfiguration 'null', vehicleAxles 5+)")
+    @Test
+    public void testTypeDefaultTestCodeQjt5TRLOverFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.ANY);
 
         testTypeSteps.getTestTypesById(TestTypes.QJT5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
