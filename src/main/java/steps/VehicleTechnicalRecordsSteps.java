@@ -225,4 +225,15 @@ public class VehicleTechnicalRecordsSteps {
         }
 
     }
+
+    @Step
+    public void validateTechRecordContainsField(String field) {
+        response.then().body("techRecord[0]", hasKey(field));
+    }
+
+    @Step
+    public void validateTechRecordFieldIsOfType(String field, Class type) {
+        response.then().body("techRecord[0]." + field, instanceOf(type));
+    }
+
 }
