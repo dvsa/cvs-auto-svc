@@ -2,6 +2,8 @@ package testnumber;
 
 import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsStatus;
@@ -9,9 +11,12 @@ import model.testresults.TestTypes;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import util.DataUtil;
 
 import java.util.Arrays;
 
@@ -46,11 +51,24 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForLecTestType() {
         vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
+                .setTestResultId(RandomStringUtils.randomAlphanumeric(3))
+                .build()
                 .getTestTypes().get(0).setTestResult("pass").setName("Technical test").setTestTypeName("Low Emissions Certificate (LEC) with annual test")
                 .setTestTypeId("39");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
+
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
@@ -202,7 +220,18 @@ public class PostTestNumber {
                 .getTestTypes().get(0).setTestResult("pass").setName("Technical test").setTestTypeName("Low Emissions Certificate (LEC) with annual test")
                 .setTestTypeId("39");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
+
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
@@ -227,6 +256,7 @@ public class PostTestNumber {
         testResultsSteps.validateTestNumberIsDifferentForTwoTestTypes();
     }
 
+    @WithTag("failing due to CVSB-7964 - to update")
     @Title("CVSB-2157/CVSB-3246 AC A1. VSA submits test results (when current cert letter in database is not 'Z', and current sequence number in database is not '999') (testNumber generated)")
     @Test
     public void verifyNextTestNumberGeneration() {
@@ -235,7 +265,17 @@ public class PostTestNumber {
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs").setName("Retest").setTestTypeName("Part-paid retest")
                 .getDefects().get(0).setPrs(true);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
@@ -247,7 +287,17 @@ public class PostTestNumber {
                 .getTestTypes().get(0).setTestResult("pass").setName("Technical test").setTestTypeName("Low Emissions Certificate (LEC) with annual test")
                 .setTestTypeId("39");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        objectMapper = new ObjectMapper();
+        payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+
+        testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);

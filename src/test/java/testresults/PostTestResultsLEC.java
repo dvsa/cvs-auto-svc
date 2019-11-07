@@ -92,7 +92,7 @@ public class PostTestResultsLEC {
         // Post the results, together with any alterations, and verify that they are handled correctly.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Expiry Date not present on LEC test type");
+        testResultsSteps.validateErrorText("Expiry Date not present on LEC test type");
     }
 
     @Title("CVSB-7964 - TC6 - AC5.2 - API Consumer receives error when submitting an LEC test without sending a certificateNumber")
@@ -115,7 +115,7 @@ public class PostTestResultsLEC {
         // Post the results, together with any alterations, and verify that they are handled correctly.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Certificate number not present on LEC test type");
+        testResultsSteps.validateErrorText("Certificate number not present on LEC test type");
     }
 
     @Title("CVSB-7964 - TC7 - AC5.3 - API Consumer receives error when submitting an LEC test without sending a modType")
@@ -138,7 +138,7 @@ public class PostTestResultsLEC {
         // Post the results, together with any alterations, and verify that they are handled correctly.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Modification type not present on LEC test type");
+        testResultsSteps.validateErrorText("Modification type not present on LEC test type");
     }
 
     @Title("CVSB-7964 - TC8 - AC5.4 - API Consumer receives error when submitting an LEC test without sending an emissionStandard")
@@ -161,7 +161,7 @@ public class PostTestResultsLEC {
         // Post the results, together with any alterations, and verify that they are handled correctly.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Emission standard not present on LEC test type");
+        testResultsSteps.validateErrorText("Emission standard not present on LEC test type");
     }
 
     @Title("CVSB-7964 - TC9 - AC5.5 - API Consumer receives error when submitting an LEC test without sending a fuelType")
@@ -184,6 +184,6 @@ public class PostTestResultsLEC {
         // Post the results, together with any alterations, and verify that they are handled correctly.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateData("Fuel Type not present on LEC test type");
+        testResultsSteps.validateErrorText("Fuel Type not present on LEC test type");
     }
 }

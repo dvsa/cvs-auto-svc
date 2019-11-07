@@ -8,7 +8,9 @@ import model.testresults.TestTypes;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -108,7 +110,7 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("certificateLink", "is not allowed");
     }
 
-
+    @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - testExpiryDate")
     @Test
     public void testResultsExtraFieldTestExpiryDate() {
@@ -118,6 +120,7 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }
 
+    @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testExpiryDate")
     @Test
     public void testResultsNullTestExpiryDate() {
