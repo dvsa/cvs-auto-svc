@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Ignore("CVSB-7964 NOT yet merged")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsLEC {
 

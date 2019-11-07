@@ -17,12 +17,6 @@ public class TestStations {
     private String testStationLatitude;
     private String testStationType;
     private String testStationStatus;
-
-    public String getTestStationStatus() {
-        return testStationStatus;
-    }
-
-
     private List<String> testStationEmails;
 
     public String getTestStationId() {
@@ -41,6 +35,10 @@ public class TestStations {
     public TestStations setTestStationPNumber(String testStationPNumber) {
         this.testStationPNumber = testStationPNumber;
         return this;
+    }
+
+    public String getTestStationStatus() {
+        return testStationStatus;
     }
 
     public String getTestStationName() {
@@ -162,6 +160,7 @@ public class TestStations {
                 ", testStationLongitude='" + testStationLongitude + '\'' +
                 ", testStationLatitude='" + testStationLatitude + '\'' +
                 ", testStationType='" + testStationType + '\'' +
+                ", testStationStatus='" + testStationStatus + '\'' +
                 ", testStationEmails=" + testStationEmails +
                 '}';
     }

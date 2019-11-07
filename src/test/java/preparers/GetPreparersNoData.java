@@ -15,7 +15,7 @@ public class GetPreparersNoData {
     @Steps
     PreparersSteps preparersSteps;
 
-    @Ignore
+    @Ignore ("no data test")
     @Title("CVSB-579 / CVSB-743 - AC2 - The preparers IDs are not retrieved")
     @Test
     public void preparersNoData() {
