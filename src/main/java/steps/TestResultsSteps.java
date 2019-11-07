@@ -510,14 +510,18 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void validateTestTypeFieldValue(int testNumber, String key, String value) {
+        String returnedValue = response.jsonPath().getString("[0]." + key);
+        assertThat(returnedValue.equals(value)).isTrue();
+    }
+
+    @Step
     public void validateVehicleFieldExists(String fieldName) {
-//        response.then().log().all();
-        assertThat(response.then().body("$", everyItem(hasKey(fieldName))));
+        assertThat(response.then().body("$", anyOf(hasItem(hasKey(fieldName)))));
     }
 
     @Step
     public void validateTestFieldExists(String fieldName) {
-//        response.then().log().all();
         hasTests();
         assertThat(response.then().body("[0].testTypes[0]", hasKey(fieldName)));
     }

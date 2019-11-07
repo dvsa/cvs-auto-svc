@@ -35,7 +35,8 @@ public class TestStationsClient {
     private Response callGetTestStations(Filter filter) {
         Response response = given().filters(filter)
                 .contentType(ContentType.JSON)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/test-stations");
 
         return response;

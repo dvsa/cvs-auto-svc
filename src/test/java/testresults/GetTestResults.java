@@ -217,24 +217,22 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
     }
 
-    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
     @Test
     public void testResultsForRegnDateHgv() {
-        testResultsSteps.getTestResults("P012301230123");
+        testResultsSteps.getTestResults("P012301293847");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "P012301230123");
+        testResultsSteps.validateVehicleFieldValue("vin", "P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
         testResultsSteps.validateVehicleFieldExists("regnDate");
     }
 
-    @Ignore ("8703 not merged on 4907")
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - trl")
     @Test
     public void testResultsForFirstUseDateTrl() {
-        testResultsSteps.getTestResults("T12765432");
+        testResultsSteps.getTestResults("T12111111");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "T12765432");
+        testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
         testResultsSteps.validateVehicleFieldExists("firstUseDate");
     }

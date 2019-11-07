@@ -256,7 +256,8 @@ public class TestResultsClient {
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .post("/test-results");
 
         return response;
@@ -269,7 +270,8 @@ public class TestResultsClient {
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
 
         return response;
@@ -281,7 +283,8 @@ public class TestResultsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("vin", vin)
                 .queryParam("status", status)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
 
 
@@ -356,6 +359,7 @@ public class TestResultsClient {
                 .queryParam("fromDateTime", fromDateTime)
                 .queryParam("toDateTime", toDateTime)
 //                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
 
         return response;

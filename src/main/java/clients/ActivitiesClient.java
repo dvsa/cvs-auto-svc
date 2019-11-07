@@ -181,7 +181,8 @@ public class ActivitiesClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .post("/activities");
 
         return response;
@@ -234,7 +235,8 @@ public class ActivitiesClient {
         }
 
         Response response = requestSpecification
-                .log().all()
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/activities/details");
 
         return response;

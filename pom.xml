@@ -80,6 +80,21 @@
             <artifactId>jsonassert</artifactId>
             <version>1.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-rds</artifactId>
+            <version>1.11.489</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dynamodb</artifactId>
+            <version>1.11.490</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dms</artifactId>
+            <version>1.11.184</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
