@@ -437,4 +437,20 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
     }
 
+    @Title("CVSB-4924 - AC1 API Consumer retrieve the Vehicle Technical Records - adrDetails")
+    @Test
+    public void testVehicleTechnicalRecordsSearchAdrDetails() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("012999");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateTechRecordContainsField("adrDetails");
+    }
+
+    @Title("CVSB-4924 - AC1 API Consumer retrieve the Vehicle Technical Records - euroStandard")
+    @Test
+    public void testVehicleTechnicalRecordsSearchEuroStandard() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("012999");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateTechRecordContainsField("euroStandard");
+        vehicleTechnicalRecordsSteps.validateTechRecordFieldIsOfType("euroStandard", String.class);
+    }
 }

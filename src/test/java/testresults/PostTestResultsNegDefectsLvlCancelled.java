@@ -224,7 +224,7 @@ public class PostTestResultsNegDefectsLvlCancelled {
 
         String propertyValue = generateRandomExcludingValues(2,"m","d","c","l","x","v","i").toLowerCase();
 
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "deficiencySubId", propertyValue, ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
+        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).setTestResultId(generateRandomExcludingValues(5,vehicleCancelledData.build().getTestResultId())).build(), "deficiencySubId", propertyValue, ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("deficiencySubId", "with value \"" + propertyValue + "\" fails to match the required pattern: /^[mdclxvi]+$/");
     }

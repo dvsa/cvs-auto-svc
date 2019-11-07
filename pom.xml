@@ -8,6 +8,7 @@
     <artifactId>cvs-auto-backend</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
     <properties>
         <junit.version>4.12</junit.version>
         <serenity.version>2.0.20</serenity.version>
@@ -79,6 +80,21 @@
             <groupId>org.skyscreamer</groupId>
             <artifactId>jsonassert</artifactId>
             <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-rds</artifactId>
+            <version>1.11.489</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dynamodb</artifactId>
+            <version>1.11.490</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dms</artifactId>
+            <version>1.11.184</version>
         </dependency>
     </dependencies>
     <profiles>
