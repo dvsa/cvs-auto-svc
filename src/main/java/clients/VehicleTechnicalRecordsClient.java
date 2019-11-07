@@ -47,6 +47,8 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
@@ -58,6 +60,8 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", status)
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;

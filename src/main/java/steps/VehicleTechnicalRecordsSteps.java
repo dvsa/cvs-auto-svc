@@ -46,7 +46,9 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().statusCode(statusCode);
+        response.then()
+                .log().all()
+                .statusCode(statusCode);
     }
 
     @Step

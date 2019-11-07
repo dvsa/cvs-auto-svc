@@ -15,7 +15,7 @@ public class GetTestStationsNoData {
     @Steps
     TestStationSteps testStationSteps;
 
-    @Ignore
+    @Ignore ("no data test")
     @Title("CVSB-1323 / CVSB-2390 - CVSB-507 /  CVSB-745 - AC2 - No data returned")
     @Test
     public void testStationNoData() {
