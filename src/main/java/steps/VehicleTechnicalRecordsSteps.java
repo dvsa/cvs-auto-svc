@@ -62,6 +62,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public void fieldInPathShouldExist(String parentElementPath, String key) {
         response.then().body(parentElementPath,hasKey(key));
     }
