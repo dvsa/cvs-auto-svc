@@ -229,7 +229,7 @@ public class GetTestResults {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
-        testResultsSteps.validateVehicleFieldExists("firstUseDate");
+        testResultsSteps.validateVehicleFieldMayExist("firstUseDate");
     }
 
 }
