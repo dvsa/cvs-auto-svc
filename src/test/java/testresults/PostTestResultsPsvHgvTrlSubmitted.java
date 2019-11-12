@@ -28,9 +28,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostValidTrl() {
 
-        String newVin = generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin());
         vehicleSubmittedData
-                .setVin(newVin)
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -88,9 +87,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostMissingMandatoryFieldsTrl() {
 
-        String newVin = generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin());
         vehicleSubmittedData
-                .setVin(newVin)
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -147,9 +145,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostAdditionalFieldsTestTypesTrl() {
 
-        String newVin = generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin());
         vehicleSubmittedData
-                .setVin(newVin)
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -208,9 +205,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostAdditionalFieldsTrl() {
 
-        String newVin = generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin());
         vehicleSubmittedData
-                .setVin(newVin)
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -1121,9 +1117,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostIncorrectValuesOdometerValueTypeTrl() {
 
-        String newVin = generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin());
         vehicleSubmittedData
-                .setVin(newVin)
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
