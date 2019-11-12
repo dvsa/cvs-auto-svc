@@ -9,6 +9,8 @@
     {
       "createdAt": "2019-01-16T12:24:38.027Z",
       "lastUpdatedAt": "2019-01-16T12:24:38.027Z",
+      "createdByName": "dragos",
+      "createdById": "22223333-44445555",
       "chassisMake": "Volvo",
       "chassisModel": "B10M",
       "bodyMake": "Duple",

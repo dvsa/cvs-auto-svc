@@ -1,0 +1,70 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "techRecord": [
+    {
+      "reasonForCreation": "Update ADR TYPE",
+      "adrDetails": {
+        "additionalExaminerNotes": "string",
+        "additionalNotes": {
+          "guidanceNotes": [
+            "New certificate requested"
+          ],
+          "number": [
+            "1",
+            "2"
+          ]
+        },
+        "applicantDetails": {
+          "city": "string",
+          "name": "string",
+          "postcode": "string",
+          "street": "string",
+          "town": "string"
+        },
+        "declarationsSeen": true,
+        "brakeDeclarationsSeen": true,
+        "brakeDeclarationIssuer": "DVSA",
+        "brakeEndurance": true,
+        "weight": "123",
+        "compatibilityGroupJ": false,
+        "documents": [
+          "S3://bla-bla.txt"
+        ],
+        "batteryListNumber": "123456",
+        "listStatementApplicable": true,
+        "memosApply": [
+          "07/09 3mth leak ext"
+        ],
+        "permittedDangerousGoods": [
+          "FP <61 (FL)"
+        ],
+        "tank": {
+          "tankDetails": {
+            "specialProvisions": "string",
+            "tankCode": "string",
+            "tankManufacturer": "string",
+            "tankManufacturerSerialNo": "string",
+            "tankTypeAppNo": "string",
+            "tc2Details": {
+              "tc2Type": "initial"
+            },
+            "yearOfManufacture": 0
+          },
+          "tankStatement": {
+            "productList": "string",
+            "statement": "string",
+            "substancesPermitted": "Substances permitted under the tank code and any special provisions specified in 9 may be carried"
+          }
+        },
+        "vehicleDetails": {
+          "approvalDate": "2019-10-10",
+          "type": "Centre axle battery"
+        },
+        "adrTypeApprovalNo": "123456"
+      }
+    }
+  ]
+}
