@@ -523,6 +523,12 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void validateVehicleFieldMayExist(String fieldName) {
+//        response.then().log().all();
+        assertThat(response.then().body("$", anyOf(hasItem(hasKey(fieldName)))));
+    }
+
+    @Step
     public void validateTestFieldExists(String fieldName) {
 //        response.then().log().all();
         hasTests();
