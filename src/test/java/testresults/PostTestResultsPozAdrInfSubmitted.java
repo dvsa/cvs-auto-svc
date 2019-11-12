@@ -65,6 +65,7 @@ public class PostTestResultsPozAdrInfSubmitted {
     public void testResultsAdrNoExpiryDate() {
 
         vehicleSubmittedData
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -78,7 +79,6 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -124,6 +124,7 @@ public class PostTestResultsPozAdrInfSubmitted {
     public void testResultsAdrNoCertificateNumber() {
 
         vehicleSubmittedData
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -137,7 +138,6 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -184,6 +184,7 @@ public class PostTestResultsPozAdrInfSubmitted {
     public void testResultsFailAdr() {
 
         vehicleSubmittedData
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -197,7 +198,6 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -243,8 +243,8 @@ public class PostTestResultsPozAdrInfSubmitted {
     @Title("CVSB-4927 - TC - Negative - API Consumer creates a new test results")
     @Test
     public void testResultsNonAdrNewTestResults() {
-
         vehicleSubmittedData
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -258,7 +258,6 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -313,13 +312,13 @@ public class PostTestResultsPozAdrInfSubmitted {
         String testResultId = generateRandomExcludingValues(4,vehicleSubmittedData.build().getTestResultId());
 
         vehicleSubmittedData
-                .setVin("T12111111")
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(testResultId)
                 .setCountryOfRegistration("XX")
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(1)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2020-09-12T16:42:14.757Z")
+                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")

@@ -520,7 +520,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     }
 
 
-    @Ignore
+    @Ignore ("deprecated")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType hgv")
     @Test
     public void testResultsValueVehicleTypeValueTwo() {
@@ -534,7 +534,7 @@ public class PostTestResultsPozMainLvlSubmitted {
         validateSavedData();
     }
 
-    @Ignore
+    @Ignore("deprecated")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType trl")
     @Test
     public void testResultsValueVehicleTypeValueThree() {

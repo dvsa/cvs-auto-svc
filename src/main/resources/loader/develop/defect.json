@@ -2535,7 +2535,11 @@
             "rear"
           ],
           "rowNumber": null,
-          "lateral": null,
+          "lateral": [
+            "nearside",
+            "offside",
+            "centre"
+          ],
           "seatNumber": null
         },
         "notes": false
@@ -2550,7 +2554,11 @@
             "rear"
           ],
           "rowNumber": null,
-          "lateral": null,
+          "lateral": [
+            "nearside",
+            "offside",
+            "centre"
+          ],
           "seatNumber": null
         },
         "notes": false
@@ -13914,7 +13922,8 @@
   {
     "forVehicleType": [
       "psv",
-      "hgv"
+      "hgv",
+      "trl"
     ],
     "imDescription": "Additional Braking Devices",
     "imNumber": 58,
@@ -13975,7 +13984,8 @@
             "deficiencySubId": null,
             "forVehicleType": [
               "psv",
-              "hgv"
+              "hgv",
+              "trl"
             ],
             "deficiencyId": "a"
           },
@@ -13987,7 +13997,8 @@
             "deficiencySubId": "i",
             "forVehicleType": [
               "psv",
-              "hgv"
+              "hgv",
+              "trl"
             ],
             "deficiencyId": "b"
           },
@@ -13999,7 +14010,8 @@
             "deficiencySubId": "ii",
             "forVehicleType": [
               "psv",
-              "hgv"
+              "hgv",
+              "trl"
             ],
             "deficiencyId": "b"
           },
@@ -14011,7 +14023,8 @@
             "deficiencySubId": "i",
             "forVehicleType": [
               "psv",
-              "hgv"
+              "hgv",
+              "trl"
             ],
             "deficiencyId": "c"
           },
@@ -14023,14 +14036,16 @@
             "deficiencySubId": "ii",
             "forVehicleType": [
               "psv",
-              "hgv"
+              "hgv",
+              "trl"
             ],
             "deficiencyId": "c"
           }
         ],
         "forVehicleType": [
           "psv",
-          "hgv"
+          "hgv",
+          "trl"
         ]
       }
     ],
@@ -14060,7 +14075,16 @@
         "notes": true
       },
       "trl": {
-
+        "location": {
+          "axleNumber": null,
+          "horizontal": null,
+          "vertical": null,
+          "longitudinal": null,
+          "rowNumber": null,
+          "lateral": null,
+          "seatNumber": null
+        },
+        "notes": true
       }
     }
   },
