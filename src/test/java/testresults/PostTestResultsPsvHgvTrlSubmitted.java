@@ -43,7 +43,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -103,7 +102,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -162,7 +160,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -223,7 +220,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -1136,7 +1132,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("articulated")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 

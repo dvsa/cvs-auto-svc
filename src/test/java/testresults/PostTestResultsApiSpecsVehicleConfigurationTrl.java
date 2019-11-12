@@ -71,7 +71,6 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration(vehicleConfiguration)
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -137,7 +136,6 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration(vehicleConfiguration)
-                .setVin("T12111111")
                 .setTestStatus("cancelled").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 

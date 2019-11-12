@@ -244,7 +244,6 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("undefined")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -303,7 +302,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration(null)
-                .setVin("T12111111")
+
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -362,7 +361,6 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
                 .setTestStationType("gvts")
                 .setVehicleType("trl")
                 .setVehicleConfiguration("drawbar")
-                .setVin("T12111111")
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 

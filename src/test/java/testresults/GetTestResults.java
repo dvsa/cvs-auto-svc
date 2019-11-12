@@ -165,7 +165,6 @@ public class GetTestResults {
             .setTestStationType("gvts")
             .setVehicleType("trl")
             .setVehicleConfiguration("semi-trailer")
-            .setVin("T12111111")
             .setTestStatus("submitted").build()
             .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -209,12 +208,8 @@ public class GetTestResults {
 
     testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
     testResultsSteps.validateVehicleFieldValue("vehicleConfiguration", "semi-trailer");
-
-
-    testResultsSteps.getTestResults("T12111111");
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
-        testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
+    testResultsSteps.validateVehicleFieldValue("vin", vehicleDefaultSubmittedData.build().getVin());
+    testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
     }
 
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
