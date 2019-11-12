@@ -64,7 +64,7 @@ public class VehicleTechnicalRecordsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
-        response.prettyPrint();
+
         return response;
     }
 
@@ -112,7 +112,7 @@ public class VehicleTechnicalRecordsClient {
                 .body(alteredBody)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
-        System.out.println(alteredBody);
+
         return response;
     }
 
@@ -122,6 +122,7 @@ public class VehicleTechnicalRecordsClient {
                 .body(body)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
+
         return response;
     }
 
