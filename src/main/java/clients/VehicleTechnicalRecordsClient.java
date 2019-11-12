@@ -64,7 +64,7 @@ public class VehicleTechnicalRecordsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
-        response.prettyPrint();
+
         return response;
     }
 
