@@ -62,6 +62,16 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void valuesForFieldsInPathShouldEqual(String jsonPath1, String jsonPath2) {
+        response.then().body(jsonPath1, equalTo(response.then().extract().path(jsonPath2)));
+    }
+
+    @Step
+    public void valuesForFieldsInPathShouldNotEqual(String jsonPath1, String jsonPath2) {
+        response.then().body(jsonPath1, not(equalTo(response.then().extract().path(jsonPath2))));
+    }
+
+    @Step
     public void fieldInPathShouldExist(String parentElementPath, String key) {
         response.then().body(parentElementPath,hasKey(key));
     }

@@ -3,6 +3,10 @@
   "secondaryVrms": [
     "X71LTA"
   ],
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
   "vin": "1B7GG36N12S678410",
   "partialVin": "678410",
   "techRecord": [

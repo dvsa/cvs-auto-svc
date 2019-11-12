@@ -3,6 +3,10 @@
   "secondaryVrms": [
     "SM33KR"
   ],
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
   "vin": "XMGDE02FS0H012461",
   "partialVin": "012461",
   "techRecord": [

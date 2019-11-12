@@ -1,0 +1,68 @@
+{
+  "msUserDetails": {
+    "msUser": "dragos",
+    "msOid": "11112222-33334444"
+  },
+  "techRecord": [
+    {
+      "reasonForCreation": "Update ADR TYPE",
+      "adrDetails": {
+        "additionalExaminerNotes": "additional note",
+        "additionalNotes": {
+          "guidanceNotes": [
+            "Old certificate requested"
+          ],
+          "number": [
+            "3",
+            "4"
+          ]
+        },
+        "applicantDetails": {
+          "city": "string1",
+          "name": "string1",
+          "postcode": "string1",
+          "street": "string1",
+          "town": "string1"
+        },
+        "declarationsSeen": false,
+        "brakeDeclarationsSeen": false,
+        "brakeDeclarationIssuer": "London",
+        "brakeEndurance": false,
+        "compatibilityGroupJ": true,
+        "documents": [
+          "S3://document.txt"
+        ],
+        "memosApply": [
+          "07/09 3mth leak int"
+        ],
+        "permittedDangerousGoods": [
+          "Explosives (type 2)"
+        ],
+        "tank": {
+          "tankDetails": {
+            "specialProvisions": "string1",
+            "tankCode": "string1",
+            "tankManufacturer": "string1",
+            "tankManufacturerSerialNo": "string1",
+            "tankTypeAppNo": "string1",
+            "tc2Details": {
+              "tc2IntermediateApprovalNo": "456789",
+              "tc2IntermediateExpiryDate": "2020-12-30"
+            },
+            "yearOfManufacture": 3
+          },
+          "tankStatement": {
+            "productList": "string1",
+            "statement": "string1",
+            "substancesPermitted": "No dangerous substances may be carried"
+          }
+        },
+        "vehicleDetails": {
+          "approvalDate": "2019-11-10",
+          "type": "tank"
+        },
+        "adrTypeApprovalNo": "456789"
+      }
+    }
+  ]
+}

@@ -23,27 +23,28 @@ public class PostVehicleTechnicalRecordsNeg {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-    // generate random Vin
-    private String randomVin = GenericData.generateRandomVin();
-    //generate random Vrm
-    private String randomVrm = GenericData.generateRandomVrm();
-    // read post request body from file
-    private String requestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
-    // create alteration make the techRecord array from the body request empty
-    private JsonPathAlteration emptyTechRecordArrayAlteration = new JsonPathAlteration("$.techRecord","[]","","REPLACE");
-    // create alteration to change Vin in the request body with the random generated Vin
-    private JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-    // create alteration to change primary vrm in the request body with the random generated primary vrm
-    private JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
-    // initialize the alterations list with only the alterations for changing the Vin and primay vrm
-    private List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
-
-
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC2 - Can not create a new vehicle entry using an existing VIN from the DB" +
             "AC4 - can not create a new vehicle entry when the request body doesn't contain at least one element in the `techRecord` array")
     @Test
     public void testCreateVehicleTechnicalRecordExistingVinEmptyTechRecordArray() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String requestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
+        // create alteration make the techRecord array from the body request empty
+        JsonPathAlteration emptyTechRecordArrayAlteration = new JsonPathAlteration("$.techRecord","[]","","REPLACE");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with only the alterations for changing the Vin and primay vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // validate AC2
