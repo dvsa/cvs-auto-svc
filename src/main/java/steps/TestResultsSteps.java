@@ -639,4 +639,10 @@ public class TestResultsSteps {
     public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
     }
+
+    @Step
+    public void valueForFieldInPathShouldBe(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " has value " + expectedValue);
+        response.then().body(path, equalTo(expectedValue));
+    }
 }
