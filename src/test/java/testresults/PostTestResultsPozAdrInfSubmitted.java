@@ -185,7 +185,6 @@ public class PostTestResultsPozAdrInfSubmitted {
 
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
