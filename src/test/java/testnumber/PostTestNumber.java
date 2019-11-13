@@ -60,6 +60,11 @@ public class PostTestNumber {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
+
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
@@ -223,6 +228,11 @@ public class PostTestNumber {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
+
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
@@ -268,6 +278,11 @@ public class PostTestNumber {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
+
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
@@ -289,6 +304,11 @@ public class PostTestNumber {
 
         objectMapper = new ObjectMapper();
         payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
 
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
