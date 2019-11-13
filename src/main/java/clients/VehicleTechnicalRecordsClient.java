@@ -112,7 +112,6 @@ public class VehicleTechnicalRecordsClient {
                 .body(alteredBody)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
-
         return response;
     }
 
