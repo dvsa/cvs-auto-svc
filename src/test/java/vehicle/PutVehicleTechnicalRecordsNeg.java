@@ -53,8 +53,7 @@ public class PutVehicleTechnicalRecordsNeg {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-8677 - AC1 - Add adrDetails{} object onto an existing tech record with status current" +
-            "AC2 - Update adrDetails{} object on an existing tech record")
+    @Title("CVSB-8677 - AC6 - Add or update adrDetails{} object onto an existing tech record without a mandatory adr field")
     @Test
     public void testErrorForMissingMandatoryAdrFields() {
         // TEST SETUP
@@ -185,8 +184,7 @@ public class PutVehicleTechnicalRecordsNeg {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-8677 - AC1 - Add adrDetails{} object onto an existing tech record with status current" +
-            "AC2 - Update adrDetails{} object on an existing tech record")
+    @Title("CVSB-8677 - AC7 - Add or update adrDetails{} object onto an existing tech record with at least one not applicable field")
     @Test
     public void testErrorForNotApplicableAdrFields() {
         // TEST SETUP
@@ -275,4 +273,48 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-8677 - AC8 - Add or update adrDetails{} object onto an existing tech record with random values for a field that accepts only specific values")
+    @Test
+    public void testErrorForNotAcceptedValuesAdrField() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv.json","$");
+        // read put request body from file for adding adr details
+        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$");
+        // read the adr details from the file used for put request body with adr details
+        String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // validate that making PUT request with N/A adr fields will give error
+        JsonPathAlteration alterationRandomTc2Type = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tc2Details.tc2Type", "random","","REPLACE");
+        JsonPathAlteration alterationRandomTc3Details = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails", "[]]","tc3Details","ADD_FIELD");
+        JsonPathAlteration alterationRandomTc3Type = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tc3Details", "random","[]","ADD_VALUE");
+
+        JsonPathAlteration alterationChangeAdrVehicleTypeNonBatteryTank = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.type", "car","","REPLACE");
+        List<JsonPathAlteration> adrAlterations = new ArrayList<>(Arrays.asList());
+        // tc2Type
+        adrAlterations = new ArrayList<>(Arrays.asList(alterationRandomTc2Type));
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
+        // tc3Type
+        adrAlterations = Arrays.asList(alterationRandomTc3Details, alterationRandomTc3Type);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
+    }
+
 }
