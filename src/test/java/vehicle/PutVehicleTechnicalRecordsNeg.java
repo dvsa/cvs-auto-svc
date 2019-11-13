@@ -82,8 +82,8 @@ public class PutVehicleTechnicalRecordsNeg {
         // vehicleDetails.type
         JsonPathAlteration alterationDeleteAdrVehicleDetailsType = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.type", "","","DELETE");
         adrAlterations.add(alterationDeleteAdrVehicleDetailsType);
-//        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
         adrAlterations.clear();
         // vehicleDetails.approvalDate
         JsonPathAlteration alterationDeleteAdrVehicleDetailsApprovalDate = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.approvalDate", "","","DELETE");
