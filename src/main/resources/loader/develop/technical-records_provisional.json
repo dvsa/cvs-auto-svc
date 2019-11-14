@@ -5,6 +5,10 @@
   ],
   "vin": "1B7GG36N12S021430",
   "partialVin": "021430",
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
   "techRecord": [
     {
       "createdAt": "2018-04-20T04:20:00.027Z",
