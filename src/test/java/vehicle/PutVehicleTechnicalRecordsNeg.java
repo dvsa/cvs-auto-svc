@@ -216,9 +216,9 @@ public class PutVehicleTechnicalRecordsNeg {
         JsonPathAlteration alterationDeleteAdrBatteryListNumber = new JsonPathAlteration("$.techRecord[0].adrDetails.batteryListNumber", "","","DELETE");
         JsonPathAlteration alterationDeleteAdrMemosApply = new JsonPathAlteration("$.techRecord[0].adrDetails.memosApply", "","","DELETE");
         JsonPathAlteration alterationChangeAdrVehicleTypeNonBatteryTank = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.type", "car","","REPLACE");
-        List<JsonPathAlteration> adrAlterations = new ArrayList<>(Arrays.asList());
+
         // tank
-        adrAlterations = new ArrayList<>(Arrays.asList(
+        List<JsonPathAlteration> adrAlterations = new ArrayList<>(Arrays.asList(
                 alterationDeleteAdrDocuments,
                 alterationDeleteAdrListStatementApplicable,
                 alterationDeleteAdrBatteryListNumber,
@@ -306,9 +306,9 @@ public class PutVehicleTechnicalRecordsNeg {
         JsonPathAlteration alterationRandomTc3Type = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tc3Details", "random","[]","ADD_VALUE");
 
         JsonPathAlteration alterationChangeAdrVehicleTypeNonBatteryTank = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.type", "car","","REPLACE");
-        List<JsonPathAlteration> adrAlterations = new ArrayList<>(Arrays.asList());
+
         // tc2Type
-        adrAlterations = new ArrayList<>(Arrays.asList(alterationRandomTc2Type));
+        List<JsonPathAlteration>  adrAlterations = new ArrayList<>(Arrays.asList(alterationRandomTc2Type));
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
         // tc3Type
