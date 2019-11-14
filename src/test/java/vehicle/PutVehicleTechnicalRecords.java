@@ -23,6 +23,7 @@ public class PutVehicleTechnicalRecords {
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
 
+    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
@@ -113,10 +114,6 @@ public class PutVehicleTechnicalRecords {
         String putRequestBodyAdrDetailsTank = GenericData.readJsonValueFromFile("technical-records_adr_details_tank.json","$");
         // read the adr details from the file used for put request body with tank adr details
         String adrDetailsTank = GenericData.readJsonValueFromFile("technical-records_adr_details_tank.json","$.techRecord[0].adrDetails");
-//        // create alteration to change all the adr details and tester information
-//        JsonPathAlteration alteration = new JsonPathAlteration("$", randomVrm,"","REPLACE");
-//        // create separate alterations list in regard to adding the adrDetails object
-//        List<JsonPathAlteration> alterationsAdrDetails = new ArrayList<>(Arrays.asList(alteration));
 
         //TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
