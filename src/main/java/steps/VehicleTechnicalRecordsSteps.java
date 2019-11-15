@@ -57,6 +57,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
+        response.then().body(path, endsWith(expectedValue));
+    }
+
+    @Step
     public void valueForFieldInPathShouldBe(String path, int expectedValue) {
         response.then().body(path, equalTo(expectedValue));
     }
