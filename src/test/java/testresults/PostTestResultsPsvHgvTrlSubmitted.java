@@ -7,6 +7,7 @@ import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -290,6 +291,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.validateTestFieldExists("seatbeltInstallationCheckDate");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-6805 - CVSB-7256 - API Consumer creates a new test results for the submitted test (HGV)")
     @Test
     public void testTestResultsPostValidHgv() {
