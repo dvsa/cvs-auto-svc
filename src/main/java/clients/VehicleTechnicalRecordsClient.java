@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static util.WriterReader.saveUtils;
 
 public class VehicleTechnicalRecordsClient {
@@ -164,6 +167,18 @@ public class VehicleTechnicalRecordsClient {
             saveUtils();
             response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
         }
+
+        return response;
+    }
+
+    public Response downloadFile(String searchIdentifier, String fileName) {
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("filename", fileName)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }

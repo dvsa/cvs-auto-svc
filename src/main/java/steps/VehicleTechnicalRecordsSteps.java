@@ -13,6 +13,7 @@ import util.JsonPathAlteration;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class VehicleTechnicalRecordsSteps {
@@ -251,4 +252,14 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("techRecord[0]." + field, instanceOf(type));
     }
 
+    @Step
+    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
+        vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+        return response.then().extract().path(jsonPath).toString();
+    }
+
+    @Step
+    public Response downloadFile(String searchIdentifier, String fileName) {
+        return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
+    }
 }
