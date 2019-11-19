@@ -57,8 +57,7 @@ public class ActivitiesSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then()
-                .log().all()
+        response.then().log().all()
                 .statusCode(statusCode);
     }
 
