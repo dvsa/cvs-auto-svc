@@ -33,7 +33,7 @@ public class PostTestResultsAdrCertificate {
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
 //                {"50"},
-//                {"59"},
+                {"59"},
                 {"60"}
         });
     }
