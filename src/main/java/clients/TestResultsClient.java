@@ -402,6 +402,8 @@ public class TestResultsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
+//                .log().all()
+                .log().method().log().uri().log().body()
                 .post("/test-results");
 
         return response;

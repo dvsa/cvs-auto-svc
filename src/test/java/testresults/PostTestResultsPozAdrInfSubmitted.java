@@ -309,7 +309,7 @@ public class PostTestResultsPozAdrInfSubmitted {
     @Test
     public void testResultsAdrNewTestResults() {
 
-        String testResultId = generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId());
+        String testResultId = generateRandomExcludingValues(4,vehicleSubmittedData.build().getTestResultId());
 
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
