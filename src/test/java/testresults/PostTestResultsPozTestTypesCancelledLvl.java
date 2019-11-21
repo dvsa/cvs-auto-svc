@@ -471,11 +471,11 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     @Test
     public void testResultsReasonForAbandoningPassEmpty() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
+        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData
+                .setTestResultId(generateRandomExcludingValues(5,vehicleCancelledData.build().getTestResultId()))
+                .build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning("");
-
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
         vehicleCancelledData.build().getTestTypes().get(0).setReasonForAbandoning(null);
 
         ObjectMapper objectMapper = new ObjectMapper();

@@ -282,11 +282,10 @@ public class PostTestNumber {
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
 
-        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
-        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testExpiryDate", "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
 
         testResultsSteps.postTestResultsPayload(payload);

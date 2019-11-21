@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 
+import static util.DataUtil.generateRandomExcludingValues;
+
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegTestTypesSubmittedLvl {
@@ -127,7 +129,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestExpiryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId())).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }
