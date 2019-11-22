@@ -60,6 +60,11 @@ public class PostTestNumber {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
+
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
@@ -223,6 +228,11 @@ public class PostTestNumber {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
+
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
@@ -256,6 +266,7 @@ public class PostTestNumber {
         testResultsSteps.validateTestNumberIsDifferentForTwoTestTypes();
     }
 
+    @WithTag("failing due to CVSB-7964 - to update")
     @Title("CVSB-2157/CVSB-3246 AC A1. VSA submits test results (when current cert letter in database is not 'Z', and current sequence number in database is not '999') (testNumber generated)")
     @Test
     public void verifyNextTestNumberGeneration() {
@@ -267,11 +278,15 @@ public class PostTestNumber {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
-        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
+
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
-        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testExpiryDate", "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
 
         testResultsSteps.postTestResultsPayload(payload);
@@ -288,6 +303,11 @@ public class PostTestNumber {
 
         objectMapper = new ObjectMapper();
         payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapFitted", "New improved particulateTrap");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "particulateTrapSerialNumber", "12481632");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modificationTypeUsed", "Big filter");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "smokeTestKLimitApplied", "2.2");
 
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");

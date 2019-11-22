@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 
+import static util.DataUtil.generateRandomExcludingValues;
+
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegTestTypesSubmittedLvl {
@@ -112,6 +114,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     }
 
 
+    @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - testExpiryDate")
     @Test
     public void testResultsExtraFieldTestExpiryDate() {
@@ -121,12 +124,12 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }
 
-
+    @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testExpiryDate")
     @Test
     public void testResultsNullTestExpiryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId())).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }

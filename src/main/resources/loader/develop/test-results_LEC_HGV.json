@@ -30,6 +30,10 @@
         "code": "p",
         "description": "particulate trap"
       },
+      "particulateTrapFitted": "New improved particulateTrap",
+      "particulateTrapSerialNumber": "12481632",
+      "modificationTypeUsed": "Big filter",
+      "smokeTestKLimitApplied": "2.2",
       "name": "Technical test",
       "prohibitionIssued": true,
       "reasonForAbandoning": null,

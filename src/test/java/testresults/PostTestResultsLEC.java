@@ -24,6 +24,13 @@ public class PostTestResultsLEC {
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
+    private void validateSavedData(List<String> data) {
+
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
+        testResultsSteps.validateDataForExpiry(data);
+    }
 
 
     @Title("CVSB-7964 - TC4 - AC4 - API Consumer creates a new test results for the submitted test (PSV, Pass)")

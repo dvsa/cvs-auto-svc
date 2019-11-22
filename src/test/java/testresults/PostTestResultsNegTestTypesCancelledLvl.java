@@ -110,6 +110,7 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("certificateLink", "is not allowed");
     }
 
+    @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - testExpiryDate")
     @Test
     public void testResultsExtraFieldTestExpiryDate() {
@@ -119,13 +120,13 @@ public class PostTestResultsNegTestTypesCancelledLvl {
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testExpiryDate")
+    @Title("CVSB-9831 - Add a BE test to confirm expiryDate set to null is accepted - overrides: CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testExpiryDate")
     @Test
     public void testResultsNullTestExpiryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
+        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).setTestResultId(RandomStringUtils.randomNumeric(3)).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
     }
 
 

@@ -112,8 +112,7 @@ public class TestResultsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then()
-                .log().all()
+        response.then().log().all()
                 .statusCode(statusCode);
     }
 
@@ -129,8 +128,7 @@ public class TestResultsSteps {
 
     @Step
     public void validateMessage(String stringData) {
-        response.then()
-                .log().all()
+        response.then().log().all()
                 .body("message", equalTo(stringData));
     }
 
