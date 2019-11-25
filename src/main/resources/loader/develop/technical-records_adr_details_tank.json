@@ -30,7 +30,7 @@
         "brakeEndurance": false,
         "compatibilityGroupJ": true,
         "documents": [
-          "S3://document.txt"
+          "document.txt"
         ],
         "memosApply": [
           "07/09 3mth leak int"

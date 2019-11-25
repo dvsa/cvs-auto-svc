@@ -86,11 +86,11 @@ public class PutVehicleTechnicalRecords {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-8677 - AC1 - Add adrDetails{} object onto an existing tech record with status current" +
-            "AC2 - Update adrDetails{} object on an existing tech record" +
+    @Title("CVSB-8677 - AC1 - Add adrDetails object onto an existing tech record with status current" +
+            "AC2 - Update adrDetails object on an existing tech record" +
             "AC3 - All attributes are returned" +
-            "AC4 - Adding of adrDetails{} is audited" +
-            "AC5 - Updating of adrDetails{} is audited")
+            "AC4 - Adding of adrDetails is audited" +
+            "AC5 - Updating of adrDetails is audited")
     @Test
     public void testAddAdrDetailsObjectVehicleTechnicalRecord() {
         //TEST SETUP

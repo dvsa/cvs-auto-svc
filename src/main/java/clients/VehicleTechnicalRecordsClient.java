@@ -112,6 +112,7 @@ public class VehicleTechnicalRecordsClient {
                 .body(alteredBody)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
+
         return response;
     }
 
@@ -121,6 +122,7 @@ public class VehicleTechnicalRecordsClient {
                 .body(body)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
+
         return response;
     }
 
