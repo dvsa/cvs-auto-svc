@@ -33,7 +33,7 @@ public class PostTestResultsAdrCertificate {
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
 //                {"50"},
-                {"59"},
+//                {"59"},
                 {"60"}
         });
     }
@@ -119,15 +119,6 @@ public class PostTestResultsAdrCertificate {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.validateCertificateIsGenerated(uuid,vin);
-
-//        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
-//        testResultsSteps.statusCodeShouldBe(200);
-//
-//        testResultsSteps.validateVehicleFieldExists("vrm");
-//        testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
-//        testResultsSteps.validateVehicleFieldValue("odometerReading", 350000);
-//        testResultsSteps.validateVehicleFieldValue("odometerReadingUnits", "kilometres");
-//        testResultsSteps.validateCertificateIsGenerated(uuid,vin);
 
     }
 
