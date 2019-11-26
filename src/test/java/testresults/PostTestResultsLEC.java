@@ -15,6 +15,7 @@ import util.JsonPathAlteration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsLEC {
@@ -426,5 +427,77 @@ public class PostTestResultsLEC {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validateErrorText("Fuel Type not present on LEC test type");
+    }
+
+    @Title("CVSB-7523 - AC2 - LEC Certificate number is populated using testNumber service - PSV")
+    @Test
+    public void testResults_LEC_PSV_Pass_Certificate_Number() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_psv_cert.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId =  UUID.randomUUID().toString();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId,"","REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationResult,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Retrieve the created record, and verify that the fields are present.
+        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        // Verify LEC test field values match the expected values.
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeId", "39");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeName", "Low Emissions Certificate (LEC) with annual test");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lbp");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
+    }
+
+    @Title("CVSB-7523 - AC2 - LEC Certificate number is populated using testNumber service - HGV")
+    @Test
+    public void testResults_LEC_HGV_Pass_Certificate_Number() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_hgv_cert.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId =  UUID.randomUUID().toString();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId,"","REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationResult,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Retrieve the created record, and verify that the fields are present.
+        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        // Verify LEC test field values match the expected values.
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeId", "45");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeName", "Low Emissions Certificate (LEC)");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lev");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 }

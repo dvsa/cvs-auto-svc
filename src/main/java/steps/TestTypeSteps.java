@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.Step;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class TestTypeSteps {
@@ -37,7 +38,7 @@ public class TestTypeSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().statusCode(statusCode);
+        response.then().log().all().statusCode(statusCode);
     }
 
     @Step
@@ -196,4 +197,8 @@ public class TestTypeSteps {
 
     }
 
+    @Step
+    public void validateData(String key, String value) {
+        assertThat(response.then().body("$", hasEntry(key,value)));
+    }
 }

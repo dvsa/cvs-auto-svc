@@ -18,4 +18,7 @@ public interface Loader {
 
     String getDataPath();
 
+    String getS3Bucket();
+
+    String getBranchName();
 }

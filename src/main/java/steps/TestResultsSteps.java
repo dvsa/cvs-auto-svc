@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import util.AwsUtil;
 import util.JsonPathAlteration;
 
 import java.util.Arrays;
@@ -481,6 +482,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public String getTestNumber() {
+        return response.jsonPath().getString("[0].testTypes[0].testNumber");
+    }
+
+    @Step
     public void checkNextTestNumberIsValid(String nextTestNumber){
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         System.out.println("nextTestNumber: " + nextTestNumber + " and the actual is: " + testNumber);
@@ -636,5 +642,9 @@ public class TestResultsSteps {
     @Step
     public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
+    }
+
+    public void validateCertificateIsGenerated(String uuid, String vin) {
+        assertThat(AwsUtil.isCertificateCreated(uuid,vin)).isTrue();
     }
 }

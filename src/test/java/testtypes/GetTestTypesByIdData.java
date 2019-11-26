@@ -3374,5 +3374,22 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
     }
 
+    @Title("CVSB-7523 - TC - AC1 - GET to testTypes service and confirm 'Annual With Certificate' is retrieved")
+    @Test
+    public void testTypeLecAnnualCertificatePsvSmallRigid() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+
+        testTypeSteps.getTestTypesById("39", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","39");
+        testTypeSteps.validateData("testTypeClassification","Annual With Certificate");
+        testTypeSteps.validateData("defaultTestCode","lbp");
+        testTypeSteps.validateData("linkedTestCode","lcp");
+    }
 
 }
