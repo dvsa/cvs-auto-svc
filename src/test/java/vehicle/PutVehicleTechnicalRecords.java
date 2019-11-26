@@ -156,4 +156,49 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].createdById", "11112222-33334444");
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[3].adrDetails", adrDetailsTank);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
+            "AC2 - Document is removed from the ADR record")
+    @Test
+    public void testAddAdrDetailsUploadDocumentAdrRecord() {
+        //TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv.json","$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        // get pdf content as base64 encoded string
+        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
+        // create alteration to add files field in the request body as array with an element the previously encoded string
+        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
+        JsonPathAlteration alterationRemoveFiles = new JsonPathAlteration("$.techRecord[0].adrDetails.documents","[]","","REPLACE");
+        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // validate AC1
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[2].adrDetails.documents[1]", ".pdf");
+        //validate AC2
+        alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationRemoveFiles));
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 4);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].adrDetails.documents.size()", 0);
+    }
 }

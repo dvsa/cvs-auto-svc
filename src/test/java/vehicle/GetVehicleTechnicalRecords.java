@@ -427,6 +427,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
     }
 
+    @WithTag("Vtm")
     @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
     @Test
     public void testAllVehicleTechnicalRecordsSearchVrm() {
@@ -437,6 +438,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 10);
     }
 
+    @WithTag("Vtm")
     @Title("CVSB-4924 - AC1 API Consumer retrieve the Vehicle Technical Records - adrDetails")
     @Test
     public void testVehicleTechnicalRecordsSearchAdrDetails() {
@@ -445,6 +447,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateTechRecordContainsField("adrDetails");
     }
 
+    @WithTag("Vtm")
     @Title("CVSB-4924 - AC1 API Consumer retrieve the Vehicle Technical Records - euroStandard")
     @Test
     public void testVehicleTechnicalRecordsSearchEuroStandard() {
@@ -452,5 +455,18 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateTechRecordContainsField("euroStandard");
         vehicleTechnicalRecordsSteps.validateTechRecordFieldIsOfType("euroStandard", String.class);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-9425 - API Consumer retrieve all vrms for a specific vehicle, primary and secondary")
+    @Test
+    public void testVehicleTechnicalRecordsGetAllVrms() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301000000");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms.size", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", "AA00AAA");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].isPrimary", true);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", "CT96DRG");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].isPrimary", false);
     }
 }

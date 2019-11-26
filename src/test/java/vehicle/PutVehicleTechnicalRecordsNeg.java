@@ -1,11 +1,13 @@
 package vehicle;
 
 import data.GenericData;
+import io.restassured.response.Response;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -317,4 +319,40 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
     }
 
+    @WithTag("Vtm")
+    @Title("CVSB-9657 - AC2 - Error is given when making GET request with invalid file name")
+    @Test
+    public void testErrorForDownloadingRandomFile() {
+        //TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv.json","$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        // get pdf content as base64 encoded string
+        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
+        // create alteration to add files field in the request body as array with an element the previously encoded string
+        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
+        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        Response downloadFileResponse = vehicleTechnicalRecordsSteps.downloadFile(randomVin, "bla-bla.txt");
+        String downloadedFileContent = downloadFileResponse.asString().substring(1, downloadFileResponse.asString().length()-1);
+        Assert.assertEquals(500, downloadFileResponse.getStatusCode());
+        Assert.assertEquals("Cannot download document from S3", downloadedFileContent);
+    }
 }

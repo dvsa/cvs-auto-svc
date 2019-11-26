@@ -46,7 +46,8 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().log().all()
+        response.then()
+                .log().all()
                 .statusCode(statusCode);
     }
 
@@ -56,8 +57,18 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public void valueForFieldInPathShouldBe(String path, int expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
+        response.then().body(path, endsWith(expectedValue));
     }
 
     @Step
@@ -245,4 +256,14 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("techRecord[0]." + field, instanceOf(type));
     }
 
+    @Step
+    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
+        vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+        return response.then().extract().path(jsonPath).toString();
+    }
+
+    @Step
+    public Response downloadFile(String searchIdentifier, String fileName) {
+        return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
+    }
 }

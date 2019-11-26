@@ -64,7 +64,7 @@ public class VehicleTechnicalRecordsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
-
+        response.prettyPrint();
         return response;
     }
 
@@ -166,6 +166,18 @@ public class VehicleTechnicalRecordsClient {
             saveUtils();
             response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
         }
+
+        return response;
+    }
+
+    public Response downloadFile(String searchIdentifier, String fileName) {
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("filename", fileName)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
