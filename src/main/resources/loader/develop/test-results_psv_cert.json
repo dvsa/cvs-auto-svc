@@ -1,0 +1,64 @@
+{
+  "countryOfRegistration": "gb",
+  "euVehicleCategory": "m1",
+  "noOfAxles": 2,
+  "numberOfSeats": 50,
+  "odometerReading": 35000,
+  "odometerReadingUnits": "kilometres",
+  "preparerId": "BL5545",
+  "numberOfWheelsDriven": 4,
+  "preparerName": "Durrell Vehicles Limited",
+  "reasonForCancellation": null,
+  "testEndTimestamp": "2019-11-25T12:48:26.012Z",
+  "testerEmailAddress": "cvs.automation6@dvsagov.onmicrosoft.com",
+  "testerName": "cvs.automation6@dvsagov.onmicrosoft.com",
+  "testerStaffId": "b358e472-007d-438c-9d0d-75f243a8cce6",
+  "testResultId": "0528f56d-633f-4cad-9bfd-1d938d4f7cc0",
+  "testStartTimestamp": "2019-11-25T12:43:46.167Z",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testStatus": "submitted",
+  "testTypes": [
+    {
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "certificateNumber": null,
+      "secondaryCertificateNumber": "123456",
+      "defects": [
+      ],
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType": "diesel",
+      "modificationTypeUsed": "Big filter",
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "particulateTrapFitted": "New improved particulateTrap",
+      "particulateTrapSerialNumber": "12481632",
+      "lastSeatbeltInstallationCheckDate": null,
+      "name": "Technical test",
+      "numberOfSeatbeltsFitted": null,
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "seatbeltInstallationCheckDate": null,
+      "testResult": "pass",
+      "customDefects": [],
+      "testTypeEndTimestamp": "2019-11-25T12:48:26.013Z",
+      "testTypeId": "39",
+      "testTypeName": "Low Emissions Certificate (LEC) with annual test",
+      "testTypeStartTimestamp": "2019-11-25T12:46:54.382Z",
+      "smokeTestKLimitApplied": "2.2",
+      "testExpiryDate": "2019-09-19"
+    }
+  ],
+  "vehicleClass": {
+    "code": "s",
+    "description": "small psv (ie: less than or equal to 22 seats)"
+  },
+  "vehicleConfiguration": "rigid",
+  "vehicleSize": "small",
+  "vehicleType": "psv",
+  "vin": "1B7GG36N12S678410",
+  "vrm": "BQ91YHQ"
+}

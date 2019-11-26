@@ -1,0 +1,59 @@
+{
+  "testResultId":"8e76d2c5-4691-46da-8bdc-5dbebdb7444f",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "numberOfWheelsDriven": 4,
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2019-12-09T17:08:39.021Z",
+  "testEndTimestamp":"2019-12-09T17:10:14.347Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"AD35GHT",
+  "odometerReading":12344,
+  "odometerReadingUnits":"kilometres",
+  "vin":"P012301957486",
+  "vehicleClass":{
+    "description":"heavy goods vehicle",
+    "code":"v"
+  },
+  "vehicleType":"hgv",
+  "vehicleConfiguration":"centre axle drawbar",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"n2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":5,
+  "testTypes":[
+    {
+      "name":"Technical test",
+      "secondaryCertificateNumber": "123456",
+      "testTypeName":"Low Emissions Certificate (LEC) with annual test",
+      "testTypeId":"44",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-12-09T17:09:18.436Z",
+      "testTypeEndTimestamp":"2019-12-09T17:10:14.349Z",
+      "modType":{
+        "code":"g",
+        "description":"gas engine"
+      },
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType":"petrol",
+      "smokeTestKLimitApplied":"23",
+      "particulateTrapFitted":null,
+      "customDefects": [],
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":"dsdf",
+      "testResult":"fail",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"dssd",
+      "defects":[
+
+      ]
+    }
+  ]
+}

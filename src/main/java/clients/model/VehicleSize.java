@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public enum VehicleSize implements PropertyValued {
 
-    SMALL("small"), LARGE("large"), EMPTY(""),
+    SMALL("small"), LARGE("large"), EMPTY(""),NULL(null),
     INVALID("invalid") {
         @Override
         public String getValue() {

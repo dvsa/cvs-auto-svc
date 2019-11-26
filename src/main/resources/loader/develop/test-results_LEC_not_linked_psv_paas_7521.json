@@ -1,0 +1,65 @@
+{
+  "testResultId":"d33f4634-c1e9-4914-89bf-2b2166a11bf7",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "numberOfWheelsDriven": 4,
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2019-12-09T15:31:42.296Z",
+  "testEndTimestamp":"2019-12-09T15:33:13.651Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"JY58FPP",
+  "odometerReading":12344,
+  "odometerReadingUnits":"kilometres",
+  "vin":"XMGDE02FS0H012345",
+  "vehicleClass":{
+    "description":"small psv (ie: less than or equal to 22 seats)",
+    "code":"s"
+  },
+  "vehicleType":"psv",
+  "vehicleConfiguration":"rigid",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"m2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":2,
+  "vehicleSize":"small",
+  "numberOfSeats":22,
+  "testTypes":[
+    {
+      "name":"Technical test",
+      "testTypeName":"Low Emissions Certificate (LEC) with annual test",
+      "testTypeId":"39",
+      "secondaryCertificateNumber": "123456",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-12-09T15:32:34.270Z",
+      "testTypeEndTimestamp":"2019-12-09T15:33:13.653Z",
+      "numberOfSeatbeltsFitted":null,
+      "lastSeatbeltInstallationCheckDate":null,
+      "seatbeltInstallationCheckDate":null,
+      "modType":{
+        "code":"m",
+        "description":"modification or change of engine"
+      },
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType":"petrol",
+      "smokeTestKLimitApplied":"12",
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":"dfdfg",
+      "testExpiryDate":"2020-11-09",
+      "testResult":"pass",
+      "customDefects": [],
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"dfdf",
+      "defects":[
+
+      ]
+    }
+  ]
+}
