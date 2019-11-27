@@ -26,8 +26,8 @@ public enum TestTypes {
 //    FGV2("40", "fgv2", TestTypeClassification.CERTIFICATE.getValue()),
 //    FGV3("40", "fgv3", TestTypeClassification.CERTIFICATE.getValue()),
 //    FGV4("40", "fgv4", TestTypeClassification.CERTIFICATE.getValue()),
-    LDV("44", "ldv", TestTypeClassification.NO_CERTIFICATE.getValue()),
-    LEV("45", "lev", TestTypeClassification.NO_CERTIFICATE.getValue()),
+    LDV("44", "ldv", TestTypeClassification.CERTIFICATE.getValue()),
+    LEV("45", "lev", TestTypeClassification.CERTIFICATE.getValue()),
     NFV("47", "nfv", TestTypeClassification.NO_CERTIFICATE.getValue()),
     NFT("47", "nft", TestTypeClassification.NO_CERTIFICATE.getValue()),
     NVV("48", "nvv", TestTypeClassification.NO_CERTIFICATE.getValue()),
@@ -263,7 +263,7 @@ public enum TestTypes {
     NFL("38", "nfl", TestTypeClassification.NO_CERTIFICATE.getValue()),
     NFS("38", "nfs", TestTypeClassification.NO_CERTIFICATE.getValue()),
 //    LCP("39", "lcp", TestTypeClassification.NO_CERTIFICATE.getValue()),
-    LBP("39", "lbp", TestTypeClassification.NO_CERTIFICATE.getValue());
+    LBP("39", "lbp", TestTypeClassification.CERTIFICATE.getValue());
 
 
 

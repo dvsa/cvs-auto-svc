@@ -13,6 +13,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -217,6 +218,7 @@ public class PostTestNumber {
         testResultsSteps.validateTestNumberEqualsCertificateNumber();
     }
 
+    @Ignore("Deprecated by CVSB-731")
     @Title("CVSB-2157/CVSB-3279 AC B3. VSA submits test results which contain an LEC Test Type (testNumber and certificate number are not the same)")
     @Test
     public void validTestNumberGeneratedForLecTestTypeIsNotEqualToCertificateNumber() {
