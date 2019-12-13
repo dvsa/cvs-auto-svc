@@ -8,7 +8,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -47,10 +46,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -75,10 +76,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -103,10 +106,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -115,10 +120,9 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateData("Test records created");
 
         //Verify that the certificate is generated in S3 bucket
-        //testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-
 
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - PASS ")
     @Test
@@ -132,10 +136,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -160,10 +166,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -188,10 +196,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -216,10 +226,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -231,7 +243,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-
 
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - PASS ")
     @Test
@@ -245,10 +256,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -273,10 +286,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -301,10 +316,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -329,10 +346,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -357,10 +376,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -385,10 +406,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -413,10 +436,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -441,10 +466,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -469,10 +496,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -497,10 +526,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -525,10 +556,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -553,10 +586,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -581,10 +616,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -609,10 +646,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -637,10 +676,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -652,7 +693,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-
 
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - FAIL ")
     @Test
@@ -666,10 +706,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -694,10 +736,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -722,10 +766,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -750,10 +796,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -778,10 +826,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -806,10 +856,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -834,10 +886,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
@@ -862,10 +916,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationResult,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.
