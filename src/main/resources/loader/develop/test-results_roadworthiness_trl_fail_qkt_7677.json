@@ -1,0 +1,70 @@
+{
+  "testResultId":"2786ad78-3568-422d-8e65-618ce650eed5",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2019-12-13T16:47:58.152Z",
+  "testEndTimestamp":"2019-12-13T16:48:48.019Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "trailerId":"C000002",
+  "vin":"T12341237",
+  "vehicleClass":{
+    "description":"trailer",
+    "code":"t"
+  },
+  "vehicleType":"trl",
+  "vehicleConfiguration":"semi-trailer",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"o2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":1,
+  "testTypes":[
+    {
+      "name":"Retest",
+      "testTypeName":"Paid roadworthiness retest",
+      "testTypeId":"101",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-12-13T16:48:21.888Z",
+      "testTypeEndTimestamp":"2019-12-13T16:48:48.021Z",
+      "testExpiryDate":null,
+      "testResult":"fail",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"cdcs",
+      "defects":[
+        {
+          "deficiencyRef":"38.5.a",
+          "deficiencyCategory":"major",
+          "deficiencyId":"a",
+          "deficiencySubId":null,
+          "deficiencyText":"are missing.",
+          "imNumber":38,
+          "imDescription":"Service Brake Operation",
+          "itemNumber":5,
+          "itemDescription":"Any of the required ABS or ABS/EBS or ESC warning lamps:",
+          "additionalInformation":{
+            "notes":"ddw",
+            "location":{
+              "vertical":null,
+              "horizontal":null,
+              "lateral":null,
+              "longitudinal":null,
+              "rowNumber":null,
+              "seatNumber":null,
+              "axleNumber":null
+            }
+          },
+          "stdForProhibition":false,
+          "prs":false,
+          "prohibitionIssued":false
+        }
+      ]
+    }
+  ]
+}

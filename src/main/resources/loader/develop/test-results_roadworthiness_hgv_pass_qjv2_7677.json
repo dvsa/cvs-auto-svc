@@ -1,0 +1,54 @@
+{
+  "testResultId":"e745c5bd-3cf3-4d8b-b433-a825899e58c4",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2019-12-13T14:55:57.955Z",
+  "testEndTimestamp":"2019-12-13T14:58:50.634Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"CT70VRL",
+  "odometerReading":4356,
+  "odometerReadingUnits":"kilometres",
+  "vin":"P012301230123",
+  "vehicleClass":{
+    "description":"heavy goods vehicle",
+    "code":"v"
+  },
+  "vehicleType":"hgv",
+  "vehicleConfiguration":"semi-car transporter",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"n2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":2,
+  "testTypes":[
+    {
+      "name":"Voluntary test",
+      "testTypeName":"Voluntary roadworthiness test",
+      "testTypeId":"122",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-12-13T14:58:34.644Z",
+      "testTypeEndTimestamp":"2019-12-13T14:58:50.635Z",
+      "modType":null,
+      "emissionStandard":null,
+      "fuelType":null,
+      "smokeTestKLimitApplied":null,
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":null,
+      "testExpiryDate":null,
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"dvdf",
+      "defects":[
+
+      ]
+    }
+  ]
+}
