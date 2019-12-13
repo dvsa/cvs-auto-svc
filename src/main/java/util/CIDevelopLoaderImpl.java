@@ -83,4 +83,25 @@ public class CIDevelopLoaderImpl implements Loader {
             throw new AutomationException("Setup of variable DATA, default or explicit failed, please pass in command or configure variable");
         }
     }
+
+    @Override
+    public String getS3Bucket() {
+        System.out.println("Using CI settings...");
+        String variable =  System.getProperty("BUCKET");
+        if (variable != null) {
+            return variable;
+        } else {
+            throw new AutomationException("Setup of variable DATA, default or explicit failed, please pass in command or configure variable");
+        }
+    }
+
+    @Override
+    public String getBranchName() {
+        String variable =  System.getProperty("BRANCH");
+        if (variable != null) {
+            return variable;
+        } else {
+            throw new AutomationException("Setup of variable DATA, default or explicit failed, please pass in command or configure variable");
+        }
+    }
 }
