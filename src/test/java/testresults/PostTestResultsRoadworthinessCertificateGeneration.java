@@ -35,7 +35,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateDataForExpiry(data);
     }
 
-    @WithTag("In_Test")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT1_Pass_Certificate_Generation() {
@@ -66,7 +65,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
     }
 
-    @WithTag("In_Test")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT2) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT2_Pass_Certificate_Generation() {
@@ -96,7 +94,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT4) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT4_Pass_Certificate_Generation() {
@@ -126,6 +124,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
+
     @WithTag("In_Test")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - PASS ")
     @Test
@@ -156,7 +155,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV3) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV3_Pass_Certificate_Generation() {
@@ -186,7 +185,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV4) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV4_Pass_Certificate_Generation() {
@@ -216,7 +215,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV5) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV5_Pass_Certificate_Generation() {
@@ -246,6 +245,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
+
     @WithTag("In_Test")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - PASS ")
     @Test
@@ -276,7 +276,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QKT) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_QKT_Pass_Certificate_Generation() {
@@ -306,7 +306,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QPV) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QPV_Pass_Certificate_Generation() {
@@ -336,7 +336,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QPT) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_QPT_Pass_Certificate_Generation() {
@@ -366,7 +366,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QQV) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QQV_Pass_Certificate_Generation() {
@@ -396,7 +396,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QQT) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_QQT_Pass_Certificate_Generation() {
@@ -426,7 +426,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(RUT) - PASS ")
     @Test
     public void testResults_Roadworthiness_TRL_RUT_Pass_Certificate_Generation() {
@@ -456,7 +456,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(RUV) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_RUV_Pass_Certificate_Generation() {
@@ -486,7 +486,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT1_Fail_Certificate_Generation() {
@@ -516,7 +516,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT2) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT2_Fail_Certificate_Generation() {
@@ -546,7 +546,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT4) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT4_Fail_Certificate_Generation() {
@@ -576,7 +576,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV2_Fail_Certificate_Generation() {
@@ -606,7 +606,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV3) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV3_Fail_Certificate_Generation() {
@@ -636,7 +636,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV4) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV4_Fail_Certificate_Generation() {
@@ -666,7 +666,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV5) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV5_Fail_Certificate_Generation() {
@@ -696,6 +696,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
+
     @WithTag("In_Test")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - FAIL ")
     @Test
@@ -726,7 +727,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QKT) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QKT_Fail_Certificate_Generation() {
@@ -756,7 +757,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QPV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QPV_Fail_Certificate_Generation() {
@@ -786,7 +787,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QPT) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QPT_Fail_Certificate_Generation() {
@@ -816,7 +817,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QQV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QQV_Fail_Certificate_Generation() {
@@ -846,7 +847,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QQT) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QQT_Fail_Certificate_Generation() {
@@ -876,7 +877,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(RUT) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_RUT_Fail_Certificate_Generation() {
@@ -906,7 +907,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
 
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(RUV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_RUV_Fail_Certificate_Generation() {
