@@ -3951,7 +3951,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - HGV")
     @Test
     public void testTypeRoadworthinessAnnualCertificateHgvTwoAxles() {
@@ -3968,7 +3968,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - TRL")
     @Test
     public void testTypeRoadworthinessAnnualCertificateTrlThreeAxles() {
@@ -3985,7 +3985,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (101) - TRL")
     @Test
     public void testTypeRoadworthinessAnnualCertificateTrlOneAxle() {
@@ -4002,7 +4002,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (63) - HGV")
     @Test
     public void testTypeRoadworthinessAnnualCertificateHgvNoAxle() {
@@ -4018,7 +4018,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (63) - TRL")
     @Test
     public void testTypeRoadworthinessAnnualCertificateTrlNoAxle() {
@@ -4034,7 +4034,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (122) - HGV")
     @Test
     public void testTypeRoadworthinessAnnualCertificateHgvFiveAxles() {
@@ -4051,7 +4051,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (122) - TRL")
     @Test
     public void testTypeRoadworthinessAnnualCertificateTrlFiveAxles() {
@@ -4068,7 +4068,7 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (91) - TRL")
     @Test
     public void testTypeRoadworthinessAnnualCertificateTrlForOneAxle() {

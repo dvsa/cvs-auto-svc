@@ -119,7 +119,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV2_Pass_Certificate_Generation() {
@@ -232,7 +232,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QKV_Pass_Certificate_Generation() {
@@ -653,7 +653,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QKV_Fail_Certificate_Generation() {
