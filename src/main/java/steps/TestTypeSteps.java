@@ -8,6 +8,7 @@ import io.restassured.response.Response;
 import model.TestType;
 import model.testtypeid.TestTypeById;
 import net.thucydides.core.annotations.Step;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -194,6 +195,11 @@ public class TestTypeSteps {
         List<List<List<String>>> forVehicleSizeListOfList = testType.getNextTestTypesOrCategories().stream().map(s -> s.getNextTestTypesOrCategories().stream().map(TestType::getForVehicleSize).collect(toList())).collect(toList());
         forVehicleSizeListOfList.forEach(forVehicleSizesList -> response.then().body("nextTestTypesOrCategories.nextTestTypesOrCategories.forVehicleSize", hasItem(hasItem(contains(forVehicleSizesList.toArray())))));
 
+    }
+
+    @Step
+    public void validateData(String key, String value) {
+        assertThat(response.then().body("$", hasEntry(key,value)));
     }
 
 }
