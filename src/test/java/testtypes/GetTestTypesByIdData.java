@@ -3951,6 +3951,139 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
     }
 
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - HGV")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateHgvTwoAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById("62", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "62");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - TRL")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateTrlThreeAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleAxles(VehicleAxles.THREE);
+
+        testTypeSteps.getTestTypesById("62", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "62");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (101) - TRL")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateTrlOneAxle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleAxles(VehicleAxles.ONE);
+
+        testTypeSteps.getTestTypesById("101", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "101");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (63) - HGV")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateHgvNoAxle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV);
+
+        testTypeSteps.getTestTypesById("63", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "63");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (63) - TRL")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateTrlNoAxle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL);
+
+        testTypeSteps.getTestTypesById("63", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "63");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (122) - HGV")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateHgvFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleAxles(VehicleAxles.FIVE);
+
+        testTypeSteps.getTestTypesById("122", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "122");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (122) - TRL")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateTrlFiveAxles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleAxles(VehicleAxles.TWO);
+
+        testTypeSteps.getTestTypesById("122", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "122");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
+
+    @WithTag("In_Test")
+    @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (91) - TRL")
+    @Test
+    public void testTypeRoadworthinessAnnualCertificateTrlForOneAxle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL)
+                .setVehicleAxles(VehicleAxles.ONE);
+
+        testTypeSteps.getTestTypesById("91", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "91");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+
+    }
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - HGV")
     @Test
