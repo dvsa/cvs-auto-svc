@@ -799,4 +799,22 @@ public class GetVehicleTechnicalRecords {
         }
 
     }
+
+    @Title("CVSB-9335 - TC - AC1 API consumer does not use the “searchCriteria” query parameter")
+    @Test
+    public void testVehicleTechnicalRecordsNoSearchCriteria() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("T72741234");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "trl" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional");
+    }
+
+    @Title("CVSB-9335 - TC - AC1 API consumer does not use the “searchCriteria” query parameter")
+    @Test
+    public void testVehicleTechnicalRecordsAllSearchCriteria() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsCriteria("230123", "all");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "hgv" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","current");
+    }
 }

@@ -771,4 +771,16 @@ public class VehicleTechnicalRecordsClient {
                 .get("/vehicles/{searchIdentifier}/tech-records");
         return response;
     }
+
+    public Response getVehicleTechnicalRecords(String searchIdentifier, String searchCriteria) {
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("searchCriteria", searchCriteria)
+//               .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+    }
 }

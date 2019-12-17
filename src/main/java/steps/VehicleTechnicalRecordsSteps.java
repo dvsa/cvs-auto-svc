@@ -555,4 +555,9 @@ public class VehicleTechnicalRecordsSteps {
     public void insertRecordInDynamo(String json, String table, String primaryKey) {
         AwsUtil.insertJsonInTable(json, table, primaryKey);
     }
+
+    @Step
+    public void getVehicleTechnicalRecordsCriteria(String searchIdentifier, String searchCriteria) {
+        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier, searchCriteria);
+    }
 }
