@@ -80,7 +80,7 @@ public class PostTestResultsAdrCertificate {
     public void testResultsADRCertificateHgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_ADR_Hgv.json","$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_ADR_HGV.json","$");
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
