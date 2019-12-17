@@ -110,7 +110,6 @@ public class PostTestResultsAdrCertificate {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
 
-
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload,0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1));
         testResultsSteps.removeTestResultsFields(payload, "vehicleSize", "numberOfSeats", "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "numberOfSeatbeltsFitted", "lastSeatbeltInstallationCheckDate", "seatbeltInstallationCheckDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testAnniversaryDate");
