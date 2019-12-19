@@ -112,7 +112,6 @@ public class VehicleTechnicalRecordsClient {
                 .body(alteredBody)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
-
         return response;
     }
 
@@ -122,7 +121,6 @@ public class VehicleTechnicalRecordsClient {
                 .body(body)
                 .pathParam("vin", vin)
                 .put("/vehicles/{vin}");
-
         return response;
     }
 
@@ -166,6 +164,18 @@ public class VehicleTechnicalRecordsClient {
             saveUtils();
             response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
         }
+
+        return response;
+    }
+
+    public Response downloadFile(String searchIdentifier, String fileName) {
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .pathParam("fileName", fileName)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/download-file/{fileName}");
 
         return response;
     }

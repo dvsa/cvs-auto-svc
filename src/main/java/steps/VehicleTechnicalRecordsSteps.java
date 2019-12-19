@@ -46,7 +46,8 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().log().all()
+        response.then()
+                .log().all()
                 .statusCode(statusCode);
     }
 
@@ -56,8 +57,28 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public void valueForFieldInPathShouldBe(String path, int expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
+        response.then().body(path, endsWith(expectedValue));
+    }
+
+    @Step
+    public void valuesForFieldsInPathShouldEqual(String jsonPath1, String jsonPath2) {
+        response.then().body(jsonPath1, equalTo(response.then().extract().path(jsonPath2)));
+    }
+
+    @Step
+    public void valuesForFieldsInPathShouldNotEqual(String jsonPath1, String jsonPath2) {
+        response.then().body(jsonPath1, not(equalTo(response.then().extract().path(jsonPath2))));
     }
 
     @Step
@@ -84,7 +105,7 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     private void validateDataByIndex(Vehicle vehicle, int index) {
-        response.then().body("size()", is(Vehicle.class.getDeclaredFields().length));
+        response.then().body("size()", is(Vehicle.class.getDeclaredFields().length-1));
         response.then().body("vrms.vrm", hasItem(equalTo(vehicle.getVrms().get(0).getVrm())));
         response.then().body("vrms.isPrimary", hasItem(equalTo(vehicle.getVrms().get(0).getPrimary())));
 
@@ -235,4 +256,14 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("techRecord[0]." + field, instanceOf(type));
     }
 
+    @Step
+    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
+        vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+        return response.then().extract().path(jsonPath).toString();
+    }
+
+    @Step
+    public Response downloadFile(String searchIdentifier, String fileName) {
+        return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
+    }
 }

@@ -5,10 +5,16 @@
   ],
   "vin": "1B7GG36N12S678410",
   "partialVin": "678410",
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
   "techRecord": [
     {
       "createdAt": "2019-01-16T12:24:38.027Z",
       "lastUpdatedAt": "2019-01-16T12:24:38.027Z",
+      "createdByName": "dragos",
+      "createdById": "22223333-44445555",
       "chassisMake": "Volvo",
       "chassisModel": "B10M",
       "bodyMake": "Duple",

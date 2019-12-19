@@ -11,6 +11,7 @@ public class Vehicle {
     private List<Vrms> vrms;
     private String vin;
     private List<TechRecord> techRecord;
+    private MsUserDetails msUserDetails;
 
     public List<Vrms> getVrms() {
         return vrms;
@@ -36,6 +37,15 @@ public class Vehicle {
 
     public Vehicle setTechRecord(List<TechRecord> techRecord) {
         this.techRecord = techRecord;
+        return this;
+    }
+
+    public MsUserDetails getMsUserDetails() {
+        return msUserDetails;
+    }
+
+    public Vehicle setMsUserDetails(MsUserDetails msUserDetails) {
+        this.msUserDetails = msUserDetails;
         return this;
     }
 

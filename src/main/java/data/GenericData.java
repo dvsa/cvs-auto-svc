@@ -12,10 +12,9 @@ import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 import static net.minidev.json.parser.JSONParser.DEFAULT_PERMISSIVE_MODE;
 
@@ -24,6 +23,19 @@ public class GenericData {
     public static String readJsonBodyFromFile(String fileName) throws IOException {
         ClassLoader classLoader = DataMapper.class.getClassLoader();
         return DataMapper.readFromInputStream(classLoader.getResourceAsStream("loader/" + BaseData.getDataLocation() + "/" + fileName));
+    }
+
+    public static String readBytesFromFile(String fileName) {
+        String encodedString = "";
+        try {
+            byte[] input_file = Files.readAllBytes(Paths.get("src/main/resources/loader/" + BaseData.getDataLocation() + "/" + fileName));
+            byte[] encodedBytes = Base64.getEncoder().encode(input_file);
+            encodedString =  new String(encodedBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return encodedString;
     }
 
     public static String readJsonValueFromFile(String fileName, String path) {
