@@ -203,7 +203,6 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body(is("\"" + stringData + "\""));
     }
 
-
     @Step
     public void postVehicleTechnicalRecords(String requestBody) {
         this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
@@ -265,6 +264,7 @@ public class VehicleTechnicalRecordsSteps {
     public Response downloadFile(String searchIdentifier, String fileName) {
         return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
     }
+
     @Step
     public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds) {
 
