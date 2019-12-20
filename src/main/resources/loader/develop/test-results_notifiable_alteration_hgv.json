@@ -1,0 +1,52 @@
+{
+  "testResultId": "bf24bdd9-e143-43a4-94e1-9f57bc8d4a9c",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testerName": "cvs.automation4@dvsagov.onmicrosoft.com",
+  "testerStaffId": "c26d6b02-49b2-456a-ac20-7435e9397bac",
+  "testerEmailAddress": "cvs.automation4@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2019-12-20T06:46:40.398Z",
+  "testEndTimestamp": "2019-12-20T06:47:56.091Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "vrm": "C25WHE",
+  "odometerReading": 35000,
+  "odometerReadingUnits": "kilometres",
+  "vin": "NB56GPA2DP9IHW",
+  "vehicleClass": {
+    "description": "heavy goods vehicle",
+    "code": "v"
+  },
+  "vehicleType": "hgv",
+  "vehicleConfiguration": "semi-car transporter",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "n2",
+  "countryOfRegistration": "bg",
+  "noOfAxles": 2,
+  "testTypes": [
+    {
+      "name": "Technical test",
+      "testTypeName": "Paid notifiable alteration",
+      "testTypeId": "48",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2019-12-20T06:47:32.301Z",
+      "testTypeEndTimestamp": "2019-12-20T06:47:56.094Z",
+      "modType": null,
+      "emissionStandard": null,
+      "fuelType": null,
+      "smokeTestKLimitApplied": null,
+      "particulateTrapFitted": null,
+      "particulateTrapSerialNumber": null,
+      "modificationTypeUsed": null,
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": []
+    }
+  ]
+}

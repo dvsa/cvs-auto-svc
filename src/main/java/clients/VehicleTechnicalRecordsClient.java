@@ -97,6 +97,7 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
+                .log().method().log().uri().log().body()
                 .post("/vehicles");
 
         return response;
