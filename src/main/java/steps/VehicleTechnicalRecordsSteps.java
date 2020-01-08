@@ -46,8 +46,7 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then()
-                .log().all()
+        response.then().log().all()
                 .statusCode(statusCode);
     }
 
@@ -204,7 +203,6 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body(is("\"" + stringData + "\""));
     }
 
-
     @Step
     public void postVehicleTechnicalRecords(String requestBody) {
         this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
@@ -266,4 +264,32 @@ public class VehicleTechnicalRecordsSteps {
     public Response downloadFile(String searchIdentifier, String fileName) {
         return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
     }
+
+    @Step
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds) {
+
+        System.out.println("...waiting for the vehicle tech record to be updated...\n");
+
+        for(int i=0; i < seconds; i++){
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+
+            int status = response.getStatusCode();
+            int recordsNumber = response.then().extract().jsonPath().getInt("techRecord.size()");
+
+            System.out.println("status is: " + status + " and number of records: " + recordsNumber);
+
+            if(status == 200 && recordsNumber > 1){
+                break;
+            }
+            else{
+                System.out.println("\n...waiting one more second (" + i +")...");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
