@@ -4117,7 +4117,6 @@ public class GetTestTypesByIdData {
 
     }
 
-    @WithTag("In_Test")
     @Title("CVSB-8335 - TC - AC1 - MDU test code - 8 Axles")
     @Test
     public void validateMduTestCodeFor8Axles() {
