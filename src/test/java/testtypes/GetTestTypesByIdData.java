@@ -3954,7 +3954,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - HGV")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateHgvTwoAxles() {
+    public void testTypeRoadworthinessTestAnnualCertificateHgvTwoAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -3971,7 +3971,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (62) - TRL")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateTrlThreeAxles() {
+    public void testTypeRoadworthinessTestAnnualCertificateTrlThreeAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -3988,7 +3988,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (101) - TRL")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateTrlOneAxle() {
+    public void testTypeRoadworthinessTestAnnualCertificateTrlOneAxle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -4005,7 +4005,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (63) - HGV")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateHgvNoAxle() {
+    public void testTypeRoadworthinessTestAnnualCertificateHgvNoAxle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -4021,7 +4021,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (63) - TRL")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateTrlNoAxle() {
+    public void testTypeRoadworthinessTestAnnualCertificateTrlNoAxle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -4037,7 +4037,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (122) - HGV")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateHgvFiveAxles() {
+    public void testTypeRoadworthinessTestAnnualCertificateHgvFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -4071,7 +4071,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (91) - TRL")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateTrlForOneAxle() {
+    public void testTypeRoadworthinessTestAnnualCertificateTrlForOneAxle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
@@ -4187,7 +4187,7 @@ public class GetTestTypesByIdData {
 
     @Title("CVSB-7677 - TC - AC3 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification=Annual With Certificate (122) - TRL")
     @Test
-    public void testTypeRoadworthinessAnnualCertificateTrlFiveAxles() {
+    public void testTypeRoadworthinessTestAnnualCertificateTrlFiveAxles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
