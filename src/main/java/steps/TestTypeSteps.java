@@ -38,7 +38,13 @@ public class TestTypeSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().log().status().log().body().statusCode(statusCode);
+        //response.then().log().status().log().body().statusCode(statusCode);
+        response.then().log().all().statusCode(statusCode);
+    }
+
+    @Step
+    public void validateData(String key, String value) {
+        assertThat(response.then().body("$", hasEntry(key,value)));
     }
 
     @Step

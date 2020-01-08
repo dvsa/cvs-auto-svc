@@ -68,6 +68,8 @@ public enum TestTypes {
     DRV("60", "drv", TestTypeClassification.NO_CERTIFICATE.getValue()),
     DRT("60", "drt", TestTypeClassification.NO_CERTIFICATE.getValue()),
     QKV("62", "qkv", TestTypeClassification.NO_CERTIFICATE.getValue()),
+    MDA("100", "mda", TestTypeClassification.NO_CERTIFICATE.getValue()),
+    MDU("121", "mdu", TestTypeClassification.NO_CERTIFICATE.getValue()),
     QKT("101", "qkt", TestTypeClassification.NO_CERTIFICATE.getValue()),
     QPV("62", "qpv", TestTypeClassification.NO_CERTIFICATE.getValue()),
     QPT("62", "qpt", TestTypeClassification.NO_CERTIFICATE.getValue()),
@@ -264,6 +266,8 @@ public enum TestTypes {
     NFS("38", "nfs", TestTypeClassification.NO_CERTIFICATE.getValue()),
 //    LCP("39", "lcp", TestTypeClassification.NO_CERTIFICATE.getValue()),
     LBP("39", "lbp", TestTypeClassification.NO_CERTIFICATE.getValue());
+
+
 
 
 
