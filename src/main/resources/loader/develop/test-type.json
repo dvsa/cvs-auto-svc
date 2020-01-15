@@ -715,9 +715,7 @@
         "forVehicleSize": null
       },
       {
-        "linkedIds": [
-
-        ],
+        "linkedIds": [],
         "testTypeName": "Voluntary Tempo 100",
         "forVehicleType": [
           "psv"
@@ -904,10 +902,10 @@
         "nextTestTypesOrCategories": [
           {
             "linkedIds": null,
-            "testTypeName": "Low Emissions Certificate (LEC) with annual test",
             "forVehicleType": [
               "hgv"
             ],
+            "testTypeName": "Low Emissions Certificate (LEC) with annual test",
             "name": "With linked test",
             "forVehicleAxles": null,
             "id": "44",
@@ -916,10 +914,10 @@
           },
           {
             "linkedIds": null,
-            "testTypeName": "Low Emissions Certificate (LEC)",
             "forVehicleType": [
               "hgv"
             ],
+            "testTypeName": "Low Emissions Certificate (LEC)",
             "name": "Without linked test",
             "forVehicleAxles": null,
             "id": "45",
@@ -941,11 +939,11 @@
         "nextTestTypesOrCategories": [
           {
             "linkedIds": null,
-            "testTypeName": "Free notifiable alteration",
             "forVehicleType": [
               "hgv",
               "trl"
             ],
+            "testTypeName": "Free notifiable alteration",
             "name": "Free",
             "forVehicleAxles": null,
             "id": "47",
@@ -954,11 +952,11 @@
           },
           {
             "linkedIds": null,
-            "testTypeName": "Paid notifiable alteration",
             "forVehicleType": [
               "hgv",
               "trl"
             ],
+            "testTypeName": "Paid notifiable alteration",
             "name": "Paid",
             "forVehicleAxles": null,
             "id": "48",
@@ -979,11 +977,11 @@
       },
       {
         "linkedIds": null,
-        "testTypeName": "TIR test",
         "forVehicleType": [
           "hgv",
           "trl"
         ],
+        "testTypeName": "TIR test",
         "name": "TIR",
         "forVehicleAxles": null,
         "id": "49",
@@ -992,11 +990,11 @@
       },
       {
         "linkedIds": null,
-        "testTypeName": "ADR test",
         "forVehicleType": [
           "hgv",
           "trl"
         ],
+        "testTypeName": "ADR test",
         "name": "ADR",
         "forVehicleAxles": null,
         "id": "50",
@@ -1031,7 +1029,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "53",
             "forVehicleConfiguration": null,
@@ -1049,7 +1052,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "54",
             "forVehicleConfiguration": null,
@@ -1066,7 +1074,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "52",
         "forVehicleConfiguration": null,
@@ -1231,7 +1244,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "65",
             "forVehicleConfiguration": null,
@@ -1249,7 +1267,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "66",
             "forVehicleConfiguration": null,
@@ -1280,7 +1303,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "64",
         "forVehicleConfiguration": null,
@@ -1382,7 +1410,12 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ],
     "forVehicleConfiguration": null,
     "forVehicleSize": null,
@@ -1405,7 +1438,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "70",
             "forVehicleConfiguration": null,
@@ -1423,7 +1461,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "71",
             "forVehicleConfiguration": null,
@@ -1440,7 +1483,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "69",
         "forVehicleConfiguration": null,
@@ -1458,7 +1506,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "72",
         "forVehicleConfiguration": null,
@@ -1476,7 +1529,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "73",
         "forVehicleConfiguration": null,
@@ -1498,7 +1556,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "id": "76",
                 "forVehicleConfiguration": null,
@@ -1516,7 +1579,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "id": "77",
                 "forVehicleConfiguration": null,
@@ -1533,7 +1601,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "75",
             "forVehicleConfiguration": null,
@@ -1553,7 +1626,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "id": "79",
                 "forVehicleConfiguration": null,
@@ -1571,7 +1649,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "id": "80",
                 "forVehicleConfiguration": null,
@@ -1588,7 +1671,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "78",
             "forVehicleConfiguration": null,
@@ -1605,7 +1693,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "74",
         "forVehicleConfiguration": null,
@@ -1625,7 +1718,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "82",
             "forVehicleConfiguration": null,
@@ -1643,7 +1741,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "id": "83",
             "forVehicleConfiguration": null,
@@ -1660,7 +1763,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "81",
         "forVehicleConfiguration": null,
@@ -1688,13 +1796,7 @@
           "trl"
         ],
         "name": "Brake test",
-        "forVehicleAxles": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
+        "forVehicleAxles": null,
         "id": "85",
         "forVehicleConfiguration": null,
         "forVehicleSize": null
@@ -1786,7 +1888,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "id": "122",
         "forVehicleConfiguration": null,
@@ -1802,7 +1909,12 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ],
     "forVehicleConfiguration": null,
     "forVehicleSize": null,
@@ -1820,7 +1932,12 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ],
     "forVehicleConfiguration": null,
     "forVehicleSize": null,
