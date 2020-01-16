@@ -1062,7 +1062,10 @@
         ]
       },
       {
+
+        "id": "36",
         "linkedIds": [],
+        "name": "Tempo 100",
         "testTypeName": "Voluntary Tempo 100",
         "forVehicleType": [
           "psv"
@@ -1420,6 +1423,7 @@
         "name": "LEC",
         "nextTestTypesOrCategories": [
           {
+
             "linkedIds": null,
             "forVehicleType": [
               "hgv"
@@ -1444,6 +1448,7 @@
             "testTypeName": "Low Emissions Certificate (LEC) with annual test"
           },
           {
+
             "linkedIds": null,
             "forVehicleType": [
               "hgv"
@@ -1589,7 +1594,7 @@
           "trl"
         ],
         "testTypeName": "ADR test",
-        "name": "ADR",
+        "name": "ADR", 
         "forVehicleAxles": null,
         "id": "50",
         "linkedIds": null,

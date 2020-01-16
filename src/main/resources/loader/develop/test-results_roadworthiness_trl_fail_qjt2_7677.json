@@ -1,0 +1,70 @@
+{
+  "testResultId":"9665f019-04d0-45a3-b466-9d511ee4b917",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2019-12-13T16:31:27.295Z",
+  "testEndTimestamp":"2019-12-13T16:32:29.173Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "trailerId":"C000001",
+  "vin":"T12341234",
+  "vehicleClass":{
+    "description":"trailer",
+    "code":"t"
+  },
+  "vehicleType":"trl",
+  "vehicleConfiguration":"centre axle drawbar",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"o2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":2,
+  "testTypes":[
+    {
+      "name":"Voluntary test",
+      "testTypeName":"Voluntary roadworthiness test",
+      "testTypeId":"122",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-12-13T16:31:53.576Z",
+      "testTypeEndTimestamp":"2019-12-13T16:32:29.175Z",
+      "testExpiryDate":null,
+      "testResult":"fail",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"sd",
+      "defects":[
+        {
+          "deficiencyRef":"20.1.a.i",
+          "deficiencyCategory":"major",
+          "deficiencyId":"a",
+          "deficiencySubId":"i",
+          "deficiencyText":"insecure, fractured or cracked, distorted, worn, corroded, damaged or modified, to such an extent it is likely to cause injury.",
+          "imNumber":20,
+          "imDescription":"Condition of Body",
+          "itemNumber":1,
+          "itemDescription":"Any headboard, rave, cross or longitudinal member, hinge or retaining device, tipping gear, glass panel or any part of the body designed to carry or contain the load (including the floor and main support pillars):",
+          "additionalInformation":{
+            "notes":null,
+            "location":{
+              "vertical":null,
+              "horizontal":null,
+              "lateral":"nearside",
+              "longitudinal":"front",
+              "rowNumber":null,
+              "seatNumber":null,
+              "axleNumber":null
+            }
+          },
+          "stdForProhibition":false,
+          "prs":false,
+          "prohibitionIssued":false
+        }
+      ]
+    }
+  ]
+}

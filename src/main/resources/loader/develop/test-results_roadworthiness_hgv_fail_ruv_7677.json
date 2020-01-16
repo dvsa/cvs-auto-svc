@@ -1,0 +1,79 @@
+{
+  "testResultId":"21989faa-23ab-450f-a077-61c3bf5d6e96",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2019-12-13T17:00:34.516Z",
+  "testEndTimestamp":"2019-12-13T17:01:22.587Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"AD35GHT",
+  "odometerReading":7456,
+  "odometerReadingUnits":"kilometres",
+  "vin":"P012301957486",
+  "vehicleClass":{
+    "description":"heavy goods vehicle",
+    "code":"v"
+  },
+  "vehicleType":"hgv",
+  "vehicleConfiguration":"centre axle drawbar",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"n2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":5,
+  "testTypes":[
+    {
+      "name":"Retest",
+      "testTypeName":"Part paid roadworthiness retest",
+      "testTypeId":"63",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-12-13T17:00:59.055Z",
+      "testTypeEndTimestamp":"2019-12-13T17:01:22.588Z",
+      "modType":null,
+      "emissionStandard":null,
+      "fuelType":null,
+      "smokeTestKLimitApplied":null,
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":null,
+      "testExpiryDate":null,
+      "testResult":"fail",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"df",
+      "defects":[
+        {
+          "deficiencyRef":"7.1.a.i",
+          "deficiencyCategory":"major",
+          "deficiencyId":"a",
+          "deficiencySubId":"i",
+          "deficiencyText":"of which the nominal size, ply rating, load index or speed rating of any tyre is below that appropriate for the plated axle weight.",
+          "imNumber":7,
+          "imDescription":"Size and Type of Tyres",
+          "itemNumber":1,
+          "itemDescription":"A tyre:",
+          "additionalInformation":{
+            "notes":null,
+            "location":{
+              "vertical":null,
+              "horizontal":"inner",
+              "lateral":"offside",
+              "longitudinal":null,
+              "rowNumber":null,
+              "seatNumber":null,
+              "axleNumber":1
+            }
+          },
+          "stdForProhibition":false,
+          "prs":false,
+          "prohibitionIssued":false
+        }
+      ]
+    }
+  ]
+}
