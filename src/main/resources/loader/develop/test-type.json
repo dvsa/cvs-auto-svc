@@ -1062,9 +1062,7 @@
         ]
       },
       {
-        "id": "36",
         "linkedIds": [],
-        "name": "Tempo 100",
         "testTypeName": "Voluntary Tempo 100",
         "forVehicleType": [
           "psv"
@@ -1422,12 +1420,13 @@
         "name": "LEC",
         "nextTestTypesOrCategories": [
           {
-            "forVehicleAxles": null,
-            "forVehicleConfiguration": null,
-            "forVehicleSize": null,
+            "linkedIds": null,
             "forVehicleType": [
               "hgv"
             ],
+            "testTypeName": "Low Emissions Certificate (LEC) with annual test",
+            "name": "With linked test",
+            "forVehicleAxles": null,
             "id": "44",
             "linkedIds": null,
             "name": "With linked test",
@@ -1445,12 +1444,13 @@
             "testTypeName": "Low Emissions Certificate (LEC) with annual test"
           },
           {
-            "forVehicleAxles": null,
-            "forVehicleConfiguration": null,
-            "forVehicleSize": null,
+            "linkedIds": null,
             "forVehicleType": [
               "hgv"
             ],
+            "testTypeName": "Low Emissions Certificate (LEC)",
+            "name": "Without linked test",
+            "forVehicleAxles": null,
             "id": "45",
             "linkedIds": null,
             "name": "Without linked test",
@@ -1482,13 +1482,14 @@
         "name": "Notifiable alteration",
         "nextTestTypesOrCategories": [
           {
-            "forVehicleAxles": null,
-            "forVehicleConfiguration": null,
-            "forVehicleSize": null,
+            "linkedIds": null,
             "forVehicleType": [
               "hgv",
               "trl"
             ],
+            "testTypeName": "Free notifiable alteration",
+            "name": "Free",
+            "forVehicleAxles": null,
             "id": "47",
             "linkedIds": null,
             "name": "Free",
@@ -1514,13 +1515,14 @@
             "testTypeName": "Free notifiable alteration"
           },
           {
-            "forVehicleAxles": null,
-            "forVehicleConfiguration": null,
-            "forVehicleSize": null,
+            "linkedIds": null,
             "forVehicleType": [
               "hgv",
               "trl"
             ],
+            "testTypeName": "Paid notifiable alteration",
+            "name": "Paid",
+            "forVehicleAxles": null,
             "id": "48",
             "linkedIds": null,
             "name": "Paid",
@@ -1548,13 +1550,14 @@
         ]
       },
       {
-        "forVehicleAxles": null,
-        "forVehicleConfiguration": null,
-        "forVehicleSize": null,
+        "linkedIds": null,
         "forVehicleType": [
           "hgv",
           "trl"
         ],
+        "testTypeName": "TIR test",
+        "name": "TIR",
+        "forVehicleAxles": null,
         "id": "49",
         "linkedIds": null,
         "name": "TIR",
@@ -1580,13 +1583,14 @@
         "testTypeName": "TIR test"
       },
       {
-        "forVehicleAxles": null,
-        "forVehicleConfiguration": null,
-        "forVehicleSize": null,
+        "linkedIds": null,
         "forVehicleType": [
           "hgv",
           "trl"
         ],
+        "testTypeName": "ADR test",
+        "name": "ADR",
+        "forVehicleAxles": null,
         "id": "50",
         "linkedIds": null,
         "name": "ADR",
@@ -1657,7 +1661,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -1742,7 +1751,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -1822,7 +1836,19 @@
           "hgv",
           "trl"
         ],
-        "forVehicleSize": null,
+        "name": "Annual test",
+        "forVehicleAxles": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "id": "52",
         "forVehicleConfiguration": null,
         "forVehicleAxles": null,
         "nextTestTypesOrCategories": [
@@ -2149,7 +2175,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -2234,7 +2265,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -2341,7 +2377,15 @@
         "forVehicleSize": null,
         "forVehicleConfiguration": null,
         "forVehicleAxles": [
-          1
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "nextTestTypesOrCategories": [
           {
@@ -2477,7 +2521,12 @@
       2,
       3,
       4,
-      5
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
     ],
     "nextTestTypesOrCategories": [
       {
@@ -2512,7 +2561,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -2597,7 +2651,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual NO CERTIFICATE",
             "testCodes": [
@@ -2684,7 +2743,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "testTypeClassification": "Annual NO CERTIFICATE",
         "testCodes": [
@@ -2769,7 +2833,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "testTypeClassification": "Annual NO CERTIFICATE",
         "testCodes": [
@@ -2853,7 +2922,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "nextTestTypesOrCategories": [
           {
@@ -2888,7 +2962,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "testTypeClassification": "Annual With Certificate",
                 "testCodes": [
@@ -2973,7 +3052,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "testTypeClassification": "Annual NO CERTIFICATE",
                 "testCodes": [
@@ -3059,7 +3143,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "nextTestTypesOrCategories": [
               {
@@ -3077,7 +3166,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "testTypeClassification": "Annual With Certificate",
                 "testCodes": [
@@ -3162,7 +3256,12 @@
                   2,
                   3,
                   4,
-                  5
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
                 ],
                 "testTypeClassification": "Annual NO CERTIFICATE",
                 "testCodes": [
@@ -3232,7 +3331,27 @@
                   }
                 ]
               }
-            ]
+            ],
+            "linkedIds": null,
+            "forVehicleType": [
+              "hgv",
+              "trl"
+            ],
+            "name": "Part paid",
+            "forVehicleAxles": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "id": "78",
+            "forVehicleConfiguration": null,
+            "forVehicleSize": null
           }
         ]
       },
@@ -3250,7 +3369,12 @@
           2,
           3,
           4,
-          5
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
         ],
         "nextTestTypesOrCategories": [
           {
@@ -3268,7 +3392,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -3353,7 +3482,12 @@
               2,
               3,
               4,
-              5
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "testTypeClassification": "Annual With Certificate",
             "testCodes": [
@@ -3423,7 +3557,27 @@
               }
             ]
           }
-        ]
+        ],
+        "linkedIds": null,
+        "forVehicleType": [
+          "hgv",
+          "trl"
+        ],
+        "name": "Prohibition clearance on first test",
+        "forVehicleAxles": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "id": "81",
+        "forVehicleConfiguration": null,
+        "forVehicleSize": null
       }
     ]
   },
@@ -3443,7 +3597,32 @@
       {
         "id": "106",
         "linkedIds": null,
-        "name": "Full inspection/ Fee",
+        "testTypeName": "Voluntary brake test",
+        "forVehicleType": [
+          "hgv",
+          "trl"
+        ],
+        "name": "Brake test",
+        "forVehicleAxles": null,
+        "id": "85",
+        "forVehicleConfiguration": null,
+        "forVehicleSize": null
+      },
+      {
+        "linkedIds": null,
+        "testTypeName": "Voluntary multi-check",
+        "forVehicleType": [
+          "hgv"
+        ],
+        "name": "Multi - check",
+        "forVehicleAxles": null,
+        "id": "86",
+        "forVehicleConfiguration": null,
+        "forVehicleSize": null
+      },
+      {
+        "linkedIds": null,
+        "testTypeName": "Voluntary Shaker plate check",
         "forVehicleType": [
           "trl"
         ],
@@ -3452,6 +3631,95 @@
         "forVehicleAxles": [
           1
         ],
+        "id": "91",
+        "forVehicleConfiguration": null,
+        "forVehicleSize": null
+      },
+      {
+        "linkedIds": null,
+        "testTypeName": "Voluntary roadworthiness test",
+        "forVehicleType": [
+          "hgv",
+          "trl"
+        ],
+        "name": "Roadworthiness test",
+        "forVehicleAxles": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "id": "122",
+        "forVehicleConfiguration": null,
+        "forVehicleSize": null
+      }
+    ],
+    "linkedIds": null,
+    "id": "84",
+    "name": "Voluntary test"
+  },
+  {
+    "forVehicleAxles": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "forVehicleConfiguration": null,
+    "forVehicleSize": null,
+    "forVehicleType": [
+      "hgv",
+      "trl"
+    ],
+    "linkedIds": null,
+    "testTypeName": "Annual test",
+    "id": "94",
+    "name": "Annual test"
+  },
+  {
+    "forVehicleAxles": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "forVehicleConfiguration": null,
+    "forVehicleSize": null,
+    "forVehicleType": [
+      "hgv",
+      "trl"
+    ],
+    "linkedIds": null,
+    "testTypeName": "First test",
+    "id": "95",
+    "name": "First test"
+  },
+  {
+    "forVehicleAxles": [
+      1
+    ],
+    "forVehicleConfiguration": null,
+    "forVehicleSize": null,
+    "forVehicleType": [
+      "trl"
+    ],
+    "nextTestTypesOrCategories": [
+      {
         "nextTestTypesOrCategories": [
           {
             "id": "107",
