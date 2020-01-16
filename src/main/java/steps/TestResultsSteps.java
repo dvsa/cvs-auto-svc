@@ -643,8 +643,4 @@ public class TestResultsSteps {
     public String getTestNumber() {
         return response.jsonPath().getString("[0].testTypes[0].testNumber");
     }
-
-    public void validateCertificateIsGenerated(String uuid, String vin) {
-        assertThat(AwsUtil.isCertificateCreated(uuid,vin)).isTrue();
-    }
 }
