@@ -46,5 +46,15 @@ public class LocalLoaderImpl implements Loader {
         return properties.getProperty("data.location");
     }
 
+    public String getS3Bucket() {
+        System.out.println("Using local settings....");
+        return properties.getProperty("s3.bucket");
+    }
+
+    @Override
+    public String getBranchName() {
+        return properties.getProperty("s3.branch");
+    }
+
 
 }
