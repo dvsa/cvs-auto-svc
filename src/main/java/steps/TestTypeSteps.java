@@ -43,11 +43,6 @@ public class TestTypeSteps {
     }
 
     @Step
-    public void validateData(String key, String value) {
-        assertThat(response.then().body("$", hasEntry(key,value)));
-    }
-
-    @Step
     public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
         response.then().body(path, equalTo(expectedValue));
     }
