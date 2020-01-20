@@ -2,7 +2,9 @@ package testtypes;
 
 import clients.model.*;
 import data.TestTypeByIdData;
+import io.restassured.response.Response;
 import model.testtypeid.TestTypeById;
+import model.vehicles.Vehicle;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -4229,6 +4231,257 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById("121", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(404);
         testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+
+    }
+
+    @Title("CVSB-4952 - As an SVSA I want to be able to select/ remove/ abandon a test type so that I can conduct a specialist test - car")
+    @Test
+    public void validateTestCodeForCarVehicleSubclassR() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.CAR)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.NULL)
+                .setVehicleSubClass(VehicleSubClass.R)
+                .setVehicleClass(VehicleClass.NULL)
+                .setEuVehicleCategory(EuVehicleCategory.NULL);
+
+        testTypeSteps.getTestTypesById("187", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "187");
+        testTypeSteps.validateData("defaultTestCode", "ya4");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-4952 - As an SVSA I want to be able to select/ remove/ abandon a test type so that I can conduct a specialist test - motorcycle")
+    @Test
+    public void validateTestCodeForMotorcycleVehicleClassOneWheelsTwo() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.MOTORCYCLE)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.NULL)
+                .setVehicleSubClass(VehicleSubClass.NULL)
+                .setVehicleClass(VehicleClass.MOTORBIKE_UNDER_200CC)
+                .setVehicleWheels(VehicleWheels.TWO)
+                .setEuVehicleCategory(EuVehicleCategory.NULL);
+
+        testTypeSteps.getTestTypesById("139", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "139");
+        testTypeSteps.validateData("defaultTestCode", "eab");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-4952 - As an SVSA I want to be able to select/ remove/ abandon a test type so that I can conduct a specialist test - lgv")
+    @Test
+    public void validateTestCodeForLgvVehicleSubclassL() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.LGV)
+                .setVehicleConfiguration(VehicleConfiguration.NULL)
+                .setVehicleAxles(VehicleAxles.NULL)
+                .setVehicleSubClass(VehicleSubClass.L)
+                .setVehicleClass(VehicleClass.NULL)
+                .setVehicleWheels(VehicleWheels.NULL)
+                .setEuVehicleCategory(EuVehicleCategory.NULL);
+
+        testTypeSteps.getTestTypesById("158", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "158");
+        testTypeSteps.validateData("defaultTestCode", "ym7");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC2 API Consumer retrieves a category or test type with “forEuVehicleCategory”=null - CAR")
+    @Test
+    public void validateTestCodeForPsvForEuVehicleCategoryNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.CAR)
+                .setEuVehicleCategory(EuVehicleCategory.NULL)
+                .setVehicleSubClass(VehicleSubClass.A);
+
+        testTypeSteps.getTestTypesById("125", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "125");
+        testTypeSteps.validateData("defaultTestCode", "yf4");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC3 API Consumer retrieves a category or test type with \"forEuVehicleCategory\" different than null - OK - HGV")
+    @Test
+    public void validateTestCodeForPsvForEuVehicleCategoryNotNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setEuVehicleCategory(EuVehicleCategory.N2)
+                .setVehicleType(VehicleType.HGV);
+
+        testTypeSteps.getTestTypesById("188", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "188");
+        testTypeSteps.validateData("defaultTestCode", "ydv");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC4 API Consumer retrieves a category or test type with \"forEuVehicleCategory\" different than null - NOT Found - TRL")
+    @Test
+    public void validateTestCodeForPsvForEuVehicleCategoryNotFound() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setEuVehicleCategory(EuVehicleCategory.N2)
+                .setVehicleType(VehicleType.TRL);
+
+        testTypeSteps.getTestTypesById("184", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateData("No resources match the search criteria.");
+    }
+
+    @Title("CVSB-10223 - AC5 API Consumer retrieves a category or test type with “forVehicleClass”=null")
+    @Test
+    public void validateTestCodeForPsvForVehicleClassNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleClass(VehicleClass.NULL)
+                .setVehicleType(VehicleType.CAR);
+
+        testTypeSteps.getTestTypesById("189", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "189");
+        testTypeSteps.validateData("defaultTestCode", "ye4");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC6 API Consumer retrieves a category or test type with \"forVehicleClass\" different than null - OK - MOTORCYCLE")
+    @Test
+    public void validateTestCodeForPsvForVehicleClassNotNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleClass(VehicleClass.MOTORBIKE_OVER_200CC)
+                .setVehicleType(VehicleType.MOTORCYCLE);
+
+        testTypeSteps.getTestTypesById("134", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "134");
+        testTypeSteps.validateData("defaultTestCode", "ea2");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC7 API Consumer retrieves a category or test type with \"forVehicleClass\" different than null - NOT Found - MOTORCYCLE")
+    @Test
+    public void validateTestCodeForPsvForVehicleClassNotFound() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleClass(VehicleClass.INVALID)
+                .setVehicleType(VehicleType.MOTORCYCLE);
+
+        testTypeSteps.getTestTypesById("166", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateData("No resources match the search criteria.");
+    }
+
+    @Title("CVSB-10223 - AC8 AC8 API Consumer retrieves a category or test type with “forVehicleSubclass”=null")
+    @Test
+    public void validateTestCodeForPsvForVehicleSubclassNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleSubClass(VehicleSubClass.NULL)
+                .setVehicleType(VehicleType.MOTORCYCLE)
+                .setVehicleClass(VehicleClass.THREE_WHEELERS);
+
+        testTypeSteps.getTestTypesById("172", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "172");
+        testTypeSteps.validateData("defaultTestCode", "ee3");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC9 API Consumer retrieves a category or test type with \"forVehicleSubclass\" different than null - OK - CAR")
+    @Test
+    public void validateTestCodeForPsvForVehicleSubclassNotNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleSubClass(VehicleSubClass.R)
+                .setVehicleType(VehicleType.CAR);
+
+        testTypeSteps.getTestTypesById("191", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "191");
+        testTypeSteps.validateData("defaultTestCode", "yd4");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC10 API Consumer retrieves a category or test type with \"forVehicleSubclass\" different than null - NOT Found - CAR")
+    @Test
+    public void validateTestCodeForPsvForVehicleSubClassNotFound() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleSubClass(VehicleSubClass.A)
+                .setVehicleType(VehicleType.CAR);
+
+        testTypeSteps.getTestTypesById("153", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateData("No resources match the search criteria.");
+    }
+
+    @Title("CVSB-10223 - AC11 API Consumer retrieves a category or test type with “forVehicleWheels”=null")
+    @Test
+    public void validateTestCodeForPsvForVehicleWheelsNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleWheels(VehicleWheels.NULL)
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.LARGE)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+
+        testTypeSteps.getTestTypesById("1", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "1");
+        testTypeSteps.validateData("defaultTestCode", "aal");
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
+    }
+
+    @Title("CVSB-10223 - AC12 API Consumer retrieves a category or test type with \"forVehicleWheels\" different than null - OK - MOTORCYCLE")
+    @Test
+    public void validateTestCodeForPsvForVehicleWheelsNotNull() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleWheels(VehicleWheels.FOUR)
+                .setVehicleType(VehicleType.MOTORCYCLE);
+
+        testTypeSteps.getTestTypesById("134", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id", "134");
+        testTypeSteps.validateData("defaultTestCode", "eg4");
+        testTypeSteps.validateData("testTypeClassification", "Annual NO CERTIFICATE");
+    }
+
+    @Title("CVSB-10223 - AC13 API Consumer retrieves a category or test type with \"forVehicleWheels\" different than null - NOT Found - MOTORCYCLE")
+    @Test
+    public void validateTestCodeForPsvForVehicleWheelsNotFound() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleWheels(VehicleWheels.INVALID)
+                .setVehicleType(VehicleType.CAR);
+
+        testTypeSteps.getTestTypesById("134", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateData("No resources match the search criteria.");
 
     }
 }
