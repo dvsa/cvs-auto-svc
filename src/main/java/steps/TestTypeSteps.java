@@ -38,7 +38,8 @@ public class TestTypeSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-        response.then().log().status().log().body().statusCode(statusCode);
+        //response.then().log().status().log().body().statusCode(statusCode);
+        response.then().log().all().statusCode(statusCode);
     }
 
     @Step

@@ -6,7 +6,7 @@ import java.util.Random;
 
 public enum VehicleAxles implements PropertyValued {
 
-    ONE("1"), TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), EMPTY(""),
+    ONE("1"), TWO("2"), THREE("3"), FOUR("4"), FIVE("5"),EIGHT("8"), EMPTY(""),
     NULL("null"), ANY(Integer.toString(new Random().nextInt(11-6) + 6)), INVALID("invalid") {
         @Override
         public String getValue() {

@@ -6,10 +6,10 @@ import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
-import net.thucydides.core.annotations.WithTag;
 
 import java.util.Arrays;
 
@@ -3949,5 +3949,288 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.ADL.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(404);
         testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - 1 Axle")
+    @Test
+    public void validateMdaTestCodeFor1Axle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleAxles(VehicleAxles.ONE);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - 4 Axles")
+    @Test
+    public void validateMdaTestCodeFor4Axles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleAxles(VehicleAxles.FOUR);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - 8 Axles")
+    @Test
+    public void validateMdaTestCodeFor8Axles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleAxles(VehicleAxles.EIGHT);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code -   PSV Small Rigid")
+    @Test
+    public void validateMdaTestCodeForPsvSmallRigid() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleSize(VehicleSize.SMALL);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Large Articulated")
+    @Test
+    public void validateMdaTestCodeForPsvLargeArticulated() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.LARGE)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code -   PSV Large Rigid")
+    @Test
+    public void validateMdaTestCodeForPsvLargeRigid() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleSize(VehicleSize.LARGE);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Small Articulated")
+    @Test
+    public void validateMdaTestCodeForPsvSmallArticulated() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
+
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","100");
+        testTypeSteps.validateData("defaultTestCode","mda");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDU test code - 1 Axle")
+    @Test
+    public void validateMduTestCodeFor1Axle() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleAxles(VehicleAxles.ONE);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+
+    @Title("CVSB-8335 - TC - AC1 - MDU test code - 4 Axles")
+    @Test
+    public void validateMduTestCodeFor4Axles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleAxles(VehicleAxles.FOUR);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDU test code - 8 Axles")
+    @Test
+    public void validateMduTestCodeFor8Axles() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleAxles(VehicleAxles.EIGHT);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDU test code - PSV Small Rigid")
+    @Test
+    public void validateMduTestCodeForPsvRigid() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Large Articulated")
+    @Test
+    public void validateMduTestCodeForPsvLargeArticulated() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.LARGE)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code -   PSV Large Rigid")
+    @Test
+    public void validateMduTestCodeForPsvLargeRigid() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID)
+                .setVehicleSize(VehicleSize.LARGE);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Small Articulated")
+    @Test
+    public void validateMduTestCodeForPsvSmallArticulated() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
+
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","121");
+        testTypeSteps.validateData("defaultTestCode","mdu");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDA test code - HGV")
+    @Test
+    public void validateMdaTestCodeForHgv() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.HGV);
+
+        testTypeSteps.getTestTypesById("100", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+
+    }
+
+    @Title("CVSB-8335 - TC - AC1 - MDU test code - Trl")
+    @Test
+    public void validateMdaTestCodeForTrl() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
+                .setVehicleType(VehicleType.TRL);
+
+        testTypeSteps.getTestTypesById("121", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(404);
+        testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+
     }
 }
