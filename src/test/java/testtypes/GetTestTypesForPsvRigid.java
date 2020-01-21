@@ -33,7 +33,7 @@ public class GetTestTypesForPsvRigid {
     }};
 
     /**
-     * @param testTypesList        represent the list from the root category to the leaf subcategory
+     * @param testTypesList        represent the list which contains the root tests categories and their subcategories
      * @param vehicleConfiguration represent the configuration of the vehicle that can be Articulated or Rigid/Articulated
      */
     public void testTypeForArticulatedPSV(List<String> testTypesList, List<String> vehicleConfiguration) {
@@ -45,7 +45,7 @@ public class GetTestTypesForPsvRigid {
                 boolean containTestType = false;
                 for (int i = 0; i < allTestTypes.length(); i++) {
                     JSONObject testType = allTestTypes.getJSONObject(i);
-                    if ((testTypeElement.trim()).equals(testType.getString("name"))) {
+                    if (testTypeElement.equals(testType.getString("name"))) {
                         containTestType = true;
                         String forVehicleType = testType.getString("forVehicleType");
                         List<String> forVehicleTypeList = Arrays.asList(mapper.readValue(forVehicleType, String[].class));
@@ -112,7 +112,6 @@ public class GetTestTypesForPsvRigid {
         }};
         testTypeForArticulatedPSV(testType, vehicleConfigurationArticulated);
     }
-
 
     @Title("CVSB - 8232 AC1 - DISPLAYING THE CORRECT TEST TYPES IN THE APP FOR ARTICULATED PSV's(Class 6A -> First Test)")
     @Test
@@ -265,7 +264,6 @@ public class GetTestTypesForPsvRigid {
         }};
         testTypeForArticulatedPSV(testType, vehicleConfigurationRigidArticulated);
     }
-
 
     @Title("CVSB - 8232 AC1 - DISPLAYING THE CORRECT TEST TYPES IN THE APP FOR ARTICULATED PSV's(Voluntary -> Brake test)")
     @Test
