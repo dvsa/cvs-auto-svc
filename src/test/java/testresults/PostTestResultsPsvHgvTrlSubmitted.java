@@ -426,7 +426,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
 
-        testResultsSteps.validatePostErrorDataContains("odometerReading", "is required");
+        testResultsSteps.validatePostErrorDataContains("odometerReading", "is mandatory");
     }
 
     @Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - odometerReadingUnits )")
@@ -447,7 +447,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
 
-        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "is required");
+        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "is mandatory");
     }
 
     @Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - vehicleSize )")
@@ -692,7 +692,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
 
-        testResultsSteps.validatePostErrorDataContains("odometerReading", "is required");
+        testResultsSteps.validatePostErrorDataContains("odometerReading", "is mandatory");
 
     }
 
@@ -761,7 +761,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
 
-        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "is required");
+        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "is mandatory");
 
     }
 
@@ -1041,7 +1041,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.changeTestResultsFieldValue(payload, "odometerReadingUnits", "litre");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "must be one of [kilometres, miles]");
+        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "must be one of [kilometres, miles, null]");
 
     }
 
@@ -1249,7 +1249,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.changeTestResultsFieldValue(payload, "odometerReadingUnits", "seven");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "must be one of [kilometres, miles]");
+        testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "must be one of [kilometres, miles, null]");
     }
 
     @Title("CVSB-6805 - CVSB-7331 - API Consumer creates a new test results for the submitted test (PSV - attributes defined incorrectly)")

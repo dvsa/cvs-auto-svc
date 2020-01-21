@@ -26,14 +26,6 @@ public class PostTestResultsRoadworthiness {
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
-    private void validateSavedData(List<String> data) {
-
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
-        testResultsSteps.validateDataForExpiry(data);
-    }
-
     @Title("CVSB-7675 - TC1 - AC1 - ROADWORTHINESS certificate number generated (HGV) - PASS")
     @Test
     public void testResults_Roadworthiness_HGV_Pass_Certificate_Number() {

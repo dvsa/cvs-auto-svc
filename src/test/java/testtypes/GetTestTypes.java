@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -26,6 +27,7 @@ public class GetTestTypes {
     @Steps
     TestTypeSteps testTypeSteps;
 
+    @Ignore("Bad test design - requires maintenance for every change in taxonomy")
     @Title("CVSB-579 / CVSB-746 - CVSB-996 / CVSB-2391 AC1 - API Consumer retrieve all the test types and test codes reference data")
     @Test
     public void testTypesReferenceData() throws Exception {
