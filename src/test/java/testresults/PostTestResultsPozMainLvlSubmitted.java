@@ -855,7 +855,7 @@ public class PostTestResultsPozMainLvlSubmitted {
         validateSavedData();
     }
 
-
+    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - countryOfRegistration")
     @Test
     public void testResultsEmptyValueCountryOfRegistration() {

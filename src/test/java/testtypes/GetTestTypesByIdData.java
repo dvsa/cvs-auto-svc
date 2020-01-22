@@ -4034,8 +4034,6 @@ public class GetTestTypesByIdData {
                 .setVehicleType(VehicleType.PSV)
                 .setVehicleSize(VehicleSize.LARGE)
                 .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
-
-
         testTypeSteps.getTestTypesById("100", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
