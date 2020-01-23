@@ -34,6 +34,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void getTestResultsSysNumber(String systemNumber) {
+        response = testResultsClient.getTestResultsSysNumber(systemNumber);
+    }
+
+    @Step
     public void getTestResultsNotAuthenticated(String vin) {
         setMissingAtuh();
         response = testResultsClient.callGetTestResults(vin);
@@ -50,6 +55,11 @@ public class TestResultsSteps {
     @Step
     public void getTestResults(String vin, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsWithStatus(vin, testResultsStatus.getStatus());
+    }
+
+    @Step
+    public void getTestResultsWithStatusAndSysNumber(String systemNumber, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsWithStatusAndSysNumber(systemNumber, testResultsStatus.getStatus());
     }
 
     @Step
@@ -104,6 +114,11 @@ public class TestResultsSteps {
     @Step
     public void getTestResultsBetweenDate(String vin, String fromDate, String toDate) {
         response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate);
+    }
+
+    @Step
+    public void getTestResultsBetweenDateWithSysNum(String systemNumber, String fromDate, String toDate) {
+        response = testResultsClient.getTestResultsBetweenDateWithSysNum(systemNumber, fromDate, toDate);
     }
 
     @Step
@@ -637,6 +652,13 @@ public class TestResultsSteps {
     @Step
     public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
+    }
+
+    @Step
+    public void postVehicleTestResultsWithNoAuthorization(String requestBody) {
+        setWrongAtuh();
+        this.response = testResultsClient.callPostVehicleTestResultsWithNoAuthorization(requestBody);
+        setRightAtuh();
     }
 
     @Step

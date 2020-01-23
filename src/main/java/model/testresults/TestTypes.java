@@ -20,7 +20,6 @@ public class TestTypes {
     private String testResult;
     private String additionalCommentsForAbandon;
 
-
     public TestTypes() {
 
     }
@@ -42,7 +41,6 @@ public class TestTypes {
         private String additionalNotesRecorded;
         private List<Defects> defects;
         private String additionalCommentsForAbandon;
-
 
         public Builder() {
         }
@@ -125,6 +123,8 @@ public class TestTypes {
         public TestTypes build() {
             return new TestTypes(this);
         }
+
+
     }
 
     protected TestTypes(TestTypes.Builder<?> builder) {

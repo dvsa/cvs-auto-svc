@@ -34,6 +34,19 @@ public class TestResultsClient {
 
     }
 
+    public Response getTestResultsSysNumber(String systemNumber) {
+
+        Response response = callGetTestResults(systemNumber);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResults(systemNumber);
+        }
+
+        return response;
+
+    }
+
     public Response getTestResultsWithStatus(String vin, String status) {
 
         Response response = callFetTestResultsWithStatus(vin, status);
@@ -41,6 +54,18 @@ public class TestResultsClient {
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callFetTestResultsWithStatus(vin, status);
+        }
+
+        return response;
+    }
+
+    public Response getTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
+
+        Response response = callGetTestResultsWithStatusAndSysNumber(systemNumber, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsWithStatusAndSysNumber(systemNumber, status);
         }
 
         return response;
@@ -237,6 +262,18 @@ public class TestResultsClient {
         return response;
     }
 
+    public Response getTestResultsBetweenDateWithSysNum(String systemNumber, String fromDateTime, String toDateTime) {
+
+        Response response = callGetTestResultsBetweenDateWithSysNum(systemNumber, fromDateTime, toDateTime);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsBetweenDateWithSysNum(systemNumber, fromDateTime, toDateTime);
+        }
+
+        return response;
+    }
+
     public Response getTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime, String status) {
 
         Response response = callGetTestResultsBetweenDate(vin, fromDateTime, toDateTime, status);
@@ -277,6 +314,19 @@ public class TestResultsClient {
         return response;
     }
 
+    public Response callGetTestResultsSysNum(String systemNumber) {
+
+        Response response = given()
+                .filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/test-results/{systemNumber}");
+
+        return response;
+    }
+
     private Response callFetTestResultsWithStatus(String vin, String status) {
 
         Response response = given().filters(new BasePathFilter())
@@ -286,6 +336,21 @@ public class TestResultsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
+
+
+        return response;
+    }
+
+
+    private Response callGetTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+                .queryParam("status", status)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/test-results/{systemNumber}");
 
 
         return response;
@@ -350,6 +415,18 @@ public class TestResultsClient {
         return response;
     }
 
+    private Response callGetTestResultsBetweenDateWithSysNum(String systemNumber, String fromDateTime, String toDateTime) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+                .queryParam("fromDateTime", fromDateTime)
+                .queryParam("toDateTime", toDateTime)
+                .get("/test-results/{systemNumber}");
+
+        return response;
+    }
+
     private Response callGetTestResultsBetweenDate(String vin, String fromDateTime, String toDateTime, String status) {
 
         Response response = given().filters(new BasePathFilter())
@@ -408,6 +485,18 @@ public class TestResultsClient {
 
         return response;
     }
+
+    public Response callPostVehicleTestResultsWithNoAuthorization(String body) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .post("/test-results");
+
+        return response;
+    }
+
 
     public Response postVehicleTestResultsWithAlterations(String body, List<JsonPathAlteration> alterations) {
         Response response = callPostVehicleTestResultsWithAlterations(body, alterations);
