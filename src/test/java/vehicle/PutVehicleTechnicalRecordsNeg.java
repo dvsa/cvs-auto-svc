@@ -14,10 +14,7 @@ import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecordsNeg {
@@ -339,17 +336,11 @@ public class PutVehicleTechnicalRecordsNeg {
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
-        // get pdf content as base64 encoded string
-        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
-        // create alteration to add files field in the request body as array with an element the previously encoded string
-        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
-        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles));
+
 
         //TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         Response downloadFileResponse = vehicleTechnicalRecordsSteps.downloadFile(randomVin, "bla-bla.txt");
         String downloadedFileContent = downloadFileResponse.asString().substring(1, downloadFileResponse.asString().length()-1);
         Assert.assertEquals(500, downloadFileResponse.getStatusCode());

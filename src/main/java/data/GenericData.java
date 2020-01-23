@@ -6,6 +6,7 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
 import data.config.DataMapper;
+import net.minidev.json.JSONArray;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.lang.NonNull;
@@ -99,8 +100,15 @@ public class GenericData {
                     break;
                 case "REPLACE":
                     Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
-                    jsonContext = jsonContext.set(alteration.getPath(), value);
+                    if (value == "true") {
+                        jsonContext.set(alteration.getPath(), true);
+                    }
+                    else if (value == "false") {
+                        jsonContext.set(alteration.getPath(), false);
+                    }
+                    else {
+                        jsonContext = jsonContext.set(alteration.getPath(), value);
+                    }
                     break;
             }
         }
@@ -174,4 +182,11 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static String extractStringValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath).toString();
+    }
+
+    public static JSONArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
 }

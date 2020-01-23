@@ -1,6 +1,7 @@
 package steps;
 
 import clients.VehicleTechnicalRecordsClient;
+import com.jayway.jsonpath.JsonPath;
 import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.response.Response;
@@ -255,13 +256,14 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
+    public String extractFieldValueFromResponse(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
         vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
         return response.then().extract().path(jsonPath).toString();
     }
 
     @Step
     public Response downloadFile(String searchIdentifier, String fileName) {
+        this.response = vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
         return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
     }
 

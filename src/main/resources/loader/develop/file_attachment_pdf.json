@@ -1,0 +1,9 @@
+{
+  "files": [
+    {
+      "toUpload": true,
+      "filename": "someFilename.pdf",
+      "base64String": "data:application/pdf;base64,JVBERi0xLjMKJcTl8uXrp/Og0MTGCjQgMCBvYmoKPDwgL0x"
+    }
+  ]
+}

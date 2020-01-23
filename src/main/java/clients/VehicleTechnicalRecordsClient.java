@@ -173,10 +173,10 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
-                .pathParam("fileName", fileName)
+                .queryParam("filename", fileName)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/download-file/{fileName}");
+                .get("/vehicles/{searchIdentifier}/download-file");
 
         return response;
     }

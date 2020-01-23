@@ -3,19 +3,23 @@ package vehicle;
 import data.GenericData;
 import io.restassured.response.Response;
 import model.vehicles.VehicleTechnicalRecordStatus;
+import net.minidev.json.JSONArray;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import  org.junit.Assert;
 import org.junit.Ignore;
+import org.springframework.util.Base64Utils;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(SerenityRunner.class)
@@ -182,10 +186,17 @@ public class PutVehicleTechnicalRecords {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
         // get pdf content as base64 encoded string
         String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
-        // create alteration to add files field in the request body as array with an element the previously encoded string
-        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
-        JsonPathAlteration alterationRemoveFiles = new JsonPathAlteration("$.techRecord[0].adrDetails.documents","[]","","REPLACE");
-        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles));
+        // create alteration to add files field in the request body as array with two elements, one for the new files and one to keep the existing file
+        String addFileForUpload = GenericData.readJsonValueFromFile("file_attachment_pdf.json","$.files");
+        int i1 = addFileForUpload.lastIndexOf(",");
+        int i2 = addFileForUpload.lastIndexOf("\"");
+        String newFileForUpload = addFileForUpload.replace(addFileForUpload.substring(i1+1, i2), encodedFileContent);
+        String keepExistingFile = "{\"filename\":\"bla-bla.txt\",\"toUpload\":false}";
+        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$", newFileForUpload,"files","ADD_FIELD");
+        JsonPathAlteration alterationKeepExistingFile = new JsonPathAlteration("$.files", keepExistingFile,"files","ADD_VALUE");
+
+        JsonPathAlteration alterationRemoveAddedFile = new JsonPathAlteration("$","[" + keepExistingFile + "]","files","ADD_FIELD");
+        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles,alterationKeepExistingFile));
 
         //TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
@@ -196,12 +207,25 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[2].adrDetails.documents[1]", ".pdf");
+        String fileName = vehicleTechnicalRecordsSteps.extractFieldValueFromResponse("techRecord[2].adrDetails.documents[1]", randomVin, VehicleTechnicalRecordStatus.CURRENT);
         //validate AC2
-        alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationRemoveFiles));
+        alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationRemoveAddedFile));
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 4);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].adrDetails.documents.size()", 0);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].adrDetails.documents.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].adrDetails.documents[0]", "bla-bla.txt");
+        //previously uploaded file can be added again to the documents array without having "toUpload" to true
+        JsonPathAlteration alterationToUploadFalse = new JsonPathAlteration("$.files[0].toUpload", Boolean.toString(false),"","REPLACE");
+        JsonPathAlteration alterationAddAlreadyUploadedFileToDocuments = new JsonPathAlteration("$.files[0].filename", fileName,"","REPLACE");
+        JsonPathAlteration alterationBase64StringNull = new JsonPathAlteration("$.files[0].base64String", "random string","","REPLACE");
+        alterationsAdrFiles =  new ArrayList<>(Arrays.asList(alterationAddFiles, alterationToUploadFalse, alterationBase64StringNull, alterationAddAlreadyUploadedFileToDocuments));
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 5);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[4].adrDetails.documents.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[4].adrDetails.documents[0]", fileName);
+
     }
 
     @WithTag("Vtm")
@@ -226,9 +250,16 @@ public class PutVehicleTechnicalRecords {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
         // get pdf content as base64 encoded string
         String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
+        // create alteration to add files field in the request body as array with two elements, one for the new files and one to keep the existing file
+        String addFileForUpload = GenericData.readJsonValueFromFile("file_attachment_pdf.json","$.files");
+        int i1 = addFileForUpload.lastIndexOf(",");
+        int i2 = addFileForUpload.lastIndexOf("\"");
+        String newFileForUpload = addFileForUpload.replace(addFileForUpload.substring(i1+1, i2), encodedFileContent);
         // create alteration to add files field in the request body as array with an element the previously encoded string
-        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
-        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles));
+        String keepExistingFile = "{\"filename\":\"bla-bla.txt\",\"toUpload\":false}";
+        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$", newFileForUpload,"files","ADD_FIELD");
+        JsonPathAlteration alterationKeepExistingFile = new JsonPathAlteration("$.files", keepExistingFile,"files","ADD_VALUE");
+        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles,alterationKeepExistingFile));
 
         //TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
@@ -238,10 +269,104 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[2].adrDetails.documents[1]", ".pdf");
-        String fileName = vehicleTechnicalRecordsSteps.extractFieldValueFromGetVehicleTechnicalRecordsByStatus("techRecord[2].adrDetails.documents[1]", randomVin, VehicleTechnicalRecordStatus.CURRENT);
+        String fileName = vehicleTechnicalRecordsSteps.extractFieldValueFromResponse("techRecord[2].adrDetails.documents[1]", randomVin, VehicleTechnicalRecordStatus.CURRENT);
         Response downloadFileResponse = vehicleTechnicalRecordsSteps.downloadFile(randomVin, fileName);
-        String downloadedFileContent = downloadFileResponse.asString().substring(1, downloadFileResponse.asString().length()-1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("fileBuffer.type", "Buffer");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("contentType","application/pdf");
+
+        JSONArray jsonArray = GenericData.extractJsonArrayValueFromJsonString(downloadFileResponse.asString(), "$.fileBuffer.data");
+        byte[] bytes = new byte[jsonArray.size()];
+        for (int i = 0; i < jsonArray.size(); i++) {
+            bytes[i]=(byte)(((int)jsonArray.get(i)));
+        }
+        String downloadedFileContent = Base64Utils.encodeToString(bytes);
         Assert.assertEquals(200, downloadFileResponse.getStatusCode());
         Assert.assertEquals(encodedFileContent, downloadedFileContent);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10847 - Existing ADR document is removed if it is not in files array with 'toUpload' set to false")
+    @Test
+    public void testRemoveAdrDocument() {
+        //TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv.json","$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        // create alteration to remove all adr documents
+        JsonPathAlteration alterationNoFiles = new JsonPathAlteration("$", "[]","files","ADD_FIELD");
+        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationNoFiles));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10847 - User is allowed making GET request with the name of an existing file with 'toUpload' set to true")
+    @Test
+    public void testErrorForUploadingAlreadyExistingFile() {
+        //TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv.json","$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        // get pdf content as base64 encoded string
+        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
+        // create alterations to add files to keep the existing file and then upload a new file
+        String addFileForUpload = GenericData.readJsonValueFromFile("file_attachment_pdf.json","$.files");
+        int i1 = addFileForUpload.lastIndexOf(",");
+        int i2 = addFileForUpload.lastIndexOf("\"");
+        String newFileForUpload = addFileForUpload.replace(addFileForUpload.substring(i1+1, i2), encodedFileContent);
+        String keepExistingFile = "{\"filename\":\"bla-bla.txt\",\"toUpload\":false}";
+        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$", newFileForUpload,"files","ADD_FIELD");
+        JsonPathAlteration alterationKeepExistingFile = new JsonPathAlteration("$.files", keepExistingFile,"files","ADD_VALUE");
+        List<JsonPathAlteration> alterationsAdrFiles = new ArrayList<>(Arrays.asList(alterationAddFiles,alterationKeepExistingFile));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // upload file
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[2].adrDetails.documents[1]", ".pdf");
+        //re-upload previous file
+        String fileName = vehicleTechnicalRecordsSteps.extractFieldValueFromResponse("techRecord[2].adrDetails.documents[1]", randomVin, VehicleTechnicalRecordStatus.CURRENT);
+        String existingFileUploadTrue = "{\"filename\":\"" + fileName + "\",\"base64String\":\"data:application/pdf;base64," + encodedFileContent + "\",\"toUpload\":true}";
+        JsonPathAlteration existingFileUploadTrueAlteration = new JsonPathAlteration("$","[" + existingFileUploadTrue + "]","files","ADD_FIELD");
+        alterationsAdrFiles = new ArrayList<>(Collections.singletonList(existingFileUploadTrueAlteration));
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetailsBattery, alterationsAdrFiles);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].adrDetails.documents.size()", 1);
     }
 }
