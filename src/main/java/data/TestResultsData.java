@@ -36,7 +36,4 @@ public class TestResultsData {
 
         return testResults;
     }
-
-
-
 }

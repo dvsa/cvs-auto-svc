@@ -20,6 +20,7 @@ public class TestTypes {
     private String testResult;
     private String additionalCommentsForAbandon;
 
+
     public TestTypes() {
 
     }

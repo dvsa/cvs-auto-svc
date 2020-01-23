@@ -81,6 +81,7 @@ public class TestResults {
             this.vin = vin;
             return (T) this;
         }
+
         public T setTestResultId(String testResultId) {
             this.testResultId = testResultId;
             return (T) this;
