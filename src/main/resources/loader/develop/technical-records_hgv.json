@@ -17,7 +17,6 @@
             "dataTrAxles": 345,
             "fitmentCode": "single",
             "plyRating": "AB",
-            "speedCategorySymbol": "a7",
             "tyreCode": 1234,
             "tyreSize": "9.23648E+11"
           },
@@ -32,7 +31,6 @@
             "dataTrAxles": 345,
             "fitmentCode": "single",
             "plyRating": "AB",
-            "speedCategorySymbol": "a7",
             "tyreCode": 5678,
             "tyreSize": "9.23648E+11"
           },
@@ -46,28 +44,12 @@
         "code": "x",
         "description": "other"
       },
-      "brakeCode": "178202",
+      "fuelPropulsionSystem": "Hybrid",
+      "numberOfWheelsDriven": 4,
+      "euVehicleCategory": "m1",
+      "approvalType": "NTA",
       "brakes": {
-        "antilockBrakingSystem": true,
-        "brakeCode": "123",
-        "brakeCodeOriginal": "12412",
-        "brakeForceWheelsNotLocked": {
-          "parkingBrakeForceA": 2332,
-          "secondaryBrakeForceA": 2512,
-          "serviceBrakeForceA": 6424
-        },
-        "brakeForceWheelsUpToHalfLocked": {
-          "parkingBrakeForceB": 3512,
-          "secondaryBrakeForceB": 2512,
-          "serviceBrakeForceB": 5521
-        },
-        "dataTrBrakeOne": "None",
-        "dataTrBrakeThree": "None",
-        "dataTrBrakeTwo": "None",
-        "dtpNumber": "sdgsd",
-        "loadSensingValve": true,
-        "retarderBrakeOne": "electric",
-        "retarderBrakeTwo": "exhaust"
+        "dtpNumber": "sdgsd"
       },
       "conversionRefNo": "7891234",
       "createdAt": "2019-06-24T10:26:54.903Z",
@@ -77,13 +59,14 @@
       },
       "drawbarCouplingFitted": true,
       "euroStandard": "7",
+      "frontAxleToRearAxle": 100,
       "frontAxleTo5thWheelCouplingMax": 1900,
       "frontAxleTo5thWheelCouplingMin": 1700,
       "frontAxleTo5thWheelMax": 1500,
       "frontAxleTo5thWheelMin": 1200,
       "functionCode": "A",
-      "grossKerbWeight": 2500,
-      "grossLadenWeight": 3000,
+      "grossGbWeight": 2500,
+      "grossDesignWeight": 2500,
       "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
       "make": "Isuzu",
       "manufactureYear": 2018,
@@ -97,7 +80,6 @@
       "regnDate": "2019-06-24",
       "roadFriendly": true,
       "speedLimiterMrk": true,
-      "statusCode": "provisional",
       "tachoExemptMrk": true,
       "trainDesignWeight": 2000,
       "trainGbWeight": 1500,
@@ -107,7 +89,17 @@
         "description": "heavy goods vehicle"
       },
       "vehicleConfiguration": "semi-car transporter",
-      "vehicleType": "hgv"
+      "vehicleType": "hgv",
+      "applicantDetails": {
+        "name": "string",
+        "address1": "string",
+        "address2": "string",
+        "postTown": "string",
+        "address3": "string",
+        "postCode": "string",
+        "emailAddress": "string",
+        "telephoneNumber": "string"
+      }
     },
     {
       "axles": [
@@ -117,7 +109,6 @@
             "dataTrAxles": 345,
             "fitmentCode": "single",
             "plyRating": "AB",
-            "speedCategorySymbol": "a7",
             "tyreCode": 1234,
             "tyreSize": "9.23648E+11"
           },
@@ -132,7 +123,6 @@
             "dataTrAxles": 345,
             "fitmentCode": "single",
             "plyRating": "AB",
-            "speedCategorySymbol": "a7",
             "tyreCode": 5678,
             "tyreSize": "9.23648E+11"
           },
@@ -146,28 +136,12 @@
         "code": "x",
         "description": "other"
       },
-      "brakeCode": "178202",
+      "fuelPropulsionSystem": "Hybrid",
+      "numberOfWheelsDriven": 4,
+      "euVehicleCategory": "m1",
+      "approvalType": "NTA",
       "brakes": {
-        "antilockBrakingSystem": true,
-        "brakeCode": "123",
-        "brakeCodeOriginal": "12412",
-        "brakeForceWheelsNotLocked": {
-          "parkingBrakeForceA": 2332,
-          "secondaryBrakeForceA": 2512,
-          "serviceBrakeForceA": 6424
-        },
-        "brakeForceWheelsUpToHalfLocked": {
-          "parkingBrakeForceB": 3512,
-          "secondaryBrakeForceB": 2512,
-          "serviceBrakeForceB": 5521
-        },
-        "dataTrBrakeOne": "None",
-        "dataTrBrakeThree": "None",
-        "dataTrBrakeTwo": "None",
-        "dtpNumber": "sdgsd",
-        "loadSensingValve": true,
-        "retarderBrakeOne": "electric",
-        "retarderBrakeTwo": "exhaust"
+        "dtpNumber": "sdgsd"
       },
       "conversionRefNo": "7891234",
       "createdAt": "2019-06-24T10:26:54.903Z",
@@ -177,13 +151,14 @@
       },
       "drawbarCouplingFitted": true,
       "euroStandard": "7",
+      "frontAxleToRearAxle": 100,
       "frontAxleTo5thWheelCouplingMax": 1900,
       "frontAxleTo5thWheelCouplingMin": 1700,
       "frontAxleTo5thWheelMax": 1500,
       "frontAxleTo5thWheelMin": 1200,
       "functionCode": "A",
-      "grossKerbWeight": 2500,
-      "grossLadenWeight": 3000,
+      "grossGbWeight": 2500,
+      "grossDesignWeight": 2500,
       "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
       "make": "Isuzu",
       "manufactureYear": 2018,
@@ -197,7 +172,6 @@
       "regnDate": "2019-06-24",
       "roadFriendly": true,
       "speedLimiterMrk": true,
-      "statusCode": "current",
       "tachoExemptMrk": true,
       "trainDesignWeight": 2000,
       "trainGbWeight": 1500,
@@ -207,7 +181,17 @@
         "description": "heavy goods vehicle"
       },
       "vehicleConfiguration": "semi-car transporter",
-      "vehicleType": "hgv"
+      "vehicleType": "hgv",
+      "applicantDetails": {
+        "name": "string",
+        "address1": "string",
+        "address2": "string",
+        "postTown": "string",
+        "address3": "string",
+        "postCode": "string",
+        "emailAddress": "string",
+        "telephoneNumber": "string"
+      }
     }
   ],
   "vin": "P012301270556"

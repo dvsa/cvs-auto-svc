@@ -216,7 +216,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].adrDetails.documents.size()", 1);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[3].adrDetails.documents[0]", "bla-bla.txt");
         //previously uploaded file can be added again to the documents array without having "toUpload" to true
-        JsonPathAlteration alterationToUploadFalse = new JsonPathAlteration("$.files[0].toUpload", Boolean.toString(false),"","REPLACE");
+        JsonPathAlteration alterationToUploadFalse = new JsonPathAlteration("$.files[0].toUpload", false,"","REPLACE");
         JsonPathAlteration alterationAddAlreadyUploadedFileToDocuments = new JsonPathAlteration("$.files[0].filename", fileName,"","REPLACE");
         JsonPathAlteration alterationBase64StringNull = new JsonPathAlteration("$.files[0].base64String", "random string","","REPLACE");
         alterationsAdrFiles =  new ArrayList<>(Arrays.asList(alterationAddFiles, alterationToUploadFalse, alterationBase64StringNull, alterationAddAlreadyUploadedFileToDocuments));
@@ -320,7 +320,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10847 - User is allowed making GET request with the name of an existing file with 'toUpload' set to true")
     @Test
-    public void testErrorForUploadingAlreadyExistingFile() {
+    public void testNoErrorForUploadingAlreadyExistingFile() {
         //TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();

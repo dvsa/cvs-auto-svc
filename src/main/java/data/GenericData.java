@@ -76,10 +76,10 @@ public class GenericData {
         for (final JsonPathAlteration alteration : alterations) {
             Objects.requireNonNull(alteration.getPath(), "The 'path' is required for any alteration");
 
-            final boolean valueIsJson = alteration.getValue() != null && !alteration.getValue().isEmpty()
-                    && ((alteration.getValue().startsWith("{") && alteration.getValue().endsWith("}"))
-                    || (alteration.getValue().startsWith("[") && alteration.getValue().endsWith("]")));
-            final Object value = valueIsJson ? readJson(alteration.getValue()) : alteration.getValue();
+            final boolean valueIsJson = alteration.getValue().getClass().getName().equals("java.lang.String") && alteration.getValue() != null && !alteration.getValue().toString().isEmpty()
+                    && ((alteration.getValue().toString().startsWith("{") && alteration.getValue().toString().endsWith("}"))
+                    || (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]")));
+            final Object value = (valueIsJson) ? readJson(alteration.getValue().toString()) : alteration.getValue();
 
             switch (alteration.getAction()) {
                 case "ADD_FIELD":
@@ -100,15 +100,15 @@ public class GenericData {
                     break;
                 case "REPLACE":
                     Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-                    if (value == "true") {
-                        jsonContext.set(alteration.getPath(), true);
-                    }
-                    else if (value == "false") {
-                        jsonContext.set(alteration.getPath(), false);
-                    }
-                    else {
+//                    if (value == "true") {
+//                        jsonContext.set(alteration.getPath(), true);
+//                    }
+//                    else if (value == "false") {
+//                        jsonContext.set(alteration.getPath(), false);
+//                    }
+//                    else {
                         jsonContext = jsonContext.set(alteration.getPath(), value);
-                    }
+//                    }
                     break;
             }
         }

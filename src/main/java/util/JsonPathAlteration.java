@@ -8,7 +8,7 @@ public class JsonPathAlteration {
 
     private String field;
 
-    private String value;
+    private Object value;
 
 
     //The only supported actions are: ADD_FIELD, ADD_VALUE, DELETE and REPLACE
@@ -21,11 +21,25 @@ public class JsonPathAlteration {
         this.action = action;
     }
 
+    public JsonPathAlteration(String path, int value, String field, String action) {
+        this.path = path;
+        this.value = value;
+        this.field = field;
+        this.action = action;
+    }
+
+    public JsonPathAlteration(String path, boolean value, String field, String action) {
+        this.path = path;
+        this.value = value;
+        this.field = field;
+        this.action = action;
+    }
+
     public String getPath() {
         return this.path;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return this.value;
     }
 
