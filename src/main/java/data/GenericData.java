@@ -100,15 +100,7 @@ public class GenericData {
                     break;
                 case "REPLACE":
                     Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-//                    if (value == "true") {
-//                        jsonContext.set(alteration.getPath(), true);
-//                    }
-//                    else if (value == "false") {
-//                        jsonContext.set(alteration.getPath(), false);
-//                    }
-//                    else {
-                        jsonContext = jsonContext.set(alteration.getPath(), value);
-//                    }
+                    jsonContext = jsonContext.set(alteration.getPath(), value);
                     break;
             }
         }
