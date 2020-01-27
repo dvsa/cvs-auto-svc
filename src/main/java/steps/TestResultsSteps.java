@@ -117,11 +117,6 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void getTestResultsBetweenDateWithSysNum(String systemNumber, String fromDate, String toDate) {
-        response = testResultsClient.getTestResultsBetweenDateWithSysNum(systemNumber, fromDate, toDate);
-    }
-
-    @Step
     public void getTestResultsBetweenDate(String vin, String fromDate, String toDate, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate, testResultsStatus.getStatus());
     }
