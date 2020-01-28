@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Title;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.DefectsSteps;
@@ -322,6 +323,7 @@ public class VerifyDefectsTaxonomy {
         getDefects(id, defects, deficiencyCategory, vehicleConfiguration);
     }
 
+    @Ignore("Blocked by CVSB-11688")
     @Test
     @Title("CVSB - 11012 AC1 - Defect taxonomy updates are visible in the app 41.2.a.ii")
     public void testDefect412aii() {
