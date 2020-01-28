@@ -1,0 +1,53 @@
+{
+  "testResultId": "3c4ad2ef-3655-4a46-89e6-f8110b6447d4",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testerName": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testerStaffId": "d463f9f3-1ce7-4944-930a-ce9fd51e506b",
+  "testerEmailAddress": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2020-01-27T13:09:50.347Z",
+  "testEndTimestamp": "2020-01-27T13:18:17.655Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "vrm": "CT70VRL",
+  "odometerReading": 55000,
+  "odometerReadingUnits": "kilometres",
+  "regnDate": "2019-06-24",
+  "vin": "P012301230123",
+  "vehicleClass": {
+    "description": "heavy goods vehicle",
+    "code": "v"
+  },
+  "vehicleType": "hgv",
+  "vehicleConfiguration": "semi-car transporter",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "n2",
+  "countryOfRegistration": "bg",
+  "noOfAxles": 2,
+  "testTypes": [
+    {
+      "name": "First test",
+      "testTypeName": "First test",
+      "testTypeId": "95",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2020-01-27T13:17:35.086Z",
+      "testTypeEndTimestamp": "2020-01-27T13:18:17.658Z",
+      "modType": null,
+      "emissionStandard": null,
+      "fuelType": null,
+      "smokeTestKLimitApplied": null,
+      "particulateTrapFitted": null,
+      "particulateTrapSerialNumber": null,
+      "modificationTypeUsed": null,
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": []
+    }
+  ]
+}
