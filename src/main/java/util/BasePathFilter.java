@@ -10,8 +10,8 @@ import io.restassured.specification.FilterableResponseSpecification;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import static io.restassured.RestAssured.config;
-import static util.TypeLoader.isMissingtuh;
-import static util.TypeLoader.isWrongAtuh;
+import static util.TypeLoader.isMissingAuth;
+import static util.TypeLoader.isWrongAuth;
 
 public class BasePathFilter implements Filter {
 
@@ -36,9 +36,9 @@ public class BasePathFilter implements Filter {
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
 
         filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
-        if (!isWrongAtuh() && !isMissingtuh()) {
+        if (!isWrongAuth() && !isMissingAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken());
-        } else if (isWrongAtuh()) {
+        } else if (isWrongAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));
         }
 

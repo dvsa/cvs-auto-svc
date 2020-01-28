@@ -40,16 +40,16 @@ public class TestResultsSteps {
 
     @Step
     public void getTestResultsNotAuthenticated(String vin) {
-        setMissingAtuh();
+        setMissingAuth();
         response = testResultsClient.callGetTestResults(vin);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
     public void getTestResultsNotAuthorised(String vin) {
-        setWrongAtuh();
+        setWrongAuth();
         response = testResultsClient.callGetTestResults(vin);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
@@ -69,16 +69,16 @@ public class TestResultsSteps {
 
     @Step
     public void postTestResultsNotAuthorised(TestResults testResults) {
-        setWrongAtuh();
+        setWrongAuth();
         response = testResultsClient.callPostTestResults(testResults);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
     public void postTestResultsNotAuthenticated(TestResults testResults) {
-        setMissingAtuh();
+        setMissingAuth();
         response = testResultsClient.callPostTestResults(testResults);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
@@ -651,9 +651,9 @@ public class TestResultsSteps {
 
     @Step
     public void postVehicleTestResultsWithNoAuthorization(String requestBody) {
-        setWrongAtuh();
+        setWrongAuth();
         this.response = testResultsClient.callPostVehicleTestResultsWithNoAuthorization(requestBody);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
