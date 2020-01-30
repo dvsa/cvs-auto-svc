@@ -77,7 +77,7 @@ public class PostVehicleWithoutMandatoryHgvField {
     @WithTag("Vtm")
     @Title("CVSB-10210 - AC1 - Attempt to create a new vehicle without a mandatory field")
     @Test
-    public void testValidatePostRequestWithoutMandatoryHgvAttribute() {
+    public void testValidateRequestWithoutMandatoryHgvField() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();

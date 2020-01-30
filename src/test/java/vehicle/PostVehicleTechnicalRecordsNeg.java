@@ -60,7 +60,7 @@ public class PostVehicleTechnicalRecordsNeg {
     @WithTag("Vtm")
     @Title("CVSB-10210 - AC2 - Attempt to create a new vehicle with a not applicable field")
     @Test
-    public void testValidateRequestWithMandatoryHgvAttribute() {
+    public void testValidateRequestNotApplicableHgvField() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
