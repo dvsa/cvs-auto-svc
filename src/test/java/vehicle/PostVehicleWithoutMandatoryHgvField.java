@@ -75,7 +75,7 @@ public class PostVehicleWithoutMandatoryHgvField {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC1 - making POST request without a mandatory field")
+    @Title("CVSB-10210 - AC1 - Attempt to create a new vehicle without a mandatory field")
     @Test
     public void testValidateRequestWithoutMandatoryHgvAttribute() {
         // TEST SETUP
