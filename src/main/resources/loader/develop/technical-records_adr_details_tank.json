@@ -10,7 +10,7 @@
         "additionalExaminerNotes": "additional note",
         "additionalNotes": {
           "guidanceNotes": [
-            "Old certificate requested"
+            "New certificate requested"
           ],
           "number": [
             "3",
@@ -46,13 +46,20 @@
             "tankManufacturerSerialNo": "string1",
             "tankTypeAppNo": "string1",
             "tc2Details": {
+              "tc2Type": "initial",
               "tc2IntermediateApprovalNo": "456789",
               "tc2IntermediateExpiryDate": "2020-12-30"
             },
+            "tc3Details": [
+              {
+                "tc3Type": "periodic",
+                "tc3PeriodicNumber": "12345",
+                "tc3PeriodicExpiryDate": "2100-12-31"
+              }
+            ],
             "yearOfManufacture": 3
           },
           "tankStatement": {
-            "productList": "string1",
             "statement": "string1",
             "substancesPermitted": "No dangerous substances may be carried"
           }
