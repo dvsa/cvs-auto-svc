@@ -1,0 +1,89 @@
+{
+  "msUserDetails": {
+    "msUser": "sean",
+    "msOid": "12345"
+  },
+  "techRecord": [
+    {
+      "axles": [
+        {
+          "axleNumber": "1",
+          "tyres": {
+            "dataTrAxles": 1,
+            "fitmentCode": "single",
+            "tyreCode": 462,
+            "tyreSize": "12-22.5"
+          },
+          "weights": {
+            "designWeight": 7500,
+            "gbWeight": 7100
+          }
+        },
+        {
+          "axleNumber": "2",
+          "tyres": {
+            "dataTrAxles": 2,
+            "fitmentCode": "double",
+            "tyreCode": 462,
+            "tyreSize": "12-22.5"
+          },
+          "weights": {
+            "designWeight": 13000,
+            "gbWeight": 9500
+          }
+        }
+      ],
+      "bodyType": {
+        "description": "other"
+      },
+      "brakes": {
+        "dtpNumber": "3798A"
+      },
+      "createdAt": "2019-05-14T16:41:10.000000Z",
+      "createdByName": "dragos",
+      "createdById": "123456",
+      "lastUpdatedAt": "2019-05-14T16:41:10.000000Z",
+      "lastUpdatedByName": "dragos",
+      "lastUpdatedById": "123456",
+      "dimensions": {
+        "length": 10000,
+        "width": 2000
+      },
+      "drawbarCouplingFitted": false,
+      "euroStandard": "2",
+      "fuelPropulsionSystem": "Electric",
+      "frontAxleToRearAxle": 1000,
+      "frontAxleTo5thWheelMax": 1000,
+      "frontAxleTo5thWheelMin": 1000,
+      "grossDesignWeight": 33500,
+      "grossGbWeight": 25000,
+      "make": "VOLVO",
+      "manufactureYear": 1984,
+      "maxTrainGbWeight": 44000,
+      "model": "F12-33",
+      "noOfAxles": 3,
+      "reasonForCreation": " ",
+      "regnDate": "1985-01-01",
+      "roadFriendly": false,
+      "speedLimiterMrk": false,
+      "tachoExemptMrk": false,
+      "trainGbWeight": 41000,
+      "offRoad": false,
+      "numberOfWheelsDriven": 4,
+      "euVehicleCategory": "m1",
+      "approvalType": "NTA",
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "name": "************",
+        "postTown": "*"
+      },
+      "vehicleClass": {
+        "description": "heavy goods vehicle"
+      },
+      "vehicleConfiguration": "articulated",
+      "vehicleType": "hgv"
+    }
+  ],
+  "vin": "A00037508"
+}

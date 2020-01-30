@@ -49,13 +49,26 @@
             "tankManufacturerSerialNo": "string",
             "tankTypeAppNo": "string",
             "tc2Details": {
-              "tc2Type": "initial"
+              "tc2Type": "initial",
+              "tc2IntermediateApprovalNo": "12345",
+              "tc2IntermediateExpiryDate": "2100-12-31"
+
             },
+            "tc3Details": [
+              {
+                "tc3Type": "intermediate",
+                "tc3PeriodicNumber": "12345",
+                "tc3PeriodicExpiryDate": "2100-12-31"
+              }
+            ],
             "yearOfManufacture": 0
           },
           "tankStatement": {
             "productList": "string",
-            "statement": "string",
+            "productListRefNo": "string",
+            "productListUnNo":  [
+              "string"
+            ],
             "substancesPermitted": "Substances permitted under the tank code and any special provisions specified in 9 may be carried"
           }
         },
