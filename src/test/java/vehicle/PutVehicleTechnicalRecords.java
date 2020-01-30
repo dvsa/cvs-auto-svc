@@ -25,7 +25,7 @@ public class PutVehicleTechnicalRecords {
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
 
-    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
+//    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
@@ -38,13 +38,13 @@ public class PutVehicleTechnicalRecords {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
         // read put request body from file
-        String putRequestBody = GenericData.readJsonValueFromFile("technical-records_psv.json","$");
+        String putRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
         // read the tech record from the file used for post request body
-        String oldTechRecord = GenericData.readJsonValueFromFile("technical-records_current.json","$.techRecord[0]");
+        String oldTechRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$.techRecord[0]");
         // read the tech record from the file used for post request body
-        String newTechRecord = GenericData.readJsonValueFromFile("technical-records_psv.json","$.techRecord[0]");
+        String newTechRecord = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$.techRecord[0]");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
@@ -62,8 +62,9 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", newTechRecord);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1]", newTechRecord);
         // validate AC7
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", randomVrm);
@@ -84,7 +85,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", newTechRecord);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
     }
 
     @WithTag("Vtm")

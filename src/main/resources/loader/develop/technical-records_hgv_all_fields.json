@@ -15,7 +15,7 @@
           "axleNumber": 1,
           "parkingBrakeMrk": false,
           "tyres": {
-            "dataTrAxles": 1,
+            "dataTrAxles": 2,
             "fitmentCode": "single",
             "plyRating": " ",
             "tyreCode": 462,
@@ -45,7 +45,6 @@
         }
       ],
       "bodyType": {
-        "code": "x",
         "description": "other"
       },
       "brakes": {
@@ -83,7 +82,7 @@
       "noOfAxles": 3,
       "notes": " ",
       "ntaNumber": "0000514903",
-      "reasonForCreation": " ",
+      "reasonForCreation": "something",
       "regnDate": "1985-01-01",
       "roadFriendly": false,
       "speedLimiterMrk": false,
