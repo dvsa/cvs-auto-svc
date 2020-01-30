@@ -355,4 +355,33 @@ public class PutVehicleTechnicalRecordsNeg {
         Assert.assertEquals(500, downloadFileResponse.getStatusCode());
         Assert.assertEquals("Cannot download document from S3", downloadedFileContent);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10210 - AC2 - making PUT request with a not applicable field")
+    @Test
+    public void testValidateRequestWithMandatoryHgvAttribute() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String requestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+
+        // initialize the alterations list with both declared alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+
+        // validate 400 response when making PUT request with a not applicable field
+        JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", "1234", "brakeCode", "ADD_FIELD");
+        alterations.add(notApplicableField);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+    }
 }
