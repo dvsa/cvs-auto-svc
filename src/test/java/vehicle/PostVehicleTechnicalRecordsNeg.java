@@ -58,7 +58,7 @@ public class PostVehicleTechnicalRecordsNeg {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC2 - making POST request without a not applicable field")
+    @Title("CVSB-10210 - AC2 - Attempt to create a new vehicle with a not applicable field")
     @Test
     public void testValidateRequestWithMandatoryHgvAttribute() {
         // TEST SETUP
@@ -77,7 +77,7 @@ public class PostVehicleTechnicalRecordsNeg {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
 
-        // validate 400 response when making POST request without a mandatory field
+        // validate 400 response when making POST request with a not applicable field
         JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", "1234", "brakeCode", "ADD_FIELD");
         alterations.add(notApplicableField);
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
