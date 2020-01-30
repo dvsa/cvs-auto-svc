@@ -25,7 +25,7 @@ public class PutVehicleTechnicalRecords {
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
 
-//    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
+    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
