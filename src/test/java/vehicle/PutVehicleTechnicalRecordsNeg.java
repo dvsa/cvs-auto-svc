@@ -357,9 +357,9 @@ public class PutVehicleTechnicalRecordsNeg {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC2 - making PUT request with a not applicable field")
+    @Title("CVSB-10210 - AC2 - Attempt to update a vehicle with a not applicable field")
     @Test
-    public void testValidateRequestWithMandatoryHgvAttribute() {
+    public void testValidateRequestNotAppliclableHgvField() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
