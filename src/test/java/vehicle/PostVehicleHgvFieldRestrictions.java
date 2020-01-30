@@ -17,8 +17,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+
 @RunWith(SerenityParameterizedRunner.class)
-public class HgvFieldsRestrictionsOnPostRequest {
+public class PostVehicleHgvFieldRestrictions {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -225,13 +226,15 @@ public class HgvFieldsRestrictionsOnPostRequest {
     private final String jsonPath;
     private final Object value;
 
-    public HgvFieldsRestrictionsOnPostRequest(String jsonPath, Object value) {
+    public PostVehicleHgvFieldRestrictions(String jsonPath, Object value) {
         this.jsonPath = jsonPath;
         this.value = value;
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10209 - AC2 - hgv field data types and restrictions")
+    @Title("CVSB-10210 - AC1 - Attempt to create a new vehicle without a mandatory field" +
+            "AC3 - Attempt to create a new vehicle with unexpected values for a field that accepts only specific values" +
+            "AC4 - Attempt to create a new vehicle, using a field which has a field value outside of the min/max length for that field")
     @Test
     public void testValidateHgvAttributesDataTypesAndRestrictions() {
         // TEST SETUP

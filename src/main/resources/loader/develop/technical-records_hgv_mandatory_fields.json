@@ -1,89 +1,71 @@
 {
   "msUserDetails": {
-    "msUser": "sean",
-    "msOid": "12345"
+    "msUser": "dragos",
+    "msOid": "123456"
   },
+  "primaryVrm": "B2C1C12",
   "techRecord": [
     {
       "axles": [
         {
-          "axleNumber": "1",
-          "tyres": {
-            "dataTrAxles": 1,
-            "fitmentCode": "single",
-            "tyreCode": 462,
-            "tyreSize": "12-22.5"
-          },
-          "weights": {
-            "designWeight": 7500,
-            "gbWeight": 7100
-          }
-        },
-        {
-          "axleNumber": "2",
+          "axleNumber": 1,
           "tyres": {
             "dataTrAxles": 2,
             "fitmentCode": "double",
-            "tyreCode": 462,
-            "tyreSize": "12-22.5"
+            "tyreCode": 463,
+            "tyreSize": "10-20.5"
           },
           "weights": {
-            "designWeight": 13000,
-            "gbWeight": 9500
+            "designWeight": 6500,
+            "gbWeight": 6100
           }
         }
       ],
       "bodyType": {
-        "description": "other"
+        "description": "articulated"
       },
       "brakes": {
-        "dtpNumber": "3798A"
+        "dtpNumber": "3799A"
       },
-      "createdAt": "2019-05-14T16:41:10.000000Z",
-      "createdByName": "dragos",
-      "createdById": "123456",
-      "lastUpdatedAt": "2019-05-14T16:41:10.000000Z",
-      "lastUpdatedByName": "dragos",
-      "lastUpdatedById": "123456",
       "dimensions": {
-        "length": 10000,
-        "width": 2000
+        "length": 9000,
+        "width": 1000
       },
-      "drawbarCouplingFitted": false,
-      "euroStandard": "2",
-      "fuelPropulsionSystem": "Electric",
-      "frontAxleToRearAxle": 1000,
-      "frontAxleTo5thWheelMax": 1000,
-      "frontAxleTo5thWheelMin": 1000,
-      "grossDesignWeight": 33500,
-      "grossGbWeight": 25000,
-      "make": "VOLVO",
-      "manufactureYear": 1984,
-      "maxTrainGbWeight": 44000,
-      "model": "F12-33",
-      "noOfAxles": 3,
-      "reasonForCreation": " ",
-      "regnDate": "1985-01-01",
-      "roadFriendly": false,
-      "speedLimiterMrk": false,
-      "tachoExemptMrk": false,
-      "trainGbWeight": 41000,
-      "offRoad": false,
-      "numberOfWheelsDriven": 4,
-      "euVehicleCategory": "m1",
-      "approvalType": "NTA",
+      "drawbarCouplingFitted": true,
+      "euroStandard": "3",
+      "fuelPropulsionSystem": "Hybrid",
+      "frontAxleToRearAxle": 2000,
+      "frontAxleTo5thWheelMax": 2000,
+      "frontAxleTo5thWheelMin": 2000,
+      "grossDesignWeight": 30500,
+      "grossGbWeight": 20000,
+      "make": "ISUZU",
+      "manufactureYear": 1986,
+      "maxTrainGbWeight": 34000,
+      "model": "F11-32",
+      "noOfAxles": 1,
+      "reasonForCreation": "whatever",
+      "regnDate": "1986-01-01",
+      "roadFriendly": true,
+      "speedLimiterMrk": true,
+      "tachoExemptMrk": true,
+      "trainGbWeight": 31000,
+      "offRoad": true,
+      "numberOfWheelsDriven": 6,
+      "euVehicleCategory": "m2",
+      "approvalType": "ECTA",
       "applicantDetails": {
-        "address1": "*****",
-        "address2": "*****",
-        "name": "************",
-        "postTown": "*"
+        "address1": "address1",
+        "address2": "address2",
+        "name": "name",
+        "postTown": "town"
       },
       "vehicleClass": {
-        "description": "heavy goods vehicle"
+        "description": "3 wheelers"
       },
-      "vehicleConfiguration": "articulated",
+      "vehicleConfiguration": "dolly",
       "vehicleType": "hgv"
     }
   ],
-  "vin": "A00037508"
+  "vin": "A00037509"
 }

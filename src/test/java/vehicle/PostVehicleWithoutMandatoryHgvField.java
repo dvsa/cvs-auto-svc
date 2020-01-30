@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RunWith(SerenityParameterizedRunner.class)
-public class HgvMandatoryFieldsOnPostRequest {
+public class PostVehicleWithoutMandatoryHgvField {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -26,17 +26,56 @@ public class HgvMandatoryFieldsOnPostRequest {
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
                 {"$.primaryVrm"},
+                {"$.vin"},
+                {"$.techRecord[0].vehicleType"},
+                {"$.techRecord[0].manufactureYear"},
+                {"$.techRecord[0].noOfAxles"},
+                {"$.techRecord[0].brakes.dtpNumber"},
+                {"$.techRecord[0].speedLimiterMrk"},
+                {"$.techRecord[0].tachoExemptMrk"},
+                {"$.techRecord[0].euroStandard"},
+                {"$.techRecord[0].fuelPropulsionSystem"},
+                {"$.techRecord[0].roadFriendly"},
+                {"$.techRecord[0].drawbarCouplingFitted"},
+                {"$.techRecord[0].vehicleClass.description"},
+                {"$.techRecord[0].vehicleConfiguration"},
+                {"$.techRecord[0].offRoad"},
+                {"$.techRecord[0].numberOfWheelsDriven"},
+                {"$.techRecord[0].euVehicleCategory"},
+                {"$.techRecord[0].approvalType"},
+                {"$.techRecord[0].make"},
+                {"$.techRecord[0].model"},
+                {"$.techRecord[0].bodyType.description"},
+                {"$.techRecord[0].grossGbWeight"},
+                {"$.techRecord[0].grossDesignWeight"},
+                {"$.techRecord[0].trainGbWeight"},
+                {"$.techRecord[0].maxTrainGbWeight"},
+                {"$.techRecord[0].axles[0].weights.gbWeight"},
+                {"$.techRecord[0].axles[0].weights.designWeight"},
+                {"$.techRecord[0].axles[0].tyres.tyreCode"},
+                {"$.techRecord[0].axles[0].tyres.tyreSize"},
+                {"$.techRecord[0].axles[0].tyres.fitmentCode"},
+                {"$.techRecord[0].dimensions.width"},
+                {"$.techRecord[0].dimensions.length"},
+                {"$.techRecord[0].frontAxleToRearAxle"},
+                {"$.techRecord[0].frontAxleTo5thWheelMin"},
+                {"$.techRecord[0].frontAxleTo5thWheelMax"},
+                {"$.techRecord[0].applicantDetails.name"},
+                {"$.techRecord[0].applicantDetails.address1"},
+                {"$.techRecord[0].applicantDetails.address2"},
+                {"$.techRecord[0].applicantDetails.postTown"},
+                {"$.techRecord[0].reasonForCreation"}
         });
     }
 
     private final String jsonPath;
 
-    public HgvMandatoryFieldsOnPostRequest(String jsonPath) {
+    public PostVehicleWithoutMandatoryHgvField(String jsonPath) {
         this.jsonPath = jsonPath;
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10209 - AC2 - making POST request without a mandatory field")
+    @Title("CVSB-10210 - AC1 - making POST request without a mandatory field")
     @Test
     public void testValidateRequestWithoutMandatoryHgvAttribute() {
         // TEST SETUP

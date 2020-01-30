@@ -469,17 +469,4 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", "CT96DRG");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].isPrimary", false);
     }
-
-    @WithTag("Vtm")
-    @Title("CVSB-10209 - AC2 - A new tech record is created when making POST request with all hgv attributes, optional and mandatory")
-    @Test
-    public void testVehicleTechnicalRecordsPostAllHgvAttributes() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P012301000000");
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms.size", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", "AA00AAA");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].isPrimary", true);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", "CT96DRG");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].isPrimary", false);
-    }
 }
