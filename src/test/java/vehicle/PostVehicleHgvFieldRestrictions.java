@@ -235,7 +235,7 @@ public class PostVehicleHgvFieldRestrictions {
     @Title("CVSB-10210 - AC3 - Attempt to create a new vehicle with unexpected values for a field that accepts only specific values" +
             "AC4 - Attempt to create a new vehicle, using a field with its value outside of the min/max length for that field")
     @Test
-    public void testValidateHgvAttributesDataTypesAndRestrictions() {
+    public void testValidateHgvFieldsDataTypesAndRestrictions() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
