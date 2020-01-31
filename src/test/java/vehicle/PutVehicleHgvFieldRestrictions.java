@@ -73,15 +73,6 @@ public class PutVehicleHgvFieldRestrictions {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"$.primaryVrm", RandomStringUtils.randomAlphanumeric(10)},
-                {"$.primaryVrm", ""},
-                {"$.primaryVrm", 100},
-                {"$.secondaryVrms[0]", RandomStringUtils.randomAlphanumeric(10)},
-                {"$.secondaryVrms[0]", ""},
-                {"$.secondaryVrms[0]", 100},
-                {"$.vin", RandomStringUtils.randomAlphanumeric(22)},
-                {"$.vin", RandomStringUtils.randomAlphanumeric(2)},
-                {"$.vin", 100},
                 {"$.techRecord[0].vehicleType", RandomStringUtils.randomAlphanumeric(10)},
                 {"$.techRecord[0].vehicleType", 100},
                 {"$.techRecord[0].regnDate", "21/08/1987"},
@@ -99,7 +90,7 @@ public class PutVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].tachoExemptMrk", "99"},
                 {"$.techRecord[0].euroStandard", 10},
                 {"$.techRecord[0].euroStandard", -1},
-                {"$.techRecord[0].euroStandard", "1"},
+                {"$.techRecord[0].euroStandard", false},
                 {"$.techRecord[0].fuelPropulsionSystem", RandomStringUtils.randomAlphanumeric(10)},
                 {"$.techRecord[0].fuelPropulsionSystem", 10},
                 {"$.techRecord[0].roadFriendly", "99"},
