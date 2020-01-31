@@ -1,6 +1,7 @@
 package vehicle;
 
 
+import clients.model.VehicleClass;
 import data.GenericData;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -55,6 +56,55 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
         // validated AC5
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-7885 - AC1 - Partial VIN is auto-populated when creating a new vehicle" +
+            "AC2 - Vehicle class code is auto-populated when creating a new vehicle" +
+            "AC3 - Body type code is auto-populated when creating a new vehicle")
+    @Test
+    public void testCreateVehicleAutoPopulateFields() {
+        // TEST SETUP
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+        String vehicleClassDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].vehicleClass.description");
+        String bodyTypeDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].bodyType.description");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // validate AC1
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("partialVin", GenericData.getPartialVinFromVin(randomVin));
+        // validate AC2
+        VehicleClass vehicleClass = VehicleClass.MOTORBIKE_OVER_200CC;
+        for (VehicleClass v : VehicleClass.values()) {
+            if (v.getDescription().equals(vehicleClassDescription)) {
+                vehicleClass = v;
+            }
+        }
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleClass.code", vehicleClass.getCode());
+        // validated AC3
+//        VehicleClass bodyType = BodyType.MOTORBIKE_OVER_200CC;
+//        for (VehicleClass v : VehicleClass.values()) {
+//            if (v.getDescription().equals(vehicleClassDescription)) {
+//                vehicleClass = v;
+//            }
+//        }
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code", "current");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", "archived");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
     }

@@ -6,8 +6,10 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
 import data.config.DataMapper;
+import net.minidev.json.JSONArray;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
+import org.apache.bcel.generic.FSUB;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
@@ -113,6 +115,22 @@ public class GenericData {
         return jsonContext.jsonString();
     }
 
+    public static String extractStringValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static Integer extractIntegerValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static Boolean extractBooleanValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static JSONArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
     private static Object readJson(final String json) {
         try {
             final JSONParser parser = new JSONParser(DEFAULT_PERMISSIVE_MODE);
@@ -179,4 +197,12 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static String getPartialVinFromVin(String randomVin) {
+        if (randomVin.length() >= 6) {
+            return randomVin.substring(randomVin.length()-6);
+        }
+        else {
+            return randomVin;
+        }
+    }
 }
