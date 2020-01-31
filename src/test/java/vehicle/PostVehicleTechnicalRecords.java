@@ -2,6 +2,7 @@ package vehicle;
 
 
 import clients.model.VehicleClass;
+import clients.model.BodyType;
 import data.GenericData;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -61,7 +62,7 @@ public class PostVehicleTechnicalRecords {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-7885 - AC1 - Partial VIN is auto-populated when creating a new vehicle" +
+    @Title("CVSB-10213 - AC1 - Partial VIN is auto-populated when creating a new vehicle" +
             "AC2 - Vehicle class code is auto-populated when creating a new vehicle" +
             "AC3 - Body type code is auto-populated when creating a new vehicle")
     @Test
@@ -85,9 +86,9 @@ public class PostVehicleTechnicalRecords {
         // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL);
         // validate AC1
-
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("partialVin", GenericData.getPartialVinFromVin(randomVin));
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         // validate AC2
         VehicleClass vehicleClass = VehicleClass.MOTORBIKE_OVER_200CC;
         for (VehicleClass v : VehicleClass.values()) {
@@ -97,15 +98,12 @@ public class PostVehicleTechnicalRecords {
         }
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleClass.code", vehicleClass.getCode());
         // validated AC3
-//        VehicleClass bodyType = BodyType.MOTORBIKE_OVER_200CC;
-//        for (VehicleClass v : VehicleClass.values()) {
-//            if (v.getDescription().equals(vehicleClassDescription)) {
-//                vehicleClass = v;
-//            }
-//        }
-
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        BodyType bodyType = BodyType.ARTICULATED;
+        for (BodyType b : BodyType.values()) {
+            if (b.getDescription().equals(bodyTypeDescription)) {
+                bodyType = b;
+            }
+        }
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code", bodyType.getCode());
     }
 }

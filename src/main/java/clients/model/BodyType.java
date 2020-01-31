@@ -1,10 +1,14 @@
 package clients.model;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
+import java.util.Random;
+
 public enum BodyType {
     ARTICULATED("a", "articulated"),
     SINGLE_DECKER("s", "single decker"),
     DOUBLE_DECKER("d", "double decker"),
-    OTHER("o", "other"),
+    OTHER("omx", "other"),
     PETROL_OIL_TANKER("p", "petrol/oil tanker"),
     SKELETAL("k", "skeletal"),
     TIPPER("t", "tipper"),
@@ -23,7 +27,12 @@ public enum BodyType {
     }
 
     public String getCode() {
-        return code;
+        if (code.length()==1) {
+            return code;
+        }
+        else {
+            return "o";
+        }
     }
 
     public String getDescription() {
