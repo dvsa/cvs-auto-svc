@@ -357,7 +357,7 @@ public class PutVehicleTechnicalRecordsNeg {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC2 - Attempt to update a vehicle with a not applicable field")
+    @Title("CVSB-10211 - AC2 - Attempt to update a vehicle with a not applicable field")
     @Test
     public void testValidateRequestNotApplicableHgvField() {
         // TEST SETUP
