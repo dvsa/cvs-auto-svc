@@ -2,11 +2,11 @@ package clients.model;
 
 public enum VehicleClass {
     MOTORBIKE_OVER_200CC("2", "motorbikes over 200cc or with a sidecar"),
-    NOT_APPLICABLE("N", "not applicable"),
-    SMALL_PSV("S", "small psv (ie: less than or equal to 22 seats)"),
+    NOT_APPLICABLE("n", "not applicable"),
+    SMALL_PSV("s", "small psv (ie: less than or equal to 22 seats)"),
     MOTORBIKE_UNDER_200CC("1", "motorbikes up to 200cc"),
-    TRAILER("T", "trailer"),
-    LARGE_PSV("L", "large psv(ie: greater than 23 seats)"),
+    TRAILER("t", "trailer"),
+    LARGE_PSV("l", "large psv(ie: greater than 23 seats)"),
     THREE_WHEELERS("3", "3 wheelers"),
     HGV("v", "heavy goods vehicle"),
     MOT4("4", "MOT class 4"),
