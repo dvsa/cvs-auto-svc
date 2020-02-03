@@ -26,6 +26,16 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
     @Steps
     TestResultsSteps testResultsSteps;
 
+    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+
+    private void validateSavedData(List<String> data) {
+
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
+        testResultsSteps.validateDataForExpiry(data);
+    }
+
     @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - PASS ")
     @Test
