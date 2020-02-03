@@ -1,9 +1,6 @@
 package vehicle;
 
-import clients.model.BodyType;
-import clients.model.VehicleClass;
 import data.GenericData;
-import io.restassured.response.Response;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -11,7 +8,6 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import  org.junit.Assert;
 import org.junit.Ignore;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
@@ -239,7 +235,7 @@ public class PutVehicleTechnicalRecords {
         alterations.add(alterationBodyTypeDescription);
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
         // validate AC2
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].vehicleClass.code", "n");
         // validated AC3
