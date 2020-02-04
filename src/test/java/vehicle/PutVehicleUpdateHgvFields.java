@@ -4,6 +4,7 @@ import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import junit.framework.TestCase;
+import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
@@ -74,76 +76,76 @@ public class PutVehicleUpdateHgvFields extends TestCase {
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
                 {"$.techRecord[0].axles[0].parkingBrakeMrk", true},
-//                {"$.techRecord[0].axles[0].tyres.dataTrAxles", 1},
-//                {"$.techRecord[0].axles[0].tyres.fitmentCode", "double"},
-//                {"$.techRecord[0].axles[0].tyres.plyRating", "rating"},
-//                {"$.techRecord[0].axles[0].tyres.tyreCode", 463},
-//                {"$.techRecord[0].axles[0].tyres.tyreSize", "11-21.5"},
-//                {"$.techRecord[0].axles[0].weights.designWeight", "6500"},
-//                {"$.techRecord[0].axles[0].weights.eecWeight", "6500"},
-//                {"$.techRecord[0].axles[0].weights.gbWeight", "6100"},
-//                {"$.techRecord[0].bodyType.description", "single decker"},
-//                {"$.techRecord[0].brakes.dtpNumber", "3798B"},
-//                {"$.techRecord[0].conversionRefNo", "refNo"},
-//                {"$.techRecord[0].dimensions.axleSpacing[0].axles", "2-1"},
-//                {"$.techRecord[0].dimensions.axleSpacing[0].value", "11000"},
-//                {"$.techRecord[0].drawbarCouplingFitted", true},
-//                {"$.techRecord[0].euroStandard", "3"},
-//                {"$.techRecord[0].fuelPropulsionSystem", "Hybrid"},
-//                {"$.techRecord[0].frontAxleToRearAxle", 2000},
-//                {"$.techRecord[0].frontAxleToRearAxle", 2000},
-//                {"$.techRecord[0].frontAxleToRearAxle", 2000},
-//                {"$.techRecord[0].frontAxleToRearAxle", 2000},
-//                {"$.techRecord[0].frontAxleToRearAxle", 2000},
-//                {"$.techRecord[0].functionCode", "B"},
-//                {"$.techRecord[0].grossDesignWeight", 20000},
-//                {"$.techRecord[0].grossGbWeight", 20000},
-//                {"$.techRecord[0].grossEecWeight", 20000},
-//                {"$.techRecord[0].make", "Chevy"},
-//                {"$.techRecord[0].manufactureYear", 2000},
-//                {"$.techRecord[0].maxTrainDesignWeight", 10000},
-//                {"$.techRecord[0].maxTrainEecWeight", 10000},
-//                {"$.techRecord[0].maxTrainGbWeight", 10000},
-//                {"$.techRecord[0].model", "Mustang"},
-//                {"$.techRecord[0].noOfAxles", 2},
-//                {"$.techRecord[0].notes", "notes"},
-//                {"$.techRecord[0].ntaNumber", "0000514900"},
-//                {"$.techRecord[0].reasonForCreation", "no reason"},
-//                {"$.techRecord[0].regnDate", 2000},
-//                {"$.techRecord[0].roadFriendly", true},
-//                {"$.techRecord[0].speedLimiterMrk", true},
-//                {"$.techRecord[0].tachoExemptMrk", true},
-//                {"$.techRecord[0].trainDesignWeight", 50000},
-//                {"$.techRecord[0].trainGbWeight", 40000},
-//                {"$.techRecord[0].trainEecWeight", 20000},
-//                {"$.techRecord[0].tyreUseCode", "2A"},
-//                {"$.techRecord[0].offRoad", true},
-//                {"$.techRecord[0].numberOfWheelsDriven", 6},
-//                {"$.techRecord[0].euVehicleCategory", "m2"},
-//                {"$.techRecord[0].emissionsLimit", 100},
-//                {"$.techRecord[0].departmentalVehicleMarker", true},
-//                {"$.techRecord[0].alterationMarker", true},
-//                {"$.techRecord[0].approvalType", "ECTA"},
-//                {"$.techRecord[0].approvalTypeNumber", "123456"},
-//                {"$.techRecord[0].variantNumber", "123456"},
-//                {"$.techRecord[0].variantVersionNumber", "123"},
-//                {"$.techRecord[0].applicantDetails.address1", "**"},
-//                {"$.techRecord[0].applicantDetails.address1", "**"},
-//                {"$.techRecord[0].applicantDetails.address1", "**"},
-//                {"$.techRecord[0].applicantDetails.name", "**"},
-//                {"$.techRecord[0].applicantDetails.postCode", "**"},
-//                {"$.techRecord[0].applicantDetails.postTown", "**"},
-//                {"$.techRecord[0].applicantDetails.telephoneNumber", "**"},
-//                {"$.techRecord[0].applicantDetails.emailAddress", "**"},
-//                {"$.techRecord[0].microfilm.microfilmDocumentType", "PSV Miscellaneous"},
-//                {"$.techRecord[0].microfilm.microfilmRollNumber", "1234"},
-//                {"$.techRecord[0].microfilm.microfilmSerialNumber", "123456"},
-//                {"$.techRecord[0].plates[0].plateSerialNumber", "12345"},
-//                {"$.techRecord[0].plates[0].plateIssueDate", "2030-12-31"},
-//                {"$.techRecord[0].plates[0].plateReasonForIssue", "no reason"},
-//                {"$.techRecord[0].plates[0].plateIssuer", "dvsa"},
-//                {"$.techRecord[0].vehicleClass.description", "skeletal"},
-//                {"$.techRecord[0].vehicleConfiguration", "rigid"}
+                {"$.techRecord[0].axles[0].tyres.dataTrAxles", 1},
+                {"$.techRecord[0].axles[0].tyres.fitmentCode", "double"},
+                {"$.techRecord[0].axles[0].tyres.plyRating", "AB"},
+                {"$.techRecord[0].axles[0].tyres.tyreCode", 463},
+                {"$.techRecord[0].axles[0].tyres.tyreSize", "11-21.5"},
+                {"$.techRecord[0].axles[0].weights.designWeight", 6500},
+                {"$.techRecord[0].axles[0].weights.eecWeight", 6500},
+                {"$.techRecord[0].axles[0].weights.gbWeight", 6100},
+                {"$.techRecord[0].bodyType.description", "single decker"},
+                {"$.techRecord[0].brakes.dtpNumber", "3798B"},
+                {"$.techRecord[0].conversionRefNo", "refNo"},
+                {"$.techRecord[0].dimensions.axleSpacing[0].axles", "2-1"},
+                {"$.techRecord[0].dimensions.axleSpacing[0].value", 11000},
+                {"$.techRecord[0].drawbarCouplingFitted", true},
+                {"$.techRecord[0].euroStandard", "7"},
+                {"$.techRecord[0].fuelPropulsionSystem", "Hybrid"},
+                {"$.techRecord[0].frontAxleToRearAxle", 2000},
+                {"$.techRecord[0].frontAxleToRearAxle", 2000},
+                {"$.techRecord[0].frontAxleToRearAxle", 2000},
+                {"$.techRecord[0].frontAxleToRearAxle", 2000},
+                {"$.techRecord[0].frontAxleToRearAxle", 2000},
+                {"$.techRecord[0].functionCode", "B"},
+                {"$.techRecord[0].grossDesignWeight", 20000},
+                {"$.techRecord[0].grossGbWeight", 20000},
+                {"$.techRecord[0].grossEecWeight", 20000},
+                {"$.techRecord[0].make", "Chevy"},
+                {"$.techRecord[0].manufactureYear", 2000},
+                {"$.techRecord[0].maxTrainDesignWeight", 10000},
+                {"$.techRecord[0].maxTrainEecWeight", 10000},
+                {"$.techRecord[0].maxTrainGbWeight", 10000},
+                {"$.techRecord[0].model", "Mustang"},
+                {"$.techRecord[0].noOfAxles", 2},
+                {"$.techRecord[0].notes", "notes"},
+                {"$.techRecord[0].ntaNumber", "0000514900"},
+                {"$.techRecord[0].reasonForCreation", "no reason"},
+                {"$.techRecord[0].regnDate", "2000-12-31"},
+                {"$.techRecord[0].roadFriendly", true},
+                {"$.techRecord[0].speedLimiterMrk", true},
+                {"$.techRecord[0].tachoExemptMrk", true},
+                {"$.techRecord[0].trainDesignWeight", 50000},
+                {"$.techRecord[0].trainGbWeight", 40000},
+                {"$.techRecord[0].trainEecWeight", 20000},
+                {"$.techRecord[0].tyreUseCode", "2A"},
+                {"$.techRecord[0].offRoad", true},
+                {"$.techRecord[0].numberOfWheelsDriven", 6},
+                {"$.techRecord[0].euVehicleCategory", "m2"},
+                {"$.techRecord[0].emissionsLimit", 40},
+                {"$.techRecord[0].departmentalVehicleMarker", true},
+                {"$.techRecord[0].alterationMarker", true},
+                {"$.techRecord[0].approvalType", "ECTA"},
+                {"$.techRecord[0].approvalTypeNumber", "123456"},
+                {"$.techRecord[0].variantNumber", "123456"},
+                {"$.techRecord[0].variantVersionNumber", "123"},
+                {"$.techRecord[0].applicantDetails.address1", "**"},
+                {"$.techRecord[0].applicantDetails.address1", "**"},
+                {"$.techRecord[0].applicantDetails.address1", "**"},
+                {"$.techRecord[0].applicantDetails.name", "**"},
+                {"$.techRecord[0].applicantDetails.postCode", "**"},
+                {"$.techRecord[0].applicantDetails.postTown", "**"},
+                {"$.techRecord[0].applicantDetails.telephoneNumber", "**"},
+                {"$.techRecord[0].applicantDetails.emailAddress", "**"},
+                {"$.techRecord[0].microfilm.microfilmDocumentType", "PSV Miscellaneous"},
+                {"$.techRecord[0].microfilm.microfilmRollNumber", "56789"},
+                {"$.techRecord[0].microfilm.microfilmSerialNumber", "3456"},
+                {"$.techRecord[0].plates[0].plateSerialNumber", "12345"},
+                {"$.techRecord[0].plates[0].plateIssueDate", "2030-12-31"},
+                {"$.techRecord[0].plates[0].plateReasonForIssue", "Destroyed"},
+                {"$.techRecord[0].plates[0].plateIssuer", "dvsa"},
+                {"$.techRecord[0].vehicleClass.description", "trailer"},
+                {"$.techRecord[0].vehicleConfiguration", "rigid"}
         });
     }
 
@@ -159,26 +161,42 @@ public class PutVehicleUpdateHgvFields extends TestCase {
     @WithTag("Vtm")
     @Title("CVSB-10209 - AC3 - HGV vehicle is updated, and the appropriate attributes are automatically set")
     @Test
-    public void testVehicleTechnicalRecordsGetAllHgvAttributes() {
+    public void testVehicleTechnicalRecordsUpdateAllHgvAttributes() {
         String putRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         JsonPathAlteration removeAxle = new JsonPathAlteration("$.techRecord[0].axles[1]", "","","DELETE");
         JsonPathAlteration removeAxleSpacing = new JsonPathAlteration("$.techRecord[0].dimensions.axleSpacing[1]", "","","DELETE");
         JsonPathAlteration changeUserId = new JsonPathAlteration("$.msUserDetails.msOid", "123456", "", "REPLACE");
         JsonPathAlteration changeUser = new JsonPathAlteration("$.msUserDetails.msUser", "dragos", "", "REPLACE");
         JsonPathAlteration updateField = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(removeAxle, removeAxleSpacing, changeUser, changeUserId, updateField));
+        String noOfTechRecords  =  vehicleTechnicalRecordsSteps.extractFieldValueFromGetVehicleTechnicalRecordsByStatus("techRecord.size()", randomVin, VehicleTechnicalRecordStatus.ALL);
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(changeUser, changeUserId, updateField));
+        if (noOfTechRecords.equals("1")) {
+            alterations.add(removeAxle);
+            alterations.add(removeAxleSpacing);
+        }
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].axles.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].dimensions.axleSpacing.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByID", "123456");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByName", "dragos");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].updateType", "techRecordUpdate");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].createdByID", "123456");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].createdByName", "dragos");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe(jsonPath.substring(2), value);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", Integer.parseInt(noOfTechRecords) + 1);
+        for (int i =0; i < Integer.parseInt(noOfTechRecords); i++) {
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + i + "].statusCode", "archived");
+        }
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].statusCode", "provisional");
+        if (noOfTechRecords.equals("1")) {
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].axles.size()", 1);
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].dimensions.axleSpacing.size()", 1);
+        }
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + (Integer.parseInt(noOfTechRecords)-1) + "].lastUpdatedById", "123456");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + (Integer.parseInt(noOfTechRecords)-1) + "].lastUpdatedByName", "dragos");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + (Integer.parseInt(noOfTechRecords)-1) + "].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].createdById", "123456");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].createdByName", "dragos");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe(jsonPath.substring(2).replaceFirst("0", noOfTechRecords), value);
+        if (jsonPath.contains("vehicleClass.description")) {
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].vehicleClass.code", "t");
+        }
+        if (jsonPath.contains("bodyType.description")) {
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[" + noOfTechRecords + "].bodyType.code", "s");
+        }
     }
 }

@@ -9,7 +9,6 @@ import data.config.DataMapper;
 import net.minidev.json.JSONArray;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
-import org.apache.bcel.generic.FSUB;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;

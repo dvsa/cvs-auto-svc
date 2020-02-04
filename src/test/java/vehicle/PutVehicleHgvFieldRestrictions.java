@@ -95,7 +95,6 @@ public class PutVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].fuelPropulsionSystem", 10},
                 {"$.techRecord[0].roadFriendly", "99"},
                 {"$.techRecord[0].drawbarCouplingFitted", "99"},
-                {"$.techRecord[0].vehicleClass.code", 10},
                 {"$.techRecord[0].vehicleClass.description", RandomStringUtils.randomAlphanumeric(10)},
                 {"$.techRecord[0].vehicleClass.description", 10},
                 {"$.techRecord[0].offRoad", 10},
