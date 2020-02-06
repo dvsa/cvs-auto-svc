@@ -228,15 +228,6 @@ public class PutVehicleTechnicalRecordsNeg {
                 alterationChangeAdrVehicleTypeNonBatteryTank));
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
-        // documents
-        adrAlterations = Arrays.asList(
-                alterationDeleteAdrTank,
-                alterationDeleteAdrListStatementApplicable,
-                alterationDeleteAdrBatteryListNumber,
-                alterationDeleteAdrMemosApply,
-                alterationChangeAdrVehicleTypeNonBatteryTank);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
         // listStatementApplicable
         adrAlterations = Arrays.asList(
                 alterationDeleteAdrTank,
@@ -252,15 +243,6 @@ public class PutVehicleTechnicalRecordsNeg {
                 alterationDeleteAdrDocuments,
                 alterationDeleteAdrListStatementApplicable,
                 alterationDeleteAdrMemosApply,
-                alterationChangeAdrVehicleTypeNonBatteryTank);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
-        // memosApply
-        adrAlterations = Arrays.asList(
-                alterationDeleteAdrTank,
-                alterationDeleteAdrDocuments,
-                alterationDeleteAdrListStatementApplicable,
-                alterationDeleteAdrBatteryListNumber,
                 alterationChangeAdrVehicleTypeNonBatteryTank);
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, adrAlterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(500);
