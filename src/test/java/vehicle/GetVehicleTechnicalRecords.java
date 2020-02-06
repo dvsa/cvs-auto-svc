@@ -491,8 +491,7 @@ public class GetVehicleTechnicalRecords {
         String techRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.techRecord[0]");
         String userId = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.msUserDetails.msOid");
         String name = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.msUserDetails.msUser");
-        String primaryVrm = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.primaryVrm");
-        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.secondaryVrm[0]");
+        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.secondaryVrms[0]");
 
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
@@ -511,8 +510,8 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].createdById", userId);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].createdByName", name);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("primaryVrm", primaryVrm);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("secondaryVrms[0]", secondaryVrm);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("secondaryVrms.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", randomVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", secondaryVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms.size()", 2);
     }
 }

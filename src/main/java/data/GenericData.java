@@ -142,30 +142,11 @@ public class GenericData {
     }
 
     public static String generateRandomVin() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder builder = new StringBuilder();
-        Random rnd = new Random();
-        Random length = new Random();
-        int vinLength = length.nextInt(15 - 3 + 1) + 3;
-        while (builder.length() < vinLength) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * chars.length());
-            builder.append(chars.charAt(index));
-        }
-        builder.append(RandomStringUtils.randomNumeric(6));
-        return builder.toString();
+        return RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 3).toUpperCase() + RandomStringUtils.randomNumeric(6);
     }
 
     public static String generateRandomVrm() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder builder = new StringBuilder();
-        Random rnd = new Random();
-        Random length = new Random();
-        int vinLength = length.nextInt(7 - 6 + 1) + 6;
-        while (builder.length() < vinLength) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * chars.length());
-            builder.append(chars.charAt(index));
-        }
-        return builder.toString();
+        return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
     }
 
     public static String getJsonStringFromJsonPath(String fileName, String path) {

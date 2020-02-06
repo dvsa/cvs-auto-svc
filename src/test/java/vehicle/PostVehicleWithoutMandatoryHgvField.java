@@ -58,8 +58,6 @@ public class PostVehicleWithoutMandatoryHgvField {
                 {"$.techRecord[0].dimensions.width"},
                 {"$.techRecord[0].dimensions.length"},
                 {"$.techRecord[0].frontAxleToRearAxle"},
-                {"$.techRecord[0].frontAxleTo5thWheelMin"},
-                {"$.techRecord[0].frontAxleTo5thWheelMax"},
                 {"$.techRecord[0].applicantDetails.name"},
                 {"$.techRecord[0].applicantDetails.address1"},
                 {"$.techRecord[0].applicantDetails.address2"},

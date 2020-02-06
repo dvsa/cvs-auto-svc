@@ -34,7 +34,7 @@ public class PostVehicleTechnicalRecordsNeg {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String requestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
+        String requestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
         // create alteration make the techRecord array from the body request empty
         JsonPathAlteration emptyTechRecordArrayAlteration = new JsonPathAlteration("$.techRecord","[]","","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
