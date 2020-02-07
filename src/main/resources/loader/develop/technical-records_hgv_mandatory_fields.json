@@ -1,0 +1,71 @@
+{
+  "msUserDetails": {
+    "msUser": "dragos",
+    "msOid": "123456"
+  },
+  "primaryVrm": "B2C1C12",
+  "techRecord": [
+    {
+      "axles": [
+        {
+          "axleNumber": 1,
+          "tyres": {
+            "dataTrAxles": 2,
+            "fitmentCode": "double",
+            "tyreCode": 463,
+            "tyreSize": "10-20.5"
+          },
+          "weights": {
+            "designWeight": 6500,
+            "gbWeight": 6100
+          }
+        }
+      ],
+      "bodyType": {
+        "description": "articulated"
+      },
+      "brakes": {
+        "dtpNumber": "3799A"
+      },
+      "dimensions": {
+        "length": 9000,
+        "width": 1000
+      },
+      "drawbarCouplingFitted": true,
+      "euroStandard": "3",
+      "fuelPropulsionSystem": "Hybrid",
+      "frontAxleToRearAxle": 2000,
+      "frontAxleTo5thWheelMax": 2000,
+      "frontAxleTo5thWheelMin": 2000,
+      "grossDesignWeight": 30500,
+      "grossGbWeight": 20000,
+      "make": "ISUZU",
+      "manufactureYear": 1986,
+      "maxTrainGbWeight": 34000,
+      "model": "F11-32",
+      "noOfAxles": 1,
+      "reasonForCreation": "whatever",
+      "regnDate": "1986-01-01",
+      "roadFriendly": true,
+      "speedLimiterMrk": true,
+      "tachoExemptMrk": true,
+      "trainGbWeight": 31000,
+      "offRoad": true,
+      "numberOfWheelsDriven": 6,
+      "euVehicleCategory": "m2",
+      "approvalType": "ECTA",
+      "applicantDetails": {
+        "address1": "address1",
+        "address2": "address2",
+        "name": "name",
+        "postTown": "town"
+      },
+      "vehicleClass": {
+        "description": "3 wheelers"
+      },
+      "vehicleConfiguration": "dolly",
+      "vehicleType": "hgv"
+    }
+  ],
+  "vin": "A00037509"
+}

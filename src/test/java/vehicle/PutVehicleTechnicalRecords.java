@@ -244,4 +244,100 @@ public class PutVehicleTechnicalRecords {
         Assert.assertEquals(200, downloadFileResponse.getStatusCode());
         Assert.assertEquals(encodedFileContent, downloadedFileContent);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for non battery/tank" +
+            "AC2 - JSON document contains 'nulls' for all optional fields for non battery/tank")
+    @Test
+    public void testValidateAdrDetailsNullsOptionalNotApplicableFieldsNonTankBattery() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_other_nulls.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_other_nulls.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // Validate AC1 + AC2
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyAdrDetails);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for battery" +
+            "AC2 - JSON document contains 'nulls' for all optional fields for battery")
+    @Test
+    public void testValidateAdrDetailsNullsOptionalNotApplicableFieldsBattery() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_battery_nulls.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_battery_nulls.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // Validate AC1 + AC2
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyAdrDetails);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for tank" +
+            "AC2 - JSON document contains 'nulls' for all optional fields for tank")
+    @Test
+    public void testValidateAdrDetailsNullsOptionalNotApplicableFieldsTank() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+        // read put request body from file for adding battery adr details
+        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_tank_nulls.json", "$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_tank_nulls.json", "$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // Validate AC1 + AC2
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyAdrDetails);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
+    }
 }

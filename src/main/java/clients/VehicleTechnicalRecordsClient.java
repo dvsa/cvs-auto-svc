@@ -112,6 +112,7 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .pathParam("vin", vin)
+                .log().method().log().uri().log().body()
                 .put("/vehicles/{vin}");
         return response;
     }
@@ -121,6 +122,7 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .body(body)
                 .pathParam("vin", vin)
+                .log().method().log().uri().log().body()
                 .put("/vehicles/{vin}");
         return response;
     }
