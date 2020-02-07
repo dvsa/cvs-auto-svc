@@ -35,8 +35,6 @@
       "euroStandard": "3",
       "fuelPropulsionSystem": "Hybrid",
       "frontAxleToRearAxle": 2000,
-      "frontAxleTo5thWheelMax": 2000,
-      "frontAxleTo5thWheelMin": 2000,
       "grossDesignWeight": 30500,
       "grossGbWeight": 20000,
       "make": "ISUZU",
