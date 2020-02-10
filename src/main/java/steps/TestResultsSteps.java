@@ -653,4 +653,9 @@ public class TestResultsSteps {
     public void insertRecordInDynamo(String json, String table) {
         AwsUtil.insertJsonnTable(json, table);
     }
+
+    @Step
+    public void insertJsonInDynamo(String table, String json) {
+        AwsUtil.insertInTable(table, json);
+    }
 }
