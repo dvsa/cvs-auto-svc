@@ -1,0 +1,78 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "techRecord": [
+    {
+      "reasonForCreation": "Update ADR TYPE",
+      "adrDetails": {
+        "additionalExaminerNotes": null,
+        "additionalNotes": {
+          "guidanceNotes": [
+          ],
+          "number": [
+          ]
+        },
+        "applicantDetails": {
+          "city": "string",
+          "name": "string",
+          "postcode": "string",
+          "street": "string",
+          "town": "string"
+        },
+        "declarationsSeen": null,
+        "brakeDeclarationsSeen": null,
+        "brakeDeclarationIssuer": null,
+        "brakeEndurance": null,
+        "weight": null,
+        "compatibilityGroupJ": null,
+        "documents": [
+        ],
+        "batteryListNumber": null,
+        "listStatementApplicable": null,
+        "memosApply": [
+        ],
+        "permittedDangerousGoods": [
+          "FP <61 (FL)"
+        ],
+        "tank": {
+          "tankDetails": {
+            "specialProvisions": null,
+            "tankCode": "string",
+            "tankManufacturer": "string",
+            "tankManufacturerSerialNo": "string",
+            "tankTypeAppNo": "string",
+            "tc2Details": {
+              "tc2Type": null,
+              "tc2IntermediateApprovalNo": null,
+              "tc2IntermediateExpiryDate": null
+            },
+            "tc3Details": [
+              {
+                "tc3Type": null,
+                "tc3PeriodicNumber": null,
+                "tc3PeriodicExpiryDate": null
+              }
+            ],
+            "yearOfManufacture": 2000
+          },
+          "tankStatement": {
+            "productList": null,
+            "productListRefNo": null,
+            "productListUnNo": [
+              null
+            ],
+            "statement": null,
+            "substancesPermitted": "Substances permitted under the tank code and any special provisions specified in 9 may be carried"
+          }
+        },
+        "vehicleDetails": {
+          "approvalDate": "2019-10-10",
+          "type": "Center axle battery"
+        },
+        "adrTypeApprovalNo": null
+      }
+    }
+  ]
+}
