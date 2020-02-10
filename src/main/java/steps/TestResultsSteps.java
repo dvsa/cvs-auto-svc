@@ -648,4 +648,9 @@ public class TestResultsSteps {
     public void validateCertificateIsGenerated(String uuid, String vin) {
         assertThat(AwsUtil.isCertificateCreated(uuid,vin)).isTrue();
     }
+
+    @Step
+    public void insertJsonInDynamo(String table, String json) {
+        AwsUtil.insertInTable(table, json);
+    }
 }
