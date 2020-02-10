@@ -1,6 +1,6 @@
 package util;
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.*;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -11,6 +11,8 @@ import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import exceptions.AutomationException;
 
 public class AwsUtil {
@@ -62,9 +64,20 @@ public class AwsUtil {
 
     public static void insertInTable(String tableName, String json) {
 
+        AWSCredentialsProvider credentialsProvider = new EnvironmentVariableCredentialsProvider();
         Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClient.builder()
+                        .withCredentials(credentialsProvider)
+                        .withRegion(clientRegion)
+                        .build();
+        STSAssumeRoleSessionCredentialsProvider arscp =
+                new STSAssumeRoleSessionCredentialsProvider.Builder("", "CVS_Developer_Read_Write_Eu_West2")
+                        .withStsClient(stsClient)
+                        .build();
         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("https://dynamodb.eu-west-1.amazonaws.com", clientRegion.getName()))
+                .withRegion(clientRegion)
+                .withCredentials(arscp)
                 .build();
 
         DynamoDB dynamoDB = new DynamoDB(client);
