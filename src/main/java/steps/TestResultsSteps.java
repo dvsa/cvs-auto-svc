@@ -650,7 +650,7 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void insertJsonInDynamo(String table, String json) {
+    public void insertInDynamo(String table, String json) {
         AwsUtil.insertInTable(table, json);
     }
 }
