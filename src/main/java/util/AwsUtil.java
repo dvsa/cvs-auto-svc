@@ -14,12 +14,15 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import data.GenericData;
+import data.GenericData;
 import exceptions.AutomationException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.*;
+
+import java.util.UUID;
 
 public class AwsUtil {
 
