@@ -257,9 +257,7 @@ public class PutVehicleTechnicalRecords {
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
-        // read put request body from file for adding battery adr details
-        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_other_nulls.json","$");
+        String requestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // read the adr details from the file used for put request body with battery adr details
         String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_other_nulls.json","$.techRecord[0].adrDetails");
         // create alteration to change Vin in the post request body with the random generated Vin
@@ -270,10 +268,12 @@ public class PutVehicleTechnicalRecords {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         //TEST
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // Validate AC1 + AC2
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyAdrDetails);
+        JsonPathAlteration alterationAddAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetails,"adrDetails","ADD_FIELD");
+        alterations.add(alterationAddAdrDetails);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
     }
@@ -289,9 +289,7 @@ public class PutVehicleTechnicalRecords {
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
-        // read put request body from file for adding battery adr details
-        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_battery_nulls.json","$");
+        String requestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // read the adr details from the file used for put request body with battery adr details
         String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_battery_nulls.json","$.techRecord[0].adrDetails");
         // create alteration to change Vin in the post request body with the random generated Vin
@@ -302,10 +300,12 @@ public class PutVehicleTechnicalRecords {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         //TEST
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // Validate AC1 + AC2
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyAdrDetails);
+        JsonPathAlteration alterationAddAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetails,"adrDetails","ADD_FIELD");
+        alterations.add(alterationAddAdrDetails);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
     }
@@ -321,9 +321,7 @@ public class PutVehicleTechnicalRecords {
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
-        // read put request body from file for adding battery adr details
-        String putRequestBodyAdrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_tank_nulls.json", "$");
+        String requestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // read the adr details from the file used for put request body with battery adr details
         String adrDetails = GenericData.readJsonValueFromFile("technical-records_adr_details_tank_nulls.json", "$.techRecord[0].adrDetails");
         // create alteration to change Vin in the post request body with the random generated Vin
@@ -334,10 +332,12 @@ public class PutVehicleTechnicalRecords {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         //TEST
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // Validate AC1 + AC2
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyAdrDetails);
+        JsonPathAlteration alterationAddAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetails,"adrDetails","ADD_FIELD");
+        alterations.add(alterationAddAdrDetails);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
     }
