@@ -6,6 +6,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.s3.AmazonS3;
@@ -13,7 +14,10 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
+import data.GenericData;
 import exceptions.AutomationException;
+
+import java.util.UUID;
 
 public class AwsUtil {
 
@@ -71,8 +75,9 @@ public class AwsUtil {
                         .withCredentials(credentialsProvider)
                         .withRegion(clientRegion)
                         .build();
+        String uuid = String.valueOf(UUID.randomUUID());
         STSAssumeRoleSessionCredentialsProvider arscp =
-                new STSAssumeRoleSessionCredentialsProvider.Builder("", "CVS_Developer_Read_Write_Eu_West2")
+                new STSAssumeRoleSessionCredentialsProvider.Builder(System.getProperty("AWS_ROLE"), uuid)
                         .withStsClient(stsClient)
                         .build();
         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
@@ -82,21 +87,24 @@ public class AwsUtil {
 
         DynamoDB dynamoDB = new DynamoDB(client);
 
-        Table table = dynamoDB.getTable("Movies");
+        Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
 
         int year = 2015;
-        String title = "The Big New Movie";
-
-        GetItemSpec spec = new GetItemSpec().withPrimaryKey("year", year, "title", title);
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = String.valueOf(UUID.randomUUID());
 
         try {
-            System.out.println("Attempting to read the item...");
-            Item outcome = table.getItem(spec);
-            System.out.println("GetItem succeeded: " + outcome);
+            System.out.println("Adding a new item...");
+            PutItemOutcome outcome = table
+                    .putItem(new Item().withPrimaryKey("vin", randomVin)
+                            .withPrimaryKey("testResultId", randomTestResultId)
+                            .withPrimaryKey("testerStaffId", "123456"));
+
+            System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
 
         }
         catch (Exception e) {
-            System.err.println("Unable to read item: " + year + " " + title);
+            System.err.println("Unable to add item: " + randomVin);
             System.err.println(e.getMessage());
         }
     }
