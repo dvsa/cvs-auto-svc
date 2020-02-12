@@ -1,5 +1,6 @@
 package data;
 
+import com.amazonaws.services.dynamodbv2.document.Item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
@@ -8,6 +9,8 @@ import data.config.BaseData;
 import data.config.DataMapper;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
@@ -51,6 +54,22 @@ public class GenericData {
         String jsonResp = null;
         try {
             jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
+            return jsonResp.substring(1, jsonResp.length()-1);
+        }
+        else {
+            return jsonResp;
+        }
+    }
+
+    public static String getJsonObjectInPath(String json, String path) {
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(json, path));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -179,4 +198,22 @@ public class GenericData {
         return jsonResp;
     }
 
+    /**
+     * Get a list of field names from a JSONObject.
+     *
+     * @return An array of field names, or null if there are no names.
+     */
+    public static List<String> getNonPrimaryKeyNames(JSONObject jo, List<String> primaryKeys) {
+
+        Iterator<?> keys = jo.keys();
+        List<String> jsonKeys = new ArrayList<>();
+
+        while( keys.hasNext() ) {
+            String key = (String) keys.next();
+            if (!(primaryKeys.contains(key))) {
+                jsonKeys.add(key);
+            }
+        }
+        return jsonKeys;
+    }
 }
