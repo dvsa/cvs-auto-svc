@@ -204,4 +204,22 @@ public class GenericData {
             return randomVin;
         }
     }
+    /**
+     * Get a list of field names from a JSONObject.
+     *
+     * @return An array of field names, or null if there are no names.
+     */
+    public static List<String> getNonPrimaryKeyNames(JSONObject jo, List<String> primaryKeys) {
+
+        Iterator<?> keys = jo.keys();
+        List<String> jsonKeys = new ArrayList<>();
+
+        while( keys.hasNext() ) {
+            String key = (String) keys.next();
+            if (!(primaryKeys.contains(key))) {
+                jsonKeys.add(key);
+            }
+        }
+        return jsonKeys;
+    }
 }
