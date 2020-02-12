@@ -161,6 +161,19 @@ public class GenericData {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 3).toUpperCase() + RandomStringUtils.randomNumeric(6);
     }
 
+    public static String generateRandomSystemNumber() {
+        String chars = "1234567890";
+        StringBuilder builder = new StringBuilder();
+        Random rnd = new Random();
+        Random length = new Random();
+        int vinLength = length.nextInt(7 - 6 + 1) + 6;
+        while (builder.length() < vinLength) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * chars.length());
+            builder.append(chars.charAt(index));
+        }
+        return builder.toString();
+    }
+
     public static String generateRandomVrm() {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
     }

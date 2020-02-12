@@ -135,4 +135,43 @@ public class PostVehicleTechnicalRecords {
         }
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code", bodyType.getCode());
     }
+
+    @Title("CVSB-10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Single Vehicle")
+    @Test
+    public void testTechnicalRecordForSingleVehicle() {
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_duplicate_chassis_10752.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationSystemNumber, alterationVin));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
+    }
+
+    @Title("CVSB-10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Multiple Vehicles")
+    @Test
+    public void testTechnicalRecordForMultipleVehicles() {
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("484009");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", "10044326");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].systemNumber", "10044320");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[2].systemNumber", "12055422");
+    }
 }
