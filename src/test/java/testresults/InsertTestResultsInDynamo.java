@@ -19,6 +19,6 @@ public class InsertTestResultsInDynamo {
     @Title("CVSB-11991 - Insert previous test-results into DynamoDB using Java AWS sdk")
     @Test
     public void testResultsSubmittedToDateExisting() throws JSONException {
-        testResultsSteps.insertRecordInDynamo("test-results_notifiable_alteration_hgv.json", "test-results");
+        testResultsSteps.insertRecordInDynamo("test-results_roadworthiness_hgv_fail_7675.json", "test-results");
     }
 }
