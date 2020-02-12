@@ -3,10 +3,7 @@ package util;
 import com.amazonaws.auth.*;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
-import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -111,9 +108,10 @@ public class AwsUtil {
         List<String> jsonKeys = GenericData.getNonPrimaryKeyNames(jsonObject, excludePrimaryKeys);
         try {
             Item item = new Item();
-            item = item.withPrimaryKey("vin", randomVin)
-                    .withPrimaryKey("testResultId", randomTestResultId)
-                    .withPrimaryKey("testerStaffId", "123456");
+            PrimaryKey primaryKey = new PrimaryKey();
+            primaryKey.addComponent("vin", randomVin);
+            primaryKey.addComponent("testResultId", randomTestResultId);
+            item = item.withPrimaryKey(primaryKey);
             for (String key : jsonKeys) {
                 if (jsonObject.get(key).getClass().equals(JSONObject.class)) {
                     item = item.withJSON(key, GenericData.getJsonObjectInPath(alteredJson, "$." + key));
