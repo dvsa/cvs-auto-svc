@@ -1,5 +1,6 @@
 package data;
 
+import com.amazonaws.services.dynamodbv2.document.Item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
@@ -53,6 +54,22 @@ public class GenericData {
         String jsonResp = null;
         try {
             jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
+            return jsonResp.substring(1, jsonResp.length()-1);
+        }
+        else {
+            return jsonResp;
+        }
+    }
+
+    public static String getJsonObjectInPath(String json, String path) {
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(json, path));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

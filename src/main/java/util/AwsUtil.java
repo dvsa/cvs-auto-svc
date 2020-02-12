@@ -1,14 +1,12 @@
 package util;
 
 import com.amazonaws.auth.*;
-import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.document.spec.GetItemSpec;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -16,8 +14,11 @@ import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import data.GenericData;
 import exceptions.AutomationException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.UUID;
+import java.util.*;
 
 public class AwsUtil {
 
@@ -66,7 +67,11 @@ public class AwsUtil {
         return false;
     }
 
-    public static void insertInTable(String tableName, String json) {
+    public static void insertJsonFromFileInTable(String fileName, String tableName) throws JSONException {
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTestResultId = String.valueOf(UUID.randomUUID());
 
         AWSCredentialsProvider credentialsProvider = new EnvironmentVariableCredentialsProvider();
         Regions clientRegion = Regions.EU_WEST_1;
@@ -89,17 +94,41 @@ public class AwsUtil {
 
         Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
 
-        int year = 2015;
-        String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = String.valueOf(UUID.randomUUID());
 
+        String json = GenericData.readJsonValueFromFile(fileName, "$");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
+        // create alteration to change test result id in the request body with the random generated test result id
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationTestResultId));
+        String alteredJson = GenericData.applyJsonAlterations(json, alterations);
+
+        JSONObject jsonObject = new JSONObject(alteredJson);
+        List<String> excludePrimaryKeys = Arrays.asList("vin", "testResultId", "testerStaffId");
+        List<String> jsonKeys = GenericData.getNonPrimaryKeyNames(jsonObject, excludePrimaryKeys);
         try {
+            Item item = new Item();
+            item = item.withPrimaryKey("vin", randomVin)
+                    .withPrimaryKey("testResultId", randomTestResultId)
+                    .withPrimaryKey("testerStaffId", "123456");
+            for (String key : jsonKeys) {
+                if (jsonObject.get(key).getClass().equals(JSONObject.class)) {
+                    item = item.withJSON(key, GenericData.getJsonObjectInPath(alteredJson, "$." + key));
+                }
+                else if (jsonObject.get(key).getClass().equals(JSONArray.class)) {
+                    List array  = Collections.singletonList(jsonObject.get(key));
+                    item = item.withList(key, array);
+                }
+                else {
+                    item = item.with(key, jsonObject.get(key));
+                }
+            }
             System.out.println("Adding a new item...");
             PutItemOutcome outcome = table
-                    .putItem(new Item().withPrimaryKey("vin", randomVin)
-                            .withPrimaryKey("testResultId", randomTestResultId)
-                            .withPrimaryKey("testerStaffId", "123456"));
-
+                    .putItem(item);
             System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
 
         }
