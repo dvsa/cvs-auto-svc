@@ -132,7 +132,7 @@ public class AwsUtil {
         }
         catch (Exception e) {
             System.err.println("Unable to add item: " + randomVin);
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
     }
 
