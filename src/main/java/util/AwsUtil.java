@@ -2,6 +2,7 @@ package util;
 
 import com.amazonaws.auth.*;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.s3.AmazonS3;
@@ -9,6 +10,8 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
+import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
+import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import data.GenericData;
 import exceptions.AutomationException;
 import org.json.JSONArray;
@@ -78,15 +81,28 @@ public class AwsUtil {
                         .withRegion(clientRegion)
                         .build();
         String uuid = String.valueOf(UUID.randomUUID());
-        STSAssumeRoleSessionCredentialsProvider arscp =
-                new STSAssumeRoleSessionCredentialsProvider.Builder(System.getProperty("AWS_ROLE"), uuid)
-                        .withStsClient(stsClient)
-                        .build();
-        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withRegion(clientRegion)
-                .withCredentials(arscp)
-                .build();
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
 
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
+//        STSAssumeRoleSessionCredentialsProvider arscp =
+//                new STSAssumeRoleSessionCredentialsProvider.Builder(System.getProperty("AWS_ROLE"), uuid)
+//                        .withStsClient(stsClient)
+//                        .build();
+//        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+//                .withRegion(clientRegion)
+//                .withCredentials(arscp)
+//                .build();
+//
         DynamoDB dynamoDB = new DynamoDB(client);
 
         Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
