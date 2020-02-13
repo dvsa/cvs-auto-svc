@@ -3700,7 +3700,7 @@ public class GetTestTypesByIdData {
 
         testTypeSteps.getTestTypesById(TestTypes.QJV5.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
-        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.QJV5.getClassification());
+        testTypeSteps.validateData("testTypeClassification", "Annual With Certificate");
         testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.QJV5.getTestCode());
     }
 
