@@ -116,10 +116,10 @@ public class AwsUtil {
                 if (jsonObject.get(key).getClass().equals(JSONObject.class)) {
                     item = item.withJSON(key, GenericData.getJsonObjectInPath(alteredJson, "$." + key));
                 }
-                else if (jsonObject.get(key).getClass().equals(JSONArray.class)) {
-                    List array  = Collections.singletonList(jsonObject.get(key));
-                    item = item.withList(key, array);
-                }
+//                else if (jsonObject.get(key).getClass().equals(JSONArray.class)) {
+//                    List array  = Collections.singletonList(jsonObject.get(key));
+//                    item = item.withList(key, array);
+//                }
                 else {
                     item = item.with(key, jsonObject.get(key));
                 }
