@@ -10,6 +10,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
+import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import data.GenericData;
@@ -73,13 +74,10 @@ public class AwsUtil {
         String randomVrm = GenericData.generateRandomVrm();
         String randomTestResultId = String.valueOf(UUID.randomUUID());
 
-        AWSCredentialsProvider credentialsProvider = new EnvironmentVariableCredentialsProvider();
-        Regions clientRegion = Regions.EU_WEST_1;
+//        AWSCredentialsProvider credentialsProvider = new EnvironmentVariableCredentialsProvider();
+//        Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
-                AWSSecurityTokenServiceClient.builder()
-                        .withCredentials(credentialsProvider)
-                        .withRegion(clientRegion)
-                        .build();
+                AWSSecurityTokenServiceClientBuilder.standard().build();
         String uuid = String.valueOf(UUID.randomUUID());
         AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
                 .withRoleArn(System.getProperty("AWS_ROLE"))
