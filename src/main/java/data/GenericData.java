@@ -109,23 +109,17 @@ public class GenericData {
             switch (alteration.getAction()) {
                 case "ADD_FIELD":
                     if (alteration.getField() != null) {
-                        Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
                         jsonContext = jsonContext.put(alteration.getPath(), alteration.getField(), value);
                         break;
                     }
                     // Intentional fall through to ADD_VALUE
                 case "ADD_VALUE":
-                    Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
                     jsonContext = jsonContext.add(alteration.getPath(), value);
                     break;
                 case "DELETE":
                     jsonContext = jsonContext.delete(alteration.getPath());
                     break;
                 case "REPLACE":
-                    Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
                     jsonContext = jsonContext.set(alteration.getPath(), value);
                     break;
             }

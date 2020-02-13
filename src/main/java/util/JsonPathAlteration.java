@@ -40,3 +40,4 @@ public class JsonPathAlteration {
         return this.action;
     }
 }
+

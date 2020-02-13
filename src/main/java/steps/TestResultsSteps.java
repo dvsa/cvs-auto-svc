@@ -658,4 +658,15 @@ public class TestResultsSteps {
     public void insertJsonInDynamo(String table, String json) {
         AwsUtil.insertInTable(table, json);
     }
+
+    @Step
+    public void valueForFieldInPathShouldStartWith(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " starts with value " + expectedValue);
+        response.then().body(path, startsWith(expectedValue));
+    }
+    @Step
+    public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " ends with value " + expectedValue);
+        response.then().body(path, endsWith(expectedValue));
+    }
 }
