@@ -544,12 +544,4 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "motorcycle");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].euVehicleCategory", "l1e-a");
     }
-
-    @Title("CVSB-10217 - TC - AC2 - No data returned")
-    @Test
-    public void testVehicleTechnicalRecordsNoDataReturned() {
-        String randomVin = GenericData.generateRandomVin();
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
-    }
 }
