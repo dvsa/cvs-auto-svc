@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -88,6 +89,7 @@ public class PostTestResultsRoadworthiness {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
+    @Ignore("Until the defect CVSB-12108 is solved")
     @Title("CVSB-7675 - TC3 - Negative (HGV) - FAIL")
     @Test
     public void testResults_Roadworthiness_HGV_Fail_Certificate_Number() {
@@ -119,6 +121,7 @@ public class PostTestResultsRoadworthiness {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", null);
     }
 
+    @Ignore("Until the defect CVSB-12108 is solved")
     @Title("CVSB-7675 - TC4 - Negative (TRL) - FAIL")
     @Test
     public void testResults_Roadworthiness_TRL_Fail_Certificate_Number() {
@@ -149,7 +152,4 @@ public class PostTestResultsRoadworthiness {
         // Verify CertificateNumber field have the null value
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", null);
     }
-
-
-
 }
