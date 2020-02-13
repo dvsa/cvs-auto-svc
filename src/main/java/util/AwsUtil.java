@@ -107,23 +107,23 @@ public class AwsUtil {
         List<String> excludePrimaryKeys = Arrays.asList("vin", "testResultId", "testerStaffId");
         List<String> jsonKeys = GenericData.getNonPrimaryKeyNames(jsonObject, excludePrimaryKeys);
         try {
-            Item item = new Item();
-            PrimaryKey primaryKey = new PrimaryKey();
-            primaryKey.addComponent("vin", randomVin);
-            primaryKey.addComponent("testResultId", randomTestResultId);
-            item = item.withPrimaryKey(primaryKey);
-            for (String key : jsonKeys) {
-                if (jsonObject.get(key).getClass().equals(JSONObject.class)) {
-                    item = item.withJSON(key, GenericData.getJsonObjectInPath(alteredJson, "$." + key));
-                }
-//                else if (jsonObject.get(key).getClass().equals(JSONArray.class)) {
-//                    List array  = Collections.singletonList(jsonObject.get(key));
-//                    item = item.withList(key, array);
+            Item item = Item.fromJSON(alteredJson);
+//            PrimaryKey primaryKey = new PrimaryKey();
+//            primaryKey.addComponent("vin", randomVin);
+//            primaryKey.addComponent("testResultId", randomTestResultId);
+//            item = item.withPrimaryKey(primaryKey);
+//            for (String key : jsonKeys) {
+//                if (jsonObject.get(key).getClass().equals(JSONObject.class)) {
+//                    item = item.withJSON(key, GenericData.getJsonObjectInPath(alteredJson, "$." + key));
 //                }
-                else {
-                    item = item.with(key, jsonObject.get(key));
-                }
-            }
+////                else if (jsonObject.get(key).getClass().equals(JSONArray.class)) {
+////                    List array  = Collections.singletonList(jsonObject.get(key));
+////                    item = item.withList(key, array);
+////                }
+//                else {
+//                    item = item.with(key, jsonObject.get(key));
+//                }
+//            }
             System.out.println("Adding a new item...");
             PutItemOutcome outcome = table
                     .putItem(item);
