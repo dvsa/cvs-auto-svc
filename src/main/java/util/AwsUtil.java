@@ -78,9 +78,9 @@ public class AwsUtil {
         String randomTestResultId = String.valueOf(UUID.randomUUID());
 
 //        AWSCredentialsProvider credentialsProvider = new EnvironmentVariableCredentialsProvider();
-//        Regions clientRegion = Regions.EU_WEST_1;
+        Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
-                AWSSecurityTokenServiceClientBuilder.standard().build();
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
         String uuid = String.valueOf(UUID.randomUUID());
         AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
                 .withRoleArn(System.getProperty("AWS_ROLE"))
