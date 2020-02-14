@@ -651,7 +651,7 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void insertRecordInDynamo(String fileName, String table) throws JSONException {
-        AwsUtil.insertJsonFromFileInTable(fileName, table);
+    public void insertRecordInDynamo(String json, String table) {
+        AwsUtil.insertJsonFromFileInTable(json, table);
     }
 }

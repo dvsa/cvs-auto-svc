@@ -21,7 +21,7 @@
   "vehicleType":"hgv",
   "vehicleConfiguration":"semi-car transporter",
   "preparerId":"No preparer ID given",
-  "preparerName":"a",
+  "preparerName":"name",
   "euVehicleCategory":"n2",
   "countryOfRegistration":"gb",
   "noOfAxles":2,
