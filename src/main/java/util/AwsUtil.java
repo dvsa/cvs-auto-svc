@@ -67,7 +67,7 @@ public class AwsUtil {
         return false;
     }
 
-    public static void insertJsonFromFileInTable(String json, String tableName) {
+    public static void insertJsonnTable(String json, String tableName) {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
                 AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
@@ -89,6 +89,7 @@ public class AwsUtil {
         DynamoDB dynamoDB = new DynamoDB(client);
 
         Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
+        String vin = GenericData.getValueFromJsonPath(json, "$.vin");
 
 
 
@@ -101,7 +102,7 @@ public class AwsUtil {
 
         }
         catch (Exception e) {
-            System.err.println("Unable to add item: " + randomVin);
+            System.err.println("Unable to add item: " + vin);
             System.err.println(e);
         }
     }
