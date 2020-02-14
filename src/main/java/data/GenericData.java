@@ -184,6 +184,17 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static String getValueFromJsonPath(String jsonBody, String path) {
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonResp;
+    }
+
     public static String getJsonStringFromHashMap(HashMap<String, String> hashMap) {
         ObjectMapper mapperObj = new ObjectMapper();
         String jsonResp = null;

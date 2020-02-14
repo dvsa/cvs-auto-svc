@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
-import org.json.JSONException;
 import util.AwsUtil;
 import util.JsonPathAlteration;
 
@@ -652,6 +651,6 @@ public class TestResultsSteps {
 
     @Step
     public void insertRecordInDynamo(String json, String table) {
-        AwsUtil.insertJsonFromFileInTable(json, table);
+        AwsUtil.insertJsonnTable(json, table);
     }
 }
