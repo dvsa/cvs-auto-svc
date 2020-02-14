@@ -4,22 +4,17 @@ import com.amazonaws.auth.*;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
-import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClient;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
 import com.amazonaws.services.securitytoken.model.AssumeRoleRequest;
 import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import data.GenericData;
 import data.GenericData;
 import exceptions.AutomationException;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.*;
 
@@ -72,13 +67,7 @@ public class AwsUtil {
         return false;
     }
 
-    public static void insertJsonFromFileInTable(String fileName, String tableName) throws JSONException {
-
-        String randomVin = GenericData.generateRandomVin();
-        String randomVrm = GenericData.generateRandomVrm();
-        String randomTestResultId = String.valueOf(UUID.randomUUID());
-
-//        AWSCredentialsProvider credentialsProvider = new EnvironmentVariableCredentialsProvider();
+    public static void insertJsonFromFileInTable(String json, String tableName) {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
                 AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
@@ -97,56 +86,18 @@ public class AwsUtil {
                         assumeResult.getCredentials().getSessionToken());
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
-//        STSAssumeRoleSessionCredentialsProvider arscp =
-//                new STSAssumeRoleSessionCredentialsProvider.Builder(System.getProperty("AWS_ROLE"), uuid)
-//                        .withStsClient(stsClient)
-//                        .build();
-//        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-//                .withRegion(clientRegion)
-//                .withCredentials(arscp)
-//                .build();
-//
         DynamoDB dynamoDB = new DynamoDB(client);
 
         Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
 
 
-        String json = GenericData.readJsonValueFromFile(fileName, "$");
-        // create alteration to change Vin in the post request body with the random generated Vin
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        // create alteration to change primary vrm in the request body with the random generated primary vrm
-        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
-        // create alteration to change test result id in the request body with the random generated test result id
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationTestResultId));
-        String alteredJson = GenericData.applyJsonAlterations(json, alterations);
 
-        JSONObject jsonObject = new JSONObject(alteredJson);
-        List<String> excludePrimaryKeys = Arrays.asList("vin", "testResultId", "testerStaffId");
-        List<String> jsonKeys = GenericData.getNonPrimaryKeyNames(jsonObject, excludePrimaryKeys);
         try {
-            Item item = Item.fromJSON(alteredJson);
-//            PrimaryKey primaryKey = new PrimaryKey();
-//            primaryKey.addComponent("vin", randomVin);
-//            primaryKey.addComponent("testResultId", randomTestResultId);
-//            item = item.withPrimaryKey(primaryKey);
-//            for (String key : jsonKeys) {
-//                if (jsonObject.get(key).getClass().equals(JSONObject.class)) {
-//                    item = item.withJSON(key, GenericData.getJsonObjectInPath(alteredJson, "$." + key));
-//                }
-////                else if (jsonObject.get(key).getClass().equals(JSONArray.class)) {
-////                    List array  = Collections.singletonList(jsonObject.get(key));
-////                    item = item.withList(key, array);
-////                }
-//                else {
-//                    item = item.with(key, jsonObject.get(key));
-//                }
-//            }
+            Item item = Item.fromJSON(json);
             System.out.println("Adding a new item...");
             PutItemOutcome outcome = table
                     .putItem(item);
-            System.out.println("PutItem succeeded:\n" + outcome.getPutItemResult());
+            System.out.println("PutItem succeeded:\n" + outcome.getItem().toString());
 
         }
         catch (Exception e) {
