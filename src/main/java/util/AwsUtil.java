@@ -14,7 +14,6 @@ import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import data.GenericData;
 import data.GenericData;
 import exceptions.AutomationException;
-import org.json.JSONException;
 
 import java.util.*;
 
