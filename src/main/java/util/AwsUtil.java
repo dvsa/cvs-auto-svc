@@ -95,7 +95,7 @@ public class AwsUtil {
             System.out.println("Adding a new item...");
             PutItemOutcome outcome = table
                     .putItem(item);
-            System.out.println("PutItem succeeded:\n" + outcome.getItem().toString());
+            System.out.println("PutItem succeeded:\n" + item.toString());
 
         }
         catch (Exception e) {
