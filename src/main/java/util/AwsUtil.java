@@ -102,7 +102,7 @@ public class AwsUtil {
 
         }
         catch (Exception e) {
-            System.err.println("Unable to add item: " + vin);
+            System.err.println("Unable to add item with vin: " + vin);
             System.err.println(e);
         }
     }
