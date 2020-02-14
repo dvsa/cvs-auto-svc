@@ -34,7 +34,7 @@ public class PostVehicleTechnicalRecordsNeg {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String requestBody = GenericData.readJsonValueFromFile("technical-records_current.json","$");
+        String requestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
         // create alteration make the techRecord array from the body request empty
         JsonPathAlteration emptyTechRecordArrayAlteration = new JsonPathAlteration("$.techRecord","[]","","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -54,6 +54,33 @@ public class PostVehicleTechnicalRecordsNeg {
         alterations.add(emptyTechRecordArrayAlteration);
         // validate AC4
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10210 - AC2 - Attempt to create a new vehicle with a not applicable field")
+    @Test
+    public void testValidateRequestNotApplicableHgvField() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+
+        // initialize the alterations list with both declared alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+
+        // validate 400 response when making POST request with a not applicable field
+        JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", "1234", "brakeCode", "ADD_FIELD");
+        alterations.add(notApplicableField);
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
     }
 }
