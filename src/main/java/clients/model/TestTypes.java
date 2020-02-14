@@ -275,7 +275,7 @@ public enum TestTypes {
     private final String testCode;
     private final String classification;
 
-    private TestTypes(String id, String testCode, String classification) {
+    TestTypes(String id, String testCode, String classification) {
         this.id = id;
         this.testCode = testCode;
         this.classification = classification;
