@@ -1,0 +1,67 @@
+[
+  {
+    "reasonForCancellation": null,
+    "testerStaffId": "5c4ed163-e54b-400f-ab9a-9d75c658c131",
+    "testerName": "cvs.automation9@dvsagov.onmicrosoft.com",
+    "euVehicleCategory": "m2",
+    "vehicleId": "C47WLL",
+    "testStationName": "Abshire-Kub",
+    "testStationPNumber": "09-4129632",
+    "testEndTimestamp": "2020-02-14T14:31:19.228Z",
+    "preparerId": "BL5545",
+    "vehicleConfiguration": "rigid",
+    "vrm": "C47WLL",
+    "testerEmailAddress": "cvs.automation9@dvsagov.onmicrosoft.com",
+    "vehicleClass": {
+      "description": "large psv(ie: greater than 23 seats)",
+      "code": "l"
+    },
+    "odometerReadingUnits": "kilometres",
+    "vehicleSize": "large",
+    "testStartTimestamp": "2020-02-14T14:16:19.228Z",
+    "vehicleType": "psv",
+    "odometerReading": 55000,
+    "preparerName": "Durrell Vehicles Limited",
+    "noOfAxles": 3,
+    "testStationType": "gvts",
+    "numberOfSeats": 53,
+    "vin": "M5TLOTUGBRF1ZI639307",
+    "countryOfRegistration": "bg",
+    "testStatus": "submitted",
+    "testTypes": [
+      {
+        "prohibitionIssued": false,
+        "testCode": "aal",
+        "lastUpdatedAt": "2020-02-14T14:16:20.783Z",
+        "testNumber": "W01L18164",
+        "testAnniversaryDate": "2020-12-14T14:16:22.124Z",
+        "modType": null,
+        "testTypeClassification": "Annual With Certificate",
+        "numberOfSeatbeltsFitted": null,
+        "createdAt": "2020-02-14T14:16:20.783Z",
+        "testTypeId": "1",
+        "particulateTrapSerialNumber": null,
+        "testTypeName": "Annual test",
+        "seatbeltInstallationCheckDate": null,
+        "smokeTestKLimitApplied": null,
+        "additionalNotesRecorded": null,
+        "emissionStandard": null,
+        "modificationTypeUsed": null,
+        "additionalCommentsForAbandon": null,
+        "testTypeEndTimestamp": "2020-02-14T14:31:19.228Z",
+        "reasonForAbandoning": null,
+        "particulateTrapFitted": null,
+        "lastSeatbeltInstallationCheckDate": null,
+        "testExpiryDate": "2021-02-13T14:16:22.124Z",
+        "testTypeStartTimestamp": "2020-02-14T14:21:19.228Z",
+        "fuelType": null,
+        "certificateNumber": "W01L18164",
+        "defects": [
+
+        ],
+        "name": "Annual test",
+        "testResult": "pass"
+      }
+    ]
+  }
+]
