@@ -198,7 +198,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 //
 //    }
 
-    @WithTag("Expiry_Dates")
+    @WithTag("In_Test")
     @Title("CVSB-9187 - TC1 - AC1 - FIRST TEST/FIRST TEST RETEST CONDUCTED AFTER THE ANNIVERSARY DATE - TRL - testTypeEndTimestamp (date only) is more than 2 months before previous testExpiryDate")
     @Test
     public void testResultsFirstTestExpiryTrlGenerated() {
@@ -234,15 +234,15 @@ public class PostTestResultsExpiryDateLogicPsv {
         String insertableTestEndTimestamp = insertedTestEndTimestamp.toInstant().toString();
 
         // Create alteration to add one more tech record to in the inserted data
-        JsonPathAlteration alterationInsertVin = new JsonPathAlteration("[0].vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("[0].testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("[0].testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("[0].testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestAnniversaryDate = new JsonPathAlteration("[0].testTypes[0].testAnniversaryDate", insertableTestAnniversaryDate, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestExpiryDate = new JsonPathAlteration("[0].testTypes[0].testExpiryDate", insertableTestExpiryDate, "", "REPLACE");
-        JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("[0].testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("[0].testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("[0].testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestAnniversaryDate = new JsonPathAlteration("$.testTypes[0].testAnniversaryDate", insertableTestAnniversaryDate, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", insertableTestExpiryDate, "", "REPLACE");
+        JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
