@@ -514,4 +514,79 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", secondaryVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms.size()", 2);
     }
+
+
+    @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves HGV vehicle technical records altered for specialist tests")
+    @Test
+    public void testVehicleTechnicalRecordsHgvSpecialistTests() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("P012301091180", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].euVehicleCategory", "n2");
+    }
+
+    @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves PSV vehicle technical records altered for specialist tests")
+    @Test
+    public void testVehicleTechnicalRecordsPsvSpecialistTests() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("XMGDE02FS0H012345", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "psv");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].euVehicleCategory", "m2");
+    }
+
+    @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves TRL vehicle technical records altered for specialist tests")
+    @Test
+    public void testVehicleTechnicalRecordsTrlSpecialistTests() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("PDY3222222203", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl");
+        vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("techRecord[1]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].vehicleType", "trl");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory", "o1");
+    }
+
+    @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves LGV vehicle technical records altered for specialist tests")
+    @Test
+    public void testVehicleTechnicalRecordsLgvSpecialistTests() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("P0123010951264", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "lgv");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].euVehicleCategory", "n1");
+    }
+
+    @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves Car vehicle technical records altered for specialist tests")
+    @Test
+    public void testVehicleTechnicalRecordsCarSpecialistTests() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("P0123010911250", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "car");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].euVehicleCategory", "m1");
+    }
+
+    @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves Motorcycle vehicle technical records altered for specialist tests")
+    @Test
+    public void testVehicleTechnicalRecordsMotorcycleSpecialistTests() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("P0123010956789");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[0]", "vehicleSubclass");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "motorcycle");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].euVehicleCategory", "l1e-a");
+    }
 }
