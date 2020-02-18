@@ -332,7 +332,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResultsBetweenDate(randomVin, testStartTimestamp , submittedEndTimestamp.plusMinutes(5).toInstant().toString());
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
