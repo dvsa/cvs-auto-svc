@@ -14,6 +14,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
+import util.JsonPathAlteration;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @RunWith(SerenityRunner.class)
@@ -470,6 +475,46 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", "CT96DRG");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].isPrimary", false);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10209 - AC1 - All attributes applicable to HGVs are returned" +
+            "AC2 - HGV vehicle is created, and the appropriate attributes are automatically set")
+    @Test
+    public void testVehicleTechnicalRecordsGetAllHgvAttributes() {
+        // TEST SETUP
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+        String techRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.techRecord[0]");
+        String userId = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.msUserDetails.msOid");
+        String name = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.msUserDetails.msUser");
+        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.secondaryVrms[0]");
+
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", techRecord);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].createdById", userId);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].createdByName", name);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", randomVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[1].vrm", secondaryVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms.size()", 2);
+    }
+
 
     @Title("CVSB-10217 - TC - AC1 - API Consumer retrieves HGV vehicle technical records altered for specialist tests")
     @Test

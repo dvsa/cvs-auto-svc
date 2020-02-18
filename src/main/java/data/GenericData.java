@@ -6,8 +6,10 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
 import data.config.DataMapper;
+import net.minidev.json.JSONArray;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
@@ -51,6 +53,22 @@ public class GenericData {
         String jsonResp = null;
         try {
             jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
+            return jsonResp.substring(1, jsonResp.length()-1);
+        }
+        else {
+            return jsonResp;
+        }
+    }
+
+    public static String getJsonObjectInPath(String json, String path) {
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(json, path));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -113,6 +131,22 @@ public class GenericData {
         return jsonContext.jsonString();
     }
 
+    public static String extractStringValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static Integer extractIntegerValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static Boolean extractBooleanValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static JSONArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
     private static Object readJson(final String json) {
         try {
             final JSONParser parser = new JSONParser(DEFAULT_PERMISSIVE_MODE);
@@ -124,29 +158,11 @@ public class GenericData {
     }
 
     public static String generateRandomVin() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder builder = new StringBuilder();
-        Random rnd = new Random();
-        Random length = new Random();
-        int vinLength = length.nextInt(21 - 9 + 1) + 9;
-        while (builder.length() < vinLength) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * chars.length());
-            builder.append(chars.charAt(index));
-        }
-        return builder.toString();
+        return RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 3).toUpperCase() + RandomStringUtils.randomNumeric(6);
     }
 
     public static String generateRandomVrm() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder builder = new StringBuilder();
-        Random rnd = new Random();
-        Random length = new Random();
-        int vinLength = length.nextInt(7 - 6 + 1) + 6;
-        while (builder.length() < vinLength) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * chars.length());
-            builder.append(chars.charAt(index));
-        }
-        return builder.toString();
+        return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
     }
 
     public static String getJsonStringFromJsonPath(String fileName, String path) {
@@ -168,6 +184,17 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static String getValueFromJsonPath(String jsonBody, String path) {
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonResp;
+    }
+
     public static String getJsonStringFromHashMap(HashMap<String, String> hashMap) {
         ObjectMapper mapperObj = new ObjectMapper();
         String jsonResp = null;
@@ -179,4 +206,12 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static String getPartialVinFromVin(String randomVin) {
+        if (randomVin.length() >= 6) {
+            return randomVin.substring(randomVin.length()-6);
+        }
+        else {
+            return randomVin;
+        }
+    }
 }

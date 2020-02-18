@@ -5,6 +5,7 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -41,6 +42,7 @@ public class PostTestResultsAdrCertificate {
     private String name;
     private String testTypeName;
 
+    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")
     @Test
     public void testResultsADRCertificateTrl() {
@@ -73,6 +75,7 @@ public class PostTestResultsAdrCertificate {
         testResultsSteps.validateCertificateIsGenerated(uuid, randomVin);
     }
 
+    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - HGV")
     @Test
     public void testResultsADRCertificateHgv() {

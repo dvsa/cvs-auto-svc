@@ -66,6 +66,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
         response.then().body(path, endsWith(expectedValue));
     }
@@ -261,7 +266,7 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
-        vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+        Response response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
         return response.then().extract().path(jsonPath).toString();
     }
 
@@ -296,5 +301,4 @@ public class VehicleTechnicalRecordsSteps {
             }
         }
     }
-
 }
