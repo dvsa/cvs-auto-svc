@@ -64,6 +64,22 @@ public class GenericData {
         }
     }
 
+    public static String getJsonObjectInPath(String json, String path) {
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(json, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
+            return jsonResp.substring(1, jsonResp.length()-1);
+        }
+        else {
+            return jsonResp;
+        }
+    }
+
     public static String getJsonValueFromFile(String fileName, String path) {
         ClassLoader classLoader = DataMapper.class.getClassLoader();
 
@@ -158,6 +174,17 @@ public class GenericData {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ObjectMapper mapperObj = new ObjectMapper();
+        String jsonResp = null;
+        try {
+            jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonResp;
+    }
+
+    public static String getValueFromJsonPath(String jsonBody, String path) {
         ObjectMapper mapperObj = new ObjectMapper();
         String jsonResp = null;
         try {
