@@ -30,7 +30,8 @@ public class PostTestResultsExpiryDateLogicPsv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"Annual test", "Annual test", "1", "large", "rigid", "pass", 1, "aal"},
+                {"Annual test", "Annual test", "1", "large", "rigid", "pass", 1, "aal", true},
+                {"Annual test", "Annual test", "1", "large", "rigid", "pass", 1, "aal", false},
 //                {"Annual test", "Annual test", "1", "small", "rigid", "pass", 1, "aas"},
 //                {"Annual test", "Annual test", "1", "large", "articulated", "pass", 1, "adl"},
 //                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "pass", 1, "wdl"},
@@ -93,11 +94,12 @@ public class PostTestResultsExpiryDateLogicPsv {
     private String vehicleConfiguration;
     private String testResult;
     private String testCode;
+    private boolean isAnnualWithCertificate;
 
     //sets the firstUseDate / regnDate one year before the current date, plus/minus one day
     private int dayOffset;
 
-    public PostTestResultsExpiryDateLogicPsv(String name, String testTypeName, String testTypeId, String vehicleSize, String vehicleConfiguration, String testResult, int dayOffset, String testCode) {
+    public PostTestResultsExpiryDateLogicPsv(String name, String testTypeName, String testTypeId, String vehicleSize, String vehicleConfiguration, String testResult, int dayOffset, String testCode, boolean isAnnualWithCertificate) {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;
@@ -106,6 +108,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         this.testResult = testResult;
         this.dayOffset = dayOffset;
         this.testCode = testCode;
+        this.isAnnualWithCertificate = isAnnualWithCertificate;
     }
 
 //    @WithTag("Expiry_Dates")
@@ -256,6 +259,10 @@ public class PostTestResultsExpiryDateLogicPsv {
                 alterationInsertTestTypeEndTimestamp,
                 alterationInsertTestEndTimestamp
         ));
+
+        if(isAnnualWithCertificate){
+            insertAlterations.add(new JsonPathAlteration("$.testTypes[0]", "Annual With Certification", "testTypeClassification", "ADD_FIELD"));
+        }
 
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
