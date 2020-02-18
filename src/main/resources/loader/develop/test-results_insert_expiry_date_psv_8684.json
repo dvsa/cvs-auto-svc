@@ -1,5 +1,6 @@
 
   {
+    "testResultId": "86126",
     "reasonForCancellation": null,
     "testerStaffId": "5c4ed163-e54b-400f-ab9a-9d75c658c131",
     "testerName": "cvs.automation9@dvsagov.onmicrosoft.com",
@@ -36,7 +37,6 @@
         "testNumber": "W01L18164",
         "testAnniversaryDate": "2020-12-14T14:16:22.124Z",
         "modType": null,
-        "testTypeClassification": "Annual With Certificate",
         "numberOfSeatbeltsFitted": null,
         "createdAt": "2020-02-14T14:16:20.783Z",
         "testTypeId": "1",

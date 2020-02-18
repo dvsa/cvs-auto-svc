@@ -1,11 +1,12 @@
 package testresults;
 
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
 import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.core.annotations.WithTags;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
@@ -270,6 +271,11 @@ public class PostTestResultsExpiryDateLogicPsv {
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
 
+        System.out.println(" \n######################## INSERTED ########################\n\n");
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
+        System.out.println(" \n########################    END   ########################\n\n");
+
+
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
         DateTime submittedTestTypeStartTimestamp = currentTimestamp.plusMinutes(10);
@@ -317,6 +323,11 @@ public class PostTestResultsExpiryDateLogicPsv {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
+
+        System.out.println(" \n######################## POSTED ########################\n\n");
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
+        System.out.println(" \n########################   END  ########################\n\n");
+
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
@@ -328,7 +339,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
 
 //        // Verify testAnniversaryDate field has the expected value
-//        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", testExpectedDate.substring(0,10));
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", testExpectedDate.substring(0,10));
 
         // Verify testExpiryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
