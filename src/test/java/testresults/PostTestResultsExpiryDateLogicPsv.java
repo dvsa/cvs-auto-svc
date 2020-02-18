@@ -203,9 +203,9 @@ public class PostTestResultsExpiryDateLogicPsv {
 //    }
 
     @WithTag("In_Test")
-    @Title("CVSB-9187 - TC1 - AC1 - FIRST TEST/FIRST TEST RETEST CONDUCTED AFTER THE ANNIVERSARY DATE - TRL - testTypeEndTimestamp (date only) is more than 2 months before previous testExpiryDate")
+    @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
-    public void testResultsFirstTestExpiryTrlGenerated() {
+    public void testResultsFirstTestExpiryPsvTodayMinusOneDay() {
 
         // Read the base INSERT test result JSON.
         String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_psv_8684.json", "$");
@@ -219,14 +219,14 @@ public class PostTestResultsExpiryDateLogicPsv {
         String randomTestResultId = RandomStringUtils.randomNumeric(5);
 
         // Create inserted record.
-        DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMonths(2).plusDays(1).minusMinutes(15);
-        DateTime insertedTestTypeStartTimestamp = currentTimestamp.minusYears(1).minusMonths(2).plusDays(1).minusMinutes(10);
-        DateTime insertedLastUpdatedAt = currentTimestamp.minusYears(1).minusMonths(2).plusDays(1).minusMinutes(5);
-        DateTime insertedTestAnniversaryDate = currentTimestamp.minusMonths(2).plusDays(1);
-        DateTime insertedTestExpiryDate = currentTimestamp.minusMonths(2).plusDays(1);
-        DateTime insertedCreatedAt = currentTimestamp.minusYears(1).minusMonths(2).plusDays(1).minusMinutes(5);
-        DateTime insertedTestTypeEndTimestamp = currentTimestamp.minusYears(1).minusMonths(2).plusDays(1).minusMinutes(5);
-        DateTime insertedTestEndTimestamp = currentTimestamp.minusYears(1).minusMonths(2).plusDays(1);
+        DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
+        DateTime insertedTestTypeStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(10);
+        DateTime insertedLastUpdatedAt = currentTimestamp.minusYears(1).minusMinutes(5);
+        DateTime insertedTestAnniversaryDate = currentTimestamp.minusMonths(2).minusDays(1);
+        DateTime insertedTestExpiryDate = currentTimestamp.minusDays(1);
+        DateTime insertedCreatedAt = currentTimestamp.minusYears(1).minusMinutes(5);
+        DateTime insertedTestTypeEndTimestamp = currentTimestamp.minusYears(1).minusMinutes(5);
+        DateTime insertedTestEndTimestamp = currentTimestamp.minusYears(1);
 
         String insertableTestStartTimestamp = insertedTestStartTimestamp.toInstant().toString();
         String insertableTestTypeStartTimestamp = insertedTestTypeStartTimestamp.toInstant().toString();
