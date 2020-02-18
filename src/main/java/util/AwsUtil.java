@@ -63,7 +63,7 @@ public class AwsUtil {
         return false;
     }
 
-    public static void insertJsonnTable(String json, String tableName) {
+    public static void insertJsonInTable(String json, String tableName) {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
                 AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
