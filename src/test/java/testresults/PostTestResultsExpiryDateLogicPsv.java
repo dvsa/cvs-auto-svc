@@ -271,9 +271,9 @@ public class PostTestResultsExpiryDateLogicPsv {
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
 
-        System.out.println(" \n######################## INSERTED ########################\n\n");
-        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
-        System.out.println(" \n########################    END   ########################\n\n");
+//        System.out.println(" \n######################## INSERTED ########################\n\n");
+//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
+//        System.out.println(" \n########################    END   ########################\n\n");
 
 
         // Create submitted
@@ -324,9 +324,9 @@ public class PostTestResultsExpiryDateLogicPsv {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
 
-        System.out.println(" \n######################## POSTED ########################\n\n");
-        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
-        System.out.println(" \n########################   END  ########################\n\n");
+//        System.out.println(" \n######################## POSTED ########################\n\n");
+//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
+//        System.out.println(" \n########################   END  ########################\n\n");
 
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
