@@ -261,7 +261,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         ));
 
         if(isAnnualWithCertificate){
-            insertAlterations.add(new JsonPathAlteration("$.testTypes[0]", "Annual With Certification", "testTypeClassification", "ADD_FIELD"));
+            insertAlterations.add(new JsonPathAlteration("$.testTypes[0]", "Annual With Certificate", "testTypeClassification", "ADD_FIELD"));
         }
 
         // Insert the altered record
