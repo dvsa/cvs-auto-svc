@@ -338,11 +338,11 @@ public class PostTestResultsExpiryDateLogicPsv {
         // Verify testCode field has the expected value
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
 
-//        // Verify testAnniversaryDate field has the expected value
-//        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", testExpectedDate.substring(0,10));
-
         // Verify testExpiryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
+
+//        // Verify testAnniversaryDate field has the expected value
+//        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", testExpectedDate.substring(0,10));
 
     }
 
