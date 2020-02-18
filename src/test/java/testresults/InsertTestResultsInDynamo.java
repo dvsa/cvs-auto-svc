@@ -22,7 +22,6 @@ public class InsertTestResultsInDynamo {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    @WithTag("In_Test")
     @Title("CVSB-11991 - Insert previous test-results into DynamoDB using Java AWS sdk")
     @Test
     public void testResultsSubmittedToDateExisting() {
