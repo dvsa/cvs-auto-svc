@@ -34,19 +34,6 @@ public class TestResultsClient {
 
     }
 
-    public Response getTestResultsSysNumber(String systemNumber) {
-
-        Response response = callGetTestResults(systemNumber);
-
-        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
-            saveUtils();
-            response = callGetTestResults(systemNumber);
-        }
-
-        return response;
-
-    }
-
     public Response getTestResultsWithStatus(String vin, String status) {
 
         Response response = callFetTestResultsWithStatus(vin, status);

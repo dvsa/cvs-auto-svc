@@ -1,0 +1,44 @@
+{
+  "testResultId": "3d10fb18-5ab5-409f-b626-92ccd18ab153",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testerName": "cvs.automation7@dvsagov.onmicrosoft.com",
+  "testerStaffId": "6719600b-3aaf-49ee-9efd-38031d49a167",
+  "testerEmailAddress": "cvs.automation7@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2020-02-04T15:38:18.602Z",
+  "testEndTimestamp": "2020-02-04T15:40:16.574Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "trailerId": "C777778",
+  "firstUseDate": "2019-06-24",
+  "vin": "ABCDEFGH777778",
+  "vehicleClass": {
+    "description": "trailer",
+    "code": "t"
+  },
+  "vehicleType": "trl",
+  "vehicleConfiguration": "centre axle drawbar",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "o2",
+  "countryOfRegistration": "bg",
+  "noOfAxles": 2,
+  "testTypes": [
+    {
+      "name": "First test",
+      "testTypeName": "First test",
+      "testTypeId": "95",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2020-02-04T15:39:57.850Z",
+      "testTypeEndTimestamp": "2020-02-04T15:40:16.576Z",
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": []
+    }
+  ]
+}
