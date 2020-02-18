@@ -238,6 +238,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", RandomStringUtils.randomNumeric(5) , "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
@@ -250,6 +251,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
                 alterationInsertVin,
+                alterationInsertTestResultId,
                 alterationInsertTestStartTimestamp,
                 alterationInsertTestTypeStartTimestamp,
                 alterationInsertLastUpdatedAt,
