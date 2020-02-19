@@ -363,7 +363,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         DateTime submittedTestEndTimestamp = currentTime;
 
         // Calculate registration date based on regDateAnniversary
-        DateTime regDateAnniversary = currentTime.plusMonths(2).minusDays(1);
+        DateTime regDateAnniversary = currentTime.plusMonths(2).plusDays(1);
         DateTime regDateTimestamp = regDateAnniversary.minusYears(1);
 
         // Create alteration to add one more tech record to in the request body
@@ -553,7 +553,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         DateTime submittedTestEndTimestamp = currentTime;
 
         // Calculate registration date based on regDateAnniversary
-        DateTime regDateAnniversary = currentTime.plusDays(1);
+        DateTime regDateAnniversary = currentTime.minusDays(1);
         DateTime regDateTimestamp = regDateAnniversary.minusYears(1);
 
         // Create alteration to add one more tech record to in the request body
