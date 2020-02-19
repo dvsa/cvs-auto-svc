@@ -982,4 +982,150 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
+
+    @WithTag("In_Test")
+    @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
+    @Test
+    public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsMinusOneDay() {
+
+        // Read the base INSERT test result JSON.
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_psv_8684.json", "$");
+        // Read the base POST test result JSON.
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_8684.json", "$");
+
+        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+
+        //
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+
+        // Create inserted record.
+        DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).plusMonths(2).minusMinutes(15);
+        DateTime insertedTestTypeStartTimestamp = currentTimestamp.minusYears(1).plusMonths(2).minusMinutes(10);
+        DateTime insertedLastUpdatedAt = currentTimestamp.minusYears(1).plusMonths(2).minusMinutes(5);
+
+        DateTime insertedTestAnniversaryDate = currentTimestamp.minusDays(1);
+        DateTime insertedTestExpiryDate = currentTimestamp.plusMonths(2).minusDays(1);
+
+        DateTime insertedCreatedAt = currentTimestamp.minusYears(1).plusMonths(2).minusMinutes(5);
+        DateTime insertedTestTypeEndTimestamp = currentTimestamp.minusYears(1).plusMonths(2).minusMinutes(5);
+        DateTime insertedTestEndTimestamp = currentTimestamp.minusYears(1).plusMonths(2);
+
+        String insertableTestStartTimestamp = insertedTestStartTimestamp.toInstant().toString();
+        String insertableTestTypeStartTimestamp = insertedTestTypeStartTimestamp.toInstant().toString();
+        String insertableLastUpdatedAt = insertedLastUpdatedAt.toInstant().toString();
+        String insertableTestAnniversaryDate = insertedTestAnniversaryDate.toInstant().toString();
+        String insertableTestExpiryDate = insertedTestExpiryDate.toInstant().toString();
+        String insertableCreatedAt = insertedCreatedAt.toInstant().toString();
+        String insertableTestTypeEndTimestamp = insertedTestTypeEndTimestamp.toInstant().toString();
+        String insertableTestEndTimestamp = insertedTestEndTimestamp.toInstant().toString();
+
+        // Create alteration to add one more tech record to in the inserted data
+        JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", RandomStringUtils.randomNumeric(5) , "", "REPLACE");
+        JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestAnniversaryDate = new JsonPathAlteration("$.testTypes[0].testAnniversaryDate", insertableTestAnniversaryDate, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", insertableTestExpiryDate, "", "REPLACE");
+        JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+
+        // Collate the list of alterations for the inserted record.
+        List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
+                alterationInsertVin,
+                alterationInsertTestResultId,
+                alterationInsertTestStartTimestamp,
+                alterationInsertTestTypeStartTimestamp,
+                alterationInsertLastUpdatedAt,
+                alterationInsertTestAnniversaryDate,
+                alterationInsertTestExpiryDate,
+                alterationInsertCreatedAt,
+                alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestEndTimestamp
+        ));
+
+        if(isAnnualWithCertificate){
+            insertAlterations.add(new JsonPathAlteration("$.testTypes[0]", "Annual With Certificate", "testTypeClassification", "ADD_FIELD"));
+        }
+
+        // Insert the altered record
+        String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+
+//        System.out.println(" \n######################## INSERTED ########################\n\n");
+//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
+//        System.out.println(" \n########################    END   ########################\n\n");
+
+
+        // Create submitted
+        DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
+        DateTime submittedTestTypeStartTimestamp = currentTimestamp.plusMinutes(10);
+        DateTime submittedTypeEndTimestamp = currentTimestamp.plusMinutes(5);
+        DateTime submittedEndTimestamp = currentTimestamp;
+
+        String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
+        String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
+        String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
+        String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
+
+        String testExpectedDate = insertedTestExpiryDate.plusYears(1).toInstant().toString();
+
+
+        // Create alteration to add one more tech record to in the request body
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+        JsonPathAlteration alterationVehicleSize = new JsonPathAlteration("$.vehicleSize", vehicleSize,"","REPLACE");
+        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp,
+                alterationVin,
+                alterationTestResultId,
+                alterationTestName,
+                alterationTestTypeId,
+                alterationTestTypeName,
+                alterationVehicleSize,
+                alterationVehicleConfiguration,
+                alterationTestResult
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
+
+//        System.out.println(" \n######################## POSTED ########################\n\n");
+//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
+//        System.out.println(" \n########################   END  ########################\n\n");
+
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Retrieve the created record, and verify that the fields are present.
+        testResultsSteps.getTestResultsBetweenDate(randomVin, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString() , submittedEndTimestamp.plusMinutes(10).toInstant().toString());
+        testResultsSteps.statusCodeShouldBe(200);
+
+        // Verify testCode field has the expected value
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
+
+        // Verify testExpiryDate field has the expected value
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
+
+//        // Verify testAnniversaryDate field has the expected value
+//        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", testExpectedDate.substring(0,10));
+
+    }
 }
