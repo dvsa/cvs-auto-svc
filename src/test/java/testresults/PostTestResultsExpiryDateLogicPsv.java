@@ -711,8 +711,8 @@ public class PostTestResultsExpiryDateLogicPsv {
         DateTime insertedTestTypeStartTimestamp = currentTimestamp.minusYears(1).plusMonths(2).plusDays(1).minusMinutes(10);
         DateTime insertedLastUpdatedAt = currentTimestamp.minusYears(1).plusMonths(2).plusDays(1).minusMinutes(5);
 
-        DateTime insertedTestAnniversaryDate = currentTimestamp.minusMonths(2).plusDays(1);
-        DateTime insertedTestExpiryDate = currentTimestamp.plusDays(1);
+        DateTime insertedTestAnniversaryDate = currentTimestamp;
+        DateTime insertedTestExpiryDate = currentTimestamp.plusMonths(2);
 
         DateTime insertedCreatedAt = currentTimestamp.minusYears(1).plusMonths(2).plusDays(1).minusMinutes(5);
         DateTime insertedTestTypeEndTimestamp = currentTimestamp.minusYears(1).plusMonths(2).plusDays(1).minusMinutes(5);
@@ -857,7 +857,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         DateTime insertedTestTypeStartTimestamp = currentTimestamp.minusYears(1).plusMonths(2).plusDays(2).minusMinutes(10);
         DateTime insertedLastUpdatedAt = currentTimestamp.minusYears(1).plusMonths(2).plusDays(2).minusMinutes(5);
 
-        DateTime insertedTestAnniversaryDate = currentTimestamp.minusMonths(2);
+        DateTime insertedTestAnniversaryDate = currentTimestamp.plusDays(1);
         DateTime insertedTestExpiryDate = currentTimestamp.plusMonths(2).plusDays(1);
 
         DateTime insertedCreatedAt = currentTimestamp.minusYears(1).plusMonths(2).plusDays(2).minusMinutes(5);
