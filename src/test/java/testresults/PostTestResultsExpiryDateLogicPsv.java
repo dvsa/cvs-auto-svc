@@ -923,7 +923,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 
-        String testExpectedDate = insertedTestExpiryDate.plusYears(1).minusDays(1).toInstant().toString();
+        String testExpectedDate = currentTimestamp.plusYears(1).minusDays(1).toInstant().toString();
 
 
         // Create alteration to add one more tech record to in the request body
