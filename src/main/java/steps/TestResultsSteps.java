@@ -310,34 +310,34 @@ public class TestResultsSteps {
                 break;
             }
         }
-            response.then().body("[" + record + "].testTypes.defects.size()", is(1));
-            response.then().body("[" + record + "].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
+        response.then().body("[" + record + "].testTypes.defects.size()", is(1));
+        response.then().body("[" + record + "].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
 
-            List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
-            List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
-            List<List<Integer>> itemNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemNumber).collect(toList())).collect(toList());
-            List<List<String>> itemDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemDescription).collect(toList())).collect(toList());
-            List<List<String>> deficiencyRef = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyRef).collect(toList())).collect(toList());
-            List<List<String>> deficiencyId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyId).collect(toList())).collect(toList());
-            List<List<String>> deficiencySubId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencySubId).collect(toList())).collect(toList());
-            List<List<String>> deficiencyCategory = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyCategory).collect(toList())).collect(toList());
-            List<List<String>> deficiencyText = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyText).collect(toList())).collect(toList());
-            List<List<Boolean>> stdForProhibition = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getStdForProhibition).collect(toList())).collect(toList());
-            List<List<Boolean>> prs = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getPrs).collect(toList())).collect(toList());
-            List<List<Boolean>> prohibitionIssued = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getProhibitionIssued).collect(toList())).collect(toList());
+        List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
+        List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
+        List<List<Integer>> itemNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemNumber).collect(toList())).collect(toList());
+        List<List<String>> itemDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemDescription).collect(toList())).collect(toList());
+        List<List<String>> deficiencyRef = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyRef).collect(toList())).collect(toList());
+        List<List<String>> deficiencyId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyId).collect(toList())).collect(toList());
+        List<List<String>> deficiencySubId = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencySubId).collect(toList())).collect(toList());
+        List<List<String>> deficiencyCategory = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyCategory).collect(toList())).collect(toList());
+        List<List<String>> deficiencyText = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getDeficiencyText).collect(toList())).collect(toList());
+        List<List<Boolean>> stdForProhibition = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getStdForProhibition).collect(toList())).collect(toList());
+        List<List<Boolean>> prs = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getPrs).collect(toList())).collect(toList());
+        List<List<Boolean>> prohibitionIssued = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getProhibitionIssued).collect(toList())).collect(toList());
 
-            response.then().body("testTypes.defects.imNumber", hasItem(contains(imNumber.toArray())));
-            response.then().body("testTypes.defects.imDescription", hasItem(contains(imDescription.toArray())));
-            response.then().body("testTypes.defects.itemNumber", hasItem(contains(itemNumber.toArray())));
-            response.then().body("testTypes.defects.itemDescription", hasItem(contains(itemDescription.toArray())));
-            response.then().body("testTypes.defects.deficiencyRef", hasItem(contains(deficiencyRef.toArray())));
-            response.then().body("testTypes.defects.deficiencyId", hasItem(contains(deficiencyId.toArray())));
-            response.then().body("testTypes.defects.deficiencySubId", hasItem(contains(deficiencySubId.toArray())));
-            response.then().body("testTypes.defects.deficiencyCategory", hasItem(contains(deficiencyCategory.toArray())));
-            response.then().body("testTypes.defects.deficiencyText", hasItem(contains(deficiencyText.toArray())));
-            response.then().body("testTypes.defects.stdForProhibition", hasItem(contains(stdForProhibition.toArray())));
-            response.then().body("testTypes.defects.prs", hasItem(contains(prs.toArray())));
-            response.then().body("testTypes.defects.prohibitionIssued", hasItem(contains(prohibitionIssued.toArray())));
+        response.then().body("testTypes.defects.imNumber", hasItem(contains(imNumber.toArray())));
+        response.then().body("testTypes.defects.imDescription", hasItem(contains(imDescription.toArray())));
+        response.then().body("testTypes.defects.itemNumber", hasItem(contains(itemNumber.toArray())));
+        response.then().body("testTypes.defects.itemDescription", hasItem(contains(itemDescription.toArray())));
+        response.then().body("testTypes.defects.deficiencyRef", hasItem(contains(deficiencyRef.toArray())));
+        response.then().body("testTypes.defects.deficiencyId", hasItem(contains(deficiencyId.toArray())));
+        response.then().body("testTypes.defects.deficiencySubId", hasItem(contains(deficiencySubId.toArray())));
+        response.then().body("testTypes.defects.deficiencyCategory", hasItem(contains(deficiencyCategory.toArray())));
+        response.then().body("testTypes.defects.deficiencyText", hasItem(contains(deficiencyText.toArray())));
+        response.then().body("testTypes.defects.stdForProhibition", hasItem(contains(stdForProhibition.toArray())));
+        response.then().body("testTypes.defects.prs", hasItem(contains(prs.toArray())));
+        response.then().body("testTypes.defects.prohibitionIssued", hasItem(contains(prohibitionIssued.toArray())));
     }
 
     @Step
@@ -547,12 +547,12 @@ public class TestResultsSteps {
 
     @Step
     public void addAdditionalTestResultsFieldValue(ObjectNode payload, String fieldName, String fieldValue) {
-            payload.put(fieldName, fieldValue);
+        payload.put(fieldName, fieldValue);
     }
 
     @Step
     public void addAdditionalTestResultsFieldValue(ObjectNode payload, String fieldName, int fieldValue) {
-            payload.put(fieldName, fieldValue);
+        payload.put(fieldName, fieldValue);
     }
 
     @Step
@@ -651,17 +651,6 @@ public class TestResultsSteps {
 
     @Step
     public void insertRecordInDynamo(String json, String table) {
-        AwsUtil.insertJsonTable(json, table);
-    }
-
-    @Step
-    public void valueForFieldInPathShouldStartWith(String path, String expectedValue) {
-        System.out.println("Verifying that " + path + " starts with value " + expectedValue);
-        response.then().body(path, startsWith(expectedValue));
-    }
-    @Step
-    public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
-        System.out.println("Verifying that " + path + " ends with value " + expectedValue);
-        response.then().body(path, endsWith(expectedValue));
+        AwsUtil.insertJsonInTable(json, table);
     }
 }

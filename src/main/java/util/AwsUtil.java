@@ -1,13 +1,10 @@
 package util;
 
-import com.amazonaws.auth.BasicSessionCredentials;
+import com.amazonaws.auth.*;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
-import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
@@ -17,7 +14,7 @@ import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import data.GenericData;
 import exceptions.AutomationException;
 
-import java.util.UUID;
+import java.util.*;
 
 public class AwsUtil {
 
@@ -66,7 +63,7 @@ public class AwsUtil {
         return false;
     }
 
-    public static void insertJsonTable(String json, String tableName) {
+    public static void insertJsonInTable(String json, String tableName) {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
                 AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
@@ -89,6 +86,8 @@ public class AwsUtil {
 
         Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
         String vin = GenericData.getValueFromJsonPath(json, "$.vin");
+
+
 
         try {
             Item item = Item.fromJSON(json);
