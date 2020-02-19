@@ -14,16 +14,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
+import steps.TestResultsSteps;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SerenityRunner.class)
 public class PostVehicleTechnicalRecords {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    @Steps
+    TestResultsSteps testResultsSteps;
 
     @WithTag("Vtm")
     @Title("CVSB-7885 - AC1 - API Consumer creates a technical record for a vehicle with a specific vin" +
@@ -163,15 +168,93 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
-    @Title("CVSB-10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Multiple Vehicles")
+    @Title("CVSB - 10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Multiple Vehicles + AC3 Certificate generation")
     @Test
-    public void testTechnicalRecordForMultipleVehicles() {
+    public void testMultipleVehiclesTestResults(){
 
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("484009");
+        // Read the base test record json
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_duplicate_chassis_10752.json","$");
+
+        // Generate random System Number for first vehicle
+        String randomSysNumVehicleOne = GenericData.generateRandomSystemNumber();
+
+        // Generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+
+        // Create alteration in the post request with System Number and Vin for first vehicle
+        JsonPathAlteration altSysNumVehicleOne = new JsonPathAlteration("$.systemNumber", randomSysNumVehicleOne, "", "REPLACE");
+        JsonPathAlteration altVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> altVehicleOne = new ArrayList<>(Arrays.asList(altSysNumVehicleOne, altVin));
+
+        // Post the tech record, together with alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, altVehicleOne);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        // Generate random System Number for second vehicle
+        String randomSysNumVehicleTwo = GenericData.generateRandomSystemNumber();
+
+        // Create alteration in the post request with System Number and Vin for second vehicle
+        JsonPathAlteration altSysNumVehicleTwo = new JsonPathAlteration("$.systemNumber", randomSysNumVehicleTwo, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> altVehicleTwo = new ArrayList<>(Arrays.asList(altSysNumVehicleTwo, altVin));
+
+        // Post the tech record, together with alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, altVehicleTwo);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        // Get the tech record , and verify the expected fields
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", "10044326");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].systemNumber", "10044320");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[2].systemNumber", "12055422");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("systemNumber.size()",2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber",randomSysNumVehicleTwo);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].systemNumber",randomSysNumVehicleOne);
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_duplicate_chassis_10752.json","$");
+
+        // Generate random TestResultId for first vehicle
+        String randomTestResultIdVehicleOne = UUID.randomUUID().toString();
+
+        // Create alteration in the post request with SystemNumber, Vin and TestResultId
+        JsonPathAlteration altTestResultSysNumVehicleOne = new JsonPathAlteration("$.systemNumber", randomSysNumVehicleOne, "", "REPLACE");
+        JsonPathAlteration altTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdVehicleOne = new JsonPathAlteration("$.testResultId", randomTestResultIdVehicleOne, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> altTestResultsVehicleOne = new ArrayList<>(Arrays.asList(
+                altTestResultSysNumVehicleOne,
+                altTestResultVin,
+                alterationTestResultIdVehicleOne));
+
+        // Post the test result, verify expected response is retrieved
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, altTestResultsVehicleOne);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Generate random TestResultId for second vehicle
+        String randomTestResultIdVehicleTwo = UUID.randomUUID().toString();
+
+        // Create alteration in the post request with SystemNumber, Vin and TestResultId
+        JsonPathAlteration altTestResultSysNumVehicleTwo = new JsonPathAlteration("$.systemNumber", randomSysNumVehicleTwo, "", "REPLACE");
+        JsonPathAlteration altTestResultVinVehicleTwo = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdVehicleTwo = new JsonPathAlteration("$.testResultId", randomTestResultIdVehicleTwo, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> altTestResultsVehicleTwo = new ArrayList<>(Arrays.asList(
+                altTestResultSysNumVehicleTwo,
+                altTestResultVinVehicleTwo,
+                alterationTestResultIdVehicleTwo));
+
+        // Post the test result, verify expected response is retrieved
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, altTestResultsVehicleTwo);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
     }
 }
