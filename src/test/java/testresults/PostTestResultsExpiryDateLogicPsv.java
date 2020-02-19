@@ -161,96 +161,99 @@ public class PostTestResultsExpiryDateLogicPsv {
         this.isAnnualWithCertificate = isAnnualWithCertificate;
     }
 
-//    @WithTag("Expiry_Dates")
-//    @Title("CVSB-9187 - TC1 - AC1 - FIRST TEST/FIRST TEST RETEST CONDUCTED AFTER THE ANNIVERSARY DATE - TRL - If no testExpiryDate")
-//    @Test
-//    public void testResultsFirstTestExpiryTrl() {
-//
-//        // Read the base test result JSON.
-//        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_8684.json", "$");
-//
-//        DateTime submittedTestStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-//        DateTime submittedTestTypeStartTimestamp = submittedTestStartTimestamp.plusMinutes(5);
-//        DateTime submittedTypeEndTimestamp = submittedTestTypeStartTimestamp.plusMinutes(10);
-//        DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
-//
-//        // Create alteration to add one more tech record to in the request body
-//        String firstUseDate = submittedEndTimestamp.toDateTime().minusYears(1).plusDays(dayOffset).toString("yyyy-MM-dd");
-//        String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
-//        String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
-//
-//        String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
-//        String testEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
-//        String testExpectedDate = submittedEndTimestamp.plusYears(1).minusDays(1).toInstant().toString();
-//        String randomVin = GenericData.generateRandomVin();
-//        String randomTestResultId = RandomStringUtils.randomNumeric(5);
-//
-//
-////        String returned_testTypeEndTimestamp = "";
-////        String returned_testExpiryDate = "";
-////        String returned_createdAt = "";
-////        String returned_testTypeStartTimestamp = "";
-//
-////        System.out.println("submittedFirstUseDate: " + firstUseDate);
-////        System.out.println("submittedTestStartTimestamp: " + testStartTimestamp);
-////        System.out.println("submittedTestTypeStartTimestamp: " + testTypeStartTimestamp);
-////        System.out.println("submittedTestTypeEndTimestamp: " + testTypeEndTimestamp);
-////        System.out.println("submittedTestEndTimestamp: " + testEndTimestamp);
-////        System.out.println("returned_testAnniversaryDate: " + testExpectedDate);
-//
-//        JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
-//        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
-//        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
-//        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
-//        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
-//        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-//        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-//
-//        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
-//        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
-//        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
-//        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
-//        JsonPathAlteration alterationVehicleSize = new JsonPathAlteration("$.vehicleSize", vehicleSize,"","REPLACE");
-//        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
-//
-//        // Collate the list of alterations.
-//        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-//                alterationFirstUseDate,
-//                alterationTestStartTimestamp,
-//                alterationTestEndTimestamp,
-//                alterationTestTypeStartTimestamp,
-//                alterationTestTypeEndTimestamp,
-//                alterationVin,
-//                alterationTestResultId,
-//                alterationTestName,
-//                alterationTestTypeId,
-//                alterationTestTypeName,
-//                alterationVehicleSize,
-//                alterationVehicleConfiguration,
-//                alterationTestResult
-//        ));
-//
-//        // Post the results, together with any alterations, and verify that they are accepted.
-//        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-//        testResultsSteps.statusCodeShouldBe(201);
-//        testResultsSteps.validateData("Test records created");
-//
-//        // Retrieve the created record, and verify that the fields are present.
-//        testResultsSteps.getTestResults(randomVin);
-//        testResultsSteps.statusCodeShouldBe(200);
-//
-//        // Verify testCode field has the expected value
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
-//
-//        // Verify testAnniversaryDate field has the expected value
-////        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeStartTimestamp", expectedTestTypeStartTimestamp);
-//
-//        // Verify testExpiryDate field has the expected value
-////        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", testExpectedDate);
-//        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
-//
-//    }
 
+    @WithTag("Expiry_Dates")
+    @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test NO PREVIOUS Expiry Date")
+    @Test
+    public void testResultsFirstTestExpiryPsvNoPreviousExpiry() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_8684.json", "$");
+
+        DateTime submittedTestStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+        DateTime submittedTestTypeStartTimestamp = submittedTestStartTimestamp.plusMinutes(5);
+        DateTime submittedTypeEndTimestamp = submittedTestTypeStartTimestamp.plusMinutes(10);
+        DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
+
+        // Create alteration to add one more tech record to in the request body
+        String firstUseDate = submittedEndTimestamp.toDateTime().minusYears(1).plusDays(dayOffset).toString("yyyy-MM-dd");
+        String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
+        String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
+
+        String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
+        String testEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
+        String testExpectedDate = submittedEndTimestamp.plusYears(1).minusDays(1).toInstant().toString();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+
+
+//        String returned_testTypeEndTimestamp = "";
+//        String returned_testExpiryDate = "";
+//        String returned_createdAt = "";
+//        String returned_testTypeStartTimestamp = "";
+
+//        System.out.println("submittedFirstUseDate: " + firstUseDate);
+//        System.out.println("submittedTestStartTimestamp: " + testStartTimestamp);
+//        System.out.println("submittedTestTypeStartTimestamp: " + testTypeStartTimestamp);
+//        System.out.println("submittedTestTypeEndTimestamp: " + testTypeEndTimestamp);
+//        System.out.println("submittedTestEndTimestamp: " + testEndTimestamp);
+//        System.out.println("returned_testAnniversaryDate: " + testExpectedDate);
+
+        JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
+        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+        JsonPathAlteration alterationVehicleSize = new JsonPathAlteration("$.vehicleSize", vehicleSize,"","REPLACE");
+        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationFirstUseDate,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp,
+                alterationVin,
+                alterationTestResultId,
+                alterationTestName,
+                alterationTestTypeId,
+                alterationTestTypeName,
+                alterationVehicleSize,
+                alterationVehicleConfiguration,
+                alterationTestExpiryDate,
+                alterationTestResult
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Retrieve the created record, and verify that the fields are present.
+        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        // Verify testCode field has the expected value
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
+
+        // Verify testAnniversaryDate field has the expected value
+//        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeStartTimestamp", expectedTestTypeStartTimestamp);
+
+        // Verify testExpiryDate field has the expected value
+//        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", testExpectedDate);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
+
+    }
+
+    
     @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
@@ -397,6 +400,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
+    
     @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today")
     @Test
@@ -543,6 +547,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
+    
     @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 1 day")
     @Test
@@ -689,7 +694,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    
     @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months")
     @Test
@@ -836,6 +841,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
+    
     @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months + 1 day")
     @Test
@@ -982,7 +988,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    
     @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
     @Test
