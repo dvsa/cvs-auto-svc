@@ -3,6 +3,7 @@ package clients;
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import util.AwsUtil;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 
@@ -232,5 +233,10 @@ public class VehicleTechnicalRecordsClient {
                 .get("/vehicles/{searchIdentifier}/download-file/{fileName}");
 
         return response;
+    }
+
+    public void insertVehicle(String body, List<JsonPathAlteration> alterations) {
+        String alteredBody = GenericData.applyJsonAlterations(body, alterations);
+        AwsUtil.insertVehicle(alteredBody);
     }
 }

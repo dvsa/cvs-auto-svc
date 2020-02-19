@@ -144,11 +144,10 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
 
         // Verify testAnniversaryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate.substring(0,10));
 
         // Verify testExpiryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate);
-
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
     }
 
     @WithTag("expiry_dates")
@@ -234,11 +233,10 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
 
         // Verify testAnniversaryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate.substring(0,10));
 
         // Verify testExpiryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate);
-
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
     }
 
     @WithTag("expiry_dates")
@@ -599,7 +597,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
 
         // Verify testTypeEndTimestamp is
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp.substring(0,10));
 
         // Verify testAnniversaryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate.substring(0,10));

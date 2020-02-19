@@ -1,4 +1,8 @@
 NAME, TEST TYPE NAME, TEST TYPE ID, NO OF AXLES, TEST RESULT, TEST CODE
+Annual test, Annual test, 94, 2, pass, aav2
+Annual test, Annual test, 94, 3, pass, aav3
+Annual test, Annual test, 94, 4, pass, aav4
+Annual test, Annual test, 94, 5, pass, aav5
 First test, First test, 95, 2, pass, ffv2
 First test, First test, 95, 3, pass, ffv3
 First test, First test, 95, 4, pass, ffv4
