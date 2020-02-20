@@ -213,8 +213,10 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("systemNumber.size()",2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber",randomSysNumVehicleTwo);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].systemNumber",randomSysNumVehicleOne);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber",randomSysNumVehicleOne);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].systemNumber",randomSysNumVehicleTwo);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBeContains("systemNumber",randomSysNumVehicleOne , randomSysNumVehicleTwo);
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_duplicate_chassis_10752.json","$");
