@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-
+@WithTag("Expiry_Date")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicHgvPreservation {
 
