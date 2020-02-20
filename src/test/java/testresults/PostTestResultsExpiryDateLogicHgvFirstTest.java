@@ -9,6 +9,7 @@ import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -19,9 +20,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-
+@Ignore
 @RunWith(SerenityParameterizedRunner.class)
-public class PostTestResultsExpiryDateLogicHgv {
+public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -241,7 +242,7 @@ public class PostTestResultsExpiryDateLogicHgv {
     //sets the firstUseDate / regnDate one year before the current date, plus/minus one day
     private int dayOffset;
 
-    public PostTestResultsExpiryDateLogicHgv(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, int dayOffset, String testCode) {
+    public PostTestResultsExpiryDateLogicHgvFirstTest(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, int dayOffset, String testCode) {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;
@@ -251,7 +252,7 @@ public class PostTestResultsExpiryDateLogicHgv {
         this.testCode = testCode;
     }
 
-    @WithTag("Expiry_Dates")
+//    @WithTag("Expiry_Dates")
     @Title("CVSB-9187 - TC1 - AC1 - FIRST TEST/FIRST TEST RETEST CONDUCTED AFTER THE ANNIVERSARY DATE - TRL")
     @Test
     public void testResultsFirstTestExpiryTrl() {
