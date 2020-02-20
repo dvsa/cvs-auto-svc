@@ -101,12 +101,10 @@ public class GenericData {
         for (final JsonPathAlteration alteration : alterations) {
             Objects.requireNonNull(alteration.getPath(), "The 'path' is required for any alteration");
 
-            final boolean valueIsJson = alteration.getValue() != null &&
-                    alteration.getValue().getClass().getName().equals("java.lang.String")
-                    && !alteration.getValue().toString().isEmpty()
+            final boolean valueIsJson =  alteration.getValue() != null && alteration.getValue().getClass().getName().equals("java.lang.String") && !alteration.getValue().toString().isEmpty()
                     && ((alteration.getValue().toString().startsWith("{") && alteration.getValue().toString().endsWith("}"))
                     || (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]")));
-            final Object value = (valueIsJson) ? readJson(alteration.getValue().toString()) : alteration.getValue();
+            final Object value = valueIsJson ? readJson(alteration.getValue().toString()) : alteration.getValue();
 
             switch (alteration.getAction()) {
                 case "ADD_FIELD":

@@ -9,6 +9,7 @@ import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+@Ignore
 @WithTag("In_Test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicPsv {
@@ -253,8 +255,8 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
+    @WithTag("Expiry_Dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayMinusOneDay() {
@@ -400,8 +402,8 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
+    @WithTag("Expiry_Dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today")
     @Test
     public void testResultsFirstTestExpiryPsvToday() {
@@ -547,8 +549,8 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
+    @WithTag("Expiry_Dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusOneDay() {
@@ -694,8 +696,8 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
+    @WithTag("Expiry_Dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonths() {
@@ -841,8 +843,8 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
+    @WithTag("Expiry_Dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsPlusOneDay() {
@@ -988,8 +990,8 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
+    @WithTag("Expiry_Dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsMinusOneDay() {
