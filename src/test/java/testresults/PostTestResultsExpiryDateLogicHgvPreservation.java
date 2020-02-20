@@ -260,14 +260,16 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
     private int noOfAxles;
     private String testResult;
     private String testCode;
+    private boolean isAnnualWithCertificate;
 
-    public PostTestResultsExpiryDateLogicHgvPreservation(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, String testCode) {
+    public PostTestResultsExpiryDateLogicHgvPreservation(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, String testCode, boolean isAnnualWithCertificate) {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;
         this.noOfAxles = noOfAxles;
         this.testResult = testResult;
         this.testCode = testCode;
+        this.isAnnualWithCertificate = isAnnualWithCertificate;
     }
 
     @WithTag("expiry_dates")
