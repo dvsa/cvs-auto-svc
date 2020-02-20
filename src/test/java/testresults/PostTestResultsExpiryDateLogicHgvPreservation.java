@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@WithTag("Expiry_Date")
+@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicHgvPreservation {
 
@@ -270,7 +270,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         this.testCode = testCode;
     }
 
-    @WithTag("Expiry_Date")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - No regnDate")
     @Test
     public void testResultsFirstTestExpiryHgvNoRegnDate() {
