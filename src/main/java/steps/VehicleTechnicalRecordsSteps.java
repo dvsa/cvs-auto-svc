@@ -54,10 +54,6 @@ public class VehicleTechnicalRecordsSteps {
     public void valueForFieldInPathShouldBe(String path, String expectedValue) {
         response.then().body(path, equalTo(expectedValue));
     }
-    @Step
-    public void valueForFieldInPathShouldBeContains(String path,String valueOne, String valueTwo) {
-        response.then().body(path, contains(valueOne,valueTwo));
-    }
 
     @Step
     public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
