@@ -168,7 +168,6 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
-    @WithTag("In_test")
     @Title("CVSB - 10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Multiple Vehicles + AC3 Certificate generation")
     @Test
     public void testMultipleVehiclesTestResults(){
