@@ -20,14 +20,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@Ignore
-@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     @Steps
     TestResultsSteps testResultsSteps;
-
 
     @TestData
     public static Collection<Object[]> testData(){
@@ -289,7 +286,6 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         DateTime submittedEndTimestamp = currentTime;
 
         // Create alteration to add one more tech record to in the request body
-//        String regnDate = submittedEndTimestamp.toDateTime().minusYears(1).plusDays(dayOffset).toString("yyyy-MM-dd");
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
         String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
@@ -358,7 +354,6 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 //        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeStartTimestamp", expectedTestTypeStartTimestamp);
 
         // Verify testExpiryDate field has the expected value
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", testExpectedDate);
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
 
     }
