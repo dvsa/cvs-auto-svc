@@ -259,7 +259,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
 
         // Verify testAnniversaryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", testExpectedDate);
+//        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", testExpectedDate);
 
         // Verify testExpiryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
