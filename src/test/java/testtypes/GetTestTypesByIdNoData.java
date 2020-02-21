@@ -65,7 +65,8 @@ public class GetTestTypesByIdNoData {
                 .setVehicleSize(VehicleSize.LARGE)
                 .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
 
-        testTypeSteps.getTestTypesById(notExistingAnnualCertificatePsvLargeArticulated.getId(), testTypeQueryParam);
+        //testTypeSteps.getTestTypesById(notExistingAnnualCertificatePsvLargeArticulated.getId(), testTypeQueryParam);
+        testTypeSteps.getTestTypesById("94", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(404);
         testTypeSteps.validateData("No resources match the search criteria.");
     }

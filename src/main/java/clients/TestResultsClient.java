@@ -12,22 +12,30 @@ import io.restassured.response.Response;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestTypesGet;
+import org.apache.commons.exec.environment.EnvironmentUtils;
 import util.BasePathFilter;
+import util.EnvironmentType;
 import util.JsonPathAlteration;
+import util.TypeLoader;
+
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
+
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
 public class TestResultsClient {
 
-    public Response getTestResults(String vin) {
+    public Response getTestResults(String systemNumber) {
 
-        Response response = callGetTestResults(vin);
+        Response response = callGetTestResults(systemNumber);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callGetTestResults(vin);
+            response = callGetTestResults(systemNumber);
         }
 
         return response;
@@ -41,6 +49,18 @@ public class TestResultsClient {
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callFetTestResultsWithStatus(vin, status);
+        }
+
+        return response;
+    }
+
+    public Response getTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
+
+        Response response = callGetTestResultsWithStatusAndSysNumber(systemNumber, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsWithStatusAndSysNumber(systemNumber, status);
         }
 
         return response;
@@ -264,15 +284,15 @@ public class TestResultsClient {
     }
 
 
-    public Response callGetTestResults(String vin) {
+    public Response callGetTestResults(String systemNumber) {
 
         Response response = given()
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
+                .pathParam("systemNumber", systemNumber)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/test-results/{vin}");
+                .get("/test-results/{systemNumber}");
 
         return response;
     }
@@ -286,6 +306,21 @@ public class TestResultsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
+
+
+        return response;
+    }
+
+
+    private Response callGetTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+                .queryParam("status", status)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/test-results/{systemNumber}");
 
 
         return response;
@@ -409,6 +444,18 @@ public class TestResultsClient {
         return response;
     }
 
+    public Response callPostVehicleTestResultsWithNoAuthorization(String body) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .post("/test-results");
+
+        return response;
+    }
+
+
     public Response postVehicleTestResultsWithAlterations(String body, List<JsonPathAlteration> alterations) {
         Response response = callPostVehicleTestResultsWithAlterations(body, alterations);
 
@@ -418,5 +465,27 @@ public class TestResultsClient {
         }
 
         return response;
+    }
+
+    public String getOutlookEmailAddress() {
+        EnvironmentType envType = TypeLoader.getType();
+        String emailAddress = "";
+        switch (envType) {
+            case CI_DEVELOP:
+                emailAddress = System.getenv("EMAIL_USERNAME");
+                break;
+            case LOCAL:
+                try {
+                    Properties properties = new Properties();
+                    properties.load(Objects.requireNonNull(EnvironmentUtils.class.getClassLoader().getResourceAsStream("conf/environment.properties")));
+                    emailAddress = properties.getProperty("email.username");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                throw new AutomationException("Environment configuration not found");
+        }
+        return emailAddress;
     }
 }

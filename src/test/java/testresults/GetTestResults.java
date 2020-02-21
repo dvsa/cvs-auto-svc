@@ -3,6 +3,7 @@ package testresults;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -15,6 +16,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import util.JsonPathAlteration;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
@@ -49,26 +56,106 @@ public class GetTestResults {
     @Title("CVSB-416 - CVSB-949 / CVSB-2215 - API Consumer retrieve the Test results for the input Vin (DEFAULT)")
     @Test
     public void testResultsSubmittedReferenceData() {
-        testResultsSteps.getTestResults(vehicleSubmittedData.getVin());
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (SUBMITTED)")
     @Test
     public void testResultsWithStatusSubmittedReferenceData() {
-        testResultsSteps.getTestResults(vehicleSubmittedData.getVin(), TestResultsStatus.SUBMITTED);
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (CANCELED)")
     @Test
     public void testResultsWithStatusCanceledReferenceData() {
 
-        testResultsSteps.getTestResults(vehicleCancelledData.getVin(), TestResultsStatus.CANCELED);
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestCode = new JsonPathAlteration("$.testTypes[0].testCode", "", "", "DELETE");
+        JsonPathAlteration alterationTestNumber = new JsonPathAlteration("$.testTypes[0].testNumber", "", "", "DELETE");
+        JsonPathAlteration alterationLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", "", "", "DELETE");
+        JsonPathAlteration alterationCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", "", "", "DELETE");
+        JsonPathAlteration alterationCertificateLink = new JsonPathAlteration("$.testTypes[0].certificateLink", "", "", "DELETE");
+        JsonPathAlteration alterationVehicleId = new JsonPathAlteration("$.vehicleId", "", "", "DELETE");
+
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestCode,
+                alterationTestNumber,
+                alterationLastUpdatedAt,
+                alterationCreatedAt,
+                alterationCertificateLink,
+                alterationVehicleId,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(randomSystemNumber,TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleCancelledData);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (INVALID)")
@@ -119,9 +206,9 @@ public class GetTestResults {
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (PSV)")
     @Test
     public void testResultsForVinPsv() {
-        testResultsSteps.getTestResults("1B7GG36N12S678410");
+        testResultsSteps.getTestResults("10000002");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "1B7GG36N12S678410");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin","1B7GG36N12S678410");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "psv");
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldExists("numberOfSeats");
@@ -137,9 +224,9 @@ public class GetTestResults {
     @Test
 
     public void testResultsForVinHgv() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012314");
+        testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "XMGDE02FS0H012314");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin","P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldExists("odometerReading");
@@ -151,7 +238,7 @@ public class GetTestResults {
     public void testResultsForVinTrl() {
 
     vehicleDefaultSubmittedData
-            .setVin(generateRandomExcludingValues(21, vehicleDefaultSubmittedData.build().getVin()))
+            .setSystemNumber(generateRandomExcludingValues(16, vehicleDefaultSubmittedData.build().getSystemNumber()))
             .setTestResultId(generateRandomExcludingValues(3,vehicleDefaultSubmittedData.build().getTestResultId()))
             .setCountryOfRegistration("a")
             .setEuVehicleCategory("o3")
@@ -203,7 +290,7 @@ public class GetTestResults {
     testResultsSteps.statusCodeShouldBe(201);
     testResultsSteps.validateData("Test records created");
 
-    testResultsSteps.getTestResults(vehicleDefaultSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+    testResultsSteps.getTestResults(vehicleDefaultSubmittedData.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
     testResultsSteps.statusCodeShouldBe(200);
 
     testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
@@ -215,7 +302,7 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
     @Test
     public void testResultsForRegnDateHgv() {
-        testResultsSteps.getTestResults("P012301293847");
+        testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
@@ -225,11 +312,10 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - trl")
     @Test
     public void testResultsForFirstUseDateTrl() {
-        testResultsSteps.getTestResults("T12111111");
+        testResultsSteps.getTestResults("10000019");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
         testResultsSteps.validateVehicleFieldMayExist("firstUseDate");
     }
-
 }

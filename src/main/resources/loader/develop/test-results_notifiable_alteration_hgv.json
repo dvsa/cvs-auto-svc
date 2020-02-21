@@ -14,6 +14,7 @@
   "odometerReading": 35000,
   "odometerReadingUnits": "kilometres",
   "vin": "NB56GPA2DP9IHW",
+  "systemNumber": "23244ERTTET43535",
   "vehicleClass": {
     "description": "heavy goods vehicle",
     "code": "v"

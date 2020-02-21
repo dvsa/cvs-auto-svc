@@ -12,6 +12,7 @@
   "reasonForCancellation":null,
   "trailerId":"C100001",
   "vin":"T72741234",
+  "systemNumber": "123342131",
   "vehicleClass":{
     "description":"trailer",
     "code":"t"

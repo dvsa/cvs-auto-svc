@@ -5,6 +5,7 @@
   },
   "partialVin": "037501",
   "primaryVrm": "B2C1C11",
+  "systemNumber": "BSFD3244BDSGR",
   "secondaryVrms": [
     "E5F1I00"
   ],
@@ -128,7 +129,8 @@
         "description": "heavy goods vehicle"
       },
       "vehicleConfiguration": "articulated",
-      "vehicleType": "hgv"
+      "vehicleType": "hgv",
+      "recordCompleteness": "complete"
     }
   ],
   "vin": "A00037502"

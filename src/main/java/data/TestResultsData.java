@@ -14,7 +14,6 @@ public class TestResultsData {
         return testResults;
     }
 
-
     public static TestResultsGet.Builder buildTestResultsCancelleddDataWithCalculated() {
 
         TestResultsGet.Builder testResults = buildTestResultsCancelledData();
@@ -30,10 +29,26 @@ public class TestResultsData {
 
     }
 
+    public static TestResultsGet.Builder buildTestResultsSubmittedDataOld() {
+
+        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_submitted_old.json");
+
+        return testResults;
+
+    }
+
     public static TestResultsGet.Builder buildTestResultsCancelledData() {
 
 
         TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_cancelled.json");
+
+        return testResults;
+    }
+
+    public static TestResultsGet.Builder buildTestResultsCancelledDataOld() {
+
+
+        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_cancelled_old.json");
 
         return testResults;
     }

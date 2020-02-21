@@ -24,7 +24,7 @@
       "certificateNumber": null,
       "defects": [
       ],
-      "emissionStandard": "0.16 g/kWh Euro 3 PM",
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
       "fuelType": "diesel",
       "modType": {
         "code": "p",
@@ -53,5 +53,6 @@
   "vehicleConfiguration": "semi-car transporter",
   "vehicleType": "hgv",
   "vin": "P012301270123",
+  "systemNumber": "1212EWRETREYRR422",
   "vrm": "CT70VRL"
 }

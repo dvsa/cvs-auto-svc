@@ -38,17 +38,22 @@ public class PutVehicleUpdateHgvFields extends TestCase {
         // TEST SETUP
         // generate random Vin
         randomVin = GenericData.generateRandomVin();
+        // generate random Vin
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
         String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change systemNumber in the post request body with the random generated Vin
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
 
         // initialize the alterations list with both declared alterations
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm,
+                alterationSystemNumber));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBodyHgv, alterations);
         Response response = given().filters(new BasePathFilter())
@@ -168,7 +173,7 @@ public class PutVehicleUpdateHgvFields extends TestCase {
         JsonPathAlteration changeUserId = new JsonPathAlteration("$.msUserDetails.msOid", "123456", "", "REPLACE");
         JsonPathAlteration changeUser = new JsonPathAlteration("$.msUserDetails.msUser", "dragos", "", "REPLACE");
         JsonPathAlteration updateField = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
-        String noOfTechRecords  =  vehicleTechnicalRecordsSteps.extractFieldValueFromGetVehicleTechnicalRecordsByStatus("techRecord.size()", randomVin, VehicleTechnicalRecordStatus.ALL);
+        String noOfTechRecords  =  vehicleTechnicalRecordsSteps.extractFieldValueFromGetVehicleTechnicalRecordsByStatus("[0].techRecord.size()", randomVin, VehicleTechnicalRecordStatus.ALL);
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(changeUser, changeUserId, updateField));
         if (noOfTechRecords.equals("1")) {
             alterations.add(removeAxle);

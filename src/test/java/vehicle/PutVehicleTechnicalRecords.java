@@ -28,7 +28,6 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
             "AC9 - Can add or remove tech records for a vehicle entry")
-    @Test
     public void testUpdateVehicleTechnicalRecord() {
         // TEST SETUP
         // generate random Vin
@@ -97,6 +96,8 @@ public class PutVehicleTechnicalRecords {
         //TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
+        // generate random systemNumber
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
@@ -105,10 +106,12 @@ public class PutVehicleTechnicalRecords {
         String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change systemNumber in the post request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
         // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
         // read the adr details from the file used for put request body with tank adr details
         String adrDetailsTank = GenericData.readJsonValueFromFile("technical-records_adr_details_tank.json","$.techRecord[0].adrDetails");
 
@@ -123,19 +126,19 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].updateType", "adrUpdate");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByName", "sean");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedById", "12345");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valuesForFieldsInPathShouldEqual("techRecord[0].lastUpdatedAt","techRecord[1].createdAt");
-        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("techRecord[1]", "adrDetails");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].updateType", "adrUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "sean");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "12345");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valuesForFieldsInPathShouldEqual("[0].techRecord[0].lastUpdatedAt","[0].techRecord[1].createdAt");
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[1]", "adrDetails");
         // validated AC3
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetailsBattery);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[1].adrDetails", adrDetailsBattery);
         // Validate AC4
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].createdByName", "sean");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].createdById", "12345");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].createdByName", "sean");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].createdById", "12345");
         // Validate AC2
         alterationAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetailsTank,"adrDetails","ADD_FIELD");
         alterations.remove(alterations.size()-1);
@@ -144,18 +147,18 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].updateType", "adrUpdate");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].lastUpdatedByName", "sean");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].lastUpdatedById", "12345");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valuesForFieldsInPathShouldEqual("techRecord[1].lastUpdatedAt","techRecord[2].createdAt");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].updateType", "adrUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "sean");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "12345");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valuesForFieldsInPathShouldEqual("[0].techRecord[1].lastUpdatedAt","[0].techRecord[2].createdAt");
         // validate AC5
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].createdByName", "sean");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].createdById", "12345");
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[2].adrDetails", adrDetailsTank);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "sean");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "12345");
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[2].adrDetails", adrDetailsTank);
     }
 
     @WithTag("Vtm")

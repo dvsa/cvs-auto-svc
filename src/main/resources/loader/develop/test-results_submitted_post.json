@@ -1,0 +1,84 @@
+{
+  "testResultId": "2",
+  "testerStaffId": "1",
+  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
+  "odometerReadingUnits": "kilometres",
+  "testEndTimestamp": "2019-01-14T10:36:33.987Z",
+  "testStatus": "submitted",
+  "systemNumber":"2314RTRYY1232",
+  "testTypes": [
+    {
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "smokeTestKLimitApplied": "value",
+      "fuelType": "diesel",
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "prohibitionIssued": false,
+      "additionalCommentsForAbandon": "none",
+      "numberOfSeatbeltsFitted": 2,
+      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
+      "reasonForAbandoning": "none",
+      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "testTypeId": "95",
+      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
+      "certificateNumber": "12334",
+      "testTypeName": "First test",
+      "seatbeltInstallationCheckDate": true,
+      "additionalNotesRecorded": "VEHICLE FRONT REGISTRATION PLATE MISSING",
+      "defects": [
+        {
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "prs": false,
+          "additionalInformation": {
+            "location": {
+              "axleNumber": null,
+              "horizontal": null,
+              "vertical": null,
+              "longitudinal": "front",
+              "rowNumber": null,
+              "lateral": null,
+              "seatNumber": null
+            },
+            "notes": "None"
+          },
+          "itemNumber": 1,
+          "deficiencyRef": "1.1.a",
+          "stdForProhibition": false,
+          "deficiencySubId": null,
+          "imDescription": "Registration Plate",
+          "deficiencyId": "a",
+          "itemDescription": "A registration plate:",
+          "imNumber": 1,
+          "prohibitionIssued" : null
+        }
+      ],
+      "name": "First test",
+      "testResult": "pass"
+    }
+  ],
+  "vehicleClass": {
+    "description": "motorbikes over 200cc or with a sidecar",
+    "code": "2"
+  },
+  "vin": "P012301293847",
+  "vehicleSize": "small",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "vehicleType": "hgv",
+  "countryOfRegistration": "united kingdom",
+  "preparerId": "ak4434",
+  "preparerName": "Durrell Vehicles Limited",
+  "odometerReading": 100000,
+  "vehicleConfiguration": "rigid",
+  "testStationType": "gvts",
+  "reasonForCancellation": "none",
+  "testerName": "Dorel",
+  "vrm": "CO79ERT",
+  "testStationPNumber": "87-1369569",
+  "numberOfSeats": 45,
+  "noOfAxles": 2,
+  "testerEmailAddress": "dorel.popescu@dvsagov.uk",
+  "euVehicleCategory": "n1"
+}
