@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+@Ignore
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicHgvPreservation {
@@ -273,7 +274,6 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         this.isAnnualWithCertificate = isAnnualWithCertificate;
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Preservation Test - NO Previous Expiry Date")
     @Test

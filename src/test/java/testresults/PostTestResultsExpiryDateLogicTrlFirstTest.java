@@ -20,9 +20,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@Ignore
 @RunWith(SerenityParameterizedRunner.class)
-public class PostTestResultsExpiryDateLogicTrl {
+public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -30,7 +29,7 @@ public class PostTestResultsExpiryDateLogicTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"First test", "First test", "41", "centre axle drawbar", 1, "pass", 1, "fft1"},
+                {"First test", "First test", "41", 1, "pass", "fft1"},
 //                {"First test", "First test", "95", "centre axle drawbar", 2, "pass", 1, "fft2"},
 //                {"First test", "First test", "95", "centre axle drawbar", 3, "pass", 1, "fft3"},
 //                {"First test", "First test", "95", "centre axle drawbar", 4, "pass", 1, "fft4"},
@@ -141,7 +140,7 @@ public class PostTestResultsExpiryDateLogicTrl {
 //                {"With certification", "Part paid prohibition clearance (retest with certification)", "79", "centre axle drawbar", 9, "pass", 1, "p6t5"},
 //                {"With certification", "Part paid prohibition clearance (retest with certification)", "79", "centre axle drawbar", 10, "pass", 1, "p6t5"},
 //
-//                {"First test", "First test", "41", "centre axle drawbar", 1, "prs", 1, "fft1"},
+                {"First test", "First test", "41", 1, "prs", "fft1"},
 //                {"First test", "First test", "95", "centre axle drawbar", 2, "prs", 1, "fft2"},
 //                {"First test", "First test", "95", "centre axle drawbar", 3, "prs", 1, "fft3"},
 //                {"First test", "First test", "95", "centre axle drawbar", 4, "prs", 1, "fft4"},
@@ -258,29 +257,25 @@ public class PostTestResultsExpiryDateLogicTrl {
     private String name;
     private String testTypeName;
     private String testTypeId;
-    private String vehicleConfiguration;
     private int noOfAxles;
     private String testResult;
     private String testCode;
 
     //sets the firstUseDate / regnDate one year before the current date, plus/minus one day
-    private int dayOffset;
 
-    public PostTestResultsExpiryDateLogicTrl(String name, String testTypeName, String testTypeId, String vehicleConfiguration, int noOfAxles, String testResult, int dayOffset, String testCode) {
+    public PostTestResultsExpiryDateLogicTrlFirstTest(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, String testCode) {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;
-        this.vehicleConfiguration = vehicleConfiguration;
         this.noOfAxles = noOfAxles;
         this.testResult = testResult;
-        this.dayOffset = dayOffset;
         this.testCode = testCode;
     }
 
-    @WithTag("Expiry_Dates")
-    @Title("CVSB-8684 - Include expiry date calculation validation in BE test suite - TRL - testTypeEndTimestamp (date only) is more than 1 year after firstUseDate AND no existing testExpiryDate")
+    @WithTag("expiry_dates")
+    @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date")
     @Test
-    public void testResultsNoFirstTestExpiryTrlMoreThanOneYear() {
+    public void testResultsFirstTestExpiryTrlNoExpiryDate() {
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_expiry_date_trl_8684.json", "$");
@@ -291,7 +286,7 @@ public class PostTestResultsExpiryDateLogicTrl {
         DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
 
         // Create alteration to add one more tech record to in the request body
-        String firstUseDate = submittedTypeEndTimestamp.toDateTime().minusYears(1).minusDays(dayOffset).toString("yyyy-MM-dd");
+        String firstUseDate = submittedTypeEndTimestamp.toDateTime().minusYears(1).minusDays(1).toString("yyyy-MM-dd");
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
         String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
@@ -327,7 +322,6 @@ public class PostTestResultsExpiryDateLogicTrl {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
@@ -342,7 +336,6 @@ public class PostTestResultsExpiryDateLogicTrl {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
-                alterationVehicleConfiguration,
                 alterationTestExpiryDate,
                 alterationTestResult
         ));
@@ -387,7 +380,7 @@ public class PostTestResultsExpiryDateLogicTrl {
         DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
 
         // Create alteration to add one more tech record to in the request body
-        String firstUseDate = submittedTypeEndTimestamp.toDateTime().minusYears(1).plusMonths(2).plusDays(dayOffset).toString("yyyy-MM-dd");
+        String firstUseDate = submittedTypeEndTimestamp.toDateTime().minusYears(1).plusMonths(2).plusDays(1).toString("yyyy-MM-dd");
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
         String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
@@ -422,7 +415,6 @@ public class PostTestResultsExpiryDateLogicTrl {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
 
         // Collate the list of alterations.
@@ -438,7 +430,6 @@ public class PostTestResultsExpiryDateLogicTrl {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
-                alterationVehicleConfiguration,
                 alterationTestExpiryDate,
                 alterationTestResult
         ));
@@ -520,7 +511,6 @@ public class PostTestResultsExpiryDateLogicTrl {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
 
         // Collate the list of alterations.
@@ -536,7 +526,6 @@ public class PostTestResultsExpiryDateLogicTrl {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
-                alterationVehicleConfiguration,
                 alterationTestExpiryDate,
                 alterationTestResult
         ));
@@ -617,7 +606,6 @@ public class PostTestResultsExpiryDateLogicTrl {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
 
         // Collate the list of alterations.
@@ -633,7 +621,6 @@ public class PostTestResultsExpiryDateLogicTrl {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
-                alterationVehicleConfiguration,
                 alterationTestExpiryDate,
                 alterationTestResult
         ));
@@ -712,7 +699,6 @@ public class PostTestResultsExpiryDateLogicTrl {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
 
         // Collate the list of alterations.
@@ -728,7 +714,6 @@ public class PostTestResultsExpiryDateLogicTrl {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
-                alterationVehicleConfiguration,
                 alterationTestExpiryDate,
                 alterationTestResult
         ));
@@ -768,7 +753,7 @@ public class PostTestResultsExpiryDateLogicTrl {
         DateTime submittedTestTypeStartTimestamp = submittedTestStartTimestamp.plusMinutes(5);
         DateTime submittedTypeEndTimestamp = submittedTestTypeStartTimestamp.plusMinutes(10);
         DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
-        DateTime submittedTestExpiryDate = submittedTypeEndTimestamp.toDateTime().minusYears(1).plusDays(dayOffset);
+        DateTime submittedTestExpiryDate = submittedTypeEndTimestamp.toDateTime().minusYears(1).plusDays(1);
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -806,7 +791,6 @@ public class PostTestResultsExpiryDateLogicTrl {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", vehicleConfiguration,"","REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", testExpiryDateTimestamp, "", "REPLACE");
 
         // Collate the list of alterations.
@@ -822,7 +806,6 @@ public class PostTestResultsExpiryDateLogicTrl {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
-                alterationVehicleConfiguration,
                 alterationTestExpiryDate,
                 alterationTestResult
         ));
