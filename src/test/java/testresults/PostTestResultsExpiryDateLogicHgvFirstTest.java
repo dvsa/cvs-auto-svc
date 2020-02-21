@@ -253,9 +253,9 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
     }
 
 //    @WithTag("Expiry_Dates")
-    @Title("CVSB-9187 - TC1 - AC1 - FIRST TEST/FIRST TEST RETEST CONDUCTED AFTER THE ANNIVERSARY DATE - TRL")
+    @Title("CVSB-9187 - TC1 - AC1 - FIRST TEST/FIRST TEST RETEST CONDUCTED AFTER THE ANNIVERSARY DATE - HGV")
     @Test
-    public void testResultsFirstTestExpiryTrl() {
+    public void testResultsFirstTestExpiryHgv() {
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_expiry_date_hgv_8684.json", "$");
