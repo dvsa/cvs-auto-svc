@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@Ignore
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
