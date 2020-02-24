@@ -34,6 +34,10 @@ public class LocalLoaderImpl implements Loader {
 
     public String getMicrosoftonlinePass() { return properties.getProperty("microsoftonline.pass"); }
 
+    public String getEmailUserName() { return properties.getProperty("email.username"); }
+
+    public String getEmailPass() { return properties.getProperty("email.pass"); }
+
     public String getUsername() {
         return properties.getProperty("browserstack.username");
     }

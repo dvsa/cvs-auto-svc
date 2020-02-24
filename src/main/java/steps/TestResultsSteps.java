@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.WebDriver;
 import util.AwsUtil;
 import util.JsonPathAlteration;
+import util.WebDriverBrowsertack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -652,5 +654,10 @@ public class TestResultsSteps {
     @Step
     public void insertRecordInDynamo(String json, String table) {
         AwsUtil.insertJsonInTable(json, table);
+    }
+
+    @Step
+    public WebDriver validateAtfEmail(String randomVin) {
+        return WebDriverBrowsertack.checkAtfEmail(randomVin);
     }
 }

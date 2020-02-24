@@ -11,7 +11,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.NoSuchElementException;
 
 public class WebDriverBrowsertack {
@@ -85,5 +87,57 @@ public class WebDriverBrowsertack {
         String token = driver.getCurrentUrl().split("id_token=")[1].split("&session_state=")[0];
         driver.quit();
         return token;
+    }
+
+    public static WebDriver checkAtfEmail(String randomVin) {
+        WebDriverBrowsertack.setup();
+        FluentWait wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(NoSuchElementException.class);
+        driver.get("https://outlook.live.com/owa/");
+
+
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.auxiliary-actions a[data-task='signin']")),
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("nav.auxiliary-actions a[data-task='signin']"))
+        ));
+        driver.manage().window().maximize();
+        driver.findElement(By.cssSelector("nav.auxiliary-actions a[data-task='signin']")).click();
+
+
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='loginfmt']")),
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='loginfmt']"))
+        ));
+        driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getEmailUserName());
+        driver.findElement(By.cssSelector("#idSIButton9")).click();
+
+
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
+        ));
+        driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getEmailPass());
+        driver.findElement(By.cssSelector("#idSIButton9")).click();
+
+
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back"))
+        ));
+        driver.findElement(By.cssSelector("#idSIButton9")).click();
+
+
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']"))
+        ));
+        driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVin);
+        driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+
+        wait.until(ExpectedConditions.textToBePresentInElement(driver.findElements(By.cssSelector("div[aria-level='3']")).get(0), "Top results"));
+        driver.findElements(By.cssSelector("div[role='option']")).get(0).click();
+        return driver;
     }
 }
