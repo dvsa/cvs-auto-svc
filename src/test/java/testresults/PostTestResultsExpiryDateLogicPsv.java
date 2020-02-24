@@ -20,8 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@Ignore
-@WithTag("In_Test")
+@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicPsv {
 
@@ -32,114 +31,116 @@ public class PostTestResultsExpiryDateLogicPsv {
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
                 {"Annual test", "Annual test", "1", "large", "rigid", "pass", 1, "aal", true},
-//                {"Annual test", "Annual test", "1", "small", "rigid", "pass", 1, "aas", true},
-//                {"Annual test", "Annual test", "1", "large", "articulated", "pass", 1, "adl", true},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "pass", 1, "wdl", true},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "pass", 1, "wds", true},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "pass", 1, "wbl", true},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "pass", 1, "wbs", true},
-//                {"Any PSV", "Paid retest", "7", "large", "articulated", "pass", 1, "rhl", true},
-//                {"Any PSV", "Paid retest", "7", "small", "rigid", "pass", 1, "rps", true},
-//                {"Any PSV", "Paid retest", "7", "large", "rigid", "pass", 1, "rpl", true},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "pass", 1, "whl", true},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "pass", 1, "whs", true},
-//                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "pass", 1, "rgl", true},
-//                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "pass", 1, "rsl", true},
-//                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "pass", 1, "rss", true},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "pass", 1, "p1l", true},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "pass", 1, "p1s", true},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "pass", 1, "p8l", true},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "pass", 1, "p8s", true},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "pass", 1, "p6l", true},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "pass", 1, "p6s", true},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "pass", 1, "wis", true},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "pass", 1, "wil", true},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "pass", 1, "wfl", true},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "pass", 1, "wfs", true},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "pass", 1, "wel", true},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "pass", 1, "wes", true},
+                {"Annual test", "Annual test", "1", "small", "rigid", "pass", 1, "aas", true},
+                {"Annual test", "Annual test", "1", "large", "articulated", "pass", 1, "adl", true},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "pass", 1, "wdl", true},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "pass", 1, "wds", true},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "pass", 1, "wbl", true},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "pass", 1, "wbs", true},
+                {"Any PSV", "Paid retest", "7", "large", "articulated", "pass", 1, "rhl", true},
+                {"Any PSV", "Paid retest", "7", "small", "rigid", "pass", 1, "rps", true},
+                {"Any PSV", "Paid retest", "7", "large", "rigid", "pass", 1, "rpl", true},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "pass", 1, "whl", true},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "pass", 1, "whs", true},
+                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "pass", 1, "rgl", true},
+                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "pass", 1, "rsl", true},
+                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "pass", 1, "rss", true},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "pass", 1, "p1l", true},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "pass", 1, "p1s", true},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "pass", 1, "p8l", true},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "pass", 1, "p8s", true},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "pass", 1, "p6l", true},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "pass", 1, "p6s", true},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "pass", 1, "wis", true},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "pass", 1, "wil", true},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "pass", 1, "wfl", true},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "pass", 1, "wfs", true},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "pass", 1, "wel", true},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "pass", 1, "wes", true},
+
                 {"Annual test", "Annual test", "1", "large", "rigid", "pass", 1, "aal", false},
-//                {"Annual test", "Annual test", "1", "small", "rigid", "pass", 1, "aas", false},
-//                {"Annual test", "Annual test", "1", "large", "articulated", "pass", 1, "adl", false},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "pass", 1, "wdl", false},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "pass", 1, "wds", false},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "pass", 1, "wbl", false},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "pass", 1, "wbs", false},
-//                {"Any PSV", "Paid retest", "7", "large", "articulated", "pass", 1, "rhl", false},
-//                {"Any PSV", "Paid retest", "7", "small", "rigid", "pass", 1, "rps", false},
-//                {"Any PSV", "Paid retest", "7", "large", "rigid", "pass", 1, "rpl", false},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "pass", 1, "whl", false},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "pass", 1, "whs", false},
-//                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "pass", 1, "rgl", false},
-//                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "pass", 1, "rsl", false},
-//                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "pass", 1, "rss", false},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "pass", 1, "p1l", false},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "pass", 1, "p1s", false},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "pass", 1, "p8l", false},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "pass", 1, "p8s", false},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "pass", 1, "p6l", false},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "pass", 1, "p6s", false},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "pass", 1, "wis", false},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "pass", 1, "wil", false},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "pass", 1, "wfl", false},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "pass", 1, "wfs", false},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "pass", 1, "wel", false},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "pass", 1, "wes", false},
-//
+                {"Annual test", "Annual test", "1", "small", "rigid", "pass", 1, "aas", false},
+                {"Annual test", "Annual test", "1", "large", "articulated", "pass", 1, "adl", false},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "pass", 1, "wdl", false},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "pass", 1, "wds", false},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "pass", 1, "wbl", false},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "pass", 1, "wbs", false},
+                {"Any PSV", "Paid retest", "7", "large", "articulated", "pass", 1, "rhl", false},
+                {"Any PSV", "Paid retest", "7", "small", "rigid", "pass", 1, "rps", false},
+                {"Any PSV", "Paid retest", "7", "large", "rigid", "pass", 1, "rpl", false},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "pass", 1, "whl", false},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "pass", 1, "whs", false},
+                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "pass", 1, "rgl", false},
+                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "pass", 1, "rsl", false},
+                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "pass", 1, "rss", false},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "pass", 1, "p1l", false},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "pass", 1, "p1s", false},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "pass", 1, "p8l", false},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "pass", 1, "p8s", false},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "pass", 1, "p6l", false},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "pass", 1, "p6s", false},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "pass", 1, "wis", false},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "pass", 1, "wil", false},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "pass", 1, "wfl", false},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "pass", 1, "wfs", false},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "pass", 1, "wel", false},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "pass", 1, "wes", false},
+
                 {"Annual test", "Annual test", "1", "large", "rigid", "prs", 1, "aal", true},
-//                {"Annual test", "Annual test", "1", "small", "rigid", "prs", 1, "aas", true},
-//                {"Annual test", "Annual test", "1", "large", "articulated", "prs", 1, "adl", true},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "prs", 1, "wdl", true},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "prs", 1, "wds", true},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "prs", 1, "wbl", true},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "prs", 1, "wbs", true},
-//                {"Any PSV", "Paid retest", "7", "large", "articulated", "prs", 1, "rhl", true},
-//                {"Any PSV", "Paid retest", "7", "small", "rigid", "prs", 1, "rps", true},
-//                {"Any PSV", "Paid retest", "7", "large", "rigid", "prs", 1, "rpl", true},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "prs", 1, "whl", true},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "prs", 1, "whs", true},
-//                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "prs", 1, "rgl", true},
-//                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "prs", 1, "rsl", true},
-//                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "prs", 1, "rss", true},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "prs", 1, "p1l", true},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "prs", 1, "p1s", true},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "prs", 1, "p8l", true},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "prs", 1, "p8s", true},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "prs", 1, "p6l", true},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "prs", 1, "p6s", true},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "prs", 1, "wis", true},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "prs", 1, "wil", true},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "prs", 1, "wfl", true},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "prs", 1, "wfs", true},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "prs", 1, "wel", true},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "prs", 1, "wes", true},
+                {"Annual test", "Annual test", "1", "small", "rigid", "prs", 1, "aas", true},
+                {"Annual test", "Annual test", "1", "large", "articulated", "prs", 1, "adl", true},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "prs", 1, "wdl", true},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "prs", 1, "wds", true},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "prs", 1, "wbl", true},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "prs", 1, "wbs", true},
+                {"Any PSV", "Paid retest", "7", "large", "articulated", "prs", 1, "rhl", true},
+                {"Any PSV", "Paid retest", "7", "small", "rigid", "prs", 1, "rps", true},
+                {"Any PSV", "Paid retest", "7", "large", "rigid", "prs", 1, "rpl", true},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "prs", 1, "whl", true},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "prs", 1, "whs", true},
+                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "prs", 1, "rgl", true},
+                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "prs", 1, "rsl", true},
+                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "prs", 1, "rss", true},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "prs", 1, "p1l", true},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "prs", 1, "p1s", true},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "prs", 1, "p8l", true},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "prs", 1, "p8s", true},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "prs", 1, "p6l", true},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "prs", 1, "p6s", true},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "prs", 1, "wis", true},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "prs", 1, "wil", true},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "prs", 1, "wfl", true},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "prs", 1, "wfs", true},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "prs", 1, "wel", true},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "prs", 1, "wes", true},
+
                 {"Annual test", "Annual test", "1", "large", "rigid", "prs", 1, "aal", false},
-//                {"Annual test", "Annual test", "1", "small", "rigid", "prs", 1, "aas", false},
-//                {"Annual test", "Annual test", "1", "large", "articulated", "prs", 1, "adl", false},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "prs", 1, "wdl", false},
-//                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "prs", 1, "wds", false},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "prs", 1, "wbl", false},
-//                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "prs", 1, "wbs", false},
-//                {"Any PSV", "Paid retest", "7", "large", "articulated", "prs", 1, "rhl", false},
-//                {"Any PSV", "Paid retest", "7", "small", "rigid", "prs", 1, "rps", false},
-//                {"Any PSV", "Paid retest", "7", "large", "rigid", "prs", 1, "rpl", false},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "prs", 1, "whl", false},
-//                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "prs", 1, "whs", false},
-//                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "prs", 1, "rgl", false},
-//                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "prs", 1, "rsl", false},
-//                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "prs", 1, "rss", false},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "prs", 1, "p1l", false},
-//                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "prs", 1, "p1s", false},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "prs", 1, "p8l", false},
-//                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "prs", 1, "p8s", false},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "prs", 1, "p6l", false},
-//                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "prs", 1, "p6s", false},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "prs", 1, "wis", false},
-//                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "prs", 1, "wil", false},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "prs", 1, "wfl", false},
-//                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "prs", 1, "wfs", false},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "prs", 1, "wel", false},
-//                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "prs", 1, "wes", false},
+                {"Annual test", "Annual test", "1", "small", "rigid", "prs", 1, "aas", false},
+                {"Annual test", "Annual test", "1", "large", "articulated", "prs", 1, "adl", false},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "large", "rigid", "prs", 1, "wdl", false},
+                {"Annual test", "Class 6A seatbelt installation check (annual test)", "3", "small", "rigid", "prs", 1, "wds", false},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "large", "rigid", "prs", 1, "wbl", false},
+                {"First test", "Class 6A seatbelt installation check (first test)", "4", "small", "rigid", "prs", 1, "wbs", false},
+                {"Any PSV", "Paid retest", "7", "large", "articulated", "prs", 1, "rhl", false},
+                {"Any PSV", "Paid retest", "7", "small", "rigid", "prs", 1, "rps", false},
+                {"Any PSV", "Paid retest", "7", "large", "rigid", "prs", 1, "rpl", false},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "large", "rigid", "prs", 1, "whl", false},
+                {"Class 6A (seatbelt installation check)", "Paid retest with Class 6A seatbelt installation check", "8", "small", "rigid", "prs", 1, "whs", false},
+                {"Any PSV", "Part-paid retest", "10", "large", "articulated", "prs", 1, "rgl", false},
+                {"Any PSV", "Part-paid retest", "10", "large", "rigid", "prs", 1, "rsl", false},
+                {"Any PSV", "Part-paid retest", "10", "small", "rigid", "prs", 1, "rss", false},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "large", "rigid", "prs", 1, "p1l", false},
+                {"With certification", "Paid prohibition clearance (full inspection with certificate)", "14", "small", "rigid", "prs", 1, "p1s", false},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "large", "rigid", "prs", 1, "p8l", false},
+                {"With certification", "Paid prohibition clearance (retest with certificate)", "18", "small", "rigid", "prs", 1, "p8s", false},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "large", "rigid", "prs", 1, "p6l", false},
+                {"With certification", "Part-paid prohibition clearance (retest with certificate)", "21", "small", "rigid", "prs", 1, "p6s", false},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "small", "rigid", "prs", 1, "wis", false},
+                {"PG9 retest", "Prohibition clearance (retest with Class 6A seatbelt installation check)", "28", "large", "rigid", "prs", 1, "wil", false},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "large", "rigid", "prs", 1, "wfl", false},
+                {"Full inspection / full fee", "Paid prohibition clearance with Class 6A seatbelt installation check (full inspection)", "27", "small", "rigid", "prs", 1, "wfs", false},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "large", "rigid", "prs", 1, "wel", false},
+                {"PG9 retest", "Prohibition clearance (retest without Class 6A seatbelt installation check)", "93", "small", "rigid", "prs", 1, "wes", false},
         });
     }
 
@@ -168,7 +169,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test NO PREVIOUS Expiry Date")
     @Test
     public void testResultsFirstTestExpiryPsvNoPreviousExpiry() {
@@ -260,7 +261,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayMinusOneDay() {
@@ -407,7 +408,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today")
     @Test
     public void testResultsFirstTestExpiryPsvToday() {
@@ -554,7 +555,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusOneDay() {
@@ -701,7 +702,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonths() {
@@ -848,7 +849,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsPlusOneDay() {
@@ -995,7 +996,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("Expiry_Dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsMinusOneDay() {
