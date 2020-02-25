@@ -49,7 +49,7 @@ public class GetTestResults {
     @Title("CVSB-416 - CVSB-949 / CVSB-2215 - API Consumer retrieve the Test results for the input Vin (DEFAULT)")
     @Test
     public void testResultsSubmittedReferenceData() {
-        testResultsSteps.getTestResults(vehicleSubmittedData.getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
@@ -57,7 +57,7 @@ public class GetTestResults {
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (SUBMITTED)")
     @Test
     public void testResultsWithStatusSubmittedReferenceData() {
-        testResultsSteps.getTestResults(vehicleSubmittedData.getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResults(vehicleSubmittedData.getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
@@ -66,7 +66,7 @@ public class GetTestResults {
     @Test
     public void testResultsWithStatusCanceledReferenceData() {
 
-        testResultsSteps.getTestResults(vehicleCancelledData.getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }
@@ -119,9 +119,11 @@ public class GetTestResults {
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (PSV)")
     @Test
     public void testResultsForVinPsv() {
-        testResultsSteps.getTestResults("1B7GG36N12S678410");
+        //testResultsSteps.getTestResults("1B7GG36N12S678410");
+        testResultsSteps.getTestResultsSysNumber("10000002");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "1B7GG36N12S678410");
+        //testResultsSteps.validateVehicleFieldValue("vin", "1B7GG36N12S678410");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin","1B7GG36N12S678410");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "psv");
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldExists("numberOfSeats");
@@ -137,9 +139,11 @@ public class GetTestResults {
     @Test
 
     public void testResultsForVinHgv() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012314");
+        //testResultsSteps.getTestResults("XMGDE02FS0H012314");
+        testResultsSteps.getTestResultsSysNumber("10000018");
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldValue("vin", "XMGDE02FS0H012314");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin","P012301293847");
+        //testResultsSteps.validateVehicleFieldValue("vin", "XMGDE02FS0H012314");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldExists("odometerReading");
@@ -151,7 +155,7 @@ public class GetTestResults {
     public void testResultsForVinTrl() {
 
     vehicleDefaultSubmittedData
-            .setVin(generateRandomExcludingValues(21, vehicleDefaultSubmittedData.build().getVin()))
+            .setSystemNumber(generateRandomExcludingValues(21, vehicleDefaultSubmittedData.build().getSystemNumber()))
             .setTestResultId(generateRandomExcludingValues(3,vehicleDefaultSubmittedData.build().getTestResultId()))
             .setCountryOfRegistration("a")
             .setEuVehicleCategory("o3")
@@ -203,7 +207,7 @@ public class GetTestResults {
     testResultsSteps.statusCodeShouldBe(201);
     testResultsSteps.validateData("Test records created");
 
-    testResultsSteps.getTestResults(vehicleDefaultSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+    testResultsSteps.getTestResults(vehicleDefaultSubmittedData.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
     testResultsSteps.statusCodeShouldBe(200);
 
     testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
@@ -215,7 +219,8 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
     @Test
     public void testResultsForRegnDateHgv() {
-        testResultsSteps.getTestResults("P012301293847");
+        //testResultsSteps.getTestResults("P012301293847");
+        testResultsSteps.getTestResultsSysNumber("10000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
@@ -225,7 +230,8 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - trl")
     @Test
     public void testResultsForFirstUseDateTrl() {
-        testResultsSteps.getTestResults("T12111111");
+        //testResultsSteps.getTestResults("T12111111");
+        testResultsSteps.getTestResultsSysNumber("10000019");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");

@@ -28,7 +28,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExisting() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
+        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getSystemNumber(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
@@ -75,7 +75,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getSystemNumber(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
@@ -120,7 +120,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExistingWithStatusCancelled() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getSystemNumber(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }

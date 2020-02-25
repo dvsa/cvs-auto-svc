@@ -8,6 +8,7 @@ public class TestResults {
 
     private String vrm;
     private String vin;
+    private String systemNumber;
     private String testStationName;
     private String testStationPNumber;
     private String testStationType;
@@ -44,6 +45,7 @@ public class TestResults {
 
         private String vrm;
         private String vin;
+        private String systemNumber;
         private String testResultId;
         private String testStationName;
         private String testStationPNumber;
@@ -79,6 +81,11 @@ public class TestResults {
 
         public T setVin(String vin) {
             this.vin = vin;
+            return (T) this;
+        }
+
+        public T setSystemNumber(String systemNumber) {
+            this.systemNumber = systemNumber;
             return (T) this;
         }
 
@@ -220,6 +227,7 @@ public class TestResults {
     protected TestResults(Builder<?> builder) {
         this.vrm = builder.vrm;
         this.vin = builder.vin;
+        this.systemNumber = builder.systemNumber;
         this.testResultId = builder.testResultId;
         this.testStationName = builder.testStationName;
         this.testStationPNumber = builder.testStationPNumber;
@@ -253,6 +261,10 @@ public class TestResults {
 
     public String getVin() {
         return vin;
+    }
+
+    public String getSystemNumber() {
+        return systemNumber;
     }
 
     public String getTestResultId() {
