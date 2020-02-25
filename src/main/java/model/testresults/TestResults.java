@@ -368,6 +368,7 @@ public class TestResults {
         return "TestResults{" +
                 "vrm='" + vrm + '\'' +
                 ", vin='" + vin + '\'' +
+                ", systemNumber='" + systemNumber + '\'' +
                 ", testStationName='" + testStationName + '\'' +
                 ", testStationPNumber='" + testStationPNumber + '\'' +
                 ", testStationType='" + testStationType + '\'' +
