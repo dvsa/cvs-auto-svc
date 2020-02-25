@@ -17,14 +17,16 @@ public class GetTestResultsDeletionFlag {
     @Title("Deletion flag is true at test record level and test type level")
     @Test
     public void getDeletionFlagTrueTrue() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012311");
+        //testResultsSteps.getTestResults("XMGDE02FS0H012311");
+        testResultsSteps.getTestResultsSysNumber("1122");
         testResultsSteps.statusCodeShouldBe(404);
     }
 
     @Title("Deletion flag is true at test type level and false at test record")
     @Test
     public void getDeletionFlagTrueFalse() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012312");
+        //testResultsSteps.getTestResults("XMGDE02FS0H012312");
+        testResultsSteps.getTestResultsSysNumber("1123");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.testTypeLengthShouldBe(0);
     }
@@ -32,14 +34,16 @@ public class GetTestResultsDeletionFlag {
     @Title("Deletion flag is true at test record level and false at test type level")
     @Test
     public void getDeletionFlagFalseTrue() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012313");
+        //testResultsSteps.getTestResults("XMGDE02FS0H012313");
+        testResultsSteps.getTestResultsSysNumber("1124");
         testResultsSteps.statusCodeShouldBe(404);
     }
 
     @Title("Deletion flag is false at test record level and test type level")
     @Test
     public void getDeletionFlagFalseFalse() {
-        testResultsSteps.getTestResults("XMGDE02FS0H012314");
+        //testResultsSteps.getTestResults("XMGDE02FS0H012314");
+        testResultsSteps.getTestResultsSysNumber("1125");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.testTypeLengthShouldBe(1);
     }
