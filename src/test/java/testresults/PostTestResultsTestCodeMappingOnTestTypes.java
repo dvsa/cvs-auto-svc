@@ -1,18 +1,23 @@
 package testresults;
 
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
 import model.testresults.TestTypes;
+import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import util.JsonPathAlteration;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
@@ -28,7 +33,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
 
     private void validateSavedData(String... testCodes) {
 
-        testResultsSteps.getTestResults(vehicleSubmittedDataOne.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResults(vehicleSubmittedDataOne.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestCode((TestResultsGet) vehicleSubmittedDataOne.build(), testCodes);
     }
@@ -146,6 +151,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
     public void testTestCodeMappingNoLinkedTestTypeDataSet7() {
         // data set: testTypeId:39 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:rigid ; noOfAxles:2 ;
         vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOne.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOne.build().getVrm()))
                 .setVehicleSize("large")
                 .setVehicleType("psv")
@@ -164,6 +170,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
     public void testTestCodeMappingNoLinkedTestTypeDataSet8() {
         // data set: testTypeId:39 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
         vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOne.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOne.build().getVrm()))
                 .setVehicleSize("small")
                 .setVehicleType("psv")
@@ -180,19 +187,65 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
     @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 9")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet9() {
-        // data set: testTypeId:7 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:3 ;
-        vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOne.build().getVrm()))
-                .setVehicleSize("large")
-                .setVehicleType("psv")
-                .setVehicleConfiguration(("articulated"))
-                .setNoOfAxles(3).build()
-                .getTestTypes().get(0).setTestTypeId("7");
+        // TEST SETUP
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted.json","$");
+//        String vehicleClassDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].vehicleClass.description");
+//        String bodyTypeDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].bodyType.description");
+        // create alteration to change system number in the request body with the random system number
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // create alteration to change vehicle size in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVehicleSize = new JsonPathAlteration("$.vehicleSize", "large","","REPLACE");
+        // create alteration to change vehicle type in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVehicleType = new JsonPathAlteration("$.vehicleType", "psv","","REPLACE");
+        // create alteration to change vehicle configuration in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", "articulated","","REPLACE");
+        // create alteration to change no of axles in the request body with the random generated primary vrm
+        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", 3,"","REPLACE");
+        // create alteration to change test type in the request body with the random generated primary vrm
+        JsonPathAlteration alterationTestType = new JsonPathAlteration("$.testTypes[0].testTypeId", "7","","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
+                alterationVrm,
+                alterationSystemNumber,
+                alterationVehicleSize,
+                alterationVehicleType,
+                alterationVehicleConfiguration,
+                alterationNoOfAxles,
+                alterationTestType
+        ));
 
-        testResultsSteps.postTestResults(vehicleSubmittedDataOne.build());
+
+
+
+
+
+//        // data set: testTypeId:7 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:3 ;
+//        vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOne.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOne.build().getVrm()))
+//                .setVehicleSize("large")
+//                .setVehicleType("psv")
+//                .setVehicleConfiguration(("articulated"))
+//                .setNoOfAxles(3).build()
+//                .getTestTypes().get(0).setTestTypeId("7");
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
         testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedData("rhl");
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedData("rhl");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.validateResponseContainsJson("[0]", postRequestBody);
     }
 
     @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 1 - Data Set 1")

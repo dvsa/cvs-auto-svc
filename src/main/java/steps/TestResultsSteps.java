@@ -4,9 +4,12 @@ import clients.TestResultsClient;
 import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import data.GenericData;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import org.json.JSONException;
+import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
 import util.JsonPathAlteration;
 
@@ -29,8 +32,8 @@ public class TestResultsSteps {
     private static String nextTestNumber = "";
 
     @Step
-    public void getTestResults(String vin) {
-        response = testResultsClient.getTestResults(vin);
+    public void getTestResults(String systemNumber) {
+        response = testResultsClient.getTestResults(systemNumber);
     }
 
     @Step
@@ -507,6 +510,18 @@ public class TestResultsSteps {
     public void valueForFieldInPathShouldBe(String path, String expectedValue) {
         System.out.println("Verifying that " + path + " has value " + expectedValue);
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void validateResponseContainsJson(String jsonPathOfResponseExtractedField, String expectedJson) {
+        String actualJson = GenericData.getJsonStringFromHashMap(response.then().extract().path(jsonPathOfResponseExtractedField));
+        try {
+            JSONAssert.assertEquals("The response does not contain the required data", expectedJson,
+                    actualJson, false);
+        } catch (final JSONException exc) {
+            throw new RuntimeException(exc);
+        }
+
     }
 
     @Step

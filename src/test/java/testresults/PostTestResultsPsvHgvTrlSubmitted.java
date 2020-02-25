@@ -1179,6 +1179,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .build();
 
@@ -1199,6 +1200,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .build();
 
@@ -1219,6 +1221,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .build();
 

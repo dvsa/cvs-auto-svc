@@ -85,7 +85,7 @@ public class PostVehicleTechnicalRecords {
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
         // read the tech record from the file used for post request body
         String techRecord = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$.techRecord[0]");
-        // create alteration to change Vin in the request body with the random generated Vin
+        // create alteration to change system number in the request body with the random generated Vin
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
@@ -110,6 +110,8 @@ public class PostVehicleTechnicalRecords {
     @Test
     public void testCreateVehicleAutoPopulateFields() {
         // TEST SETUP
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
         //generate random Vrm
@@ -118,12 +120,14 @@ public class PostVehicleTechnicalRecords {
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
         String vehicleClassDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].vehicleClass.description");
         String bodyTypeDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].bodyType.description");
+        // create alteration to change system number in the request body with the random system number
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
         // initialize the alterations list with both declared alteration
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
         // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
@@ -138,7 +142,7 @@ public class PostVehicleTechnicalRecords {
                 vehicleClass = v;
             }
         }
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleClass.code", vehicleClass.getCode());
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClass.getCode());
         // validated AC3
         BodyType bodyType = BodyType.ARTICULATED;
         for (BodyType b : BodyType.values()) {
@@ -146,7 +150,7 @@ public class PostVehicleTechnicalRecords {
                 bodyType = b;
             }
         }
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].bodyType.code", bodyType.getCode());
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyType.getCode());
     }
 
     @Title("CVSB-10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Single Vehicle")
