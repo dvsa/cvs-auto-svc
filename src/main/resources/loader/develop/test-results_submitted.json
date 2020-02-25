@@ -1,10 +1,11 @@
 {
   "testResultId": "2",
-  "testerStaffId": "15",
+  "testerStaffId": "1",
   "testStartTimestamp": "2019-01-14T10:36:33.987Z",
   "odometerReadingUnits": "kilometres",
   "testEndTimestamp": "2019-01-14T10:36:33.987Z",
   "testStatus": "submitted",
+  "systemNumber":"10000018",
   "testTypes": [
     {
       "prohibitionIssued": false,
@@ -17,12 +18,12 @@
       "reasonForAbandoning": "none",
       "lastSeatbeltInstallationCheckDate": "2019-01-14",
       "createdAt": "2019-02-22T08:50:16.706Z",
-      "testTypeId": "19",
+      "testTypeId": "95",
       "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
       "certificateNumber": "12334",
-      "testTypeName": "Annual test",
+      "testTypeName": "First test",
       "seatbeltInstallationCheckDate": true,
-      "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+      "additionalNotesRecorded": "VEHICLE FRONT REGISTRATION PLATE MISSING",
       "defects": [
         {
           "deficiencyCategory": "major",
@@ -32,51 +33,51 @@
             "location": {
               "axleNumber": null,
               "horizontal": null,
-              "vertical": "upper",
-              "longitudinal": null,
-              "rowNumber": 1,
-              "lateral": "centre",
-              "seatNumber": 2
+              "vertical": null,
+              "longitudinal": "front",
+              "rowNumber": null,
+              "lateral": null,
+              "seatNumber": null
             },
-            "notes": "seatbelt missing"
+            "notes": "None"
           },
           "itemNumber": 1,
-          "deficiencyRef": "3.1.a",
+          "deficiencyRef": "1.1.a",
           "stdForProhibition": false,
           "deficiencySubId": null,
-          "imDescription": "Seat Belts & Supplementary Restraint Systems",
+          "imDescription": "Registration Plate",
           "deficiencyId": "a",
-          "itemDescription": "Obligatory Seat Belt:",
-          "imNumber": 3,
-          "prohibitionIssued" : true
+          "itemDescription": "A registration plate:",
+          "imNumber": 1,
+          "prohibitionIssued" : null
         }
       ],
-      "name": "Annual test",
+      "name": "First test",
       "certificateLink": "http://dvsagov.co.uk",
-      "testResult": "fail"
+      "testResult": "pass"
     }
   ],
   "vehicleClass": {
     "description": "motorbikes over 200cc or with a sidecar",
     "code": "2"
   },
-  "vin": "1B7GG36N12S678410",
+  "vin": "P012301293847",
   "vehicleSize": "small",
-  "testStationName": "Larson, Nader and Okuneva",
+  "testStationName": "Rowe, Wunsch and Wisoky",
   "vehicleId": "BQ91YHQ",
-  "vehicleType": "psv",
+  "vehicleType": "hgv",
   "countryOfRegistration": "united kingdom",
-  "preparerId": "bl5545",
+  "preparerId": "ak4434",
   "preparerName": "Durrell Vehicles Limited",
-  "odometerReading": 350000,
+  "odometerReading": 100000,
   "vehicleConfiguration": "rigid",
-  "testStationType": "atf",
+  "testStationType": "gvts",
   "reasonForCancellation": "none",
-  "testerName": "Gica",
-  "vrm": "BQ91YHQ",
-  "testStationPNumber": "84-926821",
+  "testerName": "Dorel",
+  "vrm": "CO79ERT",
+  "testStationPNumber": "87-1369569",
   "numberOfSeats": 45,
   "noOfAxles": 2,
-  "testerEmailAddress": "gica.petrescuf@dvsagov.uk",
-  "euVehicleCategory": "m1"
+  "testerEmailAddress": "dorel.popescu@dvsagov.uk",
+  "euVehicleCategory": "n1"
 }
