@@ -27,7 +27,7 @@ public class GetTestResultsToDate {
     @Test
     public void testResultsSubmittedToDateExisting() {
 
-        testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
+        testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getSystemNumber(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
@@ -63,7 +63,7 @@ public class GetTestResultsToDate {
     @Test
     public void testResultsSubmittedToDateExistingWithStatusSubmitted() {
 
-        testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResultsToDate(vehicleSubmittedData.getSystemNumber(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }
@@ -99,7 +99,7 @@ public class GetTestResultsToDate {
     @Test
     public void testResultsSubmittedToDateExistingWithStatusCancelled() {
 
-        testResultsSteps.getTestResultsToDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResultsToDate(vehicleCancelledData.getSystemNumber(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }
