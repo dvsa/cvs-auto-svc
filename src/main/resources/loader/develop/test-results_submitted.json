@@ -8,14 +8,6 @@
   "systemNumber":"10000018",
   "testTypes": [
     {
-      "modType": {
-        "code": "p",
-        "description": "particulate trap"
-      },
-      "smokeTestKLimitApplied": "value",
-      "fuelType": "diesel",
-      "emissionStandard": "0.16 g/kWh Euro 3 PM",
-
       "prohibitionIssued": false,
       "testCode": "pms",
       "testNumber": "2",

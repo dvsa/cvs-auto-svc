@@ -37,11 +37,6 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void getTestResultsSysNumber(String systemNumber) {
-        response = testResultsClient.getTestResults(systemNumber);
-    }
-
-    @Step
     public void getTestResultsNotAuthenticated(String vin) {
         setMissingAtuh();
         response = testResultsClient.callGetTestResults(vin);
