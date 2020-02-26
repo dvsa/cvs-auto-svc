@@ -293,7 +293,7 @@ public class TestResultsSteps {
         response.then().body("testTypes.testTypeName", hasItem(contains(testTypeName.toArray())));
         response.then().body("testTypes.testTypeId", hasItem(contains(testTypeId.toArray())));
         // Commenting this out as the number of fields for tech record is constantly changing
-        //response.then().body("[" + record + "].testTypes[0]", hasKey("certificateNumber"));
+        //response.then().body("[" + record + "][0].testTypes[0]", hasKey("certificateNumber"));
         response.then().body("testTypes.testTypeStartTimestamp", hasItem(contains(testTypeStartTimestamp.toArray())));
         response.then().body("testTypes.testTypeEndTimestamp", hasItem(contains(testTypeEndTimestamp.toArray())));
         response.then().body("testTypes.numberOfSeatbeltsFitted", hasItem(contains(numberOfSeatbeltsFitted.toArray())));
@@ -323,7 +323,6 @@ public class TestResultsSteps {
             response.then().body("[" + record + "].testTypes.defects.size()", is(1));
              // Commenting this out as the number of fields for tech record is constantly changing
             //response.then().body("[" + record + "].testTypes[0].defects[0].size()", is(Defects.class.getDeclaredFields().length));
-
             List<List<Integer>> imNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImNumber).collect(toList())).collect(toList());
             List<List<String>> imDescription = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getImDescription).collect(toList())).collect(toList());
             List<List<Integer>> itemNumber = testResults.getTestTypes().stream().map(s -> s.getDefects().stream().map(Defects::getItemNumber).collect(toList())).collect(toList());
