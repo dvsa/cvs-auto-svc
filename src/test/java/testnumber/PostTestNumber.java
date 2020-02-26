@@ -4,6 +4,7 @@ import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsStatus;
@@ -17,8 +18,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.DataUtil;
+import util.JsonPathAlteration;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
@@ -35,16 +40,54 @@ public class PostTestNumber {
     @Title("CVSB-2157/CVSB-3287 AC B1. VSA submits test results where at least one test type has test type classification 'Annual With Certificate' and the test type result is PASSED (testNumber is generated)")
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificate() {
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testResult", "pass", "", "REPLACE");
+        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.name", "Retest", "", "REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypeName", "Part-paid retest", "", "REPLACE");
+
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResult,
+                alterationTestName,
+                alterationTestTypeName,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.SUBMITTED);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
+        testResultsSteps.validateTestNumberIsNotNull();
+
+
+       /* vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(7,vehicleSubmittedData.build().getSystemNumber())).build()
                 .getTestTypes().get(0).setTestResult("pass").setName("Retest").setTestTypeName("Part-paid retest").setTestTypeId("1");
 
         testResultsSteps.postTestResults(vehicleSubmittedData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateTestNumberIsNotNull();
+        testResultsSteps.validateTestNumberIsNotNull();*/
     }
 
     @Title("CVSB-2157/CVSB-3278 AC B3. VSA submits test results which contain an LEC Test Type (testNumber generated)")
@@ -133,12 +176,13 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForCancelledTestType() {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build();
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestNumberIsNotNull();
     }
@@ -147,12 +191,13 @@ public class PostTestNumber {
     @Test
     public void validCertificateNumberNotGeneratedForCancelledTestType() {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build();
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestNumberIsNotNull();
     }
@@ -161,12 +206,13 @@ public class PostTestNumber {
     @Test
     public void validTestNumberNotGeneratedForCancelledTWithoutTestType() {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build();
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.build(),"testTypes","[]", ToTypeConvertor.EMPTY_ARRAY, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestNumberIsNull();
     }
@@ -176,12 +222,13 @@ public class PostTestNumber {
     public void validCertificateNumberNotGeneratedForCancelledTWithoutTestType() {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build();
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.build(),"testTypes","[]", ToTypeConvertor.EMPTY_ARRAY, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledData.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateCertificateNumberIsNull();
     }
