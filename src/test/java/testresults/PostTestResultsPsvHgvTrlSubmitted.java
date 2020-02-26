@@ -2,6 +2,7 @@ package testresults;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -13,6 +14,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.DataUtil;
+import util.JsonPathAlteration;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
@@ -269,16 +276,26 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostValidPsv() {
 
-        vehicleSubmittedData
-                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
+        TestResultsData.buildTestResultsSubmittedDataOld()
+                .setVin(generateRandomExcludingValues(21, TestResultsData.buildTestResultsSubmittedDataOld().build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, TestResultsData.buildTestResultsSubmittedDataOld().build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(16, TestResultsData.buildTestResultsSubmittedDataOld().build().getSystemNumber()))
+                .setTestResultId(generateRandomExcludingValues(16, TestResultsData.buildTestResultsSubmittedDataOld().build().getTestResultId()))
                 .build();
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode payload = objectMapper.valueToTree(TestResultsData.buildTestResultsSubmittedDataOld().build());
+
+        testResultsSteps.removeTestResultsFields(payload, "vehicleId");
+        testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt",
+                "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
+        testResultsSteps.changeTestResultsFieldValue(payload, "testResultId", UUID.randomUUID().toString());
+        testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(TestResultsData.buildTestResultsSubmittedDataOld().build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldExists("vrm");
@@ -298,6 +315,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getSystemNumber()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
@@ -306,7 +324,6 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestStationName("Abshire-Kub")
                 .setTestStationPNumber("09-4129632")
                 .setTestStationType("gvts")
-                .setVehicleType("hgv")
                 .setVehicleConfiguration("articulated")
                 .setTestStatus("submitted")
                 .build();
@@ -357,12 +374,12 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
-        testResultsSteps.validateVehicleFieldValue("odometerReading", 350000);
+        testResultsSteps.validateVehicleFieldValue("odometerReading", 100000);
         testResultsSteps.validateVehicleFieldValue("odometerReadingUnits", "kilometres");
     }
 
@@ -380,6 +397,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId", "vrm");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -402,6 +420,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId", "numberOfSeats");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -423,6 +442,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId", "odometerReading");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -444,6 +464,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId", "odometerReadingUnits");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -465,6 +486,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId", "vehicleSize");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -472,7 +494,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.validatePostErrorDataContains("vehicleSize", "is required");
     }
 
- @Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - numberOfSeatbeltsFitted )")
+    @Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - numberOfSeatbeltsFitted )")
     @Test
     public void testTestResultsPostMissingMandatoryFieldsNoSeatbeltsPsv() {
 
@@ -486,6 +508,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate", "numberOfSeatbeltsFitted");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -494,7 +517,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     }
 
-@Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - seatbeltInstallationCheckDate )")
+    @Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - seatbeltInstallationCheckDate )")
     @Test
     public void testTestResultsPostMissingMandatoryFieldsSeatbeltInstallDatePsv() {
 
@@ -508,6 +531,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate", "seatbeltInstallationCheckDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -529,6 +553,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate", "lastSeatbeltInstallationCheckDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -551,6 +576,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0,  "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.addAdditionalTestResultsFieldValue(payload,"trailerId","jkflds");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -1189,6 +1215,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsFieldValue(payload, "vrm", 15);
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorDataContains("vrm", "must be a string");
@@ -1210,9 +1237,9 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsFieldValue(payload, "numberOfSeats", "seven");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorDataContains("numberOfSeats", "must be a number");
     }
 
     @Title("CVSB-6805 - CVSB-7331 - API Consumer creates a new test results for the submitted test (PSV - attributes defined incorrectly)")
@@ -1231,6 +1258,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsFieldValue(payload, "odometerReading", "seven");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorDataContains("odometerReading", "must be a number");
@@ -1251,6 +1279,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsFieldValue(payload, "odometerReadingUnits", "seven");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorDataContains("odometerReadingUnits", "must be one of [kilometres, miles, null]");
@@ -1270,6 +1299,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.changeTestResultsFieldValue(payload, "vehicleSize", "tiny");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
@@ -1291,6 +1321,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsTestTypesFields(payload, 0,"numberOfSeatbeltsFitted", "seven");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorDataContains("numberOfSeatbeltsFitted", "must be a number");
@@ -1311,6 +1342,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsTestTypesFields(payload, 0,"lastSeatbeltInstallationCheckDate", "right now");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorDataContains("lastSeatbeltInstallationCheckDate", "must be a number of milliseconds or valid date string");
@@ -1331,6 +1363,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
         testResultsSteps.changeTestResultsTestTypesFields(payload, 0,"seatbeltInstallationCheckDate", "never");
+        testResultsSteps.changeTestResultsFieldValue(payload, "vehicleType", "psv");
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorDataContains("seatbeltInstallationCheckDate", "must be a boolean");
@@ -1343,6 +1376,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVrm()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
@@ -1396,7 +1430,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("firstUseDate", firstUseDate);
 
@@ -1409,6 +1443,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
@@ -1470,7 +1505,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldValue("regnDate", regnDate);
@@ -1484,6 +1519,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVrm()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
@@ -1536,7 +1572,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("firstUseDate", null);
 
@@ -1549,6 +1585,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
@@ -1609,7 +1646,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldValue("regnDate", null);

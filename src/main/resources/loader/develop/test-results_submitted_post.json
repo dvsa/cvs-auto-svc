@@ -5,7 +5,7 @@
   "odometerReadingUnits": "kilometres",
   "testEndTimestamp": "2019-01-14T10:36:33.987Z",
   "testStatus": "submitted",
-  "systemNumber":"10000018",
+  "systemNumber":"2314RTRYY1232",
   "testTypes": [
     {
       "modType": {
@@ -15,7 +15,6 @@
       "smokeTestKLimitApplied": "value",
       "fuelType": "diesel",
       "emissionStandard": "0.16 g/kWh Euro 3 PM",
-
       "prohibitionIssued": false,
       "additionalCommentsForAbandon": "none",
       "numberOfSeatbeltsFitted": 2,

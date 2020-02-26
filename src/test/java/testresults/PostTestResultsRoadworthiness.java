@@ -3,8 +3,6 @@ package testresults;
 import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
-import model.testresults.TestResultsGet;
-import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -24,8 +22,6 @@ public class PostTestResultsRoadworthiness {
 
     @Steps
     TestResultsSteps testResultsSteps;
-
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
     @Title("CVSB-7675 - TC1 - AC1 - ROADWORTHINESS certificate number generated (HGV) - PASS")
     @Test

@@ -30,6 +30,14 @@ public class TestResultsData {
 
     }
 
+    public static TestResultsGet.Builder buildTestResultsSubmittedDataOld() {
+
+        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_submitted_old.json");
+
+        return testResults;
+
+    }
+
     public static TestResultsGet.Builder buildTestResultsCancelledData() {
 
 
