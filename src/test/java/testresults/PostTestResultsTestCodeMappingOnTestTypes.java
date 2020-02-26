@@ -195,9 +195,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted.json","$");
-//        String vehicleClassDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].vehicleClass.description");
-//        String bodyTypeDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].bodyType.description");
+        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -224,12 +222,6 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType
         ));
-
-
-
-
-
-
 //        // data set: testTypeId:7 ; vehicleType:psv ; vehicleSize:large ; vehicleConfiguration:articulated ; noOfAxles:3 ;
 //        vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
 //                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOne.build().getSystemNumber()))
@@ -239,13 +231,15 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
 //                .setVehicleConfiguration(("articulated"))
 //                .setNoOfAxles(3).build()
 //                .getTestTypes().get(0).setTestTypeId("7");
+//        testResultsSteps.postTestResults(vehicleSubmittedDataOne.build());
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedData("rhl");
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
         testResultsSteps.statusCodeShouldBe(201);
-//        testResultsSteps.validateData("Test records created");
-//        validateSavedData("rhl");
         testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.validateResponseContainsJson("[0]", postRequestBody);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "rhl");
     }
 
     @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 1 - Data Set 1")
