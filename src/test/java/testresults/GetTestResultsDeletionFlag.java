@@ -18,7 +18,7 @@ public class GetTestResultsDeletionFlag {
     @Test
     public void getDeletionFlagTrueTrue() {
         //testResultsSteps.getTestResults("XMGDE02FS0H012311");
-        testResultsSteps.getTestResultsSysNumber("1122");
+        testResultsSteps.getTestResults("1122");
         testResultsSteps.statusCodeShouldBe(404);
     }
 
@@ -26,7 +26,7 @@ public class GetTestResultsDeletionFlag {
     @Test
     public void getDeletionFlagTrueFalse() {
         //testResultsSteps.getTestResults("XMGDE02FS0H012312");
-        testResultsSteps.getTestResultsSysNumber("1123");
+        testResultsSteps.getTestResults("1123");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.testTypeLengthShouldBe(0);
     }
@@ -35,7 +35,7 @@ public class GetTestResultsDeletionFlag {
     @Test
     public void getDeletionFlagFalseTrue() {
         //testResultsSteps.getTestResults("XMGDE02FS0H012313");
-        testResultsSteps.getTestResultsSysNumber("1124");
+        testResultsSteps.getTestResults("1124");
         testResultsSteps.statusCodeShouldBe(404);
     }
 
@@ -43,7 +43,7 @@ public class GetTestResultsDeletionFlag {
     @Test
     public void getDeletionFlagFalseFalse() {
         //testResultsSteps.getTestResults("XMGDE02FS0H012314");
-        testResultsSteps.getTestResultsSysNumber("1125");
+        testResultsSteps.getTestResults("1125");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.testTypeLengthShouldBe(1);
     }

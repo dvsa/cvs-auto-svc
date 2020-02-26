@@ -38,7 +38,7 @@ public class TestResultsSteps {
 
     @Step
     public void getTestResultsSysNumber(String systemNumber) {
-        response = testResultsClient.getTestResultsSysNumber(systemNumber);
+        response = testResultsClient.getTestResults(systemNumber);
     }
 
     @Step

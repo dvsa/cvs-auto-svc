@@ -120,7 +120,7 @@ public class GetTestResults {
     @Test
     public void testResultsForVinPsv() {
         //testResultsSteps.getTestResults("1B7GG36N12S678410");
-        testResultsSteps.getTestResultsSysNumber("10000002");
+        testResultsSteps.getTestResults("10000002");
         testResultsSteps.statusCodeShouldBe(200);
         //testResultsSteps.validateVehicleFieldValue("vin", "1B7GG36N12S678410");
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin","1B7GG36N12S678410");
@@ -140,7 +140,7 @@ public class GetTestResults {
 
     public void testResultsForVinHgv() {
         //testResultsSteps.getTestResults("XMGDE02FS0H012314");
-        testResultsSteps.getTestResultsSysNumber("10000018");
+        testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin","P012301293847");
         //testResultsSteps.validateVehicleFieldValue("vin", "XMGDE02FS0H012314");
@@ -220,7 +220,7 @@ public class GetTestResults {
     @Test
     public void testResultsForRegnDateHgv() {
         //testResultsSteps.getTestResults("P012301293847");
-        testResultsSteps.getTestResultsSysNumber("10000018");
+        testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
@@ -231,7 +231,7 @@ public class GetTestResults {
     @Test
     public void testResultsForFirstUseDateTrl() {
         //testResultsSteps.getTestResults("T12111111");
-        testResultsSteps.getTestResultsSysNumber("10000019");
+        testResultsSteps.getTestResults("10000019");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
