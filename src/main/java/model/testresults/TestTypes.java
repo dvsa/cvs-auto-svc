@@ -19,11 +19,6 @@ public class TestTypes {
     private List<Defects> defects;
     private String testResult;
     private String additionalCommentsForAbandon;
-    private ModType modType;
-    private String smokeTestKLimitApplied;
-    private String fuelType;
-    private String emissionStandard;
-    private String testExpiryDate;
 
 
     public TestTypes() {
@@ -45,11 +40,6 @@ public class TestTypes {
         private Boolean prohibitionIssued;
         private String reasonForAbandoning;
         private String additionalNotesRecorded;
-        private ModType modType;
-        private String smokeTestKLimitApplied;
-        private String fuelType;
-        private String emissionStandard;
-        private String testExpiryDate;
         private List<Defects> defects;
         private String additionalCommentsForAbandon;
 
@@ -59,26 +49,6 @@ public class TestTypes {
 
         public T setTestTypeName(String testTypeName) {
             this.testTypeName = testTypeName;
-            return (T) this;
-        }
-
-        public T setSmokeTestKLimitApplied(String smokeTestKLimitApplied) {
-            this.smokeTestKLimitApplied = smokeTestKLimitApplied;
-            return (T) this;
-        }
-
-        public T setFuelType(String fuelType) {
-            this.fuelType = fuelType;
-            return (T) this;
-        }
-
-        public T setEmissionStandard(String emissionStandard) {
-            this.emissionStandard = emissionStandard;
-            return (T) this;
-        }
-
-        public T setTestExpiryDate(String testExpiryDate) {
-            this.testExpiryDate = testExpiryDate;
             return (T) this;
         }
 
@@ -142,11 +112,6 @@ public class TestTypes {
             return (T) this;
         }
 
-        public T setModType(ModType modType) {
-            this.modType = modType;
-            return (T) this;
-        }
-
         public T setName(String name) {
             this.name = name;
             return (T) this;
@@ -177,11 +142,6 @@ public class TestTypes {
         this.additionalNotesRecorded = builder.additionalNotesRecorded;
         this.defects = builder.defects;
         this.name = builder.name;
-        this.fuelType = builder.fuelType;
-        this.modType = builder.modType;
-        this.emissionStandard = builder.emissionStandard;
-        this.testExpiryDate = builder.testExpiryDate;
-        this.smokeTestKLimitApplied = builder.smokeTestKLimitApplied;
         this.additionalCommentsForAbandon = builder.additionalCommentsForAbandon;
     }
 
@@ -191,26 +151,6 @@ public class TestTypes {
 
     public String getTestTypeId() {
         return testTypeId;
-    }
-
-    public String getSmokeTestKLimitApplied() {
-        return smokeTestKLimitApplied;
-    }
-
-    public String getFuelType() {
-        return fuelType;
-    }
-
-    public String getEmissionStandard() {
-        return emissionStandard;
-    }
-
-    public String getTestExpiryDate() {
-        return testExpiryDate;
-    }
-
-    public ModType getModType() {
-        return modType;
     }
 
     public String getCertificateNumber() {
@@ -270,26 +210,6 @@ public class TestTypes {
         return this;
     }
 
-    public TestTypes setSmokeTestKLimitApplied(String smokeTestKLimitApplied) {
-        this.smokeTestKLimitApplied = smokeTestKLimitApplied;
-        return this;
-    }
-
-    public TestTypes setFuelType(String fuelType) {
-        this.fuelType = fuelType;
-        return this;
-    }
-
-    public TestTypes setEmissionStandard(String emissionStandard) {
-        this.emissionStandard = emissionStandard;
-        return this;
-    }
-
-    public TestTypes setTestExpiryDate(String testExpiryDate) {
-        this.testExpiryDate = testExpiryDate;
-        return this;
-    }
-
     public TestTypes setName(String name) {
         this.name = name;
         return this;
@@ -342,10 +262,6 @@ public class TestTypes {
         this.defects = defects;
     }
 
-    public void setModType(ModType modType) {
-        this.modType = modType;
-    }
-
     public TestTypes setTestResult(String testResult) {
         this.testResult = testResult;
         return this;
@@ -372,11 +288,6 @@ public class TestTypes {
                 ", defects=" + defects +
                 ", name='" + name + '\'' +
                 ", testResult='" + testResult + '\'' +
-                ", smokeTestKLimitApplied='" + smokeTestKLimitApplied + '\'' +
-                ", fuelType='" + fuelType + '\'' +
-                ", emissionStandard='" + emissionStandard + '\'' +
-                ", testExpiryDate='" + testExpiryDate + '\'' +
-                ", modType='" + modType + '\'' +
                 ", additionalCommentsForAbandon='" + additionalCommentsForAbandon + '\'' +
                 '}';
     }
