@@ -277,19 +277,6 @@ public class TestResultsClient {
         return response;
     }
 
-    public Response callGetTestResultsSysNum(String systemNumber) {
-
-        Response response = given()
-                .filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .pathParam("systemNumber", systemNumber)
-//                .log().all()
-                .log().method().log().uri().log().body()
-                .get("/test-results/{systemNumber}");
-
-        return response;
-    }
-
     private Response callFetTestResultsWithStatus(String vin, String status) {
 
         Response response = given().filters(new BasePathFilter())
