@@ -31,6 +31,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
 
     @Title("CVSB-6805 CVSB-7259 - API Consumer creates a new test results for the submitted test (TRL)")
     @Test
@@ -276,15 +277,15 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Test
     public void testTestResultsPostValidPsv() {
 
-        TestResultsData.buildTestResultsSubmittedDataOld()
-                .setVin(generateRandomExcludingValues(21, TestResultsData.buildTestResultsSubmittedDataOld().build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, TestResultsData.buildTestResultsSubmittedDataOld().build().getVrm()))
-                .setSystemNumber(generateRandomExcludingValues(16, TestResultsData.buildTestResultsSubmittedDataOld().build().getSystemNumber()))
-                .setTestResultId(generateRandomExcludingValues(16, TestResultsData.buildTestResultsSubmittedDataOld().build().getTestResultId()))
+        vehicleSubmittedDataOld
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestResultId(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getTestResultId()))
                 .build();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode payload = objectMapper.valueToTree(TestResultsData.buildTestResultsSubmittedDataOld().build());
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedDataOld.build());
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "createdAt", "lastUpdatedAt",
@@ -295,7 +296,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(TestResultsData.buildTestResultsSubmittedDataOld().build().getSystemNumber());
+        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldExists("vrm");

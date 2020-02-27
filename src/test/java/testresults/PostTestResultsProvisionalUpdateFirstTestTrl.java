@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -45,6 +46,7 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
         this.testTypeId = testTypeId;
     }
 
+    @Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - TRL")
     @Test
     public void testResultsProvisionalUpdateTrl() {
