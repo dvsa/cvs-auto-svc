@@ -9565,7 +9565,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -9804,6 +9803,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -9816,6 +9816,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -9949,6 +9950,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -9961,6 +9963,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -9998,7 +10001,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -10094,6 +10096,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -10106,6 +10109,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
