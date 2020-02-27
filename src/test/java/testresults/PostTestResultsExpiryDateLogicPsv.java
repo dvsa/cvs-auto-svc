@@ -3141,7 +3141,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
-        System.out.println("######################### INSERTED TEST CODE: " + insertedTestCode + "  #########################");
+//        System.out.println("######################### INSERTED TEST CODE: " + insertedTestCode + "  #########################");
         JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
@@ -3243,7 +3243,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today")
     @Test
     public void testResultsFirstTestExpiryPsvToday() {
@@ -3291,6 +3291,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -3303,7 +3304,8 @@ public class PostTestResultsExpiryDateLogicPsv {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
-                alterationInsertTestEndTimestamp
+                alterationInsertTestEndTimestamp,
+                alterationInsertTestCode
         ));
 
         if (isAnnualWithCertificate) {
@@ -3390,7 +3392,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusOneDay() {
@@ -3438,6 +3440,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -3450,6 +3453,7 @@ public class PostTestResultsExpiryDateLogicPsv {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -3537,7 +3541,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonths() {
@@ -3585,6 +3589,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -3597,6 +3602,7 @@ public class PostTestResultsExpiryDateLogicPsv {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -3684,7 +3690,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsPlusOneDay() {
@@ -3732,6 +3738,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -3744,6 +3751,7 @@ public class PostTestResultsExpiryDateLogicPsv {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -3831,7 +3839,7 @@ public class PostTestResultsExpiryDateLogicPsv {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsMinusOneDay() {
@@ -3879,6 +3887,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         JsonPathAlteration alterationInsertCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", insertableCreatedAt, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", insertableTestTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", insertableTestEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestCode = new JsonPathAlteration("$.testTypes[0].testCode", insertedTestCode, "", "REPLACE");
 
         // Collate the list of alterations for the inserted record.
         List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
@@ -3891,6 +3900,7 @@ public class PostTestResultsExpiryDateLogicPsv {
                 alterationInsertTestExpiryDate,
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
+                alterationInsertTestCode,
                 alterationInsertTestEndTimestamp
         ));
 
