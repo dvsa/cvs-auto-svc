@@ -120,6 +120,7 @@ public class GenericData {
                     jsonContext = jsonContext.delete(alteration.getPath());
                     break;
                 case "REPLACE":
+                    System.out.println("replacing the value in path: " + alteration.getPath() + " with value: " + value);
                     jsonContext = jsonContext.set(alteration.getPath(), value);
                     break;
             }
