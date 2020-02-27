@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@WithTag("In_Test")
+@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
@@ -344,7 +344,7 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate is missing")
     @Test
     public void testResultsFirstTestExpiryHgvNoExpiryDateRegnDateMissing() {
@@ -434,7 +434,7 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate = Today(-1 year, +1 month)")
     @Test
     public void testResultsFirstTestExpiryHgvNoExpiryDateRegnDateLessThanOneYear() {
