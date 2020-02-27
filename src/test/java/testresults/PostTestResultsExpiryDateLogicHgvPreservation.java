@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@WithTag("In_Test")
+@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicHgvPreservation {
 
@@ -7083,7 +7083,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = last day of previous month (EXPIRED)")
     @Test
     public void testResultsFirstTestExpiryHgvTodayMinusOneDay() {
@@ -7230,7 +7230,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = end of this month (EXPIRES THIS MONTH)")
     @Test
     public void testResultsFirstTestExpiryHgvToday() {
