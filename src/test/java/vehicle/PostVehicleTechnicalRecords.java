@@ -158,7 +158,7 @@ public class PostVehicleTechnicalRecords {
     public void testTechnicalRecordForSingleVehicle() {
 
         // Read the base test result JSON.
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_duplicate_chassis_10752.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -185,7 +185,7 @@ public class PostVehicleTechnicalRecords {
     public void testMultipleVehiclesTestResults(){
 
         // Read the base test record json
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_duplicate_chassis_10752.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
 
         // Generate random System Number for first vehicle
         String randomSysNumVehicleOne = GenericData.generateRandomSystemNumber();

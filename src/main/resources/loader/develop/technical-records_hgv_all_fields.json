@@ -130,7 +130,8 @@
         "description": "heavy goods vehicle"
       },
       "vehicleConfiguration": "articulated",
-      "vehicleType": "hgv"
+      "vehicleType": "hgv",
+      "recordCompleteness": "complete"
     }
   ],
   "vin": "A00037502"

@@ -82,11 +82,6 @@ public class GetTestResults {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
         testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
-
-
-        /*testResultsSteps.getTestResults(vehicleSubmittedData.getSystemNumber());
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);*/
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (SUBMITTED)")
@@ -117,10 +112,6 @@ public class GetTestResults {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
         testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
-
-        /*testResultsSteps.getTestResults(vehicleSubmittedData.getSystemNumber(), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);*/
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (CANCELED)")
@@ -202,10 +193,8 @@ public class GetTestResults {
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (PSV)")
     @Test
     public void testResultsForVinPsv() {
-        //testResultsSteps.getTestResults("1B7GG36N12S678410");
         testResultsSteps.getTestResults("10000002");
         testResultsSteps.statusCodeShouldBe(200);
-        //testResultsSteps.validateVehicleFieldValue("vin", "1B7GG36N12S678410");
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin","1B7GG36N12S678410");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "psv");
         testResultsSteps.validateVehicleFieldExists("vrm");
@@ -222,11 +211,9 @@ public class GetTestResults {
     @Test
 
     public void testResultsForVinHgv() {
-        //testResultsSteps.getTestResults("XMGDE02FS0H012314");
         testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin","P012301293847");
-        //testResultsSteps.validateVehicleFieldValue("vin", "XMGDE02FS0H012314");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
         testResultsSteps.validateVehicleFieldExists("vrm");
         testResultsSteps.validateVehicleFieldExists("odometerReading");
@@ -302,7 +289,6 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
     @Test
     public void testResultsForRegnDateHgv() {
-        //testResultsSteps.getTestResults("P012301293847");
         testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "P012301293847");
@@ -313,7 +299,6 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - trl")
     @Test
     public void testResultsForFirstUseDateTrl() {
-        //testResultsSteps.getTestResults("T12111111");
         testResultsSteps.getTestResults("10000019");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
