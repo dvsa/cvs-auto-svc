@@ -24,7 +24,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private static final String VRM = "SL72XD";
 
 
@@ -32,7 +32,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldCreatedAt() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "createdAt", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "createdAt", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("createdAt", "is not allowed");
     }
@@ -41,7 +41,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullCreatedAt() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "createdAt", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "createdAt", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("createdAt", "is not allowed");
     }
@@ -51,7 +51,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldLastUpdatedAt() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lastUpdatedAt", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "lastUpdatedAt", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("lastUpdatedAt", "is not allowed");
     }
@@ -60,7 +60,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullLastUpdatedAt() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lastUpdatedAt", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "lastUpdatedAt", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("lastUpdatedAt", "is not allowed");
     }
@@ -70,7 +70,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldTestCode() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testCode", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testCode", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testCode", "is not allowed");
     }
@@ -79,7 +79,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestCode() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testCode", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testCode", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testCode", "is not allowed");
     }
@@ -89,7 +89,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldTestNumber() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testNumber", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testNumber", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testNumber", "is not allowed");
     }
@@ -99,7 +99,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldCertificateLink() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "certificateLink", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "certificateLink", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("certificateLink", "is not allowed");
     }
@@ -108,7 +108,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullCertificateLink() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "certificateLink", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "certificateLink", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("certificateLink", "is not allowed");
     }
@@ -119,7 +119,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldTestExpiryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testExpiryDate", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testExpiryDate", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }
@@ -129,7 +129,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestExpiryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId())).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedDataOld.build().getTestResultId())).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testExpiryDate", "is not allowed");
     }
@@ -138,7 +138,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsExtraFieldTestAnniversaryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testAnniversaryDate", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testAnniversaryDate", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testAnniversaryDate", "is not allowed");
     }
@@ -147,7 +147,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestAnniversaryDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testAnniversaryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testAnniversaryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testAnniversaryDate", "is not allowed");
     }
@@ -157,7 +157,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingTestTypeName() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeName", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeName", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeName", "is required");
     }
@@ -167,7 +167,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestTypeName() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeName", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeName", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeName", "must be a string");
     }
@@ -176,7 +176,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerTestTypeName() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeName", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeName", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeName", "must be a string");
     }
@@ -186,7 +186,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingName() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "name", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "name", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("name", "is required");
     }
@@ -195,7 +195,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullName() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "name", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "name", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("name", "must be a string");
     }
@@ -204,7 +204,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerName() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "name", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "name", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("name", "must be a string");
     }
@@ -214,7 +214,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingTestTypeId() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeId", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeId", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeId", "is required");
     }
@@ -223,7 +223,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestTypeId() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeId", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeId", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeId", "must be a string");
     }
@@ -232,7 +232,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerTestTypeId() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeId", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeId", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeId", "must be a string");
     }
@@ -242,7 +242,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsCertificateNumber() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "certificateNumber", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "certificateNumber", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("certificateNumber", "is required");
     }
@@ -252,7 +252,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerCertificateNumber() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "certificateNumber", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "certificateNumber", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("certificateNumber", "must be a string");
     }
@@ -262,7 +262,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingTestTypeStartTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeStartTimestamp", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeStartTimestamp", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeStartTimestamp", "is required");
     }
@@ -271,7 +271,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestTypeStartTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeStartTimestamp", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeStartTimestamp", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeStartTimestamp", "must be a valid ISO 8601 date");
     }
@@ -280,7 +280,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerTestTypeStartTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeStartTimestamp", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeStartTimestamp", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeStartTimestamp", "must be a valid ISO 8601 date");
     }
@@ -289,7 +289,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringTestTypeStartTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeStartTimestamp", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeStartTimestamp", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeStartTimestamp", "must be a valid ISO 8601 date");
     }
@@ -298,7 +298,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsEmptyTestTypeStartTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeStartTimestamp", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeStartTimestamp", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeStartTimestamp", "must be a valid ISO 8601 date");
     }
@@ -308,7 +308,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingTestTypeEndTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeEndTimestamp", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeEndTimestamp", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeEndTimestamp", "is required");
     }
@@ -317,7 +317,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestTestTypeEndTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeEndTimestamp", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeEndTimestamp", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeEndTimestamp", "must be a valid ISO 8601 date");
     }
@@ -326,7 +326,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerTestTypeEndTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeEndTimestamp", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeEndTimestamp", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeEndTimestamp", "must be a valid ISO 8601 date");
     }
@@ -335,7 +335,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringTestTypeEndTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeEndTimestamp", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeEndTimestamp", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeEndTimestamp", "must be a valid ISO 8601 date");
     }
@@ -344,7 +344,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsEmptyTestTypeEndTimestamp() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testTypeEndTimestamp", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypeEndTimestamp", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypeEndTimestamp", "must be a valid ISO 8601 date");
     }
@@ -354,7 +354,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingNumberOfSeatBeltsFitted() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "numberOfSeatbeltsFitted", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "numberOfSeatbeltsFitted", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("numberOfSeatbeltsFitted", "is required");
     }
@@ -364,7 +364,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringNumberOfSeatBeltsFitted() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "numberOfSeatbeltsFitted", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "numberOfSeatbeltsFitted", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("numberOfSeatbeltsFitted", "must be a number");
     }
@@ -374,7 +374,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingLastSeatbeltInstallationCheckDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lastSeatbeltInstallationCheckDate", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "lastSeatbeltInstallationCheckDate", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("lastSeatbeltInstallationCheckDate", "is required");
     }
@@ -384,7 +384,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringLastSeatbeltInstallationCheckDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lastSeatbeltInstallationCheckDate", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "lastSeatbeltInstallationCheckDate", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("lastSeatbeltInstallationCheckDate", "must be a number of milliseconds or valid date string");
     }
@@ -393,7 +393,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsEmptyLastSeatbeltInstallationCheckDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lastSeatbeltInstallationCheckDate", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "lastSeatbeltInstallationCheckDate", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("lastSeatbeltInstallationCheckDate", "must be a number of milliseconds or valid date string");
     }
@@ -403,7 +403,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingSeatbeltInstallationCheckDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "seatbeltInstallationCheckDate", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "seatbeltInstallationCheckDate", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("seatbeltInstallationCheckDate", "is required");
     }
@@ -413,7 +413,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringSeatbeltInstallationCheckDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "seatbeltInstallationCheckDate", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "seatbeltInstallationCheckDate", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("seatbeltInstallationCheckDate", "must be a boolean");
     }
@@ -422,7 +422,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsEmptySeatbeltInstallationCheckDate() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "seatbeltInstallationCheckDate", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "seatbeltInstallationCheckDate", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("seatbeltInstallationCheckDate", "must be a boolean");
     }
@@ -432,7 +432,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingTestResult() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testResult", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testResult", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testResult", "is required");
     }
@@ -441,7 +441,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullTestResult() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testResult", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testResult", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testResult", "must be one of [fail, pass, prs, abandoned]");
     }
@@ -450,7 +450,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerTestResult() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testResult", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testResult", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testResult", "must be one of [fail, pass, prs, abandoned]");
     }
@@ -459,7 +459,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringTestResult() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testResult", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testResult", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testResult", "must be one of [fail, pass, prs, abandoned]");
     }
@@ -468,7 +468,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsEmptyTestResult() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "testResult", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testResult", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testResult", "must be one of [fail, pass, prs, abandoned]");
     }
@@ -478,7 +478,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingProhibitionIssued() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "prohibitionIssued", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "prohibitionIssued", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("prohibitionIssued", "is required");
     }
@@ -488,7 +488,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomStringProhibitionIssued() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "prohibitionIssued", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "prohibitionIssued", RandomStringUtils.randomAlphanumeric(9), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("prohibitionIssued", "must be a boolean");
     }
@@ -497,7 +497,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsEmptyProhibitionIssued() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "prohibitionIssued", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "prohibitionIssued", "", ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("prohibitionIssued", "must be a boolean");
     }
@@ -507,7 +507,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingReasonForAbandoning() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "reasonForAbandoning", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "reasonForAbandoning", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("reasonForAbandoning", "is required");
     }
@@ -516,9 +516,9 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsNullReasonForAbandoningAbandoned() {
 
-        ((TestTypes) vehicleSubmittedData.getTestTypes().get(0)).setTestResult("abandoned");
+        ((TestTypes) vehicleSubmittedDataOld.getTestTypes().get(0)).setTestResult("abandoned");
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "reasonForAbandoning",  ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "reasonForAbandoning",  ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validateData("Reason for Abandoning not present on all abandoned tests");
     }
@@ -527,7 +527,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerReasonForAbandoning() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "reasonForAbandoning", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "reasonForAbandoning", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("reasonForAbandoning", "must be a string");
     }
@@ -537,7 +537,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsLengthMaxReasonForAbandoning() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "reasonForAbandoning", RandomStringUtils.randomAlphanumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "reasonForAbandoning", RandomStringUtils.randomAlphanumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(201);
     }
 
@@ -546,7 +546,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingAdditionalNotesRecorded() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalNotesRecorded", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "additionalNotesRecorded", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalNotesRecorded", "is required");
     }
@@ -556,7 +556,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerAdditionalNotesRecorded() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalNotesRecorded", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "additionalNotesRecorded", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalNotesRecorded", "must be a string");
     }
@@ -565,7 +565,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsLengthMaxAdditionalNotesRecorded() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalNotesRecorded", RandomStringUtils.randomNumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "additionalNotesRecorded", RandomStringUtils.randomNumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalNotesRecorded", "length must be less than or equal to 500 characters long");
     }
@@ -575,7 +575,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsMissingAdditionalCommentsForAbandon() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalCommentsForAbandon", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "additionalCommentsForAbandon", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalCommentsForAbandon", "is required");
     }
@@ -585,7 +585,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsIntegerAdditionalCommentsForAbandon() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalCommentsForAbandon", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "additionalCommentsForAbandon", RandomStringUtils.randomNumeric(9), ToTypeConvertor.INTEGER, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalCommentsForAbandon", "must be a string");
     }
@@ -594,7 +594,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsLengthMaxAdditionalCommentsForAbandon() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalCommentsForAbandon", RandomStringUtils.randomNumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "additionalCommentsForAbandon", RandomStringUtils.randomNumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("additionalCommentsForAbandon", "length must be less than or equal to 500 characters long");
     }
@@ -604,7 +604,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsDefectsAsNull() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "defects", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "defects", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("defects", "must be an array");
 
@@ -614,7 +614,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsDefectsMissing() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "defects", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
+        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "defects", ToTypeConvertor.MISSING, TestResultsLevel.TEST_TYPES);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("defects", "is required");
     }

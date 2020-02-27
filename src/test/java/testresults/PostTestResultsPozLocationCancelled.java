@@ -22,42 +22,42 @@ public class PostTestResultsPozLocationCancelled {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
+    private TestResults.Builder vehicleCancelledDataOld = TestResultsData.buildTestResultsCancelledDataOld();
 
-    private void validateSavedData() {
-
-        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
+    private void validateSavedDataOld() {
+        testResultsSteps.getTestResults(vehicleCancelledDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleCancelledData.build());
+        testResultsSteps.validateData((TestResultsGet) vehicleCancelledDataOld.build());
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vertical upper")
     @Test
     public void testResultsUpperVertical() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setVertical("upper");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
-
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vertical lower")
     @Test
     public void testResultsLowerVertical() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setVertical("lower");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -65,14 +65,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullVertical() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setVertical(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -80,14 +81,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsInnerHorizontal() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setHorizontal("inner");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -95,14 +97,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsOuterHorizontal() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setHorizontal("outer");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -110,14 +113,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullHorizontal() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setHorizontal(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -125,14 +129,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNearsideLateral() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral("nearside");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -140,14 +145,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsCentreLateral() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral("centre");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -155,14 +161,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsOffsideLateral() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral("offside");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -170,14 +177,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullLateral() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -185,14 +193,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsFrontLongitudinal() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLongitudinal("front");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -200,14 +209,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsRearLongitudinal() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLongitudinal("rear");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -215,14 +225,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullLongitudinal() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLongitudinal(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -230,14 +241,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsRandomValidRowNumber() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setRowNumber(new Random().nextInt(21));
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -245,14 +257,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullRowNumber() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setRowNumber(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -260,14 +273,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsRandomValidSeatNumber() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setSeatNumber(new Random().nextInt(7));
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -275,14 +289,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullSeatNumber() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setSeatNumber(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -291,14 +306,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsRandomValidAxleNumber() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setAxleNumber(new Random().nextInt(11));
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -306,14 +322,15 @@ public class PostTestResultsPozLocationCancelled {
     @Test
     public void testResultsNullAxleNumber() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setAxleNumber(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 }

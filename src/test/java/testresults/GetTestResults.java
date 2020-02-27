@@ -238,7 +238,7 @@ public class GetTestResults {
     public void testResultsForVinTrl() {
 
     vehicleDefaultSubmittedData
-            .setSystemNumber(generateRandomExcludingValues(21, vehicleDefaultSubmittedData.build().getSystemNumber()))
+            .setSystemNumber(generateRandomExcludingValues(16, vehicleDefaultSubmittedData.build().getSystemNumber()))
             .setTestResultId(generateRandomExcludingValues(3,vehicleDefaultSubmittedData.build().getTestResultId()))
             .setCountryOfRegistration("a")
             .setEuVehicleCategory("o3")

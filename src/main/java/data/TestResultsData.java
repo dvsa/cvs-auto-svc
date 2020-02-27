@@ -45,4 +45,12 @@ public class TestResultsData {
 
         return testResults;
     }
+
+    public static TestResultsGet.Builder buildTestResultsCancelledDataOld() {
+
+
+        TestResultsGet.Builder testResults = DataMapper.getValue(TestResultsGet.Builder.class, "loader/" + BaseData.getDataLocation() + "/test-results_cancelled_old.json");
+
+        return testResults;
+    }
 }

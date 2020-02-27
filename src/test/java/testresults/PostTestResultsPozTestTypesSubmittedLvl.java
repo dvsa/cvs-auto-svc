@@ -25,18 +25,9 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
 
-    private void validateSavedData() {
-
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
-    }
-
     private void validateSavedDataOld() {
-
         testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOld.build());
@@ -46,14 +37,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomTestTypeName() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeName(RandomStringUtils.randomAlphanumeric(50));
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - testTypeName")
@@ -61,7 +53,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     public void testResultsEmptyTestTypeName() {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeName("");
 
@@ -91,14 +83,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomTestTypeId() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId(RandomStringUtils.randomAlphanumeric(50));
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - testTypeId")
@@ -120,14 +113,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomCertificateNumber() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setCertificateNumber(RandomStringUtils.randomAlphanumeric(50));
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - certificateNumber")
@@ -165,28 +159,30 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsValidTestTypeStartTimestamp() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeStartTimestamp(DataUtil.buildCurrentDateTime());
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeEndTimestamp")
     @Test
     public void testResultsRandomTestTypeEndTimestamp() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeEndTimestamp(DataUtil.buildCurrentDateTime());
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - numberOfSeatbeltsFitted")
@@ -240,14 +236,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsValidLastSeatbeltInstallationCheckDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setLastSeatbeltInstallationCheckDate(DataUtil.buildCurrentDateTime());
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - lastSeatbeltInstallationCheckDate")
@@ -270,42 +267,45 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsTrueSeatbeltInstallationCheckDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setSeatbeltInstallationCheckDate(true);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - seatbeltInstallationCheckDate false")
     @Test
     public void testResultsFalseSeatbeltInstallationCheckDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setSeatbeltInstallationCheckDate(false);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - seatbeltInstallationCheckDate")
     @Test
     public void testResultsNullSeatbeltInstallationCheckDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setSeatbeltInstallationCheckDate(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
 
@@ -313,56 +313,60 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsTestResultValueOne() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("fail");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult pass")
     @Test
     public void testResultsTestResultValueTwo() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult prs")
     @Test
     public void testResultsTestResultValueThree() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult abandoned")
     @Test
     public void testResultsTestResultValueFour() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
 
@@ -370,14 +374,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsNullProhibitionIssued() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setProhibitionIssued(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -400,26 +405,28 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsProhibitionIssuedTrue() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setProhibitionIssued(true);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - reasonForAbandoning with testResult abandoned")
     @Test
     public void testResultsReasonForAbandoningAbandonedEmpty() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("abandoned").setReasonForAbandoning("");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(400);
     }
 
@@ -443,30 +450,32 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsReasonForAbandoningPassEmpty() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning("");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - reasonForAbandoning with testResult prs")
     @Test
     public void testResultsReasonForAbandoningPrsEmpty() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("prs").setReasonForAbandoning("");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - reasonForAbandoning with testResult fail")
@@ -519,14 +528,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsNullReasonForAbandoningFail() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("fail").setReasonForAbandoning(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -534,14 +544,15 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsNullReasonForAbandoningPass() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
 
     }
 
@@ -549,42 +560,45 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsNullReasonForAbandoningPrs() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build().getTestTypes()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build().getTestTypes()
                 .get(0).setTestResult("prs").setReasonForAbandoning(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - additionalNotesRecorded")
     @Test
     public void testResultsRandomAdditionalNotesRecorded() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalNotesRecorded(RandomStringUtils.randomAlphanumeric(1, 499));
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - additionalNotesRecorded")
     @Test
     public void testResultsNullAdditionalNotesRecorded() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalNotesRecorded(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - additionalNotesRecorded")
@@ -607,28 +621,30 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void testResultsRandomAdditionalCommentsForAbandon() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(RandomStringUtils.randomAlphanumeric(1, 499));
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - additionalCommentsForAbandon")
     @Test
     public void testResultsNullAdditionalCommentsForAbandon() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - additionalCommentsForAbandon")
