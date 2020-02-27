@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@WithTag("expiry_dates")
+@WithTag("In_Test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicPsv {
 
@@ -3093,7 +3093,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayMinusOneDay() {
