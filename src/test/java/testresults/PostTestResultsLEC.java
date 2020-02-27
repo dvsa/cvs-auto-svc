@@ -42,13 +42,16 @@ public class PostTestResultsLEC {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationResult));
+                alterationResult,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -56,7 +59,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -84,12 +87,15 @@ public class PostTestResultsLEC {
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationResult));
+                alterationResult,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -97,7 +103,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -125,12 +131,15 @@ public class PostTestResultsLEC {
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationResult));
+                alterationResult,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -138,7 +147,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -166,6 +175,8 @@ public class PostTestResultsLEC {
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail","","REPLACE");
         JsonPathAlteration removeModType = new JsonPathAlteration("$.testTypes[0].modType", "","","DELETE");
         JsonPathAlteration removeExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "","","DELETE");
@@ -179,7 +190,8 @@ public class PostTestResultsLEC {
                 removeModType,
                 removeExpiryDate,
                 removeFuelType,
-                removeEmissionStandard));
+                removeEmissionStandard,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -187,7 +199,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -208,6 +220,8 @@ public class PostTestResultsLEC {
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail","","REPLACE");
         JsonPathAlteration removeModType = new JsonPathAlteration("$.testTypes[0].modType", "","","DELETE");
         JsonPathAlteration removeExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "","","DELETE");
@@ -221,7 +235,8 @@ public class PostTestResultsLEC {
                 removeModType,
                 removeExpiryDate,
                 removeFuelType,
-                removeEmissionStandard));
+                removeEmissionStandard,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -229,7 +244,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -250,6 +265,8 @@ public class PostTestResultsLEC {
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail","","REPLACE");
         JsonPathAlteration removeModType = new JsonPathAlteration("$.testTypes[0].modType", "","","DELETE");
         JsonPathAlteration removeExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "","","DELETE");
@@ -263,7 +280,8 @@ public class PostTestResultsLEC {
                 removeModType,
                 removeExpiryDate,
                 removeFuelType,
-                removeEmissionStandard));
+                removeEmissionStandard,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -271,7 +289,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.

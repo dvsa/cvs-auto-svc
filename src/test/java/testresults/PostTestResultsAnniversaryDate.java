@@ -24,13 +24,13 @@ public class PostTestResultsAnniversaryDate {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
 
     private void validateSavedData(List<String> data) {
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
+        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOld.build());
         testResultsSteps.validateDataForAnniversary(data);
     }
 
@@ -38,11 +38,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPassWithTestTypeAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("10").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -53,11 +54,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -68,11 +70,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsFailWithTestTypeAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("fail");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
@@ -83,11 +86,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsAbandonedWithTestTypeAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
@@ -98,11 +102,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPassWithTestTypeNotAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
@@ -113,11 +118,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeNotAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
@@ -128,11 +134,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsFailWithTestTypeNotAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("fail");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
@@ -143,11 +150,12 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsAbandonedWithTestTypeNotAnnualCertNoPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
@@ -158,19 +166,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPassWithTestTypeAnnualCertPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -180,19 +189,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeAnnualCertPrevRec() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -203,19 +213,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPassWithTestTypeAnnualCertPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -225,19 +236,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeAnnualCertPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
@@ -248,19 +260,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsAbandonedWithTestTypeAnnualCertPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -270,19 +283,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsFailWithTestTypeAnnualCertPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("fail");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -292,19 +306,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPassWithTestTypeNotAnnualCertPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -314,19 +329,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeNotAnnualCertPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0)));
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -2, 0), null));
@@ -337,19 +353,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeNotAnnualCertNoPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, null));
@@ -360,19 +377,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPassWithTestTypeNotAnnualCertNoPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, null));
@@ -382,19 +400,20 @@ public class PostTestResultsAnniversaryDate {
     @Test
     public void testResultsPrsWithTestTypeAnnualCertNoPrevRecWithExpiryDate() {
 
-        vehicleSubmittedData.setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm())).build()
+        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(null);
 
-        vehicleSubmittedData.build()
+        vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
-        testResultsSteps.postTestResults(vehicleSubmittedData.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedData(Arrays.asList(null, null));
