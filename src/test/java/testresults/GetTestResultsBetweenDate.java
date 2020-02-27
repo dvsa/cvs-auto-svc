@@ -21,6 +21,7 @@ public class GetTestResultsBetweenDate {
     TestResultsSteps testResultsSteps;
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
+    private TestResultsGet vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
@@ -75,7 +76,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getSystemNumber(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResultsBetweenDate("10000002", DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleSubmittedData);
     }

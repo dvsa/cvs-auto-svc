@@ -336,6 +336,8 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", 2,"","REPLACE");
         // create alteration to change test type in the request body
         JsonPathAlteration alterationTestType = new JsonPathAlteration("$.testTypes[0].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -344,7 +346,8 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationVehicleType,
                 alterationVehicleConfiguration,
                 alterationNoOfAxles,
-                alterationTestType
+                alterationTestType,
+                alterationExpiryDate
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -381,6 +384,8 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", 3,"","REPLACE");
         // create alteration to change test type in the request body
         JsonPathAlteration alterationTestType = new JsonPathAlteration("$.testTypes[0].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -389,7 +394,8 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationVehicleType,
                 alterationVehicleConfiguration,
                 alterationNoOfAxles,
-                alterationTestType
+                alterationTestType,
+                alterationExpiryDate
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -476,6 +482,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -486,7 +496,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -529,6 +541,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -539,7 +555,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -582,6 +600,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "1","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -592,7 +614,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -635,6 +659,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "1","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -645,7 +673,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -688,6 +718,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -698,7 +732,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -741,6 +777,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -751,7 +791,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -794,6 +836,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "30","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -804,7 +850,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -817,25 +865,6 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
     @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 2 - Data Set 4")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario2DataSet4() {
-//        // scenario 2
-//        // testTypeOne: testTypeId:39 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:2 ;
-//        // testTypeTwo: testTypeId:30 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:2 ;
-//        TestTypes testTypesOne = ((TestTypes) vehicleSubmittedDataOne.getTestTypes().get(0)).setTestTypeId("39");
-//        TestTypes testTypesTwo = ((TestTypes) vehicleSubmittedDataTwo.getTestTypes().get(0)).setTestTypeId("30");
-//
-//        vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
-//                .setTestTypes(Arrays.asList(testTypesOne, testTypesTwo))
-//                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOne.build().getVrm()))
-//                .setVehicleType("psv")
-//                .setNoOfAxles(2)
-//                .setVehicleSize("small")
-//                .setVehicleConfiguration(("rigid")).build();
-//
-//        testResultsSteps.postTestResults(vehicleSubmittedDataOne.build());
-//        testResultsSteps.statusCodeShouldBe(201);
-//        testResultsSteps.validateData("Test records created");
-//        validateSavedData("lcp", "qas");
-
         // TEST SETUP
         //generate random system number
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -866,6 +895,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "30","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -876,7 +909,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -919,6 +954,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -929,7 +968,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -972,6 +1013,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -982,7 +1027,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -1025,6 +1072,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "30","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -1035,7 +1086,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -1078,6 +1131,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "30","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -1088,7 +1145,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
@@ -1131,6 +1190,10 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         JsonPathAlteration alterationAddTestType = new JsonPathAlteration("$.testTypes", testType,"","ADD_VALUE");
         // create alteration to change second test type in the request body
         JsonPathAlteration alterationTestType2 = new JsonPathAlteration("$.testTypes[1].testTypeId", "39","","REPLACE");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate1 = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
+        // create alteration to add test expiry date
+        JsonPathAlteration alterationExpiryDate2 = new JsonPathAlteration("$.testTypes[1]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin,
                 alterationVrm,
@@ -1141,7 +1204,9 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
                 alterationNoOfAxles,
                 alterationTestType1,
                 alterationAddTestType,
-                alterationTestType2
+                alterationTestType2,
+                alterationExpiryDate1,
+                alterationExpiryDate2
         ));
 
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
