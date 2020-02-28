@@ -63,7 +63,8 @@
         "description": "3 wheelers"
       },
       "vehicleConfiguration": "dolly",
-      "vehicleType": "hgv"
+      "vehicleType": "hgv",
+      "recordCompleteness": "complete"
     }
   ],
   "vin": "A00037509"

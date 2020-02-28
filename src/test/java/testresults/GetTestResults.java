@@ -118,7 +118,7 @@ public class GetTestResults {
     @Test
     public void testResultsWithStatusCanceledReferenceData() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled_post.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -127,11 +127,24 @@ public class GetTestResults {
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestCode = new JsonPathAlteration("$.testTypes[0].testCode", "", "", "DELETE");
+        JsonPathAlteration alterationTestNumber = new JsonPathAlteration("$.testTypes[0].testNumber", "", "", "DELETE");
+        JsonPathAlteration alterationLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", "", "", "DELETE");
+        JsonPathAlteration alterationCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", "", "", "DELETE");
+        JsonPathAlteration alterationCertificateLink = new JsonPathAlteration("$.testTypes[0].certificateLink", "", "", "DELETE");
+        JsonPathAlteration alterationVehicleId = new JsonPathAlteration("$.vehicleId", "", "", "DELETE");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationSystemNumber,
+                alterationTestCode,
+                alterationTestNumber,
+                alterationLastUpdatedAt,
+                alterationCreatedAt,
+                alterationCertificateLink,
+                alterationVehicleId,
                 alterationTestResultId));
 
         // Post the results, together with any alterations, and verify that they are accepted.

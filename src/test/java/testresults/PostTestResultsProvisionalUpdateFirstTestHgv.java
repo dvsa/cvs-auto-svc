@@ -57,7 +57,7 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records-hgv-provisional.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change systemNumber in the request body with the random generated Vin

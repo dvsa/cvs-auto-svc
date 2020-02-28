@@ -289,12 +289,17 @@ public class VehicleTechnicalRecordsSteps {
             System.out.println("status is: " + status + " and number of records: " + recordsNumber);
 
             if(status == 200 && recordsNumber > 1){
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             else{
                 System.out.println("\n...waiting one more second (" + i +")...");
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
