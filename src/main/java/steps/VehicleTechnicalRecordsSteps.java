@@ -229,15 +229,6 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void validateFields(List<String> techRecordFields) {
-        for (String field : techRecordFields) {
-            System.out.println("Checking value at json path techRecord[0]." + field + "\n");
-            this.valueForFieldInPathShouldBe("techRecord[0]." + field,
-                    (GenericData.getJsonValueFromFile("technical-records_psv.json","$.techRecord[0]." + field).toString()));
-        }
-    }
-
-    @Step
     public void putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
         this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
     }
