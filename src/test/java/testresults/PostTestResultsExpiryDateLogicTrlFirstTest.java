@@ -16,10 +16,7 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
@@ -322,7 +319,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String testExpectedDate = submittedTypeEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
 
 //        String returned_testTypeEndTimestamp = "";
@@ -415,7 +412,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String testExpectedDate = submittedTypeEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
 
 //        String returned_testTypeEndTimestamp = "";
@@ -508,7 +505,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         String testExpectedExpiryDate = submittedFirstUseDate.dayOfMonth().withMaximumValue().plusYears(2).toInstant().toString();
 
@@ -599,7 +596,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         String testExpectedExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
 
@@ -689,7 +686,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 //        String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 //        String testExpectedDate = submittedTestStartTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
 //        String randomVin = GenericData.generateRandomVin();
-//        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+//        String randomTestResultId = UUID.randomUUID().toString();
 //
 //
 ////        String returned_testTypeEndTimestamp = "";
@@ -786,7 +783,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 //        String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 //        String testExpectedDate = submittedTestStartTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
 //        String randomVin = GenericData.generateRandomVin();
-//        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+//        String randomTestResultId = UUID.randomUUID().toString();
 //
 //
 ////        String returned_testTypeEndTimestamp = "";
