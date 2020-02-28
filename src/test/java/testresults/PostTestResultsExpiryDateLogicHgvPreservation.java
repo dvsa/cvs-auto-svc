@@ -16,10 +16,7 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
@@ -7051,7 +7048,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         String testEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
 
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         String testExpectedDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
 
@@ -7131,7 +7128,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         //
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -7156,7 +7153,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", RandomStringUtils.randomNumeric(5), "", "REPLACE");
+        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
@@ -7278,7 +7275,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         //
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -7303,7 +7300,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", RandomStringUtils.randomNumeric(5), "", "REPLACE");
+        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
@@ -7425,7 +7422,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         //
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -7572,7 +7569,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         //
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = RandomStringUtils.randomNumeric(5);
+        String randomTestResultId = UUID.randomUUID().toString();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -7597,7 +7594,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", RandomStringUtils.randomNumeric(5), "", "REPLACE");
+        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", insertableLastUpdatedAt, "", "REPLACE");
