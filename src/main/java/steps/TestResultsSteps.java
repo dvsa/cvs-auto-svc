@@ -507,6 +507,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, int expectedValue) {
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public void validateResponseContainsJson(String jsonPathOfResponseExtractedField, String expectedJson) {
         String actualJson = GenericData.getJsonStringFromHashMap(response.then().extract().path(jsonPathOfResponseExtractedField));
         try {
