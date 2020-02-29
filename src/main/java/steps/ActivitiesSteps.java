@@ -173,6 +173,11 @@ public class ActivitiesSteps {
     }
 
     @Step
+    public void insertRecordInDynamo(String json, String table) {
+        AwsUtil.insertJsonInTable(json, table);
+    }
+
+    @Step
     public void deleteActivitiesForUser(String user) {
         AwsUtil.deleteActivitiesForUser(user);
     }

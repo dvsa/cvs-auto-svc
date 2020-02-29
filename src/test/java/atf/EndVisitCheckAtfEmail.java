@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.exec.environment.EnvironmentUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -47,17 +48,17 @@ public class EndVisitCheckAtfEmail {
         // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationTestResultId));
         String alteredJson = GenericData.applyJsonAlterations(json, alterations);
-        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+        activitiesSteps.insertRecordInDynamo(alteredJson, "test-results");
 
 
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8684.json", "$");
-
-        String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+//        // Read the base test result JSON.
+//        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8684.json", "$");
+//
+//        String randomVin = GenericData.generateRandomVin();
+//        String randomTestResultId = UUID.randomUUID().toString();
+//
+//        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+//        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", "First test","","REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "95","","REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", "First Test","","REPLACE");
@@ -87,16 +88,16 @@ public class EndVisitCheckAtfEmail {
 
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId,
-                alterationTestName,
-                alterationTestTypeId,
-                alterationTestTypeName,
-                alterationTestResult,
-                alterationNoOfAxles,
-                alterationTesterEmailAddress
-        ));
+//        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+//                alterationVin,
+//                alterationTestResultId,
+//                alterationTestName,
+//                alterationTestTypeId,
+//                alterationTestTypeName,
+//                alterationTestResult,
+//                alterationNoOfAxles,
+//                alterationTesterEmailAddress
+//        ));
 
 //        // Post the results, together with any alterations, and verify that they are accepted.
 //        activitiesSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
