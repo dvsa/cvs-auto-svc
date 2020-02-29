@@ -657,7 +657,12 @@ public class TestResultsSteps {
     }
 
     @Step
-    public WebDriver validateAtfEmail(String randomVin) {
-        return WebDriverBrowsertack.checkAtfEmail(randomVin);
+    public WebDriver validateVsaEmail(String randomVin) {
+        return WebDriverBrowsertack.checkVsaEmail(randomVin);
+    }
+
+    @Step
+    public void addEmailForTestStation(String emailAddress, String testStationId) {
+        AwsUtil.addEmailForTestStation(emailAddress, testStationId);
     }
 }

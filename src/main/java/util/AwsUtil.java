@@ -107,6 +107,45 @@ public class AwsUtil {
         }
     }
 
+    public static void deleteActivitiesForUser(String testerName) {
+        Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+        String uuid = String.valueOf(UUID.randomUUID());
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
+        client.setRegion(Region.getRegion(clientRegion));
+        DynamoDB dynamoDB = new DynamoDB(client);
+        String tableName = "cvs-" + System.getProperty("BRANCH") + "-activities";
+
+        Table table = dynamoDB.getTable(tableName);
+
+        Index index = table.getIndex("StaffIndex");
+        QuerySpec spec = new QuerySpec()
+                .withKeyConditionExpression("testerStaffId = :staff_id")
+                .withValueMap(new ValueMap()
+                        .withString(":staff_id",testerName));
+
+        ItemCollection<QueryOutcome> items = index.query(spec);
+        for (Item item : items) {
+            String id = JsonPath.read(item.toJSON(), "$.id");
+            System.out.println("Delete item:\n" + item.toJSONPretty());
+
+            DeleteItemOutcome outcome = table.deleteItem("id", id);
+        }
+    }
+
     public static void addEmailForTestStation(String emailAddress, String testStationId) {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =

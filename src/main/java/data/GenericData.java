@@ -165,6 +165,10 @@ public class GenericData {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
     }
 
+    public static String generateRandomVrmForEmailValidations() {
+        return "AUT" + RandomStringUtils.randomAlphanumeric(5).toUpperCase();
+    }
+
     public static String getJsonStringFromJsonPath(String fileName, String path) {
         ClassLoader classLoader = DataMapper.class.getClassLoader();
 

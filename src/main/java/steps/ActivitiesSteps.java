@@ -8,6 +8,9 @@ import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.WebDriver;
+import util.AwsUtil;
+import util.WebDriverBrowsertack;
 
 import java.util.List;
 
@@ -167,5 +170,15 @@ public class ActivitiesSteps {
     @Step
     public void responseShouldContainFieldValue(String field, String value) {
         assertThat(response.then().body("$", anyOf(hasItem(hasEntry(field,value)))));
+    }
+
+    @Step
+    public void deleteActivitiesForUser(String user) {
+        AwsUtil.deleteActivitiesForUser(user);
+    }
+
+    @Step
+    public WebDriver validateAtfEmail(String randomVin) {
+        return WebDriverBrowsertack.checkAtfEmail(randomVin);
     }
 }

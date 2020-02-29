@@ -89,6 +89,59 @@ public class WebDriverBrowsertack {
         return token;
     }
 
+    public static WebDriver checkVsaEmail(String randomVrm) {
+        WebDriverBrowsertack.setup();
+        FluentWait wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofMillis(300))
+                .ignoring(NoSuchElementException.class);
+        driver.get("https://outlook.live.com/owa/");
+
+        System.out.println("Going to microsoft login page");
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("nav.auxiliary-actions a[data-task='signin']")),
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("nav.auxiliary-actions a[data-task='signin']"))
+        ));
+        driver.manage().window().maximize();
+        driver.findElement(By.cssSelector("nav.auxiliary-actions a[data-task='signin']")).click();
+
+        System.out.println("Filling in email address");
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='loginfmt']")),
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='loginfmt']"))
+        ));
+        driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getEmailUserName());
+        driver.findElement(By.cssSelector("#idSIButton9")).click();
+
+        System.out.println("Filling in password");
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
+        ));
+        driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getEmailPass());
+        driver.findElement(By.cssSelector("#idSIButton9")).click();
+
+        System.out.println("Confirming staying signed in");
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back"))
+        ));
+        driver.findElement(By.cssSelector("#idSIButton9")).click();
+
+        System.out.println("Searching for VSA email using VRM " + randomVrm);
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']"))
+        ));
+        driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
+        driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+
+        System.out.println("Confirming search returned at least one result");
+        wait.until(ExpectedConditions.textToBePresentInElement(driver.findElements(By.cssSelector("div[aria-level='3']")).get(0), "Top results"));
+        driver.findElements(By.cssSelector("div[role='option']")).get(0).click();
+        return driver;
+    }
+
     public static WebDriver checkAtfEmail(String randomVin) {
         WebDriverBrowsertack.setup();
         FluentWait wait = new FluentWait<>(driver)
