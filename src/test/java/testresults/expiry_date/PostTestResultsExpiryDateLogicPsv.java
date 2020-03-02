@@ -1,4 +1,4 @@
-package testresults;
+package testresults.expiry_date;
 
 import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
