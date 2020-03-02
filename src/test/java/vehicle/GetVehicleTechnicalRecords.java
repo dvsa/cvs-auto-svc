@@ -661,4 +661,14 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "motorcycle");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "l1e-A");
     }
+
+    @Title("CVSB-11546 - TC - AC1 API Consumer retrieve the Vehicle Technical Records (recordCompleteness)")
+    @Test
+    public void testVehicleTechnicalRecords_recordCompleteness() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("DP76UMK4DQLTOT778899", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[0]", "recordCompleteness");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness", "skeleton");
+    }
 }
