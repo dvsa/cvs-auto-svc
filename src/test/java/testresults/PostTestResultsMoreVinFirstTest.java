@@ -6,7 +6,6 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RunWith(SerenityRunner.class)
-public class PostTestResultsMoreVinNotifiableAlteration {
+public class PostTestResultsMoreVinFirstTest {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -28,9 +27,9 @@ public class PostTestResultsMoreVinNotifiableAlteration {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-    @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = FAIL - HGV")
+    @Title("CVSB-12445 - TC - AC1 - VSA submits First test = FAIL - HGV")
     @Test
-    public void testResultsNotifiableAlterationHgvFail() {
+    public void testResultsFirstTestHgvFail() {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
@@ -82,7 +81,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json","$");
         String testResultId = UUID.randomUUID().toString();
         String testResult = "fail";
 
@@ -92,6 +91,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> trAlterations = new ArrayList<>(Arrays.asList(
@@ -115,13 +115,14 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberTwo, randomVin, "statusCode", "provisional");
 
     }
 
-    @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = PASS - HGV")
+    @Title("CVSB-12445 - TC - AC1 - VSA submits First test = PASS - HGV")
     @Test
-    public void testResultsNotifiableAlterationHgvPass() {
+    public void testResultsFirstTestHgvPass() {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
@@ -173,7 +174,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json","$");
         String testResultId = UUID.randomUUID().toString();
         String testResult = "pass";
 
@@ -183,6 +184,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> trAlterations = new ArrayList<>(Arrays.asList(
@@ -213,9 +215,9 @@ public class PostTestResultsMoreVinNotifiableAlteration {
     }
 
     @Ignore("Uncomment when TRL POST is implemented")
-    @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = FAIL - TRL")
+    @Title("CVSB-12445 - TC - AC1 - VSA submits First test = FAIL - TRL")
     @Test
-    public void testResultsNotifiableAlterationTrlFail() {
+    public void testResultsFirstTestTrlFail() {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
@@ -267,7 +269,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl.json","$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
         String testResultId = UUID.randomUUID().toString();
         String testResult = "fail";
 
@@ -277,6 +279,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> trAlterations = new ArrayList<>(Arrays.asList(
@@ -306,9 +309,9 @@ public class PostTestResultsMoreVinNotifiableAlteration {
     }
 
     @Ignore("Uncomment when TRL POST is implemented")
-    @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = PASS - TRL")
+    @Title("CVSB-12445 - TC - AC1 - VSA submits First test = PASS - TRL")
     @Test
-    public void testResultsNotifiableAlterationTrlPass() {
+    public void testResultsFirstTestTrlPass() {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
@@ -360,7 +363,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl.json","$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
         String testResultId = UUID.randomUUID().toString();
         String testResult = "pass";
 
@@ -370,6 +373,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> trAlterations = new ArrayList<>(Arrays.asList(
@@ -397,5 +401,4 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberTwo, randomVin, "statusCode", "current");
 
     }
-
 }
