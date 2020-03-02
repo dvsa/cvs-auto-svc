@@ -7,9 +7,11 @@ import io.restassured.response.Response;
 import model.vehicles.*;
 import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import util.JsonPathAlteration;
+import org.junit.Assert;
 
 import java.util.List;
 
@@ -269,32 +271,76 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds) {
 
-        System.out.println("...waiting for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < seconds; i++){
-            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+        for(int i=0; i < seconds; i++) {
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(vin);
 
             int status = response.getStatusCode();
-            int recordsNumber = response.then().extract().jsonPath().getInt("techRecord.size()");
+            int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
 
-            System.out.println("status is: " + status + " and number of records: " + recordsNumber);
+            for (int j = 0; j < noVehicles; j++) {
 
-            if(status == 200 && recordsNumber > 1){
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                break;
-            }
-            else{
-                System.out.println("\n...waiting one more second (" + i +")...");
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                System.out.println("record number is: " + response.then().extract().jsonPath().get("[" + j + "].techRecord.size()"));
+
+                int recordsNumber = response.then().extract().jsonPath().get("[" + j + "].techRecord.size()");
+
+                System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
+
+                if (status == 200 && recordsNumber > 1) {
+                    return;
+                } else {
+                    System.out.println("\n...waiting one more second (" + i + ")...\n");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
+        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+    }
+
+    @Step
+    public void valueForFieldInTechRecordShouldBe(String systemNumber, String vin, int techRecordNo, String field, String value) {
+        try {
+            JSONArray jsonArray = new  JSONArray(response.body().asString());
+            for(int i=0;i<jsonArray.length();i++){
+                if(jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber)&&jsonArray.getJSONObject(i).get("vin").equals(vin)){
+                    System.out.println("i: "+ i + "  " + jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
+                    Assert.assertEquals(value, jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public boolean checkValueForFieldInAnyTechRecord(String systemNumber, String vin, String field, String value) {
+        try {
+            JSONArray jsonArray = new  JSONArray(response.body().asString());
+            for(int i=0;i<jsonArray.length();i++){
+                if(jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber)&&jsonArray.getJSONObject(i).get("vin").equals(vin)){
+                    JSONArray techRecords = jsonArray.getJSONObject(i).getJSONArray("techRecord");
+                    for(int j=0;j<techRecords.length();j++){
+                        if(techRecords.getJSONObject(j).get(field).toString().equals(value)) {
+                            return true;
+//                            Assert.assertEquals(value, jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
+                        }
+                    }
+                }
+//                return false;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void valueForFieldInAnyTechRecordShouldBe(String systemNumber, String vin, String field, String value) {
+        Assert.assertTrue(checkValueForFieldInAnyTechRecord(systemNumber, vin, field, value));
     }
 }
