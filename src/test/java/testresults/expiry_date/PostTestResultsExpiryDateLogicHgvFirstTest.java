@@ -152,7 +152,7 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
     }
 
-    @Ignore
+
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate is missing")
     @Test
@@ -243,7 +243,7 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
     }
 
-    @Ignore
+
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate = Today(-1 year, +1 month)")
     @Test
