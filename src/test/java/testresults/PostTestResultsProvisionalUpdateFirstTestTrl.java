@@ -48,7 +48,6 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
 
     @Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - TRL")
-    @Test
     public void testResultsProvisionalUpdateTrl() {
 
         //generate random Vin

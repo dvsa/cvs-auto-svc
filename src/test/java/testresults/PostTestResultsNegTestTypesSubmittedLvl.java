@@ -116,7 +116,6 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
 
     @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - testExpiryDate")
-    @Test
     public void testResultsExtraFieldTestExpiryDate() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testExpiryDate", RandomStringUtils.randomAlphanumeric(10), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
@@ -126,7 +125,6 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
 
     @Ignore("blocked by CVSB-9639")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testExpiryDate")
-    @Test
     public void testResultsNullTestExpiryDate() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedDataOld.build().getTestResultId())).build(), "testExpiryDate", ToTypeConvertor.NULL, TestResultsLevel.TEST_TYPES);

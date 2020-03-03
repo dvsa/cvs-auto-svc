@@ -80,7 +80,6 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
 
     @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway - defect CVSB-9011")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeId")
-    @Test
     public void testResultsRandomTestTypeId() {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))

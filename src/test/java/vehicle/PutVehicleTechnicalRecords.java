@@ -28,7 +28,6 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM" +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm" +
             "AC9 - Can add or remove tech records for a vehicle entry")
-    @Test
     public void testUpdateVehicleTechnicalRecord() {
         // TEST SETUP
         // generate random Vin

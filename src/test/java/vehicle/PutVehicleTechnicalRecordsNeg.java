@@ -326,7 +326,6 @@ public class PutVehicleTechnicalRecordsNeg {
     @Ignore("Remove the ignore annotation when the download and upload backend enpoints are re-implemented")
     @WithTag("Vtm")
     @Title("CVSB-9657 - AC2 - Error is given when making GET request with invalid file name")
-    @Test
     public void testErrorForDownloadingRandomFile() {
         //TEST SETUP
         // generate random Vin

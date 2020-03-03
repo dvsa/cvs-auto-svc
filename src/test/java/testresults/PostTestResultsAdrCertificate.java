@@ -44,7 +44,6 @@ public class PostTestResultsAdrCertificate {
 
     @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")
-    @Test
     public void testResultsADRCertificateTrl() {
 
         // Read the base test result JSON.
@@ -77,7 +76,6 @@ public class PostTestResultsAdrCertificate {
 
     @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - HGV")
-    @Test
     public void testResultsADRCertificateHgv() {
 
         // Read the base test result JSON.
