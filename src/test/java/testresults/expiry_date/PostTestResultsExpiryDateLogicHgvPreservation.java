@@ -561,7 +561,6 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = two months ahead (EARLY FOR TEST)")
     @Test
