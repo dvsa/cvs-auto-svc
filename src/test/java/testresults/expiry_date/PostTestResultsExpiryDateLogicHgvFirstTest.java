@@ -57,7 +57,6 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
         this.testCode = testCode;
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate = null")
     @Test
@@ -152,7 +151,6 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
 
     }
 
-
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate is missing")
     @Test
@@ -242,7 +240,6 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpectedDate.substring(0,10));
 
     }
-
 
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV First Test - NO Previous Expiry Date - regnDate = Today(-1 year, +1 month)")
