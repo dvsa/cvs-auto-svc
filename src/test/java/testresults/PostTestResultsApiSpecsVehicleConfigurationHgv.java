@@ -47,17 +47,18 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
         this.vehicleConfiguration = vehicleConfiguration;
     }
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private String vehicleConfiguration;
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (HGV) - cancelled")
     @Test
     public void testTestResultsPostVehicleConfigurationCancelledHgv() {
 
-        vehicleSubmittedData
-                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
-                .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+        vehicleSubmittedDataOld
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
+                .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -70,18 +71,18 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setTestStatus("cancelled")
                 .build();
 
-        vehicleSubmittedData.build().getTestTypes().get(0).setName("Annual test");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("Annual test");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId("94");
-        vehicleSubmittedData.build().getTestTypes().get(0).setCertificateNumber(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
-        vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalNotesRecorded(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setName("Annual test");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeName("Annual test");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeId("94");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setCertificateNumber(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestResult("fail");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setProhibitionIssued(false);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setAdditionalNotesRecorded(null);
 
-        vehicleSubmittedData.build().getVehicleClass().setCode("v").setDescription("heavy goods vehicle");
-        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0)
+        vehicleSubmittedDataOld.build().getVehicleClass().setCode("v").setDescription("heavy goods vehicle");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).getDefects().get(0)
                 .setDeficiencyCategory("major")
                 .setDeficiencyId("a")
                 .setDeficiencyRef("3.1.b")
@@ -95,7 +96,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setPrs(false)
                 .setStdForProhibition(false);
 
-        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation()
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation()
                 .setNotes("not working")
                 .getLocation()
                 .setVertical("lower")
@@ -107,7 +108,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setAxleNumber(null);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedDataOld.build());
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleSize", "numberOfSeats", "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "numberOfSeatbeltsFitted", "lastSeatbeltInstallationCheckDate", "seatbeltInstallationCheckDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
@@ -116,7 +117,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldExists("vrm");
@@ -128,10 +129,11 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
     @Test
     public void testTestResultsPostVehicleConfigurationSubmittedHgv() {
 
-        vehicleSubmittedData
-                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
-                .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+        vehicleSubmittedDataOld
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
+                .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -144,18 +146,18 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setTestStatus("submitted")
                 .build();
 
-        vehicleSubmittedData.build().getTestTypes().get(0).setName("Annual test");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("Annual test");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId("94");
-        vehicleSubmittedData.build().getTestTypes().get(0).setCertificateNumber(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
-        vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalNotesRecorded(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setName("Annual test");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeName("Annual test");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeId("94");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setCertificateNumber(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestResult("fail");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setProhibitionIssued(false);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setAdditionalNotesRecorded(null);
 
-        vehicleSubmittedData.build().getVehicleClass().setCode("v").setDescription("heavy goods vehicle");
-        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0)
+        vehicleSubmittedDataOld.build().getVehicleClass().setCode("v").setDescription("heavy goods vehicle");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).getDefects().get(0)
                 .setDeficiencyCategory("major")
                 .setDeficiencyId("a")
                 .setDeficiencyRef("3.1.b")
@@ -169,7 +171,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setPrs(false)
                 .setStdForProhibition(false);
 
-        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation()
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation()
                 .setNotes("not working")
                 .getLocation()
                 .setVertical("lower")
@@ -181,7 +183,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setAxleNumber(null);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedDataOld.build());
 
         testResultsSteps.removeTestResultsFields(payload, "vehicleSize", "numberOfSeats", "vehicleId");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "numberOfSeatbeltsFitted", "lastSeatbeltInstallationCheckDate", "seatbeltInstallationCheckDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink", "testExpiryDate", "testAnniversaryDate");
@@ -190,7 +192,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldExists("vrm");

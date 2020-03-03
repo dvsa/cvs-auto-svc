@@ -11,7 +11,6 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.context.annotation.DependsOn;
 import steps.TestResultsSteps;
 
 import java.util.Arrays;
@@ -48,7 +47,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
         this.vehicleConfiguration = vehicleConfiguration;
     }
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private String vehicleConfiguration;
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (TRL) - submitted")
@@ -56,9 +55,10 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
 
     public void testTestResultsPostVehicleConfigurationSubmittedTrl() {
 
-        vehicleSubmittedData
-                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+        vehicleSubmittedDataOld
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
@@ -74,17 +74,17 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setTestStatus("submitted").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
-        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalNotesRecorded("a note");
-        vehicleSubmittedData.build().getTestTypes().get(0).setCertificateNumber(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setName("Retest");
-        vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId("");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("Paid roadworthiness retest");
-        vehicleSubmittedData.build().getVehicleClass().setCode("t").setDescription("trailer");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setAdditionalNotesRecorded("a note");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setCertificateNumber(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setName("Retest");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setProhibitionIssued(false);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestResult("fail");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeId("");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeName("Paid roadworthiness retest");
+        vehicleSubmittedDataOld.build().getVehicleClass().setCode("t").setDescription("trailer");
 
-        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0)
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).getDefects().get(0)
                 .setDeficiencyCategory("dangerous")
                 .setDeficiencyId("a")
                 .setDeficiencyRef("6.2.a.ii")
@@ -99,7 +99,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setStdForProhibition(false);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedDataOld.build());
 
         testResultsSteps.addAdditionalTestResultsFieldValue(payload, "trailerId", "C234567");
         testResultsSteps.removeTestResultsFields(payload, "numberOfSeats", "odometerReading", "odometerReadingUnits", "vehicleId", "vehicleSize", "vrm");
@@ -109,7 +109,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
@@ -121,9 +121,10 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
     @Test
     public void testTestResultsPostVehicleConfigurationCancelledTrl() {
 
-        vehicleSubmittedData
-                .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
-                .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+        vehicleSubmittedDataOld
+                .setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
@@ -139,17 +140,17 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setTestStatus("cancelled").build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
-        vehicleSubmittedData.build().getTestTypes().get(0).setAdditionalNotesRecorded("a note");
-        vehicleSubmittedData.build().getTestTypes().get(0).setCertificateNumber(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setName("Retest");
-        vehicleSubmittedData.build().getTestTypes().get(0).setProhibitionIssued(false);
-        vehicleSubmittedData.build().getTestTypes().get(0).setReasonForAbandoning(null);
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestResult("fail");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeId("");
-        vehicleSubmittedData.build().getTestTypes().get(0).setTestTypeName("Paid roadworthiness retest");
-        vehicleSubmittedData.build().getVehicleClass().setCode("t").setDescription("trailer");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setAdditionalNotesRecorded("a note");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setCertificateNumber(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setName("Retest");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setProhibitionIssued(false);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestResult("fail");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeId("");
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeName("Paid roadworthiness retest");
+        vehicleSubmittedDataOld.build().getVehicleClass().setCode("t").setDescription("trailer");
 
-        vehicleSubmittedData.build().getTestTypes().get(0).getDefects().get(0)
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).getDefects().get(0)
                 .setDeficiencyCategory("dangerous")
                 .setDeficiencyId("a")
                 .setDeficiencyRef("6.2.a.ii")
@@ -164,7 +165,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setStdForProhibition(false);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedData.build());
+        ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedDataOld.build());
 
         testResultsSteps.addAdditionalTestResultsFieldValue(payload, "trailerId", "C234567");
         testResultsSteps.removeTestResultsFields(payload, "numberOfSeats", "odometerReading", "odometerReadingUnits", "vehicleId", "vehicleSize", "vrm");
@@ -174,7 +175,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");

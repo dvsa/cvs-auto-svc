@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -45,19 +46,24 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
         this.testTypeId = testTypeId;
     }
 
+    @Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - TRL")
     @Test
     public void testResultsProvisionalUpdateTrl() {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vrm
         String randomTrailerId = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(6)).toUpperCase();
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records-trl-provisional.json","$");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        // create alteration to change systemNumber in the request body with the random generated Vin
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        // create alteration to change trailer id in the request body with the random generated trailer id
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.trailerId", randomTrailerId,"","REPLACE");
          // create alteration to change partial vin in the request body with the random generated primary vrm
         JsonPathAlteration alterationPartialVin = new JsonPathAlteration("$.partialVin", randomVin.substring(randomVin.length() - 6),"","REPLACE");
@@ -66,17 +72,18 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin
+                alterationPartialVin,
+                alterationSystemNumber
         ));
 
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // retrieve the vehicle and check the status code and the techRecord size
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomSystemNumber, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
         // build and post a notifiable alteration test results
 
 

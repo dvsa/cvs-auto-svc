@@ -1,5 +1,6 @@
 package testresults;
 
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
@@ -12,6 +13,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.DataUtil;
+import util.JsonPathAlteration;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 
 @RunWith(SerenityRunner.class)
@@ -21,6 +28,7 @@ public class GetTestResultsBetweenDate {
     TestResultsSteps testResultsSteps;
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
+    private TestResultsGet vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
 
@@ -28,9 +36,33 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExisting() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);
+
+        testResultsSteps.valueForFieldInPathShouldBe("testTypes.size()", 1);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2435 - Between Date data not found (date higher than existing data) and status default")
@@ -75,9 +107,33 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleSubmittedData.getVin(), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData(vehicleSubmittedData);
+
+        testResultsSteps.valueForFieldInPathShouldBe("testTypes.size()", 1);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].vin",randomVin);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2439 - Between Date data not found (date higher than existing data) and status submitted")
@@ -120,7 +176,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExistingWithStatusCancelled() {
 
-        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getVin(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResultsBetweenDate(vehicleCancelledData.getSystemNumber(), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleCancelledData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData(vehicleCancelledData);
     }

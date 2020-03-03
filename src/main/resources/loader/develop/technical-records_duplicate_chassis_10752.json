@@ -1,0 +1,100 @@
+{
+  "msUserDetails": {
+    "msUser": "sean",
+    "msOid": "12345"
+  },
+  "partialVin":"678400",
+  "primaryVrm":"BQ91YHQ",
+  "secondaryVrms":[
+    "X71LTA"
+  ],
+  "systemNumber":"15000002",
+  "techRecord":[
+    {
+      "axles":[
+        {
+          "axleNumber":1,
+          "parkingBrakeMrk":false,
+          "tyres":{
+            "dataTrAxles":0,
+            "fitmentCode":"single",
+            "plyRating":"A",
+            "tyreCode":456,
+            "tyreSize":"295/80-22.5"
+          },
+          "weights":{
+            "designWeight":7100,
+            "gbWeight":7100
+          }
+        },
+        {
+          "axleNumber":2,
+          "tyres":{
+            "dataTrAxles":0,
+            "fitmentCode":"double",
+            "plyRating":"A",
+            "tyreCode":456,
+            "tyreSize":"295/80-22.5"
+          },
+          "weights":{
+            "designWeight":12600,
+            "gbWeight":11500
+          }
+        }
+      ],
+      "bodyType":{
+        "code":"s",
+        "description":"single decker"
+      },
+      "brakes":{
+        "dtpNumber": "123456"
+      },
+      "dimensions": {
+        "width": 1000,
+        "length": 1000
+      },
+      "euroStandard": "2",
+      "fuelPropulsionSystem": "Hybrid",
+      "drawbarCouplingFitted": true,
+      "offRoad": true,
+      "numberOfWheelsDriven": 4,
+      "euVehicleCategory": "m1",
+      "trainGbWeight": 1000,
+      "maxTrainGbWeight": 2000,
+      "frontAxleToRearAxle": 500,
+      "approvalType": "NTA",
+      "make": "Isuzu",
+      "model": "s40",
+      "roadFriendly": true,
+      "conversionRefNo":"2",
+      "createdAt":"2019-01-16T12:24:38.027Z",
+      "grossDesignWeight":19000,
+      "grossGbWeight":18000,
+      "lastUpdatedAt":"2019-01-16T12:24:38.027Z",
+      "manufactureYear":2010,
+      "noOfAxles":2,
+      "ntaNumber":"7",
+      "reasonForCreation":"COIF",
+      "regnDate":"2011-01-05",
+      "speedLimiterMrk":false,
+      "tachoExemptMrk":false,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "vehicleClass":{
+        "code":"s",
+        "description":"small psv (ie: less than or equal to 22 seats)"
+      },
+      "vehicleConfiguration":"rigid",
+      "vehicleType":"hgv"
+    }
+  ],
+  "vin":"1B7GG36N12S678400"
+}

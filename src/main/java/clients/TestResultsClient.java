@@ -21,13 +21,13 @@ import static util.WriterReader.saveUtils;
 
 public class TestResultsClient {
 
-    public Response getTestResults(String vin) {
+    public Response getTestResults(String systemNumber) {
 
-        Response response = callGetTestResults(vin);
+        Response response = callGetTestResults(systemNumber);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callGetTestResults(vin);
+            response = callGetTestResults(systemNumber);
         }
 
         return response;
@@ -289,15 +289,15 @@ public class TestResultsClient {
     }
 
 
-    public Response callGetTestResults(String vin) {
+    public Response callGetTestResults(String systemNumber) {
 
         Response response = given()
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
+                .pathParam("systemNumber", systemNumber)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/test-results/{vin}");
+                .get("/test-results/{systemNumber}");
 
         return response;
     }

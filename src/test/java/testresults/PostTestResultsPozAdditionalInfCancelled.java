@@ -21,13 +21,13 @@ public class PostTestResultsPozAdditionalInfCancelled {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
+    private TestResults.Builder vehicleCancelledDataOld = TestResultsData.buildTestResultsCancelledDataOld();
 
-    private void validateSavedData() {
+    private void validateSavedDataOld() {
 
-        testResultsSteps.getTestResults(vehicleCancelledData.build().getVin(), TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(vehicleCancelledDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleCancelledData.build());
+        testResultsSteps.validateData((TestResultsGet) vehicleCancelledDataOld.build());
     }
     
 
@@ -35,43 +35,46 @@ public class PostTestResultsPozAdditionalInfCancelled {
     @Test
     public void testResultsRandomNotes() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build().
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build().
                 getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes(RandomStringUtils.randomAlphanumeric(500));
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - notes")
     @Test
     public void testResultsNullNotes() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - notes")
     @Test
     public void testResultsEmptyNotes() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes("");
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
-        vehicleCancelledData.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes(null);
+        vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().setNotes(null);
         testResultsSteps.validateData("Test records created");
-        validateSavedData();
+        validateSavedDataOld();
     }
 
 
@@ -79,11 +82,12 @@ public class PostTestResultsPozAdditionalInfCancelled {
     @Test
     public void testResultsAdvisoryAndNullLocation() {
 
-        vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm())).build()
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setDeficiencyCategory("advisory").getAdditionalInformation().setLocation(null);
 
-        testResultsSteps.postTestResults(vehicleCancelledData.build());
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 

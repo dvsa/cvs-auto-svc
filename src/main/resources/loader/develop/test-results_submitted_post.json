@@ -5,19 +5,22 @@
   "odometerReadingUnits": "kilometres",
   "testEndTimestamp": "2019-01-14T10:36:33.987Z",
   "testStatus": "submitted",
-  "systemNumber":"2314RTRYY1233",
+  "systemNumber":"2314RTRYY1232",
   "testTypes": [
     {
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "smokeTestKLimitApplied": "value",
+      "fuelType": "diesel",
+      "emissionStandard": "0.16 g/kWh Euro 3 PM",
       "prohibitionIssued": false,
-      "testCode": "pms",
-      "testNumber": "2",
-      "lastUpdatedAt": "2019-02-22T08:50:16.706Z",
       "additionalCommentsForAbandon": "none",
       "numberOfSeatbeltsFitted": 2,
       "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
       "reasonForAbandoning": "none",
       "lastSeatbeltInstallationCheckDate": "2019-01-14",
-      "createdAt": "2019-02-22T08:50:16.706Z",
       "testTypeId": "95",
       "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
       "certificateNumber": "12334",
@@ -53,7 +56,6 @@
         }
       ],
       "name": "First test",
-      "certificateLink": "http://dvsagov.co.uk",
       "testResult": "pass"
     }
   ],
@@ -64,7 +66,6 @@
   "vin": "P012301293847",
   "vehicleSize": "small",
   "testStationName": "Rowe, Wunsch and Wisoky",
-  "vehicleId": "BQ91YHQ",
   "vehicleType": "hgv",
   "countryOfRegistration": "united kingdom",
   "preparerId": "ak4434",
