@@ -93,7 +93,6 @@ public class PostTestResultsRoadworthiness {
 
     @Ignore("Until the defect CVSB-12108 is solved")
     @Title("CVSB-7675 - TC3 - Negative (HGV) - FAIL")
-    @Test
     public void testResults_Roadworthiness_HGV_Fail_Certificate_Number() {
 
         // Read the base test result JSON.
@@ -125,7 +124,6 @@ public class PostTestResultsRoadworthiness {
 
     @Ignore("Until the defect CVSB-12108 is solved")
     @Title("CVSB-7675 - TC4 - Negative (TRL) - FAIL")
-    @Test
     public void testResults_Roadworthiness_TRL_Fail_Certificate_Number() {
 
         // Read the base test result JSON.

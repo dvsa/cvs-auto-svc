@@ -118,7 +118,6 @@ public class GetVehicleTechnicalRecords {
     @Ignore("No longer a valid test case")
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1161 - AC5 - Multiple results returned")
-    @Test
     public void testVehicleTechnicalRecordsSearchMultipleResults() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("678413");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(422);

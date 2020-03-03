@@ -39,7 +39,6 @@ public class PostLogs {
 
     @Ignore("Remove the ignore annotation after CVSB-5968 is done")
     @Title("CVSB-5558 bad request scenario")
-    @Test
     public void tryPutActionOnService() {
         logsSteps.putLogs(LogsData.buildLogsData());
         logsSteps.statusCodeShouldBe(400);

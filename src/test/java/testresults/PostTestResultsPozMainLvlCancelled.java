@@ -179,7 +179,6 @@ public class PostTestResultsPozMainLvlCancelled {
 
     @Ignore ("empty testerStaffId should be accepted but returned an error - instead returns bad Gateway - defect id CVSB-9018")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - testerStaffId")
-    @Test
     public void testResultsLengthEmptyTesterStaffId() {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
@@ -629,7 +628,6 @@ public class PostTestResultsPozMainLvlCancelled {
 
     @Ignore ("vehicleConfiguration = articulated should have returned 201 - instead returns bad Gateway - defect Id CVSB-9017")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration articulated")
-    @Test
     public void testResultsVehicleConfigurationValueTwo() {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))

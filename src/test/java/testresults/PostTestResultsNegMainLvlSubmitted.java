@@ -488,7 +488,6 @@ public class PostTestResultsNegMainLvlSubmitted {
     //TODO - possible problem with gateway
     @Ignore ("missing testStatus should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testStatus")
-    @Test
     public void testResultsMissingTestStatus() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testStatus", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
@@ -500,7 +499,6 @@ public class PostTestResultsNegMainLvlSubmitted {
     //TODO - possible problem with gateway
     @Ignore ("null testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStatus")
-    @Test
     public void testResultsNullTestStatus() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testStatus", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -512,7 +510,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("integer testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testStatus")
-    @Test
     public void testResultsIntegerTestStatus() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testStatus", RandomStringUtils.randomNumeric(1, 9), ToTypeConvertor.INTEGER, TestResultsLevel.MAIN_LEVEL);
@@ -522,7 +519,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("random testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStatus random")
-    @Test
     public void testResultsValueTestStatus() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setTestStatus(RandomStringUtils.randomAlphanumeric(10)).build());
@@ -532,7 +528,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("empty testStatus should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStatus empty")
-    @Test
     public void testResultsValueTestStatusEmpty() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setTestStatus("").build());
@@ -689,7 +684,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("missing vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - vehicleType")
-    @Test
     public void testResultsMissingVehicleType() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "vehicleType", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
@@ -699,7 +693,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("null vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleType")
-    @Test
     public void testResultsNullVehicleType() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "vehicleType", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -709,7 +702,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("integer vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - vehicleType")
-    @Test
     public void testResultsIntegerVehicleType() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "vehicleType", RandomStringUtils.randomNumeric(1,9), ToTypeConvertor.INTEGER, TestResultsLevel.MAIN_LEVEL);
@@ -719,7 +711,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("random vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicleType random")
-    @Test
     public void testResultsValueVehicleType() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setVehicleType(RandomStringUtils.randomAlphanumeric(10)).build());
@@ -729,7 +720,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("empty vehicleType should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicleType empty")
-    @Test
     public void testResultsValueVehicleTypeEmpty() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setVehicleType("").build());
@@ -835,7 +825,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - odometerReading")
-    @Test
     public void testResultsNullOdometerReading() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "odometerReading", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -865,7 +854,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - odometerReadingUnits")
-    @Test
     public void testResultsNullOdometerReadingUnits() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "odometerReadingUnits", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -896,7 +884,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - odometerReadingUnits empty")
-    @Test
     public void testResultsOdometerReadingUnitsEmpty() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setOdometerReadingUnits("").build());
@@ -973,7 +960,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - euVehicleCategory")
-    @Test
     public void testResultsNullEuVehicleCategory() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "euVehicleCategory", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -1003,7 +989,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - euVehicleCategory empty")
-    @Test
     public void testResultsValueEuVehicleCategoryEmpty() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setEuVehicleCategory("").build());
@@ -1023,7 +1008,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - countryOfRegistration")
-    @Test
     public void testResultsNullCountryOfRegistration() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "countryOfRegistration", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -1033,7 +1017,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - countryOfRegistration")
-    @Test
     public void testResultsIntegerCountryOfRegistration() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "countryOfRegistration", RandomStringUtils.randomNumeric(1,9), ToTypeConvertor.INTEGER, TestResultsLevel.MAIN_LEVEL);
@@ -1092,7 +1075,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11495")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testTypes")
-    @Test
     public void testResultsTestTypesAsNull() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setTestTypes(null).build());
@@ -1103,7 +1085,6 @@ public class PostTestResultsNegMainLvlSubmitted {
 
     @Ignore ("Defect - CVSB-11495")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testTypes")
-    @Test
     public void testResultsTestTypesMissing() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testTypes", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
