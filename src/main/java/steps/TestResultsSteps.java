@@ -34,22 +34,32 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void getTestResultsSysNumber(String systemNumber) {
+        response = testResultsClient.getTestResultsSysNumber(systemNumber);
+    }
+
+    @Step
     public void getTestResultsNotAuthenticated(String vin) {
-        setMissingAtuh();
+        setMissingAuth();
         response = testResultsClient.callGetTestResults(vin);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
     public void getTestResultsNotAuthorised(String vin) {
-        setWrongAtuh();
+        setWrongAuth();
         response = testResultsClient.callGetTestResults(vin);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
     public void getTestResults(String vin, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsWithStatus(vin, testResultsStatus.getStatus());
+    }
+
+    @Step
+    public void getTestResultsWithStatusAndSysNumber(String systemNumber, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsWithStatusAndSysNumber(systemNumber, testResultsStatus.getStatus());
     }
 
     @Step
@@ -59,16 +69,16 @@ public class TestResultsSteps {
 
     @Step
     public void postTestResultsNotAuthorised(TestResults testResults) {
-        setWrongAtuh();
+        setWrongAuth();
         response = testResultsClient.callPostTestResults(testResults);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
     public void postTestResultsNotAuthenticated(TestResults testResults) {
-        setMissingAtuh();
+        setMissingAuth();
         response = testResultsClient.callPostTestResults(testResults);
-        setRightAtuh();
+        setRightAuth();
     }
 
     @Step
@@ -637,6 +647,13 @@ public class TestResultsSteps {
     @Step
     public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
+    }
+
+    @Step
+    public void postVehicleTestResultsWithNoAuthorization(String requestBody) {
+        setWrongAuth();
+        this.response = testResultsClient.callPostVehicleTestResultsWithNoAuthorization(requestBody);
+        setRightAuth();
     }
 
     @Step

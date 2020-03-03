@@ -231,5 +231,4 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
         testResultsSteps.validateVehicleFieldMayExist("firstUseDate");
     }
-
 }

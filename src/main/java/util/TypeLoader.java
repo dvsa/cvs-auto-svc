@@ -15,24 +15,24 @@ public class TypeLoader {
         return System.getProperty("environment");
     }
 
-    public static boolean isWrongAtuh() {
+    public static boolean isWrongAuth() {
         return wrongAuth.get();
     }
 
-    public static boolean isMissingtuh() {
+    public static boolean isMissingAuth() {
         return missingAuth.get();
     }
 
-    public static void setWrongAtuh() {
+    public static void setWrongAuth() {
         wrongAuth.set(true);
     }
 
-    public static void setRightAtuh() {
+    public static void setRightAuth() {
         wrongAuth.set(false);
         missingAuth.set(false);
     }
 
-    public static void setMissingAtuh() {
+    public static void setMissingAuth() {
         missingAuth.set(true);
     }
 

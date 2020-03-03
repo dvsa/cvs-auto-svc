@@ -14,7 +14,6 @@ public class TestResultsData {
         return testResults;
     }
 
-
     public static TestResultsGet.Builder buildTestResultsCancelleddDataWithCalculated() {
 
         TestResultsGet.Builder testResults = buildTestResultsCancelledData();

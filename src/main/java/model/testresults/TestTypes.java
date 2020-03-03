@@ -43,7 +43,6 @@ public class TestTypes {
         private List<Defects> defects;
         private String additionalCommentsForAbandon;
 
-
         public Builder() {
         }
 
@@ -125,6 +124,8 @@ public class TestTypes {
         public TestTypes build() {
             return new TestTypes(this);
         }
+
+
     }
 
     protected TestTypes(TestTypes.Builder<?> builder) {
