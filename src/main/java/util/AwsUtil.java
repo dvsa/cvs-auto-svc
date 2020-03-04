@@ -67,9 +67,9 @@ public class AwsUtil {
 
         System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
 
-        for(int i = 0; i < 30 ; i++) {
+        for(int i = 0; i < 45 ; i++) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -78,7 +78,7 @@ public class AwsUtil {
             }
             System.out.println("waited for: " + i + " seconds...");
         }
-        System.out.println("file " + key + " was not created in 15 or less seconds..");
+        System.out.println("file " + key + " was not created in 45 or less seconds..");
         return false;
     }
 
