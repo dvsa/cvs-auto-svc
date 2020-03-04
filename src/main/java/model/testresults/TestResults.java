@@ -23,6 +23,7 @@ public class TestResults {
     private String vehicleType;
     private Integer numberOfSeats;
     private Integer noOfAxles;
+    private Integer numberOfWheelsDriven;
     private String vehicleConfiguration;
     private Integer odometerReading;
     private String odometerReadingUnits;
@@ -61,6 +62,7 @@ public class TestResults {
         private String vehicleType;
         private Integer numberOfSeats;
         private Integer noOfAxles;
+        private Integer numberOfWheelsDriven;
         private String vehicleConfiguration;
         private Integer odometerReading;
         private String odometerReadingUnits;
@@ -164,6 +166,11 @@ public class TestResults {
             return (T) this;
         }
 
+        public T setNumberOfWheelsDriven(Integer numberOfWheelsDriven) {
+            this.numberOfWheelsDriven = numberOfWheelsDriven;
+            return (T) this;
+        }
+
 
         public T setVehicleConfiguration(String vehicleConfiguration) {
             this.vehicleConfiguration = vehicleConfiguration;
@@ -243,6 +250,7 @@ public class TestResults {
         this.vehicleType = builder.vehicleType;
         this.numberOfSeats = builder.numberOfSeats;
         this.noOfAxles = builder.noOfAxles;
+        this.numberOfWheelsDriven = builder.numberOfWheelsDriven;
         this.vehicleConfiguration = builder.vehicleConfiguration;
         this.odometerReading = builder.odometerReading;
         this.odometerReadingUnits = builder.odometerReadingUnits;
@@ -325,6 +333,10 @@ public class TestResults {
 
     public Integer getNoOfAxles() {
         return noOfAxles;
+    }
+
+    public Integer getNumberOfWheelsDriven() {
+        return numberOfWheelsDriven;
     }
 
     public String getVehicleConfiguration() {

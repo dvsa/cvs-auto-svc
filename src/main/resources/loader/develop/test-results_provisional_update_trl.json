@@ -1,6 +1,7 @@
 {
   "preparerId": "No preparer ID found",
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
   "vehicleClass": {
     "code": "t",
     "description": "trailer"
@@ -29,7 +30,9 @@
       "reasonForAbandoning": null,
       "defects": [],
       "additionalNotesRecorded": null,
-      "testResult": "pass"
+      "testResult": "pass",
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456"
     }
   ],
   "trailerId": "D194840",

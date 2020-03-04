@@ -940,7 +940,8 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "euVehicleCategory", RandomStringUtils.randomNumeric(1,9), ToTypeConvertor.INTEGER, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, n2, n3, o1, o2, o3, o4, null]");
+        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, " +
+                "n2, n3, o1, o2, o3, o4, l1e-a, l1e, l2e, l3e, l4e, l5e, l6e, l7e, null]");
     }
 
 
@@ -950,7 +951,8 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVrm(VRM).setEuVehicleCategory(RandomStringUtils.randomAlphanumeric(10)).build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, n2, n3, o1, o2, o3, o4, null]");
+        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, " +
+                "n2, n3, o1, o2, o3, o4, l1e-a, l1e, l2e, l3e, l4e, l5e, l6e, l7e, null]");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - euVehicleCategory empty")
@@ -959,7 +961,8 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVrm(VRM).setEuVehicleCategory("").build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, n2, n3, o1, o2, o3, o4, null]");
+        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, " +
+                "n2, n3, o1, o2, o3, o4, l1e-a, l1e, l2e, l3e, l4e, l5e, l6e, l7e, null]");
     }
 
 
