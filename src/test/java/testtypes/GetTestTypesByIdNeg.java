@@ -126,8 +126,7 @@ public class GetTestTypesByIdNeg {
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleType\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleType.class) + "]");
-
+        testTypeSteps.validateData("Query parameter \\\"vehicleType\\\" is not allowed to be empty");
     }
 
     @Title("CVSB-1073 / CVSB-2420 - Query param 'vehicleSize' missing")
@@ -146,18 +145,16 @@ public class GetTestTypesByIdNeg {
     @Title("CVSB-1073 / CVSB-2421 - Query param 'vehicleSize' empty")
     @Test
     public void testTypeEmptyRequiredFieldVehicleSize() {
+            TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                    .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                    .setVehicleType(VehicleType.PSV)
+                    .setVehicleSize(VehicleSize.EMPTY)
+                    .setVehicleConfiguration(VehicleConfiguration.RIGID);
+            testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
+            testTypeSteps.statusCodeShouldBe(400);
+            testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" is not allowed to be empty");
+        }
 
-        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
-                .setVehicleType(VehicleType.PSV)
-                .setVehicleSize(VehicleSize.EMPTY)
-                .setVehicleConfiguration(VehicleConfiguration.RIGID);
-
-        testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleSize.class) + "]");
-
-    }
 
     @Title("CVSB-1073 / CVSB-2422 - Query param 'vehicleConfiguration' missing")
     @Test
@@ -219,8 +216,8 @@ public class GetTestTypesByIdNeg {
     }
 
 
+    @Ignore ("Scenario no longer valid")
     @Title("CVSB-1073 / CVSB-2026 - Query param 'vehicleConfiguration' invalid")
-    @Test
     public void testTypeInvalidFieldVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
