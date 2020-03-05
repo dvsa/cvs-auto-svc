@@ -228,7 +228,7 @@ public class GetTestTypesByIdNeg {
                 .setVehicleConfiguration(VehicleConfiguration.INVALID);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
+        testTypeSteps.statusCodeShouldBe(404);
         testTypeSteps.validateData("No resources match the search criteria.");
     }
 

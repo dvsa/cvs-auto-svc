@@ -1272,24 +1272,6 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
     @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 2")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet2() {
-//        // testTypeOne: testTypeId:1 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
-//        // testTypeTwo: testTypeId:30 ; vehicleType:psv ; vehicleSize:small ; vehicleConfiguration:rigid ; noOfAxles:3 ;
-//        TestTypes testTypesOne = ((TestTypes) vehicleSubmittedDataOne.getTestTypes().get(0)).setTestTypeId("1");
-//        TestTypes testTypesTwo = ((TestTypes) vehicleSubmittedDataTwo.getTestTypes().get(0)).setTestTypeId("30");
-//
-//        vehicleSubmittedDataOne.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOne.build().getVin()))
-//                .setTestTypes(Arrays.asList(testTypesOne, testTypesTwo))
-//                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOne.build().getVrm()))
-//                .setVehicleType("psv")
-//                .setNoOfAxles(3)
-//                .setVehicleSize("small")
-//                .setVehicleConfiguration(("rigid")).build();
-//
-//        testResultsSteps.postTestResults(vehicleSubmittedDataOne.build());
-//        testResultsSteps.statusCodeShouldBe(201);
-//        testResultsSteps.validateData("Test records created");
-//        validateSavedData("aas", "qgs");
-
         // TEST SETUP
         //generate random system number
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
