@@ -9,12 +9,14 @@ import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.junit.Assert;
 import org.skyscreamer.jsonassert.JSONAssert;
 import util.JsonPathAlteration;
-import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static data.GenericData.*;
 import static org.hamcrest.Matchers.*;
 
 public class VehicleTechnicalRecordsSteps {
@@ -274,16 +276,13 @@ public class VehicleTechnicalRecordsSteps {
         System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
 
         for(int i=0; i < seconds; i++) {
-            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(vin);
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
             int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
-
             for (int j = 0; j < noVehicles; j++) {
 
-                System.out.println("record number is: " + response.then().extract().jsonPath().get("[" + j + "].techRecord.size()"));
-
-                int recordsNumber = response.then().extract().jsonPath().get("[" + j + "].techRecord.size()");
+                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
 
                 System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
@@ -308,7 +307,7 @@ public class VehicleTechnicalRecordsSteps {
             JSONArray jsonArray = new  JSONArray(response.body().asString());
             for(int i=0;i<jsonArray.length();i++){
                 if(jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber)&&jsonArray.getJSONObject(i).get("vin").equals(vin)){
-                    System.out.println("i: "+ i + "  " + jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
+//                    System.out.println("i: "+ i + "  " + jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
                     Assert.assertEquals(value, jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
                 }
             }
@@ -328,11 +327,9 @@ public class VehicleTechnicalRecordsSteps {
                     for(int j=0;j<techRecords.length();j++){
                         if(techRecords.getJSONObject(j).get(field).toString().equals(value)) {
                             return true;
-//                            Assert.assertEquals(value, jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
                         }
                     }
                 }
-//                return false;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -340,7 +337,19 @@ public class VehicleTechnicalRecordsSteps {
         return false;
     }
 
-    public void valueForFieldInAnyTechRecordShouldBe(String systemNumber, String vin, String field, String value) {
+    public void valueForFieldInAnyTechRecordShouldBe2(String systemNumber, String vin, String field, String value) {
         Assert.assertTrue(checkValueForFieldInAnyTechRecord(systemNumber, vin, field, value));
+    }
+
+    public void valueForFieldInAnyTechRecordShouldBe(String systemNumber, String vin, String fieldName, String value){
+        String jsonString = response.body().asString();
+        ArrayList<String> list = extractArrayListStringFromJsonString(jsonString,"$[?(@.systemNumber=='" + systemNumber + "' && @.vin=='" + vin + "') ].techRecord[*]." + fieldName);
+        Assert.assertTrue(list.contains(value));
+    }
+
+    public void valueForFieldInAnyTechRecordShouldBe(String systemNumber, String vin, String fieldName, int value){
+        String jsonString = response.body().asString();
+        ArrayList<Integer> list = extractArrayListIntegerFromJsonString(jsonString,"$[?(@.systemNumber=='" + systemNumber + "' && @.vin=='" + vin + "') ].techRecord[*]." + fieldName);
+        Assert.assertTrue(list.contains(value));
     }
 }
