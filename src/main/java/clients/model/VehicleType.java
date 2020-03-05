@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public enum VehicleType implements PropertyValued {
 
-    HGV("hgv"), PSV("psv"), TRL("trl"), CAR("car"), LGC("lgv"), MOTORCYCLE("motorcycle"), EMPTY(""),
+    HGV("hgv"), PSV("psv"), TRL("trl"), CAR("car"), LGV("lgv"), MOTORCYCLE("motorcycle"), EMPTY(""),
     INVALID("invalid") {
         @Override
         public String getValue() {
