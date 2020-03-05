@@ -155,7 +155,7 @@ public class GetTestTypesByIdNeg {
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleSize.class) + "]");
+        testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" is not allowed to be empty");
 
     }
 
