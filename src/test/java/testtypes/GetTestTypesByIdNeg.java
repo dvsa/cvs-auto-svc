@@ -218,7 +218,6 @@ public class GetTestTypesByIdNeg {
 
     @Ignore ("Scenario no longer valid")
     @Title("CVSB-1073 / CVSB-2026 - Query param 'vehicleConfiguration' invalid")
-    @Test
     public void testTypeInvalidFieldVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
