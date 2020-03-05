@@ -72,7 +72,7 @@ public class PostTestResultsExpiryDateLogicPsv {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test NO PREVIOUS Expiry Date")
     @Test
@@ -164,7 +164,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
@@ -314,7 +314,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today")
     @Test
@@ -463,7 +463,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 1 day")
     @Test
@@ -612,7 +612,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months")
     @Test
@@ -761,7 +761,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months + 1 day")
     @Test
@@ -910,7 +910,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
     @Test
