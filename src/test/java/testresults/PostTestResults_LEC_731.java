@@ -129,7 +129,7 @@ public class PostTestResults_LEC_731 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeName", "Low Emissions Certificate (LEC) with annual test");
 
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].fuelType", "diesel");
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].emissionStandard", "0.16 g/kWh Euro 3 PM");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].emissionStandard", "0.10 g/kWh Euro 3 PM");
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].modType.code", "p");
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].modType.description", "particulate trap");
     }
