@@ -228,7 +228,7 @@ public class PostTestResultsExpiryDateLogicHgvFirstTest {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomSystemNo);
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
