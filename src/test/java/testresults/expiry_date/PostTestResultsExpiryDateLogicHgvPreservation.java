@@ -147,7 +147,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = last day of previous month (EXPIRED)")
     @Test
     public void testResultsFirstTestExpiryHgvTodayMinusOneDay() {
