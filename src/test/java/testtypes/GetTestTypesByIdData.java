@@ -3857,8 +3857,8 @@ public class GetTestTypesByIdData {
                 .setVehicleAxles(VehicleAxles.NULL);
 
         testTypeSteps.getTestTypesById(TestTypes.AAL.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(404);
-        testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
+        testTypeSteps.statusCodeShouldBe(400);
+        testTypeSteps.validateRawData("Query parameter \\\"vehicleConfiguration\\\" must be one of [articulated, rigid, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar, null]");
     }
 
     @Title("CVSB-7392 / CVSB-8480 - AC2.2 API Consumer sends a null value for 'vehicleConfiguration'")
