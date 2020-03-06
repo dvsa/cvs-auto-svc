@@ -432,6 +432,7 @@ public class TestResultsClient {
                 .pathParam("vin", vin)
                 .queryParam("fromDateTime", fromDateTime)
                 .queryParam("toDateTime", toDateTime)
+                .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
 
         return response;
