@@ -670,4 +670,12 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[0]", "recordCompleteness");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness", "skeleton");
     }
+
+    @Title("CVSB-12013 - TC - AC2 BE API consumer performs a GET call for tech records microservice")
+    @Test
+    public void testVehicleTechnicalRecords_VinSpecialCharacters() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("YV31ME00000 1/\\*-1", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", "YV31ME00000 1/\\*-1");
+    }
 }
