@@ -57,7 +57,6 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         this.testCode = testCode;
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate = null")
     @Test
@@ -142,7 +141,6 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate is missing")
     @Test
@@ -235,7 +233,6 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate = Today(-1 year, +1 month)")
     @Test
@@ -330,7 +327,6 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate = Today(-1 year, -1 month)")
     @Test
