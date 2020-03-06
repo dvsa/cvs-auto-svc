@@ -26,7 +26,7 @@ public class GetTestResultsVinSpecialCharacters {
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
 
-    @Title("CVSB-12015 - AC3 API Consumer creates a new test results for the submitted test (fuelType)")
+    @Title("CVSB-12013 - TC - AC2 BE API consumer performs a GET call for tech records microservice")
     @Test
     public void testTestResultsPostVinWithSpecialCharacters() {
         // Read the base test result JSON.
@@ -58,7 +58,7 @@ public class GetTestResultsVinSpecialCharacters {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
-        // Verify that the fuel type was as entered.
+        // Verify that the VIN was as entered.
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin", randomVinWithSpecialCharacters);
     }
 }
