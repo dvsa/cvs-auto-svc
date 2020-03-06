@@ -67,7 +67,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Preservation Test - NO Previous Expiry Date")
     @Test
@@ -90,6 +89,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         String testExpectedDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
 
@@ -99,6 +99,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
@@ -121,6 +122,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationTestTypeName,
                 alterationNoOfAxles,
                 alterationTestExpiryDate,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -130,7 +132,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -144,7 +146,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = last day of previous month (EXPIRED)")
     @Test
@@ -160,6 +161,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         //
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusMonths(1).dayOfMonth().withMaximumValue().minusYears(1).plusDays(1).minusMinutes(15);
@@ -184,6 +186,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
@@ -207,6 +210,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
                 alterationInsertTestCode,
+                alterationInsertSysNo,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -217,11 +221,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
-
-//        System.out.println("\n######################## INSERTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
-//        System.out.println("\n########################    END   ########################\n\n");
-
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
@@ -243,8 +242,8 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -263,6 +262,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -270,15 +270,11 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
 
-//        System.out.println("\n######################## POSTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
-//        System.out.println("\n########################   END  ########################\n\n");
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResultsBetweenDate(randomVin, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNo, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -292,7 +288,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = end of this month (EXPIRES THIS MONTH)")
     @Test
@@ -308,6 +303,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         //
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -332,6 +328,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
@@ -355,6 +352,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
                 alterationInsertTestCode,
+                alterationInsertSysNo,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -365,11 +363,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
-
-//        System.out.println("\n######################## INSERTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
-//        System.out.println("\n########################    END   ########################\n\n");
-
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
@@ -391,8 +384,8 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -411,6 +404,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -418,15 +412,11 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
 
-//        System.out.println("\n######################## POSTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
-//        System.out.println("\n########################   END  ########################\n\n");
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResultsBetweenDate(randomVin, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNo, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -440,7 +430,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = next month (EXPIRES NEXT MONTH)")
     @Test
@@ -456,6 +445,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         //
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -480,6 +470,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
@@ -503,6 +494,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
                 alterationInsertTestCode,
+                alterationInsertSysNo,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -513,11 +505,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
-
-//        System.out.println("\n######################## INSERTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(alteredJson).getAsJsonObject()));
-//        System.out.println("\n########################    END   ########################\n\n");
-
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
@@ -539,6 +526,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
@@ -558,6 +546,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -565,15 +554,11 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
 
-//        System.out.println("\n######################## POSTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
-//        System.out.println("\n########################   END  ########################\n\n");
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResultsBetweenDate(randomVin, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNo, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -587,7 +572,6 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = two months ahead (EARLY FOR TEST)")
     @Test
@@ -603,6 +587,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         //
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -627,6 +612,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
@@ -650,6 +636,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
                 alterationInsertTestCode,
+                alterationInsertSysNo,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -682,8 +669,8 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -702,6 +689,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -709,15 +697,11 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
 
-//        System.out.println("\n######################## POSTED ########################\n\n");
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(GenericData.applyJsonAlterations(postTestResultRecord, alterations)).getAsJsonObject()));
-//        System.out.println("\n########################   END  ########################\n\n");
-
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResultsBetweenDate(randomVin, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNo, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
