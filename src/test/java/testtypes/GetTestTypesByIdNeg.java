@@ -215,9 +215,8 @@ public class GetTestTypesByIdNeg {
         testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleSize.class) + "]");
     }
 
-
-    @Ignore ("Scenario no longer valid")
     @Title("CVSB-1073 / CVSB-2026 - Query param 'vehicleConfiguration' invalid")
+    @Test
     public void testTypeInvalidFieldVehicleConfiguration() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -227,8 +226,8 @@ public class GetTestTypesByIdNeg {
                 .setVehicleConfiguration(VehicleConfiguration.INVALID);
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(404);
-        testTypeSteps.validateData("No resources match the search criteria.");
+        testTypeSteps.statusCodeShouldBe(400);
+        testTypeSteps.validateData("Query parameter \\\"vehicleConfiguration\\\" must be one of [articulated, rigid, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar, null]");
     }
 
 
