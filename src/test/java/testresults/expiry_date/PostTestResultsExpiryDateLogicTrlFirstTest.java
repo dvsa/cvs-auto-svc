@@ -57,14 +57,13 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         this.testCode = testCode;
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate = null")
     @Test
     public void testResultsFirstTestExpiryTrlFirstDateNull() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_expiry_date_trl_8684.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8684.json", "$");
 
         DateTime submittedTestStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
         DateTime submittedTestTypeStartTimestamp = submittedTestStartTimestamp.plusMinutes(5);
@@ -80,6 +79,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String testExpectedDate = submittedTypeEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
         JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
@@ -88,102 +88,6 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
-        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
-        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
-        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
-        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
-        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
-        JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationFirstUseDate,
-                alterationTestStartTimestamp,
-                alterationTestEndTimestamp,
-                alterationTestTypeStartTimestamp,
-                alterationTestTypeEndTimestamp,
-                alterationVin,
-                alterationTestResultId,
-                alterationTestName,
-                alterationTestTypeId,
-                alterationTestTypeName,
-                alterationNoOfAxles,
-                alterationTestExpiryDate,
-                alterationTestResult
-        ));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-
-        // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
-        testResultsSteps.statusCodeShouldBe(200);
-
-        // Verify testCode field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
-
-        // Verify firstUseDate is
-        testResultsSteps.valueForFieldInPathShouldBe("[0].firstUseDate", firstUseDate);
-
-        // Verify testTypeEndTimestamp is
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
-
-        // Verify testAnniversaryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", testExpectedDate);
-
-        // Verify testExpiryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", testExpectedDate);
-
-    }
-
-    @Ignore
-    @WithTag("expiry_dates")
-    @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate is missing")
-    @Test
-    public void testResultsFirstTestExpiryTrlFirstDateMissing() {
-
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_expiry_date_trl_8684.json", "$");
-
-        DateTime submittedTestStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-        DateTime submittedTestTypeStartTimestamp = submittedTestStartTimestamp.plusMinutes(5);
-        DateTime submittedTypeEndTimestamp = submittedTestTypeStartTimestamp.plusMinutes(10);
-        DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
-
-        // Create alteration to add one more tech record to in the request body
-        String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
-        String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
-        String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
-        String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
-        String testExpectedDate = submittedTypeEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
-        String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-
-
-//        String returned_testTypeEndTimestamp = "";
-//        String returned_testExpiryDate = "";
-//        String returned_createdAt = "";
-//        String returned_testTypeStartTimestamp = "";
-
-//        System.out.println("submittedFirstUseDate: " + firstUseDate);
-//        System.out.println("submittedTestStartTimestamp: " + testStartTimestamp);
-//        System.out.println("submittedTestTypeStartTimestamp: " + testTypeStartTimestamp);
-//        System.out.println("submittedTestTypeEndTimestamp: " + testTypeEndTimestamp);
-//        System.out.println("submittedTestEndTimestamp: " + testEndTimestamp);
-//        System.out.println("returned_testAnniversaryDate: " + testExpectedDate);
-
-        JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", "", "", "DELETE");
-        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
@@ -207,6 +111,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
                 alterationTestTypeName,
                 alterationNoOfAxles,
                 alterationTestExpiryDate,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -216,7 +121,102 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        // Verify testCode field has the expected value
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
+
+        // Verify firstUseDate is
+        testResultsSteps.valueForFieldInPathShouldBe("[0].firstUseDate", firstUseDate);
+
+        // Verify testTypeEndTimestamp is
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
+
+        // Verify testAnniversaryDate field has the expected value
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", testExpectedDate);
+
+        // Verify testExpiryDate field has the expected value
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", testExpectedDate);
+
+    }
+
+    @WithTag("expiry_dates")
+    @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate is missing")
+    @Test
+    public void testResultsFirstTestExpiryTrlFirstDateMissing() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8684.json", "$");
+
+        DateTime submittedTestStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+        DateTime submittedTestTypeStartTimestamp = submittedTestStartTimestamp.plusMinutes(5);
+        DateTime submittedTypeEndTimestamp = submittedTestTypeStartTimestamp.plusMinutes(10);
+        DateTime submittedEndTimestamp = submittedTypeEndTimestamp.plusMinutes(5);
+
+        // Create alteration to add one more tech record to in the request body
+        String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
+        String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
+        String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
+        String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
+        String testExpectedDate = submittedTypeEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).withTimeAtStartOfDay().toInstant().toString();
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+
+//        String returned_testTypeEndTimestamp = "";
+//        String returned_testExpiryDate = "";
+//        String returned_createdAt = "";
+//        String returned_testTypeStartTimestamp = "";
+
+//        System.out.println("submittedFirstUseDate: " + firstUseDate);
+//        System.out.println("submittedTestStartTimestamp: " + testStartTimestamp);
+//        System.out.println("submittedTestTypeStartTimestamp: " + testTypeStartTimestamp);
+//        System.out.println("submittedTestTypeEndTimestamp: " + testTypeEndTimestamp);
+//        System.out.println("submittedTestEndTimestamp: " + testEndTimestamp);
+//        System.out.println("returned_testAnniversaryDate: " + testExpectedDate);
+
+        JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", "", "", "DELETE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
+        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles,"","REPLACE");
+        JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", "", "", "DELETE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationFirstUseDate,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp,
+                alterationVin,
+                alterationTestResultId,
+                alterationTestName,
+                alterationTestTypeId,
+                alterationTestTypeName,
+                alterationNoOfAxles,
+                alterationTestExpiryDate,
+                alterationSysNo,
+                alterationTestResult
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Retrieve the created record, and verify that the fields are present.
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -233,14 +233,13 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate = Today(-1 year, +1 month)")
     @Test
     public void testResultFirstTestExpiryTrlFirstUseDateLessThanOneYear() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_expiry_date_trl_8684.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8684.json", "$");
 
         DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
         DateTime submittedTestStartTimestamp = currentTime.minusMinutes(15);
@@ -257,6 +256,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
         String testExpectedExpiryDate = submittedFirstUseDate.dayOfMonth().withMaximumValue().plusYears(2).toInstant().toString();
@@ -279,6 +279,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
@@ -299,6 +300,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -308,7 +310,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -325,14 +327,13 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
 
     }
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL First Test - NO Previous Expiry Date - firstUseDate = Today(-1 year, -1 month)")
     @Test
     public void testResultsFirstTestExpiryTrlFirstUseDateMoreThanOneYear() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_expiry_date_trl_8684.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8684.json", "$");
 
         DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
         DateTime submittedTestStartTimestamp = currentTime.minusMinutes(15);
@@ -349,6 +350,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
         String testExpectedExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
@@ -371,6 +373,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
@@ -391,6 +394,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -400,7 +404,7 @@ public class PostTestResultsExpiryDateLogicTrlFirstTest {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
