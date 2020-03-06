@@ -70,7 +70,6 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
     }
 
 
-    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Preservation Test - NO Previous Expiry Date")
     @Test
@@ -93,6 +92,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         String testExpectedDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
 
@@ -102,8 +102,8 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -123,6 +123,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
@@ -132,7 +133,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify testCode field has the expected value
@@ -146,8 +147,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
-    @Ignore
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = last day of previous month (EXPIRED)")
     @Test
     public void testResultsFirstTestExpiryHgvTodayMinusOneDay() {
@@ -162,6 +162,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         //
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
 
         // Create inserted record.
         DateTime insertedTestStartTimestamp = currentTimestamp.minusYears(1).minusMinutes(15);
@@ -186,6 +187,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
         JsonPathAlteration alterationInsertTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationInsertTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestamp, "", "REPLACE");
@@ -209,6 +211,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
                 alterationInsertCreatedAt,
                 alterationInsertTestTypeEndTimestamp,
                 alterationInsertTestCode,
+                alterationInsertSysNo,
                 alterationInsertTestEndTimestamp
         ));
 
@@ -240,8 +243,8 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", name, "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName, "", "REPLACE");
@@ -260,6 +263,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationNoOfAxles,
+                alterationSysNo,
                 alterationTestResult
         ));
 
