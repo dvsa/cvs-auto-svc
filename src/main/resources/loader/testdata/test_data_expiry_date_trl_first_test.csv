@@ -1,4 +1,33 @@
 NAME, TEST TYPE NAME, TEST TYPE ID, NO OF AXLES, TEST RESULT, TEST CODE
+First test, First test, 41, 1, pass, fft1
+First test, First test, 95, 2, pass, fft2
+First test, First test, 95, 3, pass, fft3
+First test, First test, 95, 4, pass, fft4
+First test, First test, 95, 5, pass, fft5
+Paid, Paid first test retest, 103, 1, pass, rgt1
+Paid, Paid first test retest, 65, 2, pass, rgt2
+Paid, Paid first test retest, 65, 3, pass, rgt3
 Paid, Paid first test retest, 65, 4, pass, rgt4
+Paid, Paid first test retest, 65, 5, pass, rgt5
+Part paid, Part paid first test retest, 104, 1, pass, rit1
+Part paid, Part paid first test retest, 66, 2, pass, rit2
+Part paid, Part paid first test retest, 66, 3, pass, rit3
+Part paid, Part paid first test retest, 66, 4, pass, rit4
 Part paid, Part paid first test retest, 66, 5, pass, rit5
+Free, Free first test retest, 67, 3, pass, rht
+First test, First test, 41, 1, prs, fft1
+First test, First test, 95, 2, prs, fft2
+First test, First test, 95, 3, prs, fft3
+First test, First test, 95, 4, prs, fft4
+First test, First test, 95, 5, prs, fft5
+Paid, Paid first test retest, 103, 1, prs, rgt1
+Paid, Paid first test retest, 65, 2, prs, rgt2
+Paid, Paid first test retest, 65, 3, prs, rgt3
+Paid, Paid first test retest, 65, 4, prs, rgt4
 Paid, Paid first test retest, 65, 5, prs, rgt5
+Part paid, Part paid first test retest, 104, 1, prs, rit1
+Part paid, Part paid first test retest, 66, 2, prs, rit2
+Part paid, Part paid first test retest, 66, 3, prs, rit3
+Part paid, Part paid first test retest, 66, 4, prs, rit4
+Part paid, Part paid first test retest, 66, 5, prs, rit5
+Free, Free first test retest, 67, 3, prs, rht
