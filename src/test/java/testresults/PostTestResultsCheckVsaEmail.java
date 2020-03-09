@@ -1,18 +1,10 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import exceptions.AutomationException;
-import model.testresults.TestResults;
-import model.testresults.TestResultsGet;
-import model.testresults.TestResultsStatus;
-import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
-import org.apache.commons.exec.environment.EnvironmentUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +13,6 @@ import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.*;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -37,9 +28,6 @@ public class PostTestResultsCheckVsaEmail {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-    private static final String FILE_PATH = "conf/environment.properties";
-
-    @WithTag("In_Test")
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {

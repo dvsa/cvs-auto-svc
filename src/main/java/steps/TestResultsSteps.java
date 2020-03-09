@@ -39,6 +39,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void getTestResultsSysNumber(String systemNumber) {
+        response = testResultsClient.getTestResultsSysNumber(systemNumber);
+    }
+
+    @Step
     public void getTestResultsNotAuthenticated(String vin) {
         setMissingAuth();
         response = testResultsClient.callGetTestResults(vin);

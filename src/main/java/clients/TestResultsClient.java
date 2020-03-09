@@ -42,6 +42,19 @@ public class TestResultsClient {
 
     }
 
+    public Response getTestResultsSysNumber(String systemNumber) {
+
+        Response response = callGetTestResults(systemNumber);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResults(systemNumber);
+        }
+
+        return response;
+
+    }
+
     public Response getTestResultsWithStatus(String vin, String status) {
 
         Response response = callFetTestResultsWithStatus(vin, status);
@@ -285,6 +298,19 @@ public class TestResultsClient {
 
 
     public Response callGetTestResults(String systemNumber) {
+
+        Response response = given()
+                .filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/test-results/{systemNumber}");
+
+        return response;
+    }
+
+    public Response callGetTestResultsSysNum(String systemNumber) {
 
         Response response = given()
                 .filters(new BasePathFilter())
