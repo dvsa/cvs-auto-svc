@@ -539,7 +539,6 @@ public class PostTestResultsNegDefectsLvlCancelled {
 
     @Ignore ("Logic is implemented in the frontend - not possible to submit without 'additionalInformation' - defect CVSB-9010")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
-    @Test
     public void testResultsAdditionalInformationMissing() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "additionalInformation", ToTypeConvertor.MISSING, TestResultsLevel.DEFECTS);

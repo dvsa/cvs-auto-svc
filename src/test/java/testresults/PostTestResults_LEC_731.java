@@ -41,6 +41,7 @@ public class PostTestResults_LEC_731 {
 
         // AC4 API Consumer creates a new test results for the submitted test
         // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomVin = GenericData.generateRandomVin();
         String particulateTrapFitted = "My particulate trap";
         String particulateTrapSerialNumber = "PTSerialNo";
@@ -48,6 +49,7 @@ public class PostTestResults_LEC_731 {
         String smokeTestKLimitApplied = "123.456";
 
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         JsonPathAlteration alterationParticulateTrapFitted = new JsonPathAlteration("$.testTypes[0].particulateTrapFitted", particulateTrapFitted,"","REPLACE");
         JsonPathAlteration alterationParticulateTrapSerialNumber = new JsonPathAlteration("$.testTypes[0].particulateTrapSerialNumber", particulateTrapSerialNumber,"","REPLACE");
         JsonPathAlteration alterationModificationTypeUsed = new JsonPathAlteration("$.testTypes[0].modificationTypeUsed", modificationTypeUsed,"","REPLACE");
@@ -55,6 +57,7 @@ public class PostTestResults_LEC_731 {
 
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationSystemNumber,
                 alterationParticulateTrapFitted,
                 alterationParticulateTrapSerialNumber,
                 alterationModificationTypeUsed,
@@ -67,7 +70,7 @@ public class PostTestResults_LEC_731 {
 
         // AC1 API Consumer retrieve the Test results for the input Vin
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -96,9 +99,11 @@ public class PostTestResults_LEC_731 {
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -106,7 +111,7 @@ public class PostTestResults_LEC_731 {
         testResultsSteps.validateData("Test records created");
 
         // Retrieve the created record, and verify that the fields are present.
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
 
         // Verify that the new LEC fields are returned.
@@ -124,7 +129,7 @@ public class PostTestResults_LEC_731 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeName", "Low Emissions Certificate (LEC) with annual test");
 
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].fuelType", "diesel");
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].emissionStandard", "0.16 g/kWh Euro 3 PM");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].emissionStandard", "0.10 g/kWh Euro 3 PM");
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].modType.code", "p");
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].modType.description", "particulate trap");
     }

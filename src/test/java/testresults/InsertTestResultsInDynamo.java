@@ -29,7 +29,6 @@ public class InsertTestResultsInDynamo {
 
     @Ignore("This is just an example of how to read json data from external file and insert it in a specific table using AWS SDK")
     @Title("CVSB-11991 - Insert previous test-results into DynamoDB using Java AWS sdk")
-    @Test
     public void testResultsSubmittedToDateExisting() {
         String randomVin = GenericData.generateRandomVin();
         String randomVrm = GenericData.generateRandomVrm();

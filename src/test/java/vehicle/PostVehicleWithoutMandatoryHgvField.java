@@ -27,6 +27,7 @@ public class PostVehicleWithoutMandatoryHgvField {
         return Arrays.asList(new Object[][]{
                 {"$.primaryVrm"},
                 {"$.vin"},
+                {"$.systemNumber"},
                 {"$.techRecord[0].vehicleType"},
                 {"$.techRecord[0].manufactureYear"},
                 {"$.techRecord[0].noOfAxles"},

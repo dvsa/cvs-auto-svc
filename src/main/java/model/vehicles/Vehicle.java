@@ -12,6 +12,7 @@ public class Vehicle {
     private String vin;
     private List<TechRecord> techRecord;
     private MsUserDetails msUserDetails;
+    private String systemNumber;
 
     public List<Vrms> getVrms() {
         return vrms;
@@ -26,8 +27,17 @@ public class Vehicle {
         return vin;
     }
 
+    public String getSystemNumber() {
+        return systemNumber;
+    }
+
     public Vehicle setVin(String vin) {
         this.vin = vin;
+        return this;
+    }
+
+    public Vehicle setSystemNumber(String systemNumber) {
+        this.systemNumber = systemNumber;
         return this;
     }
 
@@ -55,6 +65,7 @@ public class Vehicle {
         return "Vehicle{" +
                 "vrms=" + vrms +
                 ", vin='" + vin + '\'' +
+                ", systemNumber='" + systemNumber + '\'' +
                 ", techRecord=" + techRecord +
                 '}';
     }

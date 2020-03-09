@@ -21,13 +21,26 @@ import static util.WriterReader.saveUtils;
 
 public class TestResultsClient {
 
-    public Response getTestResults(String vin) {
+    public Response getTestResults(String systemNumber) {
 
-        Response response = callGetTestResults(vin);
+        Response response = callGetTestResults(systemNumber);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callGetTestResults(vin);
+            response = callGetTestResults(systemNumber);
+        }
+
+        return response;
+
+    }
+
+    public Response getTestResultsSysNumber(String systemNumber) {
+
+        Response response = callGetTestResults(systemNumber);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResults(systemNumber);
         }
 
         return response;
@@ -41,6 +54,18 @@ public class TestResultsClient {
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callFetTestResultsWithStatus(vin, status);
+        }
+
+        return response;
+    }
+
+    public Response getTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
+
+        Response response = callGetTestResultsWithStatusAndSysNumber(systemNumber, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsWithStatusAndSysNumber(systemNumber, status);
         }
 
         return response;
@@ -264,15 +289,28 @@ public class TestResultsClient {
     }
 
 
-    public Response callGetTestResults(String vin) {
+    public Response callGetTestResults(String systemNumber) {
 
         Response response = given()
                 .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
-                .pathParam("vin", vin)
+                .pathParam("systemNumber", systemNumber)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/test-results/{vin}");
+                .get("/test-results/{systemNumber}");
+
+        return response;
+    }
+
+    public Response callGetTestResultsSysNum(String systemNumber) {
+
+        Response response = given()
+                .filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/test-results/{systemNumber}");
 
         return response;
     }
@@ -286,6 +324,21 @@ public class TestResultsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/test-results/{vin}");
+
+
+        return response;
+    }
+
+
+    private Response callGetTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+                .queryParam("status", status)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/test-results/{systemNumber}");
 
 
         return response;
@@ -408,6 +461,18 @@ public class TestResultsClient {
 
         return response;
     }
+
+    public Response callPostVehicleTestResultsWithNoAuthorization(String body) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .post("/test-results");
+
+        return response;
+    }
+
 
     public Response postVehicleTestResultsWithAlterations(String body, List<JsonPathAlteration> alterations) {
         Response response = callPostVehicleTestResultsWithAlterations(body, alterations);

@@ -2,6 +2,7 @@ package data;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
@@ -143,7 +144,15 @@ public class GenericData {
         return JsonPath.read(jsonString, jsonPath);
     }
 
-    public static JSONArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
+    public static ArrayList<String> extractArrayListStringFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+    public static ArrayList<Integer> extractArrayListIntegerFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
+     public static JsonArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
         return JsonPath.read(jsonString, jsonPath);
     }
 
@@ -159,6 +168,10 @@ public class GenericData {
 
     public static String generateRandomVin() {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 3).toUpperCase() + RandomStringUtils.randomNumeric(6);
+    }
+
+    public static String generateRandomSystemNumber() {
+        return RandomStringUtils.randomAlphanumeric(16).toUpperCase();
     }
 
     public static String generateRandomVrm() {

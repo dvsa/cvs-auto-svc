@@ -1,4 +1,8 @@
 {
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
   "partialVin": "230123",
   "primaryVrm": "CT70VRL",
   "secondaryVrms": [
@@ -6,6 +10,24 @@
   ],
   "techRecord": [
     {
+      "fuelPropulsionSystem": "Hybrid",
+      "offRoad": true,
+      "numberOfWheelsDriven": 4,
+      "euVehicleCategory": "m1",
+      "frontAxleToRearAxle": 500,
+      "approvalType": "NTA",
+      "grossGbWeight": 14440,
+      "grossDesignWeight": 14440,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
       "axles": [
         {
           "axleNumber": 1,
@@ -13,7 +35,6 @@
             "dataTrAxles": 345,
             "fitmentCode": "single",
             "plyRating": "AB",
-            "speedCategorySymbol": "a7",
             "tyreCode": 1234,
             "tyreSize": "9.23648E+11"
           },
@@ -28,7 +49,6 @@
             "dataTrAxles": 345,
             "fitmentCode": "single",
             "plyRating": "AB",
-            "speedCategorySymbol": "a7",
             "tyreCode": 5678,
             "tyreSize": "9.23648E+11"
           },
@@ -42,28 +62,8 @@
         "code": "x",
         "description": "other"
       },
-      "brakeCode": "178202",
       "brakes": {
-        "antilockBrakingSystem": true,
-        "brakeCode": "123",
-        "brakeCodeOriginal": "12412",
-        "brakeForceWheelsNotLocked": {
-          "parkingBrakeForceA": 2332,
-          "secondaryBrakeForceA": 2512,
-          "serviceBrakeForceA": 6424
-        },
-        "brakeForceWheelsUpToHalfLocked": {
-          "parkingBrakeForceB": 3512,
-          "secondaryBrakeForceB": 2512,
-          "serviceBrakeForceB": 5521
-        },
-        "dataTrBrakeOne": "None",
-        "dataTrBrakeThree": "None",
-        "dataTrBrakeTwo": "None",
-        "dtpNumber": "sdgsd",
-        "loadSensingValve": true,
-        "retarderBrakeOne": "electric",
-        "retarderBrakeTwo": "exhaust"
+        "dtpNumber": "sdgsd"
       },
       "conversionRefNo": "7891234",
       "createdAt": "2019-06-24T10:26:54.903Z",
@@ -78,8 +78,6 @@
       "frontAxleTo5thWheelMax": 1500,
       "frontAxleTo5thWheelMin": 1200,
       "functionCode": "A",
-      "grossKerbWeight": 2500,
-      "grossLadenWeight": 3000,
       "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
       "make": "Isuzu",
       "manufactureYear": 2018,
@@ -93,7 +91,6 @@
       "regnDate": "2019-06-24",
       "roadFriendly": true,
       "speedLimiterMrk": true,
-      "statusCode": "provisional",
       "tachoExemptMrk": true,
       "trainDesignWeight": 2000,
       "trainGbWeight": 1500,
@@ -106,5 +103,6 @@
       "vehicleType": "hgv"
     }
   ],
-  "vin": "P012301230123"
+  "vin": "P012301230123",
+  "systemNumber": "32442ERWTERTGRE"
 }

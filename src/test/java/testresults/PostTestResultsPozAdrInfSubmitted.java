@@ -230,6 +230,7 @@ public class PostTestResultsPozAdrInfSubmitted {
     public void testResultsNonAdrNewTestResults() {
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getSystemNumber()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
@@ -283,7 +284,7 @@ public class PostTestResultsPozAdrInfSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateCertificateNumberIsNotNull((TestResultsGet) vehicleSubmittedData.build());
         testResultsSteps.validateExpiryDateIsNotNull((TestResultsGet) vehicleSubmittedData.build());
@@ -298,6 +299,7 @@ public class PostTestResultsPozAdrInfSubmitted {
 
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getSystemNumber()))
                 .setTestResultId(testResultId)
                 .setCountryOfRegistration("XX")
                 .setEuVehicleCategory("o3")
@@ -352,7 +354,7 @@ public class PostTestResultsPozAdrInfSubmitted {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin());
+        testResultsSteps.getTestResults(vehicleSubmittedData.build().getSystemNumber());
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateCertificateNumberIsNotNull((TestResultsGet) vehicleSubmittedData.build());
         testResultsSteps.validateExpiryDateIsNotNull((TestResultsGet) vehicleSubmittedData.build());
