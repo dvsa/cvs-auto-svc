@@ -376,7 +376,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
-        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "Euro 3");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
@@ -517,7 +517,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
-        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "Euro 3");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
@@ -580,7 +580,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
-        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "Euro 3");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");
@@ -644,7 +644,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "testExpiryDate", DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1));
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "modType", "{}");
-        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "0.08 g/kWh Euro 3 PM");
+        testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "emissionStandard", "Euro 3");
         testResultsSteps.addAdditionalTestResultsTestTypesFields(payload, 0, "fuelType", "petrol");
         testResultsSteps.removeTestResultsTestTypesFields(payload, 0, "testAnniversaryDate", "createdAt", "lastUpdatedAt", "testCode", "testNumber", "certificateLink");
         testResultsSteps.removeTestResultsFields(payload, "vehicleId");

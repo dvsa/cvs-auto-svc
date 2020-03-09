@@ -38,7 +38,7 @@
         "code":"m",
         "description":"modification or change of engine"
       },
-      "emissionStandard":"0.16 g/kWh Euro 3 PM",
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
       "fuelType":"diesel",
       "smokeTestKLimitApplied":"123",
       "particulateTrapFitted":null,

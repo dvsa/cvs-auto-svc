@@ -14,7 +14,7 @@
       },
       "smokeTestKLimitApplied": "value",
       "fuelType": "diesel",
-      "emissionStandard": "0.16 g/kWh Euro 3 PM",
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
       "prohibitionIssued": false,
       "additionalCommentsForAbandon": "none",
       "numberOfSeatbeltsFitted": 2,
