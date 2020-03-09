@@ -1,4 +1,4 @@
-package testresults;
+package testresults.annual_certificates;
 
 import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
