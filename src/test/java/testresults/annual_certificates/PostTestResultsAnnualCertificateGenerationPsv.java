@@ -97,7 +97,7 @@ public class PostTestResultsAnnualCertificateGenerationPsv {
         this.testCode = testCode;
     }
 
-    @WithTag("In_Test")
+    @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Psv tests ")
     @Test
     public void testResults_Annual_Certificate_Generation_Psv() {
