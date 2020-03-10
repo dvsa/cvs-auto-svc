@@ -2,7 +2,7 @@
   "reasonForCancellation": "none",
   "testerStaffId": "15",
   "testerName": "Gica",
-  "euVehicleCategory": "l1e-a",
+  "euVehicleCategory": "l2e",
   "testStationName": "Larson, Nader and Okuneva",
   "testStationPNumber": "84-926821",
   "testEndTimestamp": "2019-01-14T10:36:33.987Z",
@@ -18,10 +18,10 @@
   "odometerReadingUnits": "kilometres",
   "vehicleSize": "small",
   "testResultId": "string",
-  "numberOfWheelsDriven": null,
+  "numberOfWheelsDriven": 3,
   "testStartTimestamp": "2019-01-14T10:36:33.987Z",
   "vehicleType": "psv",
-  "regnDate": "2019-06-24",
+  "firstUseDate": "2019-06-24",
   "odometerReading": 350000,
   "preparerName": "Durrell Vehicles Limited",
   "noOfAxles": 2,
@@ -34,16 +34,7 @@
     {
       "prohibitionIssued": false,
       "customDefects": [
-        {
-          "defectName": "Some custom defect",
-          "defectNotes": "some defect noe",
-          "referenceNumber": "abcd"
-        },
-        {
-          "defectName": "A new custom defect",
-          "defectNotes": "New customer note",
-          "referenceNumber": "efgh"
-        }
+
       ],
       "numberOfSeatbeltsFitted": 2,
       "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
