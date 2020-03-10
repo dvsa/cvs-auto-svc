@@ -135,7 +135,6 @@ public class TestResultsSteps {
                 .statusCode(statusCode);
     }
 
-
     @Step
     public void testTypeLengthShouldBe(int length) {
         response.then().body("testTypes[0].size()", is(length));
@@ -700,4 +699,9 @@ public class TestResultsSteps {
         AwsUtil.insertJsonInTable(json, table);
     }
 
+
+    @Step
+    public void deleteActivitiesForUser(String user) {
+        AwsUtil.deleteActivitiesForUser(user);
+    }
 }
