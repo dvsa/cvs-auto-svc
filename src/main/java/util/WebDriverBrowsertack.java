@@ -90,7 +90,7 @@ public class WebDriverBrowsertack {
     public static WebDriver checkVsaEmail(String randomVrm) {
         WebDriverBrowsertack.setup();
         FluentWait wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(5))
+                .withTimeout(Duration.ofSeconds(10))
                 .pollingEvery(Duration.ofMillis(250))
                 .ignoring(NoSuchElementException.class);
         driver.get("https://outlook.live.com/owa/");
