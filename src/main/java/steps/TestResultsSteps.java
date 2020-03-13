@@ -697,6 +697,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void deleteActivitiesForUser(String user) {
+        AwsUtil.deleteActivitiesForUser(user);
+    }
+
+    @Step
     public WebDriver validateVsaEmail(String randomVin) {
         return WebDriverBrowsertack.checkVsaEmail(randomVin);
     }
