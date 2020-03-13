@@ -23,11 +23,12 @@
   "vehicleConfiguration": "articulated",
   "preparerId": "BL5545",
   "preparerName": "Durrell Vehicles Limited",
-  "euVehicleCategory": "m2",
+  "euVehicleCategory": "n2",
   "countryOfRegistration": "bg",
   "noOfAxles": 3,
   "vehicleSize": "large",
   "numberOfSeats": 53,
+  "numberOfWheelsDriven": 4,
   "testTypes": [
     {
       "name": "Voluntary test",
@@ -51,7 +52,9 @@
       "reasonForAbandoning": null,
       "additionalCommentsForAbandon": null,
       "additionalNotesRecorded": null,
-      "defects": []
+      "defects": [],
+      "customDefects": [],
+      "secondaryCertificateNumber": "21323"
     }
   ]
 }
