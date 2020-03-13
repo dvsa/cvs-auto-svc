@@ -490,6 +490,12 @@ public class TestResultsSteps {
     }
 
     @Step
+    public boolean validateCertificateNumberLength() {
+        String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
+        return certificateNumber.length() == 8;
+    }
+
+    @Step
     public String nextTestNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         System.out.println("\ntestNumber is: " + testNumber +"\n");

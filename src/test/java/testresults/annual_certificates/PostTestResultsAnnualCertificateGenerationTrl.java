@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -304,6 +305,7 @@ public class PostTestResultsAnnualCertificateGenerationTrl {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
+        Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
 
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
