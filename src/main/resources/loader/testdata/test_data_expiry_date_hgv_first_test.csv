@@ -1,25 +1,3 @@
 NAME, TEST TYPE NAME, TEST TYPE ID, NO OF AXLES, TEST RESULT, TEST CODE
 First test, First test, 95, 2, pass, ffv2
 First test, First test, 95, 3, pass, ffv3
-First test, First test, 95, 4, pass, ffv4
-First test, First test, 95, 5, pass, ffv5
-Paid, Paid first test retest, 65, 2, pass, rgv2
-Paid, Paid first test retest, 65, 3, pass, rgv3
-Paid, Paid first test retest, 65, 4, pass, rgv4
-Paid, Paid first test retest, 65, 5, pass, rgv5
-Part paid, Part paid first test retest, 66, 2, pass, riv2
-Part paid, Part paid first test retest, 66, 3, pass, riv3
-Part paid, Part paid first test retest, 66, 4, pass, riv4
-Part paid, Part paid first test retest, 66, 5, pass, riv5
-First test, First test, 95, 2, prs, ffv2
-First test, First test, 95, 3, prs, ffv3
-First test, First test, 95, 4, prs, ffv4
-First test, First test, 95, 5, prs, ffv5
-Paid, Paid first test retest, 65, 2, prs, rgv2
-Paid, Paid first test retest, 65, 3, prs, rgv3
-Paid, Paid first test retest, 65, 4, prs, rgv4
-Paid, Paid first test retest, 65, 5, prs, rgv5
-Part paid, Part paid first test retest, 66, 2, prs, riv2
-Part paid, Part paid first test retest, 66, 3, prs, riv3
-Part paid, Part paid first test retest, 66, 4, prs, riv4
-Part paid, Part paid first test retest, 66, 5, prs, riv5
