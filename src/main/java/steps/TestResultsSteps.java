@@ -492,7 +492,7 @@ public class TestResultsSteps {
     @Step
     public boolean validateCertificateNumberLength() {
         String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
-        return certificateNumber.length() == 8;
+        return certificateNumber.length() == 9;
     }
 
     @Step
