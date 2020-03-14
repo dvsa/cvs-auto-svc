@@ -173,8 +173,8 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public void insertRecordInDynamo(String json, String table) {
-        AwsUtil.insertJsonInTable(json, table);
+    public void insertRecordInDynamo(String json, String table, String primaryKey) {
+        AwsUtil.insertJsonInTable(json, table, primaryKey);
     }
 
     @Step

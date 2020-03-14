@@ -41,7 +41,7 @@ public class EndVisitCheckAtfEmail {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationId, alterationTesterName));
         String alteredJson = GenericData.applyJsonAlterations(json, alterations);
         String testStationPNumber = GenericData.extractValueFromJsonString(json, "$.testStationPNumber").toString();
-        activitiesSteps.insertRecordInDynamo(alteredJson, "test-activities");
+        activitiesSteps.insertRecordInDynamo(alteredJson, "test-activities", "id");
 
         activitiesSteps.putActivitiesEnd(id);
 
@@ -54,7 +54,6 @@ public class EndVisitCheckAtfEmail {
 
         System.out.println("Checking the email title details are correct");
         String actualString = driver.findElement(By.cssSelector("div[role='main']>div:nth-of-type(1)")).getText();
-//        DVSA Commercial Vehicle Service – Site Activity Report: 09-4129632 – cvs.automation2@dvsagov.onmicrosoft.com – 12/02/2020
         String expectedString = " DVSA Commercial Vehicle Service – Site Activity Report: " +
                 testStationPNumber + " - " + testerName + " - " + date;
         assertEquals(expectedString, actualString);

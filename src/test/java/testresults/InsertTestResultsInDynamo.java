@@ -37,7 +37,7 @@ public class InsertTestResultsInDynamo {
         // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationTestResultId));
         String alteredJson = GenericData.applyJsonAlterations(json, alterations);
-        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
     }
 
     @Ignore("This is just an example of how to read json data from external file and insert it in a specific table using AWS SDK")
