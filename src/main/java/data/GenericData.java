@@ -7,7 +7,6 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
 import data.config.DataMapper;
-import net.minidev.json.JSONArray;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -176,6 +175,10 @@ public class GenericData {
 
     public static String generateRandomVrm() {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
+    }
+
+    public static String generateRandomVrmForEmailValidations() {
+        return "AUT" + RandomStringUtils.randomAlphanumeric(5).toUpperCase();
     }
 
     public static String getJsonStringFromJsonPath(String fileName, String path) {

@@ -12,10 +12,18 @@ import io.restassured.response.Response;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestTypesGet;
+import org.apache.commons.exec.environment.EnvironmentUtils;
 import util.BasePathFilter;
+import util.EnvironmentType;
 import util.JsonPathAlteration;
+import util.TypeLoader;
+
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
+
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
@@ -483,5 +491,27 @@ public class TestResultsClient {
         }
 
         return response;
+    }
+
+    public String getOutlookEmailAddress() {
+        EnvironmentType envType = TypeLoader.getType();
+        String emailAddress = "";
+        switch (envType) {
+            case CI_DEVELOP:
+                emailAddress = System.getenv("EMAIL_USERNAME");
+                break;
+            case LOCAL:
+                try {
+                    Properties properties = new Properties();
+                    properties.load(Objects.requireNonNull(EnvironmentUtils.class.getClassLoader().getResourceAsStream("conf/environment.properties")));
+                    emailAddress = properties.getProperty("email.username");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                throw new AutomationException("Environment configuration not found");
+        }
+        return emailAddress;
     }
 }
