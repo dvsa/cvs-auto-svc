@@ -27,6 +27,7 @@
   "countryOfRegistration": "bg",
   "noOfAxles": 2,
   "numberOfWheelsDriven": 4,
+  "euVehicleCategory": null,
   "testTypes": [
     {
       "name": "Annual test",
