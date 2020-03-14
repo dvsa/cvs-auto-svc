@@ -8,6 +8,9 @@ import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.WebDriver;
+import util.AwsUtil;
+import util.WebDriverBrowsertack;
 
 import java.util.List;
 
@@ -167,5 +170,27 @@ public class ActivitiesSteps {
     @Step
     public void responseShouldContainFieldValue(String field, String value) {
         assertThat(response.then().body("$", anyOf(hasItem(hasEntry(field,value)))));
+    }
+
+    @Step
+    public void insertRecordInDynamo(String json, String table, String primaryKey) {
+        AwsUtil.insertJsonInTable(json, table, primaryKey);
+    }
+
+    @Step
+    public void deleteActivitiesForUser(String user) {
+        AwsUtil.deleteActivitiesForUser(user);
+    }
+
+    @Step
+    public WebDriver validateAtfEmail(String testerName) {
+        return WebDriverBrowsertack.checkAtfEmail(testerName);
+    }
+
+    @Step
+    public void validateAtfEmailDetails(WebDriver driver, String testStationName, String testStationPNumber,
+                                        String testerName, String startDate, String startTime) {
+        WebDriverBrowsertack.checkAtfEmailDetails(driver, testStationName, testStationPNumber, testerName, startDate,
+                startTime);
     }
 }
