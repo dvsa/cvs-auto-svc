@@ -4,12 +4,9 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import org.json.JSONException;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.ActivitiesSteps;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 
@@ -23,9 +20,6 @@ public class InsertTestResultsInDynamo {
 
     @Steps
     TestResultsSteps testResultsSteps;
-
-    @Steps
-    ActivitiesSteps activitiesSteps;
 
     @Ignore("This is just an example of how to read json data from external file and insert it in a specific table using AWS SDK")
     @Title("CVSB-11991 - Insert previous test-results into DynamoDB using Java AWS sdk")
@@ -46,17 +40,9 @@ public class InsertTestResultsInDynamo {
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
     }
 
-    @Ignore("This is just an example of how to delete entries from a specific table in Dynamo using AWS SDK")
-    @Title("CVSB-12181 - Delete entries for activities table in DynamoDB using Java AWS sdk")
-    @Test
+    @Ignore("This is just an example of how to read json data from external file and insert it in a specific table using AWS SDK")
+    @Title("CVSB-12181 - Delete entries fro activities table in DynamoDB using Java AWS sdk")
     public void testDeleteActivities() {
-        activitiesSteps.deleteActivitiesForUser("a53ae740-eac4-4eb6-99ef-42afb63ce819");
-    }
-
-    @WithTag("In_Test")
-    @Title("CVSB-10530 - Update entry for test-stations table by adding other email address in DynamoDB using Java AWS sdk")
-    @Test
-    public void testUpdateTestStation() {
-        testResultsSteps.addEmailForTestStation("Cvs.Test2@dvsagov.onmicrosoft.com", "9");
+        testResultsSteps.deleteActivitiesForUser("a53ae740-eac4-4eb6-99ef-42afb63ce819");
     }
 }

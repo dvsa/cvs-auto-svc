@@ -3,10 +3,10 @@
   "endTime": true,
   "id": "5e4bd304-446e-4678-8289-d34fca9256e9",
   "startTime": "2020-02-21T12:01:17.405Z",
-  "testerName": "CVS Tester2",
-  "testerStaffId": "40286663-e09d-4348-a875-fa91cdd3f3b4",
-  "testStationEmail": "cvs.test2@dvsagov.onmicrosoft.com",
-  "testStationName": "Abshire-Kub",
-  "testStationPNumber": "09-4129632",
+  "testerName": "tester",
+  "testerStaffId": "12345678",
+  "testStationEmail": "teststationname@dvsa.gov.uk",
+  "testStationName": "Mraz-Hermann",
+  "testStationPNumber": "46-1741156",
   "testStationType": "gvts"
 }

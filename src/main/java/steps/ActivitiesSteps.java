@@ -178,12 +178,7 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public void deleteActivitiesForUser(String user) {
-        AwsUtil.deleteActivitiesForUser(user);
-    }
-
-    @Step
-    public WebDriver validateAtfEmail(String randomVin) {
-        return WebDriverBrowsertack.checkAtfEmail(randomVin);
+    public WebDriver validateAtfEmail(String testerName) {
+        return WebDriverBrowsertack.checkAtfEmail(testerName);
     }
 }

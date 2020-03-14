@@ -7,8 +7,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
-import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder;
@@ -41,20 +41,35 @@ public class AwsUtil {
     public static boolean isCertificateCreated(String uuid, String vin){
 
         Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+
+        System.out.println(System.getProperty("AWS_ROLE"));
+
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
         String bucketName = loader.getS3Bucket();
 
         String fileName = uuid + "_" + vin + "_1.pdf";
         String key =  loader.getBranchName()+ "/" + fileName;
 
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withRegion(clientRegion)
-                .build();
+        AmazonS3 s3Client = new AmazonS3Client(temporaryCredentials);
 
-        System.out.println("Waiting on file " + key + "to be created... on bucket: " + bucketName);
+        System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
 
-        for(int i = 0; i < 15 ; i++) {
+        for(int i = 0; i < 45 ; i++) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -63,7 +78,7 @@ public class AwsUtil {
             }
             System.out.println("waited for: " + i + " seconds...");
         }
-        System.out.println("file " + key + " was not created in 15 or less seconds..");
+        System.out.println("file " + key + " was not created in 45 or less seconds..");
         return false;
     }
 
@@ -144,49 +159,6 @@ public class AwsUtil {
 
             DeleteItemOutcome outcome = table.deleteItem("id", id);
         }
-    }
-
-    public static void addEmailForTestStation(String emailAddress, String testStationId) {
-        Regions clientRegion = Regions.EU_WEST_1;
-        AWSSecurityTokenService stsClient =
-                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
-        String uuid = String.valueOf(UUID.randomUUID());
-        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
-                .withRoleArn(System.getProperty("AWS_ROLE"))
-                .withDurationSeconds(3600)
-                .withRoleSessionName(uuid);
-        AssumeRoleResult assumeResult =
-                stsClient.assumeRole(assumeRequest);
-
-        BasicSessionCredentials temporaryCredentials =
-                new BasicSessionCredentials(
-                        assumeResult.getCredentials().getAccessKeyId(),
-                        assumeResult.getCredentials().getSecretAccessKey(),
-                        assumeResult.getCredentials().getSessionToken());
-        AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
-        client.setRegion(Region.getRegion(clientRegion));
-        DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-test-stations";
-
-        Table table = dynamoDB.getTable(tableName);
-
-        Map<String, String> expressionAttributeNames = new HashMap<String, String>();
-        expressionAttributeNames.put("#emails", "tesStationEmails");
-
-        Map<String, Object> expressionAttributeValues = new HashMap<String, Object>();
-        expressionAttributeValues.put(":val1",
-                new HashSet<>(Arrays.asList("automation@nonprod.cvs.dvsacloud.uk","Cvs.Test2@dvsagov.onmicrosoft.com")));
-
-        System.out.println("Updating testStationEmails for test station with id " + testStationId);
-        UpdateItemOutcome outcome =  table.updateItem(
-                "testStationId",          // key attribute name
-                "9",           // key attribute value
-                "add #emails :val1", // UpdateExpression
-                expressionAttributeNames,
-                expressionAttributeValues);
-        System.out.println("UpdateItem succeeded\n");
-        Item item = table.getItem("testStationId", "9");
-        System.out.println("This is the updated item:\n" + item.toJSONPretty());
     }
 
 }

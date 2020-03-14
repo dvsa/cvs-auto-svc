@@ -7,7 +7,6 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
 import data.config.DataMapper;
-import net.minidev.json.JSONArray;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -130,6 +129,10 @@ public class GenericData {
         }
 
         return jsonContext.jsonString();
+    }
+
+    public static Object extractValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
     }
 
     public static String extractStringValueFromJsonString(String jsonString, String jsonPath) {

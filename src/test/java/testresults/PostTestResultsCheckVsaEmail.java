@@ -1,18 +1,10 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import exceptions.AutomationException;
-import model.testresults.TestResults;
-import model.testresults.TestResultsGet;
-import model.testresults.TestResultsStatus;
-import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
-import org.apache.commons.exec.environment.EnvironmentUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +13,6 @@ import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.*;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -37,9 +28,6 @@ public class PostTestResultsCheckVsaEmail {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-    private static final String FILE_PATH = "conf/environment.properties";
-
-    @WithTag("In_Test")
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {
@@ -48,16 +36,19 @@ public class PostTestResultsCheckVsaEmail {
         String techRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
 
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomVrm = GenericData.generateRandomVrmForEmailValidations();
         String randomTestResultId = UUID.randomUUID().toString();
         String testName = "First Test";
 
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationPrimaryVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationPrimaryVrm));
+                alterationPrimaryVrm,
+                alterationSystemNumber));
 
         // create tech record
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(techRecord, alterations);
@@ -77,24 +68,7 @@ public class PostTestResultsCheckVsaEmail {
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", 2,"","REPLACE");
         JsonPathAlteration alterationTesterName = new JsonPathAlteration("$.testerName", "VSA Email Check","","REPLACE");
 
-        EnvironmentType envType = TypeLoader.getType();
-        String emailAddress = "";
-        switch (envType) {
-            case CI_DEVELOP:
-                emailAddress = System.getenv("EMAIL_USERNAME");
-                break;
-            case LOCAL:
-                try {
-                    Properties properties = new Properties();
-                    properties.load(EnvironmentUtils.class.getClassLoader().getResourceAsStream(FILE_PATH));
-                    emailAddress = properties.getProperty("email.username");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
-            default:
-                throw new AutomationException("Environment configuration not found");
-        }
+        String emailAddress = testResultsSteps.getOutlookEmailAddress();
         JsonPathAlteration alterationTesterEmailAddress = new JsonPathAlteration("$.testerEmailAddress", emailAddress,"","REPLACE");
 
         // Collate the list of alterations.
@@ -116,7 +90,7 @@ public class PostTestResultsCheckVsaEmail {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.getTestResults(randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "ffv2");
 
