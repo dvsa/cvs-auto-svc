@@ -27,6 +27,7 @@
   "euVehicleCategory": "n2",
   "countryOfRegistration": "bg",
   "noOfAxles": 2,
+  "vehicleSize": "large",
   "numberOfWheelsDriven": 4,
   "testTypes": [
     {
