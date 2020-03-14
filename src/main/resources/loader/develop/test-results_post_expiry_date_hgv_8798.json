@@ -21,7 +21,7 @@
     "code": "v"
   },
   "vehicleType": "hgv",
-  "vehicleConfiguration": "rigid",
+  "vehicleConfiguration": "semi-car transporter",
   "preparerId": "BL5545",
   "preparerName": "Durrell Vehicles Limited",
   "euVehicleCategory": "n2",
@@ -30,12 +30,12 @@
   "numberOfWheelsDriven": 4,
   "testTypes": [
     {
-      "name": "First test",
-      "testTypeName": "First test",
-      "testTypeId": "95",
+      "name": "Annual test",
+      "testTypeName": "Annual test",
+      "testTypeId": "94",
       "certificateNumber": null,
-      "testTypeStartTimestamp": "2020-02-10T10:17:32.330Z",
-      "testTypeEndTimestamp": "2020-02-10T10:17:54.845Z",
+      "testTypeStartTimestamp": "2020-02-20T10:33:50.391Z",
+      "testTypeEndTimestamp": "2020-02-20T10:34:04.341Z",
       "modType": null,
       "emissionStandard": null,
       "fuelType": null,
