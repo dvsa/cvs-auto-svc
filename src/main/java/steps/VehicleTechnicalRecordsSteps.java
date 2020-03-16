@@ -108,6 +108,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void fieldInPathShouldNotExist(String parentElementPath, String key) {
+        response.then().body(parentElementPath,not(hasKey(key)));
+    }
+
+    @Step
     public void validateData(Vehicle vehicleTechnicalRecordsData, VehicleTechnicalRecordStatus vehicleTechnicalRecordStatus) {
 
         int index = 0;
@@ -365,5 +370,4 @@ public class VehicleTechnicalRecordsSteps {
         ArrayList<Integer> list = extractArrayListIntegerFromJsonString(jsonString,"$[?(@.systemNumber=='" + systemNumber + "' && @.vin=='" + vin + "') ].techRecord[*]." + fieldName);
         Assert.assertTrue(list.contains(value));
     }
-
 }
