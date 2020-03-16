@@ -193,8 +193,9 @@ public class PostTestResultsAnnualExpiryDatePsv_11334 {
         ));
 
         System.out.println("\n******************************************************");
-        System.out.println("testCode: " + testCode);
+        System.out.println("Inserted testCode: " + insertedTestCode);
         System.out.println("Inserted previous ExpiryDate: " + insertedTestExpiryDate.toInstant().toString().substring(0,10));
+        System.out.println("POST-ed testCode: " + testCode);
         System.out.println("Today: " + currentTimestamp.toInstant().toString().substring(0,10));
         System.out.println("expected ExpiryDate: " + testExpectedDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -338,8 +339,9 @@ public class PostTestResultsAnnualExpiryDatePsv_11334 {
         ));
 
         System.out.println("\n******************************************************");
-        System.out.println("testCode: " + testCode);
+        System.out.println("Inserted testCode: " + insertedTestCode);
         System.out.println("Inserted previous ExpiryDate: " + insertedTestExpiryDate.toInstant().toString().substring(0,10));
+        System.out.println("POST-ed testCode: " + testCode);
         System.out.println("Today: " + currentTimestamp.toInstant().toString().substring(0,10));
         System.out.println("expected ExpiryDate: " + testExpectedDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -483,8 +485,9 @@ public class PostTestResultsAnnualExpiryDatePsv_11334 {
         ));
 
         System.out.println("\n******************************************************");
-        System.out.println("testCode: " + testCode);
+        System.out.println("Inserted testCode: " + insertedTestCode);
         System.out.println("Inserted previous ExpiryDate: " + insertedTestExpiryDate.toInstant().toString().substring(0,10));
+        System.out.println("POST-ed testCode: " + testCode);
         System.out.println("Today: " + currentTimestamp.toInstant().toString().substring(0,10));
         System.out.println("expected ExpiryDate: " + testExpectedDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -628,8 +631,9 @@ public class PostTestResultsAnnualExpiryDatePsv_11334 {
         ));
 
         System.out.println("\n******************************************************");
-        System.out.println("testCode: " + testCode);
+        System.out.println("Inserted testCode: " + insertedTestCode);
         System.out.println("Inserted previous ExpiryDate: " + insertedTestExpiryDate.toInstant().toString().substring(0,10));
+        System.out.println("POST-ed testCode: " + testCode);
         System.out.println("Today: " + currentTimestamp.toInstant().toString().substring(0,10));
         System.out.println("expected ExpiryDate: " + testExpectedDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -773,8 +777,9 @@ public class PostTestResultsAnnualExpiryDatePsv_11334 {
         ));
 
         System.out.println("\n******************************************************");
-        System.out.println("testCode: " + testCode);
+        System.out.println("Inserted testCode: " + insertedTestCode);
         System.out.println("Inserted previous ExpiryDate: " + insertedTestExpiryDate.toInstant().toString().substring(0,10));
+        System.out.println("POST-ed testCode: " + testCode);
         System.out.println("Today: " + currentTimestamp.toInstant().toString().substring(0,10));
         System.out.println("expected ExpiryDate: " + testExpectedDate.substring(0,10));
         System.out.println("******************************************************\n");
