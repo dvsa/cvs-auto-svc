@@ -15,6 +15,7 @@
   "odometerReadingUnits": "kilometres",
   "regnDate": "1972-10-13",
   "vin": "A00128821",
+  "numberOfWheelsDriven": 4,
   "systemNumber": "1212EWRETREYRR422",
   "vehicleClass": {
     "description": "heavy goods vehicle",
@@ -48,7 +49,9 @@
       "reasonForAbandoning": null,
       "additionalCommentsForAbandon": null,
       "additionalNotesRecorded": null,
-      "defects": []
+      "defects": [],
+      "customDefects": [],
+      "secondaryCertificateNumber": "1234456"
     }
   ]
 }
