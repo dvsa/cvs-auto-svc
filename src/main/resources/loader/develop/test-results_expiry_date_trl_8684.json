@@ -13,6 +13,7 @@
   "trailerId": "C777778",
   "firstUseDate": "2019-06-24",
   "vin": "ABCDEFGH777778",
+  "numberOfWheelsDriven": 4,
   "systemNumber": "1212EWRETREYRR422",
   "vehicleClass": {
     "description": "trailer",
@@ -39,7 +40,9 @@
       "reasonForAbandoning": null,
       "additionalCommentsForAbandon": null,
       "additionalNotesRecorded": null,
-      "defects": []
+      "defects": [],
+      "customDefects": [],
+      "secondaryCertificateNumber": "21323"
     }
   ]
 }
