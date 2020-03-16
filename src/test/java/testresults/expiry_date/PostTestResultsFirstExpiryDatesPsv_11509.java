@@ -126,6 +126,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
                 alterationTestResult
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + "missing");
+        System.out.println("Registration Anniversary: " + "missing");
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -211,6 +218,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
                 alterationTestResult,
                 alterationRegnDate
         ));
+
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -298,6 +312,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
                 alterationRegnDate
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -383,6 +404,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
                 alterationTestResult,
                 alterationRegnDate
         ));
+
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -470,6 +498,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
                 alterationRegnDate
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -555,6 +590,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
                 alterationTestResult,
                 alterationRegnDate
         ));
+
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);

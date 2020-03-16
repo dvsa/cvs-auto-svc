@@ -20,8 +20,8 @@ import java.util.UUID;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
-@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_psv_11334.csv")
-public class PostTestResultsFirstExpiryDatesPsv_11334 {
+@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_psv_coif_11509.csv")
+public class PostTestResultsFirstExpiryDatesPsv_coif_11509 {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -64,12 +64,12 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
 
 
     @WithTag("expiry_dates")
-    @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - expiryDate = Today + 1 year, - 1 day ")
+    @Title("CVSB-11509 - As a VSA/SVSA I want first expiry dates (PSV) and COIF + annual expiry dates to be calculated so that the certificates/records get accurately populated - COIF - expiryDate = Today + 1 year, - 1 day ")
     @Test
     public void testResultsFirstTestExpiryNoPreviousExpiryNoRegDate() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11334.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_coif_11509.json", "$");
 
         // Create random vin, systemNumber and testResultId
         String randomVin = GenericData.generateRandomVin();
@@ -125,6 +125,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
                 alterationTestResult
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + "missing");
+        System.out.println("Registration Anniversary: " + "missing");
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -143,12 +150,12 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - expiryDate = Today + 1 year, - 1 day ")
+    @Title("CVSB-11509 - As a VSA/SVSA I want first expiry dates (PSV) and COIF + annual expiry dates to be calculated so that the certificates/records get accurately populated - COIF - expiryDate = Today + 1 year, - 1 day ")
     @Test
     public void testResultsFirstTestExpiryNoPreviousExpiryMoreThanTwoMonthBeforeAnniversary() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11334.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_coif_11509.json", "$");
 
         // Create random vin, systemNumber and testResultId
         String randomVin = GenericData.generateRandomVin();
@@ -174,7 +181,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
         String regnDate = regDateTimestamp.toInstant().toString().substring(0, 10);
 
         // Create expected testExpiryDate based on submitted test end timestamp
-        String expectedTestExpiryDate = submittedTestEndTimestamp.plusYears(1).minusDays(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.plusYears(1).minusDays(1).toInstant().toString();
 
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
@@ -211,6 +218,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
                 alterationRegnDate
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -229,12 +243,12 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - expiryDate = Today + 1 year, - 1 day ")
+    @Title("CVSB-11509 - As a VSA/SVSA I want first expiry dates (PSV) and COIF + annual expiry dates to be calculated so that the certificates/records get accurately populated - COIF - expiryDate = Today + 1 year, - 1 day ")
     @Test
     public void testResultsFirstTestExpiryNoPreviousExpiryExactlyTwoMonthBeforeAnniversary() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11334.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_coif_11509.json", "$");
 
         // Create random vin, systemNumber and testResultId
         String randomVin = GenericData.generateRandomVin();
@@ -297,6 +311,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
                 alterationRegnDate
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -315,12 +336,12 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - expiryDate = RegistrationDate + 2 years  ")
+    @Title("CVSB-11509 - As a VSA/SVSA I want first expiry dates (PSV) and COIF + annual expiry dates to be calculated so that the certificates/records get accurately populated - COIF - expiryDate = RegistrationDate + 2 years  ")
     @Test
     public void testResultsFirstTestExpiryNoPreviousExpiryLessThanTwoMonthBeforeAnniversary() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11334.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_coif_11509.json", "$");
 
         // Create random vin, systemNumber and testResultId
         String randomVin = GenericData.generateRandomVin();
@@ -346,7 +367,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
         String regnDate = regDateTimestamp.toInstant().toString().substring(0, 10);
 
         // Create expected testExpiryDate based on submitted test end timestamp
-        String expectedTestExpiryDate = submittedTestEndTimestamp.plusYears(1).minusDays(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.plusYears(1).minusDays(1).toInstant().toString();
 
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
@@ -383,6 +404,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
                 alterationRegnDate
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -401,12 +429,12 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - expiryDate = RegistrationDate + 2 years  ")
+    @Title("CVSB-11509 - As a VSA/SVSA I want first expiry dates (PSV) and COIF + annual expiry dates to be calculated so that the certificates/records get accurately populated - COIF - expiryDate = RegistrationDate + 2 years  ")
     @Test
     public void testResultsFirstTestExpiryNoPreviousExpiryTodayIsRegAnniversary() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11334.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_coif_11509.json", "$");
 
         // Create random vin, systemNumber and testResultId
         String randomVin = GenericData.generateRandomVin();
@@ -432,7 +460,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
         String regnDate = regDateTimestamp.toInstant().toString().substring(0, 10);
 
         // Create expected testExpiryDate based on submitted test end timestamp
-        String expectedTestExpiryDate = currentTime.plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.plusYears(1).minusDays(1).toInstant().toString();
 
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
@@ -469,6 +497,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
                 alterationRegnDate
         ));
 
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
@@ -487,12 +522,12 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - expiryDate = RegistrationDate + 2 years  ")
+    @Title("CVSB-11509 - As a VSA/SVSA I want first expiry dates (PSV) and COIF + annual expiry dates to be calculated so that the certificates/records get accurately populated - COIF - expiryDate = RegistrationDate + 2 years  ")
     @Test
     public void testResultsFirstTestExpiryNoPreviousExpiryTodayIsAfterRegAnniversary() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11334.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_coif_11509.json", "$");
 
         // Create random vin, systemNumber and testResultId
         String randomVin = GenericData.generateRandomVin();
@@ -554,6 +589,13 @@ public class PostTestResultsFirstExpiryDatesPsv_11334 {
                 alterationTestResult,
                 alterationRegnDate
         ));
+
+        // Printing the scenario to the console
+        System.out.println("\nTest code: " + testCode);
+        System.out.println("Registration Date: " + regnDate);
+        System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
