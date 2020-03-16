@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-@WithTag("In_Test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsExpiryDateLogicPsv {
 
@@ -253,8 +252,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayMinusOneDay() {
@@ -400,8 +398,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today")
     @Test
     public void testResultsFirstTestExpiryPsvToday() {
@@ -547,8 +544,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusOneDay() {
@@ -694,8 +690,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonths() {
@@ -841,8 +836,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months + 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsPlusOneDay() {
@@ -988,8 +982,7 @@ public class PostTestResultsExpiryDateLogicPsv {
 
     }
 
-    
-    @WithTag("In_Test")
+
     @Title("CVSB-8684 - TC1 - AC1 - PSV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = Today + 2 months - 1 day")
     @Test
     public void testResultsFirstTestExpiryPsvTodayPlusTwoMonthsMinusOneDay() {
