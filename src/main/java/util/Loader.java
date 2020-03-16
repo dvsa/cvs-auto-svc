@@ -12,6 +12,10 @@ public interface Loader {
 
     String getMicrosoftonlinePass();
 
+    String getEmailUserName();
+
+    String getEmailPass();
+
     String getUsername();
 
     String getPassword();

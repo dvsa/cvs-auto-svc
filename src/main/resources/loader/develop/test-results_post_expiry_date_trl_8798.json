@@ -25,6 +25,7 @@
   "euVehicleCategory": "o2",
   "countryOfRegistration": "bg",
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 6,
   "testTypes": [
     {
       "name": "First test",
@@ -39,7 +40,9 @@
       "reasonForAbandoning": null,
       "additionalCommentsForAbandon": null,
       "additionalNotesRecorded": null,
-      "defects": []
+      "defects": [],
+      "customDefects": [],
+      "secondaryCertificateNumber": "21323"
     }
   ]
 }

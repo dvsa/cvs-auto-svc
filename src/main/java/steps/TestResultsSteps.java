@@ -8,10 +8,12 @@ import data.GenericData;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
 import util.JsonPathAlteration;
+import util.WebDriverBrowsertack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -495,6 +497,12 @@ public class TestResultsSteps {
     }
 
     @Step
+    public boolean validateCertificateNumberLength() {
+        String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
+        return certificateNumber.length() == 9;
+    }
+
+    @Step
     public String nextTestNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         System.out.println("\ntestNumber is: " + testNumber +"\n");
@@ -703,5 +711,15 @@ public class TestResultsSteps {
     @Step
     public void deleteActivitiesForUser(String user) {
         AwsUtil.deleteActivitiesForUser(user);
+    }
+
+    @Step
+    public WebDriver validateVsaEmail(String randomVin) {
+        return WebDriverBrowsertack.checkVsaEmail(randomVin);
+    }
+
+    @Step
+    public String getOutlookEmailAddress() {
+        return testResultsClient.getOutlookEmailAddress();
     }
 }

@@ -27,6 +27,7 @@
   "euVehicleCategory": "n2",
   "countryOfRegistration": "bg",
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
   "testTypes": [
     {
       "name": "First test",
@@ -48,7 +49,9 @@
       "reasonForAbandoning": null,
       "additionalCommentsForAbandon": null,
       "additionalNotesRecorded": null,
-      "defects": []
+      "defects": [],
+      "customDefects": [],
+      "secondaryCertificateNumber": "1234456"
     }
   ]
 }

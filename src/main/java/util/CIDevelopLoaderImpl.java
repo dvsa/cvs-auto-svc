@@ -55,6 +55,26 @@ public class CIDevelopLoaderImpl implements Loader {
     }
 
     @Override
+    public String getEmailUserName() {
+        String variable =  System.getProperty("EMAIL_USERNAME");
+        if (variable != null) {
+            return variable;
+        } else {
+            throw new AutomationException("Setup of variable EMAIL_USERNAME failed, please pass in command or configure variable");
+        }
+    }
+
+    @Override
+    public String getEmailPass() {
+        String variable =  System.getProperty("EMAIL_PASS");
+        if (variable != null) {
+            return variable;
+        } else {
+            throw new AutomationException("Setup of variable EMAIL_PASS failed, please pass in command or configure variable");
+        }
+    }
+
+    @Override
     public String getUsername() {
         String variable =  System.getenv("BROWSERSTACK_USERNAME");
         if (variable != null) {
