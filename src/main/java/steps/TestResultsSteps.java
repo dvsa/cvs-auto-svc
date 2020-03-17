@@ -698,6 +698,12 @@ public class TestResultsSteps {
     }
 
     @Step
+    @Deprecated
+    public void insertRecordInDynamo(String json, String table) {
+        AwsUtil.insertJsonInTable(json, table);
+    }
+
+    @Step
     public void insertRecordInDynamo(String json, String table, String primaryKey) {
         AwsUtil.insertJsonInTable(json, table, primaryKey);
     }
