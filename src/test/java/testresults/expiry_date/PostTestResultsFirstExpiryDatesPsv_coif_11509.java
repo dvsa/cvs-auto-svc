@@ -126,11 +126,13 @@ public class PostTestResultsFirstExpiryDatesPsv_coif_11509 {
         ));
 
         // Printing the scenario to the console
-        System.out.println("\nTest code: " + testCode);
+        System.out.println("\n******************************************************");
+        System.out.println("Test code: " + testCode);
         System.out.println("Registration Date: " + "missing");
         System.out.println("Registration Anniversary: " + "missing");
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
-        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10)));
+        System.out.println("******************************************************\n");
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -219,11 +221,13 @@ public class PostTestResultsFirstExpiryDatesPsv_coif_11509 {
         ));
 
         // Printing the scenario to the console
-        System.out.println("\nTest code: " + testCode);
+        System.out.println("\n******************************************************");
+        System.out.println("Test code: " + testCode);
         System.out.println("Registration Date: " + regnDate);
         System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
-        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10)));
+        System.out.println("******************************************************\n");
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
@@ -312,11 +316,13 @@ public class PostTestResultsFirstExpiryDatesPsv_coif_11509 {
         ));
 
         // Printing the scenario to the console
-        System.out.println("\nTest code: " + testCode);
+        System.out.println("\n******************************************************");
+        System.out.println("Test code: " + testCode);
         System.out.println("Registration Date: " + regnDate);
         System.out.println("Registration Anniversary: " + regDateAnniversary.toInstant().toString().substring(0,10));
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
-        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10) + "\n"));
+        System.out.println(("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10)));
+        System.out.println("******************************************************\n");
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
