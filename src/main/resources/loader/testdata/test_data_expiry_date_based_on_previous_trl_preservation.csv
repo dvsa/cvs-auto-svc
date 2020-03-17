@@ -1,0 +1,10 @@
+INSERTED TEST CODE ONE, INSERTED TEST RESULT ONE, INSERTED TEST TYPE ID ONE, INSERTED TEST CODE TWO, INSERTED TEST RESULT TWO, INSERTED TEST TYPE ID TWO, POST NAME, POST TEST TYPE NAME, POST TEST TYPE ID, POST TEST RESULT, POST TEST CODE, NO OF AXLES, IS ANNUAL WITH CERTIFICATE
+p1t2, pass, 70, qpt, pass, 62, With certification, Paid prohibition clearance (full inspection with certification), 70, pass, p1t2, 2, true
+p1t2, pass, 70, qqt, pass, 62, With certification, Paid prohibition clearance (full inspection with certification), 70, pass, p1t2, 2, true
+p7t1, pass, 119, qkt, pass, 62, Full Inspection/ Fee - With certification, Paid prohibition clearance on first test (full inspection with certification), 119, pass, p7t1, 1, true
+p1t2, pass, 70, rut, pass, 63, With certification, Paid prohibition clearance (full inspection with certification), 70, pass, p1t2, 2, true
+p7t1, pass, 119, qjt1, pass, 91, Full Inspection/ Fee - With certification, Paid prohibition clearance on first test (full inspection with certification), 119, pass, p7t1, 1, true
+p1t2, pass, 70, qjt2, pass, 122, With certification, Paid prohibition clearance (full inspection with certification), 70, pass, p1t2, 2, true
+p3t3, pass, 76, qjt3, pass, 122, With certification, Paid prohibition clearance (retest with certification), 76, pass, p3t3, 3, true
+rst4, pass, 54, qjt4, pass, 122, With certification, Paid prohibition clearance (retest with certification), 54, pass, rst4, 4, true
+rpt5, pass, 53, qjt4, pass, 122, Paid, Paid annual test retest, 53, pass, rpt5, 5, true
