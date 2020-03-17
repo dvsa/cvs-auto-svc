@@ -131,6 +131,10 @@ public class GenericData {
         return jsonContext.jsonString();
     }
 
+    public static Object extractValueFromJsonString(String jsonString, String jsonPath) {
+        return JsonPath.read(jsonString, jsonPath);
+    }
+
     public static String extractStringValueFromJsonString(String jsonString, String jsonPath) {
         return JsonPath.read(jsonString, jsonPath);
     }

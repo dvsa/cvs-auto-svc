@@ -498,7 +498,7 @@ public class TestResultsClient {
         String emailAddress = "";
         switch (envType) {
             case CI_DEVELOP:
-                emailAddress = System.getenv("EMAIL_USERNAME");
+                emailAddress = System.getProperty("EMAIL_USERNAME");
                 break;
             case LOCAL:
                 try {

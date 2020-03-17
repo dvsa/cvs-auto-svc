@@ -1,0 +1,12 @@
+{
+  "activityType": "visit",
+  "endTime": null,
+  "id": "5e4bd304-446e-4678-8289-d34fca9256e9",
+  "startTime": "2020-02-21T12:01:17.405Z",
+  "testerName": "tester",
+  "testerStaffId": "12345678",
+  "testStationEmail": "teststationname@dvsa.gov.uk",
+  "testStationName": "Mraz-Hermann",
+  "testStationPNumber": "46-1741156",
+  "testStationType": "gvts"
+}

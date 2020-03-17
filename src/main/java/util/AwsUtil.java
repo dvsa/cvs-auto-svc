@@ -82,7 +82,7 @@ public class AwsUtil {
         return false;
     }
 
-    public static void insertJsonInTable(String json, String tableName) {
+    public static void insertJsonInTable(String json, String tableName, String primaryKey) {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
                 AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
@@ -104,7 +104,7 @@ public class AwsUtil {
         DynamoDB dynamoDB = new DynamoDB(client);
 
         Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
-        String vin = GenericData.getValueFromJsonPath(json, "$.vin");
+        String valueForPrimaryKey = GenericData.getValueFromJsonPath(json, "$." + primaryKey);
 
 
 
@@ -117,8 +117,8 @@ public class AwsUtil {
 
         }
         catch (Exception e) {
-            System.err.println("Unable to add item with vin: " + vin);
-            System.err.println(e);
+            System.err.println("Unable to add item with " + primaryKey + ": " + valueForPrimaryKey);
+            e.printStackTrace();
         }
     }
 

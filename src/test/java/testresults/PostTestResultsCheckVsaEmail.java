@@ -27,7 +27,7 @@ public class PostTestResultsCheckVsaEmail {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
+    
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {
@@ -57,15 +57,13 @@ public class PostTestResultsCheckVsaEmail {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8684.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json", "$");
 
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", testName,"","REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "95","","REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testName,"","REPLACE");
-        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
-        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", 2,"","REPLACE");
         JsonPathAlteration alterationTesterName = new JsonPathAlteration("$.testerName", "VSA Email Check","","REPLACE");
 
         String emailAddress = testResultsSteps.getOutlookEmailAddress();
@@ -78,8 +76,6 @@ public class PostTestResultsCheckVsaEmail {
                 alterationTestName,
                 alterationTestTypeId,
                 alterationTestTypeName,
-                alterationTestResult,
-                alterationNoOfAxles,
                 alterationTesterEmailAddress,
                 alterationTesterName
         ));
@@ -94,24 +90,12 @@ public class PostTestResultsCheckVsaEmail {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "ffv2");
 
-        //Verify email is sent to VSA
-        WebDriver driver  = testResultsSteps.validateVsaEmail(randomVrm);
-
         String pattern = "d MMMM yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
 
-        System.out.println("Checking the email title details are correct");
-        String actualString = driver.findElement(By.cssSelector("div[role='main']>div:nth-of-type(1)")).getText();
-        String expectedString = randomVrm + " " + testName + "|" + date + " (Certificate 1 of 1)";
-        assertEquals(expectedString, actualString);
-
-        System.out.println("Checking the details in the email are correct");
-        String actualString1 = driver.findElement(By.cssSelector("div[role='main']>div:nth-of-type(2)")).getText();
-        String expectedString1 = "Please see the link below to access the test certificate for vehicle(s) " + randomVrm + " conducted on " + date;
-        assertTrue(actualString1.contains(expectedString1));
-
-        driver.close();
-        driver.quit();
+        //Verify email is sent to VSA
+        WebDriver driver  = testResultsSteps.validateVsaEmail(randomVrm);
+        testResultsSteps.validateVsaEmailDetails(driver, randomVrm, testName, date);
     }
 }

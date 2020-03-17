@@ -698,8 +698,8 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void insertRecordInDynamo(String json, String table) {
-        AwsUtil.insertJsonInTable(json, table);
+    public void insertRecordInDynamo(String json, String table, String primaryKey) {
+        AwsUtil.insertJsonInTable(json, table, primaryKey);
     }
 
     @Step
@@ -708,12 +708,17 @@ public class TestResultsSteps {
     }
 
     @Step
-    public WebDriver validateVsaEmail(String randomVin) {
-        return WebDriverBrowsertack.checkVsaEmail(randomVin);
+    public WebDriver validateVsaEmail(String randomVrm) {
+        return WebDriverBrowsertack.checkVsaEmail(randomVrm);
     }
 
     @Step
     public String getOutlookEmailAddress() {
         return testResultsClient.getOutlookEmailAddress();
+    }
+
+    @Step
+    public void validateVsaEmailDetails(WebDriver driver, String randomVrm, String testName, String date) {
+        WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
     }
 }
