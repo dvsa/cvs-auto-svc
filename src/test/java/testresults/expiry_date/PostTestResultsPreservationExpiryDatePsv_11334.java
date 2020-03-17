@@ -72,7 +72,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is more than 2 months before the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsMoreThanTwoMonthsBeforeAnniversary() {
@@ -218,7 +218,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is exactly 2 months before the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsExactlyTwoMonthsBeforeAnniversary() {
@@ -364,7 +364,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is less than 2 months before the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsLessThanTwoMonthsBeforeAnniversary() {
@@ -510,7 +510,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsThePreviousAnniversary() {
@@ -656,7 +656,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is after the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsAfterThePreviousAnniversary() {
