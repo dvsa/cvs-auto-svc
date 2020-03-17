@@ -6,7 +6,6 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.UseTestDataFrom;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
@@ -21,8 +20,8 @@ import java.util.UUID;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
-@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_annual_hgv_5862.csv")
-public class PostTestResultsPreservationExpiryDateHgv_5862 {
+@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_annual_trl_5862.csv")
+public class PostTestResultsPreservationExpiryDateTrl_5862 {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -69,14 +68,14 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - HGV - Today is more than 2 months before previous expiryDate (Early for test)")
+    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - TRL - Today is more than 2 months before previous expiryDate (Early for test)")
     @Test
-    public void testResultsFirstTestExpiryHgvTodayMoreThanTwoMonthsBeforePreviousExpiry() {
+    public void testResultsFirstTestExpiryTrlTodayMoreThanTwoMonthsBeforePreviousExpiry() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_hgv_5862.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_trl_5862.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_5862.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_5862.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -211,14 +210,14 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - HGV - Today is within one month before previous expiryDate")
+    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - TRL - Today is within one month before previous expiryDate")
     @Test
-    public void testResultsFirstTestExpiryHgvTodayMoreThanOneMonthBeforePreviousExpiry() {
+    public void testResultsFirstTestExpiryTrlTodayMoreThanOneMonthBeforePreviousExpiry() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_hgv_5862.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_trl_5862.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_5862.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_5862.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -353,14 +352,14 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - HGV - Today is within the month of previous expiryDate")
+    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - TRL - Today is within the month of previous expiryDate")
     @Test
-    public void testResultsFirstTestExpiryHgvTodayIsWithinTheMonthsOfPreviousExpiry() {
+    public void testResultsFirstTestExpiryTrlTodayIsWithinTheMonthsOfPreviousExpiry() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_hgv_5862.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_trl_5862.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_5862.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_5862.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -491,18 +490,17 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
 
         // Verify testExpiryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpiryDate.substring(0, 10));
-
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - HGV - Today is after the previous expiryDate")
+    @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - TRL - Today is after the previous expiryDate")
     @Test
-    public void testResultsFirstTestExpiryHgvTodayIsAfterThePreviousExpiry() {
+    public void testResultsFirstTestExpiryTrlTodayIsAfterThePreviousExpiry() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_hgv_5862.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_trl_5862.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_5862.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_5862.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -574,7 +572,7 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
         String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
-        String testEndTimestamp = submittedEndTimestamp.dayOfMonth().withMaximumValue().toInstant().toString();
+        String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 
         // Expected recalculated testExpiryDate
         String testExpiryDate = submittedEndTimestamp.plusYears(1).toInstant().toString();
@@ -633,7 +631,6 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
 
         // Verify testExpiryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", testExpiryDate.substring(0, 10));
-
     }
 
 }
