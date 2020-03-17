@@ -1,0 +1,53 @@
+{
+  "countryOfRegistration": "bg",
+  "euVehicleCategory": "o2",
+  "firstUseDate": "2019-06-24",
+  "noOfAxles": 1,
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "reasonForCancellation": null,
+  "testEndTimestamp": "2020-02-20T15:32:53.150Z",
+  "testerEmailAddress": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testerName": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testerStaffId": "d463f9f3-1ce7-4944-930a-ce9fd51e506b",
+  "testResultId": "721300f9-0914-4e0d-9fe3-b748cff7b774",
+  "testStartTimestamp": "2020-02-20T15:30:04.928Z",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testStatus": "submitted",
+  "testTypes": [
+    {
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "certificateNumber": "W01A30636",
+      "createdAt": "2020-02-20T15:32:54.089Z",
+      "defects": [
+
+      ],
+      "lastUpdatedAt": "2020-02-20T15:32:54.089Z",
+      "name": "First test",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "testAnniversaryDate": "2021-02-28T00:00:00.000Z",
+      "testCode": "fft1",
+      "testExpiryDate": "2021-02-28T00:00:00.000Z",
+      "testNumber": "W01A30636",
+      "testResult": "pass",
+      "testTypeClassification": "Annual With Certificate",
+      "testTypeEndTimestamp": "2020-02-20T15:32:53.151Z",
+      "testTypeId": "41",
+      "testTypeName": "First test",
+      "testTypeStartTimestamp": "2020-02-20T15:32:30.007Z"
+    }
+  ],
+  "trailerId": "C000002",
+  "vehicleClass": {
+    "code": "t",
+    "description": "trailer"
+  },
+  "vehicleConfiguration": "semi-trailer",
+  "vehicleType": "trl",
+  "vin": "T12341237",
+  "systemNumber": "1212EWRETREYRR422"
+}
