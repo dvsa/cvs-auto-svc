@@ -96,9 +96,6 @@ public class GenericData {
             @NonNull final String json, @NonNull final List<JsonPathAlteration> alterations) {
         DocumentContext jsonContext = JsonPath.parse(json);
         for (final JsonPathAlteration alteration : alterations) {
-//            System.out.println("==================================================================");
-//            System.out.println(alteration.getAction() + " value at json path " + alteration.getPath() +
-//                    " with value " +alteration.getValue());
             Objects.requireNonNull(alteration.getPath(), "The 'path' is required for any alteration");
 
             final boolean valueIsJson = alteration.getValue().getClass().getName().equals("java.lang.String") && alteration.getValue() != null && !alteration.getValue().toString().isEmpty()
