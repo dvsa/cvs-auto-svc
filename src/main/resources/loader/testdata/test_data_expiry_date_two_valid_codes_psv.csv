@@ -1,5 +1,4 @@
 INSERTED TEST CODE ONE, INSERTED TEST RESULT ONE, INSERTED TEST TYPE ID ONE, INSERTED TEST CODE TWO, INSERTED TEST RESULT TWO, INSERTED TEST TYPE ID TWO, POST NAME, POST TEST TYPE NAME, POST TEST TYPE ID, POST TEST RESULT, POST TEST CODE, POST VEHICLE SIZE, POST VEHICLE CONFIGURATION, IS ANNUAL WITH CERTIFICATE
-aal,	pass,	1,	aal,	pass,	1,	LEC,	Low Emissions Certificate (LEC) with annual test,	39,	pass,	p1l,	large,	rigid,	true
 adl, pass, 1, p1l, pass, 11, Annual test, Annual test, 1, pass, adl, large, articulated, true
-aav5, pass, 94, p1v5, pass, 68, Annual test, Annual test, 94, pass, aav5, null, null, true
-aat5, pass, 94, p1t5, pass, 68, Annual test, Annual test, 94, pass, aat5, null, null, true
+aav5, pass, 94, p1v5, pass, 68, Annual test, Annual test, 94, pass, aav5, large, articulated, true
+aat5, pass, 94, p1t5, pass, 68, Annual test, Annual test, 94, pass, aat5, large, articulated, true
