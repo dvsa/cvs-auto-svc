@@ -27,14 +27,6 @@ public class GetTestResultsApiSpecs {
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
-    private void validateSavedData(List<String> data) {
-
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
-        testResultsSteps.validateDataForExpiry(data);
-    }
-
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")
     @Test
     public void testPostTestResultsUsingSystemNumberAndGetResultsScenarios156() {
