@@ -51,6 +51,8 @@
           "prohibitionIssued" : true
         }
       ],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456",
       "name": "Voluntary test",
       "certificateLink": "http://dvsagov.co.uk",
       "testResult": "fail"
@@ -78,6 +80,7 @@
   "testStationPNumber": "84-926821",
   "numberOfSeats": 45,
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
   "testerEmailAddress": "gica.petrescuf@dvsagov.uk",
   "euVehicleCategory": "m1"
 }

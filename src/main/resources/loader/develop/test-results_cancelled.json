@@ -55,7 +55,9 @@
       ],
       "name": "Annual test",
       "certificateLink": "http://dvsagov.co.uk",
-      "testResult": "fail"
+      "testResult": "fail",
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456"
     }
   ],
   "vehicleClass": {
@@ -79,6 +81,7 @@
   "testStationPNumber": "84-926821",
   "numberOfSeats": 45,
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
   "testerEmailAddress": "dorel.ionescu@dvsagov.uk",
   "euVehicleCategory": "m1"
 }

@@ -25,6 +25,7 @@
   "euVehicleCategory":"n2",
   "countryOfRegistration":"gb",
   "noOfAxles":2,
+  "numberOfWheelsDriven": 4,
   "testTypes":[
     {
       "name":"Voluntary test",
@@ -46,9 +47,9 @@
       "reasonForAbandoning":null,
       "additionalCommentsForAbandon":null,
       "additionalNotesRecorded":"sdcsd",
-      "defects":[
-
-      ]
+      "defects":[],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456"
     }
   ]
 }

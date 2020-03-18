@@ -1,14 +1,12 @@
 package util;
 
 import exceptions.AutomationException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -146,15 +144,23 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']"))
         ));
         driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
+        driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+        new WebDriverWait(driver, 1).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
         System.out.println("Confirming search returned at least one result");
-        while (driver.findElements(By.cssSelector("div.full")).size() != 1) {
+        while (driver.findElement(
+                By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            driver.findElement(By.cssSelector("[placeholder='Search']")).clear();
+            driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
             driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+            new WebDriverWait(driver, 1).until(
+                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         }
 
         wait.until(ExpectedConditions.and(
@@ -224,23 +230,38 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']"))
         ));
         driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(testerName);
+        driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+        new WebDriverWait(driver, 1).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
         System.out.println("Confirming search returned at least one result");
-        while (driver.findElements(By.cssSelector("div.full")).size() != 1) {
+        while (driver.findElement(
+                By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            driver.findElement(By.cssSelector("[placeholder='Search']")).clear();
+            driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(testerName);
             driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+            new WebDriverWait(driver, 1).until(
+                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         }
 
         wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[aria-level='3']")),
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[aria-level='3']"))
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div[aria-level='3']")),
+                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div[aria-level='3']"))
         ));
         wait.until(
                 ExpectedConditions.textToBePresentInElement(driver.findElement(By.cssSelector("div[aria-level='3']")), "Top results"));
+
+
+        wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[aria-level='3']")),
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[aria-level='3']")),
+                ExpectedConditions.textToBePresentInElement(driver.findElement(By.cssSelector("div[aria-level='3']")), "Top results")
+        ));
 
         System.out.println("Select email that was searched for");
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[role='option']")));

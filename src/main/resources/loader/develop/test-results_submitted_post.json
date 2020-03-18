@@ -55,6 +55,8 @@
           "prohibitionIssued" : null
         }
       ],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456",
       "name": "First test",
       "testResult": "pass"
     }
@@ -79,6 +81,7 @@
   "testStationPNumber": "87-1369569",
   "numberOfSeats": 45,
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
   "testerEmailAddress": "dorel.popescu@dvsagov.uk",
   "euVehicleCategory": "n1"
 }
