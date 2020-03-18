@@ -1,5 +1,8 @@
 package clients.model;
 
+import model.testresults.TestResults;
+import model.vehicles.TechRecord;
+
 import java.util.List;
 
 public class TestTypeQueryParam {
@@ -8,6 +11,13 @@ public class TestTypeQueryParam {
     private VehicleSize vehicleSize;
     private VehicleConfiguration vehicleConfiguration;
     private VehicleAxles vehicleAxles;
+    private EuVehicleCategory euVehicleCategory;
+    private VehicleClass vehicleClass;
+    private VehicleSubClass vehicleSubClass;
+    private VehicleWheels vehicleWheels;
+
+
+
     private List<TestTypeField> fields;
 
     public String getVehicleType() {
@@ -46,6 +56,44 @@ public class TestTypeQueryParam {
         return this;
     }
 
+    public TestTypeQueryParam setVehicleWheels(VehicleWheels vehicleWheels ) {
+        this.vehicleWheels = vehicleWheels;
+        return this;
+    }
+
+    public TestTypeQueryParam setVehicleSubClass(VehicleSubClass vehicleSubClass ) {
+        this.vehicleSubClass = vehicleSubClass;
+        return this;
+    }
+
+
+    public TestTypeQueryParam setVehicleClass(VehicleClass vehicleClass ) {
+        this.vehicleClass = vehicleClass;
+        return this;
+    }
+
+    public TestTypeQueryParam setEuVehicleCategory(EuVehicleCategory euVehicleCategory ) {
+        this.euVehicleCategory = euVehicleCategory;
+        return this;
+    }
+
+    public String getVehicleWheels() {
+        return vehicleWheels != null ? vehicleWheels.getValue() : null;
+    }
+
+    public String getVehicleSubClass() {
+        return vehicleSubClass != null ? vehicleSubClass.getValue() : null;
+    }
+
+    public String getVehicleClass() {
+        return vehicleClass != null ? vehicleClass.getCode() : null;
+    }
+
+    public String getEuVehicleCategory() {
+        return euVehicleCategory != null ? euVehicleCategory.getValue() : null;
+    }
+
+
     public List<TestTypeField> getFields() {
         return fields;
     }
@@ -62,7 +110,12 @@ public class TestTypeQueryParam {
                 ", vehicleSize='" + vehicleSize + '\'' +
                 ", vehicleConfiguration='" + vehicleConfiguration + '\'' +
                 ", vehicleAxles='" + vehicleAxles + '\'' +
+                ", vehicleWheels='" + vehicleWheels + '\'' +
+                ", vehicleClass='" + vehicleClass + '\'' +
+                ", vehicleSubclass='" + vehicleSubClass + '\'' +
+                ", euVehicleCategory='" + euVehicleCategory + '\'' +
                 ", fields=" + fields +
                 '}';
     }
+
 }
