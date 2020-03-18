@@ -18,6 +18,7 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
+@Ignore
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value="loader/testdata/test_data_expiry_date_trl_preservation.csv")
@@ -67,6 +68,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Preservation Test - NO Previous Expiry Date")
     @Test
@@ -146,6 +148,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = last day of previous month (EXPIRED)")
     @Test
@@ -288,6 +291,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = end of this month (EXPIRES THIS MONTH)")
     @Test
@@ -430,6 +434,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = next month (EXPIRES NEXT MONTH)")
     @Test
@@ -572,6 +577,7 @@ public class PostTestResultsExpiryDateLogicTrlPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - TRL Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = two months ahead (EARLY FOR TEST)")
     @Test

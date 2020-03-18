@@ -20,8 +20,8 @@ import java.util.UUID;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
-@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_based_on_previous_trl_preservation.csv")
-public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
+@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_based_on_previous_psv_preservation.csv")
+public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -37,12 +37,20 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
     private String postTestTypeId;
     private String postTestResult;
     private String postTestCode;
-    private int noOfAxles;
+    private String postVehicleSize;
+    private String postVehicleConfiguration;
     private boolean isAnnualWithCertificate;
-
 
     public void setInsertedTestCodeOne(String insertedTestCodeOne) {
         this.insertedTestCodeOne = insertedTestCodeOne;
+    }
+
+    public void setPostVehicleSize(String postVehicleSize) {
+        this.postVehicleSize = postVehicleSize;
+    }
+
+    public void setPostVehicleConfiguration(String postVehicleConfiguration) {
+        this.postVehicleConfiguration = postVehicleConfiguration;
     }
 
     public void setInsertedTestResultOne(String insertedTestResultOne) {
@@ -85,23 +93,19 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         this.postTestCode = postTestCode;
     }
 
-    public void setNoOfAxles(int noOfAxles) {
-        this.noOfAxles = noOfAxles;
-    }
-
     public void setAnnualWithCertificate(boolean annualWithCertificate) {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
     @WithTag("In_Test")
-    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - invalid testCode expiry date LATER than valid - TRL")
+    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - invalid testCode expiry date LATER than valid - PSV")
     @Test
-    public void testResultsMostRecentExpiryInvalidLaterTrl() {
+    public void testResultsMostRecentExpiryInvalidLaterPsv() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_trl_11396.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_psv_11396.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_11396.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11396.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -132,7 +136,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertOneVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertOneSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertOneNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampOne, "", "REPLACE");
@@ -149,7 +154,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsOne = new ArrayList<>(Arrays.asList(
                 alterationInsertOneVin,
                 alterationInsertOneSystemNo,
-                alterationInsertOneNoOfAxles,
+                alterationInsertOneVehicleSize,
+                alterationInsertOneVehicleConfiguration,
                 alterationInsertOneTestResultId,
                 alterationInsertOneTestStartTimestamp,
                 alterationInsertOneTestTypeStartTimestamp,
@@ -194,7 +200,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertTwoVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertTwoNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampTwo, "", "REPLACE");
@@ -211,7 +218,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationInsertTwoVin,
                 alterationInsertTwoSystemNo,
-                alterationInsertTwoNoOfAxles,
+                alterationInsertTwoVehicleSize,
+                alterationInsertTwoVehicleConfiguration,
                 alterationInsertTwoTestResultId,
                 alterationInsertTwoTestStartTimestamp,
                 alterationInsertTwoTestTypeStartTimestamp,
@@ -259,7 +267,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", postTestTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", postTestTypeName, "", "REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", postTestResult, "", "REPLACE");
-        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
@@ -273,7 +282,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
                 alterationTestName,
                 alterationTestTypeId,
                 alterationTestTypeName,
-                alterationNoOfAxles,
+                alterationInsertVehicleSize,
+                alterationInsertVehicleConfiguration,
                 alterationTestResult
         ));
 
@@ -307,14 +317,14 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
     }
 
     @WithTag("In_Test")
-    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expiry date SOONER than valid - TRL")
+    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expiry date SOONER than valid - PSV")
     @Test
-    public void testResultsMostRecentExpiryInvalidSoonerTrl() {
+    public void testResultsMostRecentExpiryInvalidSoonerPsv() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_trl_11396.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_psv_11396.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_11396.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11396.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -345,7 +355,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertOneVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertOneSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertOneNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampOne, "", "REPLACE");
@@ -362,7 +373,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsOne = new ArrayList<>(Arrays.asList(
                 alterationInsertOneVin,
                 alterationInsertOneSystemNo,
-                alterationInsertOneNoOfAxles,
+                alterationInsertOneVehicleSize,
+                alterationInsertOneVehicleConfiguration,
                 alterationInsertOneTestResultId,
                 alterationInsertOneTestStartTimestamp,
                 alterationInsertOneTestTypeStartTimestamp,
@@ -407,7 +419,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertTwoVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertTwoNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampTwo, "", "REPLACE");
@@ -424,7 +437,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationInsertTwoVin,
                 alterationInsertTwoSystemNo,
-                alterationInsertTwoNoOfAxles,
+                alterationInsertTwoVehicleSize,
+                alterationInsertTwoVehicleConfiguration,
                 alterationInsertTwoTestResultId,
                 alterationInsertTwoTestStartTimestamp,
                 alterationInsertTwoTestTypeStartTimestamp,
@@ -472,7 +486,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", postTestTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", postTestTypeName, "", "REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", postTestResult, "", "REPLACE");
-        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
@@ -486,7 +501,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
                 alterationTestName,
                 alterationTestTypeId,
                 alterationTestTypeName,
-                alterationNoOfAxles,
+                alterationInsertVehicleSize,
+                alterationInsertVehicleConfiguration,
                 alterationTestResult
         ));
 
@@ -520,14 +536,14 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
     }
 
     @WithTag("In_Test")
-    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - valid testCode expired - TRL")
+    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - valid testCode expired - PSV")
     @Test
-    public void testResultsMostRecentExpiryValidExpiredTrl() {
+    public void testResultsMostRecentExpiryValidExpiredPsv() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_trl_11396.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_psv_11396.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_11396.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11396.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -558,7 +574,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertOneVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertOneSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertOneNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampOne, "", "REPLACE");
@@ -575,7 +592,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsOne = new ArrayList<>(Arrays.asList(
                 alterationInsertOneVin,
                 alterationInsertOneSystemNo,
-                alterationInsertOneNoOfAxles,
+                alterationInsertOneVehicleSize,
+                alterationInsertOneVehicleConfiguration,
                 alterationInsertOneTestResultId,
                 alterationInsertOneTestStartTimestamp,
                 alterationInsertOneTestTypeStartTimestamp,
@@ -620,7 +638,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertTwoVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertTwoNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampTwo, "", "REPLACE");
@@ -637,7 +656,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationInsertTwoVin,
                 alterationInsertTwoSystemNo,
-                alterationInsertTwoNoOfAxles,
+                alterationInsertTwoVehicleSize,
+                alterationInsertTwoVehicleConfiguration,
                 alterationInsertTwoTestResultId,
                 alterationInsertTwoTestStartTimestamp,
                 alterationInsertTwoTestTypeStartTimestamp,
@@ -673,7 +693,6 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Expected recalculated expiry date
         String testExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
-
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
@@ -686,7 +705,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", postTestTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", postTestTypeName, "", "REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", postTestResult, "", "REPLACE");
-        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
@@ -700,7 +720,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
                 alterationTestName,
                 alterationTestTypeId,
                 alterationTestTypeName,
-                alterationNoOfAxles,
+                alterationInsertVehicleSize,
+                alterationInsertVehicleConfiguration,
                 alterationTestResult
         ));
 
@@ -734,14 +755,14 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
     }
 
     @WithTag("In_Test")
-    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expired - TRL")
+    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expired - PSV")
     @Test
-    public void testResultsMostRecentExpiryInvalidExpiredTrl() {
+    public void testResultsMostRecentExpiryInvalidExpiredPsv() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_trl_11396.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_psv_11396.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_11396.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_11396.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
@@ -772,7 +793,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertOneVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertOneSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertOneNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertOneVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampOne, "", "REPLACE");
         JsonPathAlteration alterationInsertOneTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampOne, "", "REPLACE");
@@ -789,7 +811,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsOne = new ArrayList<>(Arrays.asList(
                 alterationInsertOneVin,
                 alterationInsertOneSystemNo,
-                alterationInsertOneNoOfAxles,
+                alterationInsertOneVehicleSize,
+                alterationInsertOneVehicleConfiguration,
                 alterationInsertOneTestResultId,
                 alterationInsertOneTestStartTimestamp,
                 alterationInsertOneTestTypeStartTimestamp,
@@ -834,7 +857,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Create alteration to add one more tech record to in the inserted data
         JsonPathAlteration alterationInsertTwoVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoSystemNo = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationInsertTwoNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertTwoVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestResultId = new JsonPathAlteration("$.testResultId", insertableTestResultIdTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", insertableTestStartTimestampTwo, "", "REPLACE");
         JsonPathAlteration alterationInsertTwoTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", insertableTestTypeStartTimestampTwo, "", "REPLACE");
@@ -851,7 +875,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         List<JsonPathAlteration> insertAlterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationInsertTwoVin,
                 alterationInsertTwoSystemNo,
-                alterationInsertTwoNoOfAxles,
+                alterationInsertTwoVehicleSize,
+                alterationInsertTwoVehicleConfiguration,
                 alterationInsertTwoTestResultId,
                 alterationInsertTwoTestStartTimestamp,
                 alterationInsertTwoTestTypeStartTimestamp,
@@ -887,7 +912,6 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         // Expected recalculated expiry date
         String testExpiryDate = insertedTestExpiryDateOne.plusYears(1).toInstant().toString();
 
-
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
@@ -900,7 +924,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", postTestTypeId, "", "REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", postTestTypeName, "", "REPLACE");
         JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", postTestResult, "", "REPLACE");
-        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", noOfAxles, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleSize = new JsonPathAlteration("$.vehicleSize", postVehicleSize, "", "REPLACE");
+        JsonPathAlteration alterationInsertVehicleConfiguration = new JsonPathAlteration("$.vehicleConfiguration", postVehicleConfiguration, "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
@@ -914,7 +939,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_11396 {
                 alterationTestName,
                 alterationTestTypeId,
                 alterationTestTypeName,
-                alterationNoOfAxles,
+                alterationInsertVehicleSize,
+                alterationInsertVehicleConfiguration,
                 alterationTestResult
         ));
 
