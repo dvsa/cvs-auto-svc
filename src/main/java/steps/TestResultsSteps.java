@@ -102,6 +102,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void getTestResultsFromDateAndSysNum(String systemNumber, String fromDate) {
+        response = testResultsClient.getTestResultsFromDateTimeAndSysNum(systemNumber, fromDate);
+    }
+
+    @Step
     public void getTestResultsFromDate(String vin, String fromDate, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsFromDateTime(vin, fromDate, testResultsStatus.getStatus());
     }
@@ -702,6 +707,7 @@ public class TestResultsSteps {
     public void insertRecordInDynamo(String json, String table) {
         AwsUtil.insertJsonInTable(json, table);
     }
+
 
     @Step
     public void insertRecordInDynamo(String json, String table, String primaryKey) {

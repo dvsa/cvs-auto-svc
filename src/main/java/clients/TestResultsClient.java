@@ -221,6 +221,21 @@ public class TestResultsClient {
         return response;
     }
 
+    public Response getTestResultsFromDateTimeAndSysNum(String systemNumber, String fromDateTime) {
+
+        Response response = callGetTestResultsFromSystemNumberDateTime(systemNumber, fromDateTime);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetTestResultsFromDateTime(systemNumber, fromDateTime);
+        }
+
+        return response;
+    }
+
+
+
+
     public Response getTestResultsFromDateTime(String vin, String fromDateTime, String status) {
 
         Response response = callGetTestResultsFromDateTime(vin, fromDateTime, status);
@@ -359,6 +374,17 @@ public class TestResultsClient {
                 .pathParam("vin", vin)
                 .queryParam("fromDateTime", fromDateTime)
                 .get("/test-results/{vin}");
+
+        return response;
+    }
+
+    private Response callGetTestResultsFromSystemNumberDateTime(String systemNumber, String fromDateTime) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("systemNumber", systemNumber)
+                .queryParam("fromDateTime", fromDateTime)
+                .get("/test-results/{systemNumber}");
 
         return response;
     }
