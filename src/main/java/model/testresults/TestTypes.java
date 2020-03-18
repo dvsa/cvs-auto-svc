@@ -321,6 +321,7 @@ public class TestTypes {
                 ", reasonForAbandoning='" + reasonForAbandoning + '\'' +
                 ", additionalNotesRecorded='" + additionalNotesRecorded + '\'' +
                 ", defects=" + defects +
+                ", customDefects=" + customDefects +
                 ", name='" + name + '\'' +
                 ", testResult='" + testResult + '\'' +
                 ", additionalCommentsForAbandon='" + additionalCommentsForAbandon + '\'' +
