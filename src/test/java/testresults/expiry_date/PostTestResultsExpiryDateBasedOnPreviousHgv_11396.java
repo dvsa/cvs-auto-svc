@@ -93,7 +93,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_11396 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - invalid testCode expiry date LATER than valid - HGV")
     @Test
     public void testResultsMostRecentExpiryInvalidLaterHgv() {
@@ -306,7 +306,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_11396 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expiry date SOONER than valid - HGV")
     @Test
     public void testResultsMostRecentExpiryInvalidSoonerHgv() {
@@ -519,7 +519,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_11396 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - valid testCode expired - HGV")
     @Test
     public void testResultsMostRecentExpiryValidExpiredHgv() {
@@ -732,7 +732,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_11396 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expired - HGV")
     @Test
     public void testResultsMostRecentExpiryInvalidExpiredHgv() {
