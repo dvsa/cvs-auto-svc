@@ -691,7 +691,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 
         // Expected recalculated expiry date
-        String testExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
+        String testExpiryDate = submittedEndTimestamp.plusYears(1).minusDays(1).toInstant().toString();
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
