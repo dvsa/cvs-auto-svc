@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -28,8 +29,8 @@ public class EndVisitCheckAtfEmail {
     @Steps
     ActivitiesSteps activitiesSteps;
 
+    @Ignore("Ignoring until fix is in place")
     @Title("CVSB-10530 - Check email to ATF lands in inbox")
-    @Test
     public void endVisit_Check_Atf_Email() {
 
         String json = GenericData.readJsonValueFromFile("activities_10530.json", "$");
