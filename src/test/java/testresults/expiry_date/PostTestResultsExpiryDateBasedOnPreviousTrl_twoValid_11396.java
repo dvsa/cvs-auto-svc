@@ -93,7 +93,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_twoValid_11396 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - two valid testCodes - TRL")
     @Test
     public void testResultsMostRecentExpiryBothValidOneExpiredTrl() {

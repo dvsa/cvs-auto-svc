@@ -72,7 +72,7 @@ public class PostTestResultsPreservationExpiryDateNegativePsv_12982 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("expiry_date")
+    @WithTag("In_Test")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong expiryDate format inserted")
     @Test
     public void testResultsExpiryDateWrongDateFormat() {
@@ -218,7 +218,7 @@ public class PostTestResultsPreservationExpiryDateNegativePsv_12982 {
 
     }
 
-    @WithTag("expiry_date")
+    @WithTag("In_Test")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong testCode inserted")
     @Test
     public void testResultsExpiryDateWrongTestCodeInserted() {

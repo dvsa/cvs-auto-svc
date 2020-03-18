@@ -97,7 +97,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - invalid testCode expiry date LATER than valid - PSV")
     @Test
     public void testResultsMostRecentExpiryInvalidLaterPsv() {
@@ -316,7 +316,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expiry date SOONER than valid - PSV")
     @Test
     public void testResultsMostRecentExpiryInvalidSoonerPsv() {
@@ -535,7 +535,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - valid testCode expired - PSV")
     @Test
     public void testResultsMostRecentExpiryValidExpiredPsv() {
@@ -754,7 +754,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_date")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history  - invalid testCode expired - PSV")
     @Test
     public void testResultsMostRecentExpiryInvalidExpiredPsv() {
