@@ -1,2 +1,13 @@
 INSERTED TEST CODE ONE, INSERTED TEST RESULT ONE, INSERTED TEST TYPE ID ONE, INSERTED TEST CODE TWO, INSERTED TEST RESULT TWO, INSERTED TEST TYPE ID TWO, POST NAME, POST TEST TYPE NAME, POST TEST TYPE ID, POST TEST RESULT, POST TEST CODE, POST VEHICLE SIZE, POST VEHICLE CONFIGURATION, IS ANNUAL WITH CERTIFICATE
 aal,	pass,	1,	lcp,	pass,	39,	LEC,	Low Emissions Certificate (LEC) with annual test,	39,	pass,	p1l,	large,	rigid,	true
+aav2, pass, 94, ldv, pass, 42, Annual test, Annual test, 94, pass, aav2, large, rigid, true
+aav3, pass, 94, lev, pass, 42, Annual test, Annual test, 94, pass, aav3, large, rigid, true
+aav4, pass, 94, ddv, pass, 50, Annual test, Annual test, 94, pass, aav4, large, rigid, true
+aav5, pass, 94, arv, pass, 58, Annual test, Annual test, 94, pass, aav5, large, rigid, true
+aat2, pass, 94, ddt, pass, 50, Annual test, Annual test, 94, pass, aat2, large, rigid, true
+aat3, pass, 94, art, pass, 58, Annual test, Annual test, 94, pass, aat3, large, rigid, true
+aat4, pass, 94, drt, pass, 58, Annual test, Annual test, 94, pass, aat4, large, rigid, true
+aat5, pass, 94, ddt, pass, 50, Annual test, Annual test, 94, pass, aat5, large, rigid, true
+aal, pass, 1, lcp, pass, 39, Annual test, Annual test, 1, pass, aal, large, rigid, true
+aas, pass, 1, lbp, pass, 39, Annual test, Annual test, 1, pass, aas, small, rigid, true
+aal, pass, 1, lbp, pass, 39, Annual test, Annual test, 1, pass, aal, large, rigid, true
