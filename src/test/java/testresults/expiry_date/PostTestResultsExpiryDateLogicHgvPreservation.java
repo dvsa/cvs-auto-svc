@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@Ignore
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value="loader/testdata/test_data_expiry_date_hgv_preservation.csv")
@@ -69,7 +70,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Preservation Test - NO Previous Expiry Date")
     @Test
@@ -147,6 +148,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = last day of previous month (EXPIRED)")
     @Test
@@ -289,6 +291,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = end of this month (EXPIRES THIS MONTH)")
     @Test
@@ -430,6 +433,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = next month (EXPIRES NEXT MONTH)")
     @Test
@@ -571,6 +575,7 @@ public class PostTestResultsExpiryDateLogicHgvPreservation {
 
     }
 
+    @Ignore
     @WithTag("expiry_dates")
     @Title("CVSB-8684 - TC1 - AC1 - HGV Annual test WITH PREVIOUS Expiry Date - Previous testExpiryDate = two months ahead (EARLY FOR TEST)")
     @Test
