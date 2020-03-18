@@ -20,8 +20,8 @@ import java.util.UUID;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
-@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_two_valid_codes_hgv.csv")
-public class PostTestResultsExpiryDateBasedOnPreviousHgv_twoValid_11396 {
+@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_based_on_previous_trl_preservation.csv")
+public class PostTestResultsExpiryDateBasedOnPreviousTrl_twoValid_11396 {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -94,14 +94,14 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_twoValid_11396 {
     }
 
     @WithTag("In_Test")
-    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - two valid testCodes - HGV")
+    @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - two valid testCodes - TRL")
     @Test
-    public void testResultsMostRecentExpiryBothValidOneExpiredHgv() {
+    public void testResultsMostRecentExpiryBothValidOneExpiredTrl() {
 
         // Read the base INSERT test result JSON.
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_hgv_11396.json", "$");
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_two_expiry_date_trl_11396.json", "$");
         // Read the base POST test result JSON.
-        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_11396.json", "$");
+        String postTestResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_11396.json", "$");
 
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
 
