@@ -35,6 +35,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void getVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
+        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
+    }
+
+    @Step
     public void getVehicleTechnicalRecordsByPartialVim(String searchIdentifier) {
         String partialVim = searchIdentifier.substring(searchIdentifier.length() - 6);
         getVehicleTechnicalRecords(partialVim);
@@ -287,6 +292,11 @@ public class VehicleTechnicalRecordsSteps {
                 System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
                 if (status == 200 && recordsNumber > 1) {
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     return;
                 } else {
                     System.out.println("\n...waiting one more second (" + i + ")...\n");

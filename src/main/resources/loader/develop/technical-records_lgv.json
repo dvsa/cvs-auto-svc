@@ -1,0 +1,119 @@
+{
+  "partialVin": "400004",
+  "primaryVrm": "SJG1004",
+  "secondaryVrms": [
+    "AS432TY"
+  ],
+  "techRecord": [
+    {
+      "axles": [
+        {
+          "axleNumber": 1,
+          "parkingBrakeMrk": false,
+          "tyres": {
+            "dataTrAxles": null,
+            "fitmentCode": null,
+            "plyRating": null,
+            "speedCategorySymbol": "a7",
+            "tyreCode": null,
+            "tyreSize": null
+          },
+          "weights": {
+            "designWeight": null,
+            "gbWeight": null
+          }
+        },
+        {
+          "axleNumber": 2,
+          "parkingBrakeMrk": null,
+          "tyres": {
+            "dataTrAxles": 345,
+            "fitmentCode": "single",
+            "plyRating": "AB",
+            "speedCategorySymbol": "a7",
+            "tyreCode": 5678,
+            "tyreSize": "295/80-22.5"
+          },
+          "weights": {
+            "designWeight": null,
+            "gbWeight": null
+          }
+        }
+      ],
+      "bodyType": {
+        "code": "x",
+        "description": null
+      },
+      "brakeCode": "178202",
+      "brakes": {
+        "antilockBrakingSystem": true,
+        "brakeCode": "123",
+        "brakeCodeOriginal": "12412",
+        "brakeForceWheelsNotLocked": {
+          "parkingBrakeForceA": 2332,
+          "secondaryBrakeForceA": 2512,
+          "serviceBrakeForceA": 6424
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "parkingBrakeForceB": 3512,
+          "secondaryBrakeForceB": 2512,
+          "serviceBrakeForceB": 5521
+        },
+        "dataTrBrakeOne": "None",
+        "dataTrBrakeThree": "None",
+        "dataTrBrakeTwo": "None",
+        "dtpNumber": null,
+        "loadSensingValve": true,
+        "retarderBrakeOne": "electric",
+        "retarderBrakeTwo": "exhaust"
+      },
+      "conversionRefNo": null,
+      "createdAt": "2019-06-24T10:26:54.903Z",
+      "createdByName": null,
+      "dimensions": {
+        "length": null,
+        "width": null
+      },
+      "drawbarCouplingFitted": null,
+      "euroStandard": " ",
+      "euVehicleCategory": "n1",
+      "frontAxleTo5thWheelCouplingMax": null,
+      "frontAxleTo5thWheelCouplingMin": null,
+      "frontAxleTo5thWheelMax": null,
+      "frontAxleTo5thWheelMin": null,
+      "functionCode": null,
+      "grossDesignWeight": null,
+      "grossGbWeight": null,
+      "grossKerbWeight": null,
+      "grossLadenWeight": null,
+      "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
+      "make": null,
+      "manufactureYear": null,
+      "maxTrainDesignWeight": null,
+      "maxTrainGbWeight": null,
+      "model": null,
+      "noOfAxles": 2,
+      "notes": null,
+      "ntaNumber": null,
+      "numberOfWheelsDriven": 3,
+      "reasonForCreation": null,
+      "roadFriendly": false,
+      "speedLimiterMrk": null,
+      "statusCode": "current",
+      "tachoExemptMrk": null,
+      "trainDesignWeight": null,
+      "trainGbWeight": null,
+      "tyreUseCode": null,
+      "vehicleClass": {
+        "code": "4",
+        "description": null
+      },
+      "vehicleConfiguration": null,
+      "vehicleSubclass": [
+        "a"
+      ],
+      "vehicleType": "lgv"
+    }
+  ],
+  "vin": "DP76UMK4DQLTOT400004"
+}

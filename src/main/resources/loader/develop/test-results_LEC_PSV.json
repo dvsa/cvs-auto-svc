@@ -19,6 +19,7 @@
   "vehicleType": "psv",
   "numberOfSeats": 45,
   "noOfAxles": 2,
+  "numberOfWheelsDriven": null,
   "vehicleConfiguration": "rigid",
   "odometerReading": 350000,
   "odometerReadingUnits": "kilometres",
@@ -34,6 +35,7 @@
       "name": "Technical test",
       "testTypeId": "39",
       "certificateNumber": "12334",
+      "secondaryCertificateNumber": null,
       "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
       "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
       "testExpiryDate": "2019-09-19",
@@ -53,6 +55,7 @@
       "prohibitionIssued": false,
       "reasonForAbandoning": "none",
       "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+      "customDefects": [],
       "defects": [
         {
           "imNumber": 3,

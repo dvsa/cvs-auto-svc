@@ -24,12 +24,14 @@
   "euVehicleCategory":"o2",
   "countryOfRegistration":"gb",
   "noOfAxles":2,
+  "numberOfWheelsDriven": null,
   "testTypes":[
     {
       "name":"Voluntary test",
       "testTypeName":"Voluntary roadworthiness test",
       "testTypeId":"122",
       "certificateNumber":null,
+      "secondaryCertificateNumber": null,
       "testTypeStartTimestamp":"2019-12-12T11:57:13.256Z",
       "testTypeEndTimestamp":"2019-12-12T11:57:28.441Z",
       "testExpiryDate":null,
@@ -38,9 +40,8 @@
       "reasonForAbandoning":null,
       "additionalCommentsForAbandon":null,
       "additionalNotesRecorded":"sdcd",
-      "defects":[
-
-      ]
+      "defects":[],
+      "customDefects": []
     }
   ]
 }
