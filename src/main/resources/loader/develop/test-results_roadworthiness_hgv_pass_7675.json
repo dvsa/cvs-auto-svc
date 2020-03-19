@@ -26,12 +26,14 @@
   "euVehicleCategory":"n2",
   "countryOfRegistration":"gb",
   "noOfAxles":2,
+  "numberOfWheelsDriven": null,
   "testTypes":[
     {
       "name":"Voluntary test",
       "testTypeName":"Voluntary roadworthiness test",
       "testTypeId":"122",
       "certificateNumber":null,
+      "secondaryCertificateNumber": null,
       "testTypeStartTimestamp":"2019-12-12T10:42:33.859Z",
       "testTypeEndTimestamp":"2019-12-12T10:42:58.971Z",
       "modType":null,
@@ -47,9 +49,8 @@
       "reasonForAbandoning":null,
       "additionalCommentsForAbandon":null,
       "additionalNotesRecorded":"sds",
-      "defects":[
-
-      ]
+      "defects":[],
+      "customDefects": []
     }
   ]
 }
