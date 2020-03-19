@@ -119,8 +119,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         // Printing the scenario to the console
         System.out.println("\n******************************************************");
         System.out.println("Test code: " + testCode);
-        System.out.println("Registration Date: " + "null");
-        System.out.println("Registration Anniversary: " + "null");
+        System.out.println("First Use Date: " + "null");
+        System.out.println("First Use Anniversary: " + "null");
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
         System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -212,8 +212,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         // Printing the scenario to the console
         System.out.println("\n******************************************************");
         System.out.println("Test code: " + testCode);
-        System.out.println("Registration Date: " + "null");
-        System.out.println("Registration Anniversary: " + "null");
+        System.out.println("First Use Date: " + "null");
+        System.out.println("First Use Anniversary: " + "null");
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
         System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -304,8 +304,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         // Printing the scenario to the console
         System.out.println("\n******************************************************");
         System.out.println("Test code: " + testCode);
-        System.out.println("Registration Date: " + firstUseDate);
-        System.out.println("Registration Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("First Use Date: " + firstUseDate);
+        System.out.println("First Use Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
         System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -396,8 +396,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         // Printing the scenario to the console
         System.out.println("\n******************************************************");
         System.out.println("Test code: " + testCode);
-        System.out.println("Registration Date: " + firstUseDate);
-        System.out.println("Registration Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("First Use Date: " + firstUseDate);
+        System.out.println("First Use Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
         System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -488,8 +488,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         // Printing the scenario to the console
         System.out.println("\n******************************************************");
         System.out.println("Test code: " + testCode);
-        System.out.println("Registration Date: " + firstUseDate);
-        System.out.println("Registration Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("First Use Date: " + firstUseDate);
+        System.out.println("First Use Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
         System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
         System.out.println("******************************************************\n");
@@ -580,8 +580,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         // Printing the scenario to the console
         System.out.println("\n******************************************************");
         System.out.println("Test code: " + testCode);
-        System.out.println("Registration Date: " + firstUseDate);
-        System.out.println("Registration Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
+        System.out.println("First Use Date: " + firstUseDate);
+        System.out.println("First Use Anniversary: " + firstAnniversary.toInstant().toString().substring(0,10));
         System.out.println("Today: " + currentTime.toInstant().toString().substring(0,10));
         System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
         System.out.println("******************************************************\n");
