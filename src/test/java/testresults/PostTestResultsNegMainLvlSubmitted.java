@@ -974,7 +974,8 @@ public class PostTestResultsNegMainLvlSubmitted {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "euVehicleCategory", RandomStringUtils.randomNumeric(1,9), ToTypeConvertor.INTEGER, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, n2, n3, o1, o2, o3, o4, null]");
+        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, " +
+                "n2, n3, o1, o2, o3, o4, l1e-a, l1e, l2e, l3e, l4e, l5e, l6e, l7e, null]");
     }
 
 
@@ -984,7 +985,8 @@ public class PostTestResultsNegMainLvlSubmitted {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setEuVehicleCategory(RandomStringUtils.randomAlphanumeric(10)).build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, n2, n3, o1, o2, o3, o4, null]");
+        testResultsSteps.validatePostErrorData("euVehicleCategory", "must be one of [m1, m2, m3, n1, " +
+                "n2, n3, o1, o2, o3, o4, l1e-a, l1e, l2e, l3e, l4e, l5e, l6e, l7e, null]");
     }
 
     @Ignore ("Defect - CVSB-11496")

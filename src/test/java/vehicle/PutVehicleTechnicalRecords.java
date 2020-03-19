@@ -161,10 +161,9 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[2].adrDetails", adrDetailsTank);
     }
 
-    @WithTag("Vtm")
+    @Ignore("no longer a valid test")
     @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
             "AC2 - Document is removed from the ADR record")
-    @Test
     public void testAddAdrDetailsUploadDocumentAdrRecord() {
         //TEST SETUP
         // generate random Vin
