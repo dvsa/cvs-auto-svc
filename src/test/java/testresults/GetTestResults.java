@@ -221,7 +221,6 @@ public class GetTestResults {
 
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
     @Test
-
     public void testResultsForVinHgv() {
         testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);
