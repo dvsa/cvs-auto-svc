@@ -35,6 +35,14 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier,
+                                                                    @NotNull VehicleTechnicalRecordStatus status,
+                                                                    @NotNull VehicleTechnicalRecordSearchCriteria criteria) {
+        this.response = vehicleTechnicalRecordsClient.
+                getVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status.getStatus(), criteria.getSearchCriteria());
+    }
+
+    @Step
     public void getVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
         this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
     }
