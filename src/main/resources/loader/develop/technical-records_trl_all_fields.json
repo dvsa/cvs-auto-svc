@@ -1,0 +1,181 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "vin": "T72741234",
+  "partialVin": "741234",
+  "trailerId": "C100001",
+  "systemNumber": "10000026",
+  "techRecord": [
+    {
+      "vehicleType": "trl",
+      "regnDate": "2019-06-24",
+      "firstUseDate": "2019-06-24",
+      "manufactureYear": 2018,
+      "noOfAxles": 2,
+      "dtpNumber": "sdsdg",
+      "suspensionType": "Y",
+      "roadFriendly": true,
+      "vehicleClass": {
+        "description": "trailer"
+      },
+      "vehicleConfiguration": "centre axle drawbar",
+      "couplingType": "F",
+      "maxLoadOnCoupling": 7000,
+      "frameDescription": "Tubular",
+      "euVehicleCategory": "o1",
+      "alterationMarker": true,
+      "departmentalVehicleMarker": false,
+      "authIntoService": {
+        "cocIssueDate": "2019-06-24",
+        "dateReceived": "2019-06-24",
+        "datePending": "2019-06-24",
+        "dateAuthorised": "2019-06-24",
+        "dateRejected": "2019-06-24"
+      },
+      "lettersOfAuth": {
+        "letterType": "Trailer authorization",
+        "letterDateRequested": "2019-06-24",
+        "letterContents": "contents"
+      },
+      "approvalType": "NTA",
+      "approvalTypeNumber": "123456",
+      "ntaNumber": "123456",
+      "variantNumber": "123456",
+      "variantVersionNumber": "123456",
+      "make": "Isuzu",
+      "model": "F06",
+      "bodyType": {
+        "description": "petrol/oil tanker"
+      },
+      "functionCode": "R",
+      "conversionRefNo": "123456",
+      "grossGbWeight": 38000,
+      "grossEecWeight": 38000,
+      "grossDesignWeight": 38000,
+      "tyreUseCode": "2B",
+      "axles": [
+        {
+          "parkingBrakeMrk": false,
+          "axleNumber": 1,
+          "brakes": {
+            "brakeActuator": 113,
+            "leverLength": 125,
+            "springBrakeParking": false
+          },
+          "tyres": {
+            "tyreSize": "9.23648E+11",
+            "plyRating": "AB",
+            "fitmentCode": "single",
+            "dataTrAxles": 345,
+            "tyreCode": 1234
+          }
+        },
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 2,
+          "tyres": {
+            "tyreSize": "9.23648E+11",
+            "plyRating": "AB",
+            "fitmentCode": "single",
+            "dataTrAxles": 345,
+            "tyreCode": 5678
+          },
+          "brakes": {
+            "brakeActuator": 113,
+            "leverLength": 125,
+            "springBrakeParking": true
+          }
+        }
+      ],
+      "brakes": {
+        "brakeCodeOriginal": "12412",
+        "brakeCode": "123",
+        "dataTrBrakeOne": "None",
+        "dataTrBrakeTwo": "None",
+        "dataTrBrakeThree": "None",
+        "retarderBrakeOne": "electric",
+        "retarderBrakeTwo": "exhaust",
+        "brakeForceWheelsNotLocked": {
+          "serviceBrakeForceA": 6424,
+          "secondaryBrakeForceA": 2512,
+          "parkingBrakeForceA": 2332
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "serviceBrakeForceB": 5521,
+          "secondaryBrakeForceB": 2512,
+          "parkingBrakeForceB": 3512
+        },
+        "loadSensingValve": true,
+        "antilockBrakingSystem": true
+      },
+      "dimensions": {
+        "length": 7500,
+        "width": 2200,
+        "axleSpacing": [
+          {
+            "axles": "1-2",
+            "value": 10000
+          }
+        ]
+      },
+      "frontAxleToRearAxle": 1700,
+      "rearAxleToRearTrl": 400,
+      "couplingCenterToRearAxleMin": 1000,
+      "couplingCenterToRearAxleMax": 900,
+      "couplingCenterToRearTrlMin": 800,
+      "couplingCenterToRearTrlMax": 700,
+      "centreOfRearmostAxleToRearOfTrl": 1000,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "purchaserDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************",
+        "faxNumber": "************",
+        "purchaserNotes": "**************"
+      },
+      "manufacturerDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************",
+        "faxNumber": "************",
+        "manufacturerNotes": "**************"
+      },
+      "microfilm": {
+        "microfilmDocumentType": "PSV Miscellaneous",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "plates": [
+        {
+          "plateSerialNumber": "11111111",
+          "plateIssueDate": "2020-02-02",
+          "plateReasonForIssue": "Original",
+          "plateIssuer": "Mr Jones"
+        }
+      ],
+      "notes": "some note",
+      "recordCompleteness": "complete"
+    }
+  ]
+}
