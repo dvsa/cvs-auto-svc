@@ -685,6 +685,8 @@ public class GetVehicleTechnicalRecords {
     @Test
     public void testVehicleTechnicalRecordsGetAllTrlAttributes() {
         // TEST SETUP
+        //generate random systemNumber
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
         //generate random Vrm
@@ -696,12 +698,15 @@ public class GetVehicleTechnicalRecords {
         String name = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msUser");
         String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.secondaryVrms[0]");
 
+
+        // create alteration to change systemNumber in the request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
         // initialize the alterations list with both declared alteration
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
         // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);

@@ -6,117 +6,93 @@
   "vin": "T72741234",
   "partialVin": "741234",
   "trailerId": "C100001",
+  "primaryVrm": "B2C1C11",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
   "systemNumber": "10000026",
   "techRecord": [
     {
       "vehicleType": "trl",
-      "regnDate": "2019-06-24",
-      "firstUseDate": "2019-06-24",
-      "manufactureYear": 2018,
-      "noOfAxles": 2,
-      "dtpNumber": "sdsdg",
-      "suspensionType": "Y",
-      "roadFriendly": true,
-      "vehicleClass": {
-        "description": "trailer"
+      "regnDate": "2019-06-25",
+      "firstUseDate": "2019-06-25",
+      "manufactureYear": 2019,
+      "noOfAxles": 1,
+      "brakes": {
+        "dtpNumber": "3798B",
+        "loadSensingValve": false,
+        "antilockBrakingSystem": false
       },
-      "vehicleConfiguration": "centre axle drawbar",
-      "couplingType": "F",
-      "maxLoadOnCoupling": 7000,
-      "frameDescription": "Tubular",
-      "euVehicleCategory": "o1",
-      "alterationMarker": true,
-      "departmentalVehicleMarker": false,
+      "suspensionType": "F",
+      "roadFriendly": false,
+      "vehicleClass": {
+        "description": "3 wheelers"
+      },
+      "vehicleConfiguration": "dolly",
+      "couplingType": "Y",
+      "maxLoadOnCoupling": 10000,
+      "frameDescription": "Other",
+      "euVehicleCategory": "o2",
+      "alterationMarker": false,
+      "departmentalVehicleMarker": true,
       "authIntoService": {
-        "cocIssueDate": "2019-06-24",
-        "dateReceived": "2019-06-24",
-        "datePending": "2019-06-24",
-        "dateAuthorised": "2019-06-24",
-        "dateRejected": "2019-06-24"
+        "cocIssueDate": "2019-06-25",
+        "dateReceived": "2019-06-25",
+        "datePending": "2019-06-25",
+        "dateAuthorised": "2019-06-25",
+        "dateRejected": "2019-06-25"
       },
       "lettersOfAuth": {
-        "letterType": "Trailer authorization",
-        "letterDateRequested": "2019-06-24",
-        "letterContents": "contents"
+        "letterType": "Trailer rejection",
+        "letterDateRequested": "2019-06-25",
+        "letterContents": "other"
       },
-      "approvalType": "NTA",
-      "approvalTypeNumber": "123456",
-      "ntaNumber": "123456",
-      "variantNumber": "123456",
-      "variantVersionNumber": "123456",
-      "make": "Isuzu",
-      "model": "F06",
+      "approvalType": "ECTA",
+      "approvalTypeNumber": "12345",
+      "ntaNumber": "12345",
+      "variantNumber": "12345",
+      "variantVersionNumber": "12345",
+      "make": "Volvo",
+      "model": "X6",
       "bodyType": {
-        "description": "petrol/oil tanker"
+        "description": "tipper"
       },
       "functionCode": "R",
       "conversionRefNo": "123456",
-      "grossGbWeight": 38000,
-      "grossEecWeight": 38000,
-      "grossDesignWeight": 38000,
-      "tyreUseCode": "2B",
+      "grossGbWeight": 40000,
+      "grossEecWeight": 40000,
+      "grossDesignWeight": 40000,
+      "tyreUseCode": "2C",
       "axles": [
         {
-          "parkingBrakeMrk": false,
+          "parkingBrakeMrk": true,
           "axleNumber": 1,
           "brakes": {
-            "brakeActuator": 113,
-            "leverLength": 125,
+            "brakeActuator": 150,
+            "leverLength": 150,
             "springBrakeParking": false
           },
           "tyres": {
-            "tyreSize": "9.23648E+11",
-            "plyRating": "AB",
-            "fitmentCode": "single",
-            "dataTrAxles": 345,
-            "tyreCode": 1234
-          }
-        },
-        {
-          "parkingBrakeMrk": true,
-          "axleNumber": 2,
-          "tyres": {
-            "tyreSize": "9.23648E+11",
-            "plyRating": "AB",
-            "fitmentCode": "single",
-            "dataTrAxles": 345,
-            "tyreCode": 5678
+            "dataTrAxles": 1,
+            "fitmentCode": "double",
+            "plyRating": "AA",
+            "tyreCode": 463,
+            "tyreSize": "11-21.5"
           },
-          "brakes": {
-            "brakeActuator": 113,
-            "leverLength": 125,
-            "springBrakeParking": true
+          "weights": {
+            "designWeight": 10000,
+            "eecWeight": 10000,
+            "gbWeight": 10000
           }
         }
       ],
-      "brakes": {
-        "brakeCodeOriginal": "12412",
-        "brakeCode": "123",
-        "dataTrBrakeOne": "None",
-        "dataTrBrakeTwo": "None",
-        "dataTrBrakeThree": "None",
-        "retarderBrakeOne": "electric",
-        "retarderBrakeTwo": "exhaust",
-        "brakeForceWheelsNotLocked": {
-          "serviceBrakeForceA": 6424,
-          "secondaryBrakeForceA": 2512,
-          "parkingBrakeForceA": 2332
-        },
-        "brakeForceWheelsUpToHalfLocked": {
-          "serviceBrakeForceB": 5521,
-          "secondaryBrakeForceB": 2512,
-          "parkingBrakeForceB": 3512
-        },
-        "loadSensingValve": true,
-        "antilockBrakingSystem": true
-      },
       "dimensions": {
-        "length": 7500,
-        "width": 2200,
+        "length": 10000,
+        "width": 3000,
         "axleSpacing": [
           {
-            "axles": "1-2",
-            "value": 10000
+            "axles": "2-1",
+            "value": 11000
           }
         ]
       },
@@ -175,6 +151,7 @@
         }
       ],
       "notes": "some note",
+      "reasonForCreation": "new record",
       "recordCompleteness": "complete"
     }
   ]
