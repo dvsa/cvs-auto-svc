@@ -1,0 +1,90 @@
+{
+  "msUserDetails": {
+    "msUser": "sean",
+    "msOid": "12345"
+  },
+  "vin": "P11122224",
+  "partialVin": "122223",
+  "primaryVrm": "PSV112244",
+  "systemNumber": "BSFD3244BDSGR",
+  "techRecord": [
+    {
+      "vehicleType": "psv",
+      "regnDate": "1995-01-01",
+      "manufactureYear": 1995,
+      "noOfAxles": 1,
+      "speedLimiterMrk": false,
+      "tachoExemptMrk": false,
+      "euroStandard": "2",
+      "fuelPropulsionSystem": "DieselPetrol",
+      "approvalType": "NTA",
+      "bodyMake": "Isuzu",
+      "bodyModel": "X40",
+      "chassisMake": "Isuzu",
+      "chassisModel": "X40",
+      "axles": [
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 1,
+          "tyres": {
+            "speedCategorySymbol": "a7",
+            "fitmentCode": "double",
+            "tyreCode": 383,
+            "tyreSize": "385/65-22.5"
+          },
+          "weights": {
+            "designWeight": 8000,
+            "gbWeight": 8000,
+            "kerbWeight": 9999,
+            "ladenWeight": 4000
+          }
+        }
+      ],
+      "bodyType": {
+        "description": "other"
+      },
+      "brakes": {
+        "dtpNumber": "123456",
+        "brakeForceWheelsNotLocked": {
+          "parkingBrakeForceA": 2,
+          "secondaryBrakeForceA": 3,
+          "serviceBrakeForceA": 4
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "parkingBrakeForceB": 5,
+          "secondaryBrakeForceB": 6,
+          "serviceBrakeForceB": 7
+        },
+        "brakeCode": "code",
+        "dataTrBrakeOne": "312677",
+        "dataTrBrakeTwo": "98765",
+        "dataTrBrakeThree": "98765"
+      },
+      "dda": {
+        "certificateIssued": true
+      },
+      "departmentalVehicleMarker": false,
+      "alterationMarker": true,
+      "euVehicleCategory": "m1",
+      "grossDesignWeight": 38000,
+      "grossGbWeight": 38000,
+      "grossKerbWeight": 38000,
+      "grossLadenWeight": 38000,
+      "numberOfWheelsDriven": 10,
+      "numberOfSeatbelts": "56",
+      "reasonForCreation": "because",
+      "seatsLowerDeck": 30,
+      "seatsUpperDeck": 26,
+      "standingCapacity": 10,
+      "trainDesignWeight": 14000,
+      "dimensions": {},
+      "applicantDetails": {},
+      "vehicleSize": "large",
+      "vehicleClass": {
+        "description": "large psv(ie: greater than 23 seats)"
+      },
+      "vehicleConfiguration": "other",
+      "recordCompleteness": "testable"
+    }
+  ]
+}

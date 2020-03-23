@@ -4,6 +4,7 @@ package vehicle;
 import data.GenericData;
 import data.VehicleTechRecordsData;
 import model.vehicles.Vehicle;
+import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -548,11 +549,13 @@ public class GetVehicleTechnicalRecords {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10209 - AC1 - All attributes applicable to HGVs are returned" +
+    @Title("CVSB-10209 - AC1 - All attributes applicable to HGVs are returned " +
             "AC2 - HGV vehicle is created, and the appropriate attributes are automatically set")
     @Test
     public void testVehicleTechnicalRecordsGetAllHgvAttributes() {
         // TEST SETUP
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
         //generate random Vrm
@@ -564,12 +567,14 @@ public class GetVehicleTechnicalRecords {
         String name = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.msUserDetails.msUser");
         String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$.secondaryVrms[0]");
 
+        // create alteration to change systemNumber in the request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
         // initialize the alterations list with both declared alteration
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
         // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
@@ -677,5 +682,48 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("YV31ME00000 1/\\*-1", VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", "YV31ME00000 1/\\*-1");
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10239 - AC1 - All attributes applicable to PSVs are returned " +
+            "AC2 - HGV vehicle is created, and the appropriate attributes are automatically set")
+    @Test
+    public void testVehicleTechnicalRecordsGetAllPsvAttributes() {
+        // TEST SETUP
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json","$");
+        String techRecord = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$.techRecord[0]");
+        String userId = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$.msUserDetails.msOid");
+        String name = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$.msUserDetails.msUser");
+        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$.secondaryVrms[0]");
+
+        // create alteration to change systemNumber in the request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[0]", techRecord);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdById", userId);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdByName", name);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", randomVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
     }
 }

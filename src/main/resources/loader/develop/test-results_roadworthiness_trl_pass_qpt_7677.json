@@ -23,6 +23,7 @@
   "euVehicleCategory":"o2",
   "countryOfRegistration":"gb",
   "noOfAxles":2,
+  "numberOfWheelsDriven": 4,
   "testTypes":[
     {
       "name":"Retest",
@@ -37,9 +38,9 @@
       "reasonForAbandoning":null,
       "additionalCommentsForAbandon":null,
       "additionalNotesRecorded":null,
-      "defects":[
-
-      ]
+      "defects":[],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456"
     }
   ]
 }
