@@ -286,12 +286,6 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
-        Response response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
-        return response.then().extract().path(jsonPath).toString();
-    }
-
-    @Step
     public Response downloadFile(String searchIdentifier, String fileName) {
         return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
     }
