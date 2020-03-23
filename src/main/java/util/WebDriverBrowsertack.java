@@ -13,7 +13,6 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
