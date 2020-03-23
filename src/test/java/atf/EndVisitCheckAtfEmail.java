@@ -29,8 +29,8 @@ public class EndVisitCheckAtfEmail {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-    @Ignore("Ignoring until fix is in place")
     @Title("CVSB-10530 - Check email to ATF lands in inbox")
+    @Test
     public void endVisit_Check_Atf_Email() {
 
         String json = GenericData.readJsonValueFromFile("activities_10530.json", "$");

@@ -13,7 +13,6 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -149,7 +148,8 @@ public class WebDriverBrowsertack {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
         System.out.println("Confirming search returned at least one result");
-        while (driver.findElement(
+        int i = 0;
+        while ( (i < 60) && driver.findElement(
                 By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
             try {
                 Thread.sleep(500);
@@ -159,6 +159,7 @@ public class WebDriverBrowsertack {
             driver.findElement(By.cssSelector("[placeholder='Search']")).clear();
             driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
             driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+            i++;
             new WebDriverWait(driver, 1).until(
                     webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         }
@@ -235,7 +236,8 @@ public class WebDriverBrowsertack {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
         System.out.println("Confirming search returned at least one result");
-        while (driver.findElement(
+        int i = 0;
+        while ( (i < 60) && driver.findElement(
                 By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
             try {
                 Thread.sleep(500);
