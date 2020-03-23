@@ -52,8 +52,6 @@ public class PostVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].axles[0].parkingBrakeMrk", "99"},
                 {"$.techRecord[0].speedLimiterMrk", "99"},
                 {"$.techRecord[0].tachoExemptMrk", "99"},
-                {"$.techRecord[0].euroStandard", 10},
-                {"$.techRecord[0].euroStandard", -1},
                 {"$.techRecord[0].euroStandard", false},
                 {"$.techRecord[0].fuelPropulsionSystem", RandomStringUtils.randomAlphanumeric(10)},
                 {"$.techRecord[0].fuelPropulsionSystem", 10},
@@ -63,6 +61,7 @@ public class PostVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].vehicleClass.description", 10},
                 {"$.techRecord[0].offRoad", 10},
                 {"$.techRecord[0].numberOfWheelsDriven", 10000},
+                {"$.techRecord[0].numberOfWheelsDriven", -1},
                 {"$.techRecord[0].numberOfWheelsDriven", RandomStringUtils.randomAlphabetic(4)},
                 {"$.techRecord[0].euVehicleCategory", RandomStringUtils.randomAlphanumeric(3)},
                 {"$.techRecord[0].euVehicleCategory", 10},
@@ -93,49 +92,49 @@ public class PostVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].conversionRefNo", 10},
                 {"$.techRecord[0].grossGbWeight", 100000},
                 {"$.techRecord[0].grossGbWeight", -1},
-                {"$.techRecord[0].grossGbWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].grossGbWeight", "test"},
                 {"$.techRecord[0].grossEecWeight", 100000},
                 {"$.techRecord[0].grossEecWeight", -1},
-                {"$.techRecord[0].grossEecWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].grossEecWeight", "test"},
                 {"$.techRecord[0].grossDesignWeight", 100000},
                 {"$.techRecord[0].grossDesignWeight", -1},
-                {"$.techRecord[0].grossDesignWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].grossDesignWeight", "test"},
                 {"$.techRecord[0].trainGbWeight", 100000},
                 {"$.techRecord[0].trainGbWeight", -1},
-                {"$.techRecord[0].trainGbWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].trainGbWeight", "test"},
                 {"$.techRecord[0].trainEecWeight", 100000},
                 {"$.techRecord[0].trainEecWeight", -1},
-                {"$.techRecord[0].trainEecWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].trainEecWeight", "test"},
                 {"$.techRecord[0].trainDesignWeight", 100000},
                 {"$.techRecord[0].trainDesignWeight", -1},
-                {"$.techRecord[0].trainDesignWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].trainDesignWeight", "test"},
                 {"$.techRecord[0].maxTrainGbWeight", 100000},
                 {"$.techRecord[0].maxTrainGbWeight", -1},
-                {"$.techRecord[0].maxTrainGbWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].maxTrainGbWeight", "test"},
                 {"$.techRecord[0].maxTrainEecWeight", 100000},
                 {"$.techRecord[0].maxTrainEecWeight", -1},
-                {"$.techRecord[0].maxTrainEecWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].maxTrainEecWeight", "test"},
                 {"$.techRecord[0].maxTrainDesignWeight", 100000},
                 {"$.techRecord[0].maxTrainDesignWeight", -1},
-                {"$.techRecord[0].maxTrainDesignWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].maxTrainDesignWeight", "test"},
                 {"$.techRecord[0].axles[0].axleNumber", 100000},
                 {"$.techRecord[0].axles[0].axleNumber", -1},
-                {"$.techRecord[0].axles[0].axleNumber", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].axles[0].axleNumber", "test"},
                 {"$.techRecord[0].axles[0].weights.gbWeight", 100000},
                 {"$.techRecord[0].axles[0].weights.gbWeight", -1},
-                {"$.techRecord[0].axles[0].weights.gbWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].axles[0].weights.gbWeight", "test"},
                 {"$.techRecord[0].axles[0].weights.eecWeight", 100000},
                 {"$.techRecord[0].axles[0].weights.eecWeight", -1},
-                {"$.techRecord[0].axles[0].weights.eecWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].axles[0].weights.eecWeight", "test"},
                 {"$.techRecord[0].axles[0].weights.designWeight", 100000},
                 {"$.techRecord[0].axles[0].weights.designWeight", -1},
-                {"$.techRecord[0].axles[0].weights.designWeight", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].axles[0].weights.designWeight", "test"},
                 {"$.techRecord[0].tyreUseCode", RandomStringUtils.randomAlphabetic(3)},
                 {"$.techRecord[0].tyreUseCode", ""},
                 {"$.techRecord[0].tyreUseCode", 10},
-                {"$.techRecord[0].axles[0].tyres.tyreCode", 100000},
+                {"$.techRecord[0].axles[0].tyres.tyreCode", 10000},
                 {"$.techRecord[0].axles[0].tyres.tyreCode", -1},
-                {"$.techRecord[0].axles[0].tyres.tyreCode", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].axles[0].tyres.tyreCode", "test"},
                 {"$.techRecord[0].axles[0].tyres.tyreSize", RandomStringUtils.randomAlphanumeric(13)},
                 {"$.techRecord[0].axles[0].tyres.tyreSize", ""},
                 {"$.techRecord[0].axles[0].tyres.tyreSize", 10},
@@ -149,29 +148,29 @@ public class PostVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].axles[0].tyres.dataTrAxles", RandomStringUtils.randomAlphabetic(3)},
                 {"$.techRecord[0].dimensions.length", 100000},
                 {"$.techRecord[0].dimensions.length", -1},
-                {"$.techRecord[0].dimensions.length", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].dimensions.length", "test"},
                 {"$.techRecord[0].dimensions.width", 100000},
                 {"$.techRecord[0].dimensions.width", -1},
-                {"$.techRecord[0].dimensions.width", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].dimensions.width", "test"},
                 {"$.techRecord[0].dimensions.axleSpacing[0].axles", 10},
                 {"$.techRecord[0].dimensions.axleSpacing[0].value", 100000},
                 {"$.techRecord[0].dimensions.axleSpacing[0].value", -1},
-                {"$.techRecord[0].dimensions.axleSpacing[0].value", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].dimensions.axleSpacing[0].value", "test"},
                 {"$.techRecord[0].frontAxleToRearAxle", 100000},
                 {"$.techRecord[0].frontAxleToRearAxle", -1},
-                {"$.techRecord[0].frontAxleToRearAxle", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].frontAxleToRearAxle", "test"},
                 {"$.techRecord[0].frontAxleTo5thWheelCouplingMin", 100000},
                 {"$.techRecord[0].frontAxleTo5thWheelCouplingMin", -1},
-                {"$.techRecord[0].frontAxleTo5thWheelCouplingMin", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].frontAxleTo5thWheelCouplingMin", "test"},
                 {"$.techRecord[0].frontAxleTo5thWheelCouplingMax", 100000},
                 {"$.techRecord[0].frontAxleTo5thWheelCouplingMax", -1},
-                {"$.techRecord[0].frontAxleTo5thWheelCouplingMax", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].frontAxleTo5thWheelCouplingMax", "test"},
                 {"$.techRecord[0].frontAxleTo5thWheelMin", 100000},
                 {"$.techRecord[0].frontAxleTo5thWheelMin", -1},
-                {"$.techRecord[0].frontAxleTo5thWheelMin", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].frontAxleTo5thWheelMin", "test"},
                 {"$.techRecord[0].frontAxleTo5thWheelMax", 100000},
                 {"$.techRecord[0].frontAxleTo5thWheelMax", -1},
-                {"$.techRecord[0].frontAxleTo5thWheelMax", RandomStringUtils.randomAlphabetic(5)},
+                {"$.techRecord[0].frontAxleTo5thWheelMax", "test"},
                 {"$.techRecord[0].applicantDetails.name", RandomStringUtils.randomAlphanumeric(151)},
                 {"$.techRecord[0].applicantDetails.name", ""},
                 {"$.techRecord[0].applicantDetails.name", 10},
@@ -218,7 +217,9 @@ public class PostVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].notes", 10},
                 {"$.techRecord[0].reasonForCreation", RandomStringUtils.randomAlphanumeric(101)},
                 {"$.techRecord[0].reasonForCreation", ""},
-                {"$.techRecord[0].reasonForCreation", 10}
+                {"$.techRecord[0].reasonForCreation", 10},
+                {"$.techRecord[0].recordCompleteness", RandomStringUtils.randomAlphanumeric(10)},
+                {"$.techRecord[0].recordCompleteness", 10}
         });
     }
 
@@ -231,24 +232,28 @@ public class PostVehicleHgvFieldRestrictions {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC3 - Attempt to create a new vehicle with unexpected values for a field that accepts only specific values" +
-            "AC4 - Attempt to create a new vehicle, using a field with its value outside of the min/max length for that field")
+    @Title("CVSB-10210 - AC3 - Attempt to create a new hgv with unexpected values for a field that accepts only specific values " +
+            "AC4 - Attempt to create a new hgv, using a field with its value outside of the min/max length for that field")
     @Test
     public void testValidateHgvFieldsDataTypesAndRestrictions() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
+        // generate random systemNumber
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
         String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change systemNumber in the post request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
 
         // initialize the alterations list with both declared alterations
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
 
         // validate each field for its restrictions and data type

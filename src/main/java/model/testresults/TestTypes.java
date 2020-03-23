@@ -8,6 +8,7 @@ public class TestTypes {
     private String name;
     private String testTypeId;
     private String certificateNumber;
+    private String secondaryCertificateNumber;
     private String testTypeStartTimestamp;
     private String testTypeEndTimestamp;
     private Integer numberOfSeatbeltsFitted;
@@ -17,6 +18,7 @@ public class TestTypes {
     private String reasonForAbandoning;
     private String additionalNotesRecorded;
     private List<Defects> defects;
+    private List<CustomDefects> customDefects;
     private String testResult;
     private String additionalCommentsForAbandon;
 
@@ -31,6 +33,7 @@ public class TestTypes {
         private String name;
         private String testTypeId;
         private String certificateNumber;
+        private String secondaryCertificateNumber;
         private String testTypeStartTimestamp;
         private String testTypeEndTimestamp;
         private Integer numberOfSeatbeltsFitted;
@@ -41,6 +44,7 @@ public class TestTypes {
         private String reasonForAbandoning;
         private String additionalNotesRecorded;
         private List<Defects> defects;
+        private List<CustomDefects> customDefects;
         private String additionalCommentsForAbandon;
 
         public Builder() {
@@ -58,6 +62,11 @@ public class TestTypes {
 
         public T setCertificateNumber(String certificateNumber) {
             this.certificateNumber = certificateNumber;
+            return (T) this;
+        }
+
+        public T setSecondaryCertificateNumber(String secondaryCertificateNumber) {
+            this.secondaryCertificateNumber = secondaryCertificateNumber;
             return (T) this;
         }
 
@@ -111,6 +120,11 @@ public class TestTypes {
             return (T) this;
         }
 
+        public T setCustomDefects(List<CustomDefects> customDefects) {
+            this.customDefects = customDefects;
+            return (T) this;
+        }
+
         public T setName(String name) {
             this.name = name;
             return (T) this;
@@ -132,6 +146,7 @@ public class TestTypes {
         this.testTypeName = builder.testTypeName;
         this.testTypeId = builder.testTypeId;
         this.certificateNumber = builder.certificateNumber;
+        this.secondaryCertificateNumber = builder.secondaryCertificateNumber;
         this.testTypeStartTimestamp = builder.testTypeStartTimestamp;
         this.testTypeEndTimestamp = builder.testTypeEndTimestamp;
         this.numberOfSeatbeltsFitted = builder.numberOfSeatbeltsFitted;
@@ -142,6 +157,7 @@ public class TestTypes {
         this.reasonForAbandoning = builder.reasonForAbandoning;
         this.additionalNotesRecorded = builder.additionalNotesRecorded;
         this.defects = builder.defects;
+        this.customDefects = builder.customDefects;
         this.name = builder.name;
         this.additionalCommentsForAbandon = builder.additionalCommentsForAbandon;
     }
@@ -156,6 +172,10 @@ public class TestTypes {
 
     public String getCertificateNumber() {
         return certificateNumber;
+    }
+
+    public String getSecondaryCertificateNumber() {
+        return secondaryCertificateNumber;
     }
 
     public String getTestTypeStartTimestamp() {
@@ -202,6 +222,10 @@ public class TestTypes {
         return defects;
     }
 
+    public List<CustomDefects> getCustomDefects() {
+        return customDefects;
+    }
+
     public String getName() {
         return name;
     }
@@ -223,6 +247,11 @@ public class TestTypes {
 
     public TestTypes setCertificateNumber(String certificateNumber) {
         this.certificateNumber = certificateNumber;
+        return this;
+    }
+
+    public TestTypes setSecondaryCertificateNumber(String secondaryCertificateNumber) {
+        this.secondaryCertificateNumber = secondaryCertificateNumber;
         return this;
     }
 
@@ -263,6 +292,10 @@ public class TestTypes {
         this.defects = defects;
     }
 
+    public void setCustomDefects(List<CustomDefects> customDefects) {
+        this.customDefects = customDefects;
+    }
+
     public TestTypes setTestResult(String testResult) {
         this.testResult = testResult;
         return this;
@@ -278,6 +311,7 @@ public class TestTypes {
                 "testTypeName='" + testTypeName + '\'' +
                 ", testTypeId='" + testTypeId + '\'' +
                 ", certificateNumber='" + certificateNumber + '\'' +
+                ", secondaryCertificateNumber='" + secondaryCertificateNumber + '\'' +
                 ", testTypeStartTimestamp='" + testTypeStartTimestamp + '\'' +
                 ", testTypeEndTimestamp='" + testTypeEndTimestamp + '\'' +
                 ", numberOfSeatbeltsFitted=" + numberOfSeatbeltsFitted +

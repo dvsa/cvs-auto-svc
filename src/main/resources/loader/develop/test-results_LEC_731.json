@@ -19,6 +19,7 @@
   "vehicleType": "psv",
   "numberOfSeats": 45,
   "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
   "vehicleConfiguration": "rigid",
   "odometerReading": 350000,
   "odometerReadingUnits": "kilometres",
@@ -81,6 +82,8 @@
           "prohibitionIssued": true
         }
       ],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456",
       "testResult": "pass",
       "additionalCommentsForAbandon": "none"
     }

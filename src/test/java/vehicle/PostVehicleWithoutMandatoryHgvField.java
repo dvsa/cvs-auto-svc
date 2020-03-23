@@ -63,7 +63,8 @@ public class PostVehicleWithoutMandatoryHgvField {
                 {"$.techRecord[0].applicantDetails.address1"},
                 {"$.techRecord[0].applicantDetails.address2"},
                 {"$.techRecord[0].applicantDetails.postTown"},
-                {"$.techRecord[0].reasonForCreation"}
+                {"$.techRecord[0].reasonForCreation"},
+                {"$.techRecord[0].recordCompleteness"}
         });
     }
 
@@ -74,23 +75,27 @@ public class PostVehicleWithoutMandatoryHgvField {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC1 - Attempt to create a new vehicle without a mandatory field")
+    @Title("CVSB-10210 - AC1 - Attempt to create a new hgv without a mandatory field")
     @Test
     public void testValidateRequestWithoutMandatoryHgvField() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
+        // generate random Vin
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
         String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change systemNumber in the post request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
 
         // initialize the alterations list with both declared alterations
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
 
         // validate 400 response when making POST request without a mandatory field

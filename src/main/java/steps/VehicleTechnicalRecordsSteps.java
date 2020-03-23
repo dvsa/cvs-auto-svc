@@ -25,26 +25,43 @@ public class VehicleTechnicalRecordsSteps {
     Response response;
 
     @Step
-    public void getVehicleTechnicalRecords(String searchIdentifier) {
-        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier);
+    public String getVehicleTechnicalRecords(String searchIdentifier) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier);
+        return response.prettyPrint();
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
-        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+    public String getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+        return response.prettyPrint();
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByPartialVim(String searchIdentifier) {
-        String partialVim = searchIdentifier.substring(searchIdentifier.length() - 6);
-        getVehicleTechnicalRecords(partialVim);
+    public String getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier,
+                                                                    @NotNull VehicleTechnicalRecordStatus status,
+                                                                    @NotNull VehicleTechnicalRecordSearchCriteria criteria) {
+        response = vehicleTechnicalRecordsClient.
+                getVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status.getStatus(), criteria.getSearchCriteria());
+        return response.prettyPrint();
+    }
+
+    @Step
+    public String getVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
+        return response.prettyPrint();
+    }
+
+    @Step
+    public String getVehicleTechnicalRecordsByPartialVin(String searchIdentifier) {
+        String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
+        return getVehicleTechnicalRecords(partialVin);
     }
 
 
     @Step
-    public void getVehicleTechnicalRecordsByPartialVimAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
-        String partialVim = searchIdentifier.substring(searchIdentifier.length() - 6);
-        getVehicleTechnicalRecordsByStatus(partialVim, status);
+    public String getVehicleTechnicalRecordsByPartialVinAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
+        String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
+        return getVehicleTechnicalRecordsByStatus(partialVin, status);
     }
 
 
@@ -72,6 +89,11 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldNotBe(String path, Object expectedValue) {
+        response.then().body(path, not(equalTo(expectedValue)));
     }
 
     @Step
@@ -113,7 +135,7 @@ public class VehicleTechnicalRecordsSteps {
             index++;
         }
         if (!found) {
-            throw new AutomationException("Vehicle with vim " + vehicleTechnicalRecordsData.getVin() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
+            throw new AutomationException("Vehicle with vin " + vehicleTechnicalRecordsData.getVin() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
         }
     }
 
@@ -218,23 +240,27 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void postVehicleTechnicalRecords(String requestBody) {
-        this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
+    public String postVehicleTechnicalRecords(String requestBody) {
+        response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
+        return response.prettyPrint();
     }
 
     @Step
-    public void postVehicleTechnicalRecordsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
-        this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+    public String postVehicleTechnicalRecordsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+        return response.prettyPrint();
     }
 
     @Step
-    public void putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
-        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(vin, requestBody);
+    public String putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(vin, requestBody);
+        return response.prettyPrint();
     }
 
     @Step
-    public void putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
-        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
+    public String putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
+        return response.prettyPrint();
     }
 
     @Step
@@ -287,6 +313,11 @@ public class VehicleTechnicalRecordsSteps {
                 System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
                 if (status == 200 && recordsNumber > 1) {
+                    try {
+                        Thread.sleep(2500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     return;
                 } else {
                     System.out.println("\n...waiting one more second (" + i + ")...\n");

@@ -25,6 +25,7 @@
   "euVehicleCategory":"n2",
   "countryOfRegistration":"gb",
   "noOfAxles":5,
+  "numberOfWheelsDriven": 4,
   "testTypes":[
     {
       "name":"Retest",
@@ -73,7 +74,9 @@
           "prs":false,
           "prohibitionIssued":false
         }
-      ]
+      ],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456"
     }
   ]
 }

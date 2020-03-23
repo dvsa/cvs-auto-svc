@@ -389,4 +389,37 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10242 - AC2 - Attempt to update a vehicle with a not applicable field")
+    @Test
+    public void testValidateRequestNotApplicablePsvField() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random systemNumber
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String requestBodyPsv = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change systemNumber in the post request body with the random generated Vin
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+
+        // initialize the alterations list with both declared alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyPsv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+
+        // validate 400 response when making PUT request with a not applicable field
+        JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", true, "roadFriendly", "ADD_FIELD");
+        alterations.add(notApplicableField);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyPsv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+    }
 }

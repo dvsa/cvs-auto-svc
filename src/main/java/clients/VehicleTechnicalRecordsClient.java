@@ -27,7 +27,6 @@ public class VehicleTechnicalRecordsClient {
 
     }
 
-
     public Response getVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
 
         Response response = callGetVehicleTechnicalRecordsByStatus(searchIdentifier, status);
@@ -41,6 +40,29 @@ public class VehicleTechnicalRecordsClient {
 
     }
 
+    public Response getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier, String status,
+                                                                        String searchCriteria) {
+        Response response = callGetVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status, searchCriteria);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status, searchCriteria);
+        }
+
+        return response;
+    }
+
+    public Response getVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
+
+        Response response = callGetVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
+        }
+
+        return response;
+    }
 
     private Response callGetVehicleTechnicalRecords(String searchIdentifier) {
 
@@ -51,6 +73,20 @@ public class VehicleTechnicalRecordsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+    }
+
+    private Response callGetVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("status", "provisional")
+
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records?searchCriteria=systemNumber");
 
         return response;
     }
@@ -66,6 +102,21 @@ public class VehicleTechnicalRecordsClient {
                 .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
+    }
+
+    private Response callGetVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier, String status, String searchCriteria) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("status", status)
+                .queryParam("searchCriteria", searchCriteria)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+
     }
 
     public String getBodyFromFile(String fileName) {

@@ -12,7 +12,6 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -222,7 +221,6 @@ public class GetTestResults {
 
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
     @Test
-
     public void testResultsForVinHgv() {
         testResultsSteps.getTestResults("10000018");
         testResultsSteps.statusCodeShouldBe(200);

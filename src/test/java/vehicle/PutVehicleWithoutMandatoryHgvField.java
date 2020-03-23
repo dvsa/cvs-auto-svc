@@ -96,6 +96,7 @@ public class PutVehicleWithoutMandatoryHgvField extends TestCase {
                 {"$.techRecord[0].grossDesignWeight"},
                 {"$.techRecord[0].trainGbWeight"},
                 {"$.techRecord[0].maxTrainGbWeight"},
+                {"$.techRecord[0].axles[0].axleNumber"},
                 {"$.techRecord[0].axles[0].weights.gbWeight"},
                 {"$.techRecord[0].axles[0].weights.designWeight"},
                 {"$.techRecord[0].axles[0].tyres.tyreCode"},
