@@ -93,7 +93,7 @@ public class WebDriverBrowsertack {
     public static WebDriver checkVsaEmail(String randomVrm) {
         WebDriverBrowsertack.setup();
         FluentWait wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(60))
+                .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(250))
                 .ignoring(NoSuchElementException.class);
         driver.get("https://outlook.live.com/owa/");
@@ -179,7 +179,7 @@ public class WebDriverBrowsertack {
     public static WebDriver checkAtfEmail(String testerName) {
         WebDriverBrowsertack.setup();
         FluentWait wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(60))
+                .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(250))
                 .ignoring(NoSuchElementException.class);
         driver.get("https://outlook.live.com/owa/");

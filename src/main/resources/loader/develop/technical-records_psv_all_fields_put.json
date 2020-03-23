@@ -1,0 +1,152 @@
+{
+  "msUserDetails": {
+    "msUser": "dragos",
+    "msOid": "123456"
+  },
+  "vin": "P11122224",
+  "partialVin": "122223",
+  "primaryVrm": "PSV112244",
+  "systemNumber": "BSFD3244BDSGR",
+  "secondaryVrms": [
+    "PSV223344"
+  ],
+  "techRecord": [
+    {
+      "vehicleType": "psv",
+      "regnDate": "2000-01-01",
+      "manufactureYear": 2000,
+      "noOfAxles": 1,
+      "speedLimiterMrk": true,
+      "tachoExemptMrk": true,
+      "euroStandard": "3",
+      "fuelPropulsionSystem": "Hybrid",
+      "approvalType": "ECTA",
+      "approvalTypeNumber": "67890",
+      "ntaNumber": "67890",
+      "coifSerialNumber": "67890",
+      "coifCertifierName": "RAR",
+      "coifDate": "2019-12-12",
+      "variantNumber": "67890",
+      "variantVersionNumber": "67890",
+      "bodyMake": "Volvo",
+      "bodyModel": "S60",
+      "modelLiteral": "67890",
+      "chassisMake": "Volvo",
+      "chassisModel": "S60",
+      "functionCode": "A",
+      "conversionRefNo": "67890",
+      "speedRestriction": 49,
+      "axles": [
+        {
+          "parkingBrakeMrk": false,
+          "axleNumber": 1,
+          "tyres": {
+            "plyRating": "AB",
+            "speedCategorySymbol": "a8",
+            "fitmentCode": "single",
+            "dataTrAxles": 1,
+            "tyreCode": 463,
+            "tyreSize": "11-21.5"
+          },
+          "weights": {
+            "designWeight": 6500,
+            "gbWeight": 6100,
+            "kerbWeight": 6100,
+            "ladenWeight": 6100
+          }
+        }
+      ],
+      "bodyType": {
+        "description": "single decker"
+      },
+      "brakes": {
+        "dtpNumber": "3799B",
+        "brakeForceWheelsNotLocked": {
+          "parkingBrakeForceA": 5,
+          "secondaryBrakeForceA": 5,
+          "serviceBrakeForceA": 5
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "parkingBrakeForceB": 8,
+          "secondaryBrakeForceB": 8,
+          "serviceBrakeForceB": 8
+        },
+        "brakeCode": "brake",
+        "dataTrBrakeOne": "brake",
+        "dataTrBrakeTwo": "brake",
+        "dataTrBrakeThree": "brake",
+        "retarderBrakeOne": "exhaust",
+        "retarderBrakeTwo": "electric"
+      },
+      "dda": {
+        "certificateIssued": false,
+        "wheelchairCapacity": 2,
+        "wheelchairFittings": "fittings",
+        "wheelchairLiftPresent": false,
+        "wheelchairLiftInformation": "infor",
+        "wheelchairRampPresent": false,
+        "wheelchairRampInformation": "info",
+        "minEmergencyExits": 2,
+        "outswing": "10",
+        "ddaSchedules": "schedules",
+        "seatbeltsFitted": 20,
+        "ddaNotes": "note"
+      },
+      "departmentalVehicleMarker": true,
+      "alterationMarker": false,
+      "dimensions": {
+        "length": 1000,
+        "width": 2000,
+        "height": 3000
+      },
+      "emissionsLimit": 40,
+      "euVehicleCategory": "m2",
+      "frontAxleToRearAxle": 2000,
+      "grossDesignWeight": 20000,
+      "grossGbWeight": 20000,
+      "grossKerbWeight": 20000,
+      "grossLadenWeight": 20000,
+      "maxTrainGbWeight": 20000,
+      "microfilm": {
+        "microfilmDocumentType": "Deleted",
+        "microfilmRollNumber": "56789",
+        "microfilmSerialNumber": "3456"
+      },
+      "numberOfWheelsDriven": 6,
+      "numberOfSeatbelts": "23",
+      "plates": [
+        {
+          "plateSerialNumber": "12345",
+          "plateIssueDate": "2030-02-02",
+          "plateReasonForIssue": "Destroyed",
+          "plateIssuer": "dvsa"
+        }
+      ],
+      "applicantDetails": {
+        "address1": "**",
+        "address2": "**",
+        "address3": "**",
+        "name": "**",
+        "postCode": "**",
+        "postTown": "**",
+        "telephoneNumber": "**",
+        "emailAddress": "**"
+      },
+      "reasonForCreation": "no reason",
+      "remarks": "test",
+      "dispensations": "test",
+      "seatbeltInstallationApprovalDate": "2030-02-02",
+      "seatsLowerDeck": 50,
+      "seatsUpperDeck": 50,
+      "standingCapacity": 100,
+      "trainDesignWeight": 20000,
+      "unladenWeight": 25000,
+      "vehicleSize": "small",
+      "vehicleClass": {
+        "description": "trailer"
+      },
+      "vehicleConfiguration": "dolly",
+      "recordCompleteness": "skeleton"
+    }
+  ]
+}

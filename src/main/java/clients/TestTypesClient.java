@@ -77,6 +77,21 @@ public class TestTypesClient {
             responseSpec.queryParam("vehicleAxles", testTypeQueryParam.getVehicleAxles());
         }
 
+        if (testTypeQueryParam.getVehicleClass() != null) {
+            responseSpec.queryParam("vehicleClass", testTypeQueryParam.getVehicleClass());
+        }
+
+        if (testTypeQueryParam.getVehicleSubClass() != null) {
+            responseSpec.queryParam("vehicleSubclass", testTypeQueryParam.getVehicleSubClass());
+        }
+
+        if (testTypeQueryParam.getVehicleWheels() != null) {
+            responseSpec.queryParam("vehicleWheels", testTypeQueryParam.getVehicleWheels());
+        }
+
+        if (testTypeQueryParam.getEuVehicleCategory() != null) {
+            responseSpec.queryParam("euVehicleCategory", testTypeQueryParam.getEuVehicleCategory());
+        }
 
         Response response = responseSpec
 //                .log().all()

@@ -1,0 +1,92 @@
+{
+  "reasonForCancellation": "none",
+  "testerStaffId": "15",
+  "testerName": "Gica",
+  "euVehicleCategory": "l1e-a",
+  "testStationName": "Larson, Nader and Okuneva",
+  "testStationPNumber": "84-926821",
+  "testEndTimestamp": "2019-01-14T10:36:33.987Z",
+  "preparerId": "bl5545",
+  "vehicleConfiguration": "rigid",
+  "vrm": "BQ91YHQ",
+  "testerEmailAddress": "gica.petrescuf@dvsagov.uk",
+  "vehicleClass": {
+    "description": "motorbikes over 200cc or with a sidecar",
+    "code": "2"
+  },
+  "systemNumber": "string",
+  "odometerReadingUnits": "kilometres",
+  "vehicleSize": "small",
+  "testResultId": "string",
+  "numberOfWheelsDriven": null,
+  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
+  "vehicleType": "psv",
+  "regnDate": "2019-06-24",
+  "odometerReading": 350000,
+  "preparerName": "Durrell Vehicles Limited",
+  "noOfAxles": 2,
+  "testStationType": "atf",
+  "numberOfSeats": 45,
+  "vin": "1B7GG36N12S678410",
+  "countryOfRegistration": "united kingdom",
+  "testStatus": "submitted",
+  "testTypes": [
+    {
+      "prohibitionIssued": false,
+      "customDefects": [
+        {
+          "defectName": "Some custom defect",
+          "defectNotes": "some defect noe",
+          "referenceNumber": "abcd"
+        },
+        {
+          "defectName": "A new custom defect",
+          "defectNotes": "New customer note",
+          "referenceNumber": "efgh"
+        }
+      ],
+      "numberOfSeatbeltsFitted": 2,
+      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
+      "reasonForAbandoning": "none",
+      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "testTypeId": "19",
+      "secondaryCertificateNumber": "1234",
+      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
+      "certificateNumber": "12334",
+      "testTypeName": "Annual test",
+      "seatbeltInstallationCheckDate": true,
+      "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+      "defects": [
+        {
+          "prohibitionIssued": true,
+          "additionalInformation": {
+            "location": {
+              "axleNumber": null,
+              "horizontal": null,
+              "vertical": "upper",
+              "longitudinal": null,
+              "rowNumber": 1,
+              "lateral": "centre",
+              "seatNumber": 2
+            },
+            "notes": "seatbelt missing"
+          },
+          "itemNumber": 1,
+          "deficiencyRef": "3.1.a",
+          "stdForProhibition": false,
+          "deficiencyId": "a",
+          "imNumber": 3,
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "prs": false,
+          "deficiencySubId": null,
+          "imDescription": "Seat Belts & Supplementary Restraint Systems",
+          "itemDescription": "Obligatory Seat Belt:"
+        }
+      ],
+      "name": "Annual test",
+      "testResult": "fail",
+      "additionalCommentsForAbandon": "none"
+    }
+  ]
+}

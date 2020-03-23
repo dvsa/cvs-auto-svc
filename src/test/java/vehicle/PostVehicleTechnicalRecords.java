@@ -31,7 +31,7 @@ public class PostVehicleTechnicalRecords {
     TestResultsSteps testResultsSteps;
 
     @WithTag("Vtm")
-    @Title("CVSB-7885 - AC1 - API Consumer creates a technical record for a vehicle with a specific vin" +
+    @Title("CVSB-7885 - AC1 - API Consumer creates a technical record for a vehicle with a specific vin " +
             "AC5 - Can create a new vehicle entry using a unique VIN and multiple entries in the `techRecord` array of the request body")
     @Test
     public void testCreateVehicleTechnicalRecord() {
@@ -73,7 +73,7 @@ public class PostVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10209 - AC2 -  HGV vehicle is created, and the appropriate attributes are automatically set")
     @Test
-    public void testCreateVehicleWithOnlyMandatoryFields() {
+    public void testCreateHgvWithOnlyMandatoryFields() {
         // TEST SETUP
         //generate random system number
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -104,11 +104,11 @@ public class PostVehicleTechnicalRecords {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10213 - AC1 - Partial VIN is auto-populated when creating a new vehicle" +
-            "AC2 - Vehicle class code is auto-populated when creating a new vehicle" +
-            "AC3 - Body type code is auto-populated when creating a new vehicle")
+    @Title("CVSB-10213 - AC1 - Partial VIN is auto-populated when creating a new hgv " +
+            "AC2 - Vehicle class code is auto-populated when creating a new hgv " +
+            "AC3 - Body type code is auto-populated when creating a new hgv")
     @Test
-    public void testCreateVehicleAutoPopulateFields() {
+    public void testCreateVehicleHgvAutoPopulateFields() {
         // TEST SETUP
         //generate random system number
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -143,7 +143,7 @@ public class PostVehicleTechnicalRecords {
             }
         }
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClass.getCode());
-        // validated AC3
+        // validate AC3
         BodyType bodyType = BodyType.ARTICULATED;
         for (BodyType b : BodyType.values()) {
             if (b.getDescription().equals(bodyTypeDescription)) {
@@ -265,6 +265,94 @@ public class PostVehicleTechnicalRecords {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, altTestResultsVehicleTwo);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+    }
 
+    @WithTag("Vtm")
+    @Title("CVSB-10239 - AC2 -  PSV vehicle is created, and the appropriate attributes are automatically set")
+    @Test
+    public void testCreatePsvWithOnlyMandatoryFields() {
+        // TEST SETUP
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_mandatory_fields.json","$");
+        // read the tech record from the file used for post request body
+        String techRecord = GenericData.readJsonValueFromFile("technical-records_psv_mandatory_fields.json","$.techRecord[0]");
+        // create alteration to change system number in the request body with the random generated Vin
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        // validate AC2
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[0]", techRecord);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10243 - AC1 - Partial VIN is auto-populated when creating a new psv " +
+            "AC2 - Vehicle class code is auto-populated when creating a new psv " +
+            "AC3 - Body type code is auto-populated when creating a new psv " +
+            "AC4 - Brake code fields are auto-populated when creating a new psv")
+    @Test
+    public void testCreateVehiclePsvAutoPopulateFields() {
+        // TEST SETUP
+        //generate random system number
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json","$");
+        String vehicleClassDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].vehicleClass.description");
+        String bodyTypeDescription = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].bodyType.description");
+        String brakeCode = GenericData.extractStringValueFromJsonString(postRequestBody, "$.techRecord[0].brakes.brakeCode");
+        // create alteration to change system number in the request body with the random system number
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL);
+        // validate AC1
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        // validate AC2
+        VehicleClass vehicleClass = VehicleClass.SMALL_PSV;
+        for (VehicleClass v : VehicleClass.values()) {
+            if (v.getDescription().equals(vehicleClassDescription)) {
+                vehicleClass = v;
+            }
+        }
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClass.getCode());
+        // validate AC3
+        BodyType bodyType = BodyType.ARTICULATED;
+        for (BodyType b : BodyType.values()) {
+            if (b.getDescription().equals(bodyTypeDescription)) {
+                bodyType = b;
+            }
+        }
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyType.getCode());
+        // validated AC4
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].brakeCode", brakeCode);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].brakes.brakeCodeOriginal",
+                brakeCode.substring(brakeCode.length()-3));
     }
 }
