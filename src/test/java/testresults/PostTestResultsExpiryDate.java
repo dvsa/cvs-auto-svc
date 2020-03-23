@@ -25,16 +25,6 @@ public class PostTestResultsExpiryDate {
     @Steps
     TestResultsSteps testResultsSteps;
 
-//    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-//
-//    private void validateSavedData(List<String> data) {
-//
-//        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getVin(), TestResultsStatus.SUBMITTED);
-//        testResultsSteps.statusCodeShouldBe(200);
-//        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOld.build());
-//        testResultsSteps.validateDataForExpiry(data);
-//    }
-
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
 
     private void validateSavedDataOld(List<String> data) {

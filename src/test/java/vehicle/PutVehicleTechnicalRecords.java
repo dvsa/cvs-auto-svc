@@ -161,8 +161,8 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[2].adrDetails", adrDetailsTank);
     }
 
-    @Ignore("Not a valid test anymore")
-    @Title("CVSB-9317 - AC1 - Document is attached to the ADR record " +
+    @Ignore("No longer a valid test")
+    @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
             "AC2 - Document is removed from the ADR record")
     public void testAddAdrDetailsUploadDocumentAdrRecord() {
         //TEST SETUP
