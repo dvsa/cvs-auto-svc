@@ -67,7 +67,7 @@ public class PostTestResultsPreservationExpiryDateNegativeTrl_12982 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong expiryDate format inserted - TRL")
     @Test
     public void testResultsExpiryDateWrongDateFormatTrl() {
@@ -209,7 +209,7 @@ public class PostTestResultsPreservationExpiryDateNegativeTrl_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - incomplete expiryDate inserted - TRL")
     @Test
     public void testResultsExpiryDateIncompleteDateTrl() {
@@ -351,7 +351,7 @@ public class PostTestResultsPreservationExpiryDateNegativeTrl_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong testCode inserted - TRL")
     @Test
     public void testResultsExpiryDateWrongTestCodeInsertedTrl() {

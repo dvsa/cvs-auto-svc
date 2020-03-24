@@ -57,7 +57,7 @@ public class PostTestResultsFirstExpiryDatesNegativeTrl_12982 {
         this.testCode = testCode;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - regnDate - wrong format - TRL")
     @Test
     public void testResultsNoPreviousExpiryFirstUseDateWrongFormatTrl() {
@@ -149,7 +149,7 @@ public class PostTestResultsFirstExpiryDatesNegativeTrl_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - regnDate - wrong format - TRL")
     @Test
     public void testResultsNoPreviousExpiryFirstUseDateIncompleteTrl() {

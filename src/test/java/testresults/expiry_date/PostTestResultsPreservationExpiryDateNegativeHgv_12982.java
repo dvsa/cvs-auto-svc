@@ -67,7 +67,7 @@ public class PostTestResultsPreservationExpiryDateNegativeHgv_12982 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong expiryDate format inserted - HGV")
     @Test
     public void testResultsExpiryDateWrongDateFormatHgv() {
@@ -209,7 +209,7 @@ public class PostTestResultsPreservationExpiryDateNegativeHgv_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - incomplete expiryDate inserted - HGV")
     @Test
     public void testResultsExpiryDateIncompleteDateHgv() {
@@ -351,7 +351,7 @@ public class PostTestResultsPreservationExpiryDateNegativeHgv_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong testCode inserted - HGV")
     @Test
     public void testResultsExpiryDateWrongTestCodeInsertedHgv() {

@@ -72,7 +72,7 @@ public class PostTestResultsPreservationExpiryDateNegativePsv_12982 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong expiryDate format inserted - PSV")
     @Test
     public void testResultsExpiryDateWrongDateFormatPsv() {
@@ -218,7 +218,7 @@ public class PostTestResultsPreservationExpiryDateNegativePsv_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - incomplete expiryDate inserted - PSV")
     @Test
     public void testResultsExpiryDateIncompleteDatePsv() {
@@ -364,7 +364,7 @@ public class PostTestResultsPreservationExpiryDateNegativePsv_12982 {
 
     }
 
-    @WithTag("In_Test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong testCode inserted - PSV")
     @Test
     public void testResultsExpiryDateWrongTestCodeInsertedPsv() {
