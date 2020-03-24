@@ -490,4 +490,52 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].brakes.brakeCodeOriginal",
                 "456");
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10830 - AC1 - PSV vehicle is updated, and the appropriate attributes are automatically set")
+    @Test
+    public void testVehicleTechnicalRecordsUpdateAllTrlAttributes() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random systemNumber
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change systemNumber in the post request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+
+        // initialize the alterations list with both declared alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyTrl, alterations);
+//        String response = vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+//        String trailerId = GenericData.getValueFromJsonPath(response, "$[0].trailerId");
+
+        String putRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields_put.json", "$");
+        String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields_put.json", "$.techRecord[0]");
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBodyTrl);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].axles.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "123456");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "dragos");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].createdById", "123456");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].createdByName", "dragos");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].vehicleClass.code", "t");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].bodyType.code", "s");
+//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].trailerId", trailerId);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord.find { it.statusCode == 'provisional' }", techRecord);
+    }
 }
