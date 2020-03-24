@@ -58,7 +58,7 @@ public class PostTestResultsFirstExpiryDatesNegativeHgv_12982 {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - regnDate - wrong format - HGV")
     @Test
     public void testResultsNoPreviousExpiryRegnDateWrongFormatHgv() {
@@ -152,7 +152,7 @@ public class PostTestResultsFirstExpiryDatesNegativeHgv_12982 {
 
     }
 
-    @WithTag("expiry_dates")
+    @WithTag("In_Test")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - regnDate - wrong format - HGV")
     @Test
     public void testResultsNoPreviousExpiryRegnDateIncompleteHgv() {
