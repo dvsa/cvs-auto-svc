@@ -1,0 +1,17 @@
+version: 1
+update_configs:
+- package_manager: "java:maven"
+  directory: "/"
+  update_schedule: "daily"
+  target_branch: "develop"
+  default_reviewers:
+  - "dpanzaru-deloitte"
+  - "jgimber-deloitte"
+  - "bfloreaDVSA"
+  default_assignees:
+  - "dpanzaru-deloitte"
+  - "jgimber-deloitte"
+  - "bfloreaDVSA"
+  allowed_updates:
+  - match:
+      update_type: "security"
