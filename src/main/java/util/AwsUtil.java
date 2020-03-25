@@ -202,4 +202,91 @@ public class AwsUtil {
         }
     }
 
+    public static String getNextSystemNumberInSequence() {
+        Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+        String uuid = String.valueOf(UUID.randomUUID());
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
+        client.setRegion(Region.getRegion(clientRegion));
+        DynamoDB dynamoDB = new DynamoDB(client);
+        String tableName = "cvs-" + System.getProperty("BRANCH") + "-test-number";
+        Table table = dynamoDB.getTable(tableName);
+        ItemCollection<ScanOutcome> items = table.scan("attribute_exists(systemNumber)", // FilterExpression
+                "systemNumber", // ProjectionExpression
+                null, // ExpressionAttributeNames - not used in this example
+                null // ExpressionAttributeValues - not used in this example
+                );
+
+        System.out.println("Scan of " + tableName + " for items with systemNumber not null");
+        Iterator<Item> iterator = items.iterator();
+        String lastSystemNumberUsed = null;
+        while (iterator.hasNext()) {
+            lastSystemNumberUsed = GenericData.getValueFromJsonPath(iterator.next().toJSONPretty(), "$.systemNumber");
+        }
+        if (lastSystemNumberUsed != null) {
+            int nextSystemNumberInSequence = Integer.parseInt(lastSystemNumberUsed) + 1;
+            return Integer.toString(nextSystemNumberInSequence);
+        }
+        else {
+            throw new AutomationException("No value found for last used systemNumber");
+        }
+    }
+
+    public static String getNextTrailerIdInSequence() {
+        Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+        String uuid = String.valueOf(UUID.randomUUID());
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
+        client.setRegion(Region.getRegion(clientRegion));
+        DynamoDB dynamoDB = new DynamoDB(client);
+        String tableName = "cvs-" + System.getProperty("BRANCH") + "-test-number";
+        Table table = dynamoDB.getTable(tableName);
+        ItemCollection<ScanOutcome> items = table.scan("attribute_exists(trailerId)", // FilterExpression
+                "trailerId, sequenceNumber, trailerLetter", // ProjectionExpression
+                null, // ExpressionAttributeNames - not used in this example
+                null // ExpressionAttributeValues - not used in this example
+        );
+
+        System.out.println("Scan of " + tableName + " for items with trailerId not null");
+        Iterator<Item> iterator = items.iterator();
+        String dynamoInfo = null;
+        while (iterator.hasNext()) {
+            dynamoInfo = iterator.next().toJSONPretty();
+        }
+        int lastTrailerSequenceNumberUsed = GenericData.extractIntegerValueFromJsonString(dynamoInfo, "$.sequenceNumber");
+        String lastTrailerLetterUsed = GenericData.getValueFromJsonPath(dynamoInfo, "$.trailerLetter");
+        if (lastTrailerSequenceNumberUsed != 0 && lastTrailerLetterUsed != null) {
+            int nextTrailerNumberInSequence = lastTrailerSequenceNumberUsed + 1;
+            return lastTrailerLetterUsed + nextTrailerNumberInSequence;
+        }
+        else {
+            throw new AutomationException("No value found for last used sequence number or trailer letter");
+        }
+    }
 }

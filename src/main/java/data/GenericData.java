@@ -136,7 +136,7 @@ public class GenericData {
         return JsonPath.read(jsonString, jsonPath);
     }
 
-    public static Integer extractIntegerValueFromJsonString(String jsonString, String jsonPath) {
+    public static int extractIntegerValueFromJsonString(String jsonString, String jsonPath) {
         return JsonPath.read(jsonString, jsonPath);
     }
 
@@ -209,7 +209,12 @@ public class GenericData {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return jsonResp;
+        if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
+            return jsonResp.substring(1, jsonResp.length()-1);
+        }
+        else {
+            return jsonResp;
+        }
     }
 
     public static String getJsonStringFromHashMap(HashMap<String, String> hashMap) {

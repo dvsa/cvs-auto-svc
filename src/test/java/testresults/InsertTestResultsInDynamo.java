@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class InsertTestResultsInDynamo {
 
     @Steps
     TestResultsSteps testResultsSteps;
+
+    @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @Ignore("This is just an example of how to read json data from external file and insert it in a specific table using AWS SDK")
     @Title("CVSB-11991 - Insert previous test-results into DynamoDB using Java AWS sdk")
@@ -43,5 +47,19 @@ public class InsertTestResultsInDynamo {
     @Title("CVSB-12181 - Delete entries fro activities table in DynamoDB using Java AWS sdk")
     public void testDeleteActivities() {
         testResultsSteps.deleteActivitiesForUser("a53ae740-eac4-4eb6-99ef-42afb63ce819");
+    }
+
+    @Ignore("This is just an example of how to get the next systemNumber to be generated from the backend")
+    @Title("CVSB-10598 - Get next systemNumber in sequence")
+    public void getNextSystemNumberInSequence() {
+        String systemNumber  = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
+        System.out.println("Next systemNumber will be " + systemNumber);
+    }
+
+    @Ignore("This is just an example of how to get the next trailerId to be generated from the backend")
+    @Title("CVSB-10131 - Get next trailerId in sequence")
+    public void getNextTrailerIdInSequence() {
+        String trailerId  = vehicleTechnicalRecordsSteps.getNextTrailerIdInSequence();
+        System.out.println("Next trailerId will be " + trailerId);
     }
 }

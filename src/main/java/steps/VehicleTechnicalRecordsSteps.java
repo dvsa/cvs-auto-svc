@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.junit.Assert;
 import org.skyscreamer.jsonassert.JSONAssert;
+import util.AwsUtil;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -87,6 +88,11 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldNotBe(String path, Object expectedValue) {
+        response.then().body(path, not(equalTo(expectedValue)));
     }
 
     @Step
@@ -397,5 +403,15 @@ public class VehicleTechnicalRecordsSteps {
             throw new AutomationException("Body type description is not valid");
         }
         return bodyTypeCode;
+    }
+
+    @Step
+    public String getNextSystemNumberInSequence() {
+        return AwsUtil.getNextSystemNumberInSequence();
+    }
+
+    @Step
+    public String getNextTrailerIdInSequence() {
+        return AwsUtil.getNextTrailerIdInSequence();
     }
 }
