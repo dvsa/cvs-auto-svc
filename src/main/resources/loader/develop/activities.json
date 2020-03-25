@@ -4,6 +4,7 @@
   "testStationName": "Rowe, Wunsch and Wisoky",
   "testStationPNumber": "87-1369561",
   "testStationEmail": "teststationname@dvsa.gov.uk",
+  "testerEmail": "someone@email.com",
   "testStationType": "gvts",
   "testerName": "Gica",
   "testerStaffId": "132",

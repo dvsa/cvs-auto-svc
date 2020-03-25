@@ -330,7 +330,7 @@ public class PostTestResultsProvisionalUpdate {
 
         // Tech record exists already in dynamoDb with a null euVehicleCategory
         String systemNumber = "XYZEP5JYOMM00006";
-        String vin = "DP76UMK4DQLTOT400006";
+            String vin = "DP76UMK4DQLTOT400006";
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -344,7 +344,7 @@ public class PostTestResultsProvisionalUpdate {
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
-        JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "l1e-aa","","REPLACE");
+        JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "l1e-a","","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResult = new ArrayList<>(Arrays.asList(
@@ -504,8 +504,8 @@ public class PostTestResultsProvisionalUpdate {
     public void testVehicleTechRecordLgvEuVehicleCategoryNotUpdated(){
 
         // Tech record exists already in dynamoDb with a pre-populated euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00010";
-        String vin = "DP76UMK4DQLTOT400010";
+        String systemNumber = "XYZEP5JYOMM000101";
+        String vin = "DP76UMK4DQLTOT400020";
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
