@@ -504,8 +504,8 @@ public class PostTestResultsProvisionalUpdate {
     public void testVehicleTechRecordLgvEuVehicleCategoryNotUpdated(){
 
         // Tech record exists already in dynamoDb with a pre-populated euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00011";
-        String vin = "DP76UMK4DQLTOT400011";
+        String systemNumber = "1000076";
+        String vin = "P0123010951264";
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
