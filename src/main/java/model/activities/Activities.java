@@ -69,6 +69,11 @@ public class Activities {
         }
 
 
+        public T setTesterEmail(String testerEmail) {
+            this.testerEmail = testerEmail;
+            return (T) this;
+        }
+
         public T setTesterStaffId(String testerStaffId) {
             this.testerStaffId = testerStaffId;
             return (T) this;
