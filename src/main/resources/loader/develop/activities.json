@@ -6,6 +6,7 @@
   "testStationEmail": "teststationname@dvsa.gov.uk",
   "testStationType": "gvts",
   "testerName": "Gica",
+  "testerEmail": "someone@email.com",
   "testerStaffId": "132",
   "startTime": "2018-02-13",
   "endTime": null,
