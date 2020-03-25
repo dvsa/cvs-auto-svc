@@ -16,7 +16,6 @@
         <assertj.version>3.11.1</assertj.version>
         <jackson.version>2.9.8</jackson.version>
         <jsonpath.version>2.4.0</jsonpath.version>
-        <sl4j.version>1.7.7</sl4j.version>
     </properties>
 
     <dependencies>
@@ -108,7 +107,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
-                            <skip>true</skip>
                         </configuration>
                     </plugin>
 

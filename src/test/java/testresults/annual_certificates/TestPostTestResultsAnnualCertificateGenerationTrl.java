@@ -15,7 +15,7 @@ import util.JsonPathAlteration;
 import java.util.*;
 
 @RunWith(SerenityParameterizedRunner.class)
-public class PostTestResultsAnnualCertificateGenerationHgv {
+public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -23,8 +23,9 @@ public class PostTestResultsAnnualCertificateGenerationHgv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"First test", "First test", "95", 2, "pass", "ffv2"},
-                {"First test", "First test", "95", 3, "pass", "ffv3"},
+                {"First test", "First test", "41", 1, "pass", "fft1"},
+                {"With certification", "Part paid prohibition clearance (retest with certification)", "79", 10, "prs", "p6t5"}
+
         });
     }
 
@@ -35,7 +36,7 @@ public class PostTestResultsAnnualCertificateGenerationHgv {
     private String testResult;
     private String testCode;
 
-    public PostTestResultsAnnualCertificateGenerationHgv(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, String testCode) {
+    public TestPostTestResultsAnnualCertificateGenerationTrl(String name, String testTypeName, String testTypeId, int noOfAxles, String testResult, String testCode) {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;
@@ -45,12 +46,12 @@ public class PostTestResultsAnnualCertificateGenerationHgv {
     }
 
     @WithTag("annual_certificates")
-    @Title("CVSB-8798 - Annual certificate is generate for all Hgv tests ")
+    @Title("CVSB-8798 - Annual certificate is generate for all Trl tests")
     @Test
-    public void testResults_Annual_Certificate_Generation_Hgv() {
+    public void testResults_Annual_Certificate_Generation_Trl() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json", "$");
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -73,8 +74,8 @@ public class PostTestResultsAnnualCertificateGenerationHgv {
                 alterationTestName,
                 alterationTestTypeId,
                 alterationTestTypeName,
-                alterationTestResult,
                 alterationNoOfAxles,
+                alterationTestResult,
                 alterationSystemNumber
         ));
 
