@@ -10,7 +10,6 @@ public class Activities {
     private String testStationEmail;
     private String testStationType;
     private String testerName;
-    private String testerEmail;
     private String testerStaffId;
     private List<String> waitReason;
     private String notes;
@@ -24,7 +23,6 @@ public class Activities {
         private String testStationEmail;
         private String testStationType;
         private String testerName;
-        private String testerEmail;
         private String testerStaffId;
         private List<String> waitReason;
         private String notes;
@@ -64,11 +62,6 @@ public class Activities {
         }
 
 
-        public T setTesterEmail(String testerEmail) {
-            this.testerEmail = testerEmail;
-            return (T) this;
-        }
-
         public T setTesterStaffId(String testerStaffId) {
             this.testerStaffId = testerStaffId;
             return (T) this;
@@ -98,7 +91,6 @@ public class Activities {
         this.testStationEmail = builder.testStationEmail;
         this.testStationType = builder.testStationType;
         this.testerName = builder.testerName;
-        this.testerEmail = builder.testerEmail;
         this.testerStaffId = builder.testerStaffId;
         this.waitReason = builder.waitReason;
         this.notes = builder.notes;
@@ -129,10 +121,6 @@ public class Activities {
         return testerName;
     }
 
-    public String getTesterEmail() {
-        return testerEmail;
-    }
-
     public String getTesterStaffId() {
         return testerStaffId;
     }
@@ -154,7 +142,6 @@ public class Activities {
                 ", testStationEmail='" + testStationEmail + '\'' +
                 ", testStationType='" + testStationType + '\'' +
                 ", testerName='" + testerName + '\'' +
-                ", testerEmail='" + testerEmail + '\'' +
                 ", testerStaffId='" + testerStaffId + '\'' +
                 ", waitReason='" + waitReason + '\'' +
                 ", notes='" + notes + '\'' +
