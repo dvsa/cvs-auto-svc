@@ -462,4 +462,10 @@ public class VehicleTechnicalRecordsSteps {
         System.out.println("- systemNumber = " + systemNumber);
         return systemNumber;
     }
+
+    @Step
+    public String getVehicleTechnicalRecordsByStatusWithMetadata(String searchIdentifier, VehicleTechnicalRecordStatus status) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatusWithMetadata(searchIdentifier, status.getStatus());
+        return response.prettyPrint();
+    }
 }
