@@ -2,16 +2,20 @@ package activities;
 
 
 import data.ActivitiesData;
+import data.GenericData;
 import model.activities.ActivitiesGet;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.DataUtil;
+import util.JsonPathAlteration;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @RunWith(SerenityRunner.class)
@@ -88,9 +92,26 @@ public class GetActivities {
     public void postActivitiesActivityTypeWait() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setActivityType("wait").build());
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        // create alteration to change testStationPNumber
+        JsonPathAlteration alterationTestStationPNumber = new JsonPathAlteration("$.testStationPNumber",
+                "35-7138320","","REPLACE");
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()),"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()),"","REPLACE");
+        ;
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime, alterationTestStationPNumber));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.getActivities("wait", null, null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1), DataUtil.buildCurrentDateTime());
+        activitiesSteps.getActivities("wait", null, null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(),0, -1), DataUtil.buildCurrentDateTime());
         activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.responseElementsShouldContainField("parentId");
         activitiesSteps.responseShouldContainFieldValue("activityType","wait");
@@ -99,13 +120,36 @@ public class GetActivities {
     @Title("CVSB- / CVSB- - AC7 ")
     @Test
     public void postActivitiesActivityTypeVisitNotVisibleForGetWait() {
-        activitiesSteps.postActivities(activitiesData.setActivityType("visit").build());
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities.json","$");
+        // create alteration to remove id
+        JsonPathAlteration alterationId = new JsonPathAlteration("$.id", "","","DELETE");
+        // create alteration to change testerStaffId
+        JsonPathAlteration alterationTesterStaffId = new JsonPathAlteration("$.testerStaffId",
+                UUID.randomUUID().toString(),"","REPLACE");
+        // create alteration to change testStationPNumber
+        JsonPathAlteration alterationTestStationPNumber = new JsonPathAlteration("$.testStationPNumber",
+                "35-7138320","","REPLACE");
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()),"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()),"","REPLACE");
+        ;
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationId, alterationStartTime,
+                alterationEndTime, alterationTesterStaffId, alterationTestStationPNumber));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(201);
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesData.setId(id);
         activitiesSteps.getActivities("wait", null, null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(),-1), DataUtil.buildCurrentDateTime());
-        activitiesSteps.statusCodeShouldBe(200);
-        activitiesSteps.validateNotExistingId(activitiesData.build());
+
+        int status  = activitiesSteps.statusCodeShouldBeOkOrNotFound();
+        if (status == 200) {
+            activitiesSteps.validateNotExistingId(activitiesData.build());
+        }
     }
 
     @Title("CVSB- / CVSB- - AC7 ")
@@ -113,7 +157,24 @@ public class GetActivities {
     public void postActivitiesActivityTypeWaitNotVisibleForGetVisit() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setActivityType("wait").build());
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        // create alteration to change testStationPNumber
+        JsonPathAlteration alterationTestStationPNumber = new JsonPathAlteration("$.testStationPNumber",
+                "35-7138320","","REPLACE");
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()),"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()),"","REPLACE");
+        ;
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime, alterationTestStationPNumber));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(201);
         String id = activitiesSteps.checkAndGetResponseId();
         System.out.println("id is : " + id);

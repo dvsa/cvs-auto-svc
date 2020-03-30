@@ -1,5 +1,7 @@
 package steps;
 
+import clients.model.VehicleClass;
+import clients.model.BodyType;
 import clients.VehicleTechnicalRecordsClient;
 import data.GenericData;
 import exceptions.AutomationException;
@@ -273,12 +275,6 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
-        Response response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
-        return response.then().extract().path(jsonPath).toString();
-    }
-
-    @Step
     public Response downloadFile(String searchIdentifier, String fileName) {
         return vehicleTechnicalRecordsClient.downloadFile(searchIdentifier, fileName);
     }
@@ -335,7 +331,7 @@ public class VehicleTechnicalRecordsSteps {
 
     }
 
-
+    @Step
     public boolean checkValueForFieldInAnyTechRecord(String systemNumber, String vin, String field, String value) {
         try {
             JSONArray jsonArray = new  JSONArray(response.body().asString());
@@ -355,19 +351,51 @@ public class VehicleTechnicalRecordsSteps {
         return false;
     }
 
+    @Step
     public void valueForFieldInAnyTechRecordShouldBe2(String systemNumber, String vin, String field, String value) {
         Assert.assertTrue(checkValueForFieldInAnyTechRecord(systemNumber, vin, field, value));
     }
 
+    @Step
     public void valueForFieldInAnyTechRecordShouldBe(String systemNumber, String vin, String fieldName, String value){
         String jsonString = response.body().asString();
         ArrayList<String> list = extractArrayListStringFromJsonString(jsonString,"$[?(@.systemNumber=='" + systemNumber + "' && @.vin=='" + vin + "') ].techRecord[*]." + fieldName);
         Assert.assertTrue(list.contains(value));
     }
 
+    @Step
     public void valueForFieldInAnyTechRecordShouldBe(String systemNumber, String vin, String fieldName, int value){
         String jsonString = response.body().asString();
         ArrayList<Integer> list = extractArrayListIntegerFromJsonString(jsonString,"$[?(@.systemNumber=='" + systemNumber + "' && @.vin=='" + vin + "') ].techRecord[*]." + fieldName);
         Assert.assertTrue(list.contains(value));
+    }
+
+    @Step
+    public String getVehicleClassCodeFromDescription(String vehicleClassDescription) {
+        String vehicleClassCode = null;
+        for (clients.model.VehicleClass v : clients.model.VehicleClass.values()) {
+            if (v.getDescription().equals(vehicleClassDescription)) {
+                vehicleClassCode = v.getCode();
+                break;
+            }
+        }
+        if (vehicleClassCode == null) {
+            throw new AutomationException("Vehicle class description is not valid");
+        }
+        return vehicleClassCode;
+    }
+
+    @Step
+    public String getBodyTypeCodeFromDescription(String bodyTypeDescription) {
+        String bodyTypeCode = null;
+        for (clients.model.BodyType b : clients.model.BodyType.values()) {
+            if (b.getDescription().equals(bodyTypeDescription)) {
+                bodyTypeCode = b.getCode();
+            }
+        }
+        if (bodyTypeCode == null) {
+            throw new AutomationException("Body type description is not valid");
+        }
+        return bodyTypeCode;
     }
 }

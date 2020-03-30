@@ -3,17 +3,24 @@ package activities;
 
 import clients.util.ToTypeConvertor;
 import data.ActivitiesData;
+import data.GenericData;
 import model.activities.Activities;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.DataUtil;
+import util.JsonPathAlteration;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 
 @RunWith(SerenityRunner.class)
@@ -346,17 +353,51 @@ public class PostActivitiesNeg {
     @Title("CVSB-179 / CVSB-4588 - API Consumer tries to log wait time with missing property")
     @Test
     public void postActivitiesInvalidParentId() {
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId("null").setActivityType("unaccountable time").setStartTime("2019-03-19T20:03:38.113Z").setEndTime("2019-03-19T20:04:38.113Z").build());
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", null,"","REPLACE");
+        // create alteration to change activityType
+        JsonPathAlteration alterationActivityType = new JsonPathAlteration("$.activityType",
+                "unaccountable time","","REPLACE");
+        Date date  = new Date();
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", "","","DELETE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime, alterationActivityType));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorMessage("Parent id does not exist");
+        activitiesSteps.validateActivityErrorMessage("\"parentId\" must be a string");
     }
 
     @Title("CVSB-179 / CVSB-4588 - API Consumer tries to log wait time with missing property")
     @Test
     public void postActivitiesNullReason() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
-        String parentId = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setWaitReason(null).build());
+        String parentId =  activitiesSteps.checkAndGetResponseId();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        Date date  = new Date();
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(date),"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+        // create alteration to change waitReason to null
+        JsonPathAlteration alterationWaitReason = new JsonPathAlteration("$.waitReason",
+                null, "","REPLACE");
+
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime, alterationWaitReason));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorMessage("\"waitReason\" must be an array");
     }
@@ -365,10 +406,25 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesInvalidReason() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
-        String parentId = activitiesSteps.checkAndGetResponseId();
-        ArrayList<String> reason = new ArrayList<String>();
-        reason.add("ASdw");
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setWaitReason(reason).build());
+        String parentId =  activitiesSteps.checkAndGetResponseId();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        Date date  = new Date();
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(date),"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+        // create alteration to change waitReason
+        JsonPathAlteration alterationWaitReason = new JsonPathAlteration("$.waitReason",
+                "[ASdw]", "","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime, alterationWaitReason));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorMessage("\"waitReason\" at position 0 does not match any of the allowed types");
     }
@@ -377,8 +433,22 @@ public class PostActivitiesNeg {
     @Test
     public void postActivitiesActivityParentIdNoEndTime() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
-        String parentId = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setEndTime(null).build());
+        String parentId =  activitiesSteps.checkAndGetResponseId();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        Date date  = new Date();
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
+                ("yyyy-MM-dd HH:mm:ss.SSS").format(date),"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
+                "", "","DELETE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorMessage("End Time not provided.");
     }
@@ -388,7 +458,20 @@ public class PostActivitiesNeg {
     public void postActivitiesActivityParentIdNoStartTime() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
         String parentId = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.postActivitiesWithWaitReason(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).setStartTime(null).build());
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        Date date  = new Date();
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", null,"","REPLACE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorMessage("\"startTime\" must be a string");
     }
@@ -397,8 +480,21 @@ public class PostActivitiesNeg {
     @Test
     public void postMissingPropertyStartTime() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
-        String parentId = activitiesSteps.checkAndGetResponseId();
-        activitiesSteps.postActivities(ActivitiesData.buildActivitiesParentIdData().setParentId(parentId).build(), "startTime", DataUtil.buildCurrentDateTime(), ToTypeConvertor.MISSING);
+        String parentId =  activitiesSteps.checkAndGetResponseId();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        // create alteration to change parentId
+        JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
+        Date date  = new Date();
+        // create alteration to change startTime
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", "","","DELETE");
+        // create alteration to change endTime
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
+                alterationEndTime));
+        activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorMessage("Start Time not provided.");
 

@@ -4383,7 +4383,7 @@ public class GetTestTypesByIdData {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
                 .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE))
-                .setVehicleClass(VehicleClass.INVALID)
+                .setVehicleClass(VehicleClass.LARGE_PSV)
                 .setVehicleType(VehicleType.MOTORCYCLE);
 
         testTypeSteps.getTestTypesById("166", testTypeQueryParam);
