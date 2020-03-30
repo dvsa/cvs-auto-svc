@@ -21,7 +21,7 @@ import java.util.UUID;
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value="loader/testdata/test_data_expiry_date_based_on_previous_hgv_preservation.csv")
-public class TestPostTestResultsExpiryDateBasedOnPreviousHgv_11396 {
+public class PostTestResultsExpiryDateBasedOnPreviousHgv_11396 {
 
     @Steps
     TestResultsSteps testResultsSteps;
