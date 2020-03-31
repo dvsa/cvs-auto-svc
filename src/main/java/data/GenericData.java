@@ -98,7 +98,9 @@ public class GenericData {
         for (final JsonPathAlteration alteration : alterations) {
             Objects.requireNonNull(alteration.getPath(), "The 'path' is required for any alteration");
 
-            final boolean valueIsJson = alteration.getValue().getClass().getName().equals("java.lang.String") && alteration.getValue() != null && !alteration.getValue().toString().isEmpty()
+            final boolean valueIsJson = alteration.getValue() != null &&
+                    alteration.getValue().getClass().getName().equals("java.lang.String")
+                    && !alteration.getValue().toString().isEmpty()
                     && ((alteration.getValue().toString().startsWith("{") && alteration.getValue().toString().endsWith("}"))
                     || (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]")));
             final Object value = (valueIsJson) ? readJson(alteration.getValue().toString()) : alteration.getValue();
@@ -106,23 +108,18 @@ public class GenericData {
             switch (alteration.getAction()) {
                 case "ADD_FIELD":
                     if (alteration.getField() != null) {
-                        Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
                         jsonContext = jsonContext.put(alteration.getPath(), alteration.getField(), value);
                         break;
                     }
                     // Intentional fall through to ADD_VALUE
                 case "ADD_VALUE":
-                    Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
                     jsonContext = jsonContext.add(alteration.getPath(), value);
                     break;
                 case "DELETE":
                     jsonContext = jsonContext.delete(alteration.getPath());
                     break;
                 case "REPLACE":
-                    Objects.requireNonNull(alteration.getValue(), "The 'value' is required for this alteration");
-
+                    System.out.println("replacing the value in path: " + alteration.getPath() + " with value: " + value);
                     jsonContext = jsonContext.set(alteration.getPath(), value);
                     break;
             }

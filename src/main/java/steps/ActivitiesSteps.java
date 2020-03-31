@@ -10,8 +10,10 @@ import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebDriver;
 import util.AwsUtil;
+import util.JsonPathAlteration;
 import util.WebDriverBrowsertack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,6 +64,13 @@ public class ActivitiesSteps {
     public void statusCodeShouldBe(int statusCode) {
         response.then().log().all()
                 .statusCode(statusCode);
+    }
+
+    @Step
+    public int statusCodeShouldBeOkOrNotFound() {
+        response.then().log().all()
+                .statusCode(anyOf(is(200),is(404)));
+        return response.statusCode();
     }
 
     @Step
@@ -192,5 +201,9 @@ public class ActivitiesSteps {
                                         String testerName, String startDate, String startTime) {
         WebDriverBrowsertack.checkAtfEmailDetails(driver, testStationName, testStationPNumber, testerName, startDate,
                 startTime);
+    }
+
+    public void postActivitiesParentIdWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        this.response = activitiesClient.postActivitiesWithAlterations(requestBody, alterations);
     }
 }

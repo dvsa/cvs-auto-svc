@@ -508,7 +508,7 @@ public class PostTestResultsProvisionalUpdate {
         String vin = "P0123010951264";
 
         // Get the created technical record, verify the status code and the fields
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
 
@@ -538,7 +538,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Get the tech record, and verify that the fields are present.
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
     }
@@ -548,11 +548,11 @@ public class PostTestResultsProvisionalUpdate {
     public void testVehicleTechRecordCarEuVehicleCategoryNotUpdated(){
 
         // Tech record exists already in dynamoDb with a pre-populated euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00020";
-        String vin = "DP76UMK4DQLTOT400021";
+        String systemNumber = "XYZEP5JYOMM00011";
+        String vin = "DP76UMK4DQLTOT400011";
 
         // Get the created technical record, verify the status code and the fields
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m2");
 
@@ -582,7 +582,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Get the tech record, and verify that the fields are present.
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m2");
     }

@@ -3,6 +3,7 @@ package clients;
 import clients.util.ToTypeConvertor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -12,8 +13,10 @@ import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import util.BasePathFilter;
+import util.JsonPathAlteration;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
@@ -242,4 +245,31 @@ public class ActivitiesClient {
         return response;
     }
 
+    public Response postActivitiesWithAlterations(String body, List<JsonPathAlteration> alterations) {
+
+        Response response = callPostActivitiesWithAlterations(body, alterations);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPostActivitiesWithAlterations(body, alterations);
+        }
+
+        return response;
+
+    }
+
+    private Response callPostActivitiesWithAlterations(String body, List<JsonPathAlteration> alterations) {
+
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(body, alterations);
+
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .log().method().log().uri().log().body()
+                .post("/activities");
+
+        return response;
+    }
 }

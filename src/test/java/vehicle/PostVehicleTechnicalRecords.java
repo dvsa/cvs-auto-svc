@@ -136,21 +136,11 @@ public class PostVehicleTechnicalRecords {
         // validate AC1
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         // validate AC2
-        VehicleClass vehicleClass = VehicleClass.MOTORBIKE_OVER_200CC;
-        for (VehicleClass v : VehicleClass.values()) {
-            if (v.getDescription().equals(vehicleClassDescription)) {
-                vehicleClass = v;
-            }
-        }
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClass.getCode());
+        String vehicleClassCode = vehicleTechnicalRecordsSteps.getVehicleClassCodeFromDescription(vehicleClassDescription);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClassCode);
         // validate AC3
-        BodyType bodyType = BodyType.ARTICULATED;
-        for (BodyType b : BodyType.values()) {
-            if (b.getDescription().equals(bodyTypeDescription)) {
-                bodyType = b;
-            }
-        }
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyType.getCode());
+        String bodyTypeCode = vehicleTechnicalRecordsSteps.getBodyTypeCodeFromDescription(bodyTypeDescription);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyTypeCode);
     }
 
     @Title("CVSB-10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Single Vehicle")
@@ -335,21 +325,11 @@ public class PostVehicleTechnicalRecords {
         // validate AC1
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         // validate AC2
-        VehicleClass vehicleClass = VehicleClass.SMALL_PSV;
-        for (VehicleClass v : VehicleClass.values()) {
-            if (v.getDescription().equals(vehicleClassDescription)) {
-                vehicleClass = v;
-            }
-        }
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClass.getCode());
+        String vehicleClassCode = vehicleTechnicalRecordsSteps.getVehicleClassCodeFromDescription(vehicleClassDescription);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleClass.code", vehicleClassCode);
         // validate AC3
-        BodyType bodyType = BodyType.ARTICULATED;
-        for (BodyType b : BodyType.values()) {
-            if (b.getDescription().equals(bodyTypeDescription)) {
-                bodyType = b;
-            }
-        }
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyType.getCode());
+        String bodyTypeCode = vehicleTechnicalRecordsSteps.getBodyTypeCodeFromDescription(bodyTypeDescription);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyTypeCode);
         // validated AC4
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].brakeCode", brakeCode);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].brakes.brakeCodeOriginal",
