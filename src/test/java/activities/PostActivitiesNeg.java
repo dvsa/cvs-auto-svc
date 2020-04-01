@@ -365,7 +365,7 @@ public class PostActivitiesNeg {
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", "","","DELETE");
         // create alteration to change endTime
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date), "","REPLACE");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationActivityType));
@@ -386,10 +386,10 @@ public class PostActivitiesNeg {
         Date date  = new Date();
         // create alteration to change startTime
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
-                ("yyyy-MM-dd HH:mm:ss.SSS").format(date),"","REPLACE");
+                ("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date),"","REPLACE");
         // create alteration to change endTime
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date), "","REPLACE");
         // create alteration to change waitReason to null
         JsonPathAlteration alterationWaitReason = new JsonPathAlteration("$.waitReason",
                 null, "","REPLACE");
@@ -414,10 +414,10 @@ public class PostActivitiesNeg {
         Date date  = new Date();
         // create alteration to change startTime
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
-                ("yyyy-MM-dd HH:mm:ss.SSS").format(date),"","REPLACE");
+                ("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date),"","REPLACE");
         // create alteration to change endTime
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date), "","REPLACE");
         // create alteration to change waitReason
         JsonPathAlteration alterationWaitReason = new JsonPathAlteration("$.waitReason",
                 "[ASdw]", "","REPLACE");
@@ -441,7 +441,7 @@ public class PostActivitiesNeg {
         Date date  = new Date();
         // create alteration to change startTime
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", new SimpleDateFormat
-                ("yyyy-MM-dd HH:mm:ss.SSS").format(date),"","REPLACE");
+                ("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date),"","REPLACE");
         // create alteration to change endTime
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
                 "", "","DELETE");
@@ -467,7 +467,7 @@ public class PostActivitiesNeg {
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", null,"","REPLACE");
         // create alteration to change endTime
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date), "","REPLACE");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime));
@@ -490,7 +490,7 @@ public class PostActivitiesNeg {
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.startTime", "","","DELETE");
         // create alteration to change endTime
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date), "","REPLACE");
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date), "","REPLACE");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime));
