@@ -24,7 +24,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
@@ -84,6 +83,11 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-sts</artifactId>
+            <version>1.11.718</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-dynamodb</artifactId>
             <version>1.11.718</version>
         </dependency>
     </dependencies>
