@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.junit.Assert;
 import org.skyscreamer.jsonassert.JSONAssert;
+import util.AwsUtil;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -27,39 +28,43 @@ public class VehicleTechnicalRecordsSteps {
     Response response;
 
     @Step
-    public void getVehicleTechnicalRecords(String searchIdentifier) {
-        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier);
+    public String getVehicleTechnicalRecords(String searchIdentifier) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier);
+        return response.prettyPrint();
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
-        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+    public String getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+        return response.prettyPrint();
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier,
+    public String getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier,
                                                                     @NotNull VehicleTechnicalRecordStatus status,
                                                                     @NotNull VehicleTechnicalRecordSearchCriteria criteria) {
-        this.response = vehicleTechnicalRecordsClient.
+        response = vehicleTechnicalRecordsClient.
                 getVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status.getStatus(), criteria.getSearchCriteria());
+        return response.prettyPrint();
     }
 
     @Step
-    public void getVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
-        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
+    public String getVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySystemNumber(searchIdentifier);
+        return response.prettyPrint();
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByPartialVim(String searchIdentifier) {
-        String partialVim = searchIdentifier.substring(searchIdentifier.length() - 6);
-        getVehicleTechnicalRecords(partialVim);
+    public String getVehicleTechnicalRecordsByPartialVin(String searchIdentifier) {
+        String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
+        return getVehicleTechnicalRecords(partialVin);
     }
 
 
     @Step
-    public void getVehicleTechnicalRecordsByPartialVimAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
-        String partialVim = searchIdentifier.substring(searchIdentifier.length() - 6);
-        getVehicleTechnicalRecordsByStatus(partialVim, status);
+    public String getVehicleTechnicalRecordsByPartialVinAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
+        String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
+        return getVehicleTechnicalRecordsByStatus(partialVin, status);
     }
 
 
@@ -87,6 +92,11 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldNotBe(String path, Object expectedValue) {
+        response.then().body(path, not(equalTo(expectedValue)));
     }
 
     @Step
@@ -128,7 +138,7 @@ public class VehicleTechnicalRecordsSteps {
             index++;
         }
         if (!found) {
-            throw new AutomationException("Vehicle with vim " + vehicleTechnicalRecordsData.getVin() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
+            throw new AutomationException("Vehicle with vin " + vehicleTechnicalRecordsData.getVin() + " has't got expected status " + vehicleTechnicalRecordStatus.getStatus() + " please check data");
         }
     }
 
@@ -233,23 +243,27 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void postVehicleTechnicalRecords(String requestBody) {
-        this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
+    public String postVehicleTechnicalRecords(String requestBody) {
+        response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecords(requestBody);
+        return response.prettyPrint();
     }
 
     @Step
-    public void postVehicleTechnicalRecordsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
-        this.response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+    public String postVehicleTechnicalRecordsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+        return response.prettyPrint();
     }
 
     @Step
-    public void putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
-        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(vin, requestBody);
+    public String putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(vin, requestBody);
+        return response.prettyPrint();
     }
 
     @Step
-    public void putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
-        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
+    public String putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
+        return response.prettyPrint();
     }
 
     @Step
@@ -272,12 +286,6 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void validateTechRecordFieldIsOfType(String field, Class type) {
         response.then().body("[0].techRecord[0]." + field, instanceOf(type));
-    }
-
-    @Step
-    public String extractFieldValueFromGetVehicleTechnicalRecordsByStatus(String jsonPath, String searchIdentifier, VehicleTechnicalRecordStatus status) {
-        Response response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
-        return response.then().extract().path(jsonPath).toString();
     }
 
     @Step
@@ -379,7 +387,7 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public String getVehicleClassCodeFromDescription(String vehicleClassDescription) {
         String vehicleClassCode = null;
-        for (clients.model.VehicleClass v : clients.model.VehicleClass.values()) {
+        for (VehicleClass v : VehicleClass.values()) {
             if (v.getDescription().equals(vehicleClassDescription)) {
                 vehicleClassCode = v.getCode();
                 break;
@@ -394,7 +402,7 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public String getBodyTypeCodeFromDescription(String bodyTypeDescription) {
         String bodyTypeCode = null;
-        for (clients.model.BodyType b : clients.model.BodyType.values()) {
+        for (BodyType b : BodyType.values()) {
             if (b.getDescription().equals(bodyTypeDescription)) {
                 bodyTypeCode = b.getCode();
             }
@@ -403,5 +411,15 @@ public class VehicleTechnicalRecordsSteps {
             throw new AutomationException("Body type description is not valid");
         }
         return bodyTypeCode;
+    }
+
+    @Step
+    public String getNextSystemNumberInSequence() {
+        return AwsUtil.getNextSystemNumberInSequence();
+    }
+
+    @Step
+    public String getNextTrailerIdInSequence() {
+        return AwsUtil.getNextTrailerIdInSequence();
     }
 }

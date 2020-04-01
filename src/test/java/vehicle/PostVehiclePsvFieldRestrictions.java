@@ -30,7 +30,6 @@ public class PostVehiclePsvFieldRestrictions {
                 {"$.primaryVrm", RandomStringUtils.randomAlphanumeric(10)},
                 {"$.primaryVrm", ""},
                 {"$.primaryVrm", 100},
-                {"$.systemNumber", 100},
                 {"$.secondaryVrms[0]", RandomStringUtils.randomAlphanumeric(10)},
                 {"$.secondaryVrms[0]", ""},
                 {"$.secondaryVrms[0]", 100},

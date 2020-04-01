@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RunWith(SerenityParameterizedRunner.class)
-public class PostVehicleWithoutMandatoryHgvField {
+public class PostVehicleWithoutMandatoryTrlField {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -25,22 +25,14 @@ public class PostVehicleWithoutMandatoryHgvField {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"$.primaryVrm"},
                 {"$.vin"},
                 {"$.techRecord[0].vehicleType"},
                 {"$.techRecord[0].manufactureYear"},
                 {"$.techRecord[0].noOfAxles"},
                 {"$.techRecord[0].brakes.dtpNumber"},
-                {"$.techRecord[0].speedLimiterMrk"},
-                {"$.techRecord[0].tachoExemptMrk"},
-                {"$.techRecord[0].euroStandard"},
-                {"$.techRecord[0].fuelPropulsionSystem"},
-                {"$.techRecord[0].roadFriendly"},
-                {"$.techRecord[0].drawbarCouplingFitted"},
-                {"$.techRecord[0].vehicleClass.description"},
+                {"$.techRecord[0].roadFriendly" },
+                {"$.techRecord[0].vehicleClass.description" },
                 {"$.techRecord[0].vehicleConfiguration"},
-                {"$.techRecord[0].offRoad"},
-                {"$.techRecord[0].numberOfWheelsDriven"},
                 {"$.techRecord[0].euVehicleCategory"},
                 {"$.techRecord[0].approvalType"},
                 {"$.techRecord[0].make"},
@@ -48,35 +40,47 @@ public class PostVehicleWithoutMandatoryHgvField {
                 {"$.techRecord[0].bodyType.description"},
                 {"$.techRecord[0].grossGbWeight"},
                 {"$.techRecord[0].grossDesignWeight"},
-                {"$.techRecord[0].trainGbWeight"},
-                {"$.techRecord[0].maxTrainGbWeight"},
                 {"$.techRecord[0].axles[0].weights.gbWeight"},
                 {"$.techRecord[0].axles[0].weights.designWeight"},
                 {"$.techRecord[0].axles[0].tyres.tyreCode"},
                 {"$.techRecord[0].axles[0].tyres.tyreSize"},
                 {"$.techRecord[0].axles[0].tyres.fitmentCode"},
-                {"$.techRecord[0].dimensions.width"},
+                {"$.techRecord[0].brakes.antilockBrakingSystem"},
                 {"$.techRecord[0].dimensions.length"},
+                {"$.techRecord[0].dimensions.width"},
                 {"$.techRecord[0].frontAxleToRearAxle"},
+                {"$.techRecord[0].rearAxleToRearTrl"},
+                {"$.techRecord[0].couplingCenterToRearAxleMin"},
+                {"$.techRecord[0].couplingCenterToRearAxleMax"},
+                {"$.techRecord[0].couplingCenterToRearTrlMin"},
+                {"$.techRecord[0].couplingCenterToRearTrlMax"},
+                {"$.techRecord[0].centreOfRearmostAxleToRearOfTrl"},
                 {"$.techRecord[0].applicantDetails.name"},
                 {"$.techRecord[0].applicantDetails.address1"},
                 {"$.techRecord[0].applicantDetails.address2"},
                 {"$.techRecord[0].applicantDetails.postTown"},
-                {"$.techRecord[0].reasonForCreation"},
-                {"$.techRecord[0].recordCompleteness"}
+                {"$.techRecord[0].purchaserDetails.name"},
+                {"$.techRecord[0].purchaserDetails.address1"},
+                {"$.techRecord[0].purchaserDetails.address2"},
+                {"$.techRecord[0].purchaserDetails.postTown"},
+                {"$.techRecord[0].manufacturerDetails.name"},
+                {"$.techRecord[0].manufacturerDetails.address1"},
+                {"$.techRecord[0].manufacturerDetails.address2"},
+                {"$.techRecord[0].manufacturerDetails.postTown"},
+                {"$.techRecord[0].reasonForCreation"}
         });
     }
 
     private final String jsonPath;
 
-    public PostVehicleWithoutMandatoryHgvField(String jsonPath) {
+    public PostVehicleWithoutMandatoryTrlField(String jsonPath) {
         this.jsonPath = jsonPath;
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10210 - AC1 - Attempt to create a new hgv without a mandatory field")
+    @Title("CVSB - 10246 - AC1 - Attempt to create a new vehicle without a mandatory field")
     @Test
-    public void testValidateRequestWithoutMandatoryHgvField() {
+    public void testValidateRequestWithoutMandatoryTrlField() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -85,7 +89,7 @@ public class PostVehicleWithoutMandatoryHgvField {
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+        String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         // create alteration to change systemNumber in the post request body with the random generated systemNumber

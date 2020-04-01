@@ -4,7 +4,6 @@ package vehicle;
 import data.GenericData;
 import data.VehicleTechRecordsData;
 import model.vehicles.Vehicle;
-import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
@@ -69,7 +68,7 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1158 - AC2 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN")
     @Test
-    public void testVehicleTechnicalRecordsSearchPartialVim() {
+    public void testVehicleTechnicalRecordsSearchPartialVin() {
 
         // Read the base test result JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
@@ -93,7 +92,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVim(randomVin);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVin(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
     }
@@ -101,7 +100,7 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1159 - AC3 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN")
     @Test
-    public void testVehicleTechnicalRecordsSearchFullVim() {
+    public void testVehicleTechnicalRecordsSearchFullVin() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vehicleCurrentData.getVin());
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
@@ -156,8 +155,8 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1265 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is archived")
     @Test
-    public void testVehicleTechnicalRecordsSearchPartialVimAndStatusArchived() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus("012461", VehicleTechnicalRecordStatus.ARCHIVED);
+    public void testVehicleTechnicalRecordsSearchPartialVinAndStatusArchived() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVinAndStatus("012461", VehicleTechnicalRecordStatus.ARCHIVED);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "psv" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","archived");
@@ -166,7 +165,7 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1266 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is archived")
     @Test
-    public void testVehicleTechnicalRecordsSearchFullVimAndStatusArchived() {
+    public void testVehicleTechnicalRecordsSearchFullVinAndStatusArchived() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("XMGDE02FS0H012461", VehicleTechnicalRecordStatus.ARCHIVED);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "psv" );
@@ -185,8 +184,8 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1268 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is provisional")
     @Test
-    public void testVehicleTechnicalRecordsSearchPartialVimAndStatusProvisional() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleProvisionalData.getVin(), VehicleTechnicalRecordStatus.PROVISIONAL);
+    public void testVehicleTechnicalRecordsSearchPartialVinAndStatusProvisional() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVinAndStatus(vehicleProvisionalData.getVin(), VehicleTechnicalRecordStatus.PROVISIONAL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleProvisionalData, VehicleTechnicalRecordStatus.PROVISIONAL);
     }
@@ -194,7 +193,7 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1269 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is provisional")
     @Test
-    public void testVehicleTechnicalRecordsSearchFullVimAndStatusProvisional() {
+    public void testVehicleTechnicalRecordsSearchFullVinAndStatusProvisional() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleProvisionalData.getVin(), VehicleTechnicalRecordStatus.PROVISIONAL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleProvisionalData, VehicleTechnicalRecordStatus.PROVISIONAL);
@@ -212,8 +211,8 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1271 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is invalid")
     @Test
-    public void testVehicleTechnicalRecordsSearchPartialVimAndStatusInvalid() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.INVALID);
+    public void testVehicleTechnicalRecordsSearchPartialVinAndStatusInvalid() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVinAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.INVALID);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
         vehicleTechnicalRecordsSteps.validateData("No resources match the search criteria.");
     }
@@ -221,7 +220,7 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1272 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is invalid")
     @Test
-    public void testVehicleTechnicalRecordsSearchFullVimAndStatusInvalid() {
+    public void testVehicleTechnicalRecordsSearchFullVinAndStatusInvalid() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.INVALID);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(404);
         vehicleTechnicalRecordsSteps.validateData("No resources match the search criteria.");
@@ -240,8 +239,8 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1282 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is current")
     @Test
-    public void testVehicleTechnicalRecordsSearchPartialVimAndStatusCurrent() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVimAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
+    public void testVehicleTechnicalRecordsSearchPartialVinAndStatusCurrent() {
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVinAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
     }
@@ -249,7 +248,7 @@ public class GetVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1283 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is current")
     @Test
-    public void testVehicleTechnicalRecordsSearchFullVimAndStatusCurrent() {
+    public void testVehicleTechnicalRecordsSearchFullVinAndStatusCurrent() {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
@@ -686,7 +685,7 @@ public class GetVehicleTechnicalRecords {
 
     @WithTag("Vtm")
     @Title("CVSB-10239 - AC1 - All attributes applicable to PSVs are returned " +
-            "AC2 - HGV vehicle is created, and the appropriate attributes are automatically set")
+            "AC2 - PSV vehicle is created, and the appropriate attributes are automatically set")
     @Test
     public void testVehicleTechnicalRecordsGetAllPsvAttributes() {
         // TEST SETUP
@@ -725,5 +724,58 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", randomVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10245 - AC1 - All attributes applicable to TRLs are returned " +
+            "AC2 - TRL vehicle is created, and the appropriate attributes are automatically set " +
+            "CVSB-10131 - AC1 - TRL vehicle is created, and the next trailerID is assigned")
+    @Test
+    public void testVehicleTechnicalRecordsGetAllTrlAttributes() {
+        // TEST SETUP
+        //generate random systemNumber
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+        String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
+        String userId = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msOid");
+        String name = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msUser");
+        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.secondaryVrms[0]");
+        String trailerId =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.trailerId");
+
+
+        // create alteration to change systemNumber in the request body with the random generated systemNumber
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+
+        // TEST
+        String generatedTrailerId = vehicleTechnicalRecordsSteps.getNextTrailerIdInSequence();
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[0]", techRecord);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdById", userId);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdByName", name);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", randomVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
+        // for CVSB-10131 we validate that the generated trailerId from the backend is unique
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", generatedTrailerId);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(generatedTrailerId, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("size()", 1);
     }
 }
