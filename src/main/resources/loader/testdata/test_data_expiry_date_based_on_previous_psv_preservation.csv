@@ -1,0 +1,4 @@
+INSERTED TEST CODE ONE, INSERTED TEST RESULT ONE, INSERTED TEST TYPE ID ONE, INSERTED TEST CODE TWO, INSERTED TEST RESULT TWO, INSERTED TEST TYPE ID TWO, POST NAME, POST TEST TYPE NAME, POST TEST TYPE ID, POST TEST RESULT, POST TEST CODE, POST VEHICLE SIZE, POST VEHICLE CONFIGURATION, IS ANNUAL WITH CERTIFICATE
+aal, pass, 1, lcp, pass, 39, Annual test, Annual test, 1, pass, aal, large, rigid, true
+aas, pass, 1, lbp, pass, 39, Annual test, Annual test, 1, pass, aas, small, rigid, true
+aal, pass, 1, lbp, pass, 39, Annual test, Annual test, 1, pass, aal, large, rigid, true

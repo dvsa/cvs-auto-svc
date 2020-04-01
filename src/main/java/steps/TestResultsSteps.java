@@ -593,12 +593,12 @@ public class TestResultsSteps {
 
     @Step
     public void addAdditionalTestResultsFieldValue(ObjectNode payload, String fieldName, String fieldValue) {
-            payload.put(fieldName, fieldValue);
+        payload.put(fieldName, fieldValue);
     }
 
     @Step
     public void addAdditionalTestResultsFieldValue(ObjectNode payload, String fieldName, int fieldValue) {
-            payload.put(fieldName, fieldValue);
+        payload.put(fieldName, fieldValue);
     }
 
     @Step
@@ -732,5 +732,16 @@ public class TestResultsSteps {
     @Step
     public void validateVsaEmailDetails(WebDriver driver, String randomVrm, String testName, String date) {
         WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
+    }
+
+    @Step
+    public void valueForFieldInPathShouldStartWith(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " starts with value " + expectedValue);
+        response.then().body(path, startsWith(expectedValue));
+    }
+    @Step
+    public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " ends with value " + expectedValue);
+        response.then().body(path, endsWith(expectedValue));
     }
 }

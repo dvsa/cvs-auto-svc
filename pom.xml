@@ -97,6 +97,12 @@
             <version>4.12</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -108,7 +114,14 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
-                            <skip>true</skip>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <environment>CI</environment>
+                                <DATA>develop</DATA>
+                            </systemPropertyVariables>
+                            <testFailureIgnore>true</testFailureIgnore>
                         </configuration>
                     </plugin>
 
@@ -117,13 +130,7 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
-                            <includes>
-                                <include>**/*.java</include>
-                            </includes>
-                            <systemPropertyVariables>
-                                <environment>CI</environment>
-                                <DATA>develop</DATA>
-                            </systemPropertyVariables>
+                            <skip>true</skip>
                         </configuration>
                         <executions>
                             <execution>
@@ -176,8 +183,6 @@
                 <directory>src/test/resources</directory>
             </testResource>
         </testResources>
-
-
         <plugins>
             <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>

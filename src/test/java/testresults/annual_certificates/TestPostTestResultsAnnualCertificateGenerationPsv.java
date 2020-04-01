@@ -15,7 +15,7 @@ import util.JsonPathAlteration;
 import java.util.*;
 
 @RunWith(SerenityParameterizedRunner.class)
-public class PostTestResultsAnnualCertificateGenerationPsv {
+public class TestPostTestResultsAnnualCertificateGenerationPsv {
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -88,7 +88,7 @@ public class PostTestResultsAnnualCertificateGenerationPsv {
     private String testResult;
     private String testCode;
 
-    public PostTestResultsAnnualCertificateGenerationPsv(String name, String testTypeName, String testTypeId, String vehicleSize, String vehicleConfiguration, String testResult, String testCode) {
+    public TestPostTestResultsAnnualCertificateGenerationPsv(String name, String testTypeName, String testTypeId, String vehicleSize, String vehicleConfiguration, String testResult, String testCode) {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;

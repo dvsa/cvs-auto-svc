@@ -1,0 +1,4 @@
+NAME, TEST TYPE NAME, TEST TYPE ID, NO OF AXLES, TEST RESULT, INSERTED TEST CODE, TEST CODE, IS ANNUAL WITH CERTIFICATE
+Annual test, Annual test, 40, 1, pass, aat1, aat1, true
+Annual test, Annual test, 94, 2, pass, aat1, aat2, true
+Annual test, Annual test, 94, 3, pass, aat1, aat3, true

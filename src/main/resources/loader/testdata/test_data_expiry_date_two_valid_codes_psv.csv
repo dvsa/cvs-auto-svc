@@ -1,0 +1,4 @@
+INSERTED TEST CODE ONE, INSERTED TEST RESULT ONE, INSERTED TEST TYPE ID ONE, INSERTED TEST CODE TWO, INSERTED TEST RESULT TWO, INSERTED TEST TYPE ID TWO, POST NAME, POST TEST TYPE NAME, POST TEST TYPE ID, POST TEST RESULT, POST TEST CODE, POST VEHICLE SIZE, POST VEHICLE CONFIGURATION, IS ANNUAL WITH CERTIFICATE
+whs, pass, 8, wfs, pass, 27, Annual test, Annual test, 1, pass, aas, small, rigid, true
+adl, pass, 1, wel, pass, 93, Annual test, Annual test, 27, pass, wfl, large, articulated, true
+p1s, pass, 14, wes, pass, 93, Annual test, Annual test, 28, pass, wis, small, rigid, true

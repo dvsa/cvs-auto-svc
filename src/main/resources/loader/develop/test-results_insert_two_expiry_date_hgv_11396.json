@@ -1,0 +1,61 @@
+{
+  "countryOfRegistration": "bg",
+  "euVehicleCategory": "n2",
+  "noOfAxles": 2,
+  "odometerReading": 55000,
+  "odometerReadingUnits": "kilometres",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "reasonForCancellation": null,
+  "testEndTimestamp": "2020-02-20T10:19:20.453Z",
+  "testerEmailAddress": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testerName": "cvs.fakeaddress@dvsagov.onmicrosoft.com",
+  "testerStaffId": "d463f9f3-1ce7-4944-930a-ce9fd51e506b",
+  "testResultId": "d8321881-92f0-49aa-8522-7429ecd7723c",
+  "testStartTimestamp": "2020-02-20T10:18:07.455Z",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testStatus": "submitted",
+  "testTypes": [
+    {
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "certificateNumber": "W01A25246",
+      "createdAt": "2020-02-20T10:19:20.848Z",
+      "defects": [
+
+      ],
+      "emissionStandard": null,
+      "fuelType": null,
+      "lastUpdatedAt": "2020-02-20T10:19:20.848Z",
+      "modificationTypeUsed": null,
+      "modType": null,
+      "name": "Annual test",
+      "particulateTrapFitted": null,
+      "particulateTrapSerialNumber": null,
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "smokeTestKLimitApplied": null,
+      "testAnniversaryDate": "2021-02-28T00:00:00.000Z",
+      "testCode": "aav2",
+      "testExpiryDate": "2021-02-28T00:00:00.000Z",
+      "testNumber": "W01A25246",
+      "testResult": "pass",
+      "testTypeEndTimestamp": "2020-02-20T10:19:20.455Z",
+      "testTypeId": "94",
+      "testTypeName": "Annual test",
+      "testTypeStartTimestamp": "2020-02-20T10:18:55.061Z"
+    }
+  ],
+  "vehicleClass": {
+    "code": "v",
+    "description": "heavy goods vehicle"
+  },
+  "vehicleConfiguration": "semi-car transporter",
+  "vehicleId": "CT70VRL",
+  "vehicleType": "hgv",
+  "vin": "P012301270123",
+  "vrm": "CT70VRL",
+  "systemNumber":"15000002"
+}
