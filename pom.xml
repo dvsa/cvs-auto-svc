@@ -91,18 +91,6 @@
             <artifactId>aws-java-sdk-dynamodb</artifactId>
             <version>1.11.718</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
     <profiles>
         <profile>
