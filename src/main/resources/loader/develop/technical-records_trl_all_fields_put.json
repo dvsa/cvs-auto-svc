@@ -1,0 +1,185 @@
+{
+  "msUserDetails": {
+    "msUser": "dragos",
+    "msOid": "123456"
+  },
+  "vin": "T72741234",
+  "partialVin": "741234",
+  "trailerId": "C100001",
+  "primaryVrm": "B2C1C11",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
+  "systemNumber": "10000026",
+  "techRecord": [
+    {
+      "vehicleType": "trl",
+      "regnDate": "2019-06-24",
+      "firstUseDate": "2019-06-24",
+      "manufactureYear": 2018,
+      "noOfAxles": 2,
+      "brakes": {
+        "dtpNumber": "3798A",
+        "loadSensingValve": true,
+        "antilockBrakingSystem": true
+      },
+      "suspensionType": "Y",
+      "roadFriendly": true,
+      "vehicleClass": {
+        "description": "trailer"
+      },
+      "vehicleConfiguration": "centre axle drawbar",
+      "couplingType": "F",
+      "maxLoadOnCoupling": 7000,
+      "frameDescription": "Tubular",
+      "euVehicleCategory": "o1",
+      "alterationMarker": true,
+      "departmentalVehicleMarker": false,
+      "authIntoService": {
+        "cocIssueDate": "2019-06-24",
+        "dateReceived": "2019-06-24",
+        "datePending": "2019-06-24",
+        "dateAuthorised": "2019-06-24",
+        "dateRejected": "2019-06-24"
+      },
+      "lettersOfAuth": {
+        "letterType": "Trailer authorization",
+        "letterDateRequested": "2019-06-24",
+        "letterContents": "contents"
+      },
+      "approvalType": "NTA",
+      "approvalTypeNumber": "123456",
+      "ntaNumber": "123456",
+      "variantNumber": "123456",
+      "variantVersionNumber": "123456",
+      "make": "Isuzu",
+      "model": "F06",
+      "bodyType": {
+        "description": "petrol/oil tanker"
+      },
+      "functionCode": "R",
+      "conversionRefNo": "123456",
+      "grossGbWeight": 38000,
+      "grossEecWeight": 38000,
+      "grossDesignWeight": 38000,
+      "tyreUseCode": "2B",
+      "axles": [
+        {
+          "parkingBrakeMrk": false,
+          "axleNumber": 1,
+          "brakes": {
+            "brakeActuator": 113,
+            "leverLength": 125,
+            "springBrakeParking": false
+          },
+          "tyres": {
+            "tyreSize": "9.23648E+11",
+            "plyRating": "AB",
+            "fitmentCode": "single",
+            "dataTrAxles": 345,
+            "tyreCode": 1234
+          },
+          "weights": {
+            "designWeight": 7500,
+            "eecWeight": 7500,
+            "gbWeight": 7100
+          }
+        },
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 2,
+          "tyres": {
+            "tyreSize": "9.23648E+11",
+            "plyRating": "AB",
+            "fitmentCode": "single",
+            "dataTrAxles": 345,
+            "tyreCode": 5678
+          },
+          "brakes": {
+            "brakeActuator": 113,
+            "leverLength": 125,
+            "springBrakeParking": true
+          },
+          "weights": {
+            "designWeight": 7500,
+            "eecWeight": 7500,
+            "gbWeight": 7100
+          }
+        }
+      ],
+      "dimensions": {
+        "length": 7500,
+        "width": 2200,
+        "axleSpacing": [
+          {
+            "axles": "1-2",
+            "value": 10000
+          }
+        ]
+      },
+      "frontAxleToRearAxle": 1500,
+      "rearAxleToRearTrl": 1500,
+      "couplingCenterToRearAxleMin": 1500,
+      "couplingCenterToRearAxleMax": 1500,
+      "couplingCenterToRearTrlMin": 1500,
+      "couplingCenterToRearTrlMax": 1500,
+      "centreOfRearmostAxleToRearOfTrl": 1500,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "purchaserDetails": {
+        "address1": "*",
+        "address2": "*",
+        "address3": "*",
+        "name": "*",
+        "postCode": "*",
+        "postTown": "***",
+        "telephoneNumber": "*",
+        "emailAddress": "*",
+        "faxNumber": "*",
+        "purchaserNotes": "*"
+      },
+      "manufacturerDetails": {
+        "address1": "*",
+        "address2": "*",
+        "address3": "*",
+        "name": "*",
+        "postCode": "*",
+        "postTown": "****",
+        "telephoneNumber": "*",
+        "emailAddress": "*",
+        "faxNumber": "*",
+        "manufacturerNotes": "*"
+      },
+      "microfilm": {
+        "microfilmDocumentType": "Deleted",
+        "microfilmRollNumber": "66666",
+        "microfilmSerialNumber": "9999"
+      },
+      "plates": [
+        {
+          "plateSerialNumber": "22222222",
+          "plateIssueDate": "2021-12-12",
+          "plateReasonForIssue": "Destroyed",
+          "plateIssuer": "DVSA"
+        },
+        {
+          "plateSerialNumber": "33333333",
+          "plateIssueDate": "2022-03-03",
+          "plateReasonForIssue": "Replacement",
+          "plateIssuer": "Mr. Smith"
+        }
+      ],
+      "notes": "other note",
+      "reasonForCreation": "no reason",
+      "recordCompleteness": "testable"
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 package data;
 
-import com.amazonaws.services.dynamodbv2.document.Item;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
@@ -11,8 +10,6 @@ import data.config.DataMapper;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
@@ -101,7 +98,9 @@ public class GenericData {
         for (final JsonPathAlteration alteration : alterations) {
             Objects.requireNonNull(alteration.getPath(), "The 'path' is required for any alteration");
 
-            final boolean valueIsJson =  alteration.getValue() != null && alteration.getValue().getClass().getName().equals("java.lang.String") && !alteration.getValue().toString().isEmpty()
+            final boolean valueIsJson = alteration.getValue() != null &&
+                    alteration.getValue().getClass().getName().equals("java.lang.String")
+                    && !alteration.getValue().toString().isEmpty()
                     && ((alteration.getValue().toString().startsWith("{") && alteration.getValue().toString().endsWith("}"))
                     || (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]")));
             final Object value = valueIsJson ? readJson(alteration.getValue().toString()) : alteration.getValue();
@@ -137,7 +136,7 @@ public class GenericData {
         return JsonPath.read(jsonString, jsonPath);
     }
 
-    public static Integer extractIntegerValueFromJsonString(String jsonString, String jsonPath) {
+    public static int extractIntegerValueFromJsonString(String jsonString, String jsonPath) {
         return JsonPath.read(jsonString, jsonPath);
     }
 
@@ -210,7 +209,12 @@ public class GenericData {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return jsonResp;
+        if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
+            return jsonResp.substring(1, jsonResp.length()-1);
+        }
+        else {
+            return jsonResp;
+        }
     }
 
     public static String getJsonStringFromHashMap(HashMap<String, String> hashMap) {
@@ -231,23 +235,5 @@ public class GenericData {
         else {
             return randomVin;
         }
-    }
-    /**
-     * Get a list of field names from a JSONObject.
-     *
-     * @return An array of field names, or null if there are no names.
-     */
-    public static List<String> getNonPrimaryKeyNames(JSONObject jo, List<String> primaryKeys) {
-
-        Iterator<?> keys = jo.keys();
-        List<String> jsonKeys = new ArrayList<>();
-
-        while( keys.hasNext() ) {
-            String key = (String) keys.next();
-            if (!(primaryKeys.contains(key))) {
-                jsonKeys.add(key);
-            }
-        }
-        return jsonKeys;
     }
 }
