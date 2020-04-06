@@ -8,13 +8,16 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
+import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -30,6 +33,9 @@ public class GetTestResults {
 
     @Steps
     TestResultsSteps testResultsSteps;
+
+    @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     private TestResults.Builder vehicleDefaultSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
@@ -316,4 +322,139 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
         testResultsSteps.validateVehicleFieldMayExist("firstUseDate");
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10280 - AC1: Update the GET request in testResults API")
+    @Test
+    public void testResultsContains() {
+        testResultsSteps.getTestResults("10000013");
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.validateVehicleFieldExists("testVersion");
+        testResultsSteps.validateVehicleFieldExists("reasonForCreation");
+        testResultsSteps.validateVehicleFieldExists("createdByName");
+        testResultsSteps.validateVehicleFieldExists("createdById");
+        testResultsSteps.validateVehicleFieldExists("createdAt");
+        testResultsSteps.validateVehicleFieldExists("lastUpdatedByName");
+        testResultsSteps.validateVehicleFieldExists("lastUpdatedByID");
+        testResultsSteps.validateVehicleFieldExists("lastUpdatedAt");
+
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10280 - AC7: PUT request: Original Test Record is updated and attributes are automatically set - Archived and Archived " +
+            "AC6: GET request returns all 'archived' test records")
+    @Test
+    public void testResultsWithTestVersionAutomaticallySetSame() {
+        testResultsSteps.getTestResults("1000000114", TestVersion.ARCHIVED ,"114");
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
+        testResultsSteps.valueForFieldInPathShouldBe("[1].testVersion","archived");
+        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
+
+        testResultsSteps.getTestResults("1000000114", TestVersion.CURRENT ,"114");
+        testResultsSteps.statusCodeShouldBe(404);
+        testResultsSteps.validateData("No resources match the search criteria");
+
+        testResultsSteps.getTestResults("1000000114", TestVersion.ALL ,"114");
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testVersion","archived");
+
+
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10280 - AC8: Backend Service Correctly Interprets The 'testVersion' value of 'all'" +
+            "AC7: PUT request: Original Test Record is updated and attributes are automatically set - Current and Archived" +
+            "AC2: Update the GET request in testResults API with testVersion attribute" + "AC3: Update the GET request in testResults API with a 'version' query parameter" +
+            "AC5: GET request returns all 'current' test records + AC6: GET request returns all \"archived\" test records ")
+    @Test
+    public void testResultsPutCurrentAndArchived() {
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle, alterationVinVehicle));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_sys_number_10754.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10280.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut));
+
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        //AC7 , AC3
+        //AC5
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
+        testResultsSteps.valueForFieldInPathShouldBe("size", 1);
+        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
+
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldNotBe("[0].testVersion","archived");
+        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
+
+        // AC8
+        testResultsSteps.getTestResults(randomSystemNumber, TestVersion.ALL ,randomTestResultId);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testVersion","archived");
+
+        // AC2
+        // AC6
+        testResultsSteps.getTestResults(randomSystemNumber, TestVersion.ARCHIVED ,randomTestResultId);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
+        testResultsSteps.valueForFieldInPathShouldNotBe("[0].testVersion","current");
+        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
+
+        testResultsSteps.getTestResults(randomSystemNumber, TestVersion.CURRENT ,randomTestResultId);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
+        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
+    }
+
+
 }

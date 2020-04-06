@@ -63,6 +63,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void getTestResults(String systemNumber, TestVersion testVersion , String testResultId ) {
+        response = testResultsClient.getTestResultsWithVersion(systemNumber, testVersion.getTestVersion(), testResultId);
+    }
+
+    @Step
     public void getTestResultsWithStatusAndSysNumber(String systemNumber, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsWithStatusAndSysNumber(systemNumber, testResultsStatus.getStatus());
     }
@@ -548,6 +553,16 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void fieldInPathShouldNotExist(String parentElementPath, String key) {
+        response.then().body(parentElementPath,not(hasKey(key)));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldNotBe(String path, Object expectedValue) {
+        response.then().body(path, not(equalTo(expectedValue)));
+    }
+
+    @Step
     public void validateVehicleFieldValue(String key, int value) {
 //        response.then().log().all();
         validateVehicleFieldExists(key);
@@ -690,6 +705,12 @@ public class TestResultsSteps {
     @Step
     public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
+    }
+
+    @Step
+    public String putTestResultsWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = testResultsClient.putTestResultsWithAlterations(vin, putRequestBody, alterations);
+        return response.prettyPrint();
     }
 
     @Step
