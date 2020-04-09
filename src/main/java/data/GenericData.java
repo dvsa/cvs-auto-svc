@@ -41,6 +41,7 @@ public class GenericData {
     }
 
     public static String readJsonValueFromFile(String fileName, String path) {
+        System.out.println("READING FILE: " + path + " " + fileName);
         ClassLoader classLoader = DataMapper.class.getClassLoader();
 
         String jsonBody = null;
@@ -176,6 +177,10 @@ public class GenericData {
 
     public static String generateRandomVrm() {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
+    }
+
+    public static String generateRandomTrailerId() {
+        return RandomStringUtils.randomAlphanumeric(8,8).toUpperCase();
     }
 
     public static String generateRandomVrmForEmailValidations() {

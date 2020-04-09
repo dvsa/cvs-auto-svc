@@ -238,21 +238,17 @@ public class PostVehicleHgvFieldRestrictions {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
-        // generate random systemNumber
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         // generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
         String postRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        // create alteration to change systemNumber in the post request body with the random generated systemNumber
-        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
 
         // initialize the alterations list with both declared alterations
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
 
         // validate each field for its restrictions and data type

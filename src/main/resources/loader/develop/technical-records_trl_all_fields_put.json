@@ -13,6 +13,7 @@
   "systemNumber": "10000026",
   "techRecord": [
     {
+      "statusCode": "provisional",
       "vehicleType": "trl",
       "regnDate": "2019-06-24",
       "firstUseDate": "2019-06-24",

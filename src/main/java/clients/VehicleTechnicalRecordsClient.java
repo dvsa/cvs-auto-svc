@@ -154,7 +154,7 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
-    private Response callPutVehicleTechnicalRecordsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
+    private Response callPutVehicleTechnicalRecordsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
@@ -162,19 +162,19 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
-                .pathParam("vin", vin)
+                .pathParam("systemNumber", systemNumber)
                 .log().method().log().uri().log().body()
-                .put("/vehicles/{vin}");
+                .put("/vehicles/{systemNumber}");
         return response;
     }
 
-    private Response callPutVehicleTechnicalRecordsForVehicle(String vin, String body) {
+    private Response callPutVehicleTechnicalRecordsForVehicle(String systemNumber, String body) {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(body)
-                .pathParam("vin", vin)
+                .pathParam("systemNumber", systemNumber)
                 .log().method().log().uri().log().body()
-                .put("/vehicles/{vin}");
+                .put("/vehicles/{systemNumber}");
         return response;
     }
 
@@ -200,23 +200,23 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
-    public Response putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
-        Response response = callPutVehicleTechnicalRecordsForVehicle(vin, requestBody);
+    public Response putVehicleTechnicalRecordsForVehicle(String systemNumber, String requestBody) {
+        Response response = callPutVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callPutVehicleTechnicalRecordsForVehicle(vin, requestBody);
+            response = callPutVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
         }
 
         return response;
     }
 
-    public Response putVehicleTechnicalRecordsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
-        Response response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
+    public Response putVehicleTechnicalRecordsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPutVehicleTechnicalRecordsWithAlterations(systemNumber, requestBody, alterations);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
+            response = callPutVehicleTechnicalRecordsWithAlterations(systemNumber, requestBody, alterations);
         }
 
         return response;

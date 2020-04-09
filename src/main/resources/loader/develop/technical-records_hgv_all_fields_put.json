@@ -11,6 +11,7 @@
   ],
   "techRecord": [
     {
+      "statusCode": "provisional",
       "axles": [
         {
           "axleNumber": 1,
@@ -68,6 +69,7 @@
       "notes": "notes",
       "ntaNumber": "0000514900",
       "reasonForCreation": "no reason",
+      "statusCode": "provisional",
       "regnDate": "2000-01-01",
       "roadFriendly": true,
       "speedLimiterMrk": true,
