@@ -228,6 +228,19 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static ArrayList<String> getJsonStringListFromHashMapArray(ArrayList<HashMap<String, String>> arrayList) {
+        ArrayList<String> jsonResp = new ArrayList<>();
+        for (HashMap<String, String> hashMap : arrayList) {
+            ObjectMapper mapperObj = new ObjectMapper();
+            try {
+                jsonResp.add(mapperObj.writeValueAsString(hashMap));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }
+        return jsonResp;
+    }
+
     public static String getPartialVinFromVin(String randomVin) {
         if (randomVin.length() >= 6) {
             return randomVin.substring(randomVin.length()-6);

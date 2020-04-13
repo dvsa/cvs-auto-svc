@@ -90,6 +90,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public Object extractValueFromPath(String path) {
+        return response.then().extract().path(path);
+    }
+
+    @Step
     public void valueForFieldInPathShouldBe(String path, Object expectedValue) {
         response.then().body(path, equalTo(expectedValue));
     }
@@ -276,6 +281,20 @@ public class VehicleTechnicalRecordsSteps {
             throw new RuntimeException(exc);
         }
 
+    }
+
+    @Step
+    public void validateElementsInResponseContainsJson(String jsonPathReturningMultipleElements, String expectedJson) {
+        ArrayList<String> actualJsons = GenericData.getJsonStringListFromHashMapArray(response.then().extract().
+                path(jsonPathReturningMultipleElements));
+        for (String actualJson : actualJsons) {
+            try {
+                JSONAssert.assertEquals("The response does not contain the required data", expectedJson,
+                        actualJson, false);
+            } catch (final JSONException exc) {
+                throw new RuntimeException(exc);
+            }
+        }
     }
 
     @Step

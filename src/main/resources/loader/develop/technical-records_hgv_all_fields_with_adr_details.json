@@ -1,0 +1,184 @@
+{
+  "msUserDetails": {
+    "msUser": "sean",
+    "msOid": "12345"
+  },
+  "partialVin": "037501",
+  "primaryVrm": "B2C1C11",
+  "systemNumber": "BSFD3244BDSGR",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
+  "techRecord": [
+    {
+      "adrDetails": {
+        "vehicleDetails": {
+          "type": "Centre axle battery",
+          "approvalDate": "2019-10-10"
+        },
+        "permittedDangerousGoods": [
+          "FP <61 (FL)"
+        ],
+        "additionalExaminerNotes": "string",
+        "applicantDetails": {
+          "name": "string",
+          "street": "string",
+          "town": "string",
+          "city": "string",
+          "postcode": "string"
+        },
+        "memosApply": [
+          "07/09 3mth leak ext"
+        ],
+        "additionalNotes": {
+          "number": [
+            "1",
+            "2"
+          ],
+          "guidanceNotes": [
+            "New certificate requested"
+          ]
+        },
+        "tank": {
+          "tankDetails": {
+            "tankManufacturer": "string",
+            "yearOfManufacture": 0,
+            "tankCode": "string",
+            "tc2Details": {
+              "tc2Type": "initial"
+            },
+            "specialProvisions": "string",
+            "tankManufacturerSerialNo": "string",
+            "tankTypeAppNo": "string"
+          },
+          "tankStatement": {
+            "substancesPermitted": "Substances permitted under the tank code and any special provisions specified in 9 may be carried",
+            "statement": "string",
+            "productList": "string"
+          }
+        }
+      },
+      "axles": [
+        {
+          "axleNumber": 1,
+          "parkingBrakeMrk": false,
+          "tyres": {
+            "dataTrAxles": 2,
+            "fitmentCode": "single",
+            "plyRating": " ",
+            "tyreCode": 462,
+            "tyreSize": "12-22.5"
+          },
+          "weights": {
+            "designWeight": 7500,
+            "eecWeight": 7500,
+            "gbWeight": 7100
+          }
+        },
+        {
+          "axleNumber": 2,
+          "parkingBrakeMrk": false,
+          "tyres": {
+            "dataTrAxles": 2,
+            "fitmentCode": "double",
+            "plyRating": " ",
+            "tyreCode": 462,
+            "tyreSize": "12-22.5"
+          },
+          "weights": {
+            "designWeight": 13000,
+            "eecWeight": 10000,
+            "gbWeight": 9500
+          }
+        }
+      ],
+      "bodyType": {
+        "description": "other"
+      },
+      "brakes": {
+        "dtpNumber": "3798A"
+      },
+      "conversionRefNo": " ",
+      "dimensions": {
+        "length": 10000,
+        "width": 2000,
+        "axleSpacing": [
+          {
+            "axles": "1-2",
+            "value": 10000
+          }
+        ]
+      },
+      "drawbarCouplingFitted": false,
+      "euroStandard": "2",
+      "fuelPropulsionSystem": "Electric",
+      "frontAxleToRearAxle": 1000,
+      "frontAxleTo5thWheelMax": 1000,
+      "frontAxleTo5thWheelMin": 1000,
+      "frontAxleTo5thWheelCouplingMax": 1000,
+      "frontAxleTo5thWheelCouplingMin": 1000,
+      "functionCode": "A",
+      "grossDesignWeight": 33500,
+      "grossGbWeight": 25000,
+      "grossEecWeight": 25000,
+      "make": "VOLVO",
+      "manufactureYear": 1984,
+      "maxTrainDesignWeight": 2800,
+      "maxTrainEecWeight": 2500,
+      "maxTrainGbWeight": 44000,
+      "model": "F12-33",
+      "noOfAxles": 3,
+      "notes": " ",
+      "ntaNumber": "0000514903",
+      "reasonForCreation": "something",
+      "regnDate": "1985-01-01",
+      "roadFriendly": false,
+      "speedLimiterMrk": false,
+      "tachoExemptMrk": false,
+      "trainDesignWeight": 59500,
+      "trainGbWeight": 41000,
+      "trainEecWeight": 25000,
+      "tyreUseCode": "2B",
+      "offRoad": false,
+      "numberOfWheelsDriven": 4,
+      "euVehicleCategory": "n2",
+      "emissionsLimit": 20,
+      "departmentalVehicleMarker": false,
+      "alterationMarker": false,
+      "approvalType": "NTA",
+      "approvalTypeNumber": "1234",
+      "variantNumber": "324324",
+      "variantVersionNumber": "345",
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "microfilm": {
+        "microfilmDocumentType": "HGV COC + Int Plate",
+        "microfilmRollNumber": "12346",
+        "microfilmSerialNumber": "1234"
+      },
+      "plates": [
+        {
+          "plateSerialNumber": "123456",
+          "plateIssueDate": "2100-12-31",
+          "plateReasonForIssue": "Replacement",
+          "plateIssuer": "issuer"
+        }
+      ],
+      "vehicleClass": {
+        "description": "heavy goods vehicle"
+      },
+      "vehicleConfiguration": "articulated",
+      "vehicleType": "hgv",
+      "recordCompleteness": "complete"
+    }
+  ],
+  "vin": "A00037502"
+}

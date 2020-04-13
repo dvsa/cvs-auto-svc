@@ -4,6 +4,7 @@ import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import junit.framework.TestCase;
+import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -26,9 +27,10 @@ import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityParameterizedRunner.class)
-public class PutVehicleWithoutMandatoryTrlField extends TestCase {
+public class PutVehicleWithoutMandatoryTrlFieldAdrUpdate extends TestCase {
 
     static String randomVin;
+    static String techRecord;
 
     @BeforeClass
     public static void createRecord() {
@@ -39,6 +41,7 @@ public class PutVehicleWithoutMandatoryTrlField extends TestCase {
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
         String postRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$");
+        techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
         // create alteration to change Vin in the post request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
@@ -72,7 +75,6 @@ public class PutVehicleWithoutMandatoryTrlField extends TestCase {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"$.techRecord[0].vehicleType"},
                 {"$.techRecord[0].manufactureYear"},
                 {"$.techRecord[0].noOfAxles"},
                 {"$.techRecord[0].brakes.dtpNumber"},
@@ -112,25 +114,37 @@ public class PutVehicleWithoutMandatoryTrlField extends TestCase {
                 {"$.techRecord[0].manufacturerDetails.name"},
                 {"$.techRecord[0].manufacturerDetails.address1"},
                 {"$.techRecord[0].manufacturerDetails.address2"},
-                {"$.techRecord[0].manufacturerDetails.postTown"},
-                {"$.techRecord[0].reasonForCreation"}
+                {"$.techRecord[0].manufacturerDetails.postTown"}
         });
     }
 
     private final String jsonPath;
 
-    public PutVehicleWithoutMandatoryTrlField(String jsonPath) {
+    public PutVehicleWithoutMandatoryTrlFieldAdrUpdate(String jsonPath) {
         this.jsonPath = jsonPath;
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10247 - AC1 - Attempt to update a vehicle without a mandatory field (TRL)")
+    @Title("CVSB-14145 - AC1 - Only the validations on the adrDetails{} level are adhered to")
     @Test
-    public void testValidatePutRequestWithoutMandatoryTrlAttribute() {
-        String putRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$");
-        JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, "", "", "DELETE");
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction));
+    public void testValidatePutRequestWithoutMandatoryTrlAttributeAdrUpdate() {
+        String putRequestBodyTrl = GenericData.readJsonValueFromFile
+                ("technical-records_trl_all_fields_with_adr_details.json", "$");
+        String adrDetails = GenericData.readJsonValueFromFile
+                ("technical-records_trl_all_fields_with_adr_details.json", "$.techRecord[0].adrDetails");
+        JsonPathAlteration removeMandatoryField = new JsonPathAlteration(jsonPath, "", "", "DELETE");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(removeMandatoryField));
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyTrl, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+
+        vehicleTechnicalRecordsSteps.validateElementsInResponseContainsJson
+                ("[0].techRecord.findAll { it.vehicleType != null }", techRecord);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'provisional' }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived' }.size()",
+                Integer.parseInt(vehicleTechnicalRecordsSteps.extractValueFromPath("[0].techRecord.size()").toString()) - 1);
+        vehicleTechnicalRecordsSteps.validateElementsInResponseContainsJson
+                ("[0].techRecord.findAll { it.adrDetails != null }.adrDetails", adrDetails);
     }
 }

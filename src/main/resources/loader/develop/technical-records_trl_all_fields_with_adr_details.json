@@ -1,0 +1,205 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "vin": "T72741234",
+  "partialVin": "741234",
+  "trailerId": "C100001",
+  "primaryVrm": "B2C1C11",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
+  "systemNumber": "10000026",
+  "techRecord": [
+    {
+      "adrDetails": {
+        "vehicleDetails": {
+          "type": "Centre axle battery",
+          "approvalDate": "2019-10-10"
+        },
+        "permittedDangerousGoods": [
+          "FP <61 (FL)"
+        ],
+        "additionalExaminerNotes": "string",
+        "applicantDetails": {
+          "name": "string",
+          "street": "string",
+          "town": "string",
+          "city": "string",
+          "postcode": "string"
+        },
+        "memosApply": [
+          "07/09 3mth leak ext"
+        ],
+        "additionalNotes": {
+          "number": [
+            "1",
+            "2"
+          ],
+          "guidanceNotes": [
+            "New certificate requested"
+          ]
+        },
+        "tank": {
+          "tankDetails": {
+            "tankManufacturer": "string",
+            "yearOfManufacture": 0,
+            "tankCode": "string",
+            "tc2Details": {
+              "tc2Type": "initial"
+            },
+            "specialProvisions": "string",
+            "tankManufacturerSerialNo": "string",
+            "tankTypeAppNo": "string"
+          },
+          "tankStatement": {
+            "substancesPermitted": "Substances permitted under the tank code and any special provisions specified in 9 may be carried",
+            "statement": "string",
+            "productList": "string"
+          }
+        }
+      },
+      "vehicleType": "trl",
+      "regnDate": "2019-06-25",
+      "firstUseDate": "2019-06-25",
+      "manufactureYear": 2019,
+      "noOfAxles": 1,
+      "brakes": {
+        "dtpNumber": "3798B",
+        "loadSensingValve": false,
+        "antilockBrakingSystem": false
+      },
+      "suspensionType": "F",
+      "roadFriendly": false,
+      "vehicleClass": {
+        "description": "3 wheelers"
+      },
+      "vehicleConfiguration": "dolly",
+      "couplingType": "Y",
+      "maxLoadOnCoupling": 10000,
+      "frameDescription": "Other",
+      "euVehicleCategory": "o2",
+      "alterationMarker": false,
+      "departmentalVehicleMarker": true,
+      "authIntoService": {
+        "cocIssueDate": "2019-06-25",
+        "dateReceived": "2019-06-25",
+        "datePending": "2019-06-25",
+        "dateAuthorised": "2019-06-25",
+        "dateRejected": "2019-06-25"
+      },
+      "lettersOfAuth": {
+        "letterType": "Trailer rejection",
+        "letterDateRequested": "2019-06-25",
+        "letterContents": "other"
+      },
+      "approvalType": "ECTA",
+      "approvalTypeNumber": "12345",
+      "ntaNumber": "12345",
+      "variantNumber": "12345",
+      "variantVersionNumber": "12345",
+      "make": "Volvo",
+      "model": "X6",
+      "bodyType": {
+        "description": "tipper"
+      },
+      "functionCode": "R",
+      "conversionRefNo": "123456",
+      "grossGbWeight": 40000,
+      "grossEecWeight": 40000,
+      "grossDesignWeight": 40000,
+      "tyreUseCode": "2C",
+      "axles": [
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 1,
+          "brakes": {
+            "brakeActuator": 150,
+            "leverLength": 150,
+            "springBrakeParking": false
+          },
+          "tyres": {
+            "dataTrAxles": 1,
+            "fitmentCode": "double",
+            "plyRating": "AA",
+            "tyreCode": 463,
+            "tyreSize": "11-21.5"
+          },
+          "weights": {
+            "designWeight": 10000,
+            "eecWeight": 10000,
+            "gbWeight": 10000
+          }
+        }
+      ],
+      "dimensions": {
+        "length": 10000,
+        "width": 3000,
+        "axleSpacing": [
+          {
+            "axles": "2-1",
+            "value": 11000
+          }
+        ]
+      },
+      "frontAxleToRearAxle": 1700,
+      "rearAxleToRearTrl": 400,
+      "couplingCenterToRearAxleMin": 1000,
+      "couplingCenterToRearAxleMax": 900,
+      "couplingCenterToRearTrlMin": 800,
+      "couplingCenterToRearTrlMax": 700,
+      "centreOfRearmostAxleToRearOfTrl": 1000,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "purchaserDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************",
+        "faxNumber": "************",
+        "purchaserNotes": "**************"
+      },
+      "manufacturerDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************",
+        "faxNumber": "************",
+        "manufacturerNotes": "**************"
+      },
+      "microfilm": {
+        "microfilmDocumentType": "PSV Miscellaneous",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "plates": [
+        {
+          "plateSerialNumber": "11111111",
+          "plateIssueDate": "2020-02-02",
+          "plateReasonForIssue": "Original",
+          "plateIssuer": "Mr Jones"
+        }
+      ],
+      "notes": "some note",
+      "reasonForCreation": "new record",
+      "recordCompleteness": "complete"
+    }
+  ]
+}
