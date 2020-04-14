@@ -12,6 +12,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
@@ -124,9 +125,8 @@ public class PutVehicleWithoutMandatoryTrlFieldAdrUpdate extends TestCase {
         this.jsonPath = jsonPath;
     }
 
-    @WithTag("Vtm")
+    @Ignore
     @Title("CVSB-14145 - AC1 - Only the validations on the adrDetails{} level are adhered to")
-    @Test
     public void testValidatePutRequestWithoutMandatoryTrlAttributeAdrUpdate() {
         String putRequestBodyTrl = GenericData.readJsonValueFromFile
                 ("technical-records_trl_all_fields_with_adr_details.json", "$");

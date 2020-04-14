@@ -12,6 +12,7 @@ import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
@@ -326,9 +327,8 @@ public class PutVehicleTrlFieldRestrictionsAdrUpdate {
         this.value = value;
     }
 
-    @WithTag("Vtm")
+    @Ignore
     @Title("CVSB-14145 - AC1 - Only the validations on the adrDetails{} level are adhered to")
-    @Test
     public void testValidateTrlAttributesDataTypesAndRestrictionsAdrUpdate() {
         String putRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$");
         String adrDetails = GenericData.readJsonValueFromFile
