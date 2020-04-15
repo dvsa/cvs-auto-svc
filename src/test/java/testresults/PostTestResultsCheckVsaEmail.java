@@ -4,11 +4,8 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
@@ -16,9 +13,6 @@ import util.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsCheckVsaEmail {

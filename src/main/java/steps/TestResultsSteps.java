@@ -715,12 +715,6 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void updateEmailsForTestStation(String primaryKeyValue,
-                                     String... updateValue) {
-        AwsUtil.updateEmailsForTestStation(primaryKeyValue, updateValue);
-    }
-
-    @Step
     public void deleteActivitiesForUser(String user) {
         AwsUtil.deleteActivitiesForUser(user);
     }

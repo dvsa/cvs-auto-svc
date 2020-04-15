@@ -14,6 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import steps.ActivitiesSteps;
+import steps.TestResultsSteps;
+import steps.TestStationSteps;
 import util.*;
 
 import java.text.SimpleDateFormat;
@@ -29,10 +31,18 @@ public class EndVisitCheckAtfEmail {
     @Steps
     ActivitiesSteps activitiesSteps;
 
+    @Steps
+    TestStationSteps testStationSteps;
+
+    @Steps
+    TestResultsSteps testResultsSteps;
+
     @Title("CVSB-10530 - Check email to ATF lands in inbox")
     @Test
     public void endVisit_Check_Atf_Email() {
 
+        String emailAddress = testResultsSteps.getOutlookEmailAddress();
+        testStationSteps.updateEmailsForTestStation("20", emailAddress);
         String json = GenericData.readJsonValueFromFile("activities_10530.json", "$");
         String testerStaffId = GenericData.extractValueFromJsonString(json, "$.testerStaffId").toString();
         activitiesSteps.deleteActivitiesForUser(testerStaffId);

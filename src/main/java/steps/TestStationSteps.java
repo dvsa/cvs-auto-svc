@@ -5,6 +5,7 @@ import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.TestStations;
 import net.thucydides.core.annotations.Step;
+import util.AwsUtil;
 
 import static org.hamcrest.Matchers.*;
 
@@ -29,6 +30,13 @@ public class TestStationSteps {
         response.then().log().all()
                 .statusCode(statusCode);
     }
+
+    @Step
+    public void updateEmailsForTestStation(String primaryKeyValue,
+                                           String... updateValue) {
+        AwsUtil.updateEmailsForTestStation(primaryKeyValue, updateValue);
+    }
+
 
     @Step
     public void validateData(TestStations testStation) {

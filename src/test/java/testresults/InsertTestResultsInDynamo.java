@@ -10,6 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import steps.TestStationSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.*;
 
@@ -23,6 +24,9 @@ public class InsertTestResultsInDynamo {
 
     @Steps
     TestResultsSteps testResultsSteps;
+
+    @Steps
+    TestStationSteps testStationSteps;
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -52,12 +56,11 @@ public class InsertTestResultsInDynamo {
         testResultsSteps.deleteActivitiesForUser("a53ae740-eac4-4eb6-99ef-42afb63ce819");
     }
 
-    @WithTag("In_Test")
+    @Ignore("This is just an example of how to update test station email address insert it in a specific table using AWS SDK")
     @Title("CVSB-10530 - Update entry from test-stations table in DynamoDB using Java AWS sdk")
-    @Test
     public void updateEmailTestStation() {
         String emailAddress = testResultsSteps.getOutlookEmailAddress();
-        testResultsSteps.updateEmailsForTestStation("20", emailAddress);
+        testStationSteps.updateEmailsForTestStation("20", emailAddress);
     }
 
     @Ignore("This is just an example of how to get the next systemNumber to be generated from the backend")
