@@ -5,7 +5,7 @@
   "odometerReadingUnits": "kilometres",
   "testEndTimestamp": "2019-01-14T10:36:33.987Z",
   "testStatus": "cancelled",
-  "systemNumber":"10000003",
+  "systemNumber":"11000003",
   "testTypes": [
     {
       "prohibitionIssued": false,
@@ -83,5 +83,5 @@
   "noOfAxles": 2,
   "numberOfWheelsDriven": 4,
   "testerEmailAddress": "dorel.ionescu@dvsagov.uk",
-  "euVehicleCategory": "m1"
+  "euVehicleCategory": "m2"
 }

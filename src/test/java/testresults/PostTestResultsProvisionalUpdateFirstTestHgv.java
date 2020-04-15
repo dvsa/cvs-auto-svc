@@ -91,9 +91,11 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
 
         String testResultId = UUID.randomUUID().toString();
 
+        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
+
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trAlterationVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
         JsonPathAlteration trAlterationName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
         JsonPathAlteration trAlterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
@@ -124,10 +126,11 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", systemNumber);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "current");
-
-
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'current' }.size()", 1);
     }
 }

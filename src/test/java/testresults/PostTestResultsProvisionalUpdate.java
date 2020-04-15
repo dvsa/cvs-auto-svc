@@ -71,11 +71,12 @@ public class PostTestResultsProvisionalUpdate {
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
 
         String testResultId = UUID.randomUUID().toString();
+        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         JsonPathAlteration trAlterationVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
 
 
@@ -99,9 +100,13 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", systemNumber);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'current' }.size()", 1);
+
     }
 
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - HGV")
@@ -554,7 +559,7 @@ public class PostTestResultsProvisionalUpdate {
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m2");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
 
 
         // Read test result base json + Generate random values
@@ -563,7 +568,7 @@ public class PostTestResultsProvisionalUpdate {
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
-        JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "m1","","REPLACE");
+        JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "m2","","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResult = new ArrayList<>(Arrays.asList(
@@ -584,7 +589,7 @@ public class PostTestResultsProvisionalUpdate {
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m2");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }
 
     @Title("CVSB-11333 - 'EU vehicle category' NOT updated - Motorcycle")

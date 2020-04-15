@@ -205,7 +205,7 @@ public class GetTestResults {
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (PSV)")
     @Test
     public void testResultsForVinPsv() {
-        testResultsSteps.getTestResults("10000002");
+        testResultsSteps.getTestResults("11000002");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin","1B7GG36N12S678410");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "psv");
@@ -222,7 +222,7 @@ public class GetTestResults {
     @Title("CVSB-6805 - API Consumer retrieve the Test results for the input Vin (HGV)")
     @Test
     public void testResultsForVinHgv() {
-        testResultsSteps.getTestResults("10000018");
+        testResultsSteps.getTestResults("11000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].vin","P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
@@ -300,7 +300,7 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - hgv")
     @Test
     public void testResultsForRegnDateHgv() {
-        testResultsSteps.getTestResults("10000018");
+        testResultsSteps.getTestResults("11000018");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "P012301293847");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "hgv");
@@ -310,7 +310,7 @@ public class GetTestResults {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates - trl")
     @Test
     public void testResultsForFirstUseDateTrl() {
-        testResultsSteps.getTestResults("10000019");
+        testResultsSteps.getTestResults("11000019");
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateVehicleFieldValue("vin", "T12111111");
         testResultsSteps.validateVehicleFieldValue("vehicleType", "trl");
