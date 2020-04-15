@@ -152,6 +152,7 @@ public class PostVehicleTechnicalRecords {
         String randomVin = GenericData.generateRandomVin();
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationSystemNumber, alterationVin));
@@ -164,7 +165,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", randomSystemNumber);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", systemNumber);
     }
 
     @Title("CVSB - 10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Multiple Vehicles + AC3 Certificate generation")

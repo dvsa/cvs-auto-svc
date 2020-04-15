@@ -65,9 +65,11 @@ public class PostTestResultsMoreVinFirstTest {
                 alterationVSystemNumberTwo
         ));
 
+        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
+        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
@@ -75,8 +77,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberTwo, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberTwo, randomVin, 0, "statusCode", "provisional");
 
         // build and post a notifiable alteration test results
 
@@ -88,7 +90,7 @@ public class PostTestResultsMoreVinFirstTest {
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         JsonPathAlteration trAlterationVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
+        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
@@ -115,8 +117,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberTwo, randomVin, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
 
     }
 
@@ -158,9 +160,11 @@ public class PostTestResultsMoreVinFirstTest {
                 alterationVSystemNumberTwo
         ));
 
+        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
+        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
@@ -168,8 +172,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberTwo, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberTwo, randomVin, 0, "statusCode", "provisional");
 
         // build and post a notifiable alteration test results
 
@@ -181,7 +185,7 @@ public class PostTestResultsMoreVinFirstTest {
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         JsonPathAlteration trAlterationVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
+        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
@@ -208,8 +212,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberOne, randomVin, "statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberOne, randomVin, "statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "current");
 
 
     }
@@ -253,9 +257,11 @@ public class PostTestResultsMoreVinFirstTest {
                 alterationVSystemNumberTwo
         ));
 
+        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
+        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
@@ -263,8 +269,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberTwo, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberTwo, randomVin, 0, "statusCode", "provisional");
 
         // build and post a notifiable alteration test results
 
@@ -276,7 +282,7 @@ public class PostTestResultsMoreVinFirstTest {
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         JsonPathAlteration trAlterationVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
+        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
@@ -303,8 +309,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberTwo, randomVin, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
 
     }
 
@@ -347,9 +353,11 @@ public class PostTestResultsMoreVinFirstTest {
                 alterationVSystemNumberTwo
         ));
 
+        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
+        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
@@ -357,8 +365,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberTwo, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberTwo, randomVin, 0, "statusCode", "provisional");
 
         // build and post a notifiable alteration test results
 
@@ -370,7 +378,7 @@ public class PostTestResultsMoreVinFirstTest {
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         JsonPathAlteration trAlterationVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
+        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumberOne,"","REPLACE");
         JsonPathAlteration trAlterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
         JsonPathAlteration trAlterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
@@ -397,8 +405,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(randomSystemNumberOne, randomVin, 0, "statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(randomSystemNumberTwo, randomVin, "statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "current");
 
     }
 }

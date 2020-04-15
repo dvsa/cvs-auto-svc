@@ -184,11 +184,11 @@ public class VehicleTechnicalRecordsSteps {
         response.then().body("[0].techRecord.vehicleSize", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleSize())));
         response.then().body("[0].techRecord.vehicleConfiguration", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleConfiguration())));
 
-        response.then().body("[0].techRecord[0].vehicleClass.size()", is(VehicleClass.class.getDeclaredFields().length));
+        response.then().body("[0].techRecord[0].vehicleClass.size()", is(VehicleClass.class.getDeclaredFields().length - VehicleClass.class.getFields().length - 1));
         response.then().body("[0].techRecord.vehicleClass.code", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleClass().getCode())));
         response.then().body("[0].techRecord.vehicleClass.description", hasItem(equalTo(vehicle.getTechRecord().get(index).getVehicleClass().getDescription())));
 
-        response.then().body("[0].techRecord[0].bodyType.size()", is(BodyType.class.getDeclaredFields().length));
+        response.then().body("[0].techRecord[0].bodyType.size()", is(BodyType.class.getDeclaredFields().length - BodyType.class.getFields().length - 1));
         response.then().body("[0].techRecord.bodyType.code", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyType().getCode())));
         response.then().body("[0].techRecord.bodyType.description", hasItem(equalTo(vehicle.getTechRecord().get(index).getBodyType().getDescription())));
 

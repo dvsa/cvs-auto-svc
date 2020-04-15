@@ -24,8 +24,8 @@ public class PostVehicleTechnicalRecordsNeg {
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @WithTag("Vtm")
-    @Title("CVSB-7885 - AC2 - Can not create a new vehicle entry using an existing VIN from the DB " +
-            "AC4 - can not create a new vehicle entry when the request body doesn't contain at least one element in the `techRecord` array")
+    @Title("CVSB-7885 - AC2 - AC4 - can not create a new vehicle entry when the request body doesn't contain at least" +
+            " one element in the `techRecord` array")
     @Test
     public void testCreateVehicleTechnicalRecordExistingVinEmptyTechRecordArray() {
         // TEST SETUP
@@ -47,9 +47,6 @@ public class PostVehicleTechnicalRecordsNeg {
         // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        // validate AC2
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         //add in the alterations list the alteration for the empty techRecord array
         alterations.add(emptyTechRecordArrayAlteration);
         // validate AC4
