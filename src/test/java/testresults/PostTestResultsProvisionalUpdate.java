@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,6 +28,7 @@ public class PostTestResultsProvisionalUpdate {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    @WithTag("In_Test")
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
     public void testResultsNotifiableAlteration_Pass() {
@@ -56,6 +58,7 @@ public class PostTestResultsProvisionalUpdate {
                 alterationVSystemNumber
         ));
 
+        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // retrieve the vehicle and check the status code and the techRecord size
@@ -71,7 +74,6 @@ public class PostTestResultsProvisionalUpdate {
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
 
         String testResultId = UUID.randomUUID().toString();
-        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
@@ -111,7 +113,6 @@ public class PostTestResultsProvisionalUpdate {
 
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - HGV")
     @Test
-
     public void testVehicleTechRecordHgvEuVehicleCategoryNull(){
 
         // Tech record exists already in dynamoDb with a null euVehicleCategory

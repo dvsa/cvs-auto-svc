@@ -332,9 +332,9 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void valueForFieldInTechRecordShouldBe(String systemNumber, String vin, int techRecordNo, String field, String value) {
         try {
-            JSONArray jsonArray = new  JSONArray(response.body().asString());
-            for(int i=0;i<jsonArray.length();i++){
-                if(jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber)&&jsonArray.getJSONObject(i).get("vin").equals(vin)){
+            JSONArray jsonArray = new JSONArray(response.body().asString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                if (jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber) && jsonArray.getJSONObject(i).get("vin").equals(vin)) {
 //                    System.out.println("i: "+ i + "  " + jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
                     Assert.assertEquals(value, jsonArray.getJSONObject(i).getJSONArray("techRecord").getJSONObject(techRecordNo).get(field).toString());
                 }
@@ -348,12 +348,12 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public boolean checkValueForFieldInAnyTechRecord(String systemNumber, String vin, String field, String value) {
         try {
-            JSONArray jsonArray = new  JSONArray(response.body().asString());
-            for(int i=0;i<jsonArray.length();i++){
-                if(jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber)&&jsonArray.getJSONObject(i).get("vin").equals(vin)){
+            JSONArray jsonArray = new JSONArray(response.body().asString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                if (jsonArray.getJSONObject(i).get("systemNumber").equals(systemNumber) && jsonArray.getJSONObject(i).get("vin").equals(vin)) {
                     JSONArray techRecords = jsonArray.getJSONObject(i).getJSONArray("techRecord");
-                    for(int j=0;j<techRecords.length();j++){
-                        if(techRecords.getJSONObject(j).get(field).toString().equals(value)) {
+                    for (int j = 0; j < techRecords.length(); j++) {
+                        if (techRecords.getJSONObject(j).get(field).toString().equals(value)) {
                             return true;
                         }
                     }

@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -46,6 +47,7 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         this.testTypeId = testTypeId;
     }
 
+    @WithTag("In_Test")
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - HGV")
     @Test
     public void testResultsProvisionalUpdateHgv() {
@@ -75,6 +77,7 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
                 alterationSystemNumber
         ));
 
+        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // retrieve the vehicle and check the status code and the techRecord size
@@ -90,8 +93,6 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
 
         String testResultId = UUID.randomUUID().toString();
-
-        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration trAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
