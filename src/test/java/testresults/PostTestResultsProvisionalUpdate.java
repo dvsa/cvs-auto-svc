@@ -28,7 +28,7 @@ public class PostTestResultsProvisionalUpdate {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-    @WithTag("In_Test")
+
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
     public void testResultsNotifiableAlteration_Pass() {

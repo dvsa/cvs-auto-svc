@@ -47,7 +47,7 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         this.testTypeId = testTypeId;
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - HGV")
     @Test
     public void testResultsProvisionalUpdateHgv() {
