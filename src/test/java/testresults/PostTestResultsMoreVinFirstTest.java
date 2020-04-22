@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class PostTestResultsMoreVinFirstTest {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
 
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = FAIL - HGV")
     @Test
@@ -116,11 +118,14 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[0].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[1].techRecord.size()", 1);
 
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
 
     }
+
 
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = PASS - HGV")
     @Test
@@ -218,7 +223,7 @@ public class PostTestResultsMoreVinFirstTest {
 
     }
 
-    @Ignore("Uncomment when TRL POST is implemented")
+
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = FAIL - TRL")
     @Test
     public void testResultsFirstTestTrlFail() {
@@ -308,13 +313,15 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[0].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[1].techRecord.size()", 1);
 
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
 
     }
 
-    @Ignore("Uncomment when TRL POST is implemented")
+
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = PASS - TRL")
     @Test
     public void testResultsFirstTestTrlPass() {
