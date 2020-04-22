@@ -1,0 +1,86 @@
+{
+  "testResultId": "48c50c36-ada5-4c18-a02e-a2bad289a68e",
+  "systemNumber": "11000001",
+  "vrm": "JY58FPP",
+  "vin": "XMGDE02FS0H012345",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369569",
+  "testStationType": "gvts",
+  "testerName": "CVS Tester2",
+  "testerStaffId": "15",
+  "testerEmailAddress": "Cvs.Test2@dvsagov.onmicrosoft.com",
+  "noOfAxles": "2",
+  "numberOfWheelsDriven": 3,
+  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
+  "testEndTimestamp": "2019-01-14T10:36:33.987Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": "none",
+  "vehicleClass": {
+    "code": "2",
+    "description": "motorbikes over 200cc or with a sidecar"
+  },
+  "vehicleType": "psv",
+  "numberOfSeats": 45,
+  "vehicleConfiguration": "rigid",
+  "odometerReading": 100000,
+  "odometerReadingUnits": "kilometres",
+  "preparerId": "ak4434",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "m2",
+  "countryOfRegistration": "united kingdom",
+  "vehicleSize": "small",
+  "testTypes": [
+    {
+      "prohibitionIssued": false,
+      "additionalCommentsForAbandon": "none",
+      "numberOfSeatbeltsFitted": 2,
+      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
+      "reasonForAbandoning": "none",
+      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "testTypeId": "1",
+      "secondaryCertificateNumber": "1234",
+      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
+      "certificateNumber": "W01A00209",
+      "testTypeName": "Annual test",
+      "seatbeltInstallationCheckDate": true,
+      "additionalNotesRecorded": "VEHICLE FRONT REGISTRATION PLATE MISSING",
+      "customDefects": [
+        {
+          "referenceNumber": "abcd",
+          "defectName": "Some custom defect",
+          "defectNotes": "some defect noe"
+        }
+      ],
+      "defects": [
+        {
+          "prohibitionIssued": false,
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "prs": false,
+          "additionalInformation": {
+            "location": {
+              "axleNumber": null,
+              "horizontal": null,
+              "vertical": null,
+              "longitudinal": "front",
+              "rowNumber": null,
+              "lateral": null,
+              "seatNumber": null
+            },
+            "notes": "None"
+          },
+          "itemNumber": 1,
+          "deficiencyRef": "1.1.a",
+          "stdForProhibition": false,
+          "deficiencySubId": null,
+          "imDescription": "Registration Plate",
+          "deficiencyId": "a",
+          "itemDescription": "A registration plate:",
+          "imNumber": 1
+        }
+      ],
+      "name": "Annual test",
+      "testResult": "pass"
+    }
+  ]
+}

@@ -721,13 +721,25 @@ public class TestResultsSteps {
     }
 
     @Step
+    public String putTestResultsWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = testResultsClient.putTestResultsWithAlterations(vin, putRequestBody, alterations);
+        return response.prettyPrint();
+    }
+
+
+    @Step
     public String getTestNumber() {
         return response.jsonPath().getString("[0].testTypes[0].testNumber");
     }
 
     @Step
-    public void validateCertificateIsGenerated(String uuid, String vin) {
-        assertThat(AwsUtil.isCertificateCreated(uuid,vin)).isTrue();
+    public void validateCertificateIsGenerated(String testNumber, String vin) {
+        assertThat(AwsUtil.isCertificateCreated(testNumber,vin)).isTrue();
+    }
+
+    @Step
+    public void validateCertificateIsNotGenerated(String testNumber, String vin) {
+        assertThat(AwsUtil.isCertificateCreated(testNumber,vin)).isFalse();
     }
 
     @Step

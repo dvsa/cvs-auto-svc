@@ -17,6 +17,7 @@ import util.BasePathFilter;
 import util.EnvironmentType;
 import util.JsonPathAlteration;
 import util.TypeLoader;
+import org.apache.http.HttpStatus;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -307,7 +308,6 @@ public class TestResultsClient {
         return response;
     }
 
-
     public Response callPostTestResults(Object object) {
 
         Response response = given()
@@ -391,7 +391,6 @@ public class TestResultsClient {
 
         return response;
     }
-
     private Response callGetTestResultsFromDateTime(String vin, String fromDateTime) {
 
         Response response = given().filters(new BasePathFilter())
@@ -504,6 +503,30 @@ public class TestResultsClient {
             saveUtils();
             response = callPostTestResults(payload);
         }
+        return response;
+    }
+
+    public Response putTestResultsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPutTestResultsWithAlterations(vin, requestBody, alterations);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            saveUtils();
+            response = callPutTestResultsWithAlterations(vin, requestBody, alterations);
+        }
+
+        return response;
+    }
+
+    private Response callPutTestResultsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .pathParam("vin", vin)
+                .log().method().log().uri().log().body()
+                .put("/test-results/{vin}");
         return response;
     }
 

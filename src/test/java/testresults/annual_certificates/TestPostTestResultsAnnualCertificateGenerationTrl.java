@@ -304,11 +304,12 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
         Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
 
         //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
 
     }
 }
