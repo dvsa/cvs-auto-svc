@@ -6,7 +6,9 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.amazonaws.services.dynamodbv2.document.*;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
+import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
+import com.amazonaws.services.dynamodbv2.model.ReturnValue;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.securitytoken.AWSSecurityTokenService;
@@ -286,6 +288,47 @@ public class AwsUtil {
         }
         else {
             throw new AutomationException("No value found for last used sequence number or trailer letter");
+        }
+    }
+
+    public static void updateEmailsForTestStation(String primaryKeyValue, String... updateValue) {
+        Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+        String uuid = String.valueOf(UUID.randomUUID());
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
+        AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
+        client.setRegion(Region.getRegion(clientRegion));
+        DynamoDB dynamoDB = new DynamoDB(client);
+        String actualTableName = "cvs-" + System.getProperty("BRANCH") + "-test-stations";
+        Table table = dynamoDB.getTable(actualTableName);
+
+
+        UpdateItemSpec updateItemSpec = new UpdateItemSpec().withPrimaryKey("testStationId", primaryKeyValue)
+                .withUpdateExpression("set testStationEmails = :fieldToUpdate")
+                .withValueMap(new ValueMap().withList(":fieldToUpdate", Arrays.asList(updateValue)))
+                .withReturnValues(ReturnValue.UPDATED_NEW);
+
+        try {
+            System.out.println("Updating the item...");
+            UpdateItemOutcome outcome = table.updateItem(updateItemSpec);
+            System.out.println("UpdateItem succeeded:\n" + outcome.getItem().toJSONPretty());
+
+        }
+        catch (Exception e) {
+            System.err.println("Unable to update item: primaryKeyValue");
+            System.err.println(e.getMessage());
         }
     }
 }
