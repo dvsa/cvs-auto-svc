@@ -51,7 +51,7 @@ public class EndVisitCheckAtfEmail {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         Date currentDateTime = new Date();
         String startTimestamp = sdf.format(currentDateTime);
-        String startTime = startTimestamp.substring(11, 19);
+        String startTime = startTimestamp.substring(13, 21);
         // create alteration to change activity id in the post request body with the random generated id
         JsonPathAlteration alterationId = new JsonPathAlteration("$.id", id, "", "REPLACE");
         // create alteration to change testerName in the post request body with the random generated testerName

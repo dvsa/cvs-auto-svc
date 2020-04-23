@@ -118,8 +118,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[0].techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[1].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].techRecord.size()", 1);
 
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
@@ -236,7 +236,7 @@ public class PostTestResultsMoreVinFirstTest {
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_mandatory_fields.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
         // create alteration to change systemNumber in the request body with the random generated Vin
         JsonPathAlteration alterationVSystemNumberOne = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
         JsonPathAlteration alterationVSystemNumberTwo = new JsonPathAlteration("$.systemNumber", randomSystemNumberTwo,"","REPLACE");
@@ -313,8 +313,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[0].techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$[1].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[1].techRecord.size()", 1);
 
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
@@ -334,7 +334,7 @@ public class PostTestResultsMoreVinFirstTest {
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_mandatory_fields.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
         // create alteration to change systemNumber in the request body with the random generated Vin
         JsonPathAlteration alterationVSystemNumberOne = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
         JsonPathAlteration alterationVSystemNumberTwo = new JsonPathAlteration("$.systemNumber", randomSystemNumberTwo,"","REPLACE");
@@ -412,8 +412,8 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "current");
 
     }
 }

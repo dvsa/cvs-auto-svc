@@ -289,7 +289,11 @@ public class WebDriverBrowsertack {
         String actualString = driver.findElement(By.cssSelector("div[role='main']>div:nth-of-type(1)")).getText();
         String expectedString = "DVSA Commercial Vehicle Service – Site Activity Report: " +
                 testStationPNumber + " – " + testerName + " – " + startDate;
-        assertEquals(expectedString, actualString);
+        try {
+            assertEquals(expectedString, actualString);
+        } catch (AssertionError e) {
+            throw new AutomationException("Expected string " + expectedString + " is not identical to actual string " + actualString);
+        }
 
         System.out.println("Checking the details in the email are correct");
         wait.until(ExpectedConditions.and(
@@ -303,7 +307,11 @@ public class WebDriverBrowsertack {
                 .getText();
         String expectedString1 =
                 "Please find below the report for the activities conducted on " + startDate + " by " + testerName + ".";
-        assertTrue(actualString1.contains(expectedString1));
+        try {
+            assertTrue(actualString1.contains(expectedString1));
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + actualString1 + " does not contain expected string " + expectedString1);
+        }
 
         wait.until(ExpectedConditions.and(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
@@ -318,10 +326,26 @@ public class WebDriverBrowsertack {
         String expectedString3 = "Assessor: " + testerName;
         String expectedString4 = "Date: " + startDate;
         String expectedString5 = "Start Time: " + startTime;
-        assertTrue(siteVisitDetailsText.contains(expectedString2));
-        assertTrue(siteVisitDetailsText.contains(expectedString3));
-        assertTrue(siteVisitDetailsText.contains(expectedString4));
-        assertTrue(siteVisitDetailsText.contains(expectedString5));
+        try {
+            assertTrue(siteVisitDetailsText.contains(expectedString2));
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString2);
+        }
+        try {
+            assertTrue(siteVisitDetailsText.contains(expectedString3));
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString3);
+        }
+        try {
+            assertTrue(siteVisitDetailsText.contains(expectedString4));
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString4);
+        }
+        try {
+            assertTrue(siteVisitDetailsText.contains(expectedString5));
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString5);
+        }
 
         driver.close();
         driver.quit();
@@ -331,12 +355,20 @@ public class WebDriverBrowsertack {
         System.out.println("Checking the email title details are correct");
         String actualString = driver.findElement(By.cssSelector("div[role='main']>div:nth-of-type(1)")).getText();
         String expectedString = randomVrm + " " + testName + "|" + date + " (Certificate 1 of 1)";
-        assertEquals(expectedString, actualString);
+        try {
+            assertEquals(expectedString, actualString);
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + actualString + " does not contain expected string " + expectedString);
+        }
 
         System.out.println("Checking the details in the email are correct");
         String actualString1 = driver.findElement(By.cssSelector("div[role='main']>div:nth-of-type(2)")).getText();
         String expectedString1 = "Please see the link below to access the test certificate for vehicle(s) " + randomVrm + " conducted on " + date;
-        assertTrue(actualString1.contains(expectedString1));
+        try {
+            assertTrue(actualString1.contains(expectedString1));
+        } catch (AssertionError e) {
+            throw new AutomationException("Actual string " + actualString1 + " does not contain expected string " + expectedString1);
+        }
 
         driver.close();
         driver.quit();
