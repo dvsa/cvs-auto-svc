@@ -71,8 +71,8 @@ public class PostTestResultsFirstExpiryDatesNegativeTrl_12982 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedFirstUseDate = currentTime.minusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1);
+        DateTime submittedFirstUseDate = currentTime.minusYears(1);
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -163,8 +163,8 @@ public class PostTestResultsFirstExpiryDatesNegativeTrl_12982 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedFirstUseDate = currentTime.minusYears(1).minusMonths(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1);
+        DateTime submittedFirstUseDate = currentTime.minusYears(1).minusMonths(1);
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();

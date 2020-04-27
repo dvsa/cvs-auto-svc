@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
-@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_based_on_previous_trl_preservation.csv")
+@UseTestDataFrom(value="loader/testdata/test_data_expiry_date_two_valid_codes_trl.csv")
 public class PostTestResultsExpiryDateBasedOnPreviousTrl_twoValid_11396 {
 
     @Steps
@@ -245,7 +245,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousTrl_twoValid_11396 {
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 
         // Expected recalculated expiry date
-        String testExpiryDate = insertedTestExpiryDateOne.plusYears(1).toInstant().toString();
+        String testExpiryDate = insertedTestExpiryDateTwo.plusYears(1).toInstant().toString();
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");

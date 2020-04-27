@@ -1,7 +1,4 @@
 NAME, TEST TYPE NAME, TEST TYPE ID, VEHICLE SIZE, VEHICLE CONFIGURATION, TEST RESULT, TEST CODE
-Annual test, Annual test, 1, large, rigid, pass, aal
-Annual test, Annual test, 1, small, rigid, pass, aas
-Annual test, Annual test, 1, large, articulated, pass, adl
 Annual test, Class 6A seatbelt installation check (annual test), 3, large, rigid, pass, wdl
 Annual test, Class 6A seatbelt installation check (annual test), 3, small, rigid, pass, wds
 First test, Class 6A seatbelt installation check (first test), 4, large, rigid, pass, wbl
