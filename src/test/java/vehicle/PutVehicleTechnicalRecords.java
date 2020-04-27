@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Ignore;
@@ -579,5 +580,63 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].vehicleClass.code", "n");
         // validated AC3
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].bodyType.code", "a");
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-14486 - AC4 - All error messages are returned")
+    @Test
+    public void testUpdateVehicleErrorOnMultipleAdrFields() {
+        // TEST SETUP
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String requestBodyAdr = GenericData.readJsonValueFromFile(
+                "technical-records_hgv_all_fields_with_adr_details.json","$");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyAdr, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // create alteration to remove mandatory adr field
+        JsonPathAlteration alterationRemoveMandatoryAdrField = new JsonPathAlteration(
+                "$.techRecord[0].adrDetails.applicantDetails.name", "","","DELETE");
+        alterations.add(alterationRemoveMandatoryAdrField);
+        // create alteration for adr field to have empty string value
+        JsonPathAlteration alterationAdrFielEmptyStringValue = new JsonPathAlteration(
+                "$.techRecord[0].adrDetails.applicantDetails.street", "","","REPLACE");
+        alterations.add(alterationAdrFielEmptyStringValue);
+        // create alteration for adr field to have different data type than expected
+        JsonPathAlteration alterationAdrFieldDifferentDataTypeThanExpected = new JsonPathAlteration(
+                "$.techRecord[0].adrDetails.applicantDetails.town", 20,"","REPLACE");
+        alterations.add(alterationAdrFieldDifferentDataTypeThanExpected);
+        // create alteration for adr field to have value that is not in the accepted values
+        JsonPathAlteration alterationAdrFieldNotAcceptedValue = new JsonPathAlteration(
+                "$.techRecord[0].adrDetails.tank.tankDetails.tc2Details.tc2Type", "new","","REPLACE");
+        alterations.add(alterationAdrFieldNotAcceptedValue);
+        // create alteration for adr field to have value with length bigger and the maximum accepted length
+        JsonPathAlteration alterationAdrFieldValueLengthBiggerThanMax = new JsonPathAlteration(
+                "$.techRecord[0].adrDetails.applicantDetails.postcode", RandomStringUtils.randomAlphanumeric(26),
+                "","REPLACE");
+        alterations.add(alterationAdrFieldValueLengthBiggerThanMax);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyAdr, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("errors.size()", 5);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("errors.findAll " +
+                "{ it.contains('adrDetails.applicantDetails.name') }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("errors.findAll " +
+                "{ it.contains('adrDetails.applicantDetails.street') }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("errors.findAll " +
+                "{ it.contains('adrDetails.applicantDetails.town') }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("errors.findAll " +
+                "{ it.contains('adrDetails.applicantDetails.postcode') }.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("errors.findAll " +
+                "{ it.contains('adrDetails.tank.tankDetails.tc2Details.tc2Type') }.size()", 1);
     }
 }
