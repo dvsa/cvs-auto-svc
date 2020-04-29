@@ -1,13 +1,18 @@
 package clients;
 
 import clients.model.TestTypeQueryParam;
+import clients.model.TestTypes;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.json.JSONException;
+import org.json.JSONObject;
 import util.BasePathFilter;
+import util.JsonPathAlteration;
 import util.NoDataPathFilter;
 
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
@@ -33,6 +38,47 @@ public class TestTypesClient {
 
         return response;
 
+    }
+
+    public JSONObject getRestrictions(String testCode) {
+        JSONObject restrictions = null;
+        for (TestTypes testType : TestTypes.values()) {
+            if (testType.getTestCode().contentEquals(testCode.toLowerCase())) {
+                try {
+                    restrictions = testType.getRestrictions();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        return restrictions;
+    }
+
+    public String getVehicleType(String testCode) {
+        String vehicleType = null;
+        for (TestTypes testType : TestTypes.values()) {
+            if (testType.getTestCode().contentEquals(testCode.toLowerCase())) {
+                try {
+                    vehicleType = testType.getRestrictions().get("vehicleType").toString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        return vehicleType;
+    }
+
+    public String getTestTypeIdFromTestCode(String testCode) {
+        String testTypeId = null;
+        for (TestTypes testType : TestTypes.values()) {
+            if (testType.getTestCode().contentEquals(testCode.toLowerCase())) {
+                testTypeId = testType.getId();
+                break;
+            }
+        }
+        return testTypeId;
     }
 
     public Response getTestTypes(String id, TestTypeQueryParam testTypeQueryParam) {
@@ -111,5 +157,14 @@ public class TestTypesClient {
 
         return response;
 
+    }
+
+    public String getActualTestCode(String testCode) {
+        if (testCode.lastIndexOf("_") != -1) {
+            return testCode.split("_")[0];
+        }
+        else {
+            return testCode;
+        }
     }
 }

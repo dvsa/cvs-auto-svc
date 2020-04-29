@@ -1,0 +1,151 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "testResult": {
+    "testResultId": "1542778f-2da5-4e3a-89w5-1d576be6728e",
+    "systemNumber": "BSFD7248EDSGR",
+    "testerStaffId": "133",
+    "testStartTimestamp": "2020-05-01T09:15:33.987Z",
+    "odometerReadingUnits": "kilometres",
+    "testEndTimestamp": "2020-05-01T17:45:33.987Z",
+    "testStatus": "cancelled",
+    "numberOfWheelsDriven": 3,
+    "testTypes": [
+      {
+        "testCode": "pms",
+        "numberOfSeatbeltsFitted": 0,
+        "lastSeatbeltInstallationCheckDate": "2019-02-21",
+        "seatbeltInstallationCheckDate": true,
+        "testNumber": "3",
+        "secondaryCertificateNumber": "1234",
+        "lastUpdatedAt": "2019-02-22T08:52:10.255Z",
+        "additionalCommentsForAbandon": "none",
+        "testTypeEndTimestamp": "2020-05-01T17:30:23.950Z",
+        "reasonForAbandoning": "none",
+        "createdAt": "2019-02-22T08:52:10.255Z",
+        "testTypeId": "1",
+        "testTypeStartTimestamp": "2020-05-01T09:30:23.950Z",
+        "testAnniversaryDate": "2020-04-22",
+        "testTypeName": "Annual test",
+        "certificateNumber": "123456",
+        "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+        "defects":[
+          {
+            "deficiencyRef":"6.1.b",
+            "deficiencyCategory":"major",
+            "deficiencyId":"b",
+            "deficiencySubId":null,
+            "deficiencyText":"butting causing the flange to lift more than 1.5mm from the rim and/or not properly fitted.",
+            "imNumber":6,
+            "imDescription":"Road Wheels and Hubs",
+            "itemNumber":1,
+            "itemDescription":"A tyre retaining ring:",
+            "additionalInformation":{
+              "notes":null,
+              "location":{
+                "vertical":null,
+                "horizontal":"inner",
+                "lateral":"offside",
+                "longitudinal":null,
+                "rowNumber":null,
+                "seatNumber":null,
+                "axleNumber":7
+              }
+            },
+            "stdForProhibition":false,
+            "prs":false,
+            "prohibitionIssued":false
+          },
+          {
+            "deficiencyRef":"6.1.b",
+            "deficiencyCategory":"major",
+            "deficiencyId":"b",
+            "deficiencySubId":null,
+            "deficiencyText":"butting causing the flange to lift more than 1.5mm from the rim and/or not properly fitted.",
+            "imNumber":6,
+            "imDescription":"Road Wheels and Hubs",
+            "itemNumber":1,
+            "itemDescription":"A tyre retaining ring:",
+            "additionalInformation":{
+              "notes":null,
+              "location":{
+                "vertical":null,
+                "horizontal":"inner",
+                "lateral":"offside",
+                "longitudinal":null,
+                "rowNumber":null,
+                "seatNumber":null,
+                "axleNumber":7
+              }
+            },
+            "stdForProhibition":false,
+            "prs":false,
+            "prohibitionIssued":false
+          },
+          {
+            "deficiencyRef":"6.1.b",
+            "deficiencyCategory":"major",
+            "deficiencyId":"b",
+            "deficiencySubId":null,
+            "deficiencyText":"butting causing the flange to lift more than 1.5mm from the rim and/or not properly fitted.",
+            "imNumber":6,
+            "imDescription":"Road Wheels and Hubs",
+            "itemNumber":1,
+            "itemDescription":"A tyre retaining ring:",
+            "additionalInformation":{
+              "notes":null,
+              "location":{
+                "vertical":null,
+                "horizontal":"inner",
+                "lateral":"offside",
+                "longitudinal":null,
+                "rowNumber":null,
+                "seatNumber":null,
+                "axleNumber":7
+              }
+            },
+            "stdForProhibition":false,
+            "prs":false,
+            "prohibitionIssued":false
+          }
+        ],
+        "customDefects": [
+          {
+            "referenceNumber": "abcd",
+            "defectName": "Some custom defect",
+            "defectNotes": "some defect noe"
+          }
+        ],
+        "name": "Annual test",
+        "certificateLink": "http://dvsagov.co.uk",
+        "testResult": "pass",
+        "testTypeClassification": "Annual With Certificate"
+      }
+    ],
+    "vehicleClass": {
+      "description": "motorbikes over 200cc or with a sidecar",
+      "code": "2"
+    },
+    "vin": "A12599502",
+    "vehicleSize": "small",
+    "testStationName": "Rowe, Wunsch and Wisoky",
+    "vehicleId": "AA12BCD",
+    "vehicleType": "psv",
+    "countryOfRegistration": "gb",
+    "preparerId": "bl5545",
+    "preparerName": "Durrell Vehicles Limited",
+    "odometerReading": 350000,
+    "vehicleConfiguration": "rigid",
+    "testStationType": "gvts",
+    "reasonForCancellation": "mistake",
+    "testerName": "Gica",
+    "vrm": "AA12BCD",
+    "testStationPNumber": "87-1369569",
+    "numberOfSeats": 45,
+    "noOfAxles": 2,
+    "testerEmailAddress": "someone@email.com",
+    "euVehicleCategory": "m2"
+  }
+}

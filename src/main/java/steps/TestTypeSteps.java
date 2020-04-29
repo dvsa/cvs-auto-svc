@@ -8,6 +8,9 @@ import io.restassured.response.Response;
 import model.TestType;
 import model.testtypeid.TestTypeById;
 import net.thucydides.core.annotations.Step;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -29,6 +32,16 @@ public class TestTypeSteps {
     public Response getTestTypesWithData() {
         response = testTypesClient.getTestTypesWithData();
         return response;
+    }
+
+    @Step
+    public JSONObject getRestrictionsByTestCode(String testCode) {
+        return testTypesClient.getRestrictions(testCode);
+    }
+
+    @Step
+    public String getVehicleType(String testCode) {
+        return testTypesClient.getVehicleType(testCode);
     }
 
     @Step
@@ -203,4 +216,7 @@ public class TestTypeSteps {
         assertThat(response.then().body("$", hasEntry(key,value)));
     }
 
+    public String getActualTestCode(String testCode) {
+        return testTypesClient.getActualTestCode(testCode);
+    }
 }

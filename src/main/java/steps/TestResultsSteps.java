@@ -1,14 +1,17 @@
 package steps;
 
 import clients.TestResultsClient;
+import clients.TestTypesClient;
+import clients.VehicleTechnicalRecordsClient;
 import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.GenericData;
+import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
-import org.joda.time.DateTime;
+import org.json.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -17,7 +20,9 @@ import util.JsonPathAlteration;
 import util.WebDriverBrowsertack;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,12 +36,19 @@ import static util.TypeLoader.*;
 public class TestResultsSteps {
 
     TestResultsClient testResultsClient = new TestResultsClient();
+    VehicleTechnicalRecordsClient vehicleTechnicalRecordsClient = new VehicleTechnicalRecordsClient();
+    TestTypesClient testTypesClient = new TestTypesClient();
     Response response;
     private static String nextTestNumber = "";
 
     @Step
-    public void getTestResults(String systemNumber) {
-        response = testResultsClient.getTestResults(systemNumber);
+    public Response getTestResults(String systemNumber) {
+        return response = testResultsClient.getTestResults(systemNumber);
+    }
+
+    @Step
+    public Response getTestResultsNo404(String systemNumber, int numberOfRetries) {
+        return response = testResultsClient.getTestResultsNo404(systemNumber, numberOfRetries);
     }
 
     @Step
@@ -45,22 +57,22 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void getTestResultsNotAuthenticated(String vin) {
+    public void getTestResultsNotAuthenticated(String systemNumber) {
         setMissingAuth();
-        response = testResultsClient.callGetTestResults(vin);
+        response = testResultsClient.callGetTestResults(systemNumber);
         setRightAuth();
     }
 
     @Step
-    public void getTestResultsNotAuthorised(String vin) {
+    public void getTestResultsNotAuthorised(String systemNumber) {
         setWrongAuth();
-        response = testResultsClient.callGetTestResults(vin);
+        response = testResultsClient.callGetTestResults(systemNumber);
         setRightAuth();
     }
 
     @Step
-    public void getTestResults(String vin, TestResultsStatus testResultsStatus) {
-        response = testResultsClient.getTestResultsWithStatus(vin, testResultsStatus.getStatus());
+    public void getTestResults(String systemNumber, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsWithStatus(systemNumber, testResultsStatus.getStatus());
     }
 
     @Step
@@ -103,8 +115,8 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void getTestResultsFromDate(String vin, String fromDate) {
-        response = testResultsClient.getTestResultsFromDateTime(vin, fromDate);
+    public void getTestResultsFromDate(String systemNumber, String fromDate) {
+        response = testResultsClient.getTestResultsFromDateTime(systemNumber, fromDate);
     }
 
     @Step
@@ -113,28 +125,28 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void getTestResultsFromDate(String vin, String fromDate, TestResultsStatus testResultsStatus) {
-        response = testResultsClient.getTestResultsFromDateTime(vin, fromDate, testResultsStatus.getStatus());
+    public void getTestResultsFromDate(String systemNumber, String fromDate, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsFromDateTime(systemNumber, fromDate, testResultsStatus.getStatus());
     }
 
     @Step
-    public void getTestResultsToDate(String vin, String toDate) {
-        response = testResultsClient.getTestResultsToDateTime(vin, toDate);
+    public void getTestResultsToDate(String systemNumber, String toDate) {
+        response = testResultsClient.getTestResultsToDateTime(systemNumber, toDate);
     }
 
     @Step
-    public void getTestResultsToDate(String vin, String toDate, TestResultsStatus testResultsStatus) {
-        response = testResultsClient.getTestResultsToDateTime(vin, toDate, testResultsStatus.getStatus());
+    public void getTestResultsToDate(String systemNumber, String toDate, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsToDateTime(systemNumber, toDate, testResultsStatus.getStatus());
     }
 
     @Step
-    public void getTestResultsBetweenDate(String vin, String fromDate, String toDate) {
-        response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate);
+    public void getTestResultsBetweenDate(String systemNumber, String fromDate, String toDate) {
+        response = testResultsClient.getTestResultsBetweenDate(systemNumber, fromDate, toDate);
     }
 
     @Step
-    public void getTestResultsBetweenDate(String vin, String fromDate, String toDate, TestResultsStatus testResultsStatus) {
-        response = testResultsClient.getTestResultsBetweenDate(vin, fromDate, toDate, testResultsStatus.getStatus());
+    public void getTestResultsBetweenDate(String systemNumber, String fromDate, String toDate, TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsBetweenDate(systemNumber, fromDate, toDate, testResultsStatus.getStatus());
     }
 
     @Step
@@ -536,8 +548,24 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldContain(String path, String expectedValue) {
+        System.out.println("Verifying that " + path + " has value " + expectedValue);
+        response.then().body(path, containsString(expectedValue));
+    }
+
+    @Step
+    public void fieldInPathShouldNotExist(String parentElementPath, String key) {
+        response.then().body(parentElementPath,not(hasKey(key)));
+    }
+
+    @Step
     public void valueForFieldInPathShouldBe(String path, int expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldNotBe(String path, Object expectedValue) {
+        response.then().body(path, not(equalTo(expectedValue)));
     }
 
     @Step
@@ -550,16 +578,6 @@ public class TestResultsSteps {
             throw new RuntimeException(exc);
         }
 
-    }
-
-    @Step
-    public void fieldInPathShouldNotExist(String parentElementPath, String key) {
-        response.then().body(parentElementPath,not(hasKey(key)));
-    }
-
-    @Step
-    public void valueForFieldInPathShouldNotBe(String path, Object expectedValue) {
-        response.then().body(path, not(equalTo(expectedValue)));
     }
 
     @Step
@@ -708,9 +726,20 @@ public class TestResultsSteps {
     }
 
     @Step
-    public String putTestResultsWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
-        response = testResultsClient.putTestResultsWithAlterations(vin, putRequestBody, alterations);
+    public String putTestResultsWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = testResultsClient.putTestResultsWithAlterations(systemNumber, putRequestBody, alterations);
         return response.prettyPrint();
+    }
+
+    @Step
+    public String putTestResultsWithAlterationsNo400(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = testResultsClient.putTestResultsWithAlterationsNo400(systemNumber, putRequestBody, alterations);
+        return response.prettyPrint();
+    }
+
+    @Step
+    public void getTestResults(String systemNumber, TestVersion testVersion , String testResultId , TestResultsStatus testResultsStatus) {
+        response = testResultsClient.getTestResultsWithVersionAndStatus(systemNumber,testVersion.getTestVersion(),testResultId,testResultsStatus.getStatus());
     }
 
     @Step
@@ -726,8 +755,13 @@ public class TestResultsSteps {
     }
 
     @Step
+    public String getTestCode() {
+        return response.jsonPath().getString("[0].testTypes[0].testCode");
+    }
+
+    @Step
     public void validateCertificateIsGenerated(String testNumber, String vin) {
-        assertThat(AwsUtil.isCertificateCreated(testNumber,vin)).isTrue();
+        assertThat(AwsUtil.isCertificateCreated(testNumber, vin)).isTrue();
     }
 
     @Step
@@ -800,5 +834,11 @@ public class TestResultsSteps {
     @Step
     public void cleanUpTestResultsOfTestTypeId(String testResultId) {
         AwsUtil.deleteTestResultId(testResultId);
+    }
+
+    @Step
+    public String  createTestRecord(String testStatus, String testResult, String testCode, boolean withWithoutDefects,
+                                    Map<String, Object> testResultAttributes) {
+        return testResultsClient.createTestRecord(testStatus, testResult, testCode, withWithoutDefects, testResultAttributes);
     }
 }

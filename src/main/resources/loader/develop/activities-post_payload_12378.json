@@ -1,0 +1,16 @@
+{
+  "activityType": "visit",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369569",
+  "testStationEmail": "teststationname@dvsa.gov.uk",
+  "testStationType": "gvts",
+  "testerEmail": "someone@email.com",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "startTime": "2020-05-01T09:00:00.950Z",
+  "endTime": "2020-05-01T18:00:00.950Z",
+  "waitReason": [
+    "Break"
+  ],
+  "notes": "string"
+}
