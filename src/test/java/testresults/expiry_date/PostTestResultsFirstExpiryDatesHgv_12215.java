@@ -251,8 +251,8 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedRegnDate = currentTime.minusYears(1).minusMonths(2).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime regAnniversary = submittedRegnDate.plusYears(1);
+        DateTime submittedRegnDate = currentTime.minusYears(1).plusMonths(3);
+        DateTime regAnniversary = submittedRegnDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -345,8 +345,8 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedRegnDate = currentTime.minusYears(1).plusMonths(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime regAnniversary = submittedRegnDate.plusYears(1);
+        DateTime submittedRegnDate = currentTime.minusYears(1).plusMonths(1);
+        DateTime regAnniversary = submittedRegnDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -439,8 +439,8 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedRegnDate = currentTime.minusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime regAnniversary = submittedRegnDate.plusYears(1);
+        DateTime submittedRegnDate = currentTime.minusYears(1);
+        DateTime regAnniversary = submittedRegnDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -533,8 +533,8 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedRegnDate = currentTime.minusYears(1).minusMonths(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime regAnniversary = submittedRegnDate.plusYears(1);
+        DateTime submittedRegnDate = currentTime.minusYears(1).minusMonths(1);
+        DateTime regAnniversary = submittedRegnDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();

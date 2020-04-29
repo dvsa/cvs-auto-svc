@@ -2,3 +2,7 @@ NAME, TEST TYPE NAME, TEST TYPE ID, VEHICLE SIZE, VEHICLE CONFIGURATION, TEST RE
 Annual test, Annual test, 1, large, rigid, pass, aal, aal, true
 Annual test, Annual test, 1, small, rigid, pass, aal, aas, true
 Annual test, Annual test, 1, large, articulated, pass, aal, adl, true
+PG9 retest, Prohibition clearance (retest without Class 6A seatbelt installation check), 93, large, articulated, prs, rgl, wel, true
+First test, Class 6A seatbelt installation check (first test), 4, large, articulated, pass, wel, wbl, true
+With certification, Paid prohibition clearance (retest with certificate), 18, small, rigid, pass, wes, p8s, true
+With certification, Paid prohibition clearance (retest with certificate), 18, large, articulated, pass, wel, p8l, false

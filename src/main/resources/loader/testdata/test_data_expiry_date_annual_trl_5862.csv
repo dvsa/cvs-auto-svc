@@ -2,3 +2,6 @@ NAME, TEST TYPE NAME, TEST TYPE ID, NO OF AXLES, TEST RESULT, INSERTED TEST CODE
 Annual test, Annual test, 40, 1, pass, aat1, aat1, true
 Annual test, Annual test, 94, 2, pass, aat1, aat2, true
 Annual test, Annual test, 94, 3, pass, aat1, aat3, true
+With certification, Part paid prohibition clearance (retest with certification), 79, 3, prs, aat1, p6t3, true
+With certification, Part paid prohibition clearance (retest with certification), 79, 4, prs, aat1, p6t4, true
+With certification, Part paid prohibition clearance (retest with certification), 79, 5, prs, aat1, p6t5, true

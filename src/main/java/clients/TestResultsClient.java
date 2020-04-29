@@ -50,9 +50,7 @@ public class TestResultsClient {
             saveUtils();
             response = callGetTestResults(systemNumber);
         }
-
         return response;
-
     }
 
     public Response getTestResultsWithStatus(String vin, String status) {

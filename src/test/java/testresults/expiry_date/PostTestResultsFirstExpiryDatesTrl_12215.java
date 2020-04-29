@@ -144,11 +144,10 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
 
         // Verify testAnniversaryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate.substring(0,10));
 
         // Verify testExpiryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate);
-
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
     }
 
     @WithTag("expiry_dates")
@@ -234,15 +233,14 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
 
         // Verify testAnniversaryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate.substring(0,10));
 
         // Verify testExpiryDate field has the expected value
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate);
-
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is 2 month before FirstUseDate Anniversary")
+    @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is 2 months before FirstUseDate Anniversary")
     @Test
     public void testResultsFirstTestExpiryTrlTodayIsMoreThanTwoMonthBeforeAnniversary() {
 
@@ -255,8 +253,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedFirstUseDate = currentTime.minusYears(1).minusMonths(2).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1);
+        DateTime submittedFirstUseDate = currentTime.minusYears(1).plusMonths(3);
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -334,7 +332,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is in the month before FirstUseDate Anniversary")
+    @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is one month before FirstUseDate Anniversary")
     @Test
     public void testResultsFirstTestExpiryTrlTodayIsOneMonthBeforeRegAnniversary() {
 
@@ -347,8 +345,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedFirstUseDate = currentTime.minusYears(1).plusMonths(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1);
+        DateTime submittedFirstUseDate = currentTime.minusYears(1).plusMonths(1);
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -439,8 +437,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedFirstUseDate = currentTime.minusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1);
+        DateTime submittedFirstUseDate = currentTime.minusYears(1);
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -531,8 +529,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedTypeEndTimestamp = currentTime.minusMinutes(5);
         DateTime submittedEndTimestamp = currentTime;
 
-        DateTime submittedFirstUseDate = currentTime.minusYears(1).minusMonths(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1);
+        DateTime submittedFirstUseDate = currentTime.minusYears(1).minusMonths(1);
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -599,7 +597,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
 
         // Verify testTypeEndTimestamp is
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp);
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp.substring(0,10));
 
         // Verify testAnniversaryDate field has the expected value
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testAnniversaryDate", expectedTestExpiryDate.substring(0,10));

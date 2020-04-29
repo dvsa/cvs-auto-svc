@@ -1,3 +1,6 @@
 INSERTED TEST CODE ONE, INSERTED TEST RESULT ONE, INSERTED TEST TYPE ID ONE, INSERTED TEST CODE TWO, INSERTED TEST RESULT TWO, INSERTED TEST TYPE ID TWO, POST NAME, POST TEST TYPE NAME, POST TEST TYPE ID, POST TEST RESULT, POST TEST CODE, NO OF AXLES, IS ANNUAL WITH CERTIFICATE
-
-aav2, pass, 94, rpv2, pass, 53, Annual test, Annual test, 94, pass, aav2, 2, true
+pft2, pass, 77, rpt2, pass, 53, Annual test, Annual test, 94, pass, aat2, 2, true
+p1t4, pass, 70, aat4, pass, 94, Annual test, Annual test, 94, pass, aat4, 4, true
+rst3, pass, 54, aat3, pass, 94, Annual test, Annual test, 94, pass, aat4, 4, true
+p4t1, pass, 120, rpt1, pass, 98, With certification, Paid prohibition clearance (retest with certification), 113, pass, p3t1, 1, true
+p3t3, pass, 76, rpt3, pass, 53, With certification, Part paid prohibition clearance (retest with certification), 79, pass, p6t3, 3, true
