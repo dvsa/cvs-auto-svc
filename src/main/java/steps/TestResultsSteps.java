@@ -581,6 +581,13 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void validateTestFieldNotPresent(String fieldName) {
+//        response.then().log().all();
+        hasTests();
+        assertThat(response.then().body("[0].testTypes[0]", not(hasKey(fieldName))));
+    }
+
+    @Step
     public void hasTests(){
         assertThat(response.then().body("[0].testTypes", hasItems()));
     }

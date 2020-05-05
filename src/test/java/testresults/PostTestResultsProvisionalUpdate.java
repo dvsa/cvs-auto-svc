@@ -5,7 +5,6 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -168,7 +167,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_PSV.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -431,7 +430,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_PSV.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
