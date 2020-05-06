@@ -14,7 +14,6 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
-@WithTag("In_Test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsVehicleClass {
 
@@ -43,8 +42,6 @@ public class PostTestResultsVehicleClass {
             this.statusCode = statusCode;
         }
 
-
-    @WithTag("In_Test")
     @Title("CVSB-13903 - (IMPROVEMENT)[BE] Specialist tests, updating the test results API specs - vehicleClass mandatory only for motorcycles - AC1 - vehicleClass - optional for other than motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleVehicleCategoryOptional() {

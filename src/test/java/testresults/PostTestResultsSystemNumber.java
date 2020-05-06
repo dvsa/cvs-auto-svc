@@ -147,7 +147,7 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.validateMessage("User is not authorized to access this resource with an explicit deny");
     }
 
-    @WithTag("In_Test")
+
     @Title("CVSB-13903 - (IMPROVEMENT)[BE] Specialist tests, updating the test results API specs - vehicleClass mandatory only for motorcycles - AC2 - vehicleClass - mandatory for motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleVehicleCategoryMissing(){
@@ -178,7 +178,6 @@ public class PostTestResultsSystemNumber {
 
     }
 
-    @WithTag("In_Test")
     @Title("CVSB-13903 - (IMPROVEMENT)[BE] Specialist tests, updating the test results API specs - vehicleClass mandatory only for motorcycles - AC2 - vehicleClass - mandatory for motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleVehicleCategoryInvalid() {
