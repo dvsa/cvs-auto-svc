@@ -12,6 +12,7 @@
   "techRecord": [
     {
       "adrDetails": {
+        "adrCertificateNotes": "1234",
         "vehicleDetails": {
           "type": "Centre axle battery",
           "approvalDate": "2019-10-15"
@@ -68,7 +69,8 @@
             "productListUnNo": [
               "UN number 1"
             ],
-            "productList": "string"
+            "productList": "string",
+            "statement": "statement"
           }
         },
         "batteryListNumber": "1234",
