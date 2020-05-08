@@ -12,6 +12,7 @@ import org.junit.Assert;
 import util.AwsUtil;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
+import org.apache.http.HttpStatus;
 
 import java.io.IOException;
 import java.util.*;
@@ -48,12 +49,23 @@ public class VehicleTechnicalRecordsClient {
     }
 
     public Response getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier, String status,
-                                                                        String searchCriteria) {
+                                                                          String searchCriteria) {
         Response response = callGetVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status, searchCriteria);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callGetVehicleTechnicalRecordsByStatusAndSearchCriteria(searchIdentifier, status, searchCriteria);
+        }
+
+        return response;
+    }
+
+    public Response getVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier, String searchCriteria) {
+        Response response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
         }
 
         return response;
@@ -90,16 +102,15 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", "provisional")
-                .queryParam("searchCriteria", "systemNumber")
 
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/vehicles/{searchIdentifier}/tech-records?searchCriteria=systemNumber");
 
         return response;
     }
 
-    private Response callGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
+    public Response callGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
@@ -120,6 +131,19 @@ public class VehicleTechnicalRecordsClient {
                 .queryParam("status", status)
                 .queryParam("searchCriteria", searchCriteria)
 //                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+
+    }
+
+    private Response callGetVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,String searchCriteria) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("searchCriteria", searchCriteria)
                 .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/tech-records");
 
@@ -162,7 +186,21 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
-    private Response callPutVehicleTechnicalRecordsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
+    private Response callPutVehicleTechnicalRecordsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .pathParam("vin", vin)
+                .log().method().log().uri().log().body()
+                .put("/vehicles/{vin}");
+        return response;
+    }
+
+    private Response callPutVehicleTechnicalRecordsForArchivedWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
@@ -172,17 +210,79 @@ public class VehicleTechnicalRecordsClient {
                 .body(alteredBody)
                 .pathParam("systemNumber", systemNumber)
                 .log().method().log().uri().log().body()
+                .put("/vehicles/archive/{systemNumber}");
+        return response;
+    }
+
+    public Response postVehicleTechnicalRecordsForProvisionalWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPostVehicleTechnicalRecordsForProvisionalWithAlterations(systemNumber, requestBody,alterations);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            saveUtils();
+            response = callPostVehicleTechnicalRecordsForProvisionalWithAlterations(systemNumber, requestBody,alterations);
+        }
+
+        return response;
+    }
+
+    private Response callPostVehicleTechnicalRecordsForProvisionalWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .pathParam("systemNumber", systemNumber)
+                .log().method().log().uri().log().body()
+                .post("/vehicles/add-provisional/{systemNumber}");
+        return response;
+    }
+
+    private Response callPutVehicleTechnicalRecordsForCurrentWithAlterations(String systemNumber,String oldStatusCode, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .pathParam("systemNumber", systemNumber)
+                .queryParam("oldStatusCode", oldStatusCode)
+                .log().method().log().uri().log().body()
                 .put("/vehicles/{systemNumber}");
         return response;
     }
 
-    private Response callPutVehicleTechnicalRecordsForVehicle(String systemNumber, String body) {
+    public Response putVehicleTechnicalRecordsForCurrentWithAlterations(String systemNumber,String oldStatusCode, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPutVehicleTechnicalRecordsForCurrentWithAlterations(systemNumber,oldStatusCode, requestBody, alterations);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            saveUtils();
+            response = callPutVehicleTechnicalRecordsForCurrentWithAlterations(systemNumber,oldStatusCode,requestBody, alterations);
+        }
+
+        return response;
+    }
+
+    public Response putVehicleTechnicalRecordsForArchivedWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPutVehicleTechnicalRecordsForArchivedWithAlterations(systemNumber, requestBody, alterations);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            saveUtils();
+            response = callPutVehicleTechnicalRecordsForArchivedWithAlterations(systemNumber, requestBody, alterations);
+        }
+
+        return response;
+    }
+
+    private Response callPutVehicleTechnicalRecordsForVehicle(String vin, String body) {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(body)
-                .pathParam("systemNumber", systemNumber)
+                .pathParam("vin", vin)
                 .log().method().log().uri().log().body()
-                .put("/vehicles/{systemNumber}");
+                .put("/vehicles/{vin}");
         return response;
     }
 
@@ -208,23 +308,23 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
-    public Response putVehicleTechnicalRecordsForVehicle(String systemNumber, String requestBody) {
-        Response response = callPutVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
+    public Response putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
+        Response response = callPutVehicleTechnicalRecordsForVehicle(vin, requestBody);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callPutVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
+            response = callPutVehicleTechnicalRecordsForVehicle(vin, requestBody);
         }
 
         return response;
     }
 
-    public Response putVehicleTechnicalRecordsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
-        Response response = callPutVehicleTechnicalRecordsWithAlterations(systemNumber, requestBody, alterations);
+    public Response putVehicleTechnicalRecordsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = callPutVehicleTechnicalRecordsWithAlterations(systemNumber, requestBody, alterations);
+            response = callPutVehicleTechnicalRecordsWithAlterations(vin, requestBody, alterations);
         }
 
         return response;
@@ -619,29 +719,5 @@ public class VehicleTechnicalRecordsClient {
         testResultAttributes.put("vehicleType", vehicleType);
 
         return testResultAttributes;
-    }
-
-    public Response getVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier, String searchCriteria) {
-        Response response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
-
-        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
-            saveUtils();
-            response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
-        }
-
-        return response;
-    }
-
-    private Response callGetVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,String searchCriteria) {
-
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .pathParam("searchIdentifier", searchIdentifier)
-                .queryParam("searchCriteria", searchCriteria)
-                .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
-
-        return response;
-
     }
 }
