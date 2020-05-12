@@ -13,7 +13,7 @@
     "odometerReadingUnits": "kilometres",
     "preparerId": "QE7355",
     "preparerName": "RPT Logistics Limited",
-    "reasonForCancellation": null,
+    "reasonForCancellation": "For Testing purpose only",
     "regnDate": "2011-01-05",
     "systemNumber": "KC7VFFUPB5HYLXTG",
     "testEndTimestamp": "2020-04-08T04:22:27.612Z",
@@ -38,8 +38,6 @@
 
 
         ],
-
-
         "lastSeatbeltInstallationCheckDate": "2020-04-08T04:21:40.354Z",
         "lastUpdatedAt": "2020-04-08T04:22:27.910Z",
         "name": "Annual test",
@@ -49,7 +47,7 @@
         "secondaryCertificateNumber": null,
         "testAnniversaryDate": "2021-02-08T04:22:38.377Z",
         "testCode": "aas",
-        "testExpiryDate": "2021-04-07T04:22:38.377Z",
+
         "testNumber": "W03V32972",
         "testResult": "pass",
         "testTypeClassification": "Annual With Certificate",
