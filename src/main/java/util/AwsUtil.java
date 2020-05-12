@@ -39,7 +39,7 @@ public class AwsUtil {
         }
     }
 
-    public static boolean isCertificateCreated(String uuid, String vin){
+    public static boolean isCertificateCreated(String testNumber, String vin){
 
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
@@ -50,7 +50,7 @@ public class AwsUtil {
         AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
                 .withRoleArn(System.getProperty("AWS_ROLE"))
                 .withDurationSeconds(3600)
-                .withRoleSessionName(uuid);
+                .withRoleSessionName(testNumber);
         AssumeRoleResult assumeResult =
                 stsClient.assumeRole(assumeRequest);
 
@@ -61,7 +61,7 @@ public class AwsUtil {
                         assumeResult.getCredentials().getSessionToken());
         String bucketName = loader.getS3Bucket();
 
-        String fileName = uuid + "_" + vin + "_1.pdf";
+        String fileName = testNumber + "_" + vin + ".pdf";
         String key =  loader.getBranchName()+ "/" + fileName;
 
         AmazonS3 s3Client = new AmazonS3Client(temporaryCredentials);
