@@ -102,7 +102,8 @@ public class PutTestResultsCertificateGeneration extends TestCase {
                 {"pass","submitted","Annual With Certificate"},
                 {"fail","submitted","Annual With Certificate"},
                 {"prs","submitted","Annual With Certificate"},
-
+                {"abandoned","submitted","Annual With Certificate"},
+                {"abandoned","submitted","Annual No Certificate"},
         });
     }
 
@@ -122,7 +123,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     @Test
     public void testResultsPut() {
 
-       String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10280.json","$");
+       String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

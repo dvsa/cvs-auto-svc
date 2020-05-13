@@ -496,9 +496,7 @@ public class TestResultsSteps {
 
     private boolean validateCertificateNumber() {
         String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
-        if (certificateNumber != null && !certificateNumber.isEmpty()) {
-            return true;
-        } else return false;
+        return certificateNumber != null && !certificateNumber.isEmpty();
     }
 
     @Step
@@ -719,13 +717,6 @@ public class TestResultsSteps {
         this.response = testResultsClient.callPostVehicleTestResultsWithNoAuthorization(requestBody);
         setRightAuth();
     }
-
-    @Step
-    public String putTestResultsWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
-        response = testResultsClient.putTestResultsWithAlterations(vin, putRequestBody, alterations);
-        return response.prettyPrint();
-    }
-
 
     @Step
     public String getTestNumber() {

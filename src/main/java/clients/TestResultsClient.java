@@ -568,30 +568,6 @@ public class TestResultsClient {
         return response;
     }
 
-    public Response putTestResultsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
-        Response response = callPutTestResultsWithAlterations(vin, requestBody, alterations);
-
-        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
-            saveUtils();
-            response = callPutTestResultsWithAlterations(vin, requestBody, alterations);
-        }
-
-        return response;
-    }
-
-    private Response callPutTestResultsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
-        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
-        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
-
-        Response response = given().filters(new BasePathFilter())
-                .contentType(ContentType.JSON)
-                .body(alteredBody)
-                .pathParam("vin", vin)
-                .log().method().log().uri().log().body()
-                .put("/test-results/{vin}");
-        return response;
-    }
-
     public String getOutlookEmailAddress() {
         EnvironmentType envType = TypeLoader.getType();
         String emailAddress = "";
