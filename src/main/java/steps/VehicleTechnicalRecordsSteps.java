@@ -51,6 +51,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public String getSystemNumber() {
+        return response.jsonPath().getString("[0].systemNumber");
+    }
+
+    @Step
     public String getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier,
                                                                     @NotNull VehicleTechnicalRecordStatus status,
                                                                     @NotNull VehicleTechnicalRecordSearchCriteria criteria) {
@@ -93,6 +98,11 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
         response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
+    public void valueForFieldInPathShouldContains(String path, String expectedValue) {
+        response.then().body(path, containsString(expectedValue));
     }
 
     @Step
@@ -446,6 +456,14 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public String getNextSystemNumberInSequence() {
         return AwsUtil.getNextSystemNumberInSequence();
+    }
+
+    @Step
+    public void validatePostErrorData(String field, String errorMessage) {
+        Object fieldName = "\"" + field + "\" ";
+        response.then().body("size()", is(1));
+        response.then().body("errors.size()", greaterThanOrEqualTo(1));
+        response.then().body("errors[0]", equalTo( fieldName + errorMessage));
     }
 
     @Step

@@ -1,0 +1,39 @@
+{
+  "msUserDetails": {
+    "msUser": "Tue",
+    "msOid": "12345"
+  },
+  "vin": "44IIM2LQWEZT450938",
+  "primaryVrm": "73XIZ00",
+  "techRecord": [
+    {
+      "createdAt": "2019-06-24T10:26:54.903Z",
+      "createdByName": "Deepika",
+      "createdById": "3523",
+      "statusCode": "provisional",
+      "vehicleType": "motorcycle",
+      "regnDate": "1986-05-01",
+      "manufactureYear": 1986,
+      "noOfAxles": 2,
+      "numberOfWheelsDriven": 2,
+      "euVehicleCategory": "m1",
+      "vehicleClass": {
+        "code": "4",
+        "description": "MOT class 4"
+      },
+      "euVehicleCategory": "m2",
+      "applicantDetails": {
+        "name": "************",
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "postTown": "*",
+        "postCode": "*****",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "remarks":"For test",
+      "reasonForCreation": "Testing"
+    }
+  ]
+}
