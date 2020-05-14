@@ -83,15 +83,16 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", "provisional")
+                .queryParam("searchCriteria", "systemNumber")
 
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records?searchCriteria=systemNumber");
+                .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
 
-    public Response callGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
+    private Response callGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
@@ -230,6 +231,31 @@ public class VehicleTechnicalRecordsClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/vehicles/{searchIdentifier}/download-file/{fileName}");
+
+        return response;
+    }
+
+    public Response getVehicleTechnicalRecordsByStatusWithMetadata(String searchIdentifier, String status) {
+        Response response = callGetVehicleTechnicalRecordsByStatusWithMetadata(searchIdentifier, status);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsByStatusWithMetadata(searchIdentifier, status);
+        }
+
+        return response;
+    }
+
+    private Response callGetVehicleTechnicalRecordsByStatusWithMetadata(String searchIdentifier, String status) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("status", status)
+                .queryParam("metadata", true)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }

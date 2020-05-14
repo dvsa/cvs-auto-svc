@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -777,5 +778,27 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", generatedTrailerId);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(generatedTrailerId, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("size()", 1);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10255 - AC1 - All attributes applicable to PSVs are returned")
+    @Test
+    public void testVehicleTechnicalRecordsGetManufacturer() throws IOException {
+        // TEST
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusWithMetadata("C123456", VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        ArrayList<String> bodyMake = GenericData.readFile("body_make_list.txt");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].metadata.bodyMakeFe.size()", 613);
+        for (String make : bodyMake) {
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                    ("[0].metadata.bodyMakeFe.find { it == '" + make.replace("'","\\'") + "' }", make);
+        }
+        ArrayList<String> vehicleManufacturer = GenericData.readFile("manufacturers_list.txt");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].metadata.makeAndChassisMakeFe.size()", 408);
+        for (String manufacturer : vehicleManufacturer) {
+            vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                    ("[0].metadata.makeAndChassisMakeFe.find { it == '" + manufacturer.replace("'","\\'") + "' }", manufacturer);
+        }
+
     }
 }

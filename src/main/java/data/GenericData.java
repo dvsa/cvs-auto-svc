@@ -13,7 +13,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -38,6 +38,21 @@ public class GenericData {
         }
 
         return encodedString;
+    }
+
+    public static ArrayList<String> readFile(String fileName) throws IOException {
+        File file = new File(Paths.get("src/main/resources/loader/" + BaseData.getDataLocation() + "/" + fileName).toString());    //creates a new file instance
+        FileReader fr = new FileReader(file);;   //reads the file
+
+        BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
+        String line;
+        ArrayList<String> list = new ArrayList<>();
+        while((line=br.readLine())!=null)
+        {
+            list.add(line);
+        }
+
+        return list;
     }
 
     public static String readJsonValueFromFile(String fileName, String path) {
