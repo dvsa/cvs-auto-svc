@@ -210,6 +210,9 @@ public class PutVehicleTechnicalRecordsNeg {
         //TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        JsonPathAlteration alterationStatusCode = new JsonPathAlteration("$.techRecord[0]", "provisional", "statusCode", "ADD_FIELD");
+
         // validate that making PUT request with N/A adr fields will give error
         JsonPathAlteration alterationAddAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetails,"adrDetails","ADD_FIELD");
         alterations.add(alterationAddAdrDetails);
@@ -226,9 +229,10 @@ public class PutVehicleTechnicalRecordsNeg {
                 alterationDeleteAdrListStatementApplicable,
                 alterationDeleteAdrBatteryListNumber,
                 alterationDeleteAdrMemosApply,
-                alterationChangeAdrVehicleTypeNonBatteryTank));
+                alterationChangeAdrVehicleTypeNonBatteryTank,
+                alterationStatusCode));
         alterations.addAll(adrAlterations);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
 //        // documents
 //        alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationAddAdrDetails));
@@ -246,18 +250,20 @@ public class PutVehicleTechnicalRecordsNeg {
         adrAlterations = Arrays.asList(
                 alterationDeleteAdrTank,
                 alterationDeleteAdrBatteryListNumber,
-                alterationChangeAdrVehicleTypeNonBatteryTank);
+                alterationChangeAdrVehicleTypeNonBatteryTank,
+                alterationStatusCode);
         alterations.addAll(adrAlterations);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyAdrDetails, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, putRequestBodyAdrDetails, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // batteryListNumber
         alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationAddAdrDetails));
         adrAlterations = Arrays.asList(
                 alterationDeleteAdrTank,
                 alterationDeleteAdrListStatementApplicable,
-                alterationChangeAdrVehicleTypeNonBatteryTank);
+                alterationChangeAdrVehicleTypeNonBatteryTank,
+                alterationStatusCode);
         alterations.addAll(adrAlterations);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
 //        // memosApply
 //        alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationAddAdrDetails));
@@ -276,9 +282,10 @@ public class PutVehicleTechnicalRecordsNeg {
                 alterationDeleteAdrTank,
                 alterationDeleteAdrListStatementApplicable,
                 alterationDeleteAdrBatteryListNumber,
-                alterationChangeAdrVehicleTypeNonBatteryTank);
+                alterationChangeAdrVehicleTypeNonBatteryTank,
+                alterationStatusCode);
         alterations.addAll(adrAlterations);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
     }
 

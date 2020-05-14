@@ -34,14 +34,11 @@ public class PostTestResultsProvisionalUpdate {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
-        //generate random systemNumber
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String systemNumber;
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
-        // create alteration to change systemNumber in the request body with the random generated Vin
-        JsonPathAlteration alterationVSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
@@ -53,11 +50,9 @@ public class PostTestResultsProvisionalUpdate {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumber
+                alterationPartialVin
         ));
 
-        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // retrieve the vehicle and check the status code and the techRecord size
@@ -66,8 +61,9 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
-        // build and post a notifiable alteration test results
+        systemNumber = vehicleTechnicalRecordsSteps.getValueFromBody("[0].systemNumber");
 
+        // build and post a notifiable alteration test results
 
         // read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");

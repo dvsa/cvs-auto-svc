@@ -1245,7 +1245,7 @@
         "deficiencies": [
           {
             "deficiencyCategory": "dangerous",
-            "deficiencyText": "fractured.",
+            "deficiencyText": "fractured or not properly fitted such that detachment is likely.",
             "ref": "6.1.a",
             "stdForProhibition": true,
             "deficiencySubId": null,
@@ -1258,7 +1258,7 @@
           },
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "butting causing the flange to lift more than 1.5mm from the rim.",
+            "deficiencyText": "butting causing the flange to lift more than 1.5mm from the rim and/or not properly fitted.",
             "ref": "6.1.b",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -2579,25 +2579,25 @@
         "itemDescription": "A spare wheel:",
         "deficiencies": [
           {
-            "deficiencyCategory": "dangerous",
-            "deficiencyText": "so insecure or positioned that it is likely to fall from the vehicle.",
-            "ref": "10.2.ii",
-            "stdForProhibition": true,
-            "deficiencySubId": "ii",
+            "deficiencyCategory": "major",
+            "deficiencyText": "insecure, damaged or incorrectly positioned but not so that it is likely to fall from the vehicle.",
+            "ref": "10.2.i",
+            "stdForProhibition": false,
+            "deficiencySubId": "i",
             "forVehicleType": [
+              "psv",
               "hgv",
               "trl"
             ],
             "deficiencyId": null
           },
           {
-            "deficiencyCategory": "major",
-            "deficiencyText": "insecure or incorrectly positioned but not so that it is likely to fall from the vehicle.",
-            "ref": "10.2.i",
-            "stdForProhibition": false,
-            "deficiencySubId": "i",
+            "deficiencyCategory": "dangerous",
+            "deficiencyText": "so insecure or positioned that it is likely to fall from the vehicle.",
+            "ref": "10.2.ii",
+            "stdForProhibition": true,
+            "deficiencySubId": "ii",
             "forVehicleType": [
-              "psv",
               "hgv",
               "trl"
             ],
@@ -4707,7 +4707,7 @@
           },
           {
             "deficiencyCategory": "dangerous",
-            "deficiencyText": "which is so badly deteriorated or insecure that it would impair the drivers control of the vehicle or is likely to cause injury.",
+            "deficiencyText": "which is so badly deteriorated or insecure it is likely to impair the driver’s control of the vehicle or is likely to cause injury.",
             "ref": "17.1.ii",
             "stdForProhibition": true,
             "deficiencySubId": "ii",
@@ -5095,7 +5095,7 @@
             "deficiencyId": "d"
           },
           {
-            "deficiencyCategory": "minor",
+            "deficiencyCategory": "major",
             "deficiencyText": "not fitted with an effective secondary locking device.",
             "ref": "19.3.e",
             "stdForProhibition": false,
@@ -7128,7 +7128,7 @@
           },
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "with an audible device missing or inoperative.",
+            "deficiencyText": "with an audible device missing or inoperative. (except an Annex VII done vehicle with a powered lift).",
             "ref": "24.4.b",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -7312,7 +7312,7 @@
       },
       {
         "itemNumber": 9,
-        "itemDescription": "Lighting specifically intended for wheelchair users to board or alight in safety",
+        "itemDescription": "Communication devices: Lighting specifically intended for wheelchair users to board or alight in safety",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -7708,7 +7708,7 @@
         "deficiencies": [
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "tachograph scale not marked in kilometres per hour.",
+            "deficiencyText": "tachograph scale not marked in kilometres per hour (There is no requirement for tachographs to be marked in m.p.h.).",
             "ref": "26.3.a",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -7804,7 +7804,7 @@
           },
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "a digital tachograph that displays a ‘K’ factor reading different to that shown on the calibration plaque.",
+            "deficiencyText": "a digital tachograph that displays a ‘K’ factor reading different to that shown on the calibration plaque (there is no allowance/tolerance as with analogue type tachographs).",
             "ref": "26.3.i",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -7838,7 +7838,7 @@
           },
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "If a speed limiter is not required: a seal (within the tachograph head) missing, broken, or where a clearly “non mandatory” seal has been fitted in place of an “official” seal.",
+            "deficiencyText": "If a speed limiter is not required: a seal (within the tachograph head) missing, broken, or where a clearly “non mandatory” seal has been fitted in place of an “official” seal. There is no requirement for the gearbox sender unit to be sealed.",
             "ref": "26.4.b",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -10079,18 +10079,6 @@
         "itemDescription": "Frame and/or cross member fastenings:",
         "deficiencies": [
           {
-            "deficiencyCategory": "dangerous",
-            "deficiencyText": "insecure flitch plates and/or fastenings or welds breaking away so that the control of the vehicle is likely to be affected or the load will become insecure.",
-            "ref": "41.2.a.ii",
-            "stdForProhibition": true,
-            "deficiencySubId": "ii",
-            "forVehicleType": [
-              "hgv",
-              "trl"
-            ],
-            "deficiencyId": "a"
-          },
-          {
             "deficiencyCategory": "major",
             "deficiencyText": "insecure flitch plates and/or fastenings or welds breaking away.",
             "ref": "41.2.a.i",
@@ -10098,6 +10086,18 @@
             "deficiencySubId": "i",
             "forVehicleType": [
               "psv",
+              "hgv",
+              "trl"
+            ],
+            "deficiencyId": "a"
+          },
+          {
+            "deficiencyCategory": "dangerous",
+            "deficiencyText": "insecure flitch plates and/or fastenings or welds breaking away so that the control of the vehicle is likely to be affected or the load will become insecure.",
+            "ref": "41.2.a.ii",
+            "stdForProhibition": true,
+            "deficiencySubId": "ii",
+            "forVehicleType": [
               "hgv",
               "trl"
             ],
@@ -11250,17 +11250,6 @@
         "itemDescription": "An exhaust system:",
         "deficiencies": [
           {
-            "deficiencyCategory": "dangerous",
-            "deficiencyText": "leaking and entering the drivers cab.",
-            "ref": "46.1.b.ii",
-            "stdForProhibition": false,
-            "deficiencySubId": "ii",
-            "forVehicleType": [
-              "hgv"
-            ],
-            "deficiencyId": "b"
-          },
-          {
             "deficiencyCategory": "major",
             "deficiencyText": "incorrectly positioned so that fumes are likely to enter the driver’s cab.",
             "ref": "46.1.c.i",
@@ -11314,6 +11303,17 @@
             "deficiencySubId": "i",
             "forVehicleType": [
               "psv",
+              "hgv"
+            ],
+            "deficiencyId": "b"
+          },
+          {
+            "deficiencyCategory": "dangerous",
+            "deficiencyText": "leaking and entering the drivers cab.",
+            "ref": "46.1.b.ii",
+            "stdForProhibition": false,
+            "deficiencySubId": "ii",
+            "forVehicleType": [
               "hgv"
             ],
             "deficiencyId": "b"
@@ -14549,10 +14549,20 @@
               "trl"
             ],
             "deficiencyId": null
-          },
+          }
+        ],
+        "forVehicleType": [
+          "hgv",
+          "trl"
+        ]
+      },
+      {
+        "itemNumber": 9,
+        "itemDescription": "Unsafe:",
+        "deficiencies": [
           {
             "deficiencyCategory": "dangerous",
-            "deficiencyText": "modification to any part of the braking system and braking performance is affected.",
+            "deficiencyText": "unsafe modification to any part of the braking system and braking performance is affected.",
             "ref": "59.9.ii",
             "stdForProhibition": false,
             "deficiencySubId": "ii",
@@ -15516,7 +15526,7 @@
     "items": [
       {
         "itemNumber": 7,
-        "itemDescription": "Reversing lamp:",
+        "itemDescription": "Reversing lamp (in addition to 1 above):",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -15647,7 +15657,7 @@
             "deficiencyId": "d"
           },
           {
-            "deficiencyCategory": "major",
+            "deficiencyCategory": "minor",
             "deficiencyText": "an obligatory lamp not showing a light of the right colour.",
             "ref": "63.1.e.i",
             "stdForProhibition": false,
@@ -15707,7 +15717,7 @@
       },
       {
         "itemNumber": 2,
-        "itemDescription": "Rear Fog lamp:",
+        "itemDescription": "Rear Fog lamp:(in addition to 1 above)",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -15757,7 +15767,7 @@
       },
       {
         "itemNumber": 3,
-        "itemDescription": "No stop lamps",
+        "itemDescription": "No stop lamps (in addition to 1 above)",
         "deficiencies": [
           {
             "deficiencyCategory": "dangerous",
@@ -15781,7 +15791,7 @@
       },
       {
         "itemNumber": 4,
-        "itemDescription": "Headlamp:",
+        "itemDescription": "Headlamp: (in addition to 1 above)",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -15875,7 +15885,7 @@
       },
       {
         "itemNumber": 5,
-        "itemDescription": "A rear registration plate lamp",
+        "itemDescription": "A rear registration plate lamp (in addition to 1 above)",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -15899,7 +15909,7 @@
       },
       {
         "itemNumber": 6,
-        "itemDescription": "Front fog lamp",
+        "itemDescription": "Front fog lamp (in addition to 1 above)",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -15921,7 +15931,7 @@
       },
       {
         "itemNumber": 8,
-        "itemDescription": "Day time running lamp:",
+        "itemDescription": "Day time running lamp (in addition to 1 above):",
         "deficiencies": [
           {
             "deficiencyCategory": "minor",
@@ -16285,7 +16295,7 @@
     "items": [
       {
         "itemNumber": 1,
-        "itemDescription": "In relation to the 0% Horizontal line, the beam horizontal cut-off line is not between the limits listed below.",
+        "itemDescription": "European checked on Dipped Beam: In relation to the 0% Horizontal line, the beam horizontal cut-off line is not between the limits listed below.",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16319,7 +16329,7 @@
       },
       {
         "itemNumber": 2,
-        "itemDescription": "The beam image contains:",
+        "itemDescription": "European checked on Dipped Beam: The beam image contains:",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16341,7 +16351,7 @@
       },
       {
         "itemNumber": 3,
-        "itemDescription": "White light:",
+        "itemDescription": "European checked on Dipped Beam: White light:",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16363,7 +16373,7 @@
       },
       {
         "itemNumber": 4,
-        "itemDescription": "In relation to the 0% Horizontal line, the upper edge of the “Hot Spot” is not between the limits listed below.",
+        "itemDescription": "British American Checked on Dipped Beam: In relation to the 0% Horizontal line, the upper edge of the “Hot Spot” is not between the limits listed below.",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16385,7 +16395,7 @@
       },
       {
         "itemNumber": 5,
-        "itemDescription": "The right hand edge of the “Hot Spot”:",
+        "itemDescription": "British American Checked on Dipped Beam: The right hand edge of the “Hot Spot”:",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16407,11 +16417,11 @@
       },
       {
         "itemNumber": 6,
-        "itemDescription": "A Headlamp",
+        "itemDescription": "British American Checked on Dipped Beam: A Headlamp",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "dips to the right.",
+            "deficiencyText": "dips to the right (See note in Applications).",
             "ref": "67.6",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -16429,7 +16439,7 @@
       },
       {
         "itemNumber": 7,
-        "itemDescription": "In relation to the 0% Horizontal line, the Centre of the “Hot Spot” is not between the limits listed below.",
+        "itemDescription": "British American Checked on Main Beam: In relation to the 0% Horizontal line, the Centre of the “Hot Spot” is not between the limits listed below.",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16463,7 +16473,7 @@
       },
       {
         "itemNumber": 8,
-        "itemDescription": "In any case the centre of the “Hot Spot”",
+        "itemDescription": "British American Checked on Main Beam: In any case the centre of the “Hot Spot”",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
@@ -16485,11 +16495,11 @@
       },
       {
         "itemNumber": 9,
-        "itemDescription": "A Headlamp",
+        "itemDescription": "British American Checked on Main Beam: A Headlamp",
         "deficiencies": [
           {
             "deficiencyCategory": "major",
-            "deficiencyText": "dips to the right.",
+            "deficiencyText": "dips to the right (see note in Application).",
             "ref": "67.9",
             "stdForProhibition": false,
             "deficiencySubId": null,
@@ -16606,7 +16616,18 @@
               "hgv"
             ],
             "deficiencyId": "c"
-          },
+          }
+        ],
+        "forVehicleType": [
+          "psv",
+          "hgv",
+          "trl"
+        ]
+      },
+      {
+        "itemNumber": 1,
+        "itemDescription": "All Roller Brake Test Machines: With the service brake fully applied:",
+        "deficiencies": [
           {
             "deficiencyCategory": "major",
             "deficiencyText": "there is very little brake effort at any wheel.",

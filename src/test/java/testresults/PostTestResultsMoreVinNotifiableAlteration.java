@@ -37,15 +37,13 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
         //generate two random systemNumber
-        String randomSystemNumberOne = GenericData.generateRandomSystemNumber();
-        String randomSystemNumberTwo = GenericData.generateRandomSystemNumber();
+        String systemNumberOne;
+        String systemNumberTwo;
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
         // create alteration to change systemNumber in the request body with the random generated Vin
-        JsonPathAlteration alterationVSystemNumberOne = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
-        JsonPathAlteration alterationVSystemNumberTwo = new JsonPathAlteration("$.systemNumber", randomSystemNumberTwo,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
@@ -57,29 +55,28 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         List<JsonPathAlteration> alterationsOne = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumberOne
+                alterationPartialVin
         ));
 
         List<JsonPathAlteration> alterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumberTwo
+                alterationPartialVin
         ));
 
-        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
-        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
+
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberTwo, randomVin, 0, "statusCode", "provisional");
 
@@ -120,7 +117,6 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
-
     }
 
 
@@ -131,15 +127,13 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
         //generate two random systemNumber
-        String randomSystemNumberOne = GenericData.generateRandomSystemNumber();
-        String randomSystemNumberTwo = GenericData.generateRandomSystemNumber();
+        String systemNumberOne;
+        String systemNumberTwo;
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
         // create alteration to change systemNumber in the request body with the random generated Vin
-        JsonPathAlteration alterationVSystemNumberOne = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
-        JsonPathAlteration alterationVSystemNumberTwo = new JsonPathAlteration("$.systemNumber", randomSystemNumberTwo,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
@@ -151,24 +145,22 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         List<JsonPathAlteration> alterationsOne = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumberOne
+                alterationPartialVin
         ));
 
         List<JsonPathAlteration> alterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumberTwo
+                alterationPartialVin
         ));
 
-        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
-        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -324,16 +316,10 @@ public class PostTestResultsMoreVinNotifiableAlteration {
 
         //generate random Vin
         String randomVin = RandomStringUtils.randomAlphanumeric(14).toUpperCase();
-        //generate two random systemNumber
-        String randomSystemNumberOne = GenericData.generateRandomSystemNumber();
-        String randomSystemNumberTwo = GenericData.generateRandomSystemNumber();
         //generate random Vrm
         String randomVrm = (RandomStringUtils.randomAlphabetic(1) + RandomStringUtils.randomNumeric(2) + RandomStringUtils.randomAlphabetic(3)).toUpperCase();
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
-        // create alteration to change systemNumber in the request body with the random generated Vin
-        JsonPathAlteration alterationVSystemNumberOne = new JsonPathAlteration("$.systemNumber", randomSystemNumberOne,"","REPLACE");
-        JsonPathAlteration alterationVSystemNumberTwo = new JsonPathAlteration("$.systemNumber", randomSystemNumberTwo,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
@@ -345,24 +331,22 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         List<JsonPathAlteration> alterationsOne = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumberOne
+                alterationPartialVin
         ));
 
         List<JsonPathAlteration> alterationsTwo = new ArrayList<>(Arrays.asList(
                 alterationVin,
                 alterationVrm,
-                alterationPartialVin,
-                alterationVSystemNumberTwo
+                alterationPartialVin
         ));
 
-        String systemNumberOne = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        String systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
-        String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        String systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -409,7 +393,5 @@ public class PostTestResultsMoreVinNotifiableAlteration {
 
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "archived");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "current");
-
     }
-
 }

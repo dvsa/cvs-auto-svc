@@ -13,6 +13,7 @@
   "techRecord": [
     {
       "vehicleType": "psv",
+      "statusCode": "provisional",
       "regnDate": "2000-01-01",
       "manufactureYear": 2000,
       "noOfAxles": 1,

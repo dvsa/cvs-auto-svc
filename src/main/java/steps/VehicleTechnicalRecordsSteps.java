@@ -5,6 +5,7 @@ import clients.model.BodyType;
 import clients.VehicleTechnicalRecordsClient;
 import data.GenericData;
 import exceptions.AutomationException;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.vehicles.*;
 import net.thucydides.core.annotations.Step;
@@ -26,6 +27,15 @@ public class VehicleTechnicalRecordsSteps {
 
     VehicleTechnicalRecordsClient vehicleTechnicalRecordsClient = new VehicleTechnicalRecordsClient();
     Response response;
+
+    @Step
+    public String getValueFromBody(String jsonPath) {
+        System.out.println("Retrieving value: " + jsonPath);
+        JsonPath jsonPathEvaluator = response.jsonPath();
+        String value = jsonPathEvaluator.get(jsonPath);
+        System.out.println("- " + value);
+        return value;
+    }
 
     @Step
     public String getVehicleTechnicalRecords(String searchIdentifier) {
@@ -55,16 +65,16 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String getVehicleTechnicalRecordsByPartialVin(String searchIdentifier) {
+    public void getVehicleTechnicalRecordsByPartialVin(String searchIdentifier) {
         String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
-        return getVehicleTechnicalRecords(partialVin);
+        getVehicleTechnicalRecords(partialVin);
     }
 
 
     @Step
-    public String getVehicleTechnicalRecordsByPartialVinAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
+    public void getVehicleTechnicalRecordsByPartialVinAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {
         String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
-        return getVehicleTechnicalRecordsByStatus(partialVin, status);
+        getVehicleTechnicalRecordsByStatus(partialVin, status);
     }
 
 
@@ -244,7 +254,7 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void validateData(String stringData) {
-        response.then().body(is("\"" + stringData + "\""));
+        response.then().body(anything("\"" + stringData + "\""));
     }
 
     @Step
@@ -260,14 +270,14 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String putVehicleTechnicalRecordsForVehicle(String vin, String requestBody) {
-        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(vin, requestBody);
+    public String putVehicleTechnicalRecordsForVehicle(String systemNumber, String requestBody) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
         return response.prettyPrint();
     }
 
     @Step
-    public String putVehicleTechnicalRecordsForVehicleWithAlterations(String vin, String putRequestBody, List<JsonPathAlteration> alterations) {
-        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(vin, putRequestBody, alterations);
+    public String putVehicleTechnicalRecordsForVehicleWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(systemNumber, putRequestBody, alterations);
         return response.prettyPrint();
     }
 
@@ -440,5 +450,16 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public String getNextTrailerIdInSequence() {
         return AwsUtil.getNextTrailerIdInSequence();
+    }
+
+    @Step
+    public String getSystemNumberUsingVin(String vin) {
+        String systemNumber = "";
+        System.out.println("Retrieving systemNumber for vin: " + vin);
+        getVehicleTechnicalRecords(vin);
+        statusCodeShouldBe(200);
+        systemNumber = getValueFromBody("[0].systemNumber");
+        System.out.println("- systemNumber = " + systemNumber);
+        return systemNumber;
     }
 }
