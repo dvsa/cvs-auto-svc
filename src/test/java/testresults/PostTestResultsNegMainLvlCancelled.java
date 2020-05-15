@@ -550,8 +550,9 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("reasonForCancellation", "length must be less than or equal to 500 characters long");
     }
 
+
+    @Ignore("Test is obsolete due to: CVSB-13903")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - vehicleClass")
-    @Test
     public void testResultsMissingVehicleClass() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "vehicleClass", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
@@ -559,8 +560,8 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("vehicleClass", "is required");
     }
 
+    @Ignore("Test is obsolete due to: CVSB-13903")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleClass")
-    @Test
     public void testResultsNullVehicleClass() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "vehicleClass", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
@@ -568,8 +569,8 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("vehicleClass", "must be an object");
     }
 
+    @Ignore("Test is obsolete due to: CVSB-13903")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - vehicleClass description")
-    @Test
     public void testResultsMissingVehicleClassDescription() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "description", ToTypeConvertor.MISSING, TestResultsLevel.VEHICLE_CLASS);
@@ -577,13 +578,13 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("description", "is required");
     }
 
+    @Ignore("Test is obsolete due to: CVSB-13903")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleClass description")
-    @Test
     public void testResultsNullVehicleClassDescription() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "description", ToTypeConvertor.NULL, TestResultsLevel.VEHICLE_CLASS);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known]");
+        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known, null]");
     }
 
 
@@ -593,7 +594,7 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "description", RandomStringUtils.randomNumeric(1, 9), ToTypeConvertor.INTEGER, TestResultsLevel.VEHICLE_CLASS);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known]");
+        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known, null]");
     }
 
 
@@ -604,8 +605,9 @@ public class PostTestResultsNegMainLvlCancelled {
         vehicleCancelledData.setVrm(VRM).getVehicleClass().setDescription(RandomStringUtils.randomAlphanumeric(10));
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known]");
+        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known, null]");
     }
+
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicle class description empty")
     @Test
@@ -614,12 +616,11 @@ public class PostTestResultsNegMainLvlCancelled {
         vehicleCancelledData.setVrm(VRM).getVehicleClass().setDescription("");
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known]");
+        testResultsSteps.validatePostErrorData("description", "must be one of [motorbikes up to 200cc, motorbikes over 200cc or with a sidecar, 3 wheelers, not applicable, small psv (ie: less than or equal to 22 seats), trailer, large psv(ie: greater than 23 seats), heavy goods vehicle, MOT class 4, MOT class 5, MOT class 7, PSV of unknown or unspecified size, Not Known, null]");
     }
 
-
+    @Ignore("Test is obsolete due to: CVSB-13903")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - vehicleClass code")
-    @Test
     public void testResultsMissingVehicleClassCode() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "code", ToTypeConvertor.MISSING, TestResultsLevel.VEHICLE_CLASS);
@@ -627,13 +628,13 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("code", "is required");
     }
 
+    @Ignore("Test is obsolete due to: CVSB-13903")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleClass code")
-    @Test
     public void testResultsNullVehicleClassCode() {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "code", ToTypeConvertor.NULL, TestResultsLevel.VEHICLE_CLASS);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u]");
+        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u, null]");
     }
 
 
@@ -643,18 +644,18 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "code", RandomStringUtils.randomNumeric(1, 9), ToTypeConvertor.INTEGER, TestResultsLevel.VEHICLE_CLASS);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u]");
+        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u, null]");
     }
 
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicle class code random")
     @Test
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicle class code random")
     public void testResultsValueVehicleClassCode() {
 
         vehicleCancelledData.setVrm(VRM).getVehicleClass().setCode(RandomStringUtils.randomAlphanumeric(10));
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u]");
+        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u, null]");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicle class code empty")
@@ -664,7 +665,7 @@ public class PostTestResultsNegMainLvlCancelled {
         vehicleCancelledData.setVrm(VRM).getVehicleClass().setCode("");
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u]");
+        testResultsSteps.validatePostErrorData("code", "must be one of [1, 2, 3, n, s, t, l, v, 4, 5, 7, p, u, null]");
     }
 
     //TODO - possible problem with gateway

@@ -1,8 +1,10 @@
 package model.testresults;
 
+import data.GenericData;
 import util.PropertyNotPresent;
 
 import java.util.List;
+import java.util.UUID;
 
 public class TestResults {
 
@@ -92,7 +94,7 @@ public class TestResults {
         }
 
         public T setTestResultId(String testResultId) {
-            this.testResultId = testResultId;
+            this.testResultId = UUID.randomUUID().toString();
             return (T) this;
         }
 

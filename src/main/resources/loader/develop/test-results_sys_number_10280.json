@@ -1,0 +1,59 @@
+{
+  "testResultId":"196",
+  "systemNumber":"1220",
+  "testStationName":"Abshire-Kub",
+  "testStationPNumber":"09-4129632",
+  "testStationType":"gvts",
+  "testerName":"Tester",
+  "testerStaffId":"1",
+  "testerEmailAddress":"dorel.popescu@dvsagov.uk",
+  "testStartTimestamp":"2019-11-07T12:16:44.944Z",
+  "testEndTimestamp":"2019-11-07T12:21:49.752Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"CT70VRL",
+  "odometerReading":123,
+  "odometerReadingUnits":"kilometres",
+  "vin":"P012301230123",
+  "vehicleClass":{
+    "description":"heavy goods vehicle",
+    "code":"v"
+  },
+  "vehicleType":"hgv",
+  "vehicleConfiguration":"semi-car transporter",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"n1",
+  "countryOfRegistration":"gb",
+  "noOfAxles":2,
+  "numberOfWheelsDriven": 4,
+  "testTypes":[
+    {
+      "name":"Technical test",
+      "testTypeName":"Low Emissions Certificate (LEC) with annual test",
+      "testTypeId":"44",
+      "certificateNumber":null,
+      "testTypeStartTimestamp":"2019-11-07T12:20:29.601Z",
+      "testTypeEndTimestamp":"2019-11-07T12:21:49.754Z",
+      "modType":{
+        "code":"m",
+        "description":"modification or change of engine"
+      },
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType":"diesel",
+      "smokeTestKLimitApplied":"123",
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":"123",
+      "testExpiryDate":"2021-10-07",
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"Test notes",
+      "defects":[],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456"
+    }
+  ]
+}
