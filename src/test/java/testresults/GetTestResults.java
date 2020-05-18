@@ -387,7 +387,7 @@ public class GetTestResults {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_sys_number_10754.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_sys_number_10280.json", "$");
 
         // Create alteration to add one more tech record to in the request body
 
