@@ -109,7 +109,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         testResultsSteps.validateData("Test records created");
 
         // wait a maximum of seconds for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // retrieve the tech record of the vehicle and verify whether the status has changed to current
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -198,7 +198,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         testResultsSteps.validateData("Test records created");
 
         // wait a maximum of seconds for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // retrieve the tech record of the vehicle and verify whether the status has changed to current
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -294,7 +294,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         testResultsSteps.validateData("Test records created");
 
         // wait a maximum of seconds for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // retrieve the tech record of the vehicle and verify whether the status has changed to current
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -384,7 +384,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         testResultsSteps.validateData("Test records created");
 
         // wait a maximum of seconds for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // retrieve the tech record of the vehicle and verify whether the status has changed to current
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);

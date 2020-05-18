@@ -61,6 +61,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
                     .post("/vehicles");
         }
 
+
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
 
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_payload_10711.json", "$");
