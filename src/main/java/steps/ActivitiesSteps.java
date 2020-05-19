@@ -203,7 +203,45 @@ public class ActivitiesSteps {
                 startTime);
     }
 
+    @Step
     public void postActivitiesParentIdWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = activitiesClient.postActivitiesWithAlterations(requestBody, alterations);
+    }
+
+    @Step
+    public void insertActivityWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        activitiesClient.insertActivityWithAlterations(requestBody, alterations);
+    }
+
+    @Step
+    public void deleteActivity(String id) {
+        activitiesClient.deleteActivity(id);
+    }
+
+    @Step
+    public void checkAwsDispatcherLogContains(String id, String value) {
+        String keyValuePair = "\""+id+"\"" + ":{\"S\":\"" + value + "\"}";
+        assertThat(AwsUtil.checkLogsFor("/aws/lambda/edh-dispatcher", keyValuePair)).isTrue();
+    }
+
+    @Step
+    public void checkAwsMarshallerLogContains(String key, String value) {
+        String keyValuePair = key+": { S: '" + value + "' }";
+        assertThat(AwsUtil.checkLogsFor("/aws/lambda/edh-marshaller", keyValuePair)).isTrue();
+    }
+
+    @Step
+    public void checkAwsDispatcherLogStatusCodeForSystemNumber(String id, int httpCode) {
+        String keyValuePair1 = "\"id\":\"" + id + "\"";
+        String keyValuePair2 = "statusCode: " + httpCode;
+        assertThat(AwsUtil.checkDispatcherLogsForData(keyValuePair1, keyValuePair2)).isTrue();
+    }
+
+    @Step
+    public void checkAwsDispatcherLogStatusCodeForSystemNumber(String httpMethod, String id, int httpCode) {
+        String keyValuePair1 = "\"id\":\"" + id + "\"";
+        String keyValuePair2 = "statusCode: " + httpCode;
+        String keyValuePair3 = "method: '" + httpMethod +"'";
+        assertThat(AwsUtil.checkDispatcherLogsForData(keyValuePair1, keyValuePair2, keyValuePair3)).isTrue();
     }
 }

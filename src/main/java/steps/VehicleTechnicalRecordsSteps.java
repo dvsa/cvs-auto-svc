@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static data.GenericData.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class VehicleTechnicalRecordsSteps {
@@ -451,6 +452,25 @@ public class VehicleTechnicalRecordsSteps {
     public String getNextTrailerIdInSequence() {
         return AwsUtil.getNextTrailerIdInSequence();
     }
+
+    public void checkAwsDispatcherLogStatusCodeForSystemNumber(String httpMethod, String systemNumber, int httpCode) {
+        String keyValuePair1 = "\"systemNumber\":\"" + systemNumber + "\"";
+        String keyValuePair2 = "statusCode: " + httpCode;
+        String keyValuePair3 = "method: '" + httpMethod +"'";
+        assertThat(AwsUtil.checkDispatcherLogsForData(keyValuePair1, keyValuePair2, keyValuePair3)).isTrue();
+    }
+
+    @Step
+    public void deleteRecords(String systemNumber) {
+        AwsUtil.deleteVehicleById(systemNumber);
+    }
+
+
+    @Step
+    public void insertVehicleWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        vehicleTechnicalRecordsClient.insertVehicle(requestBody, alterations);
+    }
+
 
     @Step
     public String getSystemNumberUsingVin(String vin) {
