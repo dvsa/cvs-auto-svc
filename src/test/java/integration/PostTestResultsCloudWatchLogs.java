@@ -23,8 +23,7 @@ public class PostTestResultsCloudWatchLogs {
     @Steps
     TestResultsSteps testResultsSteps;
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC1 - http status code: 202")
     public void testResults_CloudWatch_Logs_HGV_202() {
 
@@ -64,8 +63,7 @@ public class PostTestResultsCloudWatchLogs {
         testResultsSteps.cleanUpTestResultsOfTestTypeId(randomTestResultId);
     }
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC2 - http status code: 400")
     public void testResults_CloudWatch_Logs_HGV_400() {
 
@@ -101,8 +99,7 @@ public class PostTestResultsCloudWatchLogs {
         testResultsSteps.cleanUpTestResultsOfTestTypeId(randomTestResultId);
     }
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC2 - http status code: 401")
     public void testResults_CloudWatch_Logs_HGV_401() {
 
@@ -138,8 +135,7 @@ public class PostTestResultsCloudWatchLogs {
         testResultsSteps.cleanUpTestResultsOfTestTypeId(randomTestResultId);
     }
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC2 - http status code: 403")
     public void testResults_CloudWatch_Logs_HGV_403() {
 
@@ -175,8 +171,7 @@ public class PostTestResultsCloudWatchLogs {
         testResultsSteps.cleanUpTestResultsOfTestTypeId(randomTestResultId);
     }
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC2 - http status code: 404")
     public void testResults_CloudWatch_Logs_HGV_404() {
 
@@ -212,8 +207,7 @@ public class PostTestResultsCloudWatchLogs {
         testResultsSteps.cleanUpTestResultsOfTestTypeId(randomTestResultId);
     }
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC3 - http status code: 429")
     public void testResults_CloudWatch_Logs_HGV_429() {
 
@@ -249,8 +243,7 @@ public class PostTestResultsCloudWatchLogs {
         testResultsSteps.cleanUpTestResultsOfTestTypeId(randomTestResultId);
     }
 
-//    @WithTag("In_Test")
-    @Test
+    @WithTag("integration")
     @Title("CVSB-10773 - CVS to EDH (Completed Tests) - AC3 - http status code: 500")
     public void testResults_CloudWatch_Logs_HGV_500() {
 
