@@ -8,6 +8,7 @@ import data.GenericData;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -774,5 +775,29 @@ public class TestResultsSteps {
     public void valueForFieldInPathShouldEndWith(String path, String expectedValue) {
         System.out.println("Verifying that " + path + " ends with value " + expectedValue);
         response.then().body(path, endsWith(expectedValue));
+    }
+
+    @Step
+    public void checkAwsDispatcherLogContains(String key, String value) {
+        String keyValuePair = "\""+key+"\"" + ":{\"S\":\"" + value + "\"}";
+        assertThat(AwsUtil.checkLogsFor("/aws/lambda/edh-dispatcher", keyValuePair)).isTrue();
+    }
+
+    @Step
+    public void checkAwsMarshallerLogContains(String key, String value) {
+        String keyValuePair = key+": { S: '" + value + "' }";
+        assertThat(AwsUtil.checkLogsFor("/aws/lambda/edh-marshaller", keyValuePair)).isTrue();
+    }
+
+    @Step
+    public void checkAwsDispatcherLogStatusCodeForSystemNumber(String systemNumber, int httpCode) {
+        String keyValuePair1 = "\"systemNumber\":\"" + systemNumber + "\"";
+        String keyValuePair2 = "statusCode: " + httpCode;
+        assertThat(AwsUtil.checkDispatcherLogsForData(keyValuePair1, keyValuePair2)).isTrue();
+    }
+
+    @Step
+    public void cleanUpTestResultsOfTestTypeId(String testResultId) {
+        AwsUtil.deleteTestResultId(testResultId);
     }
 }
