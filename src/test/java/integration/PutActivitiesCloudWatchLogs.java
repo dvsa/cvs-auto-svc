@@ -1,8 +1,6 @@
 package integration;
 
-import data.ActivitiesData;
 import data.GenericData;
-import model.activities.ActivitiesGet;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -19,16 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-
 @RunWith(SerenityRunner.class)
 public class PutActivitiesCloudWatchLogs {
     @Steps
     ActivitiesSteps activitiesSteps;
 
-
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 202")
-    @Test
     public void insertPutActivityVisitHttpCode202() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");
@@ -71,9 +66,8 @@ public class PutActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 400")
-    @Test
     public void insertPutActivityVisitHttpCode400() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");
@@ -118,9 +112,8 @@ public class PutActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 401")
-    @Test
     public void insertPutActivityVisitHttpCode401() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");
@@ -165,9 +158,8 @@ public class PutActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 403")
-    @Test
     public void insertPutActivityVisitHttpCode403() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");
@@ -211,9 +203,8 @@ public class PutActivitiesCloudWatchLogs {
         activitiesSteps.deleteActivity(randomId);
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 404")
-    @Test
     public void insertPutActivityVisitHttpCode404() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");
@@ -257,9 +248,8 @@ public class PutActivitiesCloudWatchLogs {
         activitiesSteps.deleteActivity(randomId);
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 429")
-    @Test
     public void insertPutActivityVisitHttpCode429() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");
@@ -304,9 +294,8 @@ public class PutActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) PUT - AC1 - http status code 500")
-    @Test
     public void insertPutActivityVisitHttpCode500() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10769.json","$");

@@ -2,9 +2,7 @@ package integration;
 
 import data.ActivitiesData;
 import data.GenericData;
-import model.activities.Activities;
 import model.activities.ActivitiesGet;
-import model.activities.ActivitiesPut;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -15,7 +13,6 @@ import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
-import util.DataUtil;
 import util.JsonPathAlteration;
 
 import java.text.SimpleDateFormat;
@@ -29,9 +26,8 @@ public class PostActivitiesCloudWatchLogs {
     ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 202")
-    @Test
     public void insertPostActivityVisitHttpCode202() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -75,9 +71,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//     @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 400")
-    @Test
     public void insertPostActivityVisitHttpCode400() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -121,9 +116,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//     @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 401")
-    @Test
     public void insertPostActivityVisitHttpCode401() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -167,9 +161,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//     @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 403")
-    @Test
     public void insertPostActivityVisitHttpCode403() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -214,9 +207,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//     @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 404")
-    @Test
     public void insertPostActivityVisitHttpCode404() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -260,9 +252,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 429")
-    @Test
     public void insertPostActivityVisitHttpCode429() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -306,9 +297,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//     @WithTag("In_Test")
+    @WithTag("integration")
     @Title("CVSB-10767 CVS to EDH (Open Site Visits) POST - AC1 - http status code 500")
-    @Test
     public void insertPostActivityVisitHttpCode500() {
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("activities_10767.json","$");
@@ -354,12 +344,8 @@ public class PostActivitiesCloudWatchLogs {
 
 
 
-
-
-
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC1 - http status code 202")
-    @Test
     public void insertPostActivityTimeHttpCode202() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -391,9 +377,8 @@ public class PostActivitiesCloudWatchLogs {
         activitiesSteps.deleteActivity(id);
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC2 - http status code 400")
-    @Test
     public void insertPostActivityTimeHttpCode400() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -426,9 +411,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC2 - http status code 401")
-    @Test
     public void insertPostActivityTimeHttpCode401() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -461,9 +445,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC2 - http status code 403")
-    @Test
     public void insertPostActivityTimeHttpCode403() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -496,9 +479,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC2 - http status code 404")
-    @Test
     public void insertPostActivityTimeHttpCode404() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -531,9 +513,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC3 - http status code 429")
-    @Test
     public void insertPostActivityTimeHttpCode429() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -566,9 +547,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) POST - AC3 - http status code 500")
-    @Test
     public void insertPostActivityTimeHttpCode500() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -601,9 +581,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC4 - http status code 202")
-    @Test
     public void insertPutActivityTimeHttpCode202() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -647,9 +626,8 @@ public class PostActivitiesCloudWatchLogs {
         activitiesSteps.deleteActivity(id);
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC5 - http status code 400")
-    @Test
     public void insertPutActivityTimeHttpCode400() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -693,9 +671,8 @@ public class PostActivitiesCloudWatchLogs {
         activitiesSteps.deleteActivity(id);
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC5 - http status code 401")
-    @Test
     public void insertPutActivityTimeHttpCode401() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -741,9 +718,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC5 - http status code 403")
-    @Test
     public void insertPutActivityTimeHttpCode403() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -788,9 +764,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC5 - http status code 404")
-    @Test
     public void insertPutActivityTimeHttpCode404() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -834,9 +809,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC6 - http status code 429")
-    @Test
     public void insertPutActivityTimeHttpCode429() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
@@ -880,9 +854,8 @@ public class PostActivitiesCloudWatchLogs {
 
     }
 
-//    @WithTag("In_test")
+    @WithTag("integration")
     @Title("CVSB-10779 - CVS to EDH (Wait times) PUT - AC6 - http status code 500")
-    @Test
     public void insertPutActivityTimeHttpCode500() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
