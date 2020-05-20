@@ -60,7 +60,7 @@ public class PostTestResultsPozDefectsLvlSubmitted {
         validateSavedDataOld();
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - imDescription")
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - imDescription - null")
     @Test
     public void testResultsEmptyImDescription() {
 

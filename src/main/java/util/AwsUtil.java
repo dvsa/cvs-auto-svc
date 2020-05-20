@@ -52,13 +52,11 @@ public class AwsUtil {
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
                 AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
-
-        System.out.println(System.getProperty("AWS_ROLE"));
-
+        String uuid = String.valueOf(UUID.randomUUID());
         AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
                 .withRoleArn(System.getProperty("AWS_ROLE"))
                 .withDurationSeconds(3600)
-                .withRoleSessionName(testNumber);
+                .withRoleSessionName(uuid);
         AssumeRoleResult assumeResult =
                 stsClient.assumeRole(assumeRequest);
 
@@ -67,6 +65,7 @@ public class AwsUtil {
                         assumeResult.getCredentials().getAccessKeyId(),
                         assumeResult.getCredentials().getSecretAccessKey(),
                         assumeResult.getCredentials().getSessionToken());
+
         String bucketName = loader.getS3Bucket();
 
         String fileName = testNumber + "_" + vin + ".pdf";
@@ -243,6 +242,7 @@ public class AwsUtil {
                         assumeResult.getCredentials().getAccessKeyId(),
                         assumeResult.getCredentials().getSecretAccessKey(),
                         assumeResult.getCredentials().getSessionToken());
+
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
