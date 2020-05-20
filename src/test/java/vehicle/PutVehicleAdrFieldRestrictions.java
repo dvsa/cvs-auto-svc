@@ -156,9 +156,11 @@ public class PutVehicleAdrFieldRestrictions {
     @Title("CVSB-10155 - AC1 - Attempt to update a vehicle with unexpected values for an ADR field that accepts only specific values")
     @Test
     public void testValidateAdrAttributesDataTypesAndRestrictions() {
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction));
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyHgv, alterations);
+        JsonPathAlteration alterationAStatusCode = new JsonPathAlteration("$.techRecord[0]", "provisional","statusCode","ADD_FIELD");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction, alterationAStatusCode));
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
     }
 }
