@@ -242,6 +242,7 @@ public class AwsUtil {
                         assumeResult.getCredentials().getAccessKeyId(),
                         assumeResult.getCredentials().getSecretAccessKey(),
                         assumeResult.getCredentials().getSessionToken());
+
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);

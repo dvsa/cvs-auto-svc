@@ -478,6 +478,7 @@ public class TestResultsSteps {
 
     private boolean validateTestNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
+        System.out.println("TestNumber: " + testNumber);
         if (testNumber != null && !testNumber.isEmpty()) {
             assertThat(isTestNumberChecksumValid(testNumber)).isTrue();
             assertThat(testNumber.length() == 9).isTrue();
