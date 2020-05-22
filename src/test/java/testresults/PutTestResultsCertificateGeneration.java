@@ -145,7 +145,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
                 alterationPutTestTypeClassification
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         testResultsSteps.getTestResults(randomSystemNumber);

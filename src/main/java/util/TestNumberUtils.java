@@ -64,14 +64,14 @@ public class TestNumberUtils {
         String expectedLastTwoDigits;
 
         if (sum >= 100) {
-            expectedLastTwoDigits = String.valueOf(sum).substring(0, 2);
+            expectedLastTwoDigits = String.valueOf(sum).substring(String.valueOf(sum).length() - 2);
         } else if (sum < 10) {
             expectedLastTwoDigits = "0" + sum;
         } else expectedLastTwoDigits = String.valueOf(sum);
-
         if (actualLastTwoDigits.equals(expectedLastTwoDigits)) {
             return true;
         } else {
+            System.out.println("expectedLastTwoDigits: " + expectedLastTwoDigits + " NOT EQUALS actualLastTwoDigits: " + actualLastTwoDigits);
             return false;
         }
     }
@@ -97,7 +97,7 @@ public class TestNumberUtils {
         String lastTwoDigits;
 
         if (sum >= 100) {
-            lastTwoDigits = String.valueOf(sum).substring(0, 2);
+            lastTwoDigits = String.valueOf(sum).substring(String.valueOf(sum).length() - 2);
         } else if (sum < 10) {
             lastTwoDigits = "0" + sum;
         } else lastTwoDigits = String.valueOf(sum);
