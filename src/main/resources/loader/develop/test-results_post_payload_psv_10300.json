@@ -1,0 +1,91 @@
+{
+  "vrm": "PST11244",
+  "vin": "P11322224",
+  "systemNumber": "BSFR3244BDSGR",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369569",
+  "testStationType": "gvts",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "testerEmailAddress": "someone@email.com",
+  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
+  "testEndTimestamp": "2019-01-14T10:36:33.987Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "vehicleClass": {
+    "code": "2",
+    "description": "motorbikes over 200cc or with a sidecar"
+  },
+  "vehicleType": "psv",
+  "numberOfSeats": 45,
+  "noOfAxles": 2,
+  "numberOfWheelsDriven": 4,
+  "vehicleConfiguration": "rigid",
+  "odometerReading": 350000,
+  "odometerReadingUnits": "kilometres",
+  "preparerId": "bl5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "m1",
+  "countryOfRegistration": "united kingdom",
+  "vehicleSize": "small",
+  "testResultId": "3",
+  "testTypes": [
+    {
+      "testTypeName": "Low Emissions Certificate (LEC) with annual test",
+      "name": "Technical test",
+      "testTypeId": "39",
+      "certificateNumber": "12334",
+      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
+      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
+      "testExpiryDate": "2019-09-19",
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "particulateTrapFitted": "New improved particulateTrap",
+      "particulateTrapSerialNumber": "12481632",
+      "modificationTypeUsed": "Big filter",
+      "smokeTestKLimitApplied": "2.2",
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType": "diesel",
+      "numberOfSeatbeltsFitted": 2,
+      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "seatbeltInstallationCheckDate": true,
+      "prohibitionIssued": false,
+      "reasonForAbandoning": "none",
+      "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+      "defects": [
+        {
+          "imNumber": 3,
+          "imDescription": "Seat Belts & Supplementary Restraint Systems",
+          "additionalInformation": {
+            "location": {
+              "vertical": "upper",
+              "horizontal": null,
+              "lateral": "centre",
+              "longitudinal": null,
+              "rowNumber": 1,
+              "seatNumber": 2,
+              "axleNumber": null
+            },
+            "notes": "seatbelt missing"
+          },
+          "itemNumber": 1,
+          "itemDescription": "Obligatory Seat Belt:",
+          "deficiencyRef": "3.1.a",
+          "deficiencyId": "a",
+          "deficiencySubId": null,
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "stdForProhibition": false,
+          "prs": false,
+          "prohibitionIssued": true
+        }
+      ],
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456",
+      "testResult": "pass",
+      "additionalCommentsForAbandon": "none"
+    }
+  ]
+}
