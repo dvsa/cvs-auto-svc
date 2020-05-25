@@ -64,6 +64,7 @@ public class PutVehicleTechnicalRecordsNeg {
         String randomVin = GenericData.generateRandomVin();
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
+
         // read post request body from file
         String requestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
         // read the adr details from the file used for put request body with adr details
@@ -78,111 +79,113 @@ public class PutVehicleTechnicalRecordsNeg {
         //TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        //generate random System Number
+        String randomSysNo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        // PUT the update record.
+        String putRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields_put.json", "$");
         // Validate that making PUT request without mandatory adr fields will give error
-        // vehicleDetails.type
+        // create alteration to change Vin in the post request body with the random generated System Number
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSysNo,"","REPLACE");
         JsonPathAlteration alterationAddAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetails,"adrDetails","ADD_FIELD");
+        alterations.add(alterationSysNo);
         alterations.add(alterationAddAdrDetails);
+
         JsonPathAlteration alterationDeleteAdrVehicleDetailsType = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.type", "","","DELETE");
         alterations.add(alterationDeleteAdrVehicleDetailsType);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // vehicleDetails.approvalDate
         JsonPathAlteration alterationDeleteAdrVehicleDetailsApprovalDate = new JsonPathAlteration("$.techRecord[0].adrDetails.vehicleDetails.approvalDate", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrVehicleDetailsApprovalDate);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // listStatementApplicable
         JsonPathAlteration alterationDeleteAdrListStatementApplicable = new JsonPathAlteration("$.techRecord[0].adrDetails.listStatementApplicable", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrListStatementApplicable);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // batteryListNumber
         JsonPathAlteration alterationDeleteAdrBatteryListNumber = new JsonPathAlteration("$.techRecord[0].adrDetails.batteryListNumber", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrBatteryListNumber);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // weight
         JsonPathAlteration alterationDeleteAdrWeight = new JsonPathAlteration("$.techRecord[0].adrDetails.weight", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrWeight);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // permittedDangerousGoods
         JsonPathAlteration alterationDeleteAdrPermittedDangerousGoods = new JsonPathAlteration("$.techRecord[0].adrDetails.permittedDangerousGoods", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrPermittedDangerousGoods);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // applicantDetails.name
         JsonPathAlteration alterationDeleteAdrApplicantDetailsName = new JsonPathAlteration("$.techRecord[0].adrDetails.applicantDetails.name", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrApplicantDetailsName);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // applicantDetails.street
         JsonPathAlteration alterationDeleteAdrApplicantDetailsStreet = new JsonPathAlteration("$.techRecord[0].adrDetails.applicantDetails.street", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrApplicantDetailsStreet);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // applicantDetails.town
         JsonPathAlteration alterationDeleteAdrApplicantDetailsTown = new JsonPathAlteration("$.techRecord[0].adrDetails.applicantDetails.town", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrApplicantDetailsTown);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // applicantDetails.city
         JsonPathAlteration alterationDeleteAdrApplicantDetailsCity = new JsonPathAlteration("$.techRecord[0].adrDetails.applicantDetails.city", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrApplicantDetailsCity);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // applicantDetails.postcode
         JsonPathAlteration alterationDeleteAdrApplicantDetailsPostcode = new JsonPathAlteration("$.techRecord[0].adrDetails.applicantDetails.postcode", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrApplicantDetailsPostcode);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // tank.tankDetails.tankManufacturer
         JsonPathAlteration alterationDeleteAdrTankManufacturer = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tankManufacturer", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrTankManufacturer);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        // tank.tankDetails.yearOfManufacture
-        JsonPathAlteration alterationDeleteAdrYearOfManufacture = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.yearOfManufacture", "","","DELETE");
-        alterations.remove(alterations.size()-1);
-        alterations.add(alterationDeleteAdrYearOfManufacture);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        // tank.tankDetails.tankCode
-        JsonPathAlteration alterationDeleteAdrTankCode = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tankCode", "","","DELETE");
-        alterations.remove(alterations.size()-1);
-        alterations.add(alterationDeleteAdrTankCode);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        // tank.tankDetails.tankManufacturerSerialNo
-        JsonPathAlteration alterationDeleteAdrTankManufacturerSerialNo = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tankManufacturerSerialNo", "","","DELETE");
-        alterations.remove(alterations.size()-1);
-        alterations.add(alterationDeleteAdrTankManufacturerSerialNo);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        // tank.tankDetails.tankTypeAppNo
-        JsonPathAlteration alterationDeleteAdrTankTypeAppNo = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tankTypeAppNo", "","","DELETE");
-        alterations.remove(alterations.size()-1);
-        alterations.add(alterationDeleteAdrTankTypeAppNo);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
         // tank.tankStatement.substancesPermitted
         JsonPathAlteration alterationDeleteAdrTankStatementSubstancesPermitted = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankStatement.substancesPermitted", "","","DELETE");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationDeleteAdrTankStatementSubstancesPermitted);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        // tank.tankDetails.yearOfManufacture
+        JsonPathAlteration alterationDeleteAdrYearOfManufacture = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.yearOfManufacture", "","","DELETE");
+        alterations.remove(alterations.size()-1);
+        alterations.add(alterationDeleteAdrYearOfManufacture);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        // tank.tankDetails.tankCode
+        JsonPathAlteration alterationDeleteAdrTankCode = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tankCode", "","","DELETE");
+        alterations.remove(alterations.size()-1);
+        alterations.add(alterationDeleteAdrTankCode);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        // tank.tankDetails.tankManufacturerSerialNo
+        JsonPathAlteration alterationDeleteAdrTankManufacturerSerialNo = new JsonPathAlteration("$.techRecord[0].adrDetails.tank.tankDetails.tankManufacturerSerialNo", "","","DELETE");
+        alterations.remove(alterations.size()-1);
+        alterations.add(alterationDeleteAdrTankManufacturerSerialNo);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomSysNo, putRequestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+
+
     }
 
     @WithTag("Vtm")

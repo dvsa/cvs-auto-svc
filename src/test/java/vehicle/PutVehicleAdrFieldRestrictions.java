@@ -94,7 +94,8 @@ public class PutVehicleAdrFieldRestrictions {
                 {"$.techRecord[0].adrDetails.compatibilityGroupJ", 100},
                 {"$.techRecord[0].adrDetails.documents[0]", 100},
                 {"$.techRecord[0].adrDetails.permittedDangerousGoods[0]", false},
-                {"$.techRecord[0].adrDetails.additionalExaminerNotes", RandomStringUtils.randomAlphanumeric(1025)},
+                //TODO uncomment when clarified whether this value should be limited to 1024 characters or not
+//                {"$.techRecord[0].adrDetails.additionalExaminerNotes", RandomStringUtils.randomAlphanumeric(1025)},
                 {"$.techRecord[0].adrDetails.additionalExaminerNotes", 100},
                 {"$.techRecord[0].adrDetails.applicantDetails.name", RandomStringUtils.randomAlphanumeric(151)},
                 {"$.techRecord[0].adrDetails.applicantDetails.name", 100},
