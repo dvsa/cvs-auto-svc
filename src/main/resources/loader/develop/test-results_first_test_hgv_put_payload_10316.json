@@ -1,0 +1,65 @@
+{
+  "msUserDetails":{
+    "msUser":"catalin",
+    "msOid":"123243424-234234245"
+  },
+  "testResult":{
+    "testerStaffId": "133",
+    "testResultId": "c51ef277-92fa-4ff9-b164-be3612b56d45",
+    "systemNumber": "10000223",
+    "testStartTimestamp": "2020-05-27T13:18:56.966Z",
+    "odometerReadingUnits": "kilometres",
+    "testEndTimestamp": "2020-05-27T13:21:56.966Z",
+    "testStatus": "submitted",
+    "numberOfWheelsDriven": 3,
+    "noOfAxles": "2",
+    "testTypes": [
+      {
+        "testCode": "ffv2",
+        "testNumber": "W03V32972",
+        "testTypeClassification": "Annual With Certificate",
+        "testAnniversaryDate": "2021-02-08T04:22:38.377Z",
+        "additionalCommentsForAbandon": "none",
+        "testTypeEndTimestamp": "2020-05-27T13:20:56.966Z",
+        "reasonForAbandoning": "none",
+        "testTypeId": "95",
+        "secondaryCertificateNumber": "1234",
+        "testTypeStartTimestamp": "2020-05-27T13:19:56.966Z",
+        "certificateNumber": "W01A00209",
+        "testTypeName": "First test",
+        "additionalNotesRecorded": "VEHICLE FRONT REGISTRATION PLATE MISSING",
+        "customDefects": [
+          {
+            "referenceNumber": "abcd",
+            "defectName": "Some custom defect",
+            "defectNotes": "some defect noe"
+          }
+        ],
+        "defects": [
+
+        ],
+        "name": "First test",
+        "testResult": "pass"
+      }
+    ],
+    "vehicleClass": {
+      "description": "motorbikes over 200cc or with a sidecar",
+      "code": "2"
+    },
+    "vin": "PNW0TKD0REJ212485",
+    "testStationName": "Rowe, Wunsch and Wisoky",
+    "vehicleType": "hgv",
+    "countryOfRegistration": "gb",
+    "preparerId": "ak4434",
+    "preparerName": "Durrell Vehicles Limited",
+    "odometerReading": 100000,
+    "vehicleConfiguration": "rigid",
+    "testStationType": "gvts",
+    "reasonForCancellation": "none",
+    "testerName": "Gica",
+    "vrm": "B2C1C11",
+    "testStationPNumber": "87-1369569",
+    "testerEmailAddress": "someone@email.com",
+    "euVehicleCategory": "m1"
+  }
+}

@@ -10,6 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +19,8 @@ import steps.VehicleTechnicalRecordsSteps;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
@@ -32,8 +35,13 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     static String randomSystemNumber;
     static String randomTestResultId;
 
+
+
     @BeforeClass
     public static void createRecord() {
+
+        Date date  = new Date();
+
         // Read the base test result JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
 
@@ -70,8 +78,19 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
 
-        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(alterationSystemNumberTestResults, alterationVinTestResults,alterationTestResultIdPost));
+
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
 
         String alteredBodyTestResult = GenericData.applyJsonAlterations(testResultRecord, alterationsTestResults);
 
@@ -124,16 +143,23 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     @Test
     public void testResultsPut() {
 
+        Date date  = new Date();
+
        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultIdPutTestResults = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-
-
         JsonPathAlteration alterationPutTestResult = new JsonPathAlteration("$.testResult.testTypes[0].testResult", testResult, "", "REPLACE");
         JsonPathAlteration alterationPutTestStatus = new JsonPathAlteration("$.testResult.testStatus", testStatus, "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeClassification = new JsonPathAlteration("$.testResult.testTypes[0].testTypeClassification", testTypeClassification, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -142,7 +168,11 @@ public class PutTestResultsCertificateGeneration extends TestCase {
                 alterationTestResultIdPutTestResults,
                 alterationPutTestResult,
                 alterationPutTestStatus,
-                alterationPutTestTypeClassification
+                alterationPutTestTypeClassification,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
         ));
 
         testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
@@ -151,6 +181,8 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("TestNumber is " +testNumber);
 
         // verify that the certificate is created in the S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);

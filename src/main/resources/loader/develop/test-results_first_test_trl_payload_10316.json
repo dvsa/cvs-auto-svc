@@ -1,0 +1,50 @@
+{
+  "testResultId":"0fd419ee-b60a-4c9d-9eda-c4e8a67cbe6a",
+  "testStationName":"Rowe, Wunsch and Wisoky",
+  "testStationPNumber":"87-1369569",
+  "testStationType":"gvts",
+  "testerName":"Gica",
+  "testerStaffId":"133",
+  "testerEmailAddress":"someone@email.com",
+  "testStartTimestamp":"2020-05-26T16:59:03.373Z",
+  "testEndTimestamp":"2020-05-26T16:59:50.234Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "trailerId":"C234567",
+  "firstUseDate":"2019-06-24",
+  "systemNumber":"11000019",
+  "vin":"T12111111",
+  "vehicleClass":{
+    "description":"trailer",
+    "code":"t"
+  },
+  "vehicleType":"trl",
+  "vehicleConfiguration":"drawbar",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"o2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":6,
+  "numberOfWheelsDriven":null,
+  "testTypes":[
+    {
+      "name":"First test",
+      "testTypeName":"First test",
+      "testTypeId":"95",
+      "certificateNumber":null,
+      "secondaryCertificateNumber":null,
+      "testTypeStartTimestamp":"2020-05-26T16:59:34.559Z",
+      "testTypeEndTimestamp":"2020-05-26T16:59:50.235Z",
+      "testExpiryDate":null,
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"dfds",
+      "defects":[
+
+      ],
+      "customDefects":null
+    }
+  ]
+}

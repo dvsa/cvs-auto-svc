@@ -5,6 +5,7 @@ import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -618,5 +619,29 @@ public class VehicleTechnicalRecordsClient {
         testResultAttributes.put("vehicleType", vehicleType);
 
         return testResultAttributes;
+    }
+
+    public Response getVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier, String searchCriteria) {
+        Response response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
+        }
+
+        return response;
+    }
+
+    private Response callGetVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,String searchCriteria) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("searchCriteria", searchCriteria)
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+
     }
 }

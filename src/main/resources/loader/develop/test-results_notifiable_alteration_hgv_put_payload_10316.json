@@ -1,0 +1,55 @@
+{
+  "msUserDetails":{
+    "msUser":"catalin",
+    "msOid":"123243424-234234245"
+  },
+  "testResult":{
+    "testResultId":"3c7622ad-541a-4f8e-bbba-098c44ca51e6",
+    "testStationName":"Rowe, Wunsch and Wisoky",
+    "testStationPNumber":"87-1369569",
+    "testStationType":"gvts",
+    "testerName":"Gica",
+    "testerStaffId":"133",
+    "testerEmailAddress":"someone@email.com",
+    "testStartTimestamp":"2020-05-26T17:02:54.090Z",
+    "testEndTimestamp":"2020-05-26T17:04:12.867Z",
+    "testStatus":"submitted",
+    "reasonForCancellation":null,
+    "vrm":"F6F2H50",
+    "odometerReading":4645,
+    "odometerReadingUnits":"kilometres",
+    "systemNumber":"1100057",
+    "vin":"A00034477",
+    "vehicleClass":{
+      "description":"heavy goods vehicle",
+      "code":"v"
+    },
+    "vehicleType":"hgv",
+    "vehicleConfiguration":"rigid",
+    "preparerId":"No preparer ID given",
+    "preparerName":"",
+    "euVehicleCategory":"m1",
+    "countryOfRegistration":"gb",
+    "noOfAxles":2,
+    "numberOfWheelsDriven":null,
+    "testTypes":[
+      {
+        "testCode": "ffv2",
+        "testNumber": "W03V32972",
+        "testTypeClassification": "Annual With Certificate",
+        "name":"Technical test",
+        "testTypeName":"Free notifiable alteration",
+        "testTypeId":"47",
+        "secondaryCertificateNumber":null,
+        "testTypeStartTimestamp":"2020-05-26T17:03:57.039Z",
+        "testTypeEndTimestamp":"2020-05-26T17:04:12.869Z",
+        "testResult":"pass",
+        "prohibitionIssued" : false,
+        "reasonForAbandoning":null,
+        "additionalCommentsForAbandon":null,
+        "additionalNotesRecorded":"dsd",
+        "customDefects":null
+      }
+    ]
+  }
+}

@@ -1,32 +1,37 @@
 package vehicle;
 
 import data.GenericData;
+import model.testresults.TestVersion;
+import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Ignore;
+import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    @Steps
+    TestResultsSteps testResultsSteps;
+
 
     Date date  = new Date();
 
@@ -1022,7 +1027,6 @@ public class PutVehicleTechnicalRecords {
                 "{ it.contains('adrDetails.tank.tankDetails.tc2Details.tc2Type') }.size()", 1);
     }
 
-    @WithTag("Vtm")
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - CAR")
     @Test
     public void testUpdateVehicleTechnicalRecordForCar() {
@@ -1074,7 +1078,6 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].updateType","techRecordUpdate" );
     }
 
-    @WithTag("Vtm")
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - LGV")
     @Test
     public void testUpdateVehicleTechnicalRecordForLgv() {
@@ -1127,7 +1130,6 @@ public class PutVehicleTechnicalRecords {
 
     }
 
-    @WithTag("Vtm")
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - MOTORCYCLE")
     @Test
     public void testUpdateVehicleTechnicalRecordForMotorcycle() {
@@ -1179,7 +1181,6 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].updateType","techRecordUpdate" );
     }
 
-    @WithTag("Vtm")
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - CAR")
     @Test
     public void testUpdateVehicleTechnicalRecordOptionalVehicleClassForCar() {
@@ -1234,7 +1235,6 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("[0].techRecord[0]","vehicleClass");
     }
 
-    @WithTag("Vtm")
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - LGV")
     @Test
     public void testUpdateVehicleTechnicalRecordWithOptionalVehicleClassForLgv() {
@@ -1290,5 +1290,868 @@ public class PutVehicleTechnicalRecords {
 
     }
 
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - First Test")
+    @Test
+    public void testPostVehicleTechRecordHgvPrsFirstTest(){
 
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestResult,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_hgv_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResultPut = new JsonPathAlteration("$.testResult.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationTestResultPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - First Test")
+    @Test
+    public void testPostVehicleTechRecordHgvPassFirstTest(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_hgv_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - First Test")
+    @Test
+    public void testPostVehicleTechRecordTrlPrsFirstTest(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestResult,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_trl_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResultPut = new JsonPathAlteration("$.testResult.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationTestResultPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - First Test")
+    @Test
+    public void testPostVehicleTechRecordTrlPassFirstTest(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_trl_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - Notifiable Alteration")
+    @Test
+    public void testPostVehicleTechRecordHgvPrsNotifiableAlteration(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestResult,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResultPut = new JsonPathAlteration("$.testResult.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationTestResultPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - Notifiable Alteration")
+    @Test
+    public void testPostVehicleTechRecordHgvPassNotifiableAlteration(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - Notifiable Alteration")
+    @Test
+    public void testPostVehicleTechRecordTrlPrsNotifiableAlteration(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestResult,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResultPut = new JsonPathAlteration("$.testResult.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationTestResultPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
+    @Test
+    public void testPostVehicleTechRecordTrlPassNotifiableAlteration(){
+
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl_payload_10316.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl_put_payload_10316.json","$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp",new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)) , "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResultsPut = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // wait until the tech-record is updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+    }
 }

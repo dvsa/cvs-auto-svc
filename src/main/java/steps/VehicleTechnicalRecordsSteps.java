@@ -521,4 +521,10 @@ public class VehicleTechnicalRecordsSteps {
     public Map<String,Object> createTechRecord (String vehicleType, JSONObject restrictions) {
         return vehicleTechnicalRecordsClient.createTechRecord(vehicleType, restrictions);
     }
+
+    @Step
+    public String getVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,@NotNull VehicleTechnicalRecordSearchCriteria criteria) {
+        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, criteria.getSearchCriteria());
+        return response.prettyPrint();
+    }
 }
