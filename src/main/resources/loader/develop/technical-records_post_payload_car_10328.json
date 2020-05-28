@@ -1,0 +1,39 @@
+{
+  "msUserDetails": {
+    "msUser": "Tue",
+    "msOid": "12345"
+  },
+  "primaryVrm": "QU123RT",
+  "techRecord": [
+    {
+      "createdAt": "2019-06-24T10:26:54.903Z",
+      "createdByName": "Deepika",
+      "createdById": "3523",
+      "noOfAxles": 2,
+      "regnDate": "1986-05-01",
+      "manufactureYear": 1986,
+      "euVehicleCategory": "m1",
+      "reasonForCreation": "Testing",
+      "remarks":"For test",
+      "vehicleClass": {
+        "code": "4",
+        "description": "MOT class 4"
+      },
+      "applicantDetails": {
+        "name": "************",
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "postTown": "*",
+        "postCode": "*****",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "vehicleSubclass": [
+        "N"
+      ],
+      "vehicleType": "car"
+    }
+  ],
+  "vin": "P0853010911250"
+}

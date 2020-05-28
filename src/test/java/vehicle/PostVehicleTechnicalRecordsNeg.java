@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -147,4 +148,133 @@ public class PostVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyHgv, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10328 - AC3. POST: Attempt to create a new vehicle with a not applicable field - CAR")
+    @Test
+    public void testCreateVehicleTechnicalRecordNotApplicableFieldForCar() {
+
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        //Read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_car_10328.json","$");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", 2, "euroStandard", "ADD_FIELD");
+        alterations.add(notApplicableField);
+        // POST tech-records and verify the expected response
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10328 - AC3. POST: Attempt to create a new vehicle with a not applicable field - LGV")
+    @Test
+    public void testCreateVehicleTechnicalRecordNotApplicableFieldForLgv() {
+
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        //Read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_lgv_10328.json","$");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", 2, "euroStandard", "ADD_FIELD");
+        alterations.add(notApplicableField);
+        // POST tech-records and verify the expected response
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10328 - AC3. POST: Attempt to create a new vehicle with a not applicable field - MOTORCYCLE")
+    @Test
+    public void testCreateVehicleTechnicalRecordNotApplicableFieldForMotorcycle() {
+
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        //Read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_motorcycle_10328.json","$");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        JsonPathAlteration notApplicableField = new JsonPathAlteration("$.techRecord[0]", 2, "euroStandard", "ADD_FIELD");
+        alterations.add(notApplicableField);
+        // POST tech-records and verify the expected response
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10328 - AC2. PUT: Attempt to update a vehicle without a mandatory field - VehicleClass is missing - MOTORCYCLE")
+    @Test
+    public void testCreateVehicleTechRecordWithVehicleClassMissingForMotorcycle() {
+
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        //Read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_motorcycle_10328.json","$");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationVehicleClass = new JsonPathAlteration("$.techRecord[0].vehicleClass", "","","DELETE");
+
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm,alterationVehicleClass));
+
+        // POST tech-records and verify the expected response
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+        vehicleTechnicalRecordsSteps.validatePostErrorData("vehicleClass", "is required");
+    }
+
+    @WithTag("Vtm")
+    @Title("CVSB-10328 - AC2. PUT: Attempt to update a vehicle without a mandatory field - VehicleClass is invalid - MOTORCYCLE")
+    @Test
+    public void testCreateVehicleTechRecordWithVehicleClassInvalidForMotorcycle() {
+
+        //generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        //Read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_motorcycle_10328.json","$");
+        // create alteration to change Vin in the request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationVehicleClass = new JsonPathAlteration("$.techRecord[0].vehicleClass", null,"","REPLACE");
+
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm,alterationVehicleClass));
+
+        // POST tech-records and verify the expected response
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+        vehicleTechnicalRecordsSteps.validatePostErrorData("vehicleClass", "must be of type object");
+    }
+
+
 }
