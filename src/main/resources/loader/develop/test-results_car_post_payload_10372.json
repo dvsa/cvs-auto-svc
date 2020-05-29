@@ -1,0 +1,64 @@
+{
+  "testResultId":"c1fc4382-fd97-4b9f-b861-d91ffbd4816f",
+  "testStationName":"Rowe, Wunsch and Wisoky",
+  "testStationPNumber":"87-1369569",
+  "testStationType":"gvts",
+  "testerName":"Gica",
+  "testerStaffId":"133",
+  "testerEmailAddress":"someone@email.com",
+  "testStartTimestamp":"2020-05-28T13:44:48.281Z",
+  "testEndTimestamp":"2020-05-28T13:47:09.561Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"C47WLL",
+  "odometerReading":54,
+  "odometerReadingUnits":"kilometres",
+  "regnDate":"1986-05-01",
+  "systemNumber":"11000009",
+  "vin":"YV31MEC18GA011900",
+  "vehicleClass": {
+    "code": "4",
+    "description": "MOT class 4"
+  },
+  "vehicleSubclass": [
+    "n"
+  ],
+  "vehicleType":"car",
+  "vehicleConfiguration":"articulated",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"m1",
+  "countryOfRegistration":"gb",
+  "noOfAxles": 2,
+  "numberOfWheelsDriven": 2,
+  "testTypes":[
+    {
+      "name":"Basic inspection",
+      "testTypeName":"Basic voluntary IVA inspection",
+      "testTypeId":"154",
+      "certificateNumber":"35346",
+      "secondaryCertificateNumber":"4645",
+      "testTypeStartTimestamp":"2020-05-28T13:46:41.224Z",
+      "testTypeEndTimestamp":"2020-05-28T13:47:09.563Z",
+      "modType":null,
+      "emissionStandard":null,
+      "fuelType":null,
+      "smokeTestKLimitApplied":null,
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":null,
+      "testExpiryDate":null,
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"zdfvc",
+      "defects":[
+
+      ],
+      "customDefects":[
+
+      ]
+    }
+  ]
+}

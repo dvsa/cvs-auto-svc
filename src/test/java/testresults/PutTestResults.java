@@ -5,6 +5,8 @@ import io.restassured.http.ContentType;
 import junit.framework.TestCase;
 import model.testresults.TestResultsStatus;
 import model.testresults.TestVersion;
+import model.vehicles.VehicleTechnicalRecordSearchCriteria;
+import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import io.restassured.response.Response;
@@ -2185,5 +2187,731 @@ public class PutTestResults extends TestCase{
         testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
         testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
     }
-}
 
+    @Title("CVSB-10372 - AC5. PUT: Attempt to update a test record with a not applicable field - COIF With Annual Test")
+    @Test
+    public void PutTestResultsForNotApplicableCOIFAnnual() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.testResult", "SGETBWD","trailerID","ADD_FIELD");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTrailerId
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+
+    }
+
+    @Title("CVSB-10372 - AC5. PUT: Attempt to update a test record with a not applicable field - COIF Without Annual Test")
+    @Test
+    public void PutTestResultsForNotApplicableCOIFWithoutAnnual() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "143", "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp,
+                alterationTestTypeId));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.testResult", "SGETBWD","trailerID","ADD_FIELD");
+        JsonPathAlteration alterationTestTypeID = new JsonPathAlteration("$.testResult.testTypes[0].testTypeId", "143", "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestTypeID,
+                alterationTrailerId
+
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @Title("CVSB-10372 - AC5. PUT: Attempt to update a test record with a not applicable field - MSVA")
+    @Test
+    public void PutTestResultsForNotApplicableMSVA() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_motorcycle_10328.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_motorcycle_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testResult.testTypes[0]", "2020-06-01","testExpiryDate","ADD_FIELD");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestExpiryDate
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @Title("CVSB-10372 - AC5. PUT: Attempt to update a test record with a not applicable field - IVA")
+    @Test
+    public void PutTestResultsForNotApplicableIVA() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_car_10328.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_car_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_car_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testResult.testTypes[0]", "2020-06-01","testExpiryDate","ADD_FIELD");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestExpiryDate
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+    }
+
+    @Title("CVSB-10372 - AC8. Generate a certificate - PSV + PASSED Specialist test only - COIF with annual test - CEL, CES")
+    @Test
+    public void PutTestResultsCertificateGenerationForCOIFTest() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String testNumber = testResultsSteps.getTestNumber();
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestNumber= new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestNumber
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        // Validate if the certificate is generated
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("CVSB-10372 - AC8. Generate a certificate - PSV + PASSED Specialist test only - COIF with annual test retest - CKL, CKS")
+    @Test
+    public void PutTestResultsCertificateGenerationForCOIFRetest() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeID= new JsonPathAlteration("$.testTypes[0].testTypeId", "175", "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestTypeID,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeId= new JsonPathAlteration("$.testResult.testTypes[0].testTypeId", "175", "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestTypeId
+                //alterationTestNumber
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String testNumberPut = testResultsSteps.getTestNumberForPut();
+
+        //Validate if the certificate is generated
+        testResultsSteps.validateCertificateIsGenerated(testNumberPut,randomVin);
+    }
+
+    @Title("CVSB-10372 - AC8. Generate a certificate - PSV + PASSED Specialist test only - COIF seatbelt installation check with annual test - CHL, CHS")
+    @Test
+    public void PutTestResultsCertificateGenerationForCOIFSeatBelt() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeID= new JsonPathAlteration("$.testTypes[0].testTypeId", "146", "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestTypeID,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String testNumber = testResultsSteps.getTestNumber();
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeId= new JsonPathAlteration("$.testResult.testTypes[0].testTypeId", "146", "", "REPLACE");
+        JsonPathAlteration alterationTestNumber= new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestTypeId,
+                alterationTestNumber
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        //Validate if the certificate is generated
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("CVSB-10372 - AC8. Generate a certificate - PSV + PASSED Specialist test only - COIF seatbelt installation check with annual test retest - CML, CMS")
+    @Test
+    public void PutTestResultsCertificateGenerationForCOIFSeatBeltRetest() {
+
+        Date date = new Date();
+
+        // Read the base test result JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle,
+                alterationVinVehicle));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // Read base JSON to create test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
+
+        //Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeID= new JsonPathAlteration("$.testTypes[0].testTypeId", "177", "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestTypeID,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        String testNumber = testResultsSteps.getTestNumber();
+
+        // Read the base JSON for PUT test-results
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", systemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
+        JsonPathAlteration alterationTestTypeId= new JsonPathAlteration("$.testResult.testTypes[0].testTypeId", "177", "", "REPLACE");
+        JsonPathAlteration alterationTestNumber= new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp,
+                alterationPutTestTypeStartTimestamp,
+                alterationPutTestTypeEndTimestamp,
+                alterationTestTypeId,
+                alterationTestNumber
+        ));
+
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+
+        //Validate if the certificate is generated
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+}

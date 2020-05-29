@@ -1,0 +1,70 @@
+{
+  "msUserDetails":{
+    "msUser":"catalin",
+    "msOid":"123243424-234234245"
+  },
+  "testResult":{
+    "testResultId":"c1fc4382-fd97-4b9f-b861-d91ffbd4816f",
+    "testStationName":"Rowe, Wunsch and Wisoky",
+    "testStationPNumber":"87-1369569",
+    "testStationType":"gvts",
+    "testerName":"Gica",
+    "testerStaffId":"133",
+    "testerEmailAddress":"someone@email.com",
+    "testStartTimestamp":"2020-05-28T13:44:48.281Z",
+    "testEndTimestamp":"2020-05-28T13:47:09.561Z",
+    "testStatus":"submitted",
+    "reasonForCancellation":null,
+    "vrm":"C47WLL",
+    "odometerReading":54,
+    "odometerReadingUnits":"kilometres",
+    "regnDate":"1986-05-01",
+    "systemNumber":"11000009",
+    "vin":"YV31MEC18GA011900",
+    "vehicleClass":{
+      "description":"large psv(ie: greater than 23 seats)",
+      "code":"l"
+    },
+    "vehicleType":"psv",
+    "vehicleConfiguration":"articulated",
+    "preparerId":"No preparer ID given",
+    "preparerName":"",
+    "euVehicleCategory":"m2",
+    "countryOfRegistration":"gb",
+    "noOfAxles":3,
+    "numberOfWheelsDriven":null,
+    "vehicleSize":"large",
+    "numberOfSeats":53,
+    "testTypes":[
+      {
+        "testCode": "aas",
+        "testNumber": "W03V32972",
+        "testAnniversaryDate": "2021-02-08T04:22:38.377Z",
+        "name":"Specialist test",
+        "testTypeName":"COIF with annual test",
+        "testTypeId":"142",
+        "certificateNumber":"Toofi",
+        "secondaryCertificateNumber":"4645",
+        "testTypeStartTimestamp":"2020-05-28T13:46:41.224Z",
+        "testTypeEndTimestamp":"2020-05-28T13:47:09.563Z",
+        "numberOfSeatbeltsFitted":45,
+        "lastSeatbeltInstallationCheckDate": "2020-05-28",
+        "seatbeltInstallationCheckDate":true,
+        "testExpiryDate": "2021-05-28",
+        "testResult":"pass",
+        "prohibitionIssued":false,
+        "testTypeClassification": "Annual With Certificate",
+        "reasonForAbandoning":null,
+        "additionalCommentsForAbandon":null,
+        "additionalNotesRecorded":"zdfvc",
+        "customDefects":[
+          {
+            "referenceNumber":"string",
+            "defectName":"string",
+            "defectNotes":"string"
+          }
+        ]
+      }
+    ]
+  }
+}
