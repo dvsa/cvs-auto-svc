@@ -65,7 +65,6 @@ public class AwsUtil {
                         assumeResult.getCredentials().getAccessKeyId(),
                         assumeResult.getCredentials().getSecretAccessKey(),
                         assumeResult.getCredentials().getSessionToken());
-
         String bucketName = loader.getS3Bucket();
 
         String fileName = testNumber + "_" + vin + ".pdf";
