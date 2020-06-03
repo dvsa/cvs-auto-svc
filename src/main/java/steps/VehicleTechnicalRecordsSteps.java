@@ -5,6 +5,7 @@ import clients.model.BodyType;
 import clients.VehicleTechnicalRecordsClient;
 import data.GenericData;
 import exceptions.AutomationException;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.vehicles.*;
@@ -12,17 +13,21 @@ import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
+import util.BasePathFilter;
 import util.JsonPathAlteration;
+import util.TypeLoader;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static data.GenericData.*;
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
+import static util.WriterReader.saveUtils;
 
 public class VehicleTechnicalRecordsSteps {
 
@@ -505,5 +510,15 @@ public class VehicleTechnicalRecordsSteps {
     public String getVehicleTechnicalRecordsByStatusWithMetadata(String searchIdentifier, VehicleTechnicalRecordStatus status) {
         response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatusWithMetadata(searchIdentifier, status.getStatus());
         return response.prettyPrint();
+    }
+
+    @Step
+    public Map<String,Object> createTechRecord (String vehicleType) {
+        return vehicleTechnicalRecordsClient.createTechRecord(vehicleType);
+    }
+
+    @Step
+    public Map<String,Object> createTechRecord (String vehicleType, JSONObject restrictions) {
+        return vehicleTechnicalRecordsClient.createTechRecord(vehicleType, restrictions);
     }
 }

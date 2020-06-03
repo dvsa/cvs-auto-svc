@@ -1,0 +1,112 @@
+{
+  "testerStaffId": "133",
+  "testResultId": "1542778f-2da5-4e3a-89w5-1d576be6728e",
+  "systemNumber": "BSFD7248EDSGR",
+  "testStartTimestamp": "2020-05-01T09:15:33.987Z",
+  "odometerReadingUnits": "kilometres",
+  "testEndTimestamp": "2020-05-01T17:45:33.987Z",
+  "testStatus": "submitted",
+  "numberOfWheelsDriven": 3,
+  "noOfAxles": "2",
+  "testTypes": [
+    {
+      "prohibitionIssued": false,
+      "additionalCommentsForAbandon": "none",
+      "numberOfSeatbeltsFitted": 2,
+      "testTypeEndTimestamp": "2020-05-01T17:30:23.950Z",
+      "reasonForAbandoning": "none",
+      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "testTypeId": "1",
+      "secondaryCertificateNumber": "1234",
+      "testTypeStartTimestamp": "2020-05-01T09:30:23.950Z",
+      "certificateNumber": "W01A00209",
+      "testTypeName": "Annual test",
+      "seatbeltInstallationCheckDate": true,
+      "additionalNotesRecorded": "VEHICLE FRONT REGISTRATION PLATE MISSING",
+      "customDefects": [
+        {
+          "referenceNumber": "abcd",
+          "defectName": "Some custom defect",
+          "defectNotes": "some defect noe"
+        }
+      ],
+      "defects": [
+        {
+          "prohibitionIssued": false,
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "prs": false,
+          "additionalInformation": {
+            "location": {
+              "axleNumber": null,
+              "horizontal": null,
+              "vertical": null,
+              "longitudinal": "front",
+              "rowNumber": null,
+              "lateral": null,
+              "seatNumber": null
+            },
+            "notes": "None"
+          },
+          "itemNumber": 1,
+          "deficiencyRef": "1.1.a",
+          "stdForProhibition": false,
+          "deficiencySubId": null,
+          "imDescription": "Registration Plate",
+          "deficiencyId": "a",
+          "itemDescription": "A registration plate:",
+          "imNumber": 1
+        },
+        {
+          "prohibitionIssued": false,
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "prs": false,
+          "additionalInformation": {
+            "location": {
+              "axleNumber": null,
+              "horizontal": null,
+              "vertical": null,
+              "longitudinal": "front",
+              "rowNumber": null,
+              "lateral": null,
+              "seatNumber": null
+            },
+            "notes": "None"
+          },
+          "itemNumber": 1,
+          "deficiencyRef": "1.1.a",
+          "stdForProhibition": false,
+          "deficiencySubId": null,
+          "imDescription": "Registration Plate",
+          "deficiencyId": "a",
+          "itemDescription": "A registration plate:",
+          "imNumber": 1
+        }
+      ],
+      "name": "Annual test",
+      "testResult": "pass"
+    }
+  ],
+  "vehicleClass": {
+    "description": "motorbikes over 200cc or with a sidecar",
+    "code": "2"
+  },
+  "vin": "A12599502",
+  "vehicleSize": "small",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "vehicleType": "psv",
+  "countryOfRegistration": "united kingdom",
+  "preparerId": "ak4434",
+  "preparerName": "Durrell Vehicles Limited",
+  "odometerReading": 100000,
+  "vehicleConfiguration": "rigid",
+  "testStationType": "gvts",
+  "reasonForCancellation": "none",
+  "testerName": "Gica",
+  "vrm": "BQ91YHQ",
+  "testStationPNumber": "87-1369569",
+  "numberOfSeats": 45,
+  "testerEmailAddress": "someone@email.com",
+  "euVehicleCategory": "o2"
+}

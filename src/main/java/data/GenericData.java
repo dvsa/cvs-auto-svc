@@ -3,6 +3,7 @@ package data;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
@@ -168,7 +169,7 @@ public class GenericData {
         return JsonPath.read(jsonString, jsonPath);
     }
 
-     public static JsonArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
+    public static JsonArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
         return JsonPath.read(jsonString, jsonPath);
     }
 

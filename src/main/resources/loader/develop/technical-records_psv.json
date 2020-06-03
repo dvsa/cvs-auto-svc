@@ -1,130 +1,170 @@
 {
-  "primaryVrm": "BQ91YHQ",
-  "secondaryVrms": [
-    "X71LTA"
-  ],
-  "vin": "1B7GG36N12S678410",
-  "partialVin": "678410",
   "msUserDetails": {
-    "msUser": "catalin",
-    "msOid": "123243424-234234245"
+    "msUser": "sean",
+    "msOid": "12345"
   },
+  "vin": "P11122224",
+  "partialVin": "122223",
+  "primaryVrm": "PSV112244",
+  "systemNumber": "BSFD3244BDSGR",
+  "secondaryVrms": [
+    "PSV223344"
+  ],
   "techRecord": [
     {
-      "createdAt": "2019-01-16T12:24:38.027Z",
-      "lastUpdatedAt": "2019-01-16T12:24:38.027Z",
-      "createdByName": "dragos",
-      "createdById": "22223333-44445555",
-      "chassisMake": "Volvo",
-      "chassisModel": "B10M",
-      "bodyMake": "Duple",
-      "bodyModel": "320",
-      "bodyType": {
-        "code": "ss",
-        "description": "single-decker"
-      },
-      "manufactureYear": 1986,
-      "regnDate": "1986-05-01",
-      "coifDate": "1986-04-18",
-      "ntaNumber": "1",
-      "conversionRefNo": "1",
-      "seatsLowerDeck": 53,
-      "seatsUpperDeck": 1,
-      "standingCapacity": 26,
-      "speedRestriction": 100,
-      "speedLimiterMrk": true,
-      "tachoExemptMrk": true,
-      "dispensations": "Some",
-      "remarks": "53 seatbelts",
-      "reasonForCreation": "COID",
-      "statusCode": "archived",
-      "unladenWeight": 1,
-      "grossKerbWeight": 11020,
-      "grossLadenWeight": 14513,
-      "grossGbWeight": 16260,
-      "grossDesignWeight": 17000,
-      "noOfAxles": 3,
-      "brakeCode": "145202",
-      "vehicleClass": {
-        "code": "l",
-        "description": "large psv(ie: greater than 23 seats)"
-      },
-      "vehicleType": "PSV",
-      "vehicleSize": "large",
-      "vehicleConfiguration": "articulated",
-      "brakes": {
-        "brakeCode": "145202",
-        "brakeCodeOriginal": "124",
-        "dataTrBrakeOne": "NONE",
-        "dataTrBrakeTwo": "NONE",
-        "dataTrBrakeThree": "NONE",
-        "retarderBrakeOne": "electric",
-        "retarderBrakeTwo": "electric",
-        "brakeForceWheelsNotLocked": {
-          "serviceBrakeForceA": 2322,
-          "secondaryBrakeForceA": 3265,
-          "parkingBrakeForceA": 6531
-        },
-        "brakeForceWheelsUpToHalfLocked": {
-          "serviceBrakeForceB": 1763,
-          "secondaryBrakeForceB": 2755,
-          "parkingBrakeForceB": 5510
-        }
-      },
+      "vehicleType": "psv",
+      "regnDate": "1995-01-01",
+      "manufactureYear": 1994,
+      "noOfAxles": 2,
+      "speedLimiterMrk": false,
+      "tachoExemptMrk": false,
+      "euroStandard": "2",
+      "fuelPropulsionSystem": "DieselPetrol",
+      "approvalType": "NTA",
+      "approvalTypeNumber": "1234",
+      "ntaNumber": "123456",
+      "coifSerialNumber": "12345678",
+      "coifCertifierName": "1234567890",
+      "coifDate": "2020-12-12",
+      "variantNumber": "12345",
+      "variantVersionNumber": "1234567",
+      "bodyMake": "Isuzu",
+      "bodyModel": "X40",
+      "modelLiteral": "123",
+      "chassisMake": "Isuzu",
+      "chassisModel": "X40",
+      "functionCode": "R",
+      "conversionRefNo": "12346",
+      "speedRestriction": 10,
       "axles": [
         {
+          "parkingBrakeMrk": true,
           "axleNumber": 1,
-          "parkingBrakeMrk": false,
           "tyres": {
-            "dataTrAxles": 0,
-            "fitmentCode": "single",
-            "plyRating": "A",
-            "speedCategorySymbol": "j",
-            "tyreCode": 390,
-            "tyreSize": "295/80-22.5"
+            "plyRating": "1",
+            "speedCategorySymbol": "a7",
+            "fitmentCode": "double",
+            "dataTrAxles": 888,
+            "tyreCode": 383,
+            "tyreSize": "385/65-22.5"
           },
           "weights": {
-            "designWeight": 6500,
-            "gbWeight": 6500,
-            "kerbWeight": 4870,
-            "ladenWeight": 5888
+            "designWeight": 8000,
+            "gbWeight": 7000,
+            "kerbWeight": 9999,
+            "ladenWeight": 4000
           }
         },
         {
+          "parkingBrakeMrk": false,
           "axleNumber": 2,
           "tyres": {
-            "dataTrAxles": 0,
-            "fitmentCode": "double",
-            "plyRating": "A",
-            "speedCategorySymbol": "j",
-            "tyreCode": 386,
-            "tyreSize": "295/80-22.5"
+            "plyRating": "2",
+            "speedCategorySymbol": "a8",
+            "fitmentCode": "single",
+            "dataTrAxles": 777,
+            "tyreCode": 282,
+            "tyreSize": "380/65-22.5"
           },
           "weights": {
-            "designWeight": 10500,
-            "gbWeight": 10170,
-            "kerbWeight": 6150,
-            "ladenWeight": 8625
-          }
-        },
-        {
-          "axleNumber": 3,
-          "tyres": {
-            "dataTrAxles": 0,
-            "fitmentCode": "double",
-            "plyRating": "A",
-            "speedCategorySymbol": "j",
-            "tyreCode": 390,
-            "tyreSize": "295/80-22.5"
-          },
-          "weights": {
-            "designWeight": 10200,
-            "gbWeight": 10100,
-            "kerbWeight": 6250,
-            "ladenWeight": 7625
+            "designWeight": 6000,
+            "gbWeight": 6500,
+            "kerbWeight": 7500,
+            "ladenWeight": 9000
           }
         }
-      ]
+      ],
+      "bodyType": {
+        "description": "other"
+      },
+      "brakes": {
+        "dtpNumber": "3799A",
+        "brakeForceWheelsNotLocked": {
+          "parkingBrakeForceA": 2,
+          "secondaryBrakeForceA": 3,
+          "serviceBrakeForceA": 4
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "parkingBrakeForceB": 5,
+          "secondaryBrakeForceB": 6,
+          "serviceBrakeForceB": 7
+        },
+        "brakeCode": "brCode",
+        "dataTrBrakeOne": "312677",
+        "dataTrBrakeTwo": "98765",
+        "dataTrBrakeThree": "9876543",
+        "retarderBrakeOne": "electric",
+        "retarderBrakeTwo": "exhaust"
+      },
+      "dda": {
+        "certificateIssued": true,
+        "wheelchairCapacity": 20,
+        "wheelchairFittings": "wheelchair fittings",
+        "wheelchairLiftPresent": false,
+        "wheelchairLiftInformation": "wheelchair lift info",
+        "wheelchairRampPresent": false,
+        "wheelchairRampInformation": "wheelchair ramp info",
+        "minEmergencyExits": 1,
+        "outswing": "100 cm",
+        "ddaSchedules": "schedule",
+        "seatbeltsFitted": 2,
+        "ddaNotes": "dda notes"
+      },
+      "departmentalVehicleMarker": false,
+      "alterationMarker": true,
+      "dimensions": {
+        "length": 13760,
+        "width": 2480,
+        "height": 4562
+      },
+      "emissionsLimit": 20,
+      "euVehicleCategory": "m2",
+      "frontAxleToRearAxle": 1000,
+      "grossDesignWeight": 38000,
+      "grossGbWeight": 39000,
+      "grossKerbWeight": 40000,
+      "grossLadenWeight": 41000,
+      "maxTrainGbWeight": 14000,
+      "microfilm": {
+        "microfilmDocumentType": "PSV Miscellaneous",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "numberOfWheelsDriven": 4,
+      "numberOfSeatbelts": "56",
+      "plates": [
+        {
+          "plateSerialNumber": "11111111",
+          "plateIssueDate": "2020-02-02",
+          "plateReasonForIssue": "Original",
+          "plateIssuer": "Mr Jones"
+        }
+      ],
+      "applicantDetails": {
+        "address1": "applicant address 1",
+        "address2": "applicant address 2",
+        "address3": "applicant address 3",
+        "name": "applicant name",
+        "postCode": "PO16 7GZ",
+        "postTown": "applicant post town",
+        "telephoneNumber": "123456",
+        "emailAddress": "test@test.com"
+      },
+      "reasonForCreation": "because",
+      "remarks": "remarks",
+      "dispensations": "dispensations",
+      "seatbeltInstallationApprovalDate": "2020-02-02",
+      "seatsLowerDeck": 30,
+      "seatsUpperDeck": 26,
+      "standingCapacity": 10,
+      "trainDesignWeight": 13000,
+      "unladenWeight": 37000,
+      "vehicleSize": "large",
+      "vehicleClass": {
+        "description": "large psv(ie: greater than 23 seats)"
+      },
+      "vehicleConfiguration": "other",
+      "recordCompleteness": "testable"
     }
   ]
 }
