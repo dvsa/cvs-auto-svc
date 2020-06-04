@@ -625,24 +625,11 @@ public class TestResultsClient {
             response = callPutTestResultsWithAlterations(systemNumber, requestBody, alterations);
         }
         int i =0;
-        while ((response.getStatusCode() == HttpStatus.SC_BAD_REQUEST) && (i < 4)) {
+        while ((response.getStatusCode() == HttpStatus.SC_BAD_REQUEST) && (i < 3)) {
             DocumentContext jsonContext = JsonPath.parse(response.asString());
             HashMap errorMessage = jsonContext.read("$");
             if (errorMessage.containsKey("errors")) {
                 Object[] errors = ((JSONArray) errorMessage.get("errors")).toArray();
-                if ((errorMessage.get("errors")!=null) && (errorMessage.get("errors") instanceof JSONArray)) {
-                    if ((errors[0] != null) && (errors[0] instanceof JSONArray)) {
-                        notApplicableFields = GenericData.extractArrayListStringFromJsonString(response.asString(), "$.errors[0]");
-                        for (String error : notApplicableFields) {
-                            if (error.contains("is not allowed")) {
-                                String fieldName = error.split("\"")[1];
-                                JsonPathAlteration alterationDeleteTestTypeField = new JsonPathAlteration(
-                                        "$.testResult.testTypes[0]." + fieldName, "", "", "DELETE");
-                                alterations.add(alterationDeleteTestTypeField);
-                            }
-                        }
-                    }
-                }
                 if ((errors[0] != null) && (errors[0] instanceof String)) {
                     notApplicableFields = GenericData.extractArrayListStringFromJsonString(response.asString(), "$.errors");
                     for (String error : notApplicableFields) {
@@ -651,6 +638,9 @@ public class TestResultsClient {
                             JsonPathAlteration alterationDeleteTestResultField = new JsonPathAlteration(
                                     "$.testResult." + fieldName, "", "", "DELETE");
                             alterations.add(alterationDeleteTestResultField);
+                            JsonPathAlteration alterationDeleteTestTypeField = new JsonPathAlteration(
+                                    "$.testResult.testTypes[0]." + fieldName, "", "", "DELETE");
+                            alterations.add(alterationDeleteTestTypeField);
                         }
                         if (error.contains("is required")) {
                             String fieldName = error.split("\"")[1];
