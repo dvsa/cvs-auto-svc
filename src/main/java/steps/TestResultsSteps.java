@@ -453,7 +453,6 @@ public class TestResultsSteps {
             String testCode = response.jsonPath().setRoot("[0].testTypes").getList(" findAll { it.testTypeId == '" + data.getTestTypes().get(i).getTestTypeId() + "' }.testCode ").get(0).toString();
             assertThat(testCode, is(equalTo(expectedTestCodes[i])));
         }
-
     }
 
     @Step
@@ -533,14 +532,12 @@ public class TestResultsSteps {
         System.out.println("nextTestNumber: " + nextTestNumber + " and the actual is: " + testNumber);
         assertThat(testNumber.equals(nextTestNumber)).isTrue();
     }
-
     @Step
     public void validateVehicleFieldValue(String key, String value) {
         response.then().log().all();
         validateVehicleFieldExists(key);
         assertThat(response.then().body("$", anyOf(hasItem(hasEntry(key,value)))));
     }
-
     @Step
     public void valueForFieldInPathShouldBe(String path, String expectedValue) {
         System.out.println("Verifying that " + path + " has value " + expectedValue);
@@ -842,3 +839,4 @@ public class TestResultsSteps {
         return testResultsClient.createTestRecord(testStatus, testResult, testCode, withWithoutDefects, testResultAttributes);
     }
 }
+

@@ -1,0 +1,75 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "testResult": {
+    "testResultId": "fc6273b1-015d-47f6-8955-bf60de956251",
+    "systemNumber": "CFSTEH",
+    "odometerReadingUnits": "kilometres",
+    "numberOfWheelsDriven": null,
+    "reasonForCancellation": "Test",
+    "testStartTimestamp": "2020-05-19T16:59:05.522Z",
+    "testEndTimestamp": "2020-05-19T17:01:36.063Z",
+    "vehicleType": "hgv",
+    "odometerReading": 547896,
+    "testStationName": "Rowe, Wunsch and Wisoky",
+    "testStationPNumber": "87-1369569",
+    "euVehicleCategory": "m1",
+    "testerName": "Gica",
+    "preparerId": "No preparer ID given",
+    "preparerName": "",
+    "testerStaffId": "133",
+    "testerEmailAddress": "someone@email.com",
+    "noOfAxles": 3,
+    "vehicleId": "132",
+    "testStationType": "gvts",
+    "vehicleConfiguration": "rigid",
+    "vehicleClass": {
+      "code":"v",
+      "description": "heavy goods vehicle"
+    },
+    "vin": "A45456TYRC",
+    "vrm":"SQQA",
+    "countryOfRegistration": "gb",
+    "testStatus": "submitted",
+    "testTypes": [
+      {
+        "prohibitionIssued": false,
+        "testCode": "ddv",
+        "lastUpdatedAt": "2020-05-20T11:36:07.703Z",
+        "testNumber": "W01A00330",
+        "numberOfSeatbeltsFitted": 4,
+        "seatbeltInstallationCheckDate": true,
+        "lastSeatbeltInstallationCheckDate": "2020-03-16T11:35:34.989Z",
+        "testAnniversaryDate": "2022-05-19",
+        "modType": {
+          "code": "p",
+          "description": "particulate trap"
+        },
+        "testTypeClassification": "Annual NO CERTIFICATE",
+        "customDefects": null,
+        "createdAt": "2020-05-20T11:36:07.703Z",
+        "testTypeId": "50",
+        "particulateTrapSerialNumber": null,
+        "testTypeName": "ADR test",
+        "smokeTestKLimitApplied": "2.2",
+        "additionalNotesRecorded": "dgdfg",
+        "emissionStandard": "0.10 g/kWh Euro 3 PM",
+        "additionalCommentsForAbandon": null,
+        "testTypeEndTimestamp": "2020-05-19T17:01:36.064Z",
+        "reasonForAbandoning": null,
+        "particulateTrapFitted": null,
+        "testExpiryDate": "2022-05-19",
+        "secondaryCertificateNumber": null,
+        "testTypeStartTimestamp": "2020-05-19T16:59:54.569Z",
+        "fuelType": "diesel",
+        "certificateNumber": "254786",
+        "defects": [],
+        "name": "Technical test",
+        "testResult": "pass"
+      }
+    ]
+  }
+}
+

@@ -47,7 +47,6 @@
         "secondaryCertificateNumber": null,
         "testAnniversaryDate": "2021-02-08T04:22:38.377Z",
         "testCode": "aas",
-        "prohibitionIssued": false,
         "testNumber": "W03V32972",
         "testResult": "pass",
         "testTypeClassification": "Annual With Certificate",

@@ -1,0 +1,79 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "testResult": {
+    "testResultId":"ffd02799-c781-45c8-9fd6-ef5e64b8f58f",
+    "testStationName":"Rowe, Wunsch and Wisoky",
+    "testStationPNumber":"87-1369569",
+    "testStationType":"gvts",
+    "testerName":"Gica",
+    "testerStaffId":"133",
+    "testerEmailAddress":"someone@email.com",
+    "testStartTimestamp":"2020-05-20T16:15:50.433Z",
+    "testEndTimestamp":"2020-05-20T16:18:57.773Z",
+    "testStatus":"submitted",
+    "reasonForCancellation":null,
+    "systemNumber":"BSFR3244BDSGR",
+    "vrm": "BDYTSH",
+    "vin":"P11322224",
+    "vehicleId": "string",
+    "vehicleSize": "large",
+    "numberOfSeats": 20,
+    "odometerReading":547896,
+    "odometerReadingUnits":"kilometres",
+    "vehicleClass":{
+      "description":"heavy goods vehicle",
+      "code":"v"
+    },
+    "vehicleType":"psv",
+    "vehicleConfiguration":"articulated",
+    "preparerId":"No preparer ID given",
+    "preparerName":"",
+    "euVehicleCategory":"n2",
+    "countryOfRegistration":"gb",
+    "regnDate": "2020-05-22",
+    "noOfAxles":3,
+    "numberOfWheelsDriven":null,
+    "testTypes":[
+      {
+        "name":"Technical test",
+        "testTypeName":"TIR test",
+        "createdAt": "2020-05-22T10:11:23.705Z",
+        "lastUpdatedAt": "2020-05-22T10:11:23.705Z",
+        "deletionFlag": true,
+        "testCode": "dfh",
+        "testNumber": "23234",
+        "testTypeClassification": "Annual NO CERTIFICATE",
+        "testTypeId":"39",
+        "certificateNumber":"GB/V14454",
+        "testAnniversaryDate": "2022-05-19",
+        "numberOfSeatbeltsFitted": 4,
+        "seatbeltInstallationCheckDate": true,
+        "lastSeatbeltInstallationCheckDate": "2020-03-16T11:35:34.989Z",
+        "secondaryCertificateNumber":null,
+        "testTypeStartTimestamp":"2020-05-20T16:18:18.590Z",
+        "testTypeEndTimestamp":"2020-05-20T16:18:57.776Z",
+        "modType":null,
+        "emissionStandard":null,
+        "fuelType":null,
+        "smokeTestKLimitApplied":null,
+        "particulateTrapFitted":null,
+        "particulateTrapSerialNumber":null,
+        "modificationTypeUsed":null,
+        "testExpiryDate":null,
+        "testResult":"pass",
+        "prohibitionIssued":false,
+        "reasonForAbandoning":null,
+        "additionalCommentsForAbandon":null,
+        "additionalNotesRecorded":"sgdfg",
+        "defects":[
+
+        ],
+        "customDefects":null
+      }
+    ]
+  }
+}
+

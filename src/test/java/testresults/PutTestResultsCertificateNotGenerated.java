@@ -157,6 +157,5 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
 
         // verify that the certificate is created in the S3 bucket
         testResultsSteps.validateCertificateIsNotGenerated(testNumber,randomVin);
-
     }
 }

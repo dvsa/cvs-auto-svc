@@ -1,15 +1,16 @@
 package testresults;
 
 import data.GenericData;
-
 import io.restassured.http.ContentType;
-import junit.framework.TestCase;
 import io.restassured.response.Response;
+import junit.framework.TestCase;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
+import org.apache.http.HttpStatus;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,16 +18,15 @@ import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
-import org.apache.http.HttpStatus;
+
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
-import org.junit.Assert;
 
 
 @RunWith(SerenityParameterizedRunner.class)
-public class PutTestResultsCertificateGeneration extends TestCase {
+public class PutTestResultsNegFieldValidationsRoadworthiness extends TestCase {
 
     static String randomVin;
     static String randomSystemNumber;
@@ -35,7 +35,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     @BeforeClass
     public static void createRecord() {
         // Read the base test result JSON.
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
 
         // Create alteration to add one more tech record to in the request body
         randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -64,7 +64,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_payload_10711.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_trl_10300.json", "$");
 
         randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
@@ -94,65 +94,58 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"pass","submitted","Annual With Certificate"},
-                {"fail","submitted","Annual With Certificate"},
-                {"prs","submitted","Annual With Certificate"},
-                {"abandoned","submitted","Annual With Certificate"},
-                {"abandoned","submitted","Annual No Certificate"},
+                {"$.testResult.testTypes[0].testTypeId", "62"},
+                {"$.testResult.testTypes[0].testTypeId", "63"},
+                {"$.testResult.testTypes[0].testTypeId", "101"},
         });
     }
 
-    private String testResult;
-    private String testStatus;
-    private String testTypeClassification;
+    private String jsonPath;
+    private Object value;
 
-    public PutTestResultsCertificateGeneration(String testResult, String testStatus, String testTypeClassification) {
-        this.testResult = testResult;
-        this.testStatus = testStatus;
-        this.testTypeClassification = testTypeClassification;
 
+    public PutTestResultsNegFieldValidationsRoadworthiness(String jsonPath, Object value) {
+        this.jsonPath = jsonPath;
+        this.value = value;
     }
 
-    @WithTag("annual_certificates")
-    @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
+    @WithTag("Vtm")
+    @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - TRL")
     @Test
-    public void testResultsPut() {
+    public void testResultsPutWithNotApplicableFields() {
 
-       String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_trl_10300.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultIdPutTestResults = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-
-
-        JsonPathAlteration alterationPutTestResult = new JsonPathAlteration("$.testResult.testTypes[0].testResult", testResult, "", "REPLACE");
-        JsonPathAlteration alterationPutTestStatus = new JsonPathAlteration("$.testResult.testStatus", testStatus, "", "REPLACE");
-        JsonPathAlteration alterationPutTestTypeClassification = new JsonPathAlteration("$.testResult.testTypes[0].testTypeClassification", testTypeClassification, "", "REPLACE");
+        JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberPutTestResults,
                 alterationVinPutTestResults,
                 alterationTestResultIdPutTestResults,
-                alterationPutTestResult,
-                alterationPutTestStatus,
-                alterationPutTestTypeClassification
+                restriction
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-
-        testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        String testNumber = testResultsSteps.getTestNumber();
-
-        // verify that the certificate is created in the S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
+        testResultsSteps.validatePostErrorDataContains("testExpiryDate", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("testAnniversaryDate", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("modType", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("particulateTrapSerialNumber", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("smokeTestKLimitApplied", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("emissionStandard", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("modificationTypeUsed", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("particulateTrapFitted", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("fuelType", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("numberOfSeatbeltsFitted", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("seatbeltInstallationCheckDate", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("lastSeatbeltInstallationCheckDate", "is not allowed");
+        testResultsSteps.validatePostErrorDataContains("prohibitionIssued", "is not allowed");
     }
 }

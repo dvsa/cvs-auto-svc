@@ -1,0 +1,61 @@
+{
+  "testResultId":"fc6273b1-015d-47f6-8955-bf60de956251",
+  "testStationName":"Rowe, Wunsch and Wisoky",
+  "testStationPNumber":"87-1369569",
+  "testStationType":"gvts",
+  "testerName":"Gica",
+  "testerStaffId":"133",
+  "testerEmailAddress":"someone@email.com",
+  "testStartTimestamp":"2020-05-19T16:59:05.522Z",
+  "testEndTimestamp":"2020-05-19T17:01:36.063Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"B2C1C11",
+  "odometerReading":547896,
+  "odometerReadingUnits":"kilometres",
+  "systemNumber":"CFSTEH",
+  "vin":"A45456TYRC",
+  "vehicleClass":{
+    "description":"heavy goods vehicle",
+    "code":"v"
+  },
+  "vehicleType":"hgv",
+  "vehicleConfiguration":"articulated",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"m1",
+  "countryOfRegistration":"gb",
+  "noOfAxles":3,
+  "numberOfWheelsDriven":null,
+  "testTypes":[
+    {
+      "name":"Technical test",
+      "testTypeName":"ADR test",
+      "testTypeId":"50",
+      "certificateNumber":"254786",
+      "secondaryCertificateNumber":null,
+      "testTypeStartTimestamp":"2020-05-19T16:59:54.569Z",
+      "testTypeEndTimestamp":"2020-05-19T17:01:36.064Z",
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType": "diesel",
+      "smokeTestKLimitApplied": "2.2",
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":null,
+      "testExpiryDate":"2022-05-19",
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"dgdfg",
+      "defects":[
+
+      ],
+      "customDefects":null
+    }
+  ]
+}
