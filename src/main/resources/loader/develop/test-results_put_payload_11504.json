@@ -1,0 +1,79 @@
+{
+  "msUserDetails": {
+    "msUser": "PaddyS",
+    "msOid": "12345"
+  },
+  "testResult": {
+    "countryOfRegistration": "not-known",
+    "euVehicleCategory": "m2",
+    "noOfAxles": 2,
+    "numberOfSeats": 50,
+    "numberOfWheelsDriven": null,
+    "odometerReading": 123,
+    "odometerReadingUnits": "kilometres",
+    "preparerId": "QE7355",
+    "preparerName": "RPT Logistics Limited",
+    "reasonForCancellation": null,
+    "regnDate": "2011-01-05",
+    "systemNumber": "KC7VFFUPB5HYLXTG",
+    "testEndTimestamp": "2020-04-08T04:22:27.612Z",
+    "testerEmailAddress": "HGV@dvsagov.onmicrosoft.com",
+    "testerName": "HGV@dvsagov.onmicrosoft.com",
+    "testerStaffId": "a53ae740-eac4-4eb6-99ef-42afb63ce819",
+    "testResultId": "987654321",
+    "testStartTimestamp": "2020-04-08T04:20:15.868Z",
+    "testStationName": "Abshire-Kub",
+    "testStationPNumber": "09-4129632",
+    "testStationType": "gvts",
+    "testStatus": "submitted",
+    "testTypes": [
+      {
+        "additionalCommentsForAbandon": null,
+        "additionalNotesRecorded": null,
+        "certificateNumber": "W03V32972",
+        "createdAt": "2020-04-08T04:22:27.910Z",
+        "customDefects": null,
+        "defects": [
+
+
+
+        ],
+        "emissionStandard": null,
+        "fuelType": null,
+        "lastSeatbeltInstallationCheckDate": "2020-04-08T04:21:40.354Z",
+        "lastUpdatedAt": "2020-04-08T04:22:27.910Z",
+        "modificationTypeUsed": null,
+        "modType": null,
+        "name": "Annual test",
+        "numberOfSeatbeltsFitted": 123,
+        "particulateTrapFitted": null,
+        "particulateTrapSerialNumber": null,
+        "prohibitionIssued": false,
+        "reasonForAbandoning": null,
+        "seatbeltInstallationCheckDate": true,
+        "secondaryCertificateNumber": null,
+        "smokeTestKLimitApplied": null,
+        "testAnniversaryDate": "2021-02-08T04:22:38.377Z",
+        "testCode": "aas",
+        "testExpiryDate": "2021-04-07T04:22:38.377Z",
+        "testNumber": "W03V32972",
+        "testResult": "pass",
+        "testTypeClassification": "Annual With Certificate",
+        "testTypeEndTimestamp": "2020-04-08T04:22:27.616Z",
+        "testTypeId": "1",
+        "testTypeName": "Annual test",
+        "testTypeStartTimestamp": "2020-04-08T04:21:35.023Z"
+      }
+    ],
+    "vehicleClass": {
+      "code": "s",
+      "description": "small psv (ie: less than or equal to 22 seats)"
+    },
+    "vehicleConfiguration": "rigid",
+    "vehicleId": "BQ91YHQ",
+    "vehicleSize": "small",
+    "vehicleType": "psv",
+    "vin": "43YJU629794",
+    "vrm": "BQ91YHQ"
+  }
+}
