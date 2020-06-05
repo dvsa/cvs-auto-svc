@@ -4,22 +4,25 @@ package vehicle;
 import data.GenericData;
 import data.VehicleTechRecordsData;
 import model.vehicles.Vehicle;
+import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.HttpStatus;
 import org.junit.Ignore;
+import steps.TestResultsSteps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @RunWith(SerenityRunner.class)

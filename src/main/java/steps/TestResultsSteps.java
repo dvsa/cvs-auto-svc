@@ -838,4 +838,42 @@ public class TestResultsSteps {
                                     Map<String, Object> testResultAttributes) {
         return testResultsClient.createTestRecord(testStatus, testResult, testCode, withWithoutDefects, testResultAttributes);
     }
+
+    @Step
+    public void waitForTestResultsToBeUpdated(String sn, int seconds) {
+
+        System.out.println("...waiting " + seconds + " seconds for the record to be updated...\n");
+
+        for (int i = 0; i < seconds; i++) {
+            response = testResultsClient.getTestResults(sn);
+
+            int status = response.getStatusCode();
+
+            if (status == 200) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return;
+            } else {
+                System.out.println("\n...waiting one more second (" + i + ")...\n");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Step
+    public String getTesterName() {
+        return response.jsonPath().getString("[0].testerName");
+    }
+
+    @Step
+    public String getTesterStaffId() {
+        return response.jsonPath().getString("[0].testerStaffId");
+    }
 }

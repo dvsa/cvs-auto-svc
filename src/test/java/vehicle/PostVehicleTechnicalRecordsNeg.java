@@ -275,6 +275,4 @@ public class PostVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
         vehicleTechnicalRecordsSteps.validatePostErrorData("vehicleClass", "must be of type object");
     }
-
-
 }
