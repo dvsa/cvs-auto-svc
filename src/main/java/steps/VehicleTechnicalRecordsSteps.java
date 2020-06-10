@@ -527,4 +527,27 @@ public class VehicleTechnicalRecordsSteps {
         response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, criteria.getSearchCriteria());
         return response.prettyPrint();
     }
+
+    @Step
+    public String getCreatedAt() {
+        return response.jsonPath().getString("[0].techRecord[0].createdAt");
+    }
+
+    @Step
+    public String putVehicleTechnicalRecordsForArchivedWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForArchivedWithAlterations(systemNumber, putRequestBody, alterations);
+        return response.prettyPrint();
+    }
+
+    @Step
+    public String postVehicleTechnicalRecordsForProvisionalWithAlterations(String systemNumber, String postRequestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsForProvisionalWithAlterations(systemNumber, postRequestBody,alterations);
+        return response.prettyPrint();
+    }
+
+    @Step
+    public String putVehicleTechnicalRecordsForCurrentWithAlterations(String systemNumber, OldStatusCode oldStatusCode , String postRequestBody, List<JsonPathAlteration> alterations) {
+        response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForCurrentWithAlterations(systemNumber,oldStatusCode.getOldStatusCode(),postRequestBody,alterations);
+        return response.prettyPrint();
+    }
 }
