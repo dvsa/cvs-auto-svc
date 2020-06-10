@@ -71,7 +71,7 @@ public class PostGetPutCapitaliseVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", vin.toUpperCase());
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].vrms[0]", "{\"vrm\": \"" + vrm1.toUpperCase() + "\", \"isPrimary\": true}");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.find { it.isPrimary }.vrm", vrm1.toUpperCase());
 
         // read put request body from file
         String putRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields_put.json","$");
@@ -95,8 +95,7 @@ public class PostGetPutCapitaliseVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", vin.toUpperCase());
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", trailerId.toUpperCase());
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].vrms[0]", "{\"vrm\": \"" + vrm2.toUpperCase() + "\", \"isPrimary\": true}");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", trailerId.toUpperCase());vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.find { it.isPrimary }.vrm", vrm2.toUpperCase());
 
 
     }
