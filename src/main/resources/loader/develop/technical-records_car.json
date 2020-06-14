@@ -1,119 +1,40 @@
 {
-  "partialVin": "911250",
-  "primaryVrm": "QW123RT",
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "vin": "DP76UMK4DQLTOT400004",
+  "partialVin": "400004",
+  "primaryVrm": "SJG1004",
   "secondaryVrms": [
-    "RT321WQ"
+    "AS432TY"
   ],
   "techRecord": [
     {
-      "axles": [
-        {
-          "axleNumber": 1,
-          "parkingBrakeMrk": false,
-          "tyres": {
-            "dataTrAxles": null,
-            "fitmentCode": null,
-            "plyRating": null,
-            "speedCategorySymbol": "a7",
-            "tyreCode": null,
-            "tyreSize": null
-          },
-          "weights": {
-            "designWeight": null,
-            "gbWeight": null
-          }
-        },
-        {
-          "axleNumber": 2,
-          "parkingBrakeMrk": null,
-          "tyres": {
-            "dataTrAxles": 345,
-            "fitmentCode": "single",
-            "plyRating": "AB",
-            "speedCategorySymbol": "a7",
-            "tyreCode": 5678,
-            "tyreSize": "295/80-22.5"
-          },
-          "weights": {
-            "designWeight": null,
-            "gbWeight": null
-          }
-        }
-      ],
-      "bodyType": {
-        "code": "x",
-        "description": null
-      },
-      "brakeCode": "178202",
-      "brakes": {
-        "antilockBrakingSystem": true,
-        "brakeCode": "123",
-        "brakeCodeOriginal": "12412",
-        "brakeForceWheelsNotLocked": {
-          "parkingBrakeForceA": 2332,
-          "secondaryBrakeForceA": 2512,
-          "serviceBrakeForceA": 6424
-        },
-        "brakeForceWheelsUpToHalfLocked": {
-          "parkingBrakeForceB": 3512,
-          "secondaryBrakeForceB": 2512,
-          "serviceBrakeForceB": 5521
-        },
-        "dataTrBrakeOne": "None",
-        "dataTrBrakeThree": "None",
-        "dataTrBrakeTwo": "None",
-        "dtpNumber": null,
-        "loadSensingValve": true,
-        "retarderBrakeOne": "electric",
-        "retarderBrakeTwo": "exhaust"
-      },
-      "conversionRefNo": null,
-      "createdAt": "2019-06-24T10:26:54.903Z",
-      "createdByName": null,
-      "dimensions": {
-        "length": null,
-        "width": null
-      },
-      "drawbarCouplingFitted": null,
-      "euroStandard": " ",
-      "euVehicleCategory": null,
-      "frontAxleTo5thWheelCouplingMax": null,
-      "frontAxleTo5thWheelCouplingMin": null,
-      "frontAxleTo5thWheelMax": null,
-      "frontAxleTo5thWheelMin": null,
-      "functionCode": null,
-      "grossDesignWeight": null,
-      "grossGbWeight": null,
-      "grossKerbWeight": null,
-      "grossLadenWeight": null,
-      "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
-      "make": null,
-      "manufactureYear": null,
-      "maxTrainDesignWeight": null,
-      "maxTrainGbWeight": null,
-      "model": null,
+      "vehicleType": "lgv",
+      "regnDate": "2018-12-07",
+      "manufactureYear": 1999,
       "noOfAxles": 2,
-      "notes": null,
-      "ntaNumber": null,
-      "reasonForCreation": null,
-      "regnDate": null,
-      "roadFriendly": false,
-      "speedLimiterMrk": null,
-      "statusCode": "current",
-      "tachoExemptMrk": null,
-      "trainDesignWeight": null,
-      "trainGbWeight": null,
-      "tyreUseCode": null,
-      "vehicleClass": {
-        "code": "v",
-        "description": null
+      "euVehicleCategory": "m1",
+      "applicantDetails": {
+        "address1": "applicant address 1",
+        "address2": "applicant address 2",
+        "address3": "applicant address 3",
+        "name": "applicant name",
+        "postCode": "PO16 7GZ",
+        "postTown": "applicant post town",
+        "telephoneNumber": "123456",
+        "emailAddress": "applicant@applicant.com"
       },
-      "vehicleConfiguration": null,
+      "remarks": "remarks",
+      "reasonForCreation": "test",
+      "recordCompleteness": "complete",
+      "vehicleClass": {
+        "description": "motorbikes up to 200cc"
+      },
       "vehicleSubclass": [
         "a"
-      ],
-      "vehicleType": "car"
+      ]
     }
-  ],
-  "vin": "P0123010911250"
+  ]
 }

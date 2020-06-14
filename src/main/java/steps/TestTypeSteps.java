@@ -40,8 +40,8 @@ public class TestTypeSteps {
     }
 
     @Step
-    public String getVehicleType(String testCode) {
-        return testTypesClient.getVehicleType(testCode);
+    public String getTestTypeClassificationByTestCode(String testCode) {
+        return testTypesClient.getTestTypeClassificationByTestCode(testCode);
     }
 
     @Step

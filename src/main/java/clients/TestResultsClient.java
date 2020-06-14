@@ -709,17 +709,22 @@ public class TestResultsClient {
 
         for (TestTypes testType : TestTypes.values()) {
             if (testType.getTestCode().contentEquals(testCode.toLowerCase())) {
+                String testTypeId = testType.getId();
                 // create test result alteration to change testTypeId
                 JsonPathAlteration alterationTestTypeId =
-                        new JsonPathAlteration("$.testTypes[0].testTypeId", testType.getId(),"","REPLACE");
+                        new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
                 testResultAlterations.add(alterationTestTypeId);
+                String testTypeName = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.id =='" +
+                        testTypeId + "')].testTypeName");
                 // create test result alteration to change testTypeName
                 JsonPathAlteration alterationTestTypeName =
-                        new JsonPathAlteration("$.testTypes[0].testTypeName", testType.getTestTypeName(),"","REPLACE");
+                        new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
                 testResultAlterations.add(alterationTestTypeName);
+                String testName = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.id =='" +
+                        testTypeId + "')].name");
                 // create test result alteration to change testName
                 JsonPathAlteration alterationTestName =
-                        new JsonPathAlteration("$.testTypes[0].name", testType.getName(),"","REPLACE");
+                        new JsonPathAlteration("$.testTypes[0].name", testName,"","REPLACE");
                 testResultAlterations.add(alterationTestName);
                 break;
             }
@@ -808,6 +813,7 @@ public class TestResultsClient {
 
         Response responsePostTestResults = postVehicleTestResultsWithAlterations(postTestResultBody, testResultAlterations);
         if (responsePostTestResults.statusCode() != 201) {
+            responsePostTestResults.prettyPrint();
             throw new AutomationException("The post test results request was not successful, status code was "
                     + responsePostTestResults.statusCode());
         }

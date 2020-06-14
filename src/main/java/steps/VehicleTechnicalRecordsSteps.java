@@ -513,13 +513,13 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public Map<String,Object> createTechRecord (String vehicleType) {
+    public Map<String,Object> createTechRecord(String vehicleType) {
         return vehicleTechnicalRecordsClient.createTechRecord(vehicleType);
     }
 
     @Step
-    public Map<String,Object> createTechRecord (String vehicleType, JSONObject restrictions) {
-        return vehicleTechnicalRecordsClient.createTechRecord(vehicleType, restrictions);
+    public Map<String,Object> createTechRecord(JSONObject restrictions) {
+        return vehicleTechnicalRecordsClient.createTechRecord(restrictions);
     }
 
     @Step
