@@ -50,8 +50,14 @@ public class TestTypesClient {
                     testCode.split("_")[0] + "' && @.forVehicleType == '" + testCode.split("_")[1] + "')]");
         }
         else {
-            testTypeProperties = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.defaultTestCode == '" +
-                    testCode + "')]");
+            if (testCode.contentEquals("lcp")) {
+                testTypeProperties = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.linkedTestCode == '" +
+                        testCode + "')]");
+            }
+            else {
+                testTypeProperties = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.defaultTestCode == '" +
+                        testCode + "')]");
+            }
         }
 
         String restrictions = GenericData.getJsonObjectInPath(testTypeProperties, "$[0]");

@@ -29,6 +29,7 @@ import util.TypeLoader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -743,7 +744,7 @@ public class TestResultsClient {
         JsonPathAlteration alterationTestResult =
                 new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
-        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         String endDate = currentDate.plusHours(1).format(formatter);
         String expiryDate = currentDate.plusYears(1).format(formatter);

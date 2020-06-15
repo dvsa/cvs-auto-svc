@@ -266,7 +266,7 @@ public enum TestTypes {
     TES("36", "tes"),
     NFL("38", "nfl"),
     NFS("38", "nfs"),
-//    LCP("39", "lcp"),
+    LCP("39", "lcp"),
     LBP("39", "lbp"),
 
     YF4("125", "yf4"),

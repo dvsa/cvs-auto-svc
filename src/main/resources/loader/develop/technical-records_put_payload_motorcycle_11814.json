@@ -16,12 +16,11 @@
       "manufactureYear": 1986,
       "noOfAxles": 2,
       "numberOfWheelsDriven": 2,
-      "euVehicleCategory": "m1",
+      "euVehicleCategory": "l7e",
       "vehicleClass": {
         "code": "4",
         "description": "MOT class 4"
       },
-      "euVehicleCategory": "m2",
       "applicantDetails": {
         "name": "************",
         "address1": "*****",

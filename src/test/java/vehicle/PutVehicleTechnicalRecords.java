@@ -1067,7 +1067,7 @@ public class PutVehicleTechnicalRecords {
         // PUT tech-records and verify the expected response
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m2" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m1" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
@@ -1118,7 +1118,7 @@ public class PutVehicleTechnicalRecords {
         // PUT tech-records and verify the expected response
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m2" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","n1" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
@@ -1170,7 +1170,7 @@ public class PutVehicleTechnicalRecords {
         // PUT tech-records and verify the expected response
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m2" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","l7e" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
@@ -1223,7 +1223,7 @@ public class PutVehicleTechnicalRecords {
         // PUT tech-records and verify the expected response
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m2" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m1" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
@@ -1277,7 +1277,7 @@ public class PutVehicleTechnicalRecords {
         // PUT tech-records and verify the expected response
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m2" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","n1" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
