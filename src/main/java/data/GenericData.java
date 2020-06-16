@@ -3,7 +3,6 @@ package data;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
@@ -67,14 +66,17 @@ public class GenericData {
             e.printStackTrace();
         }
         ObjectMapper mapperObj = new ObjectMapper();
-        String jsonResp = null;
+        String jsonResp = "";
         try {
             jsonResp = mapperObj.writeValueAsString(JsonPath.read(jsonBody, path));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         if (jsonResp.startsWith("\"") && jsonResp.endsWith("\"")) {
-            return jsonResp.substring(1, jsonResp.length()-1);
+            return jsonResp.substring(1, jsonResp.length() - 1);
+        }
+        else if (jsonResp.startsWith("[\"") && jsonResp.endsWith("\"]") && (!jsonResp.contains("{")) && (!(jsonResp.contains(",")))) {
+            return jsonResp.substring(2, jsonResp.length() - 2);
         }
         else {
             return jsonResp;

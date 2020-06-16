@@ -29,6 +29,7 @@ import util.TypeLoader;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -709,17 +710,22 @@ public class TestResultsClient {
 
         for (TestTypes testType : TestTypes.values()) {
             if (testType.getTestCode().contentEquals(testCode.toLowerCase())) {
+                String testTypeId = testType.getId();
                 // create test result alteration to change testTypeId
                 JsonPathAlteration alterationTestTypeId =
-                        new JsonPathAlteration("$.testTypes[0].testTypeId", testType.getId(),"","REPLACE");
+                        new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
                 testResultAlterations.add(alterationTestTypeId);
+                String testTypeName = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.id =='" +
+                        testTypeId + "')].testTypeName");
                 // create test result alteration to change testTypeName
                 JsonPathAlteration alterationTestTypeName =
-                        new JsonPathAlteration("$.testTypes[0].testTypeName", testType.getTestTypeName(),"","REPLACE");
+                        new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
                 testResultAlterations.add(alterationTestTypeName);
+                String testName = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.id =='" +
+                        testTypeId + "')].name");
                 // create test result alteration to change testName
                 JsonPathAlteration alterationTestName =
-                        new JsonPathAlteration("$.testTypes[0].name", testType.getName(),"","REPLACE");
+                        new JsonPathAlteration("$.testTypes[0].name", testName,"","REPLACE");
                 testResultAlterations.add(alterationTestName);
                 break;
             }
@@ -738,7 +744,7 @@ public class TestResultsClient {
         JsonPathAlteration alterationTestResult =
                 new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
-        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         String endDate = currentDate.plusHours(1).format(formatter);
         String expiryDate = currentDate.plusYears(1).format(formatter);
@@ -808,6 +814,7 @@ public class TestResultsClient {
 
         Response responsePostTestResults = postVehicleTestResultsWithAlterations(postTestResultBody, testResultAlterations);
         if (responsePostTestResults.statusCode() != 201) {
+            responsePostTestResults.prettyPrint();
             throw new AutomationException("The post test results request was not successful, status code was "
                     + responsePostTestResults.statusCode());
         }

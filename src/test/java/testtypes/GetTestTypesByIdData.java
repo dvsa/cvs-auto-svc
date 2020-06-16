@@ -1,5 +1,6 @@
 package testtypes;
 
+import clients.TestTypesClient;
 import clients.model.*;
 import data.TestTypeByIdData;
 import io.restassured.response.Response;
@@ -3575,7 +3576,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.BID_HGV.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BID_HGV.getClassification());
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.BID_HGV.getTestCode());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", testTypeSteps.getActualTestCode(TestTypes.BID_HGV.getTestCode()));
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'bid' (forVehicleType 'trl', forVehicleConfiguration 'null')")
@@ -3591,7 +3592,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.BID_TRL.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BID_TRL.getClassification());
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.BID_TRL.getTestCode());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", testTypeSteps.getActualTestCode(TestTypes.BID_TRL.getTestCode()));
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'bif' (forVehicleType 'hgv', forVehicleConfiguration 'null')")
@@ -3607,7 +3608,23 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.BIF_HGV.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BIF_HGV.getClassification());
-        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", TestTypes.BIF_HGV.getTestCode());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", testTypeSteps.getActualTestCode(TestTypes.BIF_HGV.getTestCode()));
+    }
+
+    @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'bif' (forVehicleType 'psv', forVehicleConfiguration 'articulated')")
+    @Test
+    public void testTypeDefaultTestCodeBifPSV() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.DEFAULT_TEST_CODE, TestTypeField.TEST_TYPE_CLASSIFICATION))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED)
+                .setVehicleAxles(VehicleAxles.NULL);
+
+        testTypeSteps.getTestTypesById(TestTypes.BIF_PSV.getId(), testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.valueForFieldInPathShouldBe("testTypeClassification", TestTypes.BIF_PSV.getClassification());
+        testTypeSteps.valueForFieldInPathShouldBe("defaultTestCode", testTypeSteps.getActualTestCode(TestTypes.BIF_PSV.getTestCode()));
     }
 
     @Title("CVSB-4817 / CVSB-7188 - API Consumer retrieves data default test code 'qcv' (forVehicleType 'hgv', forVehicleConfiguration 'null')")

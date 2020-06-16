@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class DataUtil {
@@ -32,7 +33,7 @@ public class DataUtil {
 
     public static String buildCurrentDateTime() {
 
-        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         return currentDate.format(formatter);
 
@@ -41,7 +42,7 @@ public class DataUtil {
 
     public static String buildCurrentDateTime(long days) {
 
-        LocalDateTime currentDate = LocalDateTime.now().plusDays(days);
+        LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London")).plusDays(days);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         return currentDate.format(formatter);
 

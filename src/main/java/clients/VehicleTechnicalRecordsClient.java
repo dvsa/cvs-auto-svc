@@ -532,8 +532,9 @@ public class VehicleTechnicalRecordsClient {
         return testResultAttributes;
     }
 
-    public Map<String, Object> createTechRecord(String vehicleType, JSONObject restrictions) {
+    public Map<String, Object> createTechRecord(JSONObject restrictions) {
         List<JsonPathAlteration> techRecordAlterations = new ArrayList<>();
+        String vehicleType = "";
         try {
             int length = restrictions.length();
             if (length != 0) {
@@ -542,13 +543,14 @@ public class VehicleTechnicalRecordsClient {
                 int i = 0;
                 while (iterator.hasNext()) {
                     names[i] = iterator.next();
-                    if (!(names[i].toString().contentEquals("vehicleType"))) {
-                        // add tech record alteration for each restriction set on the test type to be created
-                        JsonPathAlteration additionalTechRecordAlteration =
-                                new JsonPathAlteration("$.techRecord[0]." + names[i].toString(), restrictions.get(names[i].toString()),
-                                        "", "REPLACE");
-                        techRecordAlterations.add(additionalTechRecordAlteration);
+                    if (names[i].toString().contentEquals("vehicleType")) {
+                        vehicleType = restrictions.get(names[i].toString()).toString();
                     }
+                    // add tech record alteration for each restriction set on the test type to be created
+                    JsonPathAlteration additionalTechRecordAlteration =
+                            new JsonPathAlteration("$.techRecord[0]." + names[i].toString(), restrictions.get(names[i].toString()),
+                                    "", "REPLACE");
+                    techRecordAlterations.add(additionalTechRecordAlteration);
                     i += 1;
                 }
             }
@@ -564,7 +566,9 @@ public class VehicleTechnicalRecordsClient {
         String randomVin = GenericData.generateRandomVin();
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
-        if (!vehicleType.equals("hgv") && !vehicleType.equals("psv") && !vehicleType.equals("trl")) {
+        if (!(vehicleType.contentEquals("hgv") || vehicleType.contentEquals("psv") ||
+                vehicleType.contentEquals("trl") || vehicleType.contentEquals("lgv") ||
+                vehicleType.contentEquals("car") || vehicleType.contentEquals("motorcycle"))) {
             throw new AutomationException("Invalid vehicle type");
         }
         // read post request body from file
@@ -577,50 +581,21 @@ public class VehicleTechnicalRecordsClient {
         techRecordAlterations.add(alterationVin);
         techRecordAlterations.add(alterationVrm);
 
-//        String alteredTechRecordBody = GenericData.applyJsonAlterations(postTechRecordBody, techRecordAlterations);
 
         Response postTechRecordsResponse = postVehicleTechnicalRecordsWithAlterations(postTechRecordBody,techRecordAlterations);
 
 
-//        Response postTechRecordsResponse = given().filters(new BasePathFilter())
-//                .contentType(ContentType.JSON)
-//                .body(alteredTechRecordBody)
-//                .log().method().log().uri().log().body()
-//                .post("/vehicles");
-//
-//        if (postTechRecordsResponse.getStatusCode() == 401 || postTechRecordsResponse.getStatusCode() == 403) {
-//            saveUtils();
-//            postTechRecordsResponse = given().filters(new BasePathFilter())
-//                    .contentType(ContentType.JSON)
-//                    .body(alteredTechRecordBody)
-//                    .log().method().log().uri().log().body()
-//                    .post("/vehicles");
-//        }
         postTechRecordsResponse.prettyPrint();
         if (postTechRecordsResponse.statusCode() != 201) {
+            postTechRecordsResponse.prettyPrint();
             throw new AutomationException("The post tech records request was not successful, status code was "
                     + postTechRecordsResponse.statusCode());
         }
 
         Response getTechRecordsResponse = getVehicleTechnicalRecords(randomVin);
-//        Response getTechRecordsResponse = given().filters(new BasePathFilter())
-//                .contentType(ContentType.JSON)
-//                .pathParam("searchIdentifier", randomVin)
-//                .queryParam("status", "all")
-//                .queryParam("searchCriteria", "vin")
-//                .log().method().log().uri().log().body()
-//                .get("/vehicles/{searchIdentifier}/tech-records");
-//        if (getTechRecordsResponse.getStatusCode() == 401 || getTechRecordsResponse.getStatusCode() == 403) {
-//            getTechRecordsResponse = given().filters(new BasePathFilter())
-//                    .contentType(ContentType.JSON)
-//                    .pathParam("searchIdentifier", randomVin)
-//                    .queryParam("status", "all")
-//                    .queryParam("searchCriteria", "vin")
-//                    .log().method().log().uri().log().body()
-//                    .get("/vehicles/{searchIdentifier}/tech-records");
-//        }
         getTechRecordsResponse.prettyPrint();
         if (getTechRecordsResponse.statusCode() != 200) {
+            postTechRecordsResponse.prettyPrint();
             throw new AutomationException("The get tech records request was not successful, status code was "
                     + getTechRecordsResponse.statusCode());
         }
