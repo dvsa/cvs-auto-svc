@@ -5,14 +5,17 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
+import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -24,10 +27,14 @@ import java.util.UUID;
 public class PostTestResultsRoadworthinessCertificateGeneration {
 
     @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    @Steps
     TestResultsSteps testResultsSteps;
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
+
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_QJT1_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -35,27 +42,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT2) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_QJT2_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -63,83 +75,143 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT4) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_QJT4_Pass_Certificate_Generation() {
 
-        // Read the base test result JSON.
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTrailerId = GenericData.generateRandomTrailerId();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationVrmVehicle = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.trailerId", randomTrailerId,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle,
+                alterationVrmVehicle,
+                alterationTrailerId));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_pass_qjt4_7677.json","$");
 
-        // Create alteration to add one more tech record to in the request body
-        String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        //testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV2_Pass_Certificate_Generation() {
 
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_qjv2_7677.json","$");
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
 
-        // Create alteration to add one more tech record to in the request body
+        // Create alteration to edit one or more fields in the request body
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_qjv2_7677.json","$");
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV3) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV3_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -147,27 +219,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV4) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV4_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -175,27 +252,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV5) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV5_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -203,55 +285,81 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QKV_Pass_Certificate_Generation() {
 
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_qkv_7677.json","$");
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
 
-        // Create alteration to add one more tech record to in the request body
+        // Create alteration to edit one or more fields in the request body
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_qkv_7677.json","$");
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QKT) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_QKT_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -259,27 +367,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QPV) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QPV_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -287,27 +400,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QPT) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_QPT_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -315,27 +433,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QQV) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_QQV_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -343,27 +466,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QQT) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_QQT_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -371,27 +499,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(RUT) - PASS ")
+    @Test
     public void testResults_Roadworthiness_TRL_RUT_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -399,27 +532,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(RUV) - PASS ")
+    @Test
     public void testResults_Roadworthiness_HGV_RUV_Pass_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -427,27 +565,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_QJT1_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -455,27 +598,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT2) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_QJT2_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -483,55 +631,90 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT4) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_QJT4_Fail_Certificate_Generation() {
 
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_fail_qjt4_7677.json","$");
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
 
-        // Create alteration to add one more tech record to in the request body
+        // Create alteration to edit one or more fields in the request body
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTrailerId = GenericData.generateRandomTrailerId();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationVrmVehicle = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.trailerId", randomTrailerId,"","REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle,
+                alterationVrmVehicle,
+                alterationTrailerId));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_fail_qjt4_7677.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV2_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -539,27 +722,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV3) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV3_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -567,27 +755,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV4) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV4_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -595,27 +788,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV5) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QJV5_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -623,55 +821,81 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QKV_Fail_Certificate_Generation() {
 
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_fail_qkv_7677.json","$");
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
 
-        // Create alteration to add one more tech record to in the request body
+        // Create alteration to edit one or more fields in the request body
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_fail_qkv_7677.json","$");
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QKT) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_QKT_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -679,27 +903,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QPV) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QPV_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -707,27 +936,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QPT) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_QPT_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -735,27 +969,32 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QQV) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_QQV_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -763,83 +1002,151 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QQT) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_QQT_Fail_Certificate_Generation() {
 
-        // Read the base test result JSON.
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTrailerId = GenericData.generateRandomTrailerId();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationVrmVehicle = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.trailerId", randomTrailerId,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle,
+                alterationVrmVehicle,
+                alterationTrailerId));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        System.out.println(systemNumber);
+
+        // read base JSON for POST test-results
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_fail_qqt_7677.json","$");
 
-        // Create alteration to add one more tech record to in the request body
-        String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(RUT) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_TRL_RUT_Fail_Certificate_Generation() {
 
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_fail_rut_7677.json","$");
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
 
-        // Create alteration to add one more tech record to in the request body
+        // Create alteration to edit one or more fields in the request body
         String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTrailerId = GenericData.generateRandomTrailerId();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationVrmVehicle = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.trailerId", randomTrailerId,"","REPLACE");
 
         // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationTestResultId));
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle,
+                alterationVrmVehicle,
+                alterationTrailerId));
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //GET tech-records
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        // read base JSON for POST test-results
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_fail_rut_7677.json","$");
+
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", systemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumber,
+                alterationVinTestResults,
+                alterationTestResultIdPost));
+
+        // Post the test-results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(RUV) - FAIL ")
+    @Test
     public void testResults_Roadworthiness_HGV_RUV_Fail_Certificate_Generation() {
 
         // Read the base test result JSON.
@@ -847,22 +1154,27 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
-                alterationTestResultId));
+                alterationTestResultId,
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(randomTestResultId,randomVin);
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
 
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 }
