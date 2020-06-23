@@ -1,50 +1,34 @@
 {
-  "msUserDetails": {
-    "msUser": "sean",
-    "msOid": "12345"
-  },
-  "vin": "P11122224",
-  "partialVin": "122223",
+  "partialVin": "122224",
   "primaryVrm": "PSV112244",
-  "systemNumber": "BSFD3244BDSGR",
   "secondaryVrms": [
     "PSV223344"
   ],
+  "systemNumber": "10000225",
   "techRecord": [
     {
-      "vehicleType": "psv",
-      "regnDate": "1995-01-01",
-      "manufactureYear": 1995,
-      "noOfAxles": 2,
-      "speedLimiterMrk": false,
-      "tachoExemptMrk": false,
-      "euroStandard": "2",
-      "fuelPropulsionSystem": "DieselPetrol",
+      "alterationMarker": true,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************"
+      },
       "approvalType": "NTA",
       "approvalTypeNumber": "123456",
-      "ntaNumber": "123456",
-      "coifSerialNumber": "123456",
-      "coifCertifierName": "12345678",
-      "coifDate": "2020-12-12",
-      "variantNumber": "123456",
-      "variantVersionNumber": "123456",
-      "bodyMake": "Isuzu",
-      "bodyModel": "X40",
-      "modelLiteral": "123456",
-      "chassisMake": "Isuzu",
-      "chassisModel": "X40",
-      "functionCode": "R",
-      "conversionRefNo": "123456",
-      "speedRestriction": 10,
       "axles": [
         {
-          "parkingBrakeMrk": true,
           "axleNumber": 1,
+          "parkingBrakeMrk": true,
           "tyres": {
+            "dataTrAxles": 888,
+            "fitmentCode": "double",
             "plyRating": "1",
             "speedCategorySymbol": "a7",
-            "fitmentCode": "double",
-            "dataTrAxles": 888,
             "tyreCode": 383,
             "tyreSize": "385/65-22.5"
           },
@@ -56,13 +40,13 @@
           }
         },
         {
-          "parkingBrakeMrk": false,
           "axleNumber": 2,
+          "parkingBrakeMrk": false,
           "tyres": {
+            "dataTrAxles": 777,
+            "fitmentCode": "single",
             "plyRating": "2",
             "speedCategorySymbol": "a8",
-            "fitmentCode": "single",
-            "dataTrAxles": 777,
             "tyreCode": 282,
             "tyreSize": "380/65-22.5"
           },
@@ -74,11 +58,16 @@
           }
         }
       ],
+      "bodyMake": "Isuzu",
+      "bodyModel": "X40",
       "bodyType": {
+        "code": "o",
         "description": "other"
       },
+      "brakeCode": "code",
       "brakes": {
-        "dtpNumber": "3799A",
+        "brakeCode": "code",
+        "brakeCodeOriginal": "ode",
         "brakeForceWheelsNotLocked": {
           "parkingBrakeForceA": 2,
           "secondaryBrakeForceA": 3,
@@ -89,81 +78,96 @@
           "secondaryBrakeForceB": 6,
           "serviceBrakeForceB": 7
         },
-        "brakeCode": "code",
         "dataTrBrakeOne": "312677",
-        "dataTrBrakeTwo": "98765",
         "dataTrBrakeThree": "98765",
+        "dataTrBrakeTwo": "98765",
+        "dtpNumber": "3799A",
         "retarderBrakeOne": "electric",
         "retarderBrakeTwo": "exhaust"
       },
+      "chassisMake": "Isuzu",
+      "chassisModel": "X40",
+      "coifCertifierName": "12345678",
+      "coifDate": "2020-12-12",
+      "coifSerialNumber": "123456",
+      "conversionRefNo": "123456",
+      "createdAt": "2020-06-10T14:48:34.320Z",
+      "createdById": "12345",
+      "createdByName": "sean",
       "dda": {
         "certificateIssued": true,
-        "wheelchairCapacity": 20,
-        "wheelchairFittings": "test",
-        "wheelchairLiftPresent": true,
-        "wheelchairLiftInformation": "test",
-        "wheelchairRampPresent": true,
-        "wheelchairRampInformation": "test",
+        "ddaNotes": "test",
+        "ddaSchedules": "test",
         "minEmergencyExits": 1,
         "outswing": "test",
-        "ddaSchedules": "test",
         "seatbeltsFitted": 2,
-        "ddaNotes": "test"
+        "wheelchairCapacity": 20,
+        "wheelchairFittings": "test",
+        "wheelchairLiftInformation": "test",
+        "wheelchairLiftPresent": true,
+        "wheelchairRampInformation": "test",
+        "wheelchairRampPresent": true
       },
       "departmentalVehicleMarker": false,
-      "alterationMarker": true,
       "dimensions": {
+        "height": 4562,
         "length": 13760,
-        "width": 2480,
-        "height": 4562
+        "width": 2480
       },
+      "dispensations": "dispensations",
       "emissionsLimit": 20,
+      "euroStandard": "2",
       "euVehicleCategory": "m1",
       "frontAxleToRearAxle": 1000,
+      "fuelPropulsionSystem": "DieselPetrol",
+      "functionCode": "R",
       "grossDesignWeight": 38000,
       "grossGbWeight": 38000,
       "grossKerbWeight": 38000,
       "grossLadenWeight": 38000,
+      "manufactureYear": 1995,
       "maxTrainGbWeight": 14000,
       "microfilm": {
         "microfilmDocumentType": "PSV Miscellaneous",
         "microfilmRollNumber": "55555",
         "microfilmSerialNumber": "4444"
       },
-      "numberOfWheelsDriven": 10,
+      "modelLiteral": "123456",
+      "ntaNumber": "123456",
       "numberOfSeatbelts": "56",
+      "numberOfWheelsDriven": 10,
       "plates": [
         {
-          "plateSerialNumber": "11111111",
           "plateIssueDate": "2020-02-02",
+          "plateIssuer": "Mr Jones",
           "plateReasonForIssue": "Original",
-          "plateIssuer": "Mr Jones"
+          "plateSerialNumber": "11111111"
         }
       ],
-      "applicantDetails": {
-        "address1": "*****",
-        "address2": "*****",
-        "address3": "*****",
-        "name": "************",
-        "postCode": "*****",
-        "postTown": "*",
-        "telephoneNumber": "**************",
-        "emailAddress": "*************"
-      },
       "reasonForCreation": "because",
+      "recordCompleteness": "Skeleton",
+      "regnDate": "1995-01-01",
       "remarks": "remarks",
-      "dispensations": "dispensations",
       "seatbeltInstallationApprovalDate": "2020-02-02",
       "seatsLowerDeck": 30,
       "seatsUpperDeck": 26,
+      "speedLimiterMrk": false,
+      "speedRestriction": 10,
       "standingCapacity": 10,
+      "statusCode": "provisional",
+      "tachoExemptMrk": false,
       "trainDesignWeight": 14000,
       "unladenWeight": 38000,
-      "vehicleSize": "large",
+      "variantNumber": "123456",
+      "variantVersionNumber": "123456",
       "vehicleClass": {
+        "code": "l",
         "description": "large psv(ie: greater than 23 seats)"
       },
-      "vehicleConfiguration": "other"
+      "vehicleConfiguration": "other",
+      "vehicleSize": "large",
+      "vehicleType": "psv"
     }
-  ]
+  ],
+  "vin": "P91122224"
 }

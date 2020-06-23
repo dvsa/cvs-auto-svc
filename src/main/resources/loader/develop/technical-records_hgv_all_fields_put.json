@@ -115,8 +115,7 @@
         "description": "trailer"
       },
       "vehicleConfiguration": "rigid",
-      "vehicleType": "hgv",
-      "recordCompleteness": "skeleton"
+      "vehicleType": "hgv"
     }
   ],
   "vin": "A00037502"

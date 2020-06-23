@@ -12,7 +12,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 

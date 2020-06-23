@@ -1,16 +1,25 @@
 {
-  "msUserDetails": {
-    "msUser": "sean",
-    "msOid": "12345"
-  },
-  "partialVin": "037501",
+  "partialVin": "037502",
   "primaryVrm": "B2C1C11",
-  "systemNumber": "BSFD3244BDSGR",
   "secondaryVrms": [
     "E5F1I00"
   ],
+  "systemNumber": "10000222",
   "techRecord": [
     {
+      "alterationMarker": false,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************"
+      },
+      "approvalType": "NTA",
+      "approvalTypeNumber": "1234",
       "axles": [
         {
           "axleNumber": 1,
@@ -46,91 +55,84 @@
         }
       ],
       "bodyType": {
+        "code": "o",
         "description": "other"
       },
       "brakes": {
         "dtpNumber": "3798A"
       },
       "conversionRefNo": " ",
+      "createdAt": "2020-06-10T13:33:51.623Z",
+      "createdById": "12345",
+      "createdByName": "sean",
+      "departmentalVehicleMarker": false,
       "dimensions": {
-        "length": 10000,
-        "width": 2000,
         "axleSpacing": [
           {
             "axles": "1-2",
             "value": 10000
           }
-        ]
+        ],
+        "length": 10000,
+        "width": 2000
       },
       "drawbarCouplingFitted": false,
+      "emissionsLimit": 20,
       "euroStandard": "2",
-      "fuelPropulsionSystem": "Electric",
-      "frontAxleToRearAxle": 1000,
-      "frontAxleTo5thWheelMax": 1000,
-      "frontAxleTo5thWheelMin": 1000,
+      "euVehicleCategory": "m1",
       "frontAxleTo5thWheelCouplingMax": 1000,
       "frontAxleTo5thWheelCouplingMin": 1000,
+      "frontAxleTo5thWheelMax": 1000,
+      "frontAxleTo5thWheelMin": 1000,
+      "frontAxleToRearAxle": 1000,
+      "fuelPropulsionSystem": "Electric",
       "functionCode": "A",
       "grossDesignWeight": 33500,
-      "grossGbWeight": 25000,
       "grossEecWeight": 25000,
+      "grossGbWeight": 25000,
       "make": "VOLVO",
       "manufactureYear": 1984,
       "maxTrainDesignWeight": 2800,
       "maxTrainEecWeight": 2500,
       "maxTrainGbWeight": 44000,
-      "model": "F12-33",
-      "noOfAxles": 3,
-      "notes": " ",
-      "ntaNumber": "0000514903",
-      "reasonForCreation": "something",
-      "regnDate": "1985-01-01",
-      "roadFriendly": false,
-      "speedLimiterMrk": false,
-      "tachoExemptMrk": false,
-      "trainDesignWeight": 59500,
-      "trainGbWeight": 41000,
-      "trainEecWeight": 25000,
-      "tyreUseCode": "2B",
-      "offRoad": false,
-      "numberOfWheelsDriven": 4,
-      "euVehicleCategory": "m1",
-      "emissionsLimit": 20,
-      "departmentalVehicleMarker": false,
-      "alterationMarker": false,
-      "approvalType": "NTA",
-      "approvalTypeNumber": "1234",
-      "variantNumber": "324324",
-      "variantVersionNumber": "345",
-      "applicantDetails": {
-        "address1": "*****",
-        "address2": "*****",
-        "address3": "*****",
-        "name": "************",
-        "postCode": "*****",
-        "postTown": "*",
-        "telephoneNumber": "**************",
-        "emailAddress": "*************"
-      },
       "microfilm": {
         "microfilmDocumentType": "HGV COC + Int Plate",
         "microfilmRollNumber": "12346",
         "microfilmSerialNumber": "1234"
       },
+      "model": "F12-33",
+      "notes": " ",
+      "ntaNumber": "0000514903",
+      "numberOfWheelsDriven": 4,
+      "offRoad": false,
       "plates": [
         {
-          "plateSerialNumber": "123456",
           "plateIssueDate": "2100-12-31",
+          "plateIssuer": "issuer",
           "plateReasonForIssue": "Replacement",
-          "plateIssuer": "issuer"
+          "plateSerialNumber": "123456"
         }
       ],
+      "reasonForCreation": "something",
+      "recordCompleteness": "Skeleton",
+      "regnDate": "1985-01-01",
+      "roadFriendly": false,
+      "speedLimiterMrk": false,
+      "statusCode": "provisional",
+      "tachoExemptMrk": false,
+      "trainDesignWeight": 59500,
+      "trainEecWeight": 25000,
+      "trainGbWeight": 41000,
+      "tyreUseCode": "2B",
+      "variantNumber": "324324",
+      "variantVersionNumber": "345",
       "vehicleClass": {
+        "code": "v",
         "description": "heavy goods vehicle"
       },
       "vehicleConfiguration": "articulated",
       "vehicleType": "hgv"
     }
   ],
-  "vin": "A00037502"
+  "vin": "A40037502"
 }

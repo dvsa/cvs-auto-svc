@@ -356,7 +356,7 @@ public class VehicleTechnicalRecordsSteps {
 
                 if (status == 200 && recordsNumber > 1) {
                     try {
-                        Thread.sleep(2500);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -549,5 +549,10 @@ public class VehicleTechnicalRecordsSteps {
     public String putVehicleTechnicalRecordsForCurrentWithAlterations(String systemNumber, OldStatusCode oldStatusCode , String postRequestBody, List<JsonPathAlteration> alterations) {
         response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForCurrentWithAlterations(systemNumber,oldStatusCode.getOldStatusCode(),postRequestBody,alterations);
         return response.prettyPrint();
+    }
+
+    @Step
+    public void insertRecordInDynamo(String json, String table, String primaryKey) {
+        AwsUtil.insertJsonInTable(json, table, primaryKey);
     }
 }

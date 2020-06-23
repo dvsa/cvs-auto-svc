@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 
@@ -321,9 +321,7 @@ public class PutVehiclePsvFieldRestrictions {
                 {"$.techRecord[0].dispensations", 99},
                 {"$.techRecord[0].reasonForCreation", RandomStringUtils.randomAlphanumeric(101)},
                 {"$.techRecord[0].reasonForCreation", ""},
-                {"$.techRecord[0].reasonForCreation", 10},
-                {"$.techRecord[0].recordCompleteness", RandomStringUtils.randomAlphanumeric(10)},
-                {"$.techRecord[0].recordCompleteness", 10}
+                {"$.techRecord[0].reasonForCreation", 10}
         });
     }
 

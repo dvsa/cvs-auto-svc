@@ -1,0 +1,159 @@
+{
+  "partialVin": "741234",
+  "primaryVrm": "BPC1C11",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
+  "systemNumber": "10000235",
+  "techRecord": [
+    {
+      "alterationMarker": false,
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************"
+      },
+      "approvalType": "ECTA",
+      "approvalTypeNumber": "12345",
+      "authIntoService": {
+        "cocIssueDate": "2019-06-25",
+        "dateAuthorised": "2019-06-25",
+        "datePending": "2019-06-25",
+        "dateReceived": "2019-06-25",
+        "dateRejected": "2019-06-25"
+      },
+      "axles": [
+        {
+          "axleNumber": 1,
+          "brakes": {
+            "brakeActuator": 150,
+            "leverLength": 150,
+            "springBrakeParking": false
+          },
+          "parkingBrakeMrk": true,
+          "tyres": {
+            "dataTrAxles": 1,
+            "fitmentCode": "double",
+            "plyRating": "AA",
+            "tyreCode": 463,
+            "tyreSize": "11-21.5"
+          },
+          "weights": {
+            "designWeight": 10000,
+            "eecWeight": 10000,
+            "gbWeight": 10000
+          }
+        }
+      ],
+      "bodyType": {
+        "code": "t",
+        "description": "tipper"
+      },
+      "brakes": {
+        "antilockBrakingSystem": false,
+        "dtpNumber": "3798B",
+        "loadSensingValve": false
+      },
+      "centreOfRearmostAxleToRearOfTrl": 1000,
+      "conversionRefNo": "123456",
+      "couplingCenterToRearAxleMax": 900,
+      "couplingCenterToRearAxleMin": 1000,
+      "couplingCenterToRearTrlMax": 700,
+      "couplingCenterToRearTrlMin": 800,
+      "couplingType": "Y",
+      "createdAt": "2020-06-10T16:36:00.010Z",
+      "createdById": "123243424-234234245",
+      "createdByName": "catalin",
+      "departmentalVehicleMarker": true,
+      "dimensions": {
+        "axleSpacing": [
+          {
+            "axles": "2-1",
+            "value": 11000
+          }
+        ],
+        "length": 10000,
+        "width": 3000
+      },
+      "euVehicleCategory": "o2",
+      "firstUseDate": "2019-06-25",
+      "frameDescription": "Other",
+      "frontAxleToRearAxle": 1700,
+      "functionCode": "R",
+      "grossDesignWeight": 40000,
+      "grossEecWeight": 40000,
+      "grossGbWeight": 40000,
+      "lettersOfAuth": {
+        "letterContents": "other",
+        "letterDateRequested": "2019-06-25",
+        "letterType": "Trailer rejection"
+      },
+      "make": "Volvo",
+      "manufacturerDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "faxNumber": "************",
+        "manufacturerNotes": "**************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************"
+      },
+      "manufactureYear": 2019,
+      "maxLoadOnCoupling": 10000,
+      "microfilm": {
+        "microfilmDocumentType": "PSV Miscellaneous",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "model": "X6",
+      "notes": "some note",
+      "ntaNumber": "12345",
+      "plates": [
+        {
+          "plateIssueDate": "2020-02-02",
+          "plateIssuer": "Mr Jones",
+          "plateReasonForIssue": "Original",
+          "plateSerialNumber": "11111111"
+        }
+      ],
+      "purchaserDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "faxNumber": "************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "purchaserNotes": "**************",
+        "telephoneNumber": "**************"
+      },
+      "rearAxleToRearTrl": 400,
+      "reasonForCreation": "new record",
+      "recordCompleteness": "Skeleton",
+      "regnDate": "2019-06-25",
+      "roadFriendly": false,
+      "statusCode": "provisional",
+      "suspensionType": "F",
+      "tyreUseCode": "2C",
+      "variantNumber": "12345",
+      "variantVersionNumber": "12345",
+      "vehicleClass": {
+        "code": "3",
+        "description": "3 wheelers"
+      },
+      "vehicleConfiguration": "dolly",
+      "vehicleType": "trl"
+    }
+  ],
+  "trailerId": "C530051",
+  "vin": "P72741234"
+}
