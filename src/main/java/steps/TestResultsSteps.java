@@ -456,6 +456,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldContains(String path, String expectedValue) {
+        response.then().body(path, containsString(expectedValue));
+    }
+
+    @Step
     public void validateTestNumberEqualsCertificateNumber() {
         String testNumber = response.jsonPath().getString("[0].testTypes[0].testNumber");
         String certificateNumber = response.jsonPath().getString("[0].testTypes[0].certificateNumber");
@@ -749,6 +754,11 @@ public class TestResultsSteps {
     @Step
     public String getTestNumber() {
         return response.jsonPath().getString("[0].testTypes[0].testNumber");
+    }
+
+    @Step
+    public String getTestNumberForPut() {
+        return response.jsonPath().getString("testTypes[0].testNumber");
     }
 
     @Step

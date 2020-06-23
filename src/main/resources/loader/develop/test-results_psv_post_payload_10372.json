@@ -1,0 +1,66 @@
+{
+  "testResultId":"c1fc4382-fd97-4b9f-b861-d91ffbd4816f",
+  "testStationName":"Rowe, Wunsch and Wisoky",
+  "testStationPNumber":"87-1369569",
+  "testStationType":"gvts",
+  "testerName":"Gica",
+  "testerStaffId":"133",
+  "testerEmailAddress":"someone@email.com",
+  "testStartTimestamp":"2020-05-28T13:44:48.281Z",
+  "testEndTimestamp":"2020-05-28T13:47:09.561Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "vrm":"C47WLL",
+  "odometerReading":54,
+  "odometerReadingUnits":"kilometres",
+  "regnDate":"1986-05-01",
+  "systemNumber":"11000009",
+  "vin":"YV31MEC18GA011900",
+  "vehicleClass":{
+    "description":"large psv(ie: greater than 23 seats)",
+    "code":"l"
+  },
+  "vehicleType":"psv",
+  "vehicleConfiguration":"articulated",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"m2",
+  "countryOfRegistration":"gb",
+  "noOfAxles":3,
+  "numberOfWheelsDriven":null,
+  "vehicleSize":"large",
+  "numberOfSeats":53,
+  "testTypes":[
+    {
+      "name":"Specialist test",
+      "testTypeName":"COIF with annual test",
+      "testTypeId":"142",
+      "certificateNumber":null,
+      "secondaryCertificateNumber":"4645",
+      "testTypeStartTimestamp":"2020-05-28T13:46:41.224Z",
+      "testTypeEndTimestamp":"2020-05-28T13:47:09.563Z",
+      "numberOfSeatbeltsFitted":null,
+      "lastSeatbeltInstallationCheckDate":null,
+      "seatbeltInstallationCheckDate":null,
+      "modType":null,
+      "emissionStandard":null,
+      "fuelType":null,
+      "smokeTestKLimitApplied":null,
+      "particulateTrapFitted":null,
+      "particulateTrapSerialNumber":null,
+      "modificationTypeUsed":null,
+      "testExpiryDate":null,
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":"zdfvc",
+      "defects":[
+
+      ],
+      "customDefects":[
+
+      ]
+    }
+  ]
+}
