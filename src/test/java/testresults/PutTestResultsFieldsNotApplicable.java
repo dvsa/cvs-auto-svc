@@ -142,7 +142,7 @@ public class PutTestResultsFieldsNotApplicable {
                 restriction));
 
         //Put the request payload with alterations
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterations);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterations);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
     }
 }

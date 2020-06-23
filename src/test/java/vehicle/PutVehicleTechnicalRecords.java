@@ -1372,7 +1372,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -1479,7 +1479,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -1589,7 +1589,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -1695,7 +1695,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -1805,7 +1805,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -1911,7 +1911,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -2021,7 +2021,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
@@ -2127,7 +2127,7 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated

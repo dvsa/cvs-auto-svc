@@ -1,0 +1,37 @@
+{
+  "msUserDetails": {
+    "msUser": "Tue",
+    "msOid": "12345"
+  },
+  "primaryVrm": "QU123RT",
+  "techRecord": [
+    {
+      "createdAt": "2019-06-24T10:26:54.903Z",
+      "createdByName": "Deepika",
+      "createdById": "3523",
+      "regnDate": "1986-05-01",
+      "manufactureYear": 1986,
+      "noOfAxles": 2,
+      "reasonForCreation": "Testing",
+      "vehicleType": "motorcycle",
+      "numberOfWheelsDriven": 2,
+      "euVehicleCategory": null,
+      "remarks":"For test",
+      "applicantDetails": {
+        "name": "************",
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "postTown": "*",
+        "postCode": "*****",
+        "telephoneNumber": "**************",
+        "emailAddress": "*************"
+      },
+      "vehicleClass": {
+        "code": "4",
+        "description": "motorbikes up to 200cc"
+      }
+    }
+  ],
+  "vin": "P0853010911250"
+}

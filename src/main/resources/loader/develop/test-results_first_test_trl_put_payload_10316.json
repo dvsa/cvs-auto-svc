@@ -19,6 +19,7 @@
     "firstUseDate":"2019-06-24",
     "systemNumber":"11000019",
     "vin":"T12111111",
+    "reasonForCreation":"Testing",
     "vehicleClass":{
       "description":"trailer",
       "code":"t"

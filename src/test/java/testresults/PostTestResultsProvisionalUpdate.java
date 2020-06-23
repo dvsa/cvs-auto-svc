@@ -5,7 +5,9 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -109,10 +111,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordHgvEuVehicleCategoryNull(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00001";
-        String vin = "DP76UMK4DQLTOT400001";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_hgv_insert_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -122,15 +144,15 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResult = new ArrayList<>(Arrays.asList(
                 alterationTestResultVin,
                 alterationTestResultId,
-                trAlterationSystemNumber));
+                alterationSystemNumber));
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
@@ -138,8 +160,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -151,10 +172,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordPsvEuVehicleCategoryNull(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00002";
-        String vin = "DP76UMK4DQLTOT400002";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_psv_insert_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -164,7 +205,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "m2","","REPLACE");
@@ -182,7 +223,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -195,10 +236,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordTrlEuVehicleCategoryNull(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00003";
-        String vin = "DP76UMK4DQLTOT400003";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_trl_insert_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -208,7 +269,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_pass_7675.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "o2","","REPLACE");
@@ -227,7 +288,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -240,10 +301,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordLgvEuVehicleCategoryNull(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00004";
-        String vin = "DP76UMK4DQLTOT400004";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_lgv_insert_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -253,7 +334,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "n1","","REPLACE");
@@ -271,7 +352,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -284,10 +365,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordCarEuVehicleCategoryNull(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00005";
-        String vin = "DP76UMK4DQLTOT400005";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_car_insert_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -297,7 +398,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_car.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "m1","","REPLACE");
@@ -315,8 +416,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -328,9 +428,28 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordMotorcycleEuVehicleCategoryNull(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00006";
-        String vin = "DP76UMK4DQLTOT400006";
+        // Generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+
+        // Generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+
+        // Read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_post_payload_motorcycle_11333.json","$");
+
+        // Create alteration to change one more more fields in the request body
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+
+        // Collate the alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        // POST tech-records and verify the expected response
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -341,7 +460,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "l1e-a","","REPLACE");
@@ -359,7 +478,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -372,10 +491,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordHgvEuVehicleCategoryNotUpdatedM1(){
 
-        // Tech record exists already in dynamoDb with a populated euVehicleCategory (which shouldn't change).
-        String systemNumber = "XYZEP5JYOMM00007";
-        String vin = "DP76UMK4DQLTOT400007";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_hgv_insert_2_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -385,7 +524,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"n2","REPLACE");
 
@@ -401,7 +540,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -414,10 +553,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordPsvEuVehicleCategoryNotUpdated(){
 
-        // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00008";
-        String vin = "DP76UMK4DQLTOT400008";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_psv_insert_2_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -427,7 +586,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "m2","","REPLACE");
@@ -445,7 +604,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -458,10 +617,29 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordTrlEuVehicleCategoryNotUpdatedO4(){
 
-        // Tech record exists already in dynamoDb with a pre-populated euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00009";
-        String vin = "DP76UMK4DQLTOT400009";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_trl_insert_2_11333.json", "$");
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -471,7 +649,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_pass_7675.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "o3","","REPLACE");
@@ -490,7 +668,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -503,12 +681,32 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordLgvEuVehicleCategoryNotUpdated(){
 
-        // Tech record exists already in dynamoDb with a pre-populated euVehicleCategory
-        String systemNumber = "1000076";
-        String vin = "P0123010951264";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_lgv_insert_2_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
 
@@ -516,7 +714,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "n2","","REPLACE");
@@ -534,11 +732,11 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
     }
@@ -547,12 +745,32 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordCarEuVehicleCategoryNotUpdated(){
 
-        // Tech record exists already in dynamoDb with a pre-populated euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00011";
-        String vin = "DP76UMK4DQLTOT400011";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_car_insert_2_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
 
@@ -560,7 +778,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_car.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "m2","","REPLACE");
@@ -578,11 +796,11 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }
@@ -591,10 +809,30 @@ public class PostTestResultsProvisionalUpdate {
     @Test
     public void testVehicleTechRecordMotorcycleEuVehicleCategoryNotUpdated(){
 
-        // Tech record exists already in dynamoDb with a prep-populated euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00012";
-        String vin = "DP76UMK4DQLTOT400012";
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random System Number
+        String systemNumber = GenericData.generateRandomSystemNumber();
 
+        // read post request body from file
+        String insertBody = GenericData.readJsonValueFromFile("technical-records_moto_insert_2_11333.json", "$");
+
+        // create alterations to change attributes
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
+
+        // initialize the alterations list
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationSysNo
+        ));
+
+        //TEST
+        vehicleTechnicalRecordsSteps.insertVehicleWithAlterations(insertBody, alterations);
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -604,7 +842,7 @@ public class PostTestResultsProvisionalUpdate {
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
         JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "l2e","","REPLACE");
@@ -622,7 +860,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
 
         // Get the tech record, and verify that the fields are present.
@@ -630,7 +868,6 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "l1e-a");
     }
-
 
     @Ignore("Test dropped out until duplicate-vin issue is dealt with")
     @Title("CVSB-12449 - 'EU vehicle category' updated based on systemNumber")
@@ -690,7 +927,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.validateData("Test records created");
 
         // Wait for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 20);
 
 
         // Get both tech records, and verify that ONLY record 1 has been updated.

@@ -81,7 +81,7 @@ public class PutTestResultsNegAdditionalValidationsLEC {
                 alterationVinPutTestResults,
                 alterationTestResultIdPut));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
         testResultsSteps.validatePostErrorDataContains("numberOfSeatbeltsFitted", "is not allowed");
         testResultsSteps.validatePostErrorDataContains("seatbeltInstallationCheckDate", "is not allowed");

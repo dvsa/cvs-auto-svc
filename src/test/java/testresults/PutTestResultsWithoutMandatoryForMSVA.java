@@ -175,7 +175,7 @@ public class PutTestResultsWithoutMandatoryForMSVA extends TestCase {
                 restriction
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
     }
 }

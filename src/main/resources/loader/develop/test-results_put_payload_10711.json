@@ -26,6 +26,7 @@
     "testStationPNumber": "87-1369569",
     "testStationType": "gvts",
     "testStatus": "submitted",
+    "reasonForCreation": "d",
     "testTypes": [
       {
         "additionalCommentsForAbandon": null,

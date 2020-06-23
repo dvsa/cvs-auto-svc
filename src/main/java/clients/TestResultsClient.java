@@ -603,12 +603,12 @@ public class TestResultsClient {
         return response;
     }
 
-    public Response putTestResultsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
-        Response response = callPutTestResultsWithAlterations(systemNumber, requestBody, alterations);
+    public Response putTestResultsWithAlterations(String testResultId, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPutTestResultsWithAlterations(testResultId, requestBody, alterations);
 
         if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
             saveUtils();
-            response = callPutTestResultsWithAlterations(systemNumber, requestBody, alterations);
+            response = callPutTestResultsWithAlterations(testResultId, requestBody, alterations);
         }
 
         return response;
@@ -662,16 +662,16 @@ public class TestResultsClient {
         return response;
     }
 
-    private Response callPutTestResultsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
+    private Response callPutTestResultsWithAlterations(String testResultId, String requestBody, List<JsonPathAlteration> alterations) {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
-                .pathParam("systemNumber", systemNumber)
+                .pathParam("testResultId", testResultId)
                 .log().method().log().uri().log().body()
-                .put("/test-results/{systemNumber}");
+                .put("/test-results/{testResultId}");
         return response;
     }
 
@@ -816,5 +816,18 @@ public class TestResultsClient {
                     + responsePostTestResults.statusCode());
         }
         return testResultId;
+    }
+
+    public Response putTestResultsArchiveWithAlterations(String testResultId, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .pathParam("testResultId", testResultId)
+                .log().method().log().uri().log().body()
+                .put("/test-results/archive/{testResultId}");
+        return response;
     }
 }

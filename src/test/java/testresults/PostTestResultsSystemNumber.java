@@ -291,7 +291,7 @@ public class PostTestResultsSystemNumber {
                 alterationTesterEmailAddressPut
                 ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.getTestResults(randomSystemNumber, TestVersion.ALL, randomTestResultId);
