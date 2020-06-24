@@ -10,9 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.TestResultsSteps;
-import steps.TestTypeSteps;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.JsonPathAlteration;
 
 import java.util.*;

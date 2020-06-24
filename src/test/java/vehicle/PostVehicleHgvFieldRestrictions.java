@@ -9,7 +9,7 @@ import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -215,10 +215,7 @@ public class PostVehicleHgvFieldRestrictions {
                 {"$.techRecord[0].plates[0].plateIssuer", 10},
                 {"$.techRecord[0].notes", 10},
                 {"$.techRecord[0].reasonForCreation", RandomStringUtils.randomAlphanumeric(101)},
-                {"$.techRecord[0].reasonForCreation", ""},
-                {"$.techRecord[0].reasonForCreation", 10},
-                {"$.techRecord[0].recordCompleteness", RandomStringUtils.randomAlphanumeric(10)},
-                {"$.techRecord[0].recordCompleteness", 10}
+                {"$.techRecord[0].reasonForCreation", ""}
         });
     }
 

@@ -151,8 +151,7 @@
         }
       ],
       "notes": "some note",
-      "reasonForCreation": "new record",
-      "recordCompleteness": "complete"
+      "reasonForCreation": "new record"
     }
   ]
 }

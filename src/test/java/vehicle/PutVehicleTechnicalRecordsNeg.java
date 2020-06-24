@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -465,7 +465,7 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -512,7 +512,7 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -559,7 +559,7 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -606,7 +606,7 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -654,7 +654,7 @@ public class PutVehicleTechnicalRecordsNeg {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();

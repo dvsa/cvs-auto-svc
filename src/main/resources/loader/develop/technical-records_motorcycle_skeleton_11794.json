@@ -1,0 +1,36 @@
+{
+  "partialVin": "911250",
+  "primaryVrm": "QU123RT",
+  "systemNumber": "10000232",
+  "techRecord": [
+    {
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************"
+      },
+      "createdAt": "2020-06-10T15:51:15.105Z",
+      "createdById": "12345",
+      "createdByName": "Tue",
+      "euVehicleCategory": "m1",
+      "manufactureYear": 1986,
+      "numberOfWheelsDriven": 2,
+      "reasonForCreation": "Testing",
+      "recordCompleteness": "Skeleton",
+      "regnDate": "1986-05-01",
+      "remarks": "For test",
+      "statusCode": "provisional",
+      "vehicleClass": {
+        "code": "1",
+        "description": "motorbikes up to 200cc"
+      },
+      "vehicleType": "motorcycle"
+    }
+  ],
+  "vin": "O0853010911250"
+}

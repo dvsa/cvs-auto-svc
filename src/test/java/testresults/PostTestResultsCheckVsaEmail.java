@@ -7,8 +7,7 @@ import net.thucydides.core.annotations.Title;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
-import steps.TestResultsSteps;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.*;
 
 import java.text.SimpleDateFormat;

@@ -8,7 +8,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -62,8 +62,7 @@ public class PostVehicleWithoutMandatoryHgvField {
                 {"$.techRecord[0].applicantDetails.address1"},
                 {"$.techRecord[0].applicantDetails.address2"},
                 {"$.techRecord[0].applicantDetails.postTown"},
-                {"$.techRecord[0].reasonForCreation"},
-                {"$.techRecord[0].recordCompleteness"}
+                {"$.techRecord[0].reasonForCreation"}
         });
     }
 

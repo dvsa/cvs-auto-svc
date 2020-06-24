@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 

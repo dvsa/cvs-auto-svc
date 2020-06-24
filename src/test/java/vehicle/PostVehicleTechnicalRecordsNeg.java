@@ -10,7 +10,7 @@ import org.apache.http.HttpStatus;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;

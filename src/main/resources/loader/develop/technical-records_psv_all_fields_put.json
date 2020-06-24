@@ -146,8 +146,7 @@
       "vehicleClass": {
         "description": "trailer"
       },
-      "vehicleConfiguration": "dolly",
-      "recordCompleteness": "skeleton"
+      "vehicleConfiguration": "dolly"
     }
   ]
 }

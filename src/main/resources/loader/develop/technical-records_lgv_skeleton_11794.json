@@ -1,0 +1,38 @@
+{
+  "partialVin": "911250",
+  "primaryVrm": "UU123RT",
+  "systemNumber": "10000234",
+  "techRecord": [
+    {
+      "applicantDetails": {
+        "address1": "*****",
+        "address2": "*****",
+        "address3": "*****",
+        "emailAddress": "*************",
+        "name": "************",
+        "postCode": "*****",
+        "postTown": "*",
+        "telephoneNumber": "**************"
+      },
+      "createdAt": "2020-06-10T16:28:27.194Z",
+      "createdById": "12345",
+      "createdByName": "Tue",
+      "euVehicleCategory": "m1",
+      "manufactureYear": 1986,
+      "reasonForCreation": "Testing",
+      "recordCompleteness": "Skeleton",
+      "regnDate": "1986-05-01",
+      "remarks": "For test",
+      "statusCode": "provisional",
+      "vehicleClass": {
+        "code": "4",
+        "description": "MOT class 4"
+      },
+      "vehicleSubclass": [
+        "n"
+      ],
+      "vehicleType": "lgv"
+    }
+  ],
+  "vin": "R0853010911250"
+}

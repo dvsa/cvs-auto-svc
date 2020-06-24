@@ -8,8 +8,7 @@ import net.thucydides.core.annotations.WithTag;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.TestResultsSteps;
-import steps.VehicleTechnicalRecordsSteps;
+import steps.*;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -93,4 +92,3 @@ public class PutTestResultsNegAdditionalValidationsLEC {
 
     }
 }
-
