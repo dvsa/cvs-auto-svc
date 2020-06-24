@@ -1,0 +1,70 @@
+{
+  "msUserDetails": {
+    "msUser": "PaddyS",
+    "msOid": "12345"
+  },
+  "testResult": {
+    "countryOfRegistration": "gb",
+    "euVehicleCategory": "n1",
+    "noOfAxles": 2,
+    "numberOfWheelsDriven": 4,
+    "odometerReading": 123,
+    "odometerReadingUnits": "kilometres",
+    "preparerId": "QE7355",
+    "preparerName": "RPT Logistics Limited",
+    "reasonForCancellation": null,
+    "systemNumber": "1L9GFP2CY5H5IIY9",
+    "testEndTimestamp": "2019-11-07T12:21:49.752Z",
+    "testerEmailAddress": "dorel.popescu@dvsagov.uk",
+    "testerName": "Tester",
+    "testerStaffId": "1",
+    "testResultId": "74710ede-8bb2-4233-9bfd-4e0bfcc929f1",
+    "testStartTimestamp": "2019-11-07T12:16:44.944Z",
+    "testStationName": "Abshire-Kub",
+    "testStationPNumber": "09-4129632",
+    "testStationType": "gvts",
+    "testStatus": "submitted",
+    "testTypes": [
+      {
+        "additionalCommentsForAbandon": null,
+        "additionalNotesRecorded": "Test notes",
+        "createdAt": "2020-05-12T18:57:30.002Z",
+        "customDefects": [
+
+        ],
+        "emissionStandard": "0.10 g/kWh Euro 3 PM",
+        "fuelType": "diesel",
+        "lastUpdatedAt": "2020-05-12T18:57:30.002Z",
+        "modificationTypeUsed": "123",
+        "modType": {
+          "code": "m",
+          "description": "modification or change of engine"
+        },
+        "name": "Technical test",
+        "particulateTrapFitted": null,
+        "particulateTrapSerialNumber": null,
+        "prohibitionIssued": false,
+        "reasonForAbandoning": null,
+        "secondaryCertificateNumber": "123456",
+        "smokeTestKLimitApplied": "123",
+        "testCode": "ldv",
+        "testNumber": "W01A60740",
+        "testResult": "pass",
+        "testTypeClassification": "Annual NO CERTIFICATE",
+        "testTypeEndTimestamp": "2019-11-07T12:21:49.754Z",
+        "testTypeId": "44",
+        "testTypeName": "Low Emissions Certificate (LEC) with annual test",
+        "testTypeStartTimestamp": "2019-11-07T12:20:29.601Z"
+      }
+    ],
+    "vehicleClass": {
+      "code": "v",
+      "description": "heavy goods vehicle"
+    },
+    "vehicleConfiguration": "semi-car transporter",
+    "vehicleId": "CT70VRL",
+    "vehicleType": "hgv",
+    "vin": "K8PLYXDWKBQLK311480",
+    "vrm": "CT70VRL"
+  }
+}
