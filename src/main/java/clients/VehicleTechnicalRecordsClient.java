@@ -1,6 +1,5 @@
 package clients;
 
-import clients.model.TestTypes;
 import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.http.ContentType;
