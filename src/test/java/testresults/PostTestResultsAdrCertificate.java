@@ -42,8 +42,8 @@ public class PostTestResultsAdrCertificate {
     private String name;
     private String testTypeName;
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")
+    @Test
     public void testResultsADRCertificateTrl() {
 
         // Read the base test result JSON.
@@ -51,8 +51,10 @@ public class PostTestResultsAdrCertificate {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String uuid = String.valueOf(UUID.randomUUID());
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", uuid,"","REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
         JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
@@ -61,6 +63,7 @@ public class PostTestResultsAdrCertificate {
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationSystemNumber,
                 alterationTestResultId,
                 alterationTestTypeId,
                 alterationName,
@@ -71,11 +74,17 @@ public class PostTestResultsAdrCertificate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.validateCertificateIsGenerated(uuid, randomVin);
+
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Ignore("Ignored until Certificate generation is no longer suppressed")
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - HGV")
+    @Test
     public void testResultsADRCertificateHgv() {
 
         // Read the base test result JSON.
@@ -83,8 +92,10 @@ public class PostTestResultsAdrCertificate {
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
         String uuid = String.valueOf(UUID.randomUUID());
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", uuid,"","REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", testTypeId,"","REPLACE");
         JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
@@ -93,6 +104,7 @@ public class PostTestResultsAdrCertificate {
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
+                alterationSystemNumber,
                 alterationTestResultId,
                 alterationTestTypeId,
                 alterationName,
@@ -103,7 +115,12 @@ public class PostTestResultsAdrCertificate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.validateCertificateIsGenerated(uuid, randomVin);
-    }
 
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
 }
