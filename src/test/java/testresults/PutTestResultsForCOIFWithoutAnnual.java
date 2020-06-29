@@ -162,6 +162,7 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationTestExpiryDate = new JsonPathAlteration("$.testResult.testTypes[0].testExpiryDate", "", "", "DELETE");
         JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testResult.testTypes[0].certificateNumber", "", "", "DELETE");
+        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "Test conducted", "reasonForCreation", "ADD_FIELD");
 
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
 
@@ -180,10 +181,11 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
                 alterationLastSeatBeltInstallationCheckDate,
                 alterationTestExpiryDate,
                 alterationCertificateNumber,
+                alterationReasonForCreation,
                 restriction
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
         testResultsSteps.valueForFieldInPathShouldBe("reasonForCreation","Test conducted");

@@ -131,7 +131,7 @@ public class PutTestResultsNegFieldValidationsTIR extends TestCase {
                 restriction
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
         testResultsSteps.validatePostErrorDataContains("testExpiryDate", "is not allowed");
         testResultsSteps.validatePostErrorDataContains("testAnniversaryDate", "is not allowed");

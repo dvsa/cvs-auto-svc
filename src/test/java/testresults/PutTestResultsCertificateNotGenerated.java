@@ -172,7 +172,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.CANCELED);
