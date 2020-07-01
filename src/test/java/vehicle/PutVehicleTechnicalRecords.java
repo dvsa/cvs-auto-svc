@@ -1,6 +1,8 @@
 package vehicle;
 
 import data.GenericData;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import model.testresults.TestVersion;
 import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
@@ -18,10 +20,14 @@ import org.junit.runner.RunWith;
 import org.junit.Ignore;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
+import util.BasePathFilter;
 import util.JsonPathAlteration;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
@@ -2631,4 +2637,91 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
+
+    @WithTag("Vtm")
+    @Title("CVSB-15252 / CVSB-15896 - Updating the Vehicles API to support plate generation + saving of the new tech record")
+    @Test
+    public void testVehicleTechnicalRecordPlateGeneration_Trl() {
+
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        // generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // generate random plateSerialNumber
+        String randomPlateSerialNumber = RandomStringUtils.randomNumeric(6);
+        // read post request body from file
+        String postRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields_15252.json", "$");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
+        // initialize the alterations list with both declared alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm
+        ));
+
+        // POST a plate serial number
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBodyTrl, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+
+        // GET the tech record
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        String trailerId = vehicleTechnicalRecordsSteps.getValueFromBody("[0].trailerId");
+
+        String putRequestBodyTrl = GenericData.readJsonValueFromFile("technical-records_trl_all_fields_put_15252.json", "$");
+        JsonPathAlteration alterationTrailerId = new JsonPathAlteration("$.trailerId", trailerId, "", "REPLACE");
+        List<JsonPathAlteration> alterations2 = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationTrailerId
+        ));
+
+        // PUT a tech record without plate serial number
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, putRequestBodyTrl, alterations2);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        // CVSB-15896 - AC1 Vehicles API is updated to include the new attributes required for plate generation:
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[1].plates[0]","toEmailAddress");
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[1].plates[0]","plateSerialNumber");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].reasonForCreation","VTG6 and VTG7 Plates Generated");
+        String plateSerialNumber = vehicleTechnicalRecordsSteps.getValueFromBody("[0].techRecord[1].plates[0].plateSerialNumber");
+        System.out.println("Generated Plate Serial number: " + plateSerialNumber);
+
+        String expectedPlateSerialNumber = String.valueOf(Integer.parseInt(plateSerialNumber)+1);
+        System.out.println("Expected Plate Serial number: " + expectedPlateSerialNumber);
+
+        // PUT the same plate serial number again without the plate number
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, putRequestBodyTrl, alterations2);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[2].plates[0]","plateSerialNumber");
+        //  CVSB-15252 - AC2 - PUT request: The next sequential plate serial number is assigned for this plate
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].plates[0].plateSerialNumber", expectedPlateSerialNumber);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].reasonForCreation","VTG6 and VTG7 Plates Generated");
+
+        // PUT the same plate serial number again with a plate number
+        JsonPathAlteration alterationPlate = new JsonPathAlteration(".techRecord[0].plates[0]", plateSerialNumber, "plateSerialNumber", "ADD_FIELD");
+        List<JsonPathAlteration> alterations3 = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationVrm,
+                alterationTrailerId,
+                alterationPlate
+        ));
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber, putRequestBodyTrl, alterations3);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        System.out.println("Expected Plate Serial number: " + plateSerialNumber);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[3].plates[0]","plateSerialNumber");
+        // CVSB-15896 - AC2. PUT request is submitted against tech records
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[3].plates[0].plateSerialNumber", plateSerialNumber);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[3].reasonForCreation","no reason");
+    }
+
 }
