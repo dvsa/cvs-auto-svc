@@ -22,7 +22,6 @@
     "testStationPNumber": "87-1369569",
     "testStationType": "gvts",
     "testStatus": "submitted",
-    "reasonForCreation": "Testing",
     "testTypes": [
       {
         "testCode": "ffv2",

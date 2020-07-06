@@ -120,7 +120,7 @@ public class PutTestResults extends TestCase{
         ));
 
         // PUT test-results and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
 
@@ -211,7 +211,7 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -221,12 +221,11 @@ public class PutTestResults extends TestCase{
                 alterationPutTestStartTimestamp,
                 alterationPutTestEndTimestamp,
                 alterationPutTestTypeStartTimestamp,
-                alterationPutTestTypeEndTimestamp,
-                alterationReasonForCreation
+                alterationPutTestTypeEndTimestamp
         ));
 
         // PUT test -results and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].defects.size()", 3);
@@ -329,7 +328,7 @@ public class PutTestResults extends TestCase{
 
         //AC1+ AC4
         // PUT test-results and verify that the desired status code and response is retrieved
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testNumber", "3");
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
@@ -445,7 +444,7 @@ public class PutTestResults extends TestCase{
 
         //AC5 + AC7
         // PUT test-results together with any alterations, and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testAnniversaryDate", "2020-05-25");
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testResult", "pass");
@@ -564,7 +563,7 @@ public class PutTestResults extends TestCase{
         ));
 
         // PUT test-results together with any alterations, and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldNotBe("testResult.testTypes[0].testCode",testCode);
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
@@ -669,7 +668,7 @@ public class PutTestResults extends TestCase{
         ));
 
         // PUT test-results together with any alterations, and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
         testResultsSteps.valueForFieldInPathShouldBe("testHistory[0].testVersion","archived");
@@ -707,7 +706,7 @@ public class PutTestResults extends TestCase{
         ));
 
         // PUT test-results together with any alterations, and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,secondPutRequestBody,alterationsSecPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,secondPutRequestBody,alterationsSecPutTestResults);
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
         testResultsSteps.valueForFieldInPathShouldBe("testHistory[0].testVersion","archived");
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].certificateNumber","78910");
@@ -812,7 +811,7 @@ public class PutTestResults extends TestCase{
 
         //AC5 + AC6 + AC7
         // PUT test-results together with any alterations, and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testExpiryDate", "2020-04-29");
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
@@ -910,7 +909,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationParticulateTrapFitted = new JsonPathAlteration("$.testResult.testTypes[0].particulateTrapFitted", "", "", "DELETE");
         JsonPathAlteration alterationFuelType = new JsonPathAlteration("$.testResult.testTypes[0].fuelType", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -932,11 +930,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1017,7 +1014,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationParticulateTrapFitted = new JsonPathAlteration("$.testResult.testTypes[0].particulateTrapFitted", "", "", "DELETE");
         JsonPathAlteration alterationFuelType = new JsonPathAlteration("$.testResult.testTypes[0].fuelType", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1040,11 +1036,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1125,7 +1120,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationParticulateTrapFitted = new JsonPathAlteration("$.testResult.testTypes[0].particulateTrapFitted", "", "", "DELETE");
         JsonPathAlteration alterationFuelType = new JsonPathAlteration("$.testResult.testTypes[0].fuelType", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1148,11 +1142,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1233,7 +1226,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1256,11 +1248,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1344,7 +1335,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1368,11 +1358,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1459,7 +1448,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1484,11 +1472,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1560,7 +1547,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1575,11 +1561,10 @@ public class PutTestResults extends TestCase{
                 alterationSeatBeltInstallationCheckDate,
                 alterationLastSeatBeltInstallationCheckDate,
                 alterationTestAnniversaryDate,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1656,7 +1641,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
         JsonPathAlteration alterationStatusCode = new JsonPathAlteration("$.testResult.testTypes[0]","Big Filter", "modificationTypeUsed", "ADD_FIELD");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1673,11 +1657,10 @@ public class PutTestResults extends TestCase{
                 alterationSeatBeltInstallationCheckDate,
                 alterationLastSeatBeltInstallationCheckDate,
                 alterationTestAnniversaryDate,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1754,7 +1737,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationDefects = new JsonPathAlteration("$.testResult.testTypes[0].defects", "", "", "DELETE");
         JsonPathAlteration alterationStatusCode = new JsonPathAlteration("$.testResult.testTypes[0]","Big Filter", "modificationTypeUsed", "ADD_FIELD");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1771,11 +1753,10 @@ public class PutTestResults extends TestCase{
                 alterationSeatBeltInstallationCheckDate,
                 alterationLastSeatBeltInstallationCheckDate,
                 alterationTestAnniversaryDate,
-                alterationDefects,
-                alterationReasonForCreation
+                alterationDefects
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1862,7 +1843,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationProhibitionIssued = new JsonPathAlteration("$.testResult.testTypes[0].prohibitionIssued", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1887,11 +1867,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationProhibitionIssued,
-                alterationReasonForCreation
+                alterationProhibitionIssued
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -1975,7 +1954,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationProhibitionIssued = new JsonPathAlteration("$.testResult.testTypes[0].prohibitionIssued", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -1999,11 +1977,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationProhibitionIssued,
-                alterationReasonForCreation
+                alterationProhibitionIssued
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -2088,7 +2065,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].seatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationLastSeatBeltInstallationCheckDate = new JsonPathAlteration("$.testResult.testTypes[0].lastSeatbeltInstallationCheckDate", "", "", "DELETE");
         JsonPathAlteration alterationProhibitionIssued = new JsonPathAlteration("$.testResult.testTypes[0].prohibitionIssued", "", "", "DELETE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -2112,11 +2088,10 @@ public class PutTestResults extends TestCase{
                 alterationModificationTypeUsed,
                 alterationParticulateTrapFitted,
                 alterationFuelType,
-                alterationProhibitionIssued,
-                alterationReasonForCreation
+                alterationProhibitionIssued
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
@@ -2171,16 +2146,14 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberPutTestResults,
                 alterationVinPutTestResults,
-                alterationReasonForCreation,
                 alterationTestResultIdPut));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(200);
 
         //AC7 , AC3
@@ -2213,285 +2186,6 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
         testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
-    }
-
-    @WithTag("Vtm")
-    @Title("CVSB-14406 - AC1 PUT: Update testResult API spec / AC2- Update testResult API PUT call / AC3 - Update API to include 'statusUpdated' Flag / AC5 - API invoked for test result which is already archived")
-    @Test
-    public void testResultsArchiveTestResults() {
-        // Read the base test result JSON.
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
-
-        // Create alteration to add one more tech record to in the request body
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        String randomVin = GenericData.generateRandomVin();
-        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberVehicle,
-                alterationVinVehicle
-        ));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
-        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_hgv_10300.json", "$");
-
-        // Create alteration to add one more tech record to in the request body
-
-        String randomTestResultId = UUID.randomUUID().toString();
-
-        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
-        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
-        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
-        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberTestResults,
-                alterationVinTestResults,
-                alterationTestResultIdPost,
-                alterationTestStartTimestamp,
-                alterationTestEndTimestamp,
-                alterationTestTypeStartTimestamp,
-                alterationTestTypeEndTimestamp));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
-        testResultsSteps.validateData("Test records created");
-
-        testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        String testNumber = testResultsSteps.getTestNumber();
-
-        // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_hgv_10300.json","$");
-
-        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationTestNumberPut = new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreationPut = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
-        // AC3 - Update API to include 'statusUpdated' Flag
-        JsonPathAlteration alterationStatusUpdatedFlagPut = new JsonPathAlteration("$.testResult.testTypes[0]", true, "statusUpdatedFlag", "ADD_FIELD");
-
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberPutTestResults,
-                alterationVinPutTestResults,
-                alterationTestResultIdPut,
-                alterationTestNumberPut,
-                alterationReasonForCreationPut,
-                alterationStatusUpdatedFlagPut
-
-        ));
-
-        // AC1 PUT: Update testResult API spec
-        // AC2- Update testResult API PUT call
-        testResultsSteps.putTestResultsArchiveWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-
-        // AC5 - API invoked for test result which is already archived
-        testResultsSteps.putTestResultsArchiveWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_NOT_FOUND);
-    }
-
-    @WithTag("Vtm")
-    @Title("CVSB-14406 - AC2- Update testResult API PUT call / AC3 - Update API to include 'statusUpdated' Flag / AC4- Backend service update")
-    @Test
-    public void testResultsUpdateTestResults() {
-        // Read the base test result JSON.
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
-
-        // Create alteration to add one more tech record to in the request body
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        String randomVin = GenericData.generateRandomVin();
-        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberVehicle,
-                alterationVinVehicle
-        ));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
-        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
-
-        // Create alteration to add one more tech record to in the request body
-
-        String randomTestResultId = UUID.randomUUID().toString();
-
-        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
-        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
-        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
-        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberTestResults,
-                alterationVinTestResults,
-                alterationTestResultIdPost,
-                alterationTestStartTimestamp,
-                alterationTestEndTimestamp,
-                alterationTestTypeStartTimestamp,
-                alterationTestTypeEndTimestamp));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
-        testResultsSteps.validateData("Test records created");
-
-        testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        String testNumber = testResultsSteps.getTestNumber();
-
-        // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_12378.json","$");
-
-        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationTestNumberPut = new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreationPut = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
-        // AC3 - Update API to include 'statusUpdated' Flag
-        JsonPathAlteration alterationStatusUpdatedFlagPut = new JsonPathAlteration("$.testResult.testTypes[0]", true, "statusUpdatedFlag", "ADD_FIELD");
-
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberPutTestResults,
-                alterationVinPutTestResults,
-                alterationTestResultIdPut,
-                alterationTestNumberPut,
-                alterationReasonForCreationPut,
-                alterationStatusUpdatedFlagPut
-
-        ));
-
-        // AC2- Update testResult API PUT call
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        // AC4- Backend service update
-        testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
-        testResultsSteps.valueForFieldInPathShouldBe("testHistory[0].testVersion","archived");
-        testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].statusUpdatedFlag",true);
-        testResultsSteps.fieldInPathShouldExist("testHistory[0].testTypes[0]","lastUpdatedAt");
-        testResultsSteps.fieldInPathShouldExist("testHistory[0]","lastUpdatedAt");
-        testResultsSteps.fieldInPathShouldExist("testHistory[0]","lastUpdatedByName");
-        testResultsSteps.fieldInPathShouldExist("testHistory[0]","lastUpdatedById");
-        testResultsSteps.fieldInPathShouldExist("$","reasonForCreation");
-        testResultsSteps.fieldInPathShouldExist("$","createdByName");
-        testResultsSteps.fieldInPathShouldExist("$","createdAt");
-        testResultsSteps.fieldInPathShouldExist("$","createdById");
-
-
-    }
-
-    @WithTag("Vtm")
-    @Title("CVSB-14406 - AC6 -  Attempt to update test record without reasonForCreation")
-    @Test
-    public void testPutTestResultsNoReasonForCreation() {
-
-        // Read Payload for POST tech-records
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
-
-        // Create alteration for SystemNumber and vin
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        String randomVin = GenericData.generateRandomVin();
-        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle, alterationVinVehicle));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
-        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-
-        // Read Payload for POST test-results
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
-
-        // Create alteration for timestamps and SystemNumber and vin
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
-        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
-        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
-        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberTestResults,
-                alterationVinTestResults,
-                alterationTestResultIdPost,
-                alterationTestStartTimestamp,
-                alterationTestEndTimestamp,
-                alterationTestTypeStartTimestamp,
-                alterationTestTypeEndTimestamp));
-
-        // Post the test-results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
-        testResultsSteps.validateData("Test records created");
-
-        // GET test-results
-        testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-
-        //Read the payload for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_12378.json", "$");
-
-        // Create alterations to edit one or more fields
-        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
-        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
-        JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
-        JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
-        // AC6 -  Attempt to update test record without reasonForCreation
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult.reasonForCreation", "", "", "DELETE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
-                alterationSystemNumberPutTestResults,
-                alterationVinPutTestResults,
-                alterationTestResultIdPut,
-                alterationPutTestStartTimestamp,
-                alterationPutTestEndTimestamp,
-                alterationPutTestTypeStartTimestamp,
-                alterationPutTestTypeEndTimestamp,
-                alterationReasonForCreation
-        ));
-
-        // PUT test-results and verify that they are accepted
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
-        testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
-        testResultsSteps.validatePostErrorData("reasonForCreation", "is required");
     }
 
     @Title("CVSB-10372 - AC5. PUT: Attempt to update a test record with a not applicable field - COIF With Annual Test")
@@ -2910,7 +2604,7 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
         JsonPathAlteration alterationTestNumber= new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
+
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberPutTestResults,
@@ -2920,11 +2614,10 @@ public class PutTestResults extends TestCase{
                 alterationPutTestEndTimestamp,
                 alterationPutTestTypeStartTimestamp,
                 alterationPutTestTypeEndTimestamp,
-                alterationTestNumber,
-                alterationReasonForCreation
+                alterationTestNumber
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // Validate if the certificate is generated
@@ -3105,7 +2798,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
         JsonPathAlteration alterationTestTypeId= new JsonPathAlteration("$.testResult.testTypes[0].testTypeId", "146", "", "REPLACE");
         JsonPathAlteration alterationTestNumber= new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -3117,11 +2809,10 @@ public class PutTestResults extends TestCase{
                 alterationPutTestTypeStartTimestamp,
                 alterationPutTestTypeEndTimestamp,
                 alterationTestTypeId,
-                alterationTestNumber,
-                alterationReasonForCreation
+                alterationTestNumber
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         //Validate if the certificate is generated
@@ -3203,7 +2894,6 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
         JsonPathAlteration alterationTestTypeId= new JsonPathAlteration("$.testResult.testTypes[0].testTypeId", "177", "", "REPLACE");
         JsonPathAlteration alterationTestNumber= new JsonPathAlteration("$.testResult.testTypes[0].testNumber", testNumber, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "reason", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -3215,11 +2905,10 @@ public class PutTestResults extends TestCase{
                 alterationPutTestTypeStartTimestamp,
                 alterationPutTestTypeEndTimestamp,
                 alterationTestTypeId,
-                alterationTestNumber,
-                alterationReasonForCreation
+                alterationTestNumber
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         //Validate if the certificate is generated

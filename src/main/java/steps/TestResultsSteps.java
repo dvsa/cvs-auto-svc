@@ -728,8 +728,8 @@ public class TestResultsSteps {
     }
 
     @Step
-    public String putTestResultsWithAlterations(String testResultId, String putRequestBody, List<JsonPathAlteration> alterations) {
-        response = testResultsClient.putTestResultsWithAlterations(testResultId, putRequestBody, alterations);
+    public String putTestResultsWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
+        response = testResultsClient.putTestResultsWithAlterations(systemNumber, putRequestBody, alterations);
         return response.prettyPrint();
     }
 
@@ -885,22 +885,5 @@ public class TestResultsSteps {
     @Step
     public String getTesterStaffId() {
         return response.jsonPath().getString("[0].testerStaffId");
-    }
-
-    @Step
-    public String putTestResultsArchiveWithAlterations(String testResultId, String requestBody, List<JsonPathAlteration> alterations) {
-        response = testResultsClient.putTestResultsArchiveWithAlterations(testResultId, requestBody, alterations);
-        return response.prettyPrint();
-    }
-
-    @Step
-    public void fieldInPathShouldExist(String parentElementPath, String key) {
-        response.then().body(parentElementPath,hasKey(key));
-    }
-
-    @Step
-    public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
-        System.out.println("Verifying that " + path + " has value " + expectedValue);
-        response.then().body(path, equalTo(expectedValue));
     }
 }

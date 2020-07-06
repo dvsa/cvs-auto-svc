@@ -20,7 +20,6 @@
     "odometerReadingUnits":"kilometres",
     "systemNumber":"1100057",
     "vin":"A00034477",
-    "reasonForCreation": "Testing",
     "vehicleClass":{
       "description":"heavy goods vehicle",
       "code":"v"

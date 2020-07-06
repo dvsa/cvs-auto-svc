@@ -150,7 +150,6 @@ public class PutTestResultsForCOIFWithAnnual extends TestCase {
         JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
-        JsonPathAlteration alterationReasonForCreation = new JsonPathAlteration("$.testResult", "Test conducted", "reasonForCreation", "ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -161,11 +160,10 @@ public class PutTestResultsForCOIFWithAnnual extends TestCase {
                 alterationPutTestEndTimestamp,
                 alterationPutTestTypeStartTimestamp,
                 alterationPutTestTypeEndTimestamp,
-                alterationReasonForCreation,
                 restriction
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId, putRequestBody, alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
         testResultsSteps.valueForFieldInPathShouldBe("reasonForCreation","Test conducted");

@@ -60,7 +60,6 @@
     "vrm": "B2C1C11",
     "testStationPNumber": "87-1369569",
     "testerEmailAddress": "someone@email.com",
-    "euVehicleCategory": "m1",
-    "reasonForCreation":"Testing"
+    "euVehicleCategory": "m1"
   }
 }

@@ -134,7 +134,7 @@ public class PutTestResultsNegFieldValidationsADR extends TestCase {
                 restriction
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
         testResultsSteps.validatePostErrorDataContains("numberOfSeatbeltsFitted", "is not allowed");
         testResultsSteps.validatePostErrorDataContains("seatbeltInstallationCheckDate", "is not allowed");
