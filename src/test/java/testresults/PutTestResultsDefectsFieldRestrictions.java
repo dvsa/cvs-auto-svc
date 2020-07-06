@@ -168,7 +168,7 @@ public class PutTestResultsDefectsFieldRestrictions extends TestCase {
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_12378.json","$");
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction));
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterations);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterations);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
     }
 }

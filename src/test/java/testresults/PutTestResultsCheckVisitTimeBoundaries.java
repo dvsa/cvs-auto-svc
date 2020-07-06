@@ -183,7 +183,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         ));
 
         // PUT test-results and verify the error status code is retrieved
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(400);
     }
 
@@ -291,7 +291,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         ));
 
         // PUT test-results and verify the error code is retrieved
-        testResultsSteps.putTestResultsWithAlterations(randomTestResultId,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(400);
     }
 

@@ -121,7 +121,7 @@ public class PutTestResultsUpdateTestCode {
         alterations.add(alterationAddTestResultId);
         alterations.add(alterationTriggerTestCodeChange);
 
-        testResultsSteps.putTestResultsWithAlterationsNo400(testResultId, putTestResultPayload, alterations);
+        testResultsSteps.putTestResultsWithAlterationsNo400(systemNumber, putTestResultPayload, alterations);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testCode", testTypeSteps.getActualTestCode(newTestCode));
 
