@@ -73,7 +73,7 @@ public class AwsUtil {
 
         System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
 
-        for(int i = 0; i < 45 ; i++) {
+        for(int i = 0; i < 120 ; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {

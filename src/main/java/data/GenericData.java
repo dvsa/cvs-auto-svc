@@ -1,19 +1,26 @@
 package data;
 
+import clients.model.TestTypes;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonArray;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import data.config.BaseData;
 import data.config.DataMapper;
+import exceptions.AutomationException;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 import org.springframework.lang.NonNull;
 import util.JsonPathAlteration;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -24,13 +31,13 @@ public class GenericData {
 
     public static String readJsonBodyFromFile(String fileName) throws IOException {
         ClassLoader classLoader = DataMapper.class.getClassLoader();
-        return DataMapper.readFromInputStream(classLoader.getResourceAsStream("loader/" + BaseData.getDataLocation() + "/" + fileName));
+        return DataMapper.readFromInputStream(classLoader.getResourceAsStream("src/main/resources/loader/" + fileName));
     }
 
     public static String readBytesFromFile(String fileName) {
         String encodedString = "";
         try {
-            byte[] input_file = Files.readAllBytes(Paths.get("src/main/resources/loader/" + BaseData.getDataLocation() + "/" + fileName));
+            byte[] input_file = Files.readAllBytes(Paths.get("src/main/resources/loader/" + fileName));
             byte[] encodedBytes = Base64.getEncoder().encode(input_file);
             encodedString =  new String(encodedBytes);
         } catch (IOException e) {
@@ -56,7 +63,6 @@ public class GenericData {
     }
 
     public static String readJsonValueFromFile(String fileName, String path) {
-        System.out.println("READING FILE: " + path + " " + fileName);
         ClassLoader classLoader = DataMapper.class.getClassLoader();
 
         String jsonBody = null;
@@ -104,7 +110,7 @@ public class GenericData {
 
         String jsonBody = null;
         try {
-            jsonBody = DataMapper.readFromInputStream(classLoader.getResourceAsStream("loader/" + BaseData.getDataLocation() + "/" + fileName));
+            jsonBody = DataMapper.readFromInputStream(classLoader.getResourceAsStream("loader/" + fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,8 +127,22 @@ public class GenericData {
                     alteration.getValue().getClass().getName().equals("java.lang.String")
                     && !alteration.getValue().toString().isEmpty()
                     && ((alteration.getValue().toString().startsWith("{") && alteration.getValue().toString().endsWith("}"))
-                    || (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]")));
-            final Object value = valueIsJson ? readJson(alteration.getValue().toString()) : alteration.getValue();
+                    || (alteration.getValue().toString().contentEquals("[]")));
+            Object value = valueIsJson ? readJson(alteration.getValue().toString()) : alteration.getValue();
+            List<String> array = new ArrayList<>();
+            if (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]") &&
+                    !(alteration.getValue().toString().contentEquals("[]"))) {
+                JSONArray jsonArray = (JSONArray) value;
+                assert jsonArray != null;
+                for(int i = 0; i < jsonArray.length(); i++){
+                    try {
+                        array.add(jsonArray.get(i).toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                value = array;
+            }
 
             switch (alteration.getAction()) {
                 case "ADD_FIELD":
@@ -171,7 +191,7 @@ public class GenericData {
         return JsonPath.read(jsonString, jsonPath);
     }
 
-    public static JsonArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
+    public static JSONArray extractJsonArrayValueFromJsonString(String jsonString, String jsonPath) {
         return JsonPath.read(jsonString, jsonPath);
     }
 
@@ -193,12 +213,16 @@ public class GenericData {
         return RandomStringUtils.randomAlphanumeric(16).toUpperCase();
     }
 
+    public static String generateRandomVinForVehicleType(String vehicleType) {
+        return vehicleType.toUpperCase() + "_" + RandomStringUtils.randomAlphanumeric(new Random().nextInt(5) + 6).toUpperCase();
+    }
+
     public static String generateRandomVrm() {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
     }
 
     public static String generateRandomTrailerId() {
-        return RandomStringUtils.randomAlphanumeric(8,8).toUpperCase();
+        return RandomStringUtils.randomAlphabetic(1).toUpperCase() + RandomStringUtils.randomNumeric(6);
     }
 
     public static String generateRandomVrmForEmailValidations() {
@@ -210,7 +234,7 @@ public class GenericData {
 
         String jsonBody = null;
         try {
-            jsonBody = DataMapper.readFromInputStream(classLoader.getResourceAsStream("loader/" + BaseData.getDataLocation() + "/" + fileName));
+            jsonBody = DataMapper.readFromInputStream(classLoader.getResourceAsStream("loader/" + fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -251,6 +275,15 @@ public class GenericData {
         return jsonResp;
     }
 
+    public static String getPartialVinFromVin(String randomVin) {
+        if (randomVin.length() >= 6) {
+            return randomVin.substring(randomVin.length()-6);
+        }
+        else {
+            return randomVin;
+        }
+    }
+
     public static ArrayList<String> getJsonStringListFromHashMapArray(ArrayList<HashMap<String, String>> arrayList) {
         ArrayList<String> jsonResp = new ArrayList<>();
         for (HashMap<String, String> hashMap : arrayList) {
@@ -264,12 +297,159 @@ public class GenericData {
         return jsonResp;
     }
 
-    public static String getPartialVinFromVin(String randomVin) {
-        if (randomVin.length() >= 6) {
-            return randomVin.substring(randomVin.length()-6);
+    public static String getTestTypeIdFromTestCode(String testCode) {
+        String testTypeId = null;
+        for (TestTypes testType : TestTypes.values()) {
+            if (testType.getTestCode().contentEquals(testCode.toLowerCase())) {
+                testTypeId = testType.getId();
+                break;
+            }
+        }
+        return testTypeId;
+    }
+
+    public static String getTestTypeClassificationByTestCode(String testCode) {
+        String testTypeId = getTestTypeIdFromTestCode(testCode);
+
+        return GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.id =='" +
+                testTypeId + "')].testTypeClassification");
+    }
+
+    public static JSONObject getRestrictions(String testCode) {
+        String testTypeProperties;
+        if (testCode.lastIndexOf("_") != -1) {
+            testTypeProperties = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.defaultTestCode == '" +
+                    testCode.split("_")[0] + "' && @.forVehicleType == '" + testCode.split("_")[1] + "')]");
         }
         else {
-            return randomVin;
+            if (testCode.contentEquals("lcp")) {
+                testTypeProperties = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.linkedTestCode == '" +
+                        testCode + "')]");
+            }
+            else {
+                testTypeProperties = GenericData.readJsonValueFromFile("test-type.json", "$..[?(@.defaultTestCode == '" +
+                        testCode + "')]");
+            }
         }
+
+        String restrictions = GenericData.getJsonObjectInPath(testTypeProperties, "$[0]");
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject(restrictions);
+        } catch (JSONException err) {
+            throw new AutomationException("'" + restrictions + "' is not a valid JSON string");
+        }
+        Iterator keys = jsonObject.keys();
+        JSONObject actualRestrictions = new JSONObject();
+        while(keys.hasNext()) {
+            String key = keys.next().toString();
+            if (!(key.contentEquals("defaultTestCode")) && !(key.contentEquals("linkedTestCode"))) {
+                try {
+                    if (!jsonObject.get(key).toString().contentEquals("null")) {
+                        switch (key) {
+                            case "forVehicleType":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("vehicleType", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("vehicleType", jsonObject.get(key));
+                                }
+                                break;
+                            case "forVehicleSize":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("vehicleSize", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("vehicleSize", jsonObject.get(key));
+                                }
+                                break;
+                            case "forVehicleConfiguration":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("vehicleConfiguration", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("vehicleConfiguration", jsonObject.get(key));
+                                }
+                                break;
+                            case "forVehicleAxles":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.Integer"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("noOfAxles", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("noOfAxles", jsonObject.get(key));
+                                }
+                                break;
+                            case "forEuVehicleCategory":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("euVehicleCategory", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("euVehicleCategory", jsonObject.get(key));
+                                }
+                                break;
+                            case "forVehicleClass":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("vehicleClass", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("vehicleClass", jsonObject.get(key));
+                                }
+                                break;
+                            case "forVehicleSubclass":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    actualRestrictions.put("vehicleSubclass", array);
+                                }
+                                else {
+                                    actualRestrictions.put("vehicleSubclass", jsonObject.get(key));
+                                }
+                                break;
+                            case "forVehicleWheels":
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                    JSONArray array = (JSONArray) jsonObject.get(key);
+                                    Random r = new Random();
+                                    int randomNumber = r.nextInt(array.length());
+                                    actualRestrictions.put("numberOfWheelsDriven", array.get(randomNumber));
+                                }
+                                else {
+                                    actualRestrictions.put("numberOfWheelsDriven", jsonObject.get(key));
+                                }
+                                break;
+                        }
+                    }
+                    else {
+                        if ((key.contentEquals("forVehicleConfiguration")) &&
+                                (jsonObject.get("forVehicleType").getClass().getName().contentEquals("java.lang.String")) &&
+                                (jsonObject.get("forVehicleType").toString().contentEquals("psv"))) {
+                            String[] configurations = {"rigid", "articulated"};
+                            Random r = new Random();
+                            int randomNumber = r.nextInt(configurations.length);
+                            actualRestrictions.put("vehicleConfiguration", configurations[randomNumber]);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return actualRestrictions;
     }
 }

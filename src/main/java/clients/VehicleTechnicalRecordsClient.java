@@ -1,10 +1,12 @@
 package clients;
 
+import clients.model.VehicleClass;
 import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -12,6 +14,7 @@ import util.AwsUtil;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
+import util.TypeLoader;
 
 import java.io.IOException;
 import java.util.*;
@@ -441,13 +444,16 @@ public class VehicleTechnicalRecordsClient {
         String systemNumber = GenericData.extractStringValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].systemNumber");
         String trailerId;
+        String firstUseDate;
         if (vehicleType.equals("trl")) {
             trailerId = GenericData.extractStringValueFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].trailerId");
-            testResultAttributes.put("trailerId", trailerId);
+            firstUseDate = GenericData.extractStringValueFromJsonString
+                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].firstUseDate");
         }
         else {
             trailerId = null;
+            firstUseDate = null;
         }
         int noOfAxles = GenericData.extractIntegerValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].noOfAxles");
@@ -456,15 +462,21 @@ public class VehicleTechnicalRecordsClient {
         String vehicleClassDescription = GenericData.extractStringValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleClass.description");
         ArrayList<String> vehicleSubclass;
-        if (vehicleType.contentEquals("car") || vehicleType.contentEquals("motorcycle")) {
+        if (vehicleType.contentEquals("car") || vehicleType.contentEquals("lgv")) {
             vehicleSubclass = GenericData.extractArrayListStringFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleSubclass");
         }
         else {
             vehicleSubclass = null;
         }
-        String vehicleConfiguration = GenericData.extractStringValueFromJsonString
-                (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleConfiguration");
+        String vehicleConfiguration;
+        if (!(vehicleType.contentEquals("car") || vehicleType.contentEquals("motorcycle") || vehicleType.contentEquals("lgv"))) {
+            vehicleConfiguration = GenericData.extractStringValueFromJsonString
+                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleConfiguration");
+        }
+        else {
+            vehicleConfiguration = null;
+        }
         String vehicleSize;
         if (vehicleType.contentEquals("psv")) {
             vehicleSize = GenericData.extractStringValueFromJsonString
@@ -475,16 +487,8 @@ public class VehicleTechnicalRecordsClient {
         }
         String euVehicleCategory = GenericData.extractStringValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].euVehicleCategory");
-        String firstUseDate;
-        if (vehicleType.contentEquals("trl")) {
-            firstUseDate = GenericData.extractStringValueFromJsonString
-                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].firstUseDate");
-        }
-        else {
-            firstUseDate = null;
-        }
         String regnDate;
-        if (vehicleType.contentEquals("psv") || vehicleType.contentEquals("hgv")) {
+        if (!vehicleType.contentEquals("trl")) {
             regnDate = GenericData.extractStringValueFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].regnDate");
         }
@@ -492,7 +496,7 @@ public class VehicleTechnicalRecordsClient {
             regnDate = null;
         }
         int numberOfWheelsDriven;
-        if (vehicleType.contentEquals("psv") || vehicleType.contentEquals("hgv")) {
+        if (vehicleType.contentEquals("psv") || vehicleType.contentEquals("hgv") || vehicleType.contentEquals("motorcycle")) {
             numberOfWheelsDriven = GenericData.extractIntegerValueFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].numberOfWheelsDriven");
         }
@@ -509,12 +513,14 @@ public class VehicleTechnicalRecordsClient {
             testResultAttributes.put("trailerId", trailerId);
         }
         testResultAttributes.put("noOfAxles", noOfAxles);
-        testResultAttributes.put("vehicleClassCode", vehicleClassCode);
-        testResultAttributes.put("vehicleClassDescription", vehicleClassDescription);
+        testResultAttributes.put("vehicleClass.code", vehicleClassCode);
+        testResultAttributes.put("vehicleClass.description", vehicleClassDescription);
         if (vehicleSubclass != null) {
             testResultAttributes.put("vehicleSubclass", vehicleSubclass);
         }
-        testResultAttributes.put("vehicleConfiguration", vehicleConfiguration);
+        if (vehicleConfiguration != null) {
+            testResultAttributes.put("vehicleConfiguration", vehicleConfiguration);
+        }
         if (vehicleSize != null) {
             testResultAttributes.put("vehicleSize", vehicleSize);
         }
@@ -546,11 +552,26 @@ public class VehicleTechnicalRecordsClient {
                     if (names[i].toString().contentEquals("vehicleType")) {
                         vehicleType = restrictions.get(names[i].toString()).toString();
                     }
-                    // add tech record alteration for each restriction set on the test type to be created
-                    JsonPathAlteration additionalTechRecordAlteration =
-                            new JsonPathAlteration("$.techRecord[0]." + names[i].toString(), restrictions.get(names[i].toString()),
-                                    "", "REPLACE");
-                    techRecordAlterations.add(additionalTechRecordAlteration);
+                    if (names[i].toString().contentEquals("vehicleClass")) {
+                        String vehicleClassFields = "";
+                        for (VehicleClass vehicleClass : VehicleClass.values()) {
+                            if (vehicleClass.getCode().contentEquals(restrictions.get(names[i].toString()).toString())) {
+                                vehicleClassFields = "{\"description\":\"" + vehicleClass.getDescription
+                                        (restrictions.get(names[i].toString()).toString()) + "\"}";
+                                break;
+                            }
+                        }
+                        // add tech record alteration for each restriction set on the test type to be created
+                        JsonPathAlteration additionalTechRecordAlteration =
+                                new JsonPathAlteration("$.techRecord[0]." + names[i].toString(), vehicleClassFields, "", "REPLACE");
+                        techRecordAlterations.add(additionalTechRecordAlteration);
+                    }
+                    else {
+                        // add tech record alteration for each restriction set on the test type to be created
+                        JsonPathAlteration additionalTechRecordAlteration =
+                                new JsonPathAlteration("$.techRecord[0]." + names[i].toString(), restrictions.get(names[i].toString()), "", "REPLACE");
+                        techRecordAlterations.add(additionalTechRecordAlteration);
+                    }
                     i += 1;
                 }
             }
@@ -604,13 +625,16 @@ public class VehicleTechnicalRecordsClient {
         String systemNumber = GenericData.extractStringValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].systemNumber");
         String trailerId;
+        String firstUseDate;
         if (vehicleType.equals("trl")) {
             trailerId = GenericData.extractStringValueFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].trailerId");
-            testResultAttributes.put("trailerId", trailerId);
+            firstUseDate = GenericData.extractStringValueFromJsonString
+                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].firstUseDate");
         }
         else {
             trailerId = null;
+            firstUseDate = null;
         }
         int noOfAxles = GenericData.extractIntegerValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].noOfAxles");
@@ -618,16 +642,26 @@ public class VehicleTechnicalRecordsClient {
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleClass.code");
         String vehicleClassDescription = GenericData.extractStringValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleClass.description");
-        ArrayList<String> vehicleSubclass;
-        if (vehicleType.contentEquals("car") || vehicleType.contentEquals("motorcycle")) {
-            vehicleSubclass = GenericData.extractArrayListStringFromJsonString
-                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleSubclass");
+        JSONArray vehicleSubclass;
+        if (vehicleType.contentEquals("car") || vehicleType.contentEquals("lgv")) {
+            try {
+                vehicleSubclass = new JSONArray(GenericData.extractArrayListStringFromJsonString
+                        (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleSubclass").toString());
+            } catch (JSONException e) {
+                throw new AutomationException(e.getMessage());
+            }
         }
         else {
             vehicleSubclass = null;
         }
-        String vehicleConfiguration = GenericData.extractStringValueFromJsonString
-                (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleConfiguration");
+        String vehicleConfiguration;
+        if (!(vehicleType.contentEquals("car") || vehicleType.contentEquals("motorcycle") || vehicleType.contentEquals("lgv"))) {
+            vehicleConfiguration = GenericData.extractStringValueFromJsonString
+                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].vehicleConfiguration");
+        }
+        else {
+            vehicleConfiguration = null;
+        }
         String vehicleSize;
         if (vehicleType.contentEquals("psv")) {
             vehicleSize = GenericData.extractStringValueFromJsonString
@@ -638,16 +672,8 @@ public class VehicleTechnicalRecordsClient {
         }
         String euVehicleCategory = GenericData.extractStringValueFromJsonString
                 (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].euVehicleCategory");
-        String firstUseDate;
-        if (vehicleType.contentEquals("trl")) {
-            firstUseDate = GenericData.extractStringValueFromJsonString
-                    (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].firstUseDate");
-        }
-        else {
-            firstUseDate = null;
-        }
         String regnDate;
-        if (vehicleType.contentEquals("psv") || vehicleType.contentEquals("hgv")) {
+        if (!vehicleType.contentEquals("trl")) {
             regnDate = GenericData.extractStringValueFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].regnDate");
         }
@@ -655,7 +681,7 @@ public class VehicleTechnicalRecordsClient {
             regnDate = null;
         }
         int numberOfWheelsDriven;
-        if (vehicleType.contentEquals("psv") || vehicleType.contentEquals("hgv")) {
+        if (vehicleType.contentEquals("psv") || vehicleType.contentEquals("hgv") || vehicleType.contentEquals("motorcycle")) {
             numberOfWheelsDriven = GenericData.extractIntegerValueFromJsonString
                     (getTechRecordsResponse.prettyPrint(), "$[0].techRecord[0].numberOfWheelsDriven");
         }
@@ -672,12 +698,14 @@ public class VehicleTechnicalRecordsClient {
             testResultAttributes.put("trailerId", trailerId);
         }
         testResultAttributes.put("noOfAxles", noOfAxles);
-        testResultAttributes.put("vehicleClassCode", vehicleClassCode);
-        testResultAttributes.put("vehicleClassDescription", vehicleClassDescription);
+        testResultAttributes.put("vehicleClass.code", vehicleClassCode);
+        testResultAttributes.put("vehicleClass.description", vehicleClassDescription);
         if (vehicleSubclass != null) {
             testResultAttributes.put("vehicleSubclass", vehicleSubclass);
         }
-        testResultAttributes.put("vehicleConfiguration", vehicleConfiguration);
+        if (vehicleConfiguration != null) {
+            testResultAttributes.put("vehicleConfiguration", vehicleConfiguration);
+        }
         if (vehicleSize != null) {
             testResultAttributes.put("vehicleSize", vehicleSize);
         }
@@ -694,5 +722,53 @@ public class VehicleTechnicalRecordsClient {
         testResultAttributes.put("vehicleType", vehicleType);
 
         return testResultAttributes;
+    }
+
+    public Response postTechRecordsWithAlterations(String token, String requestBody, List<JsonPathAlteration> alterations) {
+        Response response = callPostTechRecordsWithAlterations(token, requestBody, alterations);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            response = callPostTechRecordsWithAlterations(token, requestBody, alterations);
+        }
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.statusCode());
+        return response;
+    }
+
+    private Response callPostTechRecordsWithAlterations(String token, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+        Response response = given().headers(
+                "Authorization",
+                "Bearer " + token)
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+                .log().method().log().uri().log().body()
+                .post("/vehicles");
+        return response;
+    }
+
+    public Response getTechRecords(String token, String vin) {
+        Response response = callGetTechRecords(token, vin);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            response = callGetTechRecords(token, vin);
+        }
+        Assert.assertEquals(HttpStatus.SC_OK, response.statusCode());
+        return response;
+    }
+
+    public Response callGetTechRecords(String token, String vin) {
+        Response response = given()
+                .headers(
+                        "Authorization",
+                        "Bearer " + token)
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", vin)
+                .queryParam("status", "all")
+                .queryParam("searchCriteria", "vin")
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
+        return response;
     }
 }
