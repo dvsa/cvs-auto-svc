@@ -130,7 +130,7 @@ public class GenericData {
                     || (alteration.getValue().toString().contentEquals("[]")));
             Object value = valueIsJson ? readJson(alteration.getValue().toString()) : alteration.getValue();
             List<String> array = new ArrayList<>();
-            if (alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]") &&
+            if (alteration.getValue() != null && alteration.getValue().toString().startsWith("[") && alteration.getValue().toString().endsWith("]") &&
                     !(alteration.getValue().toString().contentEquals("[]"))) {
                 JSONArray jsonArray = (JSONArray) value;
                 assert jsonArray != null;
