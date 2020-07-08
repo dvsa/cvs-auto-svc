@@ -16,11 +16,11 @@
   "systemNumber": "1000077",
   "vin": "P0123010956789",
   "vehicleClass": {
-    "description": "3 wheelers",
-    "code": "v"
+    "description": "motorbikes over 200cc or with a sidecar",
+    "code": "2"
   },
+  "vehicleConfiguration": null,
   "vehicleType": "motorcycle",
-  "vehicleConfiguration": "rigid",
   "preparerId": "No preparer ID given",
   "preparerName": "",
   "euVehicleCategory": "l1e-a",

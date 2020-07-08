@@ -15,6 +15,8 @@ public enum VehicleClass {
     MOT4("4", "MOT class 4"),
     MOT5("5", "MOT class 5"),
     MOT7("7", "MOT class 7"),
+    PSV("p", "PSV of unknown or unspecified size"),
+    NOT_KNOWN("u", "Not Known"),
     NULL(null, null),
     INVALID("",""){
         @Override
@@ -39,6 +41,14 @@ public enum VehicleClass {
     }
 
     public String getDescription() {
+        return description;
+    }
+
+    public String getDescription(String code) {
+        String description = null;
+        if (this.getCode().contentEquals(code)) {
+            description = this.getDescription();
+        }
         return description;
     }
 }

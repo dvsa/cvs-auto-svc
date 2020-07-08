@@ -16,14 +16,14 @@
   "systemNumber": "1000076",
   "vin": "P0123010951264",
   "vehicleClass": {
-    "description": "3 wheelers",
-    "code": "v"
+    "description": "Not Known",
+    "code": "u"
   },
   "vehicleSubclass": [
-    "string"
+    "c"
   ],
+  "vehicleConfiguration": null,
   "vehicleType": "lgv",
-  "vehicleConfiguration": "other",
   "preparerId": "No preparer ID given",
   "preparerName": "",
   "euVehicleCategory": "n1",

@@ -11,7 +11,7 @@
   ],
   "techRecord": [
     {
-      "vehicleType": "lgv",
+      "vehicleType": "car",
       "regnDate": "2018-12-07",
       "manufactureYear": 1999,
       "noOfAxles": 2,
@@ -30,7 +30,7 @@
       "reasonForCreation": "test",
       "recordCompleteness": "complete",
       "vehicleClass": {
-        "description": "motorbikes up to 200cc"
+        "description": "not applicable"
       },
       "vehicleSubclass": [
         "a"

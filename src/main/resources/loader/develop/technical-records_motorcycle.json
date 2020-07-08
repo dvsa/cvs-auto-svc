@@ -11,7 +11,7 @@
   ],
   "techRecord": [
     {
-      "vehicleType": "car",
+      "vehicleType": "motorcycle",
       "regnDate": "2018-12-07",
       "manufactureYear": 1999,
       "noOfAxles": 2,
@@ -32,9 +32,7 @@
       "vehicleClass": {
         "description": "motorbikes up to 200cc"
       },
-      "vehicleSubclass": [
-        "m"
-      ]
+      "numberOfWheelsDriven": 2
     }
   ]
 }

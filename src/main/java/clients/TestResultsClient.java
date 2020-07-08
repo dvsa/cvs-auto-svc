@@ -18,6 +18,7 @@ import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestTypesGet;
 import org.apache.commons.exec.environment.EnvironmentUtils;
+import org.junit.Assert;
 import util.BasePathFilter;
 import util.EnvironmentType;
 import util.JsonPathAlteration;
@@ -766,8 +767,8 @@ public class TestResultsClient {
 
         // Iterate over the HashMap to add all alteration for common attributes on tech records and test results
         for (Map.Entry<String, Object> entry : testResultAttributes.entrySet()) {
-            JsonPathAlteration additionalTestResultAlteration =
-                    new JsonPathAlteration("$." + entry.getKey(), entry.getValue(),"","REPLACE");
+            JsonPathAlteration additionalTestResultAlteration = new JsonPathAlteration("$." + entry.getKey(),
+                    entry.getValue(), "", "REPLACE");
             testResultAlterations.add(additionalTestResultAlteration);
         }
 
@@ -817,4 +818,30 @@ public class TestResultsClient {
         }
         return testResultId;
     }
+
+    public Response postTestResultsWithAlterations(String token, String requestBody, List<JsonPathAlteration> alterations) {
+
+        Response response = callPostTestResultsWithAlterations(token, requestBody, alterations);
+
+        if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
+            response = callPostTestResultsWithAlterations(token, requestBody, alterations);
+        }
+        Assert.assertEquals(HttpStatus.SC_CREATED, response.statusCode());
+        return response;
+    }
+
+    private Response callPostTestResultsWithAlterations(String token, String requestBody, List<JsonPathAlteration> alterations) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
+
+        Response response = given()
+                .headers(
+                        "Authorization",
+                        "Bearer " + token)
+                .body(alteredBody)
+                .log().method().log().uri().log().body()
+                .post("/test-results");
+        return response;
+    }
+
 }
