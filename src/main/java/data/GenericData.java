@@ -423,7 +423,7 @@ public class GenericData {
                                 }
                                 break;
                             case "forVehicleWheels":
-                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.String"))) {
+                                if (!(jsonObject.get(key).getClass().getName().contentEquals("java.lang.Integer"))) {
                                     JSONArray array = (JSONArray) jsonObject.get(key);
                                     Random r = new Random();
                                     int randomNumber = r.nextInt(array.length());
