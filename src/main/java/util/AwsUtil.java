@@ -82,9 +82,12 @@ public class AwsUtil {
             if (s3Client.doesObjectExist(bucketName, key)) {
                 return s3Client.doesObjectExist(bucketName, key);
             }
-            System.out.println("waited for: " + i + " seconds...");
+            if (i % 2 == 0) {
+                int j = i % 2;
+                System.out.println("waited for: " + j + " seconds...");
+            }
         }
-        System.out.println("file " + key + " was not created in 45 or less seconds..");
+        System.out.println("file " + key + " was not created in 60 seconds or less...");
         return false;
     }
 
