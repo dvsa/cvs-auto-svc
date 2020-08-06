@@ -60,7 +60,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - regnDate = null")
-
+    @Test
     public void testResultsFirstTestExpiryHgvNoExpiryDateRegnDateNull() {
 
         // Read the base test result JSON.
@@ -152,7 +152,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - regnDate = missing")
-
+    @Test
     public void testResultsFirstTestExpiryHgvNoExpiryDateRegnDateMissing() {
 
         // Read the base test result JSON.
@@ -240,7 +240,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is 2 month before Registration Anniversary")
-
+    @Test
     public void testResultsFirstTestExpiryHgvTodayIsMoreThanTwoMonthBeforeAnniversary() {
 
         // Read the base test result JSON.
@@ -428,7 +428,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is in the month before Registration Anniversary")
-
+    @Test
     public void testResultsFirstTestExpiryHgvTodayIsOneMonthBeforeRegAnniversary() {
 
         // Read the base test result JSON.
@@ -523,7 +523,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is in the same month as Registration Anniversary")
-
+    @Test
     public void testResultsFirstTestExpiryHgvTodayIsInTheSameMonthAsAnniversary() {
 
         // Read the base test result JSON.
@@ -617,6 +617,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is after the Registration Anniversary")
+    @Test
     public void testResultsFirstTestExpiryHgvTodayIsAfterTheAnniversary() {
 
         // Read the base test result JSON.
