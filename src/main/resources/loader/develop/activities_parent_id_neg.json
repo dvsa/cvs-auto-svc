@@ -1,0 +1,16 @@
+{
+  "parentId": "9d71f94a-a87f-48ef-842c-adc160951808",
+  "activityType": "wait",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369561",
+  "testStationEmail": "teststationname@dvsa.gov.uk",
+  "testStationType": "gvts",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "startTime": "2019-03-19T20:03:38.113Z",
+  "endTime": "2019-03-19T20:08:38.113Z",
+  "waitReason": [
+    "ASdw"
+  ],
+  "notes": "string"
+}

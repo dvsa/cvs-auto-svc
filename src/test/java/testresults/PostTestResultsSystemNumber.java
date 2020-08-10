@@ -279,6 +279,7 @@ public class PostTestResultsSystemNumber {
         JsonPathAlteration alterationTestStationPNumberPut = new JsonPathAlteration("$.testResult.testStationPNumber", testStationPNumberPut, "", "REPLACE");
         JsonPathAlteration alterationTestStationTypePut = new JsonPathAlteration("$.testResult.testStationType", testStationTypePut, "", "REPLACE");
         JsonPathAlteration alterationTesterEmailAddressPut = new JsonPathAlteration("$.testResult.testerEmailAddress", testerEmailAddressPut, "", "REPLACE");
+        JsonPathAlteration alterationCertNumber = new JsonPathAlteration("$.testResult.testTypes[0]", "12345","certificateNumber","ADD_FIELD");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
@@ -288,7 +289,8 @@ public class PostTestResultsSystemNumber {
                 alterationTestStationNamePut,
                 alterationTestStationPNumberPut,
                 alterationTestStationTypePut,
-                alterationTesterEmailAddressPut
+                alterationTesterEmailAddressPut,
+                alterationCertNumber
                 ));
 
         testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);

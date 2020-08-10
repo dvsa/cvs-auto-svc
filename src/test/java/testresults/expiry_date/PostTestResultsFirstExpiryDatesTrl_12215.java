@@ -81,7 +81,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
-        String expectedTestExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay().toInstant().toString();
+        //String expectedTestExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay().toInstant().toString();
+        String expectedTestExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
@@ -173,7 +174,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
-        String expectedTestExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay().toInstant().toString();
+        //String expectedTestExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay().toInstant().toString();
+        String expectedTestExpiryDate = submittedEndTimestamp.plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", "", "", "DELETE");
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
@@ -254,7 +256,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedEndTimestamp = currentTime;
 
         DateTime submittedFirstUseDate = currentTime.minusYears(1).plusMonths(3);
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        //DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -332,9 +335,9 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
     }
 
     @WithTag("expiry_dates")
-    @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is one month before FirstUseDate Anniversary")
+    @Title("(Defect CVSB-17637 for p4t4,p7t2)CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is one month before FirstUseDate Anniversary")
     @Test
-    public void testResultsFirstTestExpiryTrlTodayIsOneMonthBeforeRegAnniversary() {
+    public void testResultsFirstTestExpiryTrlTodayIsInMonthBeforeRegAnniversary() {
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_12215.json", "$");
@@ -346,7 +349,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedEndTimestamp = currentTime;
 
         DateTime submittedFirstUseDate = currentTime.minusYears(1).plusMonths(1);
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -438,7 +441,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedEndTimestamp = currentTime;
 
         DateTime submittedFirstUseDate = currentTime.minusYears(1);
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        //DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
@@ -530,7 +534,8 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         DateTime submittedEndTimestamp = currentTime;
 
         DateTime submittedFirstUseDate = currentTime.minusYears(1).minusMonths(1);
-        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        //DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue().withTimeAtStartOfDay();
+        DateTime firstAnniversary = submittedFirstUseDate.plusYears(1).dayOfMonth().withMaximumValue();
 
         // Create alteration to add one more tech record to in the request body
         String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();

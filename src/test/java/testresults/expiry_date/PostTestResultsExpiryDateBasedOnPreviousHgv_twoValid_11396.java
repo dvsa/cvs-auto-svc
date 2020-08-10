@@ -169,7 +169,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_twoValid_11396 {
 
         // Insert the first altered record
         String alteredJsonOne = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsOne);
-        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results","vin");
 
         // Inserted expiryDate for test two
         DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
@@ -231,7 +231,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousHgv_twoValid_11396 {
 
         // Insert the first altered record
         String alteredJsonTwo = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsTwo);
-        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results","vin");
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);

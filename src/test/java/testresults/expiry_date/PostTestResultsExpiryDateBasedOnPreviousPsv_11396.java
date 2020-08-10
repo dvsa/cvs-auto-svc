@@ -114,7 +114,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
 
         // Inserted expiryDate for test one
-        DateTime insertedTestExpiryDateOne = currentTimestamp.dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateOne = currentTimestamp.dayOfMonth().withMaximumValue();
+        DateTime insertedTestExpiryDateOne = currentTimestamp;
 
         // Create inserted record One.
         DateTime insertedTestStartTimestampOne = insertedTestExpiryDateOne.minusYears(1).minusMinutes(15);
@@ -175,10 +176,11 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonOne = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsOne);
-        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results","vin");
 
         // Inserted expiryDate for test two
-        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1);
 
         // Create inserted record Two.
         DateTime insertedTestStartTimestampTwo = insertedTestExpiryDateTwo.minusYears(1).minusMinutes(15);
@@ -239,7 +241,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonTwo = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsTwo);
-        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results","vin");
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
@@ -333,7 +335,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
 
         // Inserted expiryDate for test one
-        DateTime insertedTestExpiryDateOne = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateOne = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        DateTime insertedTestExpiryDateOne = currentTimestamp.plusMonths(1).plusDays(15);
 
         // Create inserted record One.
         DateTime insertedTestStartTimestampOne = insertedTestExpiryDateOne.minusYears(1).minusMinutes(15);
@@ -394,10 +397,11 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonOne = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsOne);
-        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results","vin");
 
         // Inserted expiryDate for test two
-        DateTime insertedTestExpiryDateTwo = currentTimestamp.dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateTwo = currentTimestamp.dayOfMonth().withMaximumValue();
+        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1);
 
         // Create inserted record Two.
         DateTime insertedTestStartTimestampTwo = insertedTestExpiryDateTwo.minusYears(1).minusMinutes(15);
@@ -458,7 +462,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonTwo = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsTwo);
-        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results","vin");
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
@@ -552,7 +556,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
 
         // Inserted expiryDate for test one
-        DateTime insertedTestExpiryDateOne = currentTimestamp.minusMonths(1).dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateOne = currentTimestamp.minusMonths(1).dayOfMonth().withMaximumValue();
+        DateTime insertedTestExpiryDateOne = currentTimestamp.minusMonths(1);
 
         // Create inserted record One.
         DateTime insertedTestStartTimestampOne = insertedTestExpiryDateOne.minusYears(1).minusMinutes(15);
@@ -613,10 +618,11 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonOne = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsOne);
-        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results","vin");
 
         // Inserted expiryDate for test two
-        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1);
 
         // Create inserted record Two.
         DateTime insertedTestStartTimestampTwo = insertedTestExpiryDateTwo.minusYears(1).minusMinutes(15);
@@ -677,7 +683,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonTwo = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsTwo);
-        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results","vin");
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);
@@ -832,7 +838,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonOne = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsOne);
-        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results","vin");
 
         // Inserted expiryDate for test two
         DateTime insertedTestExpiryDateTwo = currentTimestamp.minusMonths(1).dayOfMonth().withMaximumValue();
@@ -896,7 +902,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_11396 {
 
         // Insert the first altered record
         String alteredJsonTwo = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterationsTwo);
-        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJsonTwo, "test-results","vin");
 
         // Create submitted
         DateTime submittedTestStartTimestamp = currentTimestamp.minusMinutes(15);

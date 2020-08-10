@@ -408,7 +408,7 @@ public class PostActivitiesNeg {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().build());
         String parentId =  activitiesSteps.checkAndGetResponseId();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id.json","$");
+        String postRequestBody = GenericData.readJsonValueFromFile("activities_parent_id_neg.json","$");
         // create alteration to change parentId
         JsonPathAlteration alterationParentId = new JsonPathAlteration("$.parentId", parentId,"","REPLACE");
         Date date  = new Date();
@@ -419,11 +419,11 @@ public class PostActivitiesNeg {
         JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.endTime",
                 new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(date), "","REPLACE");
         // create alteration to change waitReason
-        JsonPathAlteration alterationWaitReason = new JsonPathAlteration("$.waitReason",
-                "[ASdw]", "","REPLACE");
+        //JsonPathAlteration alterationWaitReason = new JsonPathAlteration("$.waitReason",
+                //"[ASdw]", "","REPLACE");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
-                alterationEndTime, alterationWaitReason));
+                alterationEndTime));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateActivityErrorMessage("\"waitReason\" at position 0 does not match any of the allowed types");
