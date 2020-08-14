@@ -291,7 +291,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
-        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
 
         // Create submitted
         DateTime submittedEndTimestamp = currentTimestamp;
@@ -437,7 +437,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
-        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
 
         // Create submitted
         DateTime submittedEndTimestamp = currentTimestamp;
@@ -583,7 +583,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
-        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
 
         // Create submitted
         DateTime submittedEndTimestamp = currentTimestamp;
@@ -729,7 +729,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
         // Insert the altered record
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
-        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results");
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
 
         // Create submitted
         DateTime submittedEndTimestamp = currentTimestamp;

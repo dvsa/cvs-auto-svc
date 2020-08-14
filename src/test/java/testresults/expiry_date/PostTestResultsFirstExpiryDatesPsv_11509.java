@@ -363,7 +363,8 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         DateTime submittedTestEndTimestamp = currentTime;
 
         // Calculate registration date based on regDateAnniversary
-        DateTime regDateAnniversary = currentTime.plusMonths(2).plusDays(1);
+        //DateTime regDateAnniversary = currentTime.plusMonths(2).plusDays(1);
+        DateTime regDateAnniversary = currentTime.plusMonths(2).minusDays(1);
         DateTime regDateTimestamp = regDateAnniversary.minusYears(1);
 
         // Create alteration to add one more tech record to in the request body
@@ -374,7 +375,9 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         String regnDate = regDateTimestamp.toInstant().toString().substring(0, 10);
 
         // Create expected testExpiryDate based on submitted test end timestamp
-        String expectedTestExpiryDate = submittedTestEndTimestamp.plusYears(1).minusDays(1).toInstant().toString();
+        //String expectedTestExpiryDate = submittedTestEndTimestamp.plusYears(1).toInstant().toString();
+
+        String expectedTestExpiryDate = regDateAnniversary.plusYears(1).toInstant().toString();
 
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
@@ -469,7 +472,9 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         String regnDate = regDateTimestamp.toInstant().toString().substring(0, 10);
 
         // Create expected testExpiryDate based on submitted test end timestamp
-        String expectedTestExpiryDate = currentTime.plusYears(1).toInstant().toString();
+        //String expectedTestExpiryDate = currentTime.plusYears(1).toInstant().toString();
+
+        String expectedTestExpiryDate = regDateAnniversary.plusYears(1).toInstant().toString();
 
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");

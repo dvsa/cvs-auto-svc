@@ -5,3 +5,10 @@ Annual test, Annual test, 94, 3, pass, aat1, aat3, true
 With certification, Part paid prohibition clearance (retest with certification), 79, 3, prs, aat1, p6t3, true
 With certification, Part paid prohibition clearance (retest with certification), 79, 4, prs, aat1, p6t4, true
 With certification, Part paid prohibition clearance (retest with certification), 79, 5, prs, aat1, p6t5, true
+With certification, Part paid prohibition clearance (retest with certification), 79, 4, pass, fft4, p6t4, true
+With certification, Paid prohibition clearance (retest with certification), 76, 3, prs, rit3, p3t3, true
+Paid, Paid annual test retest, 53, 2, pass, p7t2, rpt2, true
+Part paid, Part paid annual test retest, 54, 4, pass, rgt4, rst4, false
+Annual test, Annual test, 94, 2, pass, rit2, aat2, false
+With certification, Part paid prohibition clearance (retest with certification), 79, 5, pass, p7t5, p6t5, false
+Annual test, Annual test, 94, 3, prs, rht, aat3, false

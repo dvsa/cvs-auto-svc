@@ -597,7 +597,7 @@ public class PutVehicleTechnicalRecords {
         // Verify the updated record contents.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", specialCharsVrm);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", specialCharsVrm.toUpperCase());
     }
 
     @Title("CVSB-10478 - AC5 - PUT - Permit the PUT of a trailerId which has special characters")
@@ -1113,7 +1113,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -1125,10 +1125,10 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","n1" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","complete" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByName","Tue" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedById","12345" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("techRecord[0].lastUpdatedAt",new SimpleDateFormat("yyyy-MM-dd").format(date));
@@ -1165,7 +1165,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -1177,10 +1177,10 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","l7e" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","complete" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByName","Tue" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedById","12345" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("techRecord[0].lastUpdatedAt",new SimpleDateFormat("yyyy-MM-dd").format(date));
@@ -1217,7 +1217,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
         vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("[0].techRecord[0]","vehicleClass");
 
@@ -1230,10 +1230,10 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","m1" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","complete" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByName","Tue" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedById","12345" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("techRecord[0].lastUpdatedAt",new SimpleDateFormat("yyyy-MM-dd").format(date));
@@ -1271,7 +1271,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0]","systemNumber");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional" );
         vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("[0].techRecord[0]","vehicleClass");
 
@@ -1284,10 +1284,10 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(systemNumber,putRequestBody,alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].euVehicleCategory","n1" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].recordCompleteness","complete" );
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","archived" );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","skeleton" );
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","complete" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedByName","Tue" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].lastUpdatedById","12345" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("techRecord[0].lastUpdatedAt",new SimpleDateFormat("yyyy-MM-dd").format(date));
@@ -2638,9 +2638,9 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
+    @Ignore("Wait untill CVSB-15252 / CVSB-15896 is merged")
     @WithTag("Vtm")
     @Title("CVSB-15252 / CVSB-15896 - Updating the Vehicles API to support plate generation + saving of the new tech record")
-    @Test
     public void testVehicleTechnicalRecordPlateGeneration_Trl() {
 
         // TEST SETUP
