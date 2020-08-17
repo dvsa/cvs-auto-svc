@@ -1,0 +1,58 @@
+{
+  "testResultId": "eaca9545-de59-4ba4-ac21-f39664f28c51",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "numberOfWheelsDriven": 4,
+  "testerName": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testerStaffId": "d463f9f3-1ce7-4944-930a-ce9fd51e506b",
+  "testerEmailAddress": "cvs.automation3@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2019-11-26T13:13:05.473Z",
+  "testEndTimestamp": "2019-11-26T13:18:30.324Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "vrm": "GH389BH",
+  "odometerReading": 5000,
+  "odometerReadingUnits": "kilometres",
+  "vin": "P012301012938",
+  "vehicleClass": {
+    "description": "heavy goods vehicle",
+    "code": "v"
+  },
+  "vehicleType": "hgv",
+  "vehicleConfiguration": "full drawbar",
+  "preparerId": "QE7355",
+  "preparerName": "RPT Logistics Limited",
+  "euVehicleCategory": "n2",
+  "countryOfRegistration": "gb",
+  "noOfAxles": 3,
+  "testTypes": [
+    {
+      "name": "Technical test",
+      "secondaryCertificateNumber": "123456",
+      "testTypeName": "Low Emissions Certificate (LEC)",
+      "testTypeId": "45",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2019-11-26T13:16:47.009Z",
+      "testTypeEndTimestamp": "2019-11-26T13:18:30.325Z",
+      "modType": {
+        "code": "m",
+        "description": "modification or change of engine"
+      },
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType": "diesel",
+      "smokeTestKLimitApplied": "300",
+      "particulateTrapFitted": null,
+      "particulateTrapSerialNumber": null,
+      "modificationTypeUsed": "Altered hood ornament",
+      "testExpiryDate": "2021-10-26",
+      "testResult": "pass",
+      "customDefects": [],
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": []
+    }
+  ]
+}

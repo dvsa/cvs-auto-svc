@@ -10,6 +10,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -4502,5 +4503,74 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(404);
         testTypeSteps.validateData("No resources match the search criteria.");
 
+    }
+
+    @Ignore("Till the time LEC certificates are turned off")
+    @Title("CVSB-7523 - CVSB-7679 - TC - AC1 - GET to testTypes service and confirm 'Annual With Certificate' is retrieved - LBP")
+    public void testTypeLecAnnualCertificatePsvSmallRigidLbp() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+
+        testTypeSteps.getTestTypesById("39", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","39");
+        testTypeSteps.validateData("testTypeClassification","Annual With Certificate");
+        testTypeSteps.validateData("defaultTestCode","lbp");
+        testTypeSteps.validateData("linkedTestCode","lcp");
+    }
+
+    @Ignore("Till the time LEC certificates are turned off")
+    @Title("CVSB-7523 - CVSB-7679 - TC - AC1 - GET to testTypes service and confirm 'Annual With Certificate' is retrieved - LCP")
+    public void testTypeLecAnnualCertificatePsvSmallRigidLcp() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setVehicleType(VehicleType.PSV)
+                .setVehicleSize(VehicleSize.SMALL)
+                .setVehicleConfiguration(VehicleConfiguration.RIGID);
+
+        testTypeSteps.getTestTypesById("39", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","39");
+        testTypeSteps.validateData("testTypeClassification","Annual With Certificate");
+        testTypeSteps.validateData("linkedTestCode","lcp");
+    }
+
+    @Ignore("Till the time LEC certificates are turned off")
+    @Title("CVSB-7523 - CVSB-7679 - TC - AC2 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification='Annual With Certificate' - LDV")
+    public void testTypeLecAnnualCertificateHgvLdv() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleSize(VehicleSize.NULL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL);
+
+        testTypeSteps.getTestTypesById("44", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","44");
+        testTypeSteps.validateData("testTypeClassification","Annual With Certificate");
+        testTypeSteps.validateData("defaultTestCode","ldv");
+    }
+
+    @Ignore("Till the time LEC certificates are turned off")
+    @Title("CVSB-7523 - CVSB-7679 - TC - AC2 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification='Annual With Certificate' - LEV")
+    public void testTypeLecAnnualCertificateHgvLev() {
+
+        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
+                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
+                .setVehicleType(VehicleType.HGV)
+                .setVehicleSize(VehicleSize.NULL)
+                .setVehicleConfiguration(VehicleConfiguration.NULL);
+
+        testTypeSteps.getTestTypesById("45", testTypeQueryParam);
+        testTypeSteps.statusCodeShouldBe(200);
+        testTypeSteps.validateData("id","45");
+        testTypeSteps.validateData("testTypeClassification","Annual With Certificate");
+        testTypeSteps.validateData("defaultTestCode","lev");
     }
 }
