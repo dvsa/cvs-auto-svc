@@ -212,7 +212,7 @@ public class GetTestTypesByIdNeg {
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleSize.class) + "]");
+        testTypeSteps.validateData("Query parameter \\\"vehicleSize\\\" must be one of [small, large]");
     }
 
     @Title("CVSB-1073 / CVSB-2026 - Query param 'vehicleConfiguration' invalid")

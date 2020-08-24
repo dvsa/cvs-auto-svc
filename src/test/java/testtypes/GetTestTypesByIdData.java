@@ -3973,9 +3973,8 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateRawData("\"No resources match the search criteria.\"");
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - 1 Axle")
-    @Test
     public void validateMdaTestCodeFor1Axle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -3988,12 +3987,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - 4 Axles")
-    @Test
     public void validateMdaTestCodeFor4Axles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4006,12 +4003,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - 8 Axles")
-    @Test
     public void validateMdaTestCodeFor8Axles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4024,12 +4019,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code -   PSV Small Rigid")
-    @Test
     public void validateMdaTestCodeForPsvSmallRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4043,12 +4036,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Large Articulated")
-    @Test
     public void validateMdaTestCodeForPsvLargeArticulated() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4060,12 +4051,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code -   PSV Large Rigid")
-    @Test
     public void validateMdaTestCodeForPsvLargeRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4079,12 +4068,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Small Articulated")
-    @Test
     public void validateMdaTestCodeForPsvSmallArticulated() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4098,12 +4085,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","100");
         testTypeSteps.validateData("defaultTestCode","mda");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDU test code - 1 Axle")
-    @Test
     public void validateMduTestCodeFor1Axle() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4116,12 +4101,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","121");
         testTypeSteps.validateData("defaultTestCode","mdu");
-
     }
 
-
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDU test code - 4 Axles")
-    @Test
     public void validateMduTestCodeFor4Axles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4134,11 +4117,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","121");
         testTypeSteps.validateData("defaultTestCode","mdu");
-
     }
 
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDU test code - 8 Axles")
-    @Test
     public void validateMduTestCodeFor8Axles() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4151,11 +4133,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","121");
         testTypeSteps.validateData("defaultTestCode","mdu");
-
     }
 
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDU test code - PSV Small Rigid")
-    @Test
     public void validateMduTestCodeForPsvRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4169,11 +4150,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","121");
         testTypeSteps.validateData("defaultTestCode","mdu");
-
     }
 
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Large Articulated")
-    @Test
     public void validateMduTestCodeForPsvLargeArticulated() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4187,11 +4167,10 @@ public class GetTestTypesByIdData {
         testTypeSteps.statusCodeShouldBe(200);
         testTypeSteps.validateData("id","121");
         testTypeSteps.validateData("defaultTestCode","mdu");
-
     }
 
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code -   PSV Large Rigid")
-    @Test
     public void validateMduTestCodeForPsvLargeRigid() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4208,8 +4187,8 @@ public class GetTestTypesByIdData {
 
     }
 
+    @Ignore("No longer a valid test case")
     @Title("CVSB-8335 - TC - AC1 - MDA test code - PSV Small Articulated")
-    @Test
     public void validateMduTestCodeForPsvSmallArticulated() {
 
         TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
@@ -4502,7 +4481,6 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById("134", testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(404);
         testTypeSteps.validateData("No resources match the search criteria.");
-
     }
 
     @Ignore("Till the time LEC certificates are turned off")
