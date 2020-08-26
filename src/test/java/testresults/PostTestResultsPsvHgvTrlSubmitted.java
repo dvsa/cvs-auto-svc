@@ -284,6 +284,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setTestResultId(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getTestResultId()))
                 .build();
 
+        vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeId("1");
+
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.valueToTree(vehicleSubmittedDataOld.build());
 
@@ -1785,4 +1787,106 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.validatePostErrorDataContains("regnDate", "must be a string");
 
     }
+
+    @Title("CVSB-3946 - API changes related to test records to enable TIR testing - negative - missing certificateNumber - TRL")
+    @Test
+    public void testTirCertificateMissingTrl() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_trl.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId,"","REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "56","","REPLACE");
+        JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", "Retest","","REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", "Paid TIR retest","","REPLACE");
+        JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testTypes[0].certificateNumber", "certificateNumber","","DELETE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationTestTypeId,
+                alterationName,
+                alterationTestTypeName,
+                alterationCertificateNumber));
+
+        // Post the results, together with any alterations, and verify that they are handled correctly.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateErrorText("Certificate number not present on TIR test type");
+
+    }
+
+    @Title("CVSB-3946 - API changes related to test records to enable TIR testing - negative - missing certificateNumber - HGV")
+    @Test
+    public void testTirCertificateMissingHgv() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_hgv.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId,"","REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "49","","REPLACE");
+        JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", "Technical test","","REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", "TIR test","","REPLACE");
+        JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testTypes[0].certificateNumber", "certificateNumber","","DELETE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationTestTypeId,
+                alterationName,
+                alterationTestTypeName,
+                alterationCertificateNumber));
+
+        // Post the results, together with any alterations, and verify that they are handled correctly.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateData("Certificate number not present on TIR test type");
+
+    }
+
+    @Title("CVSB-3946 - API changes related to test records to enable TIR testing - Free TIR - TRL")
+    @Test
+    public void testTirCertificateFreeTirTrl() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_57_trl.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber",randomSystemNumber ,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are handled correctly.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        // Retrieve the created record, and verify that the fields are present.
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        // Verify TIR test field values match the expected values.
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testTypeId", "57");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", "GB/T22222");
+    }
+
 }

@@ -1,0 +1,47 @@
+{
+  "testResultId": "9798b686-1ebb-426a-98ea-97bf5a7c62a4",
+  "testStationName": "Abshire-Kub",
+  "systemNumber": "10000036",
+  "numberOfWheelsDriven": 3,
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testerName": "cvs.automation4@dvsagov.onmicrosoft.com",
+  "testerStaffId": "c26d6b02-49b2-456a-ac20-7435e9397bac",
+  "testerEmailAddress": "cvs.automation4@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2019-12-12T16:44:23.819Z",
+  "testEndTimestamp": "2019-12-12T16:46:08.926Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "trailerId": "C108802",
+  "vin": "ABCDEFGH777777",
+  "vehicleClass": {
+    "description": "trailer",
+    "code": "t"
+  },
+  "vehicleType": "trl",
+  "vehicleConfiguration": "centre axle drawbar",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "euVehicleCategory": "o2",
+  "countryOfRegistration": "bg",
+  "noOfAxles": 2,
+  "testTypes": [
+    {
+      "name": "Technical test",
+      "testTypeName": "TIR test",
+      "customDefects": [],
+      "secondaryCertificateNumber": "123456",
+      "testTypeId": "49",
+      "certificateNumber": "GB/T22222",
+      "testTypeStartTimestamp": "2019-12-12T16:45:16.880Z",
+      "testTypeEndTimestamp": "2019-12-12T16:46:08.927Z",
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": []
+    }
+  ]
+}
