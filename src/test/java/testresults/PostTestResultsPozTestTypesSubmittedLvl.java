@@ -97,15 +97,30 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - name")
     @Test
     public void testResultsRandomName() {
-        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
-                .getTestTypes().get(0).setName(RandomStringUtils.randomAlphanumeric(50));
 
-        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", RandomStringUtils.randomAlphanumeric(50), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationName,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
     }
 
     @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway - defect CVSB-9011")

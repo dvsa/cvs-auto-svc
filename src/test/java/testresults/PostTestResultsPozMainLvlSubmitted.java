@@ -500,29 +500,58 @@ public class PostTestResultsPozMainLvlSubmitted {
     @Test
     public void testResultsNullReasonForCancellation() {
 
-        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
-                .setReasonForCancellation(null).build());
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
 
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationReasonForCancellation = new JsonPathAlteration("$.reasonForCancellation", null, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationReasonForCancellation,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - reasonForCancellation")
     @Test
     public void testResultsEmptyReasonForCancellation() {
 
-        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
-                .setReasonForCancellation("").build());
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
 
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationReasonForCancellation = new JsonPathAlteration("$.reasonForCancellation", "", "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationReasonForCancellation,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
-        vehicleSubmittedDataOld.setReasonForCancellation(null);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
     }
 
 
@@ -675,15 +704,29 @@ public class PostTestResultsPozMainLvlSubmitted {
     @Test
     public void testResultsValueVehicleClassCodel() {
 
-        vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
-                .getVehicleClass().setCode("l");
-        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
 
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationVehicleClass = new JsonPathAlteration("$.vehicleClass.code", "l", "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationVehicleClass,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleClass code s")
