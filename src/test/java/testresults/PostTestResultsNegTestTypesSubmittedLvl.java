@@ -2,6 +2,7 @@ package testresults;
 
 import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestTypes;
@@ -14,6 +15,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import util.JsonPathAlteration;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
@@ -535,8 +542,28 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsLengthMaxReasonForAbandoning() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "reasonForAbandoning", RandomStringUtils.randomAlphanumeric(501), ToTypeConvertor.STRING, TestResultsLevel.TEST_TYPES);
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_cert.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVin();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationReasonForAbandoning = new JsonPathAlteration("$.testTypes[0].reasonForAbandoning", RandomStringUtils.randomAlphanumeric(501), "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationSystemNumber,
+                alterationReasonForAbandoning,
+                alterationTestResultId));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
     }
 
 
