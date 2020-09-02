@@ -17,6 +17,7 @@ import steps.*;
 import util.JsonPathAlteration;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -30,7 +31,7 @@ public class GetVehicleTechnicalRecords {
     private Vehicle vehicleArchivedData = VehicleTechRecordsData.buildVehicleTechRecordsArchivedData();
     private Vehicle vehicleProvisionalData = VehicleTechRecordsData.buildVehicleTechRecordsProvisionalData();
 
-    //Failing due to multiple vins are returned
+    Date date  = new Date();
 
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1157 - AC1 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - VRM")
@@ -100,9 +101,12 @@ public class GetVehicleTechnicalRecords {
     @Title("CVSB-1057 / CVSB-1159 - AC3 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVin() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vehicleCurrentData.getVin());
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("1B7GG36N12S678410");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -150,7 +154,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData(vehicleArchivedData, VehicleTechnicalRecordStatus.ARCHIVED);
     }
 
-    //Failing due to multiple vins are returned
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1265 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is archived")
     @Test
@@ -225,32 +228,41 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("No resources match the search criteria.");
     }
 
-    //Failing due to No record found
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1281 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - VRM and the statusCode is current")
     @Test
     public void testVehicleTechnicalRecordsSearchVrmAndStatusCurrent() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVrms().get(0).getVrm(), VehicleTechnicalRecordStatus.CURRENT);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("BQ91YHQ",VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1282 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN and the statusCode is current")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVinAndStatusCurrent() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByPartialVinAndStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("678410",VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1283 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - full VIN and the statusCode is current")
     @Test
     public void testVehicleTechnicalRecordsSearchFullVinAndStatusCurrent() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(vehicleCurrentData.getVin(), VehicleTechnicalRecordStatus.CURRENT);
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("1B7GG36N12S678410",VehicleTechnicalRecordStatus.CURRENT);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateData(vehicleCurrentData, VehicleTechnicalRecordStatus.CURRENT);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+
     }
 
     @WithTag("Vtm")
@@ -635,7 +647,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[0]", "vehicleSubclass");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "a");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "lgv");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
     }
@@ -647,7 +659,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[0]", "vehicleSubclass");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "a");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "car");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }

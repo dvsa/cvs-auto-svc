@@ -72,7 +72,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("expiry_date")
+    @WithTag("expiry_dates")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is more than 2 months before the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsMoreThanTwoMonthsBeforeAnniversary() {
@@ -218,7 +218,7 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("expiry_date")
+    @WithTag("expiry_dates")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is exactly 2 months before the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsExactlyTwoMonthsBeforeAnniversary() {
@@ -304,7 +304,9 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
         String testTypeEndTimestamp = submittedTypeEndTimestamp.toInstant().toString();
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 
-        String testExpectedDate = insertedTestExpiryDate.plusYears(1).toInstant().toString();
+        //String testExpectedDate = insertedTestExpiryDate.plusYears(1).toInstant().toString();
+
+        String testExpectedDate = currentTimestamp.plusYears(1).minusDays(1).toInstant().toString();
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
@@ -364,7 +366,8 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("expiry_date")
+
+    @WithTag("expiry_dates")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is less than 2 months before the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsLessThanTwoMonthsBeforeAnniversary() {
@@ -510,7 +513,8 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("expiry_date")
+
+    @WithTag("expiry_dates")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsThePreviousAnniversary() {
@@ -656,7 +660,8 @@ public class PostTestResultsPreservationExpiryDatePsv_11334 {
 
     }
 
-    @WithTag("expiry_date")
+
+    @WithTag("expiry_dates")
     @Title("CVSB-11334 - As an SVSA/VSA I want to take into consideration the expiry date of COIF + annual test types so that the most recent expiry date is accurately referenced in the future - PSV - Today is after the previousExpiryDate")
     @Test
     public void testResultsExpiryDateTodayIsAfterThePreviousAnniversary() {

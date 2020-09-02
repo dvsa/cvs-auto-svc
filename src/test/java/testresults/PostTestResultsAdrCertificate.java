@@ -13,6 +13,7 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
+@Ignore("Cert generation switched off for ADR, wait untill CVSB-9134 is merged")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsAdrCertificate {
 
@@ -42,7 +43,7 @@ public class PostTestResultsAdrCertificate {
     private String name;
     private String testTypeName;
 
-    @Ignore("Cert generation switched off for ADR, wait untill CVSB-9134 is merged")
+
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")
     public void testResultsADRCertificateTrl() {
 

@@ -14,7 +14,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
-import util.DataUtil;
 import util.JsonPathAlteration;
 
 import java.text.SimpleDateFormat;
@@ -1736,7 +1735,6 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.validateData("Test records created");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - countryOfRegistration")
     public void testResultsEmptyValueCountryOfRegistration() {
 
