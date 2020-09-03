@@ -424,7 +424,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
     }
 
     @WithTag("expiry_dates")
-    @Title("(Defect CVSB-17637 for p4t4,p7t2)CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is in the month before Registration Anniversary")
+    @Title("(Defect CVSB-17637 for p4t4, p7t2) CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is in the month before Registration Anniversary")
     @Test
     public void testResultsFirstTestExpiryHgvTodayIsOneMonthBeforeRegAnniversary() {
 
