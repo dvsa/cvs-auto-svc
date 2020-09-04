@@ -1,6 +1,9 @@
 package vehicle;
 
 import data.GenericData;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import model.testresults.TestVersion;
 import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -11,15 +14,20 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Ignore;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
+import util.BasePathFilter;
 import util.JsonPathAlteration;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static io.restassured.RestAssured.given;
+import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
@@ -2714,98 +2722,6 @@ public class PutVehicleTechnicalRecords {
         // CVSB-15896 - AC2. PUT request is submitted against tech records
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[3].plates[0].plateSerialNumber", plateSerialNumber);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[3].reasonForCreation","no reason");
-    }
-    
-    @Title("CVSB-17402 - Display correctly audit details upon EU vehicle category update via test results request")
-    @Test
-    public void testAuditDetailsEuVehicleCategoryViaTestResultsRequest() {
-        // TEST SETUP
-        //generate random systemNumber
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        //generate random Vin
-        String randomVin = GenericData.generateRandomVin();
-        //generate random Vrm
-        String randomVrm = GenericData.generateRandomVrm();
-        // read post request body from file
-        String json = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
-
-
-        // create alteration to remove euVehicleCategory from the json payload
-        JsonPathAlteration alterationEuVehicleCategory = new JsonPathAlteration("$.techRecord[0].euVehicleCategory", "","","DELETE");
-        // create alteration to add statusCode to the json payload
-        JsonPathAlteration alterationStatusCode = new JsonPathAlteration("$.techRecord[0]", "current","statusCode","ADD_FIELD");
-        // create alteration to change systemNumber in the request body with the random generated systemNumber
-        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
-        // create alteration to change Vin in the request body with the random generated Vin
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-        // create alteration to change primary vrm in the request body with the random generated primary vrm
-        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
-        // initialize the alterations list with both declared alteration
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber,
-                alterationEuVehicleCategory, alterationStatusCode));
-
-        String alteredJson = GenericData.applyJsonAlterations(json, alterations);
-        vehicleTechnicalRecordsSteps.insertRecordInDynamo(alteredJson,"technical-records","systemNumber");
-
-
-//        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomSystemNumber);
-//        String systemNumber = vehicleTechnicalRecordsSteps.extractValueFromPath("$.systemNumber").toString();
-        // Post the results, together with any alterations, and verify that they are accepted.
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_trl.json","$");
-
-        // Create alteration to add one more tech record to in the request body
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationTestSystemNumber = new JsonPathAlteration("$.systemNumber",randomSystemNumber ,"","REPLACE");
-        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-        JsonPathAlteration alterationTestResultVrm = new JsonPathAlteration("$.vrm", randomVrm,"","REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId,"","REPLACE");
-        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "49","","REPLACE");
-        JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", "Technical Test","","REPLACE");
-        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", "TIR test","","REPLACE");
-        JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testTypes[0].certificateNumber", "GB/V22222","","REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
-                alterationTestResultVin,
-                alterationTestResultVrm,
-                alterationTestSystemNumber,
-                alterationTestResultId,
-                alterationTestTypeId,
-                alterationName,
-                alterationTestTypeName,
-                alterationCertificateNumber));
-
-
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.getTestResults(randomSystemNumber);
-        String createdAt = testResultsSteps.extractValueFromPath("createdAt").toString();
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomSystemNumber, VehicleTechnicalRecordSearchCriteria.SYSTEM_NUMBER);
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size", 2 );
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'archived' }.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'current' }.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'current' }[0].euVehicleCategory","o2");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'current' }[0].createdByName","Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe
-                ("[0].techRecord.findAll { it.statusCode == 'current' }[0].createdAt",null);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe
-                ("[0].techRecord.findAll { it.statusCode == 'archived' }[0].lastUpdatedAt",null);
-        vehicleTechnicalRecordsSteps.valuesForFieldsInPathShouldEqual("[0].techRecord.findAll { it.statusCode == 'current' }[0].createdAt",
-                        "[0].techRecord.findAll { it.statusCode == 'archived' }[0].lastUpdatedAt");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'current' }[0].createdById","133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'archived' }[0].lastUpdatedByName","Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'archived' }[0].lastUpdatedById","133");
     }
 
 }
