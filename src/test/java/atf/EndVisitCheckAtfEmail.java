@@ -4,26 +4,18 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import steps.ActivitiesSteps;
 import steps.TestResultsSteps;
 import steps.TestStationSteps;
 import util.*;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SerenityRunner.class)
 public class EndVisitCheckAtfEmail {
@@ -36,6 +28,7 @@ public class EndVisitCheckAtfEmail {
 
     @Steps
     TestResultsSteps testResultsSteps;
+
 
     @Title("CVSB-10530 - Check email to ATF lands in inbox")
     @Test
@@ -77,7 +70,5 @@ public class EndVisitCheckAtfEmail {
         String startDate = simpleDateFormat.format(currentDateTime);
         activitiesSteps.validateAtfEmailDetails(driver, testStationName, testStationPNumber, testerName,
                 startDate, startTime);
-
-
     }
 }

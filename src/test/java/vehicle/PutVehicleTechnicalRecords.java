@@ -1382,28 +1382,33 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -1489,28 +1494,33 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -1599,28 +1609,33 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -1705,28 +1720,33 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -1811,32 +1831,37 @@ public class PutVehicleTechnicalRecords {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(systemNumber,putRequestBody,alterationsTestResultsPut);
+        testResultsSteps.putTestResultsWithAlterations(systemNumber, putRequestBody, alterationsTestResultsPut);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -1921,28 +1946,33 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -2031,32 +2061,37 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
+    @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordTrlPassNotifiableAlteration(){
 
@@ -2137,28 +2172,33 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedByName", "Gica");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].statusCode", "archived");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].lastUpdatedById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].statusCode", "current");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdByName", "catalin");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[2].createdById", "123243424-234234245");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[2].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - PSV")
