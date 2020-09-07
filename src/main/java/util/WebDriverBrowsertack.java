@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -131,11 +131,25 @@ public class WebDriverBrowsertack {
         }
 
         System.out.println("Confirming staying signed in");
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back")),
-                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back"))
-        ));
-        driver.findElement(By.cssSelector("#idSIButton9")).click();
+        int i = 0;
+        while (i < 5) {
+            if (driver.findElements(By.cssSelector("#idBtn_Back")).size() == 0) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                i++;
+            }
+            else {
+                wait.until(ExpectedConditions.and(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back")),
+                        ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back"))
+                ));
+                driver.findElement(By.cssSelector("#idSIButton9")).click();
+                break;
+            }
+        }
 
         System.out.println("Searching for VSA email using VRM " + randomVrm);
         wait.until(ExpectedConditions.and(
@@ -148,32 +162,68 @@ public class WebDriverBrowsertack {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
         System.out.println("Confirming search returned at least one result");
-        int i = 0;
-        while ( (i < 60) && driver.findElement(
-                By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
+        i = 0;
+        while (i < 30) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            driver.findElement(By.cssSelector("[placeholder='Search']")).clear();
-            driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
+            if (!driver.findElement(
+                    By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
+                break;
+            }
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).clear();
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).sendKeys(randomVrm);
             driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
             i++;
             new WebDriverWait(driver, 1).until(
                     webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         }
 
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div[aria-level='3']")),
-                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div[aria-level='3']"))
-        ));
+        if (i == 30) {
+            System.out.println("Go to junk folder");
+            driver.findElement(By.cssSelector("div[title='Junk Email']")).click();
+            wait.until(ExpectedConditions.and(
+                    ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("[name='Empty folder']")),
+                    ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[name='Empty folder']"))
+            ));
+
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).clear();
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).sendKeys(randomVrm);
+            driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+            new WebDriverWait(driver, 1).until(
+                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+
+            int j = 0;
+            while (j < 120) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (!driver.findElement(
+                        By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
+                    break;
+                }
+                driver.findElement(By.cssSelector("input[aria-label='Search']")).clear();
+                driver.findElement(By.cssSelector("input[aria-label='Search']")).sendKeys(randomVrm);
+                driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+                j++;
+                new WebDriverWait(driver, 1).until(
+                        webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+            }
+
+            if (j == 120) {
+                throw new AutomationException("Email was not found");
+            }
+        }
+
         wait.until(
-                ExpectedConditions.textToBePresentInElement(driver.findElement(By.cssSelector("div[aria-level='3']")), "Top results"));
+                ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("div[aria-label*='" + randomVrm + "']"), 0));
 
         System.out.println("Select email that was searched for");
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[role='option']")));
-        driver.findElement(By.cssSelector("div[role='option']")).click();
+        driver.findElements(By.cssSelector("div[aria-label*='" + randomVrm + "']")).get(0).click();
         return driver;
     }
 
@@ -219,11 +269,25 @@ public class WebDriverBrowsertack {
         }
 
         System.out.println("Confirming staying signed in");
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back")),
-                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back"))
-        ));
-        driver.findElement(By.cssSelector("#idSIButton9")).click();
+        int i = 0;
+        while (i < 5) {
+            if (driver.findElements(By.cssSelector("#idBtn_Back")).size() == 0) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                i++;
+            }
+            else {
+                wait.until(ExpectedConditions.and(
+                        ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back")),
+                        ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#idBtn_Back"))
+                ));
+                driver.findElement(By.cssSelector("#idSIButton9")).click();
+                break;
+            }
+        }
 
         System.out.println("Searching for ATF email using tester name " + testerName);
         wait.until(ExpectedConditions.and(
@@ -236,39 +300,68 @@ public class WebDriverBrowsertack {
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
         System.out.println("Confirming search returned at least one result");
-        int i = 0;
-        while ( (i < 60) && driver.findElement(
-                By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
+        i = 0;
+        while (i < 30) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            driver.findElement(By.cssSelector("[placeholder='Search']")).clear();
-            driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(testerName);
+            if (!driver.findElement(
+                    By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
+                break;
+            }
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).clear();
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).sendKeys(testerName);
             driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
             i++;
             new WebDriverWait(driver, 1).until(
                     webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         }
 
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div[aria-level='3']")),
-                ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div[aria-level='3']"))
-        ));
+        if (i == 30) {
+            System.out.println("Go to junk folder");
+            driver.findElement(By.cssSelector("div[title='Junk Email']")).click();
+            wait.until(ExpectedConditions.and(
+                    ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("[name='Empty folder']")),
+                    ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[name='Empty folder']"))
+            ));
+
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).clear();
+            driver.findElement(By.cssSelector("input[aria-label='Search']")).sendKeys(testerName);
+            driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+            new WebDriverWait(driver, 1).until(
+                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+
+            int j = 0;
+            while (j < 120) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (!driver.findElement(
+                        By.cssSelector("div[aria-label='Message list']")).getText().contains("We didn't find anything.")) {
+                    break;
+                }
+                driver.findElement(By.cssSelector("input[aria-label='Search']")).clear();
+                driver.findElement(By.cssSelector("input[aria-label='Search']")).sendKeys(testerName);
+                driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
+                j++;
+                new WebDriverWait(driver, 1).until(
+                        webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+            }
+
+            if (j == 120) {
+                throw new AutomationException("Email was not found");
+            }
+        }
+
         wait.until(
-                ExpectedConditions.textToBePresentInElement(driver.findElement(By.cssSelector("div[aria-level='3']")), "Top results"));
-
-
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[aria-level='3']")),
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector("div[aria-level='3']")),
-                ExpectedConditions.textToBePresentInElement(driver.findElement(By.cssSelector("div[aria-level='3']")), "Top results")
-        ));
+                ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("div[aria-label*='" + testerName + "']"), 0));
 
         System.out.println("Select email that was searched for");
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[role='option']")));
-        driver.findElement(By.cssSelector("div[role='option']")).click();
+        driver.findElements(By.cssSelector("div[aria-label*='" + testerName + "']")).get(0).click();
         return driver;
     }
 
@@ -296,12 +389,8 @@ public class WebDriverBrowsertack {
         }
 
         System.out.println("Checking the details in the email are correct");
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
-                        "div[class^='rps']>div>table:nth-of-type(4)>tbody>tr:nth-of-type(2)>td:nth-of-type(2)>p:first-of-type")),
-                ExpectedConditions.presenceOfElementLocated(By.cssSelector(
-                        "div[class^='rps']>div>table:nth-of-type(4)>tbody>tr:nth-of-type(2)>td:nth-of-type(2)>p:first-of-type"))
-        ));
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector(
+                "div[class^='rps']>div>table:nth-of-type(4)>tbody>tr:nth-of-type(2)>td:nth-of-type(2)>p:first-of-type"), 0));
         String actualString1 = driver.findElement(By
                 .cssSelector("div[class^='rps']>div>table:nth-of-type(4)>tbody>tr:nth-of-type(2)>td:nth-of-type(2)>p:first-of-type"))
                 .getText();
@@ -310,7 +399,7 @@ public class WebDriverBrowsertack {
         try {
             assertTrue(actualString1.contains(expectedString1));
         } catch (AssertionError e) {
-            throw new AutomationException("Actual string " + actualString1 + " does not contain expected string " + expectedString1);
+            throw new AutomationException("Actual string '" + actualString1 + "' does not contain expected string '" + expectedString1 + "'");
         }
 
         wait.until(ExpectedConditions.and(
@@ -329,22 +418,22 @@ public class WebDriverBrowsertack {
         try {
             assertTrue(siteVisitDetailsText.contains(expectedString2));
         } catch (AssertionError e) {
-            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString2);
+            throw new AutomationException("Actual string '" + siteVisitDetailsText + "' does not contain expected string '" + expectedString2 + "'");
         }
         try {
             assertTrue(siteVisitDetailsText.contains(expectedString3));
         } catch (AssertionError e) {
-            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString3);
+            throw new AutomationException("Actual string '" + siteVisitDetailsText + "' does not contain expected string '" + expectedString3 + "'");
         }
         try {
             assertTrue(siteVisitDetailsText.contains(expectedString4));
         } catch (AssertionError e) {
-            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString4);
+            throw new AutomationException("Actual string '" + siteVisitDetailsText + "' does not contain expected string '" + expectedString4 + "'");
         }
         try {
             assertTrue(siteVisitDetailsText.contains(expectedString5));
         } catch (AssertionError e) {
-            throw new AutomationException("Actual string " + siteVisitDetailsText + " does not contain expected string " + expectedString5);
+            throw new AutomationException("Actual string '" + siteVisitDetailsText + "' does not contain expected string '" + expectedString5 + "'");
         }
 
         driver.close();
@@ -367,7 +456,7 @@ public class WebDriverBrowsertack {
         try {
             assertTrue(actualString1.contains(expectedString1));
         } catch (AssertionError e) {
-            throw new AutomationException("Actual string " + actualString1 + " does not contain expected string " + expectedString1);
+            throw new AutomationException("Actual string '" + actualString1 + "' does not contain expected string '" + expectedString1 + "'");
         }
 
         driver.close();

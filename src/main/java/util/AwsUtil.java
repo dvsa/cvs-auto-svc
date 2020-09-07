@@ -79,15 +79,15 @@ public class AwsUtil {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (s3Client.doesObjectExist(bucketName, key)) {
-                return s3Client.doesObjectExist(bucketName, key);
-            }
             if (i % 2 == 0) {
                 int j = i % 2;
                 System.out.println("waited for: " + j + " seconds...");
             }
+            if (s3Client.doesObjectExist(bucketName, key)) {
+                return s3Client.doesObjectExist(bucketName, key);
+            }
         }
-        System.out.println("file " + key + " was not created in 60 seconds or less...");
+        System.out.println("file " + key + " was not created in 120 seconds or less...");
         return false;
     }
 

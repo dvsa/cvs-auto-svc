@@ -375,6 +375,42 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds, int numberOfTechRecords) {
+
+        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
+
+        for(int i=0; i < seconds; i++) {
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+
+            int status = response.getStatusCode();
+            int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
+            for (int j = 0; j < noVehicles; j++) {
+
+                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
+
+                System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
+
+                if (status == 200 && recordsNumber == numberOfTechRecords) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                } else {
+                    System.out.println("\n...waiting one more second (" + i + ")...\n");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+    }
+
+    @Step
     public void valueForFieldInTechRecordShouldBe(String systemNumber, String vin, int techRecordNo, String field, String value) {
         try {
             JSONArray jsonArray = new JSONArray(response.body().asString());
