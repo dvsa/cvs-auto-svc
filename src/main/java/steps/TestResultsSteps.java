@@ -886,4 +886,9 @@ public class TestResultsSteps {
     public String getTesterStaffId() {
         return response.jsonPath().getString("[0].testerStaffId");
     }
+
+    @Step
+    public Object extractValueFromPath(String path) {
+        return response.then().extract().path(path);
+    }
 }
