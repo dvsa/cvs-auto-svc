@@ -635,7 +635,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[0]", "vehicleSubclass");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "a");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "lgv");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
     }
@@ -647,7 +647,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 1);
         vehicleTechnicalRecordsSteps.fieldInPathShouldExist("[0].techRecord[0]", "vehicleSubclass");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "string");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleSubclass[0]", "a");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "car");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }

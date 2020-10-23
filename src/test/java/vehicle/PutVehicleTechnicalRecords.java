@@ -2061,7 +2061,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 120, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
