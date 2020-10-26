@@ -30,7 +30,6 @@ import static util.WriterReader.saveUtils;
 public class PutVehicleAdrFieldRestrictions {
 
     static String randomVin;
-    static String putRequestBodyHgv;
 
     @BeforeClass
     public static void createRecord() {
@@ -46,15 +45,11 @@ public class PutVehicleAdrFieldRestrictions {
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
-        // create alteration to add adr documents
-        JsonPathAlteration alterationAddDocuments = new JsonPathAlteration("$.techRecord[0].adrDetails",
-                "[ \"document\"]", "documents", "ADD_FIELD");
 
         // initialize the alterations list with both declared alterations
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationAddDocuments));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBodyHgv, alterations);
-        putRequestBodyHgv = alteredBody;
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
@@ -157,6 +152,8 @@ public class PutVehicleAdrFieldRestrictions {
     @Title("CVSB-10155 - AC1 - Attempt to update a vehicle with unexpected values for an ADR field that accepts only specific values")
     @Test
     public void testValidateAdrAttributesDataTypesAndRestrictions() {
+
+        String putRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records-put_hgv_all_fields_with_adr_details.json", "$");
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, value, "", "REPLACE");
         JsonPathAlteration alterationAStatusCode = new JsonPathAlteration("$.techRecord[0]", "provisional","statusCode","ADD_FIELD");

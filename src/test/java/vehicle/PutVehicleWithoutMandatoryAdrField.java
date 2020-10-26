@@ -31,7 +31,6 @@ import static util.WriterReader.saveUtils;
 public class PutVehicleWithoutMandatoryAdrField extends TestCase {
 
     static String randomVin;
-    static String putRequestBodyHgv;
 
     @BeforeClass
     public static void createRecord() {
@@ -47,15 +46,12 @@ public class PutVehicleWithoutMandatoryAdrField extends TestCase {
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm, "", "REPLACE");
-        // create alteration to add adr documents
-        JsonPathAlteration alterationAddDocuments = new JsonPathAlteration("$.techRecord[0].adrDetails",
-                "[ \"document\"]", "documents", "ADD_FIELD");
 
         // initialize the alterations list with both declared alterations
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationAddDocuments));
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBodyHgv, alterations);
-        putRequestBodyHgv = alteredBody;
+        //putRequestBodyHgv = alteredBody;
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
@@ -110,6 +106,7 @@ public class PutVehicleWithoutMandatoryAdrField extends TestCase {
     @Title("CVSB-10155 - AC1 - Attempt to update a vehicle without a mandatory adr field")
     @Test
     public void testValidatePutRequestWithoutMandatoryHgvAttribute() {
+        String putRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records-put_hgv_all_fields_with_adr_details.json", "$");
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, "", "", "DELETE");
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction));
         vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBodyHgv, alterations);
