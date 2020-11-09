@@ -820,7 +820,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("odometerReading", "is mandatory");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - odometerReading")
     public void testResultsNullOdometerReading() {
 
@@ -849,7 +848,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("odometerReadingUnits", "is mandatory");
     }
 
-    @Ignore ("Defect - CVSB-11496")
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - odometerReadingUnits")
     public void testResultsNullOdometerReadingUnits() {
 
@@ -857,8 +856,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("odometerReadingUnits", "must be one of [kilometres, miles]");
     }
-
-
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - odometerReadingUnits")
     @Test
@@ -879,7 +876,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("odometerReadingUnits", "must be one of [kilometres, miles, null]");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - odometerReadingUnits empty")
     public void testResultsOdometerReadingUnitsEmpty() {
 
@@ -955,7 +951,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("euVehicleCategory", "is mandatory");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - euVehicleCategory")
     public void testResultsNullEuVehicleCategory() {
 
@@ -986,7 +981,6 @@ public class PostTestResultsNegMainLvlSubmitted {
                 "n2, n3, o1, o2, o3, o4, l1e-a, l1e, l2e, l3e, l4e, l5e, l6e, l7e, null]");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - euVehicleCategory empty")
     public void testResultsValueEuVehicleCategoryEmpty() {
 
@@ -1005,7 +999,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("countryOfRegistration", "is mandatory");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - countryOfRegistration")
     public void testResultsNullCountryOfRegistration() {
 
@@ -1014,7 +1007,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("countryOfRegistration", "must be a string");
     }
 
-    @Ignore ("Defect - CVSB-11496")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - countryOfRegistration")
     public void testResultsIntegerCountryOfRegistration() {
 
@@ -1071,18 +1063,14 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("vehicleSize", "must be one of [small, large]");
     }
 
-
-    @Ignore ("Defect - CVSB-11495")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testTypes")
     public void testResultsTestTypesAsNull() {
 
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVrm(VRM).setTestTypes(null).build());
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypes", "must be an array");
-
     }
 
-    @Ignore ("Defect - CVSB-11495")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testTypes")
     public void testResultsTestTypesMissing() {
 

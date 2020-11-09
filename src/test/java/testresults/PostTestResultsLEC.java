@@ -448,7 +448,7 @@ public class PostTestResultsLEC {
         testResultsSteps.validateErrorText("Fuel Type not present on LEC test type");
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7523 is merged")
     @Title("CVSB-7523 - AC2 - LEC Certificate number is populated using testNumber service - PSV")
     public void testResults_LEC_PSV_Pass_Certificate_Number() {
 
@@ -487,7 +487,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7523 is merged")
     @Title("CVSB-7523 - AC2 - LEC Certificate number is populated using testNumber service - HGV")
     public void testResults_LEC_HGV_Pass_Certificate_Number() {
 
@@ -526,7 +526,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (PASS) - LEC with linked test - HGV")
     public void testResults_LEC_Linked_Test_HGV_Pass_Certificate_Number() {
 
@@ -565,7 +565,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (PASS) - LEC not linked test - HGV")
     public void testResults_LEC_not_Linked_Test_HGV_Pass_Certificate_Number() {
 
@@ -604,7 +604,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (PASS) - linked test - PSV")
     public void testResults_LEC_Linked_Test_PSV_Pass_Certificate(){
 
@@ -643,7 +643,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (PASS) - not linked test - PSV")
     public void testResults_LEC_not_Linked_Test_PSV_Pass(){
 
@@ -682,7 +682,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC12 - Generate certificate (FAIL) - linked test - HGV")
     public void testResults_LEC_Linked_Test_HGV_Fail_Certificate_Number() {
 
@@ -721,7 +721,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (FAIL) - LEC not linked test - HGV")
     public void testResults_LEC_not_Linked_Test_HGV_Fail_Certificate_Num() {
 
@@ -761,7 +761,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (FAIL) - linked test - PSV")
     public void testResults_LEC_Linked_Test_PSV_Fail_Certificate_Number(){
 
@@ -800,7 +800,7 @@ public class PostTestResultsLEC {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Remove the ignore annotation after defect CVSB-16679 is resolved")
+    @Ignore("Till CVSB-7521 is merged")
     @Title("CVSB-7521 - TC - AC1 - Generate certificate (FAIL) - not linked test - PSV")
     public void testResults_LEC_not_Linked_Test_PSV_Fail_Certificate_Number(){
 

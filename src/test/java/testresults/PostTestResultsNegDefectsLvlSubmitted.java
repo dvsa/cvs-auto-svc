@@ -217,7 +217,8 @@ public class PostTestResultsNegDefectsLvlSubmitted {
     @Test
     public void testResultsRandomAlphabeticStringDeficiencySubId() {
 
-        String propertyValue = RandomStringUtils.randomAlphabetic(2).toLowerCase();
+        //String propertyValue = RandomStringUtils.randomAlphabetic(2).toLowerCase();
+        String propertyValue = generateRandomExcludingValues(2,"m","d","c","l","x","v","i").toLowerCase();
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "deficiencySubId", propertyValue, ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
         testResultsSteps.statusCodeShouldBe(400);

@@ -5,12 +5,9 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
-import net.thucydides.junit.annotations.TestData;
 import net.thucydides.junit.annotations.UseTestDataFrom;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -335,7 +332,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
     }
 
     @WithTag("expiry_dates")
-    @Title("(Defect CVSB-17637 for p4t4, p7t2) CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is one month before FirstUseDate Anniversary")
+    @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is one month before FirstUseDate Anniversary")
     @Test
     public void testResultsFirstTestExpiryTrlTodayIsInMonthBeforeRegAnniversary() {
 

@@ -14,6 +14,7 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
+@Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsProvisionalUpdateFirstTestTrl {
 
@@ -44,7 +45,6 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
         this.testTypeId = testTypeId;
     }
 
-    @Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - TRL")
     public void testResultsProvisionalUpdateTrl() {
 

@@ -1,17 +1,13 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,7 +87,6 @@ public class PostTestResultsRoadworthiness {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Until the defect CVSB-12108 is solved")
     @Title("CVSB-7675 - TC3 - Negative (HGV) - FAIL")
     public void testResults_Roadworthiness_HGV_Fail_Certificate_Number() {
 
@@ -122,7 +117,6 @@ public class PostTestResultsRoadworthiness {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", null);
     }
 
-    @Ignore("Until the defect CVSB-12108 is solved")
     @Title("CVSB-7675 - TC4 - Negative (TRL) - FAIL")
     public void testResults_Roadworthiness_TRL_Fail_Certificate_Number() {
 

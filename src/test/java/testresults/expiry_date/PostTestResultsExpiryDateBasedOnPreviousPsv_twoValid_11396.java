@@ -97,7 +97,7 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_twoValid_11396 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("expiry_date")
+    @WithTag("expiry_dates")
     @Title("CVSB-11396 - As a VSA I want to be able to submit a test for which the expiry date is automatically calculated based on the previous test types history - two valid testCodes - PSV")
     @Test
     public void testResultsMostRecentExpiryBothValidOneExpiredPsv() {
@@ -180,8 +180,8 @@ public class PostTestResultsExpiryDateBasedOnPreviousPsv_twoValid_11396 {
         testResultsSteps.insertRecordInDynamo(alteredJsonOne, "test-results","vin");
 
         // Inserted expiryDate for test two
-        //DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
-        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(2);
+        DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(1).dayOfMonth().withMaximumValue();
+        //DateTime insertedTestExpiryDateTwo = currentTimestamp.plusMonths(2);
 
         // Create inserted record Two.
         DateTime insertedTestStartTimestampTwo = insertedTestExpiryDateTwo.minusYears(1).minusMinutes(15);
