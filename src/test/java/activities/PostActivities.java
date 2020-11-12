@@ -267,7 +267,7 @@ public class PostActivities {
         activitiesSteps.responseShouldContainId();
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesSteps.putActivitiesEnd(id);
-        activitiesSteps.statusCodeShouldBe(204);
+        activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         activitiesSteps.responseShouldContainId();

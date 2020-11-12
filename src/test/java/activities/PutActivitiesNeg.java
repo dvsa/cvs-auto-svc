@@ -55,11 +55,10 @@ public class PutActivitiesNeg {
         activitiesSteps.statusCodeShouldBe(201);
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesSteps.putActivitiesEnd(id);
-        activitiesSteps.statusCodeShouldBe(204);
+        activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.putActivitiesEnd(id);
-        activitiesSteps.statusCodeShouldBe(403);
-        activitiesSteps.validateActivityErrorMessage("Activity already ended");
-
+        activitiesSteps.statusCodeShouldBe(200);
+        activitiesSteps.valueForFieldInPathShouldBe("wasVisitAlreadyClosed",true);
     }
 
     @Title("CVSB-179 / CVSB-4563 - API Consumer with ended activity ends a new activity")

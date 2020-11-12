@@ -27,7 +27,7 @@ public class PutActivities {
         activitiesSteps.responseShouldContainId();
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesSteps.putActivitiesEnd(id);
-        activitiesSteps.statusCodeShouldBe(204);
+        activitiesSteps.statusCodeShouldBe(200);
 
     }
 
@@ -42,12 +42,12 @@ public class PutActivities {
         activitiesSteps.responseShouldContainId();
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesSteps.putActivitiesEnd(id);
-        activitiesSteps.statusCodeShouldBe(204);
+        activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.postActivities(activitiesData);
         activitiesSteps.statusCodeShouldBe(201);
         id = activitiesSteps.checkAndGetResponseId();
         activitiesSteps.putActivitiesEnd(id);
-        activitiesSteps.statusCodeShouldBe(204);
+        activitiesSteps.statusCodeShouldBe(200);
 
     }
 

@@ -67,6 +67,12 @@ public class ActivitiesSteps {
     }
 
     @Step
+    public void valueForFieldInPathShouldBe(String path, boolean expectedValue) {
+        System.out.println("Verifying that " + path + " has value " + expectedValue);
+        response.then().body(path, equalTo(expectedValue));
+    }
+
+    @Step
     public int statusCodeShouldBeOkOrNotFound() {
         response.then().log().all()
                 .statusCode(anyOf(is(200),is(404)));
