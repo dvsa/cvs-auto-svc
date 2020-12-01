@@ -39,7 +39,7 @@
       "smokeTestKLimitApplied": null,
       "testAnniversaryDate": "2021-02-28T00:00:00.000Z",
       "testCode": "aav2",
-      "testExpiryDate": "2021-02-28T00:00:00.000Z",
+      "testExpiryDate": "2021-02-28T00:00:00.000234Z",
       "testNumber": "W01A25246",
       "testResult": "pass",
       "testTypeClassification": "Annual With Certificate",
