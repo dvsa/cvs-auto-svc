@@ -7,6 +7,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -311,8 +312,52 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationPNumber",testStationPNumberPost);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationType",testStationTypePost);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testerEmailAddress",testerEmailAddressPost);
+    }
 
+    @Title("CVSB - 17727 - To verify the cert is generated for a TRL with vin having spaces")
+    @Test
+    public void testCertGenerationForVinWithSpaces() {
 
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomVinWithSpecialCharacters = "B " + randomVin.substring(5);
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVinWithSpecialCharacters, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestName = new JsonPathAlteration("$.testTypes[0].name", "Annual test","","REPLACE");
+        JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "94","","REPLACE");
+        JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", "Annual test","","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "pass","","REPLACE");
+        JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", "3","","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationTestName,
+                alterationTestTypeId,
+                alterationTestTypeName,
+                alterationNoOfAxles,
+                alterationTestResult,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+        Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVinWithSpecialCharacters);
     }
 
 }
