@@ -1,0 +1,49 @@
+{
+  "testResultId":"7885af36-d1d3-453f-864b-b042dd9ae90e",
+  "testStationName":"Haag, Nitzsche and Grant",
+  "testStationPNumber":"78-7521984",
+  "testStationType":"atf",
+  "testerName":"Deepika Singh",
+  "testerStaffId":"d0b09235-7234-4bed-b628-e4c2a1fcb414",
+  "testerEmailAddress":"deepikasingh@dvsagov.onmicrosoft.com",
+  "testStartTimestamp":"2021-01-11T12:32:51.552Z",
+  "testEndTimestamp":"2021-01-11T12:34:36.763Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "trailerId":"D000001",
+  "systemNumber":"11000024",
+  "vin":"T12765432",
+  "vehicleClass":{
+    "description":"trailer",
+    "code":"t"
+  },
+  "vehicleType":"trl",
+  "vehicleConfiguration":"articulated",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"o1",
+  "countryOfRegistration":"gb",
+  "noOfAxles":3,
+  "numberOfWheelsDriven":null,
+  "testTypes":[
+    {
+      "name":"Retest",
+      "testTypeName":"Free loaded retest",
+      "testTypeId":"199",
+      "certificateNumber":null,
+      "secondaryCertificateNumber":null,
+      "testTypeStartTimestamp":"2021-01-11T12:34:28.394Z",
+      "testTypeEndTimestamp":"2021-01-11T12:34:37.665Z",
+      "testExpiryDate":null,
+      "testResult":"pass",
+      "prohibitionIssued":false,
+      "reasonForAbandoning":null,
+      "additionalCommentsForAbandon":null,
+      "additionalNotesRecorded":null,
+      "defects":[
+
+      ],
+      "customDefects":null
+    }
+  ]
+}
