@@ -1,9 +1,9 @@
 {
   "testResultId": "3",
   "testerStaffId": "15",
-  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
+  "testStartTimestamp": "2020-01-14T10:36:33.987Z",
   "odometerReadingUnits": "kilometres",
-  "testEndTimestamp": "2019-01-14T10:36:33.987Z",
+  "testEndTimestamp": "2020-01-14T10:36:33.987Z",
   "testStatus": "cancelled",
   "systemNumber":"10000003",
   "testTypes": [

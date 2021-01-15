@@ -262,7 +262,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-
     }
 
     @WithTag("Vtm")
