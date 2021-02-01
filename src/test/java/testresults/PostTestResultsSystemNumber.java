@@ -6,6 +6,8 @@ import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -360,4 +362,95 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVinWithSpecialCharacters);
     }
 
+    @Title("CVSB-18974 - Not able to submit the test for Free loaded retest - Without History")
+    @Test
+    public void testTestResultForFreeLoadedTestsWithoutHistory() {
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_free_loaded_tests_18974.json", "$");
+
+        DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSysNo
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
+
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
+    }
+
+    @Title("CVSB-18974 - Not able to submit the test for Free loaded retest - With History")
+    @Test
+    public void testTestResultForFreeLoadedTestsWithHistory() {
+
+        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_trl_5862.json", "$");
+
+        DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNo = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        DateTime insertedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1);
+        String insertTestExpiryDate = insertedTestExpiryDate.toInstant().toString();
+
+        JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationInsertSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
+        JsonPathAlteration alterationInsertTestResultId = new JsonPathAlteration("$.testResultId", UUID.randomUUID().toString(), "", "REPLACE");
+        JsonPathAlteration alterationInsertTestExpiryDate = new JsonPathAlteration("$.testTypes[0].testExpiryDate", insertTestExpiryDate, "", "REPLACE");
+
+        // Collate the list of alterations for the inserted record.
+        List<JsonPathAlteration> insertAlterations = new ArrayList<>(Arrays.asList(
+                alterationInsertVin,
+                alterationInsertTestResultId,
+                alterationInsertTestExpiryDate,
+                alterationInsertSysNo
+        ));
+
+        // Insert the altered record
+        String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
+        testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
+
+        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_free_loaded_tests_18974.json", "$");
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSysNo
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResultsSysNumber(randomSystemNo);
+        testResultsSteps.statusCodeShouldBe(200);
+        System.out.println("Expected expiryDate: " + expectedTestExpiryDate.substring(0,10));
+
+        testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
+    }
 }
