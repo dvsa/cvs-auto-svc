@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@Ignore("This is just an example of how to read json data from external file and insert it in a specific table using AWS SDK")
 @RunWith(SerenityRunner.class)
 public class InsertTestResultsInDynamo {
 

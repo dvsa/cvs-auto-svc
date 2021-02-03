@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
 
-
+@Ignore ("no data test")
 @RunWith(SerenityRunner.class)
 public class GetTestTypesNoData {
 

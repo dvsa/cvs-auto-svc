@@ -1,9 +1,6 @@
 package vehicle;
 
 import data.GenericData;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import model.testresults.TestVersion;
 import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -14,20 +11,16 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Ignore;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
-import util.BasePathFilter;
 import util.JsonPathAlteration;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static io.restassured.RestAssured.given;
-import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {

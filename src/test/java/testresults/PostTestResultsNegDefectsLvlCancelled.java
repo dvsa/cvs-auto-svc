@@ -2,6 +2,7 @@ package testresults;
 
 import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -12,7 +13,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
+import util.JsonPathAlteration;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -222,9 +226,20 @@ public class PostTestResultsNegDefectsLvlCancelled {
     @Test
     public void testResultsRandomAlphabeticStringDeficiencySubId() {
 
-        String propertyValue = generateRandomExcludingValues(2,"m","d","c","l","x","v","i").toLowerCase();
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
 
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).setTestResultId(generateRandomExcludingValues(5,vehicleCancelledData.build().getTestResultId())).build(), "deficiencySubId", propertyValue, ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
+        String propertyValue = generateRandomExcludingValues(2, "m", "d", "c", "l", "x", "v", "i").toLowerCase();
+
+        String randomVrm = GenericData.generateRandomVrm();
+
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationDeficiencySubId = new JsonPathAlteration("$.testTypes[0].defects[0].deficiencySubId", propertyValue, "", "REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVrm,
+                alterationDeficiencySubId));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("deficiencySubId", "with value \"" + propertyValue + "\" fails to match the required pattern: /^[mdclxvi]+$/");
     }
@@ -242,9 +257,20 @@ public class PostTestResultsNegDefectsLvlCancelled {
     @Test
     public void testResultsRandomInvalidLowerCaseDeficiencySubId() {
 
-        String propertyValue = generateRandomExcludingValues(1,"m","d","c","l","x","v","i").toLowerCase();
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
 
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "deficiencySubId", propertyValue, ToTypeConvertor.STRING, TestResultsLevel.DEFECTS);
+        String propertyValue = generateRandomExcludingValues(1, "m", "d", "c", "l", "x", "v", "i").toLowerCase();
+
+        String randomVrm = GenericData.generateRandomVrm();
+
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationDeficiencySubId = new JsonPathAlteration("$.testTypes[0].defects[0].deficiencySubId", propertyValue, "", "REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVrm,
+                alterationDeficiencySubId));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("deficiencySubId", "with value \"" + propertyValue + "\" fails to match the required pattern: /^[mdclxvi]+$/");
     }

@@ -27,7 +27,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-
+@Ignore
 @RunWith(SerenityParameterizedRunner.class)
 public class PutVehicleTrlFieldRestrictionsAdrUpdate {
 
