@@ -485,8 +485,8 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("testEndTimestamp", "must be a valid ISO 8601 date");
     }
 
-    //TODO - possible problem with gateway
-    @Ignore ("missing testStatus should have returned an error - instead returns bad Gateway - defect Id CVSB-9015")
+
+    @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testStatus")
     public void testResultsMissingTestStatus() {
 
@@ -496,8 +496,7 @@ public class PostTestResultsNegMainLvlSubmitted {
     }
 
 
-    //TODO - possible problem with gateway
-    @Ignore ("null testStatus should have returned an error - instead returns 502 - defect Id CVSB-9015")
+    @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStatus")
     public void testResultsNullTestStatus() {
 

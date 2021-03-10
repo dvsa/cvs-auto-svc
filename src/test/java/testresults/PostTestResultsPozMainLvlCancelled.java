@@ -538,7 +538,6 @@ public class PostTestResultsPozMainLvlCancelled {
     }
 
 
-    //TODO may not be needed
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType hgv")
     @Test
     public void testResultsValueVehicleTypeValueTwo() {
