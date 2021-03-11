@@ -31,7 +31,6 @@ public class GetVehicleTechnicalRecords {
     private Vehicle vehicleArchivedData = VehicleTechRecordsData.buildVehicleTechRecordsArchivedData();
     private Vehicle vehicleProvisionalData = VehicleTechRecordsData.buildVehicleTechRecordsProvisionalData();
 
-    Date date  = new Date();
 
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1157 - AC1 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - VRM")
@@ -106,7 +105,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -237,7 +235,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -249,7 +246,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -261,7 +257,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "current");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[0].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
     @WithTag("Vtm")
@@ -377,28 +372,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "psv" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional");
     }
-
-    //TODO HGV with BOTH Current and Provisional
-//    @WithTag("Vtm")
-//    @Title("CVSB-7051 - TC - AC2.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has both 'current' and 'provisional' technical records HGV")
-//    @Test
-//    public void testVehicleTechnicalRecordsStatusProvidedCurrentProvisionalHgv() {
-//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("270123", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "hgv" );
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
-//    }
-
-    //TODO TRL with BOTH Current and Provisional
-//    @WithTag("Vtm")
-//    @Title("CVSB-7051 - TC - AC2.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has both 'current' and 'provisional' technical records TRL")
-//    @Test
-//    public void testVehicleTechnicalRecordsStatusProvidedCurrentProvisionalTrl() {
-//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus("270123", VehicleTechnicalRecordStatus.PROVISIONAL_OVER_CURRENT);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].vehicleType", "trl" );
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].statusCode","provisional");
-//    }
 
     @WithTag("Vtm")
     @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) PSV")
