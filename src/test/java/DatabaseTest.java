@@ -1,10 +1,18 @@
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.testcontainers.containers.MySQLContainer;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.math.BigDecimal;
 import java.sql.*;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class DatabaseTest{
@@ -19,46 +27,34 @@ public class DatabaseTest{
     }
 
     @Test
-    public void VOTT8Tests() throws SQLException {
+    public void VOTT8Tests() throws SQLException, FileNotFoundException {
 
-        //Data Setup
-        String createTables = "CREATE TABLE EMPLOYEE"
-                + "("
-                + " ID serial,"
-                + " NAME varchar(100) NOT NULL,"
-                + " SALARY numeric(15, 2) NOT NULL,"
-                + " PRIMARY KEY (ID)"
-                + ")";
+        String insertData = "INSERT INTO vott_db.make_model (make, model) VALUES ('Ford', 'Focus' )";
 
-        String insertData = "INSERT INTO EMPLOYEE (NAME, SALARY) VALUES ('Rob', '123' ), ('Emanuel', '456' )";
-
-        String query = "SELECT * FROM EMPLOYEE";
+        String query = "SELECT * FROM vott_db.make_model";
 
         //Configure Connection
         Connection conn = null;
         conn = DriverManager.getConnection(Mysqldb.getJdbcUrl(),"test","test"); //Test Container address needed
 
+        ScriptRunner sr = new ScriptRunner(conn);
+        Reader sqlFile = new BufferedReader(new FileReader("C:\\Users\\robert.whitehouse\\Downloads\\CVS_DW_MOTH_schema (1).sql"));
         Statement stmt = conn.createStatement();
 
         //Run Query and catch results
-        stmt.execute(createTables);
-        System.out.println("Table Created");
+//        stmt.execute(createTables);
+        sr.runScript(sqlFile);
         stmt.executeUpdate(insertData);
-        System.out.println("Data inserted");
         ResultSet results = stmt.executeQuery(query);
-
-        System.out.println("SQL Queries Ran");
 
         while (results.next()){
             String name = results.getString("NAME");
             BigDecimal salary = results.getBigDecimal("SALARY");
-            System.out.println(name + " earns " + salary);
 
-            //assertEquals("Rob", name);
-            //assertEquals(123, salary);
+            assertThat(name, equalTo("Rob"));
+            assertThat(salary, equalTo(123.0));
+
         }
-
-        //assertEquals(1,anInt);
     }
 
     //Test Container Teardown
