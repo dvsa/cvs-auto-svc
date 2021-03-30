@@ -1,0 +1,71 @@
+{
+  "msUserDetails":{
+    "msUser":"catalin",
+    "msOid":"123243424-234234245"
+  },
+  "testResult":{
+    "countryOfRegistration":"bg",
+    "createdAt":"2021-04-01T10:09:55.698Z",
+    "createdById":"c26d6b02-49b2-456a-ac20-7435e9397bac",
+    "createdByName":"cvs.automation4@dvsagov.onmicrosoft.com",
+    "euVehicleCategory":"n2",
+    "noOfAxles":2,
+    "numberOfWheelsDriven":4,
+    "odometerReading":5000,
+    "odometerReadingUnits":"kilometres",
+    "preparerId":"BL5545",
+    "preparerName":"Durrell Vehicles Limited",
+    "reasonForCancellation":null,
+    "reasonForCreation":"Test conducted",
+    "regnDate":"2019-06-24",
+    "systemNumber":"XZAIDURXJW7WCVJL",
+    "testEndTimestamp":"2020-03-02T14:45:06.915Z",
+    "testerEmailAddress":"cvs.test2@dvsagov.onmicrosoft.com",
+    "testerName":"cvs.automation4@dvsagov.onmicrosoft.com",
+    "testerStaffId":"c26d6b02-49b2-456a-ac20-7435e9397bac",
+    "testResultId":"6e6b65d9-390e-4836-b46a-83170cdb6f52",
+    "testStartTimestamp":"2020-03-02T14:42:05.280Z",
+    "testStationName":"Abshire-Kub",
+    "testStationPNumber":"09-4129632",
+    "testStationType":"gvts",
+    "testStatus":"submitted",
+    "testTypes":[
+      {
+        "additionalCommentsForAbandon":null,
+        "additionalNotesRecorded":null,
+        "certificateNumber":"W01A01838",
+        "createdAt":"2021-04-01T10:09:55.698Z",
+        "customDefects":[
+
+        ],
+        "defects":[
+
+        ],
+        "lastUpdatedAt":"2021-04-01T10:09:55.698Z",
+        "name":"First test",
+        "reasonForAbandoning":null,
+        "secondaryCertificateNumber":"123456",
+        "testAnniversaryDate":"2022-04-30T00:00:00.000Z",
+        "testCode":"ffv2",
+        "testExpiryDate":"2022-04-30T00:00:00.000Z",
+        "testNumber":"W01A01838",
+        "testResult":"pass",
+        "testTypeClassification":"Annual With Certificate",
+        "testTypeEndTimestamp":"2020-03-02T14:45:06.918Z",
+        "testTypeId":"95",
+        "testTypeName":"First test",
+        "testTypeStartTimestamp":"2020-03-02T14:44:49.957Z"
+      }
+    ],
+    "testVersion":"current",
+    "vehicleClass":{
+      "code":"v",
+      "description":"heavy goods vehicle"
+    },
+    "vehicleConfiguration":"semi-car transporter",
+    "vehicleId":"CT70HHH",
+    "vehicleType":"hgv",
+    "vin":"H5U8IFV3QA362170",
+    "vrm":"CT70HHH"
+  }
+}

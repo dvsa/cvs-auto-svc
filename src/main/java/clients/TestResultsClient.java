@@ -687,7 +687,7 @@ public class TestResultsClient {
                 try {
                     Properties properties = new Properties();
                     properties.load(Objects.requireNonNull(EnvironmentUtils.class.getClassLoader().getResourceAsStream("conf/environment.properties")));
-                    emailAddress = properties.getProperty("email.username");
+                    emailAddress = properties.getProperty("microsoftonline.username");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

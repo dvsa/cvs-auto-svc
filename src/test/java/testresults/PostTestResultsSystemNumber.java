@@ -453,4 +453,220 @@ public class PostTestResultsSystemNumber {
 
         testResultsSteps.valueForFieldInPathShouldStartWith("[0].testTypes[0].testExpiryDate", expectedTestExpiryDate.substring(0,10));
     }
+
+    @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - HGV")
+    @Test
+    public void testCreateTestResultGenerateCertHgv() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("testNumber is " +testNumber);
+
+        //Verify that the certificate is generated in S3 bucket
+        //testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - PSV")
+    @Test
+    public void testCreateTestResultGenerateCertPsv() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_annual_test.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("testNumber is " +testNumber);
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - TRL")
+    @Test
+    public void testCreateTestResultGenerateCertTrl() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_trl.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("testNumber is " +testNumber);
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - Car")
+    @Test
+    public void testCreateTestResultGenerateCertCar() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_car.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("testNumber is " +testNumber);
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsNotGenerated(testNumber,randomVin);
+    }
+
+    @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - Lgv")
+    @Test
+    public void testCreateTestResultGenerateCertLgv() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("testNumber is " +testNumber);
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsNotGenerated(testNumber,randomVin);
+    }
+
+    @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - Motorcycle")
+    @Test
+    public void testCreateTestResultGenerateCertMotorcycle() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle.json", "$");
+
+        String randomVin = GenericData.generateRandomVin();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomTestResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        testResultsSteps.getTestResults(randomSystemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        System.out.println("testNumber is " +testNumber);
+
+        //Verify that the certificate is generated in S3 bucket
+        testResultsSteps.validateCertificateIsNotGenerated(testNumber,randomVin);
+    }
 }

@@ -1,0 +1,56 @@
+{
+  "testResultId": "e9e48c29-a5de-436e-8530-93e49bec402e",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369561",
+  "testStationType": "gvts",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "testerEmailAddress": "cvs.test2@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2021-03-24T14:46:23.736Z",
+  "testEndTimestamp": "2021-03-24T15:46:23.736Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "testTypes": [
+    {
+      "name": "First test",
+      "testTypeName": "First test",
+      "testTypeId": "41",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2021-03-24T14:46:23.736Z",
+      "testTypeEndTimestamp": "2021-03-24T15:46:23.736Z",
+      "testExpiryDate": "2022-03-24T14:46:23.736Z",
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": [
+
+      ],
+      "customDefects": [
+        {
+          "referenceNumber": "2",
+          "defectName": "custom defect 2",
+          "defectNotes": "custom defects 2 notes"
+        }
+      ],
+      "secondaryCertificateNumber": "123456"
+    }
+  ],
+  "systemNumber": "10000003",
+  "vin": "GQDIQJBKHKQJIE691320",
+  "trailerId": "C530001",
+  "vehicleClass": {
+    "code": "3",
+    "description": "3 wheelers"
+  },
+  "vehicleConfiguration": "dolly",
+  "vehicleType": "trl",
+  "noOfAxles": 1,
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "numberOfWheelsDriven": 4,
+  "euVehicleCategory": "o2",
+  "countryOfRegistration": "not-known",
+  "firstUseDate": "2019-06-08"
+}
