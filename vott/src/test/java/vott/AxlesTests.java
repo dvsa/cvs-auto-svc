@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class MakeModelTests {
+public class AxlesTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -22,7 +22,7 @@ public class MakeModelTests {
     }
 
     @Test
-    public void MakeModelInsertExistingDataTest() throws SQLException {
+    public void AxlesInsertExistingDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
@@ -34,7 +34,7 @@ public class MakeModelTests {
         mm.setMakeModel(startingRS);
 
         String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                                                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
         int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
@@ -46,7 +46,7 @@ public class MakeModelTests {
     }
 
     @Test
-    public void MakeModelInsertNewDataTest() throws SQLException {
+    public void AxlesInsertNewDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
