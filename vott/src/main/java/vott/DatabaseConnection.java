@@ -21,11 +21,15 @@ public class DatabaseConnection {
         // Create connection to RDS DB instance
         conn = DriverManager.getConnection(jdbcUrl);
         // Create a table and write two rows
-        stmt = conn.createStatement();
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
     }
 
     public ResultSet dbQuery(String query) throws SQLException {
         return stmt.executeQuery(query);
+    }
+
+    public int dbUpdate(String query) throws SQLException {
+        return stmt.executeUpdate(query);
     }
 
 
