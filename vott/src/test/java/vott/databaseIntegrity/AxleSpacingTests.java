@@ -1,8 +1,9 @@
-package vott;
+package vott.databaseIntegrity;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.junit.Before;
 import org.junit.Test;
+import vott.DataMethods;
+import vott.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class FuelEmissionTests {
+public class AxleSpacingTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -22,7 +23,7 @@ public class FuelEmissionTests {
     }
 
     @Test
-    public void FuelEmissionInsertExistingDataTest() throws SQLException {
+    public void AxleSpacingInsertExistingDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
@@ -46,7 +47,7 @@ public class FuelEmissionTests {
     }
 
     @Test
-    public void FuelEmissionInsertNewDataTest() throws SQLException {
+    public void AxleSpacingInsertNewDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 

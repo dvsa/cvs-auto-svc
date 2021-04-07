@@ -1,8 +1,9 @@
-package vott;
+package vott.databaseIntegrity;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.junit.Before;
 import org.junit.Test;
+import vott.DataMethods;
+import vott.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class CustomDefectTests {
+public class DefectTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -22,7 +23,7 @@ public class CustomDefectTests {
     }
 
     @Test
-    public void CustomDefectInsertExistingDataTest() throws SQLException {
+    public void DefectInsertExistingDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
@@ -46,7 +47,7 @@ public class CustomDefectTests {
     }
 
     @Test
-    public void CustomDefectInsertNewDataTest() throws SQLException {
+    public void DefectInsertNewDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 

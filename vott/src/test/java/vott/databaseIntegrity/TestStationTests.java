@@ -1,8 +1,9 @@
-package vott;
+package vott.databaseIntegrity;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.junit.Before;
 import org.junit.Test;
+import vott.DataMethods;
+import vott.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class ADRTests {
+public class TestStationTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -22,7 +23,7 @@ public class ADRTests {
     }
 
     @Test
-    public void ADRInsertExistingDataTest() throws SQLException {
+    public void TestStationInsertDuplicateDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
@@ -30,11 +31,8 @@ public class ADRTests {
         int startingLength = DataMethods.getResultSetLength(startingRS);
         startingRS.first();
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
-
         String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+                "VALUES ('"+startingRS.getString("make") +"', '"+startingRS.getString("model") +"', '"+startingRS.getString("chassisMake") +"', '"+startingRS.getString("chassisModel") +"', '"+startingRS.getString("bodyMake") +"', '"+startingRS.getString("bodyModel") +"', '"+startingRS.getString("modelLiteral") +"', '"+startingRS.getString("bodyTypeCode") +"', '"+startingRS.getString("bodyTypeDescription") +"', '"+startingRS.getString("fuelPropulsionSystem") +"', '"+startingRS.getString("dtpCode") +"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
         int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
@@ -46,7 +44,7 @@ public class ADRTests {
     }
 
     @Test
-    public void ADRInsertNewDataTest() throws SQLException {
+    public void TestStationInsertNewDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
