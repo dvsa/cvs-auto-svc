@@ -1,7 +1,9 @@
-package vott;
+package vott.databaseIntegrity;
 
 import org.junit.Before;
 import org.junit.Test;
+import vott.DataMethods;
+import vott.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class TestResultTests {
+public class TestTypeTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -21,7 +23,7 @@ public class TestResultTests {
     }
 
     @Test
-    public void TestResultInsertDuplicateDataTest() throws SQLException {
+    public void TestTypeInsertDuplicateDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
@@ -42,7 +44,7 @@ public class TestResultTests {
     }
 
     @Test
-    public void TestResultInsertNewDataTest() throws SQLException {
+    public void TestTypeInsertNewDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 

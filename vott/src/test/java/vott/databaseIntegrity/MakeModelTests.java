@@ -1,7 +1,9 @@
-package vott;
+package vott.databaseIntegrity;
 
 import org.junit.Before;
 import org.junit.Test;
+import vott.DataMethods;
+import vott.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class VehicleClassTests {
+public class MakeModelTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -21,34 +23,38 @@ public class VehicleClassTests {
     }
 
     @Test
-    public void VehicleClassInsertDuplicateDataTest() throws SQLException {
+    public void MakeModelInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        //Create new MakeModel data object
+        MakeModel mm = new MakeModel();
 
-        ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        String allDataQuery = "SELECT * FROM make_model";
+        ResultSet startingRS = db.dbQuery(allDataQuery);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
+        //Capture data from first row of results
         startingRS.first();
+        mm.setMakeModel(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+startingRS.getString("make") +"', '"+startingRS.getString("model") +"', '"+startingRS.getString("chassisMake") +"', '"+startingRS.getString("chassisModel") +"', '"+startingRS.getString("bodyMake") +"', '"+startingRS.getString("bodyModel") +"', '"+startingRS.getString("modelLiteral") +"', '"+startingRS.getString("bodyTypeCode") +"', '"+startingRS.getString("bodyTypeDescription") +"', '"+startingRS.getString("fuelPropulsionSystem") +"', '"+startingRS.getString("dtpCode") +"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        //create insert query using first row from the DB
+        String insertQuery = mm.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        int update = db.dbUpdate(fingerprintQuery);
-        ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        ResultSet endRS = db.dbQuery(allDataQuery);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
 
     @Test
-    public void VehicleClassInsertNewDataTest() throws SQLException {
+    public void MakeModelInsertNewDataTest() throws SQLException {
 
         String query = "SELECT * FROM make_model";
 
         ResultSet startingRS = db.dbQuery(query);
         int startingLength = DataMethods.getResultSetLength(startingRS);
-        startingRS.first();
 
         String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
                 "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
