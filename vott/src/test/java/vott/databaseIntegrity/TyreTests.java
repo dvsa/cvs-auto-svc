@@ -23,22 +23,27 @@ public class TyreTests {
     }
 
     @Test
-    public void TyreInsertDuplicateDataTest() throws SQLException {
+    public void TyreInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        //Create new MakeModel data object
+        Tyre tyre = new Tyre();
 
-        ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        String allDataQuery = "SELECT * FROM tyre";
+        ResultSet startingRS = db.dbQuery(allDataQuery);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
+        //Capture data from first row of results
         startingRS.first();
+        tyre.setTyre(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+startingRS.getString("make") +"', '"+startingRS.getString("model") +"', '"+startingRS.getString("chassisMake") +"', '"+startingRS.getString("chassisModel") +"', '"+startingRS.getString("bodyMake") +"', '"+startingRS.getString("bodyModel") +"', '"+startingRS.getString("modelLiteral") +"', '"+startingRS.getString("bodyTypeCode") +"', '"+startingRS.getString("bodyTypeDescription") +"', '"+startingRS.getString("fuelPropulsionSystem") +"', '"+startingRS.getString("dtpCode") +"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        //create insert query using first row from the DB
+        String insertQuery = tyre.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        int update = db.dbUpdate(fingerprintQuery);
-        ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        ResultSet endRS = db.dbQuery(allDataQuery);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
@@ -46,25 +51,26 @@ public class TyreTests {
     @Test
     public void TyreInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM tyre";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
-        startingRS.first();
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO tyre( tyreSize, plyRating, fitmentCode, dataTrAxles, speedCategorySymbol, tyreCode ) " +
+                "VALUES ('test size', '', '', '', '', 0123456) " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength+1, equalTo(endLength));
+        assertThat(startingRowCount+1, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("tyre");
+        }
 
     }
 }

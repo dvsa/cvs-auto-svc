@@ -25,23 +25,25 @@ public class DefectTests {
     @Test
     public void DefectInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        //Create new MakeModel data object
+        Defect defect = new Defect();
 
-        ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        String allDataQuery = "SELECT * FROM defect";
+        ResultSet startingRS = db.dbQuery(allDataQuery);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
+        //Capture data from first row of results
         startingRS.first();
+        defect.setDefect(startingRS);
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
+        //create insert query using first row from the DB
+        String insertQuery = defect.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        ResultSet endRS = db.dbQuery(allDataQuery);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        int update = db.dbUpdate(fingerprintQuery);
-        ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
-
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
@@ -49,25 +51,25 @@ public class DefectTests {
     @Test
     public void DefectInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM defect";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
-        startingRS.first();
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-
-        int update = db.dbUpdate(fingerprintQuery);
+        String insertQuery = "INSERT INTO defect( imNumber, imDescription, itemNumber, itemDescription, deficiencyRef, deficiencyId, deficiencySubId, deficiencyCategory, deficiencyText, stdForProhibition ) " +
+                "VALUES ('12345', 'Test Description', '2', 'Test Description', NULL, NULL, NULL, NULL, NULL, '1') " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength+1, equalTo(endLength));
+        assertThat(startingRowCount+1, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("defect");
+        }
 
     }
 }

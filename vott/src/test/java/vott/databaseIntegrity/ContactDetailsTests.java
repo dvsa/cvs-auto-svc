@@ -25,19 +25,18 @@ public class ContactDetailsTests {
     @Test
     public void ContactDetailsInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        ContactDetails cd = new ContactDetails();
 
+        String query = "SELECT * FROM contact_details";
         ResultSet startingRS = db.dbQuery(query);
         int startingLength = DataMethods.getResultSetLength(startingRS);
+
         startingRS.first();
+        cd.setContactDetails(startingRS);
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
+        String insertQuery = cd.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-
-        int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
         int endLength = DataMethods.getResultSetLength(endRS);
 
@@ -49,15 +48,15 @@ public class ContactDetailsTests {
     @Test
     public void ContactDetailsInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM contact_details";
 
         ResultSet startingRS = db.dbQuery(query);
         int startingLength = DataMethods.getResultSetLength(startingRS);
         startingRS.first();
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-
+        String fingerprintQuery = "INSERT INTO contact_details( name, address1, address2, postTown, address3, postCode, emailAddress, telephoneNumber, faxNumber ) " +
+                                    "VALUES ('test name', '123 fake street', '', '', '', '', 'abc@test.com', '0123456', '') " +
+                                    "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
         int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
         int endLength = DataMethods.getResultSetLength(endRS);
@@ -66,8 +65,9 @@ public class ContactDetailsTests {
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("contact_details");
+        }
 
     }
 }

@@ -2,15 +2,25 @@ package vott.databaseIntegrity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class VehicleSubclass {
 
-    private String make;
+    private String vehicleClassID;
+    private String subclass;
 
-    public String getMake(){ return make;}
+    public String getVehicleClassID(){ return vehicleClassID;}
+    public String getSubclass(){ return subclass;}
 
-    public void setAxleSpacing(ResultSet rs) throws SQLException {
-        make = rs.getString("make");
+    public void setVehicleSubclass(ResultSet rs) throws SQLException {
+        this.vehicleClassID = Objects.toString(rs.getString("vehicle_class_id"), "");
+        this.subclass = Objects.toString(rs.getString("subclass"), "");
 
+    }
+
+    public String createInsertQuery(){
+        return "INSERT INTO vehicle_subclass( vehicle_class_id, subclass ) " +
+                "VALUES ('"+vehicleClassID+"', '"+subclass+"') " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
     }
 }

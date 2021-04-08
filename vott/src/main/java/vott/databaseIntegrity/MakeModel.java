@@ -2,6 +2,7 @@ package vott.databaseIntegrity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class MakeModel {
 
@@ -30,17 +31,17 @@ public class MakeModel {
     public String getDtpCode(){ return dtpCode;}
 
     public void setMakeModel(ResultSet rs) throws SQLException {
-        this.make = rs.getString("make");
-        this.model = rs.getString("model");
-        this.chassisMake = rs.getString("chassisMake");
-        this.chassisModel = rs.getString("chassisModel");
-        this.bodyMake = rs.getString("bodyMake");
-        this.bodyModel = rs.getString("bodyModel");
-        this.modelLiteral = rs.getString("modelLiteral");
-        this.bodyTypeCode = rs.getString("bodyTypeCode");
-        this.bodyTypeDescription = rs.getString("bodyTypeDescription");
-        this.fuelPropulsionSystem = rs.getString("fuelPropulsionSystem");
-        this.dtpCode = rs.getString("dtpCode");
+        this.make = Objects.toString(rs.getString("make"), "");
+        this.model = Objects.toString(rs.getString("model"), "");
+        this.chassisMake = Objects.toString(rs.getString("chassisMake"), "");
+        this.chassisModel = Objects.toString(rs.getString("chassisModel"), "");
+        this.bodyMake = Objects.toString(rs.getString("bodyMake"), "");
+        this.bodyModel = Objects.toString(rs.getString("bodyModel"), "");
+        this.modelLiteral = Objects.toString(rs.getString("modelLiteral"), "");
+        this.bodyTypeCode = Objects.toString(rs.getString("bodyTypeCode"), "");
+        this.bodyTypeDescription = Objects.toString(rs.getString("bodyTypeDescription"), "");
+        this.fuelPropulsionSystem = Objects.toString(rs.getString("fuelPropulsionSystem"), "");
+        this.dtpCode = Objects.toString(rs.getString("dtpCode"), "");
     }
 
     public String createInsertQuery(){

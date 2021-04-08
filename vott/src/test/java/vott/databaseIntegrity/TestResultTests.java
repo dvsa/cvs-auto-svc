@@ -23,22 +23,24 @@ public class TestResultTests {
     }
 
     @Test
-    public void TestResultInsertDuplicateDataTest() throws SQLException {
+    public void TestResultInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        TestResult tr = new TestResult();
+        String query = "SELECT * FROM test_result";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
         startingRS.first();
+        tr.setTestResult(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+startingRS.getString("make") +"', '"+startingRS.getString("model") +"', '"+startingRS.getString("chassisMake") +"', '"+startingRS.getString("chassisModel") +"', '"+startingRS.getString("bodyMake") +"', '"+startingRS.getString("bodyModel") +"', '"+startingRS.getString("modelLiteral") +"', '"+startingRS.getString("bodyTypeCode") +"', '"+startingRS.getString("bodyTypeDescription") +"', '"+startingRS.getString("fuelPropulsionSystem") +"', '"+startingRS.getString("dtpCode") +"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = tr.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
@@ -46,16 +48,17 @@ public class TestResultTests {
     @Test
     public void TestResultInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM test_result";
 
         ResultSet startingRS = db.dbQuery(query);
         int startingLength = DataMethods.getResultSetLength(startingRS);
         startingRS.first();
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO .`test_result` (`vehicle_id`,`fuel_emission_id`,`test_station_id`,`tester_id`,`preparer_id`,`vehicle_class_id`,`test_type_id`,`testStatus`,`reasonForCancellation`,`numberOfSeats`,`odometerReading`,`odometerReadingUnits`,`countryOfRegistration`,`noOfAxles`,`regnDate`,`firstUseDate`,`createdAt`,`lastUpdatedAt`,`testCode`,`testNumber`,`certificateNumber`,`secondaryCertificateNumber`,`testExpiryDate`,`testAnniversaryDate`,`testTypeStartTimestamp`,`testTypeEndTimestamp`,`numberOfSeatbeltsFitted`,`lastSeatbeltInstallationCheckDate`,`seatbeltInstallationCheckDate`,`testResult`,`reasonForAbandoning`,`additionalNotesRecorded`,`additionalCommentsForAbandon`,`particulateTrapFitted`,`particulateTrapSerialNumber`,`modificationTypeUsed`,`smokeTestKLimitApplied`,`createdBy_Id`,`lastUpdatedBy_Id`) " +
+                "VALUES (1,1,1,1,1,1,1,'Submitted','null',3,0,'Test','UK',2,NULL,NULL,NULL,NULL,'abc','A12B34567','A12B34567','A12B34567',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1) " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
         int endLength = DataMethods.getResultSetLength(endRS);
 
@@ -63,8 +66,9 @@ public class TestResultTests {
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("test_result");
+        }
 
     }
 }
