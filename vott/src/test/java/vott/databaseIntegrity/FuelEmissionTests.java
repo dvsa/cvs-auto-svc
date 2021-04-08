@@ -25,23 +25,22 @@ public class FuelEmissionTests {
     @Test
     public void FuelEmissionInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        FuelEmissions fe = new FuelEmissions();
 
+        String query = "SELECT * FROM fuel_emission";
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
         startingRS.first();
+        fe.setFuelEmissions(startingRS);
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
+        String insertQuery = fe.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-
-        int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
@@ -49,25 +48,27 @@ public class FuelEmissionTests {
     @Test
     public void FuelEmissionInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM fuel_emission";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
         startingRS.first();
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO fuel_emission( modTypeCode, description, emissionStandard, fuelType ) " +
+                "VALUES ('', 'Test Description', '', '') " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength+1, equalTo(endLength));
+        assertThat(startingRowCount+1, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("fuel_emission");
+        }
 
     }
 }

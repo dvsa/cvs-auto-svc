@@ -25,20 +25,20 @@ public class PlateTests {
     @Test
     public void PlateInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        Plate plate = new Plate();
 
-        ResultSet startingRS = db.dbQuery(query);
+        String allDataQuery = "SELECT * FROM plate";
+        ResultSet startingRS = db.dbQuery(allDataQuery);
         int startingLength = DataMethods.getResultSetLength(startingRS);
+
+        //Capture data from first row of results
         startingRS.first();
+        plate.setPlate(startingRS);
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
+        String insertQuery = plate.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-
-        int update = db.dbUpdate(fingerprintQuery);
-        ResultSet endRS = db.dbQuery(query);
+        ResultSet endRS = db.dbQuery(allDataQuery);
         int endLength = DataMethods.getResultSetLength(endRS);
 
         assertThat(startingLength, equalTo(endLength));
@@ -49,16 +49,17 @@ public class PlateTests {
     @Test
     public void PlateInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM plate";
 
         ResultSet startingRS = db.dbQuery(query);
         int startingLength = DataMethods.getResultSetLength(startingRS);
         startingRS.first();
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO plate( technical_record_id, plateSerialNumber, plateIssueDate, plateReasonForIssue, plateIssuer) " +
+                "VALUES ('1', '123456', '2100-12-31', 'Test Data', 'Tester') " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
         int endLength = DataMethods.getResultSetLength(endRS);
 
@@ -66,8 +67,9 @@ public class PlateTests {
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("plate");
+        }
 
     }
 }

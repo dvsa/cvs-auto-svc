@@ -25,23 +25,25 @@ public class ADRTests {
     @Test
     public void ADRInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        //Create new MakeModel data object
+        ADR adr = new ADR();
 
-        ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        String allDataQuery = "SELECT * FROM adr";
+        ResultSet startingRS = db.dbQuery(allDataQuery);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
+        //Capture data from first row of results
         startingRS.first();
+        adr.setADR(startingRS);
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
+        //create insert query using first row from the DB
+        String insertQuery = adr.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        ResultSet endRS = db.dbQuery(allDataQuery);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        int update = db.dbUpdate(fingerprintQuery);
-        ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
-
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
@@ -49,25 +51,26 @@ public class ADRTests {
     @Test
     public void ADRInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM adr";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
-        startingRS.first();
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO adr (`technical_record_id`,`type`,`approvalDate`,`listStatementApplicable`,`batteryListNumber`,`declarationsSeen`,`brakeDeclarationsSeen`,`brakeDeclarationIssuer`,`brakeEndurance`,`weight`,`compatibilityGroupJ`,`additionalExaminerNotes`,`applicantDetailsName`,`street`,`town`,`city`,`postcode`,`memosApply`,`adrTypeApprovalNo`,`adrCertificateNotes`,`tankManufacturer`,`yearOfManufacture`,`tankCode`,`specialProvisions`,`tankManufacturerSerialNo`,`tankTypeAppNo`,`tc2Type`,`tc2IntermediateApprovalNo`,`tc2IntermediateExpiryDate`,`substancesPermitted`,`statement`,`productListRefNo`,`productList`) " +
+                "VALUES (1, 'Test Type', '2100-12-31', NULL, NULL, 1, 1, 1, 1, '1400', NULL, 'Test Examiner Notes', 'Automation Tester', 'Test Street', 'Test Town', 'Test City', 'Test Code', 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL) " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength+1, equalTo(endLength));
+        assertThat(startingRowCount+1, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("adr");
+        }
 
     }
 }

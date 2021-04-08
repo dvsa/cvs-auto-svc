@@ -23,48 +23,54 @@ public class TechnicalRecordTests {
     }
 
     @Test
-    public void TechnicalRecordInsertDuplicateDataTest() throws SQLException {
+    public void TechnicalRecordInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        //Create new MakeModel data object
+        TechnicalRecord tr = new TechnicalRecord();
 
-        ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        String allDataQuery = "SELECT * FROM technical_record";
+        ResultSet startingRS = db.dbQuery(allDataQuery);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
+        //Capture data from first row of results
         startingRS.first();
+        tr.setTechnicalRecord(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+startingRS.getString("make") +"', '"+startingRS.getString("model") +"', '"+startingRS.getString("chassisMake") +"', '"+startingRS.getString("chassisModel") +"', '"+startingRS.getString("bodyMake") +"', '"+startingRS.getString("bodyModel") +"', '"+startingRS.getString("modelLiteral") +"', '"+startingRS.getString("bodyTypeCode") +"', '"+startingRS.getString("bodyTypeDescription") +"', '"+startingRS.getString("fuelPropulsionSystem") +"', '"+startingRS.getString("dtpCode") +"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        //create insert query using first row from the DB
+        String insertQuery = tr.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        int update = db.dbUpdate(fingerprintQuery);
-        ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        ResultSet endRS = db.dbQuery(allDataQuery);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
 
-    @Test
+
     public void TechnicalRecordInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM technical_record";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
-        startingRS.first();
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO `technical_record` (`vehicle_id`,`recordCompleteness`,`createdAt`,`lastUpdatedAt`,`make_model_id`,`functionCode`,`offRoad`,`numberOfWheelsDriven`,`emissionsLimit`,`departmentalVehicleMarker`,`alterationMarker`,`vehicle_class_id`,`variantVersionNumber`,`grossEecWeight`,`trainEecWeight`,`maxTrainEecWeight`,`applicant_detail_id`,`purchaser_detail_id`,`manufacturer_detail_id`,`manufactureYear`,`regnDate`,`firstUseDate`,`coifDate`,`ntaNumber`,`coifSerialNumber`,`coifCertifierName`,`approvalType`,`approvalTypeNumber`,`variantNumber`,`conversionRefNo`,`seatsLowerDeck`,`seatsUpperDeck`,`standingCapacity`,`speedRestriction`,`speedLimiterMrk`,`tachoExemptMrk`,`dispensations`,`remarks`,`reasonForCreation`,`statusCode`,`unladenWeight`,`grossKerbWeight`,`grossLadenWeight`,`grossGbWeight`,`grossDesignWeight`,`trainGbWeight`,`trainDesignWeight`,`maxTrainGbWeight`,`maxTrainDesignWeight`,`maxLoadOnCoupling`,`frameDescription`,`tyreUseCode`,`roadFriendly`,`drawbarCouplingFitted`,`euroStandard`,`suspensionType`,`couplingType`,`length`,`height`,`width`,`frontAxleTo5thWheelMin`,`frontAxleTo5thWheelMax`,`frontAxleTo5thWheelCouplingMin`,`frontAxleTo5thWheelCouplingMax`,`frontAxleToRearAxle`,`rearAxleToRearTrl`,`couplingCenterToRearAxleMin`,`couplingCenterToRearAxleMax`,`couplingCenterToRearTrlMin`,`couplingCenterToRearTrlMax`,`centreOfRearmostAxleToRearOfTrl`,`notes`,`purchaserNotes`,`manufacturerNotes`,`noOfAxles`,`brakeCode`,`brakes_dtpNumber`,`brakes_loadSensingValve`,`brakes_antilockBrakingSystem`,`createdBy_Id`,`lastUpdatedBy_Id`,`updateType`,`numberOfSeatbelts`,`seatbeltInstallationApprovalDate`) " +
+//                "VALUES ('"+vehicleID+"', '"+recordCompleteness+"', '"+createdAt+"', '"+lastUpdatedAt+"', '"+makeModelID+"', '"+functionCode+"', '"+offRoad+"', '"+numberOfWheelsDriven+"', '"+emissionsLimit+"', '"+departmentalVehicleMarker+"', '"+alterationMarker+"', '"+vehicleClassID+"', '"+variantVersionNumber+"', '"+grossEecWeight+"', '"+trainEecWeight+"', '"+maxTrainEecWeight+"', '"+applicantDetailID+"', '"+purchaserDetailID+"', '"+manufacturerDetailID+"', '"+manufactureYear+"', '"+regnDate+"', '"+firstUseDate+"', '"+coifDate+"', '"+ntaNumber+"', '"+coifSerialNumber+"', '"+coifCertifierName+"', '"+approvalType+"', '"+approvalTypeNumber+"', '"+variantNumber+"', '"+conversionRefNo+"', '"+seatsLowerDeck+"', '"+seatsUpperDeck+"', '"+standingCapacity+"', '"+speedRestriction+"', '"+speedLimiterMrk+"', '"+tachoExemptMrk+"', '"+dispensations+"', '"+remarks+"', '"+reasonForCreation+"', '"+statusCode+"', '"+unladenWeight+"', '"+grossKerbWeight+"', '"+grossLadenWeight+"', '"+grossGbWeight+"', '"+grossDesignWeight+"', '"+trainGbWeight+"', '"+trainDesignWeight+"', '"+maxTrainGbWeight+"', '"+maxTrainDesignWeight+"', '"+maxLoadOnCoupling+"', '"+frameDescription+"', '"+tyreUseCode+"', '"+roadFriendly+"', '"+drawbarCouplingFitted+"', '"+euroStandard+"', '"+suspensionType+"', '"+couplingType+"', '"+length+"', '"+height+"', '"+width+"', '"+frontAxleTo5thWheelMin+"', '"+frontAxleTo5thWheelMax+"', '"+frontAxleTo5thWheelCouplingMin+"', '"+frontAxleTo5thWheelCouplingMax+"', '"+frontAxleToRearAxle+"', '"+rearAxleToRearTrl+"', '"+couplingCenterToRearAxleMin+"', '"+couplingCenterToRearAxleMax+"', '"+couplingCenterToRearTrlMin+"', '"+couplingCenterToRearTrlMax+"', '"+centreOfRearmostAxleToRearOfTrl+"', '"+notes+"', '"+purchaserNotes+"', '"+manufacturerNotes+"', '"+noOfAxles+"', '"+brakeCode+"', '"+brakes_dtpNumber+"', '"+brakes_loadSensingValve+"', '"+brakes_antilockBrakingSystem+"', '"+createdByID+"', '"+lastUpdatedByID+"', '"+updateType+"', '"+numberOfSeatbelts+"', '"+seatbeltInstallationApprovalDate+"') " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength+1, equalTo(endLength));
+        assertThat(startingRowCount+1, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("technical_record");
+        }
 
     }
 }

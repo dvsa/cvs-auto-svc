@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class TestDefectTests {
+public class TesterTests {
 
     private DatabaseConnection db =  new DatabaseConnection();
 
@@ -23,21 +23,21 @@ public class TestDefectTests {
     }
 
     @Test
-    public void TestDefectInsertExistingDataTest() throws SQLException {
+    public void TesterInsertExistingDataTest() throws SQLException {
 
         //Create new MakeModel data object
-        TestDefect td = new TestDefect();
+        Tester tester = new Tester();
 
-        String allDataQuery = "SELECT * FROM test_defect";
+        String allDataQuery = "SELECT * FROM tester";
         ResultSet startingRS = db.dbQuery(allDataQuery);
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
         //Capture data from first row of results
         startingRS.first();
-        td.setTestDefect(startingRS);
+        tester.setMakeModel(startingRS);
 
         //create insert query using first row from the DB
-        String insertQuery = td.createInsertQuery();
+        String insertQuery = tester.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
         ResultSet endRS = db.dbQuery(allDataQuery);
@@ -49,16 +49,17 @@ public class TestDefectTests {
     }
 
     @Test
-    public void TestDefectInsertNewDataTest() throws SQLException {
+    public void TesterInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM test_defect";
+        String query = "SELECT * FROM tester";
 
         ResultSet startingRS = db.dbQuery(query);
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
-        String insertQuery = "INSERT INTO test_defect( test_result_id, defect_id, location_id, notes, prs, prohibitionIssued ) " +
-                "VALUES (1, 1, 1, 'Test Notes', null , 1 ) " +
+        String insertQuery = "INSERT INTO tester( staffId, name, email_address ) " +
+                "VALUES ('ABC123', 'Automation Tester', 'Tester@automation.com') " +
                 "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+
         int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
         int endRowCount = DataMethods.getResultSetLength(endRS);
@@ -67,8 +68,9 @@ public class TestDefectTests {
         assertThat(update, equalTo(1));
 
         //data Clean Up
+        //data Clean Up
         if (update == 1){
-            db.deleteLastEntry("test_defect");
+            db.deleteLastEntry("tester");
         }
 
     }

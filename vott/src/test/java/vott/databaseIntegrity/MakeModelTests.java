@@ -54,21 +54,23 @@ public class MakeModelTests {
         String query = "SELECT * FROM make_model";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
+                "VALUES ('test_make', 'test_model', NULL, '', '', '', '', '', 'test_description', '', '') " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength+1, equalTo(endLength));
+        assertThat(startingRowCount+1, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("make_model");
+        }
 
     }
 }

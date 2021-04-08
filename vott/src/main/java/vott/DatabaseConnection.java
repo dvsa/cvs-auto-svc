@@ -32,5 +32,18 @@ public class DatabaseConnection {
         return stmt.executeUpdate(query);
     }
 
+    public void deleteLastEntry(String tableName) throws SQLException {
+        DatabaseConnection db =  new DatabaseConnection();
+        db.AWSConnection();
+
+        String selectQuery = "SELECT * FROM " + tableName + " ORDER BY id DESC LIMIT 1";
+        ResultSet rs = db.dbQuery(selectQuery);
+        rs.first();
+        int id = rs.getInt("id");
+
+        String deleteQuery = "DELETE FROM " + tableName + " WHERE id = '" + id +"'";
+        db.dbUpdate(deleteQuery);
+    }
+
 
 }

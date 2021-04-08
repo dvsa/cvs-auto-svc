@@ -25,23 +25,22 @@ public class AxlesTests {
     @Test
     public void AxlesInsertExistingDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        Axle axle = new Axle();
+        String query = "SELECT * FROM axles";
 
         ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
+
         startingRS.first();
+        axle.setAxle(startingRS);
 
-        MakeModel mm = new MakeModel();
-        mm.setMakeModel(startingRS);
+        String insertQuery = axle.createInsertQuery();
+        int update = db.dbUpdate(insertQuery);
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('"+mm.getMake()+"', '"+mm.getModel()+"', '"+mm.getChassisMake()+"', '"+mm.getChassisModel()+"', '"+mm.getBodyMake()+"', '"+mm.getBodyModel()+"', '"+mm.getModelLiteral()+"', '"+mm.getBodyTypeCode()+"', '"+mm.getBodyTypeDescription()+"', '"+mm.getFuelPropulsionSystem()+"', '"+mm.getDtpCode()+"') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-
-        int update = db.dbUpdate(fingerprintQuery);
         ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+         assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }
@@ -49,16 +48,17 @@ public class AxlesTests {
     @Test
     public void AxlesInsertNewDataTest() throws SQLException {
 
-        String query = "SELECT * FROM make_model";
+        String query = "SELECT * FROM axles";
 
         ResultSet startingRS = db.dbQuery(query);
         int startingLength = DataMethods.getResultSetLength(startingRS);
         startingRS.first();
 
-        String fingerprintQuery = "INSERT INTO make_model( make, model, chassisMake, chassisModel, bodyMake, bodyModel, modelLiteral, bodyTypeCode, bodyTypeDescription, fuelPropulsionSystem, dtpCode ) " +
-                "VALUES ('test_make', 'test_model', '', '', '', '', '', '', 'test_description', '', '') ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+        String insertQuery = "INSERT INTO axles( technical_record_id, tyre_id, axleNumber, parkingBrakeMrk, kerbWeight, ladenWeight, gbWeight, eecWeight, designWeight, brakeActuator, leverLength, springBrakeParking ) " +
+                "VALUES (1, 2, 1234, 1, NULL, NULL, 1000, NULL, 1200, 100, 50, 1) " +
+                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
-        int update = db.dbUpdate(fingerprintQuery);
+        int update = db.dbUpdate(insertQuery);
         ResultSet endRS = db.dbQuery(query);
         int endLength = DataMethods.getResultSetLength(endRS);
 
@@ -66,8 +66,9 @@ public class AxlesTests {
         assertThat(update, equalTo(1));
 
         //data Clean Up
-        String deleteQuery = "DELETE FROM make_model WHERE make = 'test_make'";
-        db.dbUpdate(deleteQuery);
+        if (update == 1){
+            db.deleteLastEntry("axles");
+        }
 
     }
 }
