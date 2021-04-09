@@ -1,4 +1,4 @@
-package vott.databaseIntegrity;
+package vott.databaseModels;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
