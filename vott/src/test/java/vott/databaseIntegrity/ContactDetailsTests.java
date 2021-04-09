@@ -7,6 +7,7 @@ import vott.DatabaseConnection;
 import vott.databaseModels.ContactDetails;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -28,20 +29,35 @@ public class ContactDetailsTests {
 
         ContactDetails cd = new ContactDetails();
 
-        String query = "SELECT * FROM contact_details";
-        ResultSet startingRS = db.dbQuery(query);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        ResultSet startingRS = db.startingResultSet("contact_details");
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
+        //Capture data from first row of results
         startingRS.first();
+        ResultSetMetaData rsmd = startingRS.getMetaData();
         cd.setContactDetails(startingRS);
 
+        //create insert query using first row from the DB
         String insertQuery = cd.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
-        ResultSet endRS = db.dbQuery(query);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        ResultSet endRS = db.endResultSet("contact_details");
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        startingRS.first();
+        endRS.first();
+        int colCount = rsmd.getColumnCount();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        startingRS.last();
+        endRS.last();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }

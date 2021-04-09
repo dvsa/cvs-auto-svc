@@ -1,16 +1,16 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class VehicleSubclass {
 
     private String vehicleClassID;
     private String subclass;
-
-    public String getVehicleClassID(){ return vehicleClassID;}
-    public String getSubclass(){ return subclass;}
 
     public void setVehicleSubclass(ResultSet rs) throws SQLException {
         this.vehicleClassID = Objects.toString(rs.getString("vehicle_class_id"), "");

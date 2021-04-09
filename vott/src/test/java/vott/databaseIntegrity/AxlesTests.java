@@ -7,6 +7,7 @@ import vott.DatabaseConnection;
 import vott.databaseModels.Axle;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -27,21 +28,36 @@ public class AxlesTests {
     public void AxlesInsertExistingDataTest() throws SQLException {
 
         Axle axle = new Axle();
-        String query = "SELECT * FROM axles";
 
-        ResultSet startingRS = db.dbQuery(query);
+        ResultSet startingRS = db.startingResultSet("axles");
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
+        //Capture data from first row of results
         startingRS.first();
+        ResultSetMetaData rsmd = startingRS.getMetaData();
         axle.setAxle(startingRS);
 
+        //create insert query using first row from the DB
         String insertQuery = axle.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
-        ResultSet endRS = db.dbQuery(query);
+        ResultSet endRS = db.endResultSet("axles");
         int endRowCount = DataMethods.getResultSetLength(endRS);
 
-         assertThat(startingRowCount, equalTo(endRowCount));
+        startingRS.first();
+        endRS.first();
+        int colCount = rsmd.getColumnCount();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        startingRS.last();
+        endRS.last();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }

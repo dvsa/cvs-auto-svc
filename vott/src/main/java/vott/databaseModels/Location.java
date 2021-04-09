@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Location {
 
     private String vertical;
@@ -15,14 +17,6 @@ public class Location {
     private Integer rowNumber;
     private Integer seatNumber;
     private Integer axleNumber;
-
-    public String getVertical(){ return vertical;}
-    public String getHorizontal(){ return horizontal;}
-    public String getLateral(){ return lateral;}
-    public String getLongitudinal(){ return longitudinal;}
-    public Integer getSeatNumber(){ return rowNumber;}
-    public Integer getRowNumber(){ return seatNumber;}
-    public Integer getAxleNumber(){ return axleNumber;}
 
     public void setLocation(ResultSet rs) throws SQLException {
         this.vertical = Objects.toString(rs.getString("vertical"), "");

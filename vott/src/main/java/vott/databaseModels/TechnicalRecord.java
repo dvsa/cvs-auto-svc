@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class TechnicalRecord {
 
     private Integer vehicleID;

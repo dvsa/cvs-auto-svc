@@ -1,9 +1,12 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class MakeModel {
 
     private String make;
@@ -17,18 +20,6 @@ public class MakeModel {
     private String bodyTypeDescription;
     private String fuelPropulsionSystem;
     private String dtpCode;
-
-    public String getMake(){ return make;}
-    public String getModel(){ return model;}
-    public String getChassisMake(){ return chassisMake;}
-    public String getChassisModel(){ return chassisModel;}
-    public String getBodyMake(){ return bodyMake;}
-    public String getBodyModel(){ return bodyModel;}
-    public String getModelLiteral(){ return modelLiteral;}
-    public String getBodyTypeCode(){ return bodyTypeCode;}
-    public String getBodyTypeDescription(){ return bodyTypeDescription;}
-    public String getFuelPropulsionSystem(){ return fuelPropulsionSystem;}
-    public String getDtpCode(){ return dtpCode;}
 
     public void setMakeModel(ResultSet rs) throws SQLException {
         this.make = Objects.toString(rs.getString("make"), "");

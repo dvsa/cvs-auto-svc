@@ -5,8 +5,10 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.Plate;
+import vott.databaseModels.Tyre;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -26,23 +28,38 @@ public class PlateTests {
     @Test
     public void PlateInsertExistingDataTest() throws SQLException {
 
+        //Create new data object
         Plate plate = new Plate();
 
-        String allDataQuery = "SELECT * FROM plate";
-        ResultSet startingRS = db.dbQuery(allDataQuery);
-        int startingLength = DataMethods.getResultSetLength(startingRS);
+        ResultSet startingRS = db.startingResultSet("plate");
+        int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
         //Capture data from first row of results
         startingRS.first();
+        ResultSetMetaData rsmd = startingRS.getMetaData();
         plate.setPlate(startingRS);
 
+        //create insert query using first row from the DB
         String insertQuery = plate.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
-        ResultSet endRS = db.dbQuery(allDataQuery);
-        int endLength = DataMethods.getResultSetLength(endRS);
+        ResultSet endRS = db.endResultSet("plate");
+        int endRowCount = DataMethods.getResultSetLength(endRS);
 
-        assertThat(startingLength, equalTo(endLength));
+        startingRS.first();
+        endRS.first();
+        int colCount = rsmd.getColumnCount();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        startingRS.last();
+        endRS.last();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
 
     }

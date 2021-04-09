@@ -5,8 +5,10 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.Tyre;
+import vott.databaseModels.VehicleClass;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -26,23 +28,36 @@ public class TyreTests {
     @Test
     public void TyreInsertExistingDataTest() throws SQLException {
 
-        //Create new MakeModel data object
+        //Create new data object
         Tyre tyre = new Tyre();
 
-        String allDataQuery = "SELECT * FROM tyre";
-        ResultSet startingRS = db.dbQuery(allDataQuery);
+        ResultSet startingRS = db.startingResultSet("tyre");
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
         //Capture data from first row of results
         startingRS.first();
+        ResultSetMetaData rsmd = startingRS.getMetaData();
         tyre.setTyre(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = tyre.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
-        ResultSet endRS = db.dbQuery(allDataQuery);
+        ResultSet endRS = db.endResultSet("tyre");
         int endRowCount = DataMethods.getResultSetLength(endRS);
+
+        startingRS.first();
+        endRS.first();
+        int colCount = rsmd.getColumnCount();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        startingRS.last();
+        endRS.last();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
 
         assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));

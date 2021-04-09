@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class ADR {
 
     private Integer technicalRecordID;
@@ -41,40 +43,6 @@ public class ADR {
     private String statement;
     private String productListRefNo;
     private String productList;
-
-    public Integer getTechnicalRecordID(){ return technicalRecordID; };
-    public String getType(){ return type; };
-    public String getApprovalDate(){ return approvalDate; };
-    public Integer getListStatementApplicable(){ return listStatementApplicable; };
-    public String getBatteryListNumber(){ return batteryListNumber; };
-    public Integer getDeclarationsSeen(){ return declarationsSeen; };
-    public Integer getBrakeDeclarationsSeen(){ return brakeDeclarationsSeen; };
-    public Integer getBrakeDeclarationIssuer(){ return brakeDeclarationIssuer; };
-    public Integer getBrakeEndurance(){ return brakeEndurance; };
-    public String getWeight(){ return weight; };
-    public Integer getCompatibilityGroupJ(){ return compatibilityGroupJ; };
-    public String getAdditionalExaminerNotes(){ return additionalExaminerNotes; };
-    public String getApplicantDetailsName(){ return applicantDetailsName; };
-    public String getStreet(){ return street; };
-    public String getTown(){ return town; };
-    public String getCity(){ return city; };
-    public String getPostcode(){ return postcode; };
-    public String getMemosApply(){ return memosApply; };
-    public String getADRTypeApprovalNo(){ return adrTypeApprovalNo; };
-    public String getADRCertificateNotes(){ return adrCertificateNotes; };
-    public String getTankManufacturer(){ return tankManufacturer; };
-    public String getYearOfManufacture(){ return yearOfManufacture;};
-    public String getTankCode(){ return tankCode; };
-    public String getSpecialProvisions(){ return specialProvisions; };
-    public String getTankManufacturerSerialNo(){ return tankManufacturerSerialNo; };
-    public String getTankTypeAppNo(){ return tankTypeAppNo; };
-    public String getTC2Type(){ return tc2Type; };
-    public String getTC2IntermediateApprovalNo(){ return tc2IntermediateApprovalNo; };
-    public String getTC2IntermediateExpiryDate(){ return tc2IntermediateExpiryDate; };
-    public String getSubstancesPermitted(){ return substancesPermitted; };
-    public String getStatement(){ return statement; };
-    public String getProductListRefNo(){ return productListRefNo; };
-    public String getProductList(){ return productList; };
 
     public void setADR(ResultSet rs) throws SQLException {
         this.technicalRecordID = DataMethods.getInteger(rs, "technical_record_id");

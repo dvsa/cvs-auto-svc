@@ -5,8 +5,10 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.TestDefect;
+import vott.databaseModels.Tyre;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -26,23 +28,30 @@ public class TestDefectTests {
     @Test
     public void TestDefectInsertExistingDataTest() throws SQLException {
 
-        //Create new MakeModel data object
+        //Create new data object
         TestDefect td = new TestDefect();
 
-        String allDataQuery = "SELECT * FROM test_defect";
-        ResultSet startingRS = db.dbQuery(allDataQuery);
+        ResultSet startingRS = db.startingResultSet("test_defect");
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
         //Capture data from first row of results
         startingRS.first();
+        ResultSetMetaData rsmd = startingRS.getMetaData();
         td.setTestDefect(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = td.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
-        ResultSet endRS = db.dbQuery(allDataQuery);
+        ResultSet endRS = db.endResultSet("test_defect");
         int endRowCount = DataMethods.getResultSetLength(endRS);
+
+        startingRS.first();
+        endRS.first();
+        int colCount = rsmd.getColumnCount();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
 
         assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));

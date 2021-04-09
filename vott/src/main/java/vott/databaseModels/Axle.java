@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Axle {
 
     private Integer technicalRecordID;
@@ -20,19 +22,6 @@ public class Axle {
     private Integer brakeActuator;
     private Integer leverLength;
     private Integer springBrakeParking;
-
-    public Integer getTechnicalRecordID(){ return technicalRecordID;}
-    public Integer getTyreID(){ return tyreID;}
-    public Integer getAxleNumber(){ return axleNumber;}
-    public Integer parkingBrakeMrk(){ return parkingBrakeMrk;}
-    public Integer getKerbWeight(){ return kerbWeight;}
-    public Integer getLadenWeight(){ return ladenWeight;}
-    public Integer getGBWeight(){ return gbWeight;}
-    public Integer getEECWeight(){ return eecWeight;}
-    public Integer getDesignWeight(){ return designWeight;}
-    public Integer getBrakeActuator(){ return brakeActuator;}
-    public Integer getLeverLength(){ return leverLength;}
-    public Integer getSpringBrakeParking(){ return springBrakeParking;}
 
     public void setAxle(ResultSet rs) throws SQLException {
         this.technicalRecordID = DataMethods.getInteger(rs, "technical_record_id");

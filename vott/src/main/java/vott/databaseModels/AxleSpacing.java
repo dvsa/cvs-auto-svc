@@ -1,20 +1,18 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class AxleSpacing {
 
     private String technicalRecordID;
     private String axles;
     private Integer value;
-
-    public String getTechnicalRecordID(){ return technicalRecordID;}
-    public String getAxles(){ return axles;}
-    public Integer getValue(){ return value;}
 
     public void setAxleSpacing(ResultSet rs) throws SQLException {
         this.technicalRecordID = Objects.toString(rs.getString("technical_record_id"), "");
