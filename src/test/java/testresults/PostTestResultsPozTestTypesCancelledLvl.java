@@ -2,6 +2,7 @@ package testresults;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import data.GenericData;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -16,8 +17,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.DataUtil;
+import util.JsonPathAlteration;
 
-import java.util.Random;
+import java.util.*;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
@@ -547,16 +549,46 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     @Test
     public void testResultsReasonForAbandoningFail() {
 
-        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build().getTestTypes().get(0)
-                .setTestResult("fail").setReasonForAbandoning(RandomStringUtils.randomAlphanumeric(1, 499));
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
 
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
+        String randomVin = GenericData.generateRandomVin();
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationTestStatus = new JsonPathAlteration("$.testStatus", "cancelled", "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail", "", "REPLACE");
+        JsonPathAlteration alterationTestCode = new JsonPathAlteration("$.testTypes[0].testCode", "","","DELETE");
+        JsonPathAlteration alterationTestNumber = new JsonPathAlteration("$.testTypes[0].testNumber", "","","DELETE");
+        JsonPathAlteration alterationLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", "","","DELETE");
+        JsonPathAlteration alterationCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", "","","DELETE");
+        JsonPathAlteration alterationCertificateLink = new JsonPathAlteration("$.testTypes[0].certificateLink", "","","DELETE");
+        JsonPathAlteration alterationVehicleId = new JsonPathAlteration("$.vehicleId", "","","DELETE");
+        JsonPathAlteration alterationReasonForAbandoning = new JsonPathAlteration("$.testTypes[0].reasonForAbandoning", RandomStringUtils.randomAlphanumeric(1, 499), "", "REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVrm,
+                alterationTestStatus,
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId,
+                alterationTestResult,
+                alterationReasonForAbandoning,
+                alterationTestCode,
+                alterationTestNumber,
+                alterationLastUpdatedAt,
+                alterationCreatedAt,
+                alterationVehicleId,
+                alterationCertificateLink
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord,alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - reasonForAbandoning with testResult pass")
@@ -659,16 +691,46 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     @Test
     public void testResultsNullReasonForAbandoningPrs() {
 
-        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
-                .getTestTypes().get(0).setTestResult("prs").setReasonForAbandoning(null);
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
 
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
+        String randomVin = GenericData.generateRandomVin();
+        String randomVrm = GenericData.generateRandomVrm();
+        String randomTestResultId = UUID.randomUUID().toString();
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
+        JsonPathAlteration alterationTestStatus = new JsonPathAlteration("$.testStatus", "cancelled", "", "REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "prs", "", "REPLACE");
+        JsonPathAlteration alterationTestCode = new JsonPathAlteration("$.testTypes[0].testCode", "","","DELETE");
+        JsonPathAlteration alterationTestNumber = new JsonPathAlteration("$.testTypes[0].testNumber", "","","DELETE");
+        JsonPathAlteration alterationLastUpdatedAt = new JsonPathAlteration("$.testTypes[0].lastUpdatedAt", "","","DELETE");
+        JsonPathAlteration alterationCreatedAt = new JsonPathAlteration("$.testTypes[0].createdAt", "","","DELETE");
+        JsonPathAlteration alterationCertificateLink = new JsonPathAlteration("$.testTypes[0].certificateLink", "","","DELETE");
+        JsonPathAlteration alterationVehicleId = new JsonPathAlteration("$.vehicleId", "","","DELETE");
+        JsonPathAlteration alterationReasonForAbandoning = new JsonPathAlteration("$.testTypes[0].reasonForAbandoning", null, "", "REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVrm,
+                alterationTestStatus,
+                alterationVin,
+                alterationSystemNumber,
+                alterationTestResultId,
+                alterationTestResult,
+                alterationReasonForAbandoning,
+                alterationTestCode,
+                alterationTestNumber,
+                alterationLastUpdatedAt,
+                alterationCreatedAt,
+                alterationVehicleId,
+                alterationCertificateLink
+                ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord,alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - additionalNotesRecorded")
