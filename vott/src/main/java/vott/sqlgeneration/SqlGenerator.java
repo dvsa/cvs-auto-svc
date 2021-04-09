@@ -6,6 +6,31 @@ import java.util.stream.Collectors;
 
 public class SqlGenerator {
 
+    public String generateSelectSql(TableDetails tableDetails, int primaryKey) {
+        List<String> columnNames = Arrays.stream(tableDetails.getColumnNames())
+            .map(c -> '`' + c + '`')
+            .collect(Collectors.toList());
+
+        columnNames.add(0, "`" + tableDetails.getPrimaryKeyColumnName() + "`");
+
+        return String.format(
+            "SELECT %s FROM `%s` WHERE `%s` = %d",
+            String.join(", ", columnNames),
+            tableDetails.getTableName(),
+            tableDetails.getPrimaryKeyColumnName(),
+            primaryKey
+        );
+    }
+
+    public String generateDeleteSql(TableDetails tableDetails, int primaryKey) {
+        return String.format(
+            "DELETE FROM `%s` WHERE `%s` = %d",
+            tableDetails.getTableName(),
+            tableDetails.getPrimaryKeyColumnName(),
+            primaryKey
+        );
+    }
+
     public String generatePartialUpsertSql(TableDetails tableDetails) {
         return generateUpsertSql(
             tableDetails,
@@ -28,6 +53,7 @@ public class SqlGenerator {
     private String generateUpsertSql(TableDetails tableDetails, String[] updatePlaceholders) {
         String[] valuePlaceholders = new String[tableDetails.getColumnNames().length];
         Arrays.fill(valuePlaceholders, "?");
+
         return String.format(
             "INSERT INTO `%s` (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s",
             tableDetails.getTableName(),
