@@ -5,8 +5,10 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.TestResult;
+import vott.databaseModels.Tyre;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -26,20 +28,36 @@ public class TestResultTests {
     @Test
     public void TestResultInsertExistingDataTest() throws SQLException {
 
+        //Create new data object
         TestResult tr = new TestResult();
-        String query = "SELECT * FROM test_result";
 
-        ResultSet startingRS = db.dbQuery(query);
+        ResultSet startingRS = db.startingResultSet("test_result");
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
 
+        //Capture data from first row of results
         startingRS.first();
+        ResultSetMetaData rsmd = startingRS.getMetaData();
         tr.setTestResult(startingRS);
 
+        //create insert query using first row from the DB
         String insertQuery = tr.createInsertQuery();
         int update = db.dbUpdate(insertQuery);
 
-        ResultSet endRS = db.dbQuery(query);
+        ResultSet endRS = db.endResultSet("test_result");
         int endRowCount = DataMethods.getResultSetLength(endRS);
+
+        startingRS.first();
+        endRS.first();
+        int colCount = rsmd.getColumnCount();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
+
+        startingRS.last();
+        endRS.last();
+        for (int i = 1; i <= colCount; i++){
+            assertThat(startingRS.getString(i), equalTo(endRS.getString(i)));
+        }
 
         assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));

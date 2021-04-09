@@ -1,9 +1,12 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Plate {
 
     private String technicalRecordID;
@@ -11,12 +14,6 @@ public class Plate {
     private String plateIssueDate;
     private String plateReasonForIssue;
     private String plateIssuer;
-
-    public String getTechnicalRecordID(){ return technicalRecordID;}
-    public String getPlateSerialNumber(){ return plateSerialNumber;}
-    public String getPlateIssueDate(){ return plateIssueDate;}
-    public String getPlateReasonForIssue(){ return plateReasonForIssue;}
-    public String getPlateIssuer(){ return plateIssuer;}
 
     public void setPlate(ResultSet rs) throws SQLException {
         this.technicalRecordID = Objects.toString(rs.getString("technical_record_id"), "");

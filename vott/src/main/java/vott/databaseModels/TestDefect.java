@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class TestDefect {
 
     private Integer testResultID;
@@ -14,13 +16,6 @@ public class TestDefect {
     private String notes;
     private Integer prs;
     private Integer prohibitionIssued;
-
-    public Integer getTestResultID(){ return testResultID;}
-    public Integer getDefectID(){ return defectID;}
-    public Integer getLocationID(){ return locationID;}
-    public String getNotes(){ return notes;}
-    public Integer getPrs(){ return prs;}
-    public Integer getProhibitionIssued(){ return prohibitionIssued;}
 
     public void setTestDefect(ResultSet rs) throws SQLException {
         this.testResultID = DataMethods.getInteger(rs, "test_result_id");

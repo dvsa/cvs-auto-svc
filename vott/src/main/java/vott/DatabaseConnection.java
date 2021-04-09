@@ -12,6 +12,8 @@ public class DatabaseConnection {
 
     public Statement stmt = null;
     public Connection conn = null;
+    public Statement startStmt = null;
+    public Statement endStmt = null;
 
     public void AWSConnection() throws SQLException {
 
@@ -30,6 +32,20 @@ public class DatabaseConnection {
 
     public int dbUpdate(String query) throws SQLException {
         return stmt.executeUpdate(query);
+    }
+
+    public ResultSet startingResultSet(String tableName) throws SQLException {
+        String query = "SELECT * FROM "+tableName+";";
+
+        startStmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        return startStmt.executeQuery(query);
+    }
+
+    public ResultSet endResultSet(String tableName) throws SQLException {
+        String query = "SELECT * FROM "+tableName+";";
+
+        endStmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        return endStmt.executeQuery(query);
     }
 
     public void deleteLastEntry(String tableName) throws SQLException {

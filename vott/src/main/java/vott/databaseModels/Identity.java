@@ -1,16 +1,16 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Identity {
 
     private String identityID;
     private String name;
-
-    public String getIdentityID(){ return identityID;}
-    public String getName(){ return name;}
 
     public void setIdentity(ResultSet rs) throws SQLException {
         this.identityID = Objects.toString(rs.getString("identityId"), "");

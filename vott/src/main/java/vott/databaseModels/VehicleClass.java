@@ -1,9 +1,12 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class VehicleClass {
     private String code;
     private String description;
@@ -11,13 +14,6 @@ public class VehicleClass {
     private String vehicleSize;
     private String vehicleConfiguration;
     private String euVehicleCategory;
-
-    public String getCode(){ return code;}
-    public String getDescription(){ return description;}
-    public String getVehicleType(){ return vehicleType;}
-    public String getVehicleSize(){ return vehicleSize;}
-    public String getVehicleConfiguration(){ return vehicleConfiguration;}
-    public String getEuVehicleCategory(){ return euVehicleCategory;}
 
     public void setVehicleClass(ResultSet rs) throws SQLException {
         this.code = Objects.toString(rs.getString("code"), "");

@@ -1,20 +1,18 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class FuelEmissions {
 
     private String modTypeCode;
     private String description;
     private String emissionStandard;
     private String fuelType;
-
-    public String getModTypeCode(){ return modTypeCode;}
-    public String getDescription(){ return description;}
-    public String getEmissionStandard(){ return emissionStandard;}
-    public String getFuelType(){ return fuelType;}
 
     public void setFuelEmissions(ResultSet rs) throws SQLException {
         this.modTypeCode = Objects.toString(rs.getString("modTypeCode"), "");

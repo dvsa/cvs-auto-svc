@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Tyre {
 
     private String tyreSize;
@@ -14,13 +16,6 @@ public class Tyre {
     private String dataTrAxles;
     private String speedCategorySymbol;
     private Integer tyreCode;
-
-    public String getTyreSize(){ return tyreSize;}
-    public String getPlyRating(){ return plyRating;}
-    public String getFitmentCode(){ return fitmentCode;}
-    public String getDataTrAxles(){ return dataTrAxles;}
-    public String getSpeedCategorySymbol(){ return speedCategorySymbol;}
-    public Integer getTyreCode(){ return tyreCode;}
 
     public void setTyre(ResultSet rs) throws SQLException {
         this.tyreSize = Objects.toString(rs.getString("tyreSize"), "");

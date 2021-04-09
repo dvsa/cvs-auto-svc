@@ -1,11 +1,13 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Defect {
 
     private Integer imNumber;
@@ -18,17 +20,6 @@ public class Defect {
     private String deficiencyCategory;
     private String deficiencyText;
     private Integer stdForProhibition;
-
-    public Integer getImNumber(){ return imNumber;}
-    public String getImDescription(){ return imDescription;}
-    public Integer getItemNumber(){ return itemNumber;}
-    public String getItemDescription(){ return itemDescription;}
-    public String getDeficiencyRef(){ return deficiencyRef;}
-    public String getDeficiencyID(){ return deficiencyID;}
-    public String getDeficiencySubID(){ return deficiencySubID;}
-    public String getDeficiencyCategory(){ return deficiencyCategory;}
-    public String getDeficiencyText(){ return deficiencyText;}
-    public Integer getStdForProhibition(){ return stdForProhibition;}
 
     public void setDefect(ResultSet rs) throws SQLException {
         this.imNumber = DataMethods.getInteger(rs, "imNumber");

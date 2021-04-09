@@ -1,22 +1,19 @@
 package vott.databaseModels;
 
+import lombok.Data;
 import vott.DataMethods;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class CustomDefect {
 
     private Integer testResultID;
     private String referenceNumber;
     private String defectName;
     private String defectNotes;
-
-    public Integer getTestResultID(){ return testResultID;}
-    public String getReferenceNumber(){ return referenceNumber;}
-    public String getDefectName(){ return defectName;}
-    public String getDefectNotes(){ return defectNotes;}
 
     public void setCustomDefect(ResultSet rs) throws SQLException {
         this.testResultID = DataMethods.getInteger(rs, "test_result_id");

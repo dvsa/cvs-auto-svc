@@ -1,20 +1,18 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Vehicle {
 
     private String systemNumber;
     private String vin;
     private String vrm_trm;
     private String trailerID;
-
-    public String getSystemNumber(){ return systemNumber;}
-    public String getVin(){ return vin;}
-    public String getVrm_trm(){ return vrm_trm;}
-    public String getTrailerID(){ return trailerID;}
 
     public void setVehicle(ResultSet rs) throws SQLException {
         this.systemNumber = Objects.toString(rs.getString("system_number"), "");

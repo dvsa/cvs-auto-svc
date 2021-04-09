@@ -1,9 +1,12 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class ContactDetails {
 
     private String name;
@@ -15,16 +18,6 @@ public class ContactDetails {
     private String emailAddress;
     private String telephoneNumber;
     private String faxNumber;
-
-    public String getName(){ return name;}
-    public String getAddress1(){ return address1;}
-    public String getAddress2(){ return address2;}
-    public String getPostTown(){ return postTown;}
-    public String getAddress3(){ return address3;}
-    public String getPostCode(){ return postCode;}
-    public String getEmailAddress(){ return emailAddress;}
-    public String getTelephoneNumber(){ return telephoneNumber;}
-    public String getFaxNumber(){ return faxNumber;}
 
     public void setContactDetails(ResultSet rs) throws SQLException {
         this.name = Objects.toString(rs.getString("name"), "");

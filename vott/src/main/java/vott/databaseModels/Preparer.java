@@ -1,18 +1,16 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class Preparer {
 
     private String preparerID;
     private String name;
-
-
-    public String getPreparerID(){ return preparerID;}
-    public String getName(){ return name;}
-
 
     public void setPreparer(ResultSet rs) throws SQLException {
         this.preparerID = Objects.toString(rs.getString("preparerId"), "");

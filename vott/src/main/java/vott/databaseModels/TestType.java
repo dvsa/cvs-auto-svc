@@ -1,16 +1,16 @@
 package vott.databaseModels;
 
+import lombok.Data;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+@Data
 public class TestType {
 
     private String testTypeClassification;
     private String testTypeName;
-
-    public String getTestTypeClassification(){ return testTypeClassification;}
-    public String getTestTypeName(){ return testTypeName;}
 
     public void setTestType(ResultSet rs) throws SQLException {
         this.testTypeClassification = Objects.toString(rs.getString("testTypeClassification"), "");
