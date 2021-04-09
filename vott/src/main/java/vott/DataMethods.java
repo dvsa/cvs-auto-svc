@@ -33,7 +33,6 @@ public class DataMethods {
         if(date.length() > 4 ){
             return date.substring(0, 4);
         }
-
         return date;
     }
 }

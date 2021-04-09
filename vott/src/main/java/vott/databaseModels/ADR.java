@@ -1,4 +1,4 @@
-package vott.databaseIntegrity;
+package vott.databaseModels;
 
 import vott.DataMethods;
 
@@ -11,7 +11,7 @@ public class ADR {
     private Integer technicalRecordID;
     private String type;
     private String approvalDate;
-    private String listStatementApplicable;
+    private Integer listStatementApplicable;
     private String batteryListNumber;
     private Integer declarationsSeen;
     private Integer brakeDeclarationsSeen;
@@ -45,7 +45,7 @@ public class ADR {
     public Integer getTechnicalRecordID(){ return technicalRecordID; };
     public String getType(){ return type; };
     public String getApprovalDate(){ return approvalDate; };
-    public String getListStatementApplicable(){ return listStatementApplicable; };
+    public Integer getListStatementApplicable(){ return listStatementApplicable; };
     public String getBatteryListNumber(){ return batteryListNumber; };
     public Integer getDeclarationsSeen(){ return declarationsSeen; };
     public Integer getBrakeDeclarationsSeen(){ return brakeDeclarationsSeen; };
@@ -80,7 +80,7 @@ public class ADR {
         this.technicalRecordID = DataMethods.getInteger(rs, "technical_record_id");
         this.type = Objects.toString(rs.getString("type"), "");
         this.approvalDate = Objects.toString(rs.getString("approvalDate"), "");
-        this.listStatementApplicable = Objects.toString(rs.getString("listStatementApplicable"), "");
+        this.listStatementApplicable = DataMethods.getInteger(rs, "listStatementApplicable");
         this.batteryListNumber = Objects.toString(rs.getString("batteryListNumber"), "");
         this.declarationsSeen = DataMethods.getInteger(rs, "declarationsSeen");
         this.brakeDeclarationsSeen = DataMethods.getInteger(rs, "brakeDeclarationsSeen");
@@ -115,7 +115,7 @@ public class ADR {
 
     public String createInsertQuery(){
         return "INSERT INTO adr (`technical_record_id`,`type`,`approvalDate`,`listStatementApplicable`,`batteryListNumber`,`declarationsSeen`,`brakeDeclarationsSeen`,`brakeDeclarationIssuer`,`brakeEndurance`,`weight`,`compatibilityGroupJ`,`additionalExaminerNotes`,`applicantDetailsName`,`street`,`town`,`city`,`postcode`,`memosApply`,`adrTypeApprovalNo`,`adrCertificateNotes`,`tankManufacturer`,`yearOfManufacture`,`tankCode`,`specialProvisions`,`tankManufacturerSerialNo`,`tankTypeAppNo`,`tc2Type`,`tc2IntermediateApprovalNo`,`tc2IntermediateExpiryDate`,`substancesPermitted`,`statement`,`productListRefNo`,`productList`) " +
-                "VALUES ("+technicalRecordID+", '"+type+"', '"+approvalDate+"', '"+listStatementApplicable+"', '"+batteryListNumber+"', "+declarationsSeen+", "+brakeDeclarationsSeen+", "+brakeDeclarationIssuer+", "+brakeEndurance+", '"+weight+"', "+compatibilityGroupJ+", '"+additionalExaminerNotes+"', '"+applicantDetailsName+"', '"+street+"', '"+town+"', '"+city+"', '"+postcode+"', '"+memosApply+"', '"+adrTypeApprovalNo+"', '"+adrCertificateNotes+"', '"+tankManufacturer+"', '"+yearOfManufacture+"', '"+tankCode+"', '"+specialProvisions+"', '"+tankManufacturerSerialNo+"', '"+tankTypeAppNo+"', '"+tc2Type+"', '"+tc2IntermediateApprovalNo+"', '"+tc2IntermediateExpiryDate+"', '"+substancesPermitted+"', '"+statement+"', '"+productListRefNo+"', '"+productList+"') " +
+                "VALUES ("+technicalRecordID+", '"+type+"', '"+approvalDate+"', "+listStatementApplicable+", '"+batteryListNumber+"', "+declarationsSeen+", "+brakeDeclarationsSeen+", "+brakeDeclarationIssuer+", "+brakeEndurance+", '"+weight+"', "+compatibilityGroupJ+", '"+additionalExaminerNotes+"', '"+applicantDetailsName+"', '"+street+"', '"+town+"', '"+city+"', '"+postcode+"', '"+memosApply+"', '"+adrTypeApprovalNo+"', '"+adrCertificateNotes+"', '"+tankManufacturer+"', '"+yearOfManufacture+"', '"+tankCode+"', '"+specialProvisions+"', '"+tankManufacturerSerialNo+"', '"+tankTypeAppNo+"', '"+tc2Type+"', '"+tc2IntermediateApprovalNo+"', '"+tc2IntermediateExpiryDate+"', '"+substancesPermitted+"', '"+statement+"', '"+productListRefNo+"', '"+productList+"') " +
                 "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
     }
 }

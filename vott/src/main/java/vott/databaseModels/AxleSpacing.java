@@ -1,4 +1,4 @@
-package vott.databaseIntegrity;
+package vott.databaseModels;
 
 import vott.DataMethods;
 

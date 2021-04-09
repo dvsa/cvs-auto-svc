@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
+import vott.databaseModels.Location;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,7 +56,7 @@ public class LocationTests {
         startingRS.first();
 
         String insertQuery = "INSERT INTO location( vertical, horizontal, lateral, longitudinal, rowNumber, seatNumber, axleNumber ) " +
-                "VALUES ('', '', '', '', '', '', '') " +
+                "VALUES ('Test', 'Test', 'Test', 'Test', 12, 45, 78) " +
                 "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
 
         int update = db.dbUpdate(insertQuery);
