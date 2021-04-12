@@ -33,6 +33,11 @@ public class PreparerRepository extends AbstractRepository<Preparer> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Preparer entity) throws SQLException {
+
+    }
+
+    @Override
     protected Preparer mapToEntity(ResultSet rs) throws SQLException {
         Preparer preparer = new Preparer();
 

@@ -36,6 +36,11 @@ public class MicrofilmRepository extends AbstractRepository<Microfilm> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Microfilm entity) throws SQLException {
+
+    }
+
+    @Override
     protected Microfilm mapToEntity(ResultSet rs) throws SQLException {
         Microfilm mf = new Microfilm();
 

@@ -48,6 +48,11 @@ public class ContactDetailsRepository extends AbstractRepository<ContactDetails>
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, ContactDetails entity) throws SQLException {
+
+    }
+
+    @Override
     protected ContactDetails mapToEntity(ResultSet rs) throws SQLException {
         ContactDetails cd = new ContactDetails();
 

@@ -42,6 +42,11 @@ public class TestDefectRepository extends AbstractRepository<TestDefect>{
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, TestDefect entity) throws SQLException {
+
+    }
+
+    @Override
     protected TestDefect mapToEntity(ResultSet rs) throws SQLException {
         TestDefect td = new TestDefect();
 

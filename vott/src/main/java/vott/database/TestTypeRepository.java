@@ -33,6 +33,11 @@ public class TestTypeRepository extends AbstractRepository<TestType> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, TestType entity) throws SQLException {
+
+    }
+
+    @Override
     protected TestType mapToEntity(ResultSet rs) throws SQLException {
         TestType tt = new TestType();
 

@@ -39,6 +39,11 @@ public class VehicleClassRepository extends AbstractRepository<VehicleClass>{
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, VehicleClass entity) throws SQLException {
+
+    }
+
+    @Override
     protected VehicleClass mapToEntity(ResultSet rs) throws SQLException {
         VehicleClass vc = new VehicleClass();
 

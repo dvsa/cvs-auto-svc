@@ -36,6 +36,11 @@ public class FuelEmissionRepository extends AbstractRepository<FuelEmission> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, FuelEmission entity) throws SQLException {
+
+    }
+
+    @Override
     protected FuelEmission mapToEntity(ResultSet rs) throws SQLException {
         FuelEmission fe = new FuelEmission();
 

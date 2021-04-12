@@ -48,6 +48,11 @@ public class MakeModelRepository extends AbstractRepository<MakeModel>{
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, MakeModel entity) throws SQLException {
+
+    }
+
+    @Override
     protected MakeModel mapToEntity(ResultSet rs) throws SQLException {
         MakeModel mm = new MakeModel();
 

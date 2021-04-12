@@ -49,6 +49,11 @@ public class DefectRepository extends AbstractRepository<Defect> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Defect entity) throws SQLException {
+
+    }
+
+    @Override
     protected Defect mapToEntity(ResultSet rs) throws SQLException {
         Defect defect = new Defect();
 

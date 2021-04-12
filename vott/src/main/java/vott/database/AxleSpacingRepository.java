@@ -35,6 +35,11 @@ public class AxleSpacingRepository extends AbstractRepository<AxleSpacing> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, AxleSpacing entity) throws SQLException {
+
+    }
+
+    @Override
     protected AxleSpacing mapToEntity(ResultSet rs) throws SQLException {
         AxleSpacing as = new AxleSpacing();
 
