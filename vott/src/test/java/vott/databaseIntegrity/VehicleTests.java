@@ -5,7 +5,6 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.Vehicle;
-import vott.databaseModels.VehicleClass;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -61,7 +60,6 @@ public class VehicleTests {
 
         assertThat(startingRowCount, equalTo(endRowCount));
         assertThat(update, equalTo(1));
-
     }
 
     @Test

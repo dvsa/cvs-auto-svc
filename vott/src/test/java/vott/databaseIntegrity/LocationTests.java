@@ -35,7 +35,7 @@ public class LocationTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        location.setLocation(startingRS);
+//        location.setLocation(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = location.createInsertQuery();

@@ -5,7 +5,6 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.TestResult;
-import vott.databaseModels.Tyre;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -37,7 +36,7 @@ public class TestResultTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        tr.setTestResult(startingRS);
+//        tr.setTestResult(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = tr.createInsertQuery();

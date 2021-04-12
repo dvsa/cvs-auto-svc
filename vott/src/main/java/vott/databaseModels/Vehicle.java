@@ -25,6 +25,6 @@ public class Vehicle {
     public String createInsertQuery(){
         return "INSERT INTO vehicle( system_number, vin, vrm_trm, trailer_id ) " +
                 "VALUES ('"+systemNumber+"', '"+vin+"', '"+vrm_trm+"', '"+trailerID+"') " +
-                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
+                "ON DUPLICATE KEY UPDATE `id` = LAST_INSERT_ID(`id`) , `system_number` = '"+systemNumber+"', `vin` = '"+vin+"', `vrm_trm` = '"+vrm_trm+"', `trailer_id` = '"+trailerID+"'";
     }
 }

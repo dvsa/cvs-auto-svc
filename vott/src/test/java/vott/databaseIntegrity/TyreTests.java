@@ -5,7 +5,6 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.Tyre;
-import vott.databaseModels.VehicleClass;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -37,7 +36,7 @@ public class TyreTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        tyre.setTyre(startingRS);
+//        tyre.setTyre(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = tyre.createInsertQuery();

@@ -12,14 +12,15 @@ public class AxleSpacing {
 
     private String technicalRecordID;
     private String axles;
-    private Integer value;
+//    private Integer value;
+    private String value;
 
-    public void setAxleSpacing(ResultSet rs) throws SQLException {
-        this.technicalRecordID = Objects.toString(rs.getString("technical_record_id"), "");
-        this.axles = Objects.toString(rs.getString("axles"), "");
-        this.value = DataMethods.getInteger(rs, "value");
-
-    }
+//    public void setAxleSpacing(ResultSet rs) throws SQLException {
+//        this.technicalRecordID = Objects.toString(rs.getString("technical_record_id"), "");
+//        this.axles = Objects.toString(rs.getString("axles"), "");
+//        this.value = DataMethods.getInteger(rs, "value");
+//
+//    }
 
     public String createInsertQuery(){
         return "INSERT INTO axle_spacing( technical_record_id, axles, value ) " +

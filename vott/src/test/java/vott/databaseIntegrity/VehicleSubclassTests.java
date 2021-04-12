@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
-import vott.databaseModels.VehicleClass;
 import vott.databaseModels.VehicleSubclass;
 
 import java.sql.ResultSet;

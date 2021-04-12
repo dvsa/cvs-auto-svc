@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
-import vott.databaseModels.Axle;
+import vott.databaseModels.Axles;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -27,7 +27,7 @@ public class AxlesTests {
     @Test
     public void AxlesInsertExistingDataTest() throws SQLException {
 
-        Axle axle = new Axle();
+        Axles axle = new Axles();
 
         ResultSet startingRS = db.startingResultSet("axles");
         int startingRowCount = DataMethods.getResultSetLength(startingRS);
@@ -35,7 +35,7 @@ public class AxlesTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        axle.setAxle(startingRS);
+//        axle.setAxle(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = axle.createInsertQuery();

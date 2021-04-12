@@ -1,4 +1,4 @@
-package vott.repository;
+package vott.database;
 
 import vott.sqlgeneration.SqlGenerator;
 import vott.sqlgeneration.TableDetails;

@@ -5,7 +5,6 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.MakeModel;
-import vott.databaseModels.Tyre;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

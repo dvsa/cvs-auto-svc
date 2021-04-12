@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 @Data
-public class FuelEmissions {
+public class FuelEmission {
 
     private String modTypeCode;
     private String description;
