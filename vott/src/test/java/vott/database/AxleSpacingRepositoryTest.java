@@ -48,13 +48,13 @@ public class AxleSpacingRepositoryTest {
 
     @Test
     public void upsertingDifferentTechRecordIDReturnsDifferentPk() {
-        AxleSpacing vs1 = newTestAxleSpacing();
+        AxleSpacing as1 = newTestAxleSpacing();
 
-        AxleSpacing vs2 = newTestAxleSpacing();
-        vs2.setTechnicalRecordID("2");
+        AxleSpacing as2 = newTestAxleSpacing();
+        as2.setTechnicalRecordID("2");
 
-        int primaryKey1 = axleSpacingRepository.fullUpsert(vs1);
-        int primaryKey2 = axleSpacingRepository.fullUpsert(vs2);
+        int primaryKey1 = axleSpacingRepository.fullUpsert(as1);
+        int primaryKey2 = axleSpacingRepository.fullUpsert(as2);
 
         deleteOnExit.add(primaryKey1);
         deleteOnExit.add(primaryKey2);
@@ -64,13 +64,13 @@ public class AxleSpacingRepositoryTest {
 
     @Test
     public void upsertingDifferentAxlesReturnsDifferentPk() {
-        AxleSpacing vs1 = newTestAxleSpacing();
+        AxleSpacing as1 = newTestAxleSpacing();
 
-        AxleSpacing vs2 = newTestAxleSpacing();
-        vs2.setAxles("Test2");
+        AxleSpacing as2 = newTestAxleSpacing();
+        as2.setAxles("Test2");
 
-        int primaryKey1 = axleSpacingRepository.fullUpsert(vs1);
-        int primaryKey2 = axleSpacingRepository.fullUpsert(vs2);
+        int primaryKey1 = axleSpacingRepository.fullUpsert(as1);
+        int primaryKey2 = axleSpacingRepository.fullUpsert(as2);
 
         deleteOnExit.add(primaryKey1);
         deleteOnExit.add(primaryKey2);
@@ -80,13 +80,13 @@ public class AxleSpacingRepositoryTest {
 
     @Test
     public void upsertingIdenticalIndexValuesReturnsSamePk() {
-        AxleSpacing vs1 = newTestAxleSpacing();
+        AxleSpacing as1 = newTestAxleSpacing();
 
-        AxleSpacing vs2 = newTestAxleSpacing();
-        vs2.setValue("50");
+        AxleSpacing as2 = newTestAxleSpacing();
+        as2.setValue("50");
 
-        int primaryKey1 = axleSpacingRepository.fullUpsert(vs1);
-        int primaryKey2 = axleSpacingRepository.fullUpsert(vs2);
+        int primaryKey1 = axleSpacingRepository.fullUpsert(as1);
+        int primaryKey2 = axleSpacingRepository.fullUpsert(as2);
 
         deleteOnExit.add(primaryKey1);
         deleteOnExit.add(primaryKey2);
