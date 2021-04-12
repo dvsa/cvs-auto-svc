@@ -107,6 +107,11 @@ public class TestResultRepository extends AbstractRepository<TestResult>{
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, TestResult entity) throws SQLException {
+
+    }
+
+    @Override
     protected TestResult mapToEntity(ResultSet rs) throws SQLException {
         TestResult tr = new TestResult();
 

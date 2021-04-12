@@ -54,6 +54,11 @@ public class AxlesRepository extends AbstractRepository<Axles> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Axles entity) throws SQLException {
+
+    }
+
+    @Override
     protected Axles mapToEntity(ResultSet rs) throws SQLException {
         Axles axle = new Axles();
 

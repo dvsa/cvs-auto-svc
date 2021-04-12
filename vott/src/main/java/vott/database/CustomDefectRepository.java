@@ -37,6 +37,11 @@ public class CustomDefectRepository extends AbstractRepository<CustomDefect> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, CustomDefect entity) throws SQLException {
+
+    }
+
+    @Override
     protected CustomDefect mapToEntity(ResultSet rs) throws SQLException {
         CustomDefect cd = new CustomDefect();
 

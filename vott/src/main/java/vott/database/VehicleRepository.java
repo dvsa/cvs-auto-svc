@@ -6,6 +6,8 @@ import vott.sqlgeneration.TableDetails;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VehicleRepository extends AbstractRepository<Vehicle> {
 
@@ -35,6 +37,16 @@ public class VehicleRepository extends AbstractRepository<Vehicle> {
         preparedStatement.setString(2, entity.getVin());
         preparedStatement.setString(3, entity.getVrm_trm());
         preparedStatement.setString(4, entity.getTrailerID());
+    }
+
+    @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Vehicle entity) throws SQLException {
+        setParameters(preparedStatement, entity);
+
+        preparedStatement.setString(5, entity.getSystemNumber());
+        preparedStatement.setString(6, entity.getVin());
+        preparedStatement.setString(7, entity.getVrm_trm());
+        preparedStatement.setString(8, entity.getTrailerID());
     }
 
     @Override

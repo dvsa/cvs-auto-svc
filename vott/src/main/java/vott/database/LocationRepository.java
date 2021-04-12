@@ -43,6 +43,11 @@ public class LocationRepository extends AbstractRepository<Location> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Location entity) throws SQLException {
+
+    }
+
+    @Override
     protected Location mapToEntity(ResultSet rs) throws SQLException {
         Location location = new Location();
 

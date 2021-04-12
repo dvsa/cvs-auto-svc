@@ -35,6 +35,11 @@ public class TesterRepository extends AbstractRepository<Tester> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Tester entity) throws SQLException {
+
+    }
+
+    @Override
     protected Tester mapToEntity(ResultSet rs) throws SQLException {
         Tester tester = new Tester();
 

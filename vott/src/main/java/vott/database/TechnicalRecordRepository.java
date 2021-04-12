@@ -197,6 +197,11 @@ public class TechnicalRecordRepository extends AbstractRepository<TechnicalRecor
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, TechnicalRecord entity) throws SQLException {
+
+    }
+
+    @Override
     protected TechnicalRecord mapToEntity(ResultSet rs) throws SQLException {
         TechnicalRecord tr = new TechnicalRecord();
 

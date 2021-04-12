@@ -33,6 +33,11 @@ public class IdentityRepository extends AbstractRepository<Identity>{
         preparedStatement.setString(2, entity.getName());
     }
 
+    @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Identity entity) throws SQLException {
+
+    }
+
 
     @Override
     protected Identity mapToEntity(ResultSet rs) throws SQLException {

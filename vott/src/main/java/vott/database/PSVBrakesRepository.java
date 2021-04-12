@@ -57,6 +57,11 @@ public class PSVBrakesRepository extends AbstractRepository<PSVBrakes>{
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, PSVBrakes entity) throws SQLException {
+
+    }
+
+    @Override
     protected PSVBrakes mapToEntity(ResultSet rs) throws SQLException {
         PSVBrakes psv = new PSVBrakes();
 

@@ -40,6 +40,11 @@ public class PlateRepository extends AbstractRepository<Plate> {
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Plate entity) throws SQLException {
+
+    }
+
+    @Override
     protected Plate mapToEntity(ResultSet rs) throws SQLException {
         Plate plate = new Plate();
 

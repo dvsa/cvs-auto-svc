@@ -42,6 +42,11 @@ public class TyreRepository extends AbstractRepository<Tyre>
     }
 
     @Override
+    protected void setParametersFull(PreparedStatement preparedStatement, Tyre entity) throws SQLException {
+
+    }
+
+    @Override
     protected Tyre mapToEntity(ResultSet rs) throws SQLException {
         Tyre tyre = new Tyre();
 
