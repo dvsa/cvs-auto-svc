@@ -103,20 +103,21 @@ public abstract class AbstractRepository<T> {
 
     private int upsert(PreparedStatement preparedStatement, T entity) throws SQLException {
         int affectedRows = preparedStatement.executeUpdate();
-        int updatedRows = preparedStatement.getUpdateCount();
 
-        if (affectedRows != 1 && updatedRows != 2) {
-            throw new RuntimeException("Expected exactly 1 affected row, got " + affectedRows +" affected rows and " + updatedRows + " updated rows");
+        if (affectedRows > 2) {
+            throw new RuntimeException("Expected either 1 (INSERT) or 2 (UPDATE) affected rows, got " + affectedRows);
         }
 
         ResultSet rs = preparedStatement.getGeneratedKeys();
 
-        int i = 1; // ResultSet instances are 1-indexed
-
         List<Integer> generatedKeys = new ArrayList<>();
 
+        if (rs.getMetaData().getColumnCount() != 1) {
+            throw new RuntimeException("Expected exactly 1 column in generated keys ResultSet, got " + rs.getMetaData().getColumnCount());
+        }
+
         while (rs.next()) {
-            generatedKeys.add(rs.getInt(i++));
+            generatedKeys.add(rs.getInt(1));
         }
 
         if (generatedKeys.size() != 1) {
