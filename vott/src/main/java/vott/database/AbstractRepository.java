@@ -103,9 +103,10 @@ public abstract class AbstractRepository<T> {
 
     private int upsert(PreparedStatement preparedStatement, T entity) throws SQLException {
         int affectedRows = preparedStatement.executeUpdate();
+        int updatedRows = preparedStatement.getUpdateCount();
 
-        if (affectedRows != 1) {
-            throw new RuntimeException("Expected exactly 1 affected row, got " + affectedRows);
+        if (affectedRows != 1 && updatedRows != 2) {
+            throw new RuntimeException("Expected exactly 1 affected row, got " + affectedRows +" affected rows and " + updatedRows + " updated rows");
         }
 
         ResultSet rs = preparedStatement.getGeneratedKeys();

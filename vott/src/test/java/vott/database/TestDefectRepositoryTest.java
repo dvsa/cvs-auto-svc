@@ -116,8 +116,8 @@ public class TestDefectRepositoryTest {
         td.setDefectID("1");
         td.setLocationID("1");
         td.setNotes("Test Notes");
-        td.setPrs("A");
-        td.setProhibitionIssued("A");
+        td.setPrs("1");
+        td.setProhibitionIssued("1");
 
         return td;
     }

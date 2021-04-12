@@ -82,7 +82,7 @@ public class PlateRepositoryTest {
         Plate plate1 = newTestPlate();
 
         Plate plate2 = newTestPlate();
-        plate2.setPlateSerialNumber("2100-01-01");
+        plate2.setPlateIssueDate("2100-01-01");
 
         int primaryKey1 = plateRepository.fullUpsert(plate1);
         int primaryKey2 = plateRepository.fullUpsert(plate2);
@@ -98,7 +98,7 @@ public class PlateRepositoryTest {
         Plate plate1 = newTestPlate();
 
         Plate plate2 = newTestPlate();
-        plate2.setPlateSerialNumber("Auto Test Changed");
+        plate2.setPlateIssuer("Test Update");
 
         int primaryKey1 = plateRepository.fullUpsert(plate1);
         int primaryKey2 = plateRepository.fullUpsert(plate2);
@@ -115,7 +115,7 @@ public class PlateRepositoryTest {
         plate.setTechnicalRecordID("1");
         plate.setPlateSerialNumber("666666");
         plate.setPlateIssueDate("2100-12-31");
-        plate.setPlateReasonForIssue("Test Issue Reason");
+        plate.setPlateReasonForIssue("Test Reason");
         plate.setPlateIssuer("Auto Test");
 
         return plate;

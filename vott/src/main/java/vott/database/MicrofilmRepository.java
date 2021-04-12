@@ -37,7 +37,12 @@ public class MicrofilmRepository extends AbstractRepository<Microfilm> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Microfilm entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(5, entity.getTechnicalRecordID());
+        preparedStatement.setString(6, entity.getMicrofilmDocumentType());
+        preparedStatement.setString(7, entity.getMicrofilmRollNumber());
+        preparedStatement.setString(8, entity.getMicrofilmSerialNumber());
     }
 
     @Override

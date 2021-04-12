@@ -65,10 +65,10 @@ public class LocationRepositoryTest {
     private Location newTestLocation() {
         Location location = new Location();
 
-        location.setVertical("Test V");
-        location.setHorizontal("Test H");
-        location.setLateral("Test Lat");
-        location.setLongitudinal("Test Long");
+        location.setVertical("TestV");
+        location.setHorizontal("TestH");
+        location.setLateral("TestLat");
+        location.setLongitudinal("TestL");
         location.setRowNumber("10");
         location.setSeatNumber("20");
         location.setAxleNumber("30");

@@ -38,7 +38,12 @@ public class CustomDefectRepository extends AbstractRepository<CustomDefect> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, CustomDefect entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(5, entity.getTestResultID());
+        preparedStatement.setString(6, entity.getReferenceNumber());
+        preparedStatement.setString(7, entity.getDefectName());
+        preparedStatement.setString(8, entity.getDefectNotes());
     }
 
     @Override

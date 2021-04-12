@@ -43,7 +43,14 @@ public class TestDefectRepository extends AbstractRepository<TestDefect>{
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, TestDefect entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(7, entity.getTestResultID());
+        preparedStatement.setString(8, entity.getDefectID());
+        preparedStatement.setString(9, entity.getLocationID());
+        preparedStatement.setString(10, entity.getNotes());
+        preparedStatement.setString(11, entity.getPrs());
+        preparedStatement.setString(12, entity.getProhibitionIssued());
     }
 
     @Override

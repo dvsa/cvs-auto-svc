@@ -55,7 +55,20 @@ public class AxlesRepository extends AbstractRepository<Axles> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Axles entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(13, entity.getTechnicalRecordID());
+        preparedStatement.setString(14, entity.getTyreID());
+        preparedStatement.setString(15, entity.getAxleNumber());
+        preparedStatement.setString(16, entity.getParkingBrakeMrk());
+        preparedStatement.setString(17, entity.getKerbWeight());
+        preparedStatement.setString(18, entity.getLadenWeight());
+        preparedStatement.setString(19, entity.getGbWeight());
+        preparedStatement.setString(20, entity.getEecWeight());
+        preparedStatement.setString(21, entity.getDesignWeight());
+        preparedStatement.setString(22, entity.getBrakeActuator());
+        preparedStatement.setString(23, entity.getLeverLength());
+        preparedStatement.setString(24, entity.getSpringBrakeParking());
     }
 
     @Override

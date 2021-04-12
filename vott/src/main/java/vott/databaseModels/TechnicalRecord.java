@@ -1,11 +1,6 @@
 package vott.databaseModels;
 
 import lombok.Data;
-import vott.DataMethods;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Objects;
 
 @Data
 public class TechnicalRecord {
@@ -180,98 +175,4 @@ public class TechnicalRecord {
     private String numberOfSeatbelts;
     private String seatbeltInstallationApprovalDate;
 
-
-//    public void setTechnicalRecord(ResultSet rs) throws SQLException {
-//        this.vehicleID = DataMethods.getInteger(rs, "vehicle_id");
-//        this.recordCompleteness = Objects.toString(rs.getString("recordCompleteness"), "");
-//        this.createdAt = Objects.toString(rs.getString("createdAt"), "");
-//        this.lastUpdatedAt = Objects.toString(rs.getString("lastUpdatedAt"), "");
-//        this.makeModelID = DataMethods.getInteger(rs, "make_model_id");
-//        this.functionCode = Objects.toString(rs.getString("functionCode"), "");
-//        this.offRoad = DataMethods.getInteger(rs, "offRoad");
-//        this.numberOfWheelsDriven = DataMethods.getInteger(rs, "numberOfWheelsDriven");
-//        this.emissionsLimit = Objects.toString(rs.getString("emissionsLimit"), "");
-//        this.departmentalVehicleMarker = DataMethods.getInteger(rs,"departmentalVehicleMarker");
-//        this.alterationMarker = DataMethods.getInteger(rs,"alterationMarker");
-//        this.vehicleClassID = DataMethods.getInteger(rs,"vehicle_class_id");
-//        this.variantVersionNumber = Objects.toString(rs.getString("variantVersionNumber"), "");
-//        this.grossEecWeight = DataMethods.getInteger(rs, "grossEecWeight");
-//        this.trainEecWeight = DataMethods.getInteger(rs, "trainEecWeight");
-//        this.maxTrainEecWeight = DataMethods.getInteger(rs, "maxTrainEecWeight");
-//        this.applicantDetailID = DataMethods.getInteger(rs, "applicant_detail_id");
-//        this.purchaserDetailID = DataMethods.getInteger(rs, "purchaser_detail_id");
-//        this.manufacturerDetailID = DataMethods.getInteger(rs, "manufacturer_detail_id");
-//        this.manufactureYear = Objects.toString(DataMethods.trimYear(rs.getString("manufactureYear")), "");
-//        this.regnDate = DataMethods.formatDate(rs.getString("regnDate"));
-//        this.firstUseDate = DataMethods.formatDate(rs.getString("firstUseDate"));
-//        this.coifDate = DataMethods.formatDate(rs.getString("coifDate"));
-//        this.ntaNumber = Objects.toString(rs.getString("ntaNumber"), "");
-//        this.coifSerialNumber = Objects.toString(rs.getString("coifSerialNumber"), "");
-//        this.coifCertifierName = Objects.toString(rs.getString("coifCertifierName"), "");
-//        this.approvalType = Objects.toString(rs.getString("approvalType"), "");
-//        this.approvalTypeNumber = Objects.toString(rs.getString("approvalTypeNumber"), "");
-//        this.variantNumber = Objects.toString(rs.getString("variantNumber"), "");
-//        this.conversionRefNo = Objects.toString(rs.getString("conversionRefNo"), "");
-//        this.seatsLowerDeck = DataMethods.getInteger(rs, "seatsLowerDeck");
-//        this.seatsUpperDeck = DataMethods.getInteger(rs, "seatsUpperDeck");
-//        this.standingCapacity = DataMethods.getInteger(rs, "standingCapacity");
-//        this.speedRestriction = DataMethods.getInteger(rs, "speedRestriction");
-//        this.speedLimiterMrk = DataMethods.getInteger(rs, "speedLimiterMrk");
-//        this.tachoExemptMrk = DataMethods.getInteger(rs, "tachoExemptMrk");
-//        this.dispensations = Objects.toString(rs.getString("dispensations"), "");
-//        this.remarks = Objects.toString(rs.getString("remarks"), "");
-//        this.reasonForCreation = Objects.toString(rs.getString("reasonForCreation"), "");
-//        this.statusCode = Objects.toString(rs.getString("statusCode"), "");
-//        this.unladenWeight = DataMethods.getInteger(rs, "unladenWeight");
-//        this.grossKerbWeight = DataMethods.getInteger(rs, "grossKerbWeight");
-//        this.grossLadenWeight = DataMethods.getInteger(rs, "grossLadenWeight");
-//        this.grossGbWeight = DataMethods.getInteger(rs, "grossGbWeight");
-//        this.grossDesignWeight = DataMethods.getInteger(rs, "grossDesignWeight");
-//        this.trainGbWeight = DataMethods.getInteger(rs, "trainGbWeight");
-//        this.trainDesignWeight = DataMethods.getInteger(rs, "trainDesignWeight");
-//        this.maxTrainGbWeight = DataMethods.getInteger(rs, "maxTrainGbWeight");
-//        this.maxTrainDesignWeight = DataMethods.getInteger(rs, "maxTrainDesignWeight");
-//        this.maxLoadOnCoupling = DataMethods.getInteger(rs, "maxLoadOnCoupling");
-//        this.frameDescription = Objects.toString(rs.getString("frameDescription"), "");
-//        this.tyreUseCode = Objects.toString(rs.getString("tyreUseCode"), "");
-//        this.roadFriendly = DataMethods.getInteger(rs, "roadFriendly");
-//        this.drawbarCouplingFitted = DataMethods.getInteger(rs, "drawbarCouplingFitted");
-//        this.euroStandard = Objects.toString(rs.getString("euroStandard"), "");
-//        this.suspensionType = Objects.toString(rs.getString("suspensionType"), "");
-//        this.couplingType = Objects.toString(rs.getString("couplingType"), "");
-//        this.length = DataMethods.getInteger(rs, "length");
-//        this.height = DataMethods.getInteger(rs, "height");
-//        this.width = DataMethods.getInteger(rs, "width");
-//        this.frontAxleTo5thWheelMin = DataMethods.getInteger(rs, "frontAxleTo5thWheelMin");
-//        this.frontAxleTo5thWheelMax = DataMethods.getInteger(rs, "frontAxleTo5thWheelMax");
-//        this.frontAxleTo5thWheelCouplingMin = DataMethods.getInteger(rs, "frontAxleTo5thWheelCouplingMin");
-//        this.frontAxleTo5thWheelCouplingMax = DataMethods.getInteger(rs, "frontAxleTo5thWheelCouplingMax");
-//        this.frontAxleToRearAxle = DataMethods.getInteger(rs, "frontAxleToRearAxle");
-//        this.rearAxleToRearTrl = DataMethods.getInteger(rs, "rearAxleToRearTrl");
-//        this.couplingCenterToRearAxleMin = DataMethods.getInteger(rs, "couplingCenterToRearAxleMin");
-//        this.couplingCenterToRearAxleMax = DataMethods.getInteger(rs, "couplingCenterToRearAxleMax");
-//        this.couplingCenterToRearTrlMin = DataMethods.getInteger(rs, "couplingCenterToRearTrlMin");
-//        this.couplingCenterToRearTrlMax = DataMethods.getInteger(rs, "couplingCenterToRearTrlMax");
-//        this.centreOfRearmostAxleToRearOfTrl = DataMethods.getInteger(rs, "centreOfRearmostAxleToRearOfTrl");
-//        this.notes = Objects.toString(rs.getString("notes"), "");
-//        this.purchaserNotes = Objects.toString(rs.getString("purchaserNotes"), "");
-//        this.manufacturerNotes = Objects.toString(rs.getString("manufacturerNotes"), "");
-//        this.noOfAxles = DataMethods.getInteger(rs, "noOfAxles");
-//        this.brakeCode = Objects.toString(rs.getString("brakeCode"), "");
-//        this.brakes_dtpNumber = Objects.toString(rs.getString("brakes_dtpNumber"), "");
-//        this.brakes_loadSensingValve = DataMethods.getInteger(rs, "brakes_loadSensingValve");
-//        this.brakes_antilockBrakingSystem = DataMethods.getInteger(rs, "brakes_antilockBrakingSystem");
-//        this.createdByID = DataMethods.getInteger(rs, "createdBy_Id");
-//        this.lastUpdatedByID = DataMethods.getInteger(rs, "lastUpdatedBy_Id");
-//        this.updateType = Objects.toString(rs.getString("updateType"), "");
-//        this.numberOfSeatbelts = Objects.toString(rs.getString("numberOfSeatbelts"), "");
-//        this.seatbeltInstallationApprovalDate = DataMethods.formatDate(rs.getString("seatbeltInstallationApprovalDate"));
-//
-//    }
-
-    public String createInsertQuery(){
-        return "INSERT INTO `technical_record` (`vehicle_id`,`recordCompleteness`,`createdAt`,`lastUpdatedAt`,`make_model_id`,`functionCode`,`offRoad`,`numberOfWheelsDriven`,`emissionsLimit`,`departmentalVehicleMarker`,`alterationMarker`,`vehicle_class_id`,`variantVersionNumber`,`grossEecWeight`,`trainEecWeight`,`maxTrainEecWeight`,`applicant_detail_id`,`purchaser_detail_id`,`manufacturer_detail_id`,`manufactureYear`,`regnDate`,`firstUseDate`,`coifDate`,`ntaNumber`,`coifSerialNumber`,`coifCertifierName`,`approvalType`,`approvalTypeNumber`,`variantNumber`,`conversionRefNo`,`seatsLowerDeck`,`seatsUpperDeck`,`standingCapacity`,`speedRestriction`,`speedLimiterMrk`,`tachoExemptMrk`,`dispensations`,`remarks`,`reasonForCreation`,`statusCode`,`unladenWeight`,`grossKerbWeight`,`grossLadenWeight`,`grossGbWeight`,`grossDesignWeight`,`trainGbWeight`,`trainDesignWeight`,`maxTrainGbWeight`,`maxTrainDesignWeight`,`maxLoadOnCoupling`,`frameDescription`,`tyreUseCode`,`roadFriendly`,`drawbarCouplingFitted`,`euroStandard`,`suspensionType`,`couplingType`,`length`,`height`,`width`,`frontAxleTo5thWheelMin`,`frontAxleTo5thWheelMax`,`frontAxleTo5thWheelCouplingMin`,`frontAxleTo5thWheelCouplingMax`,`frontAxleToRearAxle`,`rearAxleToRearTrl`,`couplingCenterToRearAxleMin`,`couplingCenterToRearAxleMax`,`couplingCenterToRearTrlMin`,`couplingCenterToRearTrlMax`,`centreOfRearmostAxleToRearOfTrl`,`notes`,`purchaserNotes`,`manufacturerNotes`,`noOfAxles`,`brakeCode`,`brakes_dtpNumber`,`brakes_loadSensingValve`,`brakes_antilockBrakingSystem`,`createdBy_Id`,`lastUpdatedBy_Id`,`updateType`,`numberOfSeatbelts`,`seatbeltInstallationApprovalDate`) " +
-                "VALUES ("+vehicleID+", '"+recordCompleteness+"', '"+createdAt+"', '"+lastUpdatedAt+"', "+makeModelID+", '"+functionCode+"', "+offRoad+", "+numberOfWheelsDriven+", '"+emissionsLimit+"', "+departmentalVehicleMarker+", "+alterationMarker+", "+vehicleClassID+", '"+variantVersionNumber+"', "+grossEecWeight+", "+trainEecWeight+", "+maxTrainEecWeight+", "+applicantDetailID+", "+purchaserDetailID+", "+manufacturerDetailID+", '"+manufactureYear+"', "+regnDate+", "+firstUseDate+", "+coifDate+", '"+ntaNumber+"', '"+coifSerialNumber+"', '"+coifCertifierName+"', '"+approvalType+"', '"+approvalTypeNumber+"', '"+variantNumber+"', '"+conversionRefNo+"', "+seatsLowerDeck+", "+seatsUpperDeck+", "+standingCapacity+", "+speedRestriction+", "+speedLimiterMrk+", "+tachoExemptMrk+", '"+dispensations+"', '"+remarks+"', '"+reasonForCreation+"', '"+statusCode+"', "+unladenWeight+", "+grossKerbWeight+", "+grossLadenWeight+", "+grossGbWeight+", "+grossDesignWeight+", "+trainGbWeight+", "+trainDesignWeight+", "+maxTrainGbWeight+", "+maxTrainDesignWeight+", "+maxLoadOnCoupling+", '"+frameDescription+"', '"+tyreUseCode+"', "+roadFriendly+", "+drawbarCouplingFitted+", '"+euroStandard+"', '"+suspensionType+"', '"+couplingType+"', "+length+", "+height+", "+width+", "+frontAxleTo5thWheelMin+", "+frontAxleTo5thWheelMax+", "+frontAxleTo5thWheelCouplingMin+", "+frontAxleTo5thWheelCouplingMax+", "+frontAxleToRearAxle+", "+rearAxleToRearTrl+", "+couplingCenterToRearAxleMin+", "+couplingCenterToRearAxleMax+", "+couplingCenterToRearTrlMin+", "+couplingCenterToRearTrlMax+", "+centreOfRearmostAxleToRearOfTrl+", '"+notes+"', '"+purchaserNotes+"', '"+manufacturerNotes+"', "+noOfAxles+", '"+brakeCode+"', '"+brakes_dtpNumber+"', "+brakes_loadSensingValve+", "+brakes_antilockBrakingSystem+", "+createdByID+", "+lastUpdatedByID+", '"+updateType+"', '"+numberOfSeatbelts+"', "+seatbeltInstallationApprovalDate+") " +
-                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-    }
 }

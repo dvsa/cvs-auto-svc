@@ -41,7 +41,13 @@ public class PlateRepository extends AbstractRepository<Plate> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Plate entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(6, entity.getTechnicalRecordID());
+        preparedStatement.setString(7, entity.getPlateSerialNumber());
+        preparedStatement.setString(8, entity.getPlateIssueDate());
+        preparedStatement.setString(9, entity.getPlateReasonForIssue());
+        preparedStatement.setString(10, entity.getPlateIssuer());
     }
 
     @Override

@@ -36,7 +36,11 @@ public class AxleSpacingRepository extends AbstractRepository<AxleSpacing> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, AxleSpacing entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(4, entity.getTechnicalRecordID());
+        preparedStatement.setString(5, entity.getAxles());
+        preparedStatement.setString(6, entity.getValue());
     }
 
     @Override
