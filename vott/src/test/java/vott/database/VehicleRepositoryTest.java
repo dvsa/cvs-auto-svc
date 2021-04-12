@@ -31,7 +31,7 @@ public class VehicleRepositoryTest {
     @After
     public void tearDown() {
         for (int primaryKey : deleteOnExit) {
-            vehicleRepository.delete(primaryKey);
+//            vehicleRepository.delete(primaryKey);
         }
     }
 

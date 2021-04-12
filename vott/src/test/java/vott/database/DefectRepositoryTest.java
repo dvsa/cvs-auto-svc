@@ -72,7 +72,7 @@ public class DefectRepositoryTest {
         defect.setDeficiencyRef("Test Reference");
         defect.setDeficiencyID("1");
         defect.setDeficiencySubID("444");
-        defect.setDeficiencyCategory("Test Def Category");
+        defect.setDeficiencyCategory("Category");
         defect.setDeficiencyText("Test Test");
         defect.setStdForProhibition("1");
 

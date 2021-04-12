@@ -36,14 +36,14 @@ public class CustomDefectRepositoryTest {
     }
 
     @Test
-    public void upsertingIdenticalDataReturnsSamePk() {
+    public void upsertingIdenticalDataReturnsDifferentPk() {
         int primaryKey1 = customDefectRepository.fullUpsert(newTestCustomDefect());
         int primaryKey2 = customDefectRepository.fullUpsert(newTestCustomDefect());
 
         deleteOnExit.add(primaryKey1);
         deleteOnExit.add(primaryKey2);
 
-        assertEquals(primaryKey1, primaryKey2);
+        assertNotEquals(primaryKey1, primaryKey2);
     }
 
     @Test

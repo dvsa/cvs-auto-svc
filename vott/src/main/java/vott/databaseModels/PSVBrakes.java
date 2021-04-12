@@ -1,10 +1,6 @@
 package vott.databaseModels;
 
 import lombok.Data;
-import vott.DataMethods;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 @Data
 public class PSVBrakes {
@@ -23,4 +19,5 @@ public class PSVBrakes {
     private String serviceBrakeForceB;
     private String secondaryBrakeForceB;
     private String parkingBrakeForceB;
+
 }

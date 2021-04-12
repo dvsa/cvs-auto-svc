@@ -51,7 +51,7 @@ public class FuelEmissionRepositoryTest {
         FuelEmission fe1 = newTestFuelEmission();
 
         FuelEmission fe2 = newTestFuelEmission();
-        fe2.setEmissionStandard("Another Emission Standard");
+        fe2.setEmissionStandard("Another Standard");
 
         int primaryKey1 = fuelEmissionRepository.partialUpsert(fe1);
         int primaryKey2 = fuelEmissionRepository.partialUpsert(fe2);
@@ -67,7 +67,7 @@ public class FuelEmissionRepositoryTest {
 
         fe.setModTypeCode("a");
         fe.setDescription("Test Description");
-        fe.setEmissionStandard("Test Emission Standard");
+        fe.setEmissionStandard("Test Standard");
         fe.setFuelType("Petrol");
 
         return fe;

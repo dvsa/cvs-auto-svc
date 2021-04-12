@@ -50,7 +50,18 @@ public class DefectRepository extends AbstractRepository<Defect> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Defect entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(11, entity.getImNumber());
+        preparedStatement.setString(12, entity.getImDescription());
+        preparedStatement.setString(13, entity.getItemNumber());
+        preparedStatement.setString(14, entity.getItemDescription());
+        preparedStatement.setString(15, entity.getDeficiencyRef());
+        preparedStatement.setString(16, entity.getDeficiencyID());
+        preparedStatement.setString(17, entity.getDeficiencySubID());
+        preparedStatement.setString(18, entity.getDeficiencyCategory());
+        preparedStatement.setString(19, entity.getDeficiencyText());
+        preparedStatement.setString(20, entity.getStdForProhibition());
     }
 
     @Override

@@ -67,7 +67,7 @@ public class PSVBrakesRepositoryTest {
         PSVBrakes vs1 = newTestPSVBrakes();
 
         PSVBrakes vs2 = newTestPSVBrakes();
-        vs2.setBrakeCode("Updated Test Code");
+        vs2.setBrakeCode("Code");
 
         int primaryKey1 = psvBrakesRepository.fullUpsert(vs1);
         int primaryKey2 = psvBrakesRepository.fullUpsert(vs2);

@@ -58,7 +58,22 @@ public class PSVBrakesRepository extends AbstractRepository<PSVBrakes>{
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, PSVBrakes entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(15, entity.getTechnicalRecordID());
+        preparedStatement.setString(16, entity.getBrakeCodeOriginal());
+        preparedStatement.setString(17, entity.getBrakeCode());
+        preparedStatement.setString(18, entity.getDataTrBrakeOne());
+        preparedStatement.setString(19, entity.getDataTrBrakeTwo());
+        preparedStatement.setString(20, entity.getDataTrBrakeThree());
+        preparedStatement.setString(21, entity.getRetarderBrakeOne());
+        preparedStatement.setString(22, entity.getRetarderBrakeTwo());
+        preparedStatement.setString(23, entity.getServiceBrakeForceA());
+        preparedStatement.setString(24, entity.getSecondaryBrakeForceA());
+        preparedStatement.setString(25, entity.getParkingBrakeForceA());
+        preparedStatement.setString(26, entity.getServiceBrakeForceB());
+        preparedStatement.setString(27, entity.getSecondaryBrakeForceB());
+        preparedStatement.setString(28, entity.getParkingBrakeForceB());
     }
 
     @Override

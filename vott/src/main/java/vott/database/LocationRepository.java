@@ -44,7 +44,15 @@ public class LocationRepository extends AbstractRepository<Location> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Location entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(8, entity.getVertical());
+        preparedStatement.setString(9, entity.getHorizontal());
+        preparedStatement.setString(10, entity.getLateral());
+        preparedStatement.setString(11, entity.getLongitudinal());
+        preparedStatement.setString(12, entity.getRowNumber());
+        preparedStatement.setString(13, entity.getSeatNumber());
+        preparedStatement.setString(14, entity.getAxleNumber());
     }
 
     @Override

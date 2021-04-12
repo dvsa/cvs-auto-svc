@@ -1,11 +1,6 @@
 package vott.databaseModels;
 
 import lombok.Data;
-import vott.DataMethods;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Objects;
 
 @Data
 public class ADR {
@@ -78,45 +73,4 @@ public class ADR {
     private String productListRefNo;
     private String productList;
 
-    public void setADR(ResultSet rs) throws SQLException {
-//        this.technicalRecordID = DataMethods.getInteger(rs, "technical_record_id");
-//        this.type = Objects.toString(rs.getString("type"), "");
-//        this.approvalDate = Objects.toString(rs.getString("approvalDate"), "");
-//        this.listStatementApplicable = DataMethods.getInteger(rs, "listStatementApplicable");
-//        this.batteryListNumber = Objects.toString(rs.getString("batteryListNumber"), "");
-//        this.declarationsSeen = DataMethods.getInteger(rs, "declarationsSeen");
-//        this.brakeDeclarationsSeen = DataMethods.getInteger(rs, "brakeDeclarationsSeen");
-//        this.brakeDeclarationIssuer = DataMethods.getInteger(rs, "brakeDeclarationIssuer");
-//        this.brakeEndurance = DataMethods.getInteger(rs, "brakeEndurance");
-//        this.weight = Objects.toString(rs.getString("weight"), "");
-//        this.compatibilityGroupJ = DataMethods.getInteger(rs, "compatibilityGroupJ");
-//        this.additionalExaminerNotes = Objects.toString(rs.getString("additionalExaminerNotes"), "");
-//        this.applicantDetailsName = Objects.toString(rs.getString("applicantDetailsName"), "");
-//        this.street = Objects.toString(rs.getString("street"), "");
-//        this.town = Objects.toString(rs.getString("town"), "");
-//        this.city = Objects.toString(rs.getString("city"), "");
-//        this.postcode = Objects.toString(rs.getString("postcode"), "");
-//        this.memosApply = Objects.toString(rs.getString("memosApply"), "");
-//        this.adrTypeApprovalNo = Objects.toString(rs.getString("adrTypeApprovalNo"), "");
-//        this.adrCertificateNotes = Objects.toString(rs.getString("adrCertificateNotes"), "");
-//        this.tankManufacturer = Objects.toString(rs.getString("tankManufacturer"), "");
-//        this.yearOfManufacture = Objects.toString(rs.getString("yearOfManufacture"), "");
-//        this.tankCode = Objects.toString(rs.getString("tankCode"), "");
-//        this.specialProvisions = Objects.toString(rs.getString("specialProvisions"), "");
-//        this.tankManufacturerSerialNo = Objects.toString(rs.getString("tankManufacturerSerialNo"), "");
-//        this.tankTypeAppNo = Objects.toString(rs.getString("tankTypeAppNo"), "");
-//        this.tc2Type = Objects.toString(rs.getString("tc2Type"), "");
-//        this.tc2IntermediateApprovalNo = Objects.toString(rs.getString("tc2IntermediateApprovalNo"), "");
-//        this.tc2IntermediateExpiryDate = Objects.toString(rs.getString("tc2IntermediateExpiryDate"), "");
-//        this.substancesPermitted = Objects.toString(rs.getString("substancesPermitted"), "");
-//        this.statement = Objects.toString(rs.getString("statement"), "");
-//        this.productListRefNo = Objects.toString(rs.getString("productListRefNo"), "");
-//        this.productList = Objects.toString(rs.getString("productList"), "");
-    }
-
-    public String createInsertQuery(){
-        return "INSERT INTO adr (`technical_record_id`,`type`,`approvalDate`,`listStatementApplicable`,`batteryListNumber`,`declarationsSeen`,`brakeDeclarationsSeen`,`brakeDeclarationIssuer`,`brakeEndurance`,`weight`,`compatibilityGroupJ`,`additionalExaminerNotes`,`applicantDetailsName`,`street`,`town`,`city`,`postcode`,`memosApply`,`adrTypeApprovalNo`,`adrCertificateNotes`,`tankManufacturer`,`yearOfManufacture`,`tankCode`,`specialProvisions`,`tankManufacturerSerialNo`,`tankTypeAppNo`,`tc2Type`,`tc2IntermediateApprovalNo`,`tc2IntermediateExpiryDate`,`substancesPermitted`,`statement`,`productListRefNo`,`productList`) " +
-                "VALUES ("+technicalRecordID+", '"+type+"', '"+approvalDate+"', "+listStatementApplicable+", '"+batteryListNumber+"', "+declarationsSeen+", "+brakeDeclarationsSeen+", "+brakeDeclarationIssuer+", "+brakeEndurance+", '"+weight+"', "+compatibilityGroupJ+", '"+additionalExaminerNotes+"', '"+applicantDetailsName+"', '"+street+"', '"+town+"', '"+city+"', '"+postcode+"', '"+memosApply+"', '"+adrTypeApprovalNo+"', '"+adrCertificateNotes+"', '"+tankManufacturer+"', '"+yearOfManufacture+"', '"+tankCode+"', '"+specialProvisions+"', '"+tankManufacturerSerialNo+"', '"+tankTypeAppNo+"', '"+tc2Type+"', '"+tc2IntermediateApprovalNo+"', '"+tc2IntermediateExpiryDate+"', '"+substancesPermitted+"', '"+statement+"', '"+productListRefNo+"', '"+productList+"') " +
-                "ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)";
-    }
 }

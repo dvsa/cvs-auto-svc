@@ -120,7 +120,7 @@ public class TestResultRepositoryTest {
         tr.setPreparerID("1");
         tr.setVehicleClassID("1");
         tr.setTestTypeID("1");
-        tr.setTestStatus("Test Passed");
+        tr.setTestStatus("Test Pass");
         tr.setReasonForCancellation("Automation Test Run");
         tr.setNumberOfSeats("3");
         tr.setOdometerReading("900");
@@ -141,7 +141,7 @@ public class TestResultRepositoryTest {
         tr.setTestTypeEndTimestamp("2022-01-01 00:00:00");
         tr.setNumberOfSeatbeltsFitted("2");
         tr.setLastSeatbeltInstallationCheckDate("2022-01-01");
-        tr.setSeatbeltInstallationCheckDate("A");
+        tr.setSeatbeltInstallationCheckDate("1");
         tr.setTestResult("Auto Test");
         tr.setReasonForAbandoning("Test Automation Run");
         tr.setAdditionalNotesRecorded("Additional Test Notes");

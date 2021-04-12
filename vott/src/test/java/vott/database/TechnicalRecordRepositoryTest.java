@@ -83,7 +83,7 @@ public class TechnicalRecordRepositoryTest {
         TechnicalRecord tr1 = newTestTechnicalRecord();
 
         TechnicalRecord tr2 = newTestTechnicalRecord();
-        tr2.setRecordCompleteness("Test Updated Completeness");
+        tr2.setRecordCompleteness("ABCD");
 
         int primaryKey1 = technicalRecordRepository.fullUpsert(tr1);
         int primaryKey2 = technicalRecordRepository.fullUpsert(tr2);
@@ -98,7 +98,7 @@ public class TechnicalRecordRepositoryTest {
         TechnicalRecord tr = new TechnicalRecord();
 
         tr.setVehicleID("1");
-        tr.setRecordCompleteness("Test Completeness");
+        tr.setRecordCompleteness("Complete");
         tr.setCreatedAt("2021-01-01 00:00:00");
         tr.setLastUpdatedAt("2021-01-01 00:00:00");
         tr.setMakeModelID("1");
@@ -149,8 +149,8 @@ public class TechnicalRecordRepositoryTest {
         tr.setMaxLoadOnCoupling("1400");
         tr.setFrameDescription("Test Automation");
         tr.setTyreUseCode("A1");
-        tr.setRoadFriendly("Y");
-        tr.setDrawbarCouplingFitted("Y");
+        tr.setRoadFriendly("1");
+        tr.setDrawbarCouplingFitted("1");
         tr.setEuroStandard("Y555");
         tr.setSuspensionType("Y");
         tr.setCouplingType("B");
@@ -174,8 +174,8 @@ public class TechnicalRecordRepositoryTest {
         tr.setNoOfAxles("3");
         tr.setBrakeCode("XXXXX");
         tr.setBrakes_dtpNumber("DTP111");
-        tr.setBrakes_loadSensingValve("Y");
-        tr.setBrakes_antilockBrakingSystem("Y");
+        tr.setBrakes_loadSensingValve("1");
+        tr.setBrakes_antilockBrakingSystem("1");
         tr.setCreatedByID("1");
         tr.setLastUpdatedByID("1");
         tr.setUpdateType("AutoTest");
