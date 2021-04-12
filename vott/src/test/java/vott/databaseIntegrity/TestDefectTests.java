@@ -5,7 +5,6 @@ import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
 import vott.databaseModels.TestDefect;
-import vott.databaseModels.Tyre;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -37,7 +36,7 @@ public class TestDefectTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        td.setTestDefect(startingRS);
+//        td.setTestDefect(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = td.createInsertQuery();

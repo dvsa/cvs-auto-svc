@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import vott.DataMethods;
 import vott.DatabaseConnection;
-import vott.databaseModels.FuelEmissions;
+import vott.databaseModels.FuelEmission;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -27,7 +27,7 @@ public class FuelEmissionTests {
     @Test
     public void FuelEmissionInsertExistingDataTest() throws SQLException {
 
-        FuelEmissions fe = new FuelEmissions();
+        FuelEmission fe = new FuelEmission();
 
         ResultSet startingRS = db.startingResultSet("fuel_emission");
         int startingRowCount = DataMethods.getResultSetLength(startingRS);

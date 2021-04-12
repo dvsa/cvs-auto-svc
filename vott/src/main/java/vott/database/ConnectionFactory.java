@@ -1,4 +1,4 @@
-package vott.repository;
+package vott.database;
 
 import lombok.RequiredArgsConstructor;
 

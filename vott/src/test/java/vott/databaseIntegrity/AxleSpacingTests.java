@@ -36,7 +36,7 @@ public class AxleSpacingTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        as.setAxleSpacing(startingRS);
+//        as.setAxleSpacing(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = as.createInsertQuery();

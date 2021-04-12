@@ -36,7 +36,7 @@ public class DefectTests {
         //Capture data from first row of results
         startingRS.first();
         ResultSetMetaData rsmd = startingRS.getMetaData();
-        defect.setDefect(startingRS);
+//        defect.setDefect(startingRS);
 
         //create insert query using first row from the DB
         String insertQuery = defect.createInsertQuery();

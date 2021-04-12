@@ -10,13 +10,18 @@ import java.util.Objects;
 @Data
 public class CustomDefect {
 
-    private Integer testResultID;
+//    private Integer testResultID;
+//    private String referenceNumber;
+//    private String defectName;
+//    private String defectNotes;
+
+    private String testResultID;
     private String referenceNumber;
     private String defectName;
     private String defectNotes;
 
     public void setCustomDefect(ResultSet rs) throws SQLException {
-        this.testResultID = DataMethods.getInteger(rs, "test_result_id");
+//        this.testResultID = DataMethods.getInteger(rs, "test_result_id");
         this.referenceNumber = Objects.toString(rs.getString("referenceNumber"), "");
         this.defectName = Objects.toString(rs.getString("defectName"), "");
         this.defectNotes = Objects.toString(rs.getString("defectNotes"), "");
