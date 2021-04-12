@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import vott.databaseModels.TestResult;
+import vott.databaseModels.TestType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class TestResultRepositoryTest {
     private List<Integer> deleteOnExit;
 
     private TestResultRepository testResultRepository;
+    private TestTypeRepository testTypeRepository;
 
     @Before
     public void setUp() {
@@ -24,6 +26,7 @@ public class TestResultRepositoryTest {
         );
 
         testResultRepository = new TestResultRepository(connectionFactory);
+        testTypeRepository = new TestTypeRepository(connectionFactory);
 
         deleteOnExit = new ArrayList<>();
     }
@@ -64,16 +67,26 @@ public class TestResultRepositoryTest {
 
     @Test
     public void upsertingNewTestTypeIDReturnsDifferentPk() {
+        TestType tt = newTestTestType();
+
+        int ttpk = testTypeRepository.partialUpsert(tt);
+
         TestResult tr1 = newTestTestResult();
 
         TestResult tr2 = newTestTestResult();
-        tr2.setTestTypeID("2");
+        tr2.setTestTypeID(Integer.toString(ttpk));
 
         int primaryKey1 = testResultRepository.fullUpsert(tr1);
         int primaryKey2 = testResultRepository.fullUpsert(tr2);
 
         deleteOnExit.add(primaryKey1);
         deleteOnExit.add(primaryKey2);
+
+        for (int primaryKey : deleteOnExit) {
+            testResultRepository.delete(primaryKey);
+        }
+
+        testTypeRepository.delete(ttpk);
 
         assertNotEquals(primaryKey1, primaryKey2);
     }
@@ -154,5 +167,14 @@ public class TestResultRepositoryTest {
         tr.setLastUpdatedByID("1");
 
         return tr;
+    }
+
+    private TestType newTestTestType() {
+        TestType tt = new TestType();
+
+        tt.setTestTypeClassification("Test Test Type");
+        tt.setTestTypeName("Test Name");
+
+        return tt;
     }
 }

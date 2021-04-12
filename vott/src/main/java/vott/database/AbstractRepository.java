@@ -104,11 +104,12 @@ public abstract class AbstractRepository<T> {
     private int upsert(PreparedStatement preparedStatement, T entity) throws SQLException {
         int affectedRows = preparedStatement.executeUpdate();
 
-        if (affectedRows > 2) {
+        if (affectedRows != 1 && affectedRows != 2) {
             throw new RuntimeException("Expected either 1 (INSERT) or 2 (UPDATE) affected rows, got " + affectedRows);
         }
 
         ResultSet rs = preparedStatement.getGeneratedKeys();
+        //Get Generated keys can return 2 values when a full upsert is ran, this is a known issue with JDBC and mysql - https://bugs.mysql.com/bug.php?id=90688
 
         List<Integer> generatedKeys = new ArrayList<>();
 
@@ -120,7 +121,7 @@ public abstract class AbstractRepository<T> {
             generatedKeys.add(rs.getInt(1));
         }
 
-        if (generatedKeys.size() != 1) {
+        if (generatedKeys.size() != 1 && generatedKeys.size() != 2) { //.size == 2 allowed due to bug linked in comments related to generated keys above
             throw new RuntimeException("Expected exactly 1 generated key, got " + generatedKeys.size());
         }
 
