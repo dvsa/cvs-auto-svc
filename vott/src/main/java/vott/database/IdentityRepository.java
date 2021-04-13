@@ -1,6 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.Identity;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.Identity;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;
