@@ -1,4 +1,4 @@
-package vott.databaseModels;
+package vott.models.dao;
 
 import lombok.Data;
 

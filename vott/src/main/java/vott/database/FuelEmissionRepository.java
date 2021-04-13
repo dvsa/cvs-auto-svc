@@ -1,6 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.FuelEmission;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.FuelEmission;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;

@@ -1,7 +1,8 @@
-package vott.database;
+package vott.database.connection;
 
 import lombok.Builder;
 import lombok.Data;
+import vott.aws.AWSSecrets;
 
 @Data
 @Builder
@@ -15,7 +16,9 @@ public class DatabaseConfiguration {
 
     private String dbName;
 
-    public static DatabaseConfiguration robertWhitehouse() {
+    private AWSSecrets secrets;
+
+    public static DatabaseConfiguration connectionBuilder() {
         return DatabaseConfiguration.builder()
             .host("cvs-data-migration-staging-db-cluster-nonprod.cibmebkudson.eu-west-1.rds.amazonaws.com")
             .port(3306)

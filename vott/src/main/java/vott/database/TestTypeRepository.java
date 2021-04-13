@@ -1,7 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.TestType;
-import vott.databaseModels.Vehicle;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.TestType;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;

@@ -3,7 +3,9 @@ package vott.database;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import vott.databaseModels.Preparer;
+import vott.database.connection.ConnectionFactory;
+import vott.database.connection.DatabaseConfiguration;
+import vott.models.dao.Preparer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class PreparerRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.robertWhitehouse()
+                DatabaseConfiguration.connectionBuilder()
         );
 
         preparerRepository = new PreparerRepository(connectionFactory);

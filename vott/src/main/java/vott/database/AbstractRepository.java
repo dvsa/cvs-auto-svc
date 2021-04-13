@@ -1,5 +1,6 @@
 package vott.database;
 
+import vott.database.connection.ConnectionFactory;
 import vott.sqlgeneration.SqlGenerator;
 import vott.sqlgeneration.TableDetails;
 

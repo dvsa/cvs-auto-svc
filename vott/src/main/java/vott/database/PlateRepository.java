@@ -1,7 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.Microfilm;
-import vott.databaseModels.Plate;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.Plate;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;

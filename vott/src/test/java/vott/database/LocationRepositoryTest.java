@@ -3,7 +3,9 @@ package vott.database;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import vott.databaseModels.Location;
+import vott.database.connection.ConnectionFactory;
+import vott.database.connection.DatabaseConfiguration;
+import vott.models.dao.Location;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class LocationRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.robertWhitehouse()
+                DatabaseConfiguration.connectionBuilder()
         );
 
         locationRepository = new LocationRepository(connectionFactory);

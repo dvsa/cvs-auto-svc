@@ -3,7 +3,9 @@ package vott.database;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import vott.databaseModels.AxleSpacing;
+import vott.database.connection.ConnectionFactory;
+import vott.database.connection.DatabaseConfiguration;
+import vott.models.dao.AxleSpacing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class AxleSpacingRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.robertWhitehouse()
+                DatabaseConfiguration.connectionBuilder()
         );
 
         axleSpacingRepository = new AxleSpacingRepository(connectionFactory);
