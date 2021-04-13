@@ -38,7 +38,12 @@ public class FuelEmissionRepository extends AbstractRepository<FuelEmission> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, FuelEmission entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(5, entity.getModTypeCode());
+        preparedStatement.setString(6, entity.getDescription());
+        preparedStatement.setString(7, entity.getEmissionStandard());
+        preparedStatement.setString(8, entity.getFuelType());
     }
 
     @Override

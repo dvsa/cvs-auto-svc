@@ -34,7 +34,10 @@ public class PreparerRepository extends AbstractRepository<Preparer> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Preparer entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(3, entity.getPreparerID());
+        preparedStatement.setString(4, entity.getName());
     }
 
     @Override

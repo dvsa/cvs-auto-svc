@@ -33,7 +33,11 @@ public class TestStationRepository extends AbstractRepository<TestStation> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, TestStation entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(4, entity.getPNumber());
+        preparedStatement.setString(5, entity.getName());
+        preparedStatement.setString(6, entity.getType());
     }
 
     @Override

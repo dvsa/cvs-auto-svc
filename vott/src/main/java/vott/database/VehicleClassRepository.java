@@ -41,7 +41,14 @@ public class VehicleClassRepository extends AbstractRepository<VehicleClass>{
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, VehicleClass entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(7, entity.getCode());
+        preparedStatement.setString(8, entity.getDescription());
+        preparedStatement.setString(9, entity.getVehicleType());
+        preparedStatement.setString(10, entity.getVehicleSize());
+        preparedStatement.setString(11, entity.getVehicleConfiguration());
+        preparedStatement.setString(12, entity.getEuVehicleCategory());
     }
 
     @Override

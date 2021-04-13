@@ -49,7 +49,17 @@ public class ContactDetailsRepository extends AbstractRepository<ContactDetails>
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, ContactDetails entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(10, entity.getName());
+        preparedStatement.setString(11, entity.getAddress1());
+        preparedStatement.setString(12, entity.getAddress2());
+        preparedStatement.setString(13, entity.getPostTown());
+        preparedStatement.setString(14, entity.getAddress3());
+        preparedStatement.setString(15, entity.getPostCode());
+        preparedStatement.setString(16, entity.getEmailAddress());
+        preparedStatement.setString(17, entity.getTelephoneNumber());
+        preparedStatement.setString(18, entity.getFaxNumber());
     }
 
     @Override

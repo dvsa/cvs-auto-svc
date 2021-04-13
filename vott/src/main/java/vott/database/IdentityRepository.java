@@ -36,7 +36,10 @@ public class IdentityRepository extends AbstractRepository<Identity>{
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Identity entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(3, entity.getIdentityID());
+        preparedStatement.setString(4, entity.getName());
     }
 
 
