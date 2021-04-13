@@ -1,0 +1,234 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "vin": "T72741234",
+  "partialVin": "741234",
+  "primaryVrm": "B2C1C11",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
+  "systemNumber": "10000026",
+  "techRecord": [
+    {
+      "adrDetails": {
+        "vehicleDetails": {
+          "type": "Rigid tank",
+          "approvalDate": "2019-10-15"
+        },
+        "listStatementApplicable": false,
+        "batteryListNumber": null,
+        "declarationsSeen": false,
+        "brakeDeclarationsSeen": false,
+        "brakeDeclarationIssuer": null,
+        "brakeEndurance": true,
+        "weight": "1.996",
+        "compatibilityGroupJ": true,
+        "permittedDangerousGoods": [
+          "FP <61 (FL)",
+          "Hydrogen"
+        ],
+        "additionalExaminerNotes": "additional examiner notes1",
+        "applicantDetails": {
+          "name": "name",
+          "street": "street",
+          "town": "town",
+          "city": "city",
+          "postcode": "postcode"
+        },
+        "memosApply": [
+        ],
+        "additionalNotes": {
+          "number": [
+            "3",
+            "1"
+          ],
+          "guidanceNotes": [
+            "New certificate requested",
+            "Additional guidance note"
+          ]
+        },
+        "adrTypeApprovalNo": "123456",
+        "tank": {
+          "tankDetails": {
+            "tankManufacturer": "tank manufacturer2",
+            "yearOfManufacture": 1990,
+            "tankCode": "tank code2",
+            "tc2Details": {
+              "tc2Type": "initial",
+              "tc2IntermediateApprovalNo": "123456789",
+              "tc2IntermediateExpiryDate": "2021-12-01"
+            },
+            "tc3Details": [
+              {
+                "tc3Type": "periodic",
+                "tc3PeriodicNumber": "34567890",
+                "tc3PeriodicExpiryDate": "2021-06-01"
+              }
+            ],
+            "specialProvisions": "special provisions1",
+            "tankManufacturerSerialNo": "12345678",
+            "tankTypeAppNo": "1234"
+          },
+          "tankStatement": {
+            "substancesPermitted": "Substances (class UN number and if necessary packing group and proper shipping name) may be carried",
+            "statement": "statement_12345",
+            "productList": "additional product list details1",
+            "productListRefNo": "productList_12345",
+            "productListUnNo": [
+              "123456",
+              "654321"
+            ]
+          }
+        }
+      },
+      "vehicleType": "hgv",
+      "regnDate": "2018-06-07",
+      "manufactureYear": 2018,
+      "noOfAxles": 3,
+      "brakes": {
+        "dtpNumber": "3798B"
+      },
+      "roadFriendly": false,
+      "drawbarCouplingFitted": true,
+      "euroStandard": "6",
+      "vehicleClass": {
+        "description": "heavy goods vehicle"
+      },
+      "vehicleConfiguration": "rigid",
+      "euVehicleCategory": "n2",
+      "alterationMarker": false,
+      "departmentalVehicleMarker": true,
+      "approvalType": "NTA",
+      "approvalTypeNumber": "123456",
+      "ntaNumber": "12345",
+      "variantNumber": "1234",
+      "variantVersionNumber": "123",
+      "make": "Mercedes",
+      "model": "B2",
+      "bodyType": {
+        "description": "refrigerated"
+      },
+      "functionCode": "H",
+      "fuelPropulsionSystem": "Hybrid",
+      "offRoad": true,
+      "numberOfWheelsDriven": 4,
+      "emissionsLimit": 20,
+      "conversionRefNo": "1234567",
+      "grossGbWeight": 40000,
+      "trainGbWeight": 41000,
+      "maxTrainGbWeight": 42000,
+      "grossEecWeight": 43000,
+      "trainEecWeight": 44000,
+      "maxTrainEecWeight": 45000,
+      "grossDesignWeight": 46000,
+      "trainDesignWeight": 47000,
+      "maxTrainDesignWeight": 48000,
+      "tyreUseCode": "2D",
+      "axles": [
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 1,
+          "tyres": {
+            "dataTrAxles": 1,
+            "fitmentCode": "single",
+            "plyRating": "AC",
+            "tyreCode": 363,
+            "tyreSize": "11-21.5"
+          },
+          "weights": {
+            "designWeight": 10000,
+            "eecWeight": 11000,
+            "gbWeight": 12000
+          }
+        },
+        {
+          "parkingBrakeMrk": false,
+          "axleNumber": 2,
+          "tyres": {
+            "dataTrAxles": 2,
+            "fitmentCode": "double",
+            "plyRating": "AB",
+            "tyreCode": 362,
+            "tyreSize": "10-20.5"
+          },
+          "weights": {
+            "designWeight": 20000,
+            "eecWeight": 21000,
+            "gbWeight": 22000
+          }
+        },
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 3,
+          "tyres": {
+            "dataTrAxles": 3,
+            "fitmentCode": "single",
+            "plyRating": "AA",
+            "tyreCode": 364,
+            "tyreSize": "12-22.5"
+          },
+          "weights": {
+            "designWeight": 5000,
+            "eecWeight": 6000,
+            "gbWeight": 7000
+          }
+        }
+      ],
+      "dimensions": {
+        "length": 9000,
+        "width": 2500,
+        "axleSpacing": [
+          {
+            "axles": "1-2",
+            "value": 5000
+          },
+          {
+            "axles": "2-3",
+            "value": 6000
+          }
+        ]
+      },
+      "frontAxleTo5thWheelMin": 400,
+      "frontAxleTo5thWheelMax": 1600,
+      "frontAxleTo5thWheelCouplingMin": 900,
+      "frontAxleTo5thWheelCouplingMax": 1000,
+      "frontAxleToRearAxle": 1800,
+      "applicantDetails": {
+        "address1": "applicant address 1",
+        "address2": "applicant address 2",
+        "address3": "applicant address 3",
+        "name": "applicant name",
+        "postCode": "PO16 7GZ",
+        "postTown": "applicant post town",
+        "telephoneNumber": "123456",
+        "emailAddress": "test@test.com"
+      },
+      "microfilm": {
+        "microfilmDocumentType": "HGV COC + Int Plate",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "plates": [
+        {
+          "plateSerialNumber": "11111111",
+          "plateIssueDate": "2020-02-02",
+          "plateReasonForIssue": "Original",
+          "plateIssuer": "Mr Jones"
+        },
+        {
+          "plateSerialNumber": "22222222",
+          "plateIssueDate": "2020-01-01",
+          "plateReasonForIssue": "Replacement",
+          "plateIssuer": "Mr Johnson"
+        }
+      ],
+      "notes": "tech record note",
+      "speedLimiterMrk": true,
+      "tachoExemptMrk": false,
+      "reasonForCreation": "new record",
+      "recordCompleteness": "testable"
+    }
+  ]
+}

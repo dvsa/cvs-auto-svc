@@ -1,0 +1,98 @@
+{
+  "testResultId": "1b8047ed-a29a-4d37-8376-832bc7111f35",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369561",
+  "testStationType": "gvts",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "testerEmailAddress": "someone@email.com",
+  "testStartTimestamp": "2020-03-02T14:42:05.280Z",
+  "testEndTimestamp": "2020-03-02T14:45:06.915Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "testTypes": [
+    {
+      "testTypeName": "Low Emissions Certificate (LEC) with annual test",
+      "name": "Technical test",
+      "testTypeId": "39",
+      "certificateNumber": "12334",
+      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
+      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
+      "testExpiryDate": "2019-09-19",
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "particulateTrapFitted": "New improved particulateTrap",
+      "particulateTrapSerialNumber": "12481632",
+      "modificationTypeUsed": "Big filter",
+      "smokeTestKLimitApplied": "2.2",
+      "emissionStandard": "0.10 g/kWh Euro 3 PM",
+      "fuelType": "diesel",
+      "numberOfSeatbeltsFitted": 2,
+      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "seatbeltInstallationCheckDate": true,
+      "prohibitionIssued": false,
+      "reasonForAbandoning": "none",
+      "additionalNotesRecorded": "VEHICLE FRONT ROW SECOND SEAT HAS MISSING SEATBELT",
+      "defects": [
+        {
+          "imNumber": 3,
+          "imDescription": "Seat Belts & Supplementary Restraint Systems",
+          "additionalInformation": {
+            "location": {
+              "vertical": "upper",
+              "horizontal": null,
+              "lateral": "centre",
+              "longitudinal": null,
+              "rowNumber": 1,
+              "seatNumber": 2,
+              "axleNumber": null
+            },
+            "notes": "seatbelt missing"
+          },
+          "itemNumber": 1,
+          "itemDescription": "Obligatory Seat Belt:",
+          "deficiencyRef": "3.1.a",
+          "deficiencyId": "a",
+          "deficiencySubId": null,
+          "deficiencyCategory": "major",
+          "deficiencyText": "missing.",
+          "stdForProhibition": false,
+          "prs": false,
+          "prohibitionIssued": true
+        }
+      ],
+      "customDefects": [
+        {
+          "referenceNumber": "1",
+          "defectName": "custom defect 1",
+          "defectNotes": "custom defects 1 notes"
+        }
+      ],
+      "secondaryCertificateNumber": "123456",
+      "testResult": "pass",
+      "additionalCommentsForAbandon": "none"
+    }
+  ],
+  "systemNumber": "123342131",
+  "vrm": "VWIvoBL",
+  "vin": "gBHWhYwqFNTvEAYLYNfw3",
+  "vehicleClass": {
+    "code": "s",
+    "description": "small psv (ie: less than or equal to 22 seats)"
+  },
+  "vehicleConfiguration": "rigid",
+  "vehicleType": "psv",
+  "vehicleSize": "small",
+  "noOfAxles": 2,
+  "numberOfSeats": 45,
+  "odometerReading": 55000,
+  "odometerReadingUnits": "kilometres",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "numberOfWheelsDriven": 4,
+  "euVehicleCategory": "m2",
+  "countryOfRegistration": "ro",
+  "regnDate": "2019-06-24"
+}

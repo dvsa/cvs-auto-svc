@@ -1,0 +1,108 @@
+{
+  "testResultId": "1b8047ed-a29a-4d37-8376-832bc7111f35",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369561",
+  "testStationType": "gvts",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "testerEmailAddress": "someone@email.com",
+  "testStartTimestamp": "2020-11-02T14:42:05.280Z",
+  "testEndTimestamp": "2020-11-02T14:45:06.915Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "testTypes": [
+    {
+      "name": "Low Emissions Certificate (LEC)",
+      "testTypeName": "Low Emissions Certificate (LEC)",
+      "testTypeId": "45",
+      "certificateNumber": "12345678",
+      "testTypeStartTimestamp": "2020-11-02T14:44:49.957Z",
+      "testTypeEndTimestamp": "2020-11-02T14:45:06.918Z",
+      "modType": {
+        "code": "p",
+        "description": "particulate trap"
+      },
+      "emissionStandard": "Euro 3",
+      "fuelType": "diesel",
+      "smokeTestKLimitApplied": "20",
+      "particulateTrapFitted": "yes",
+      "particulateTrapSerialNumber": "1234",
+      "modificationTypeUsed": "modification",
+      "testExpiryDate": "2019-06-24",
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": " ",
+      "additionalNotesRecorded": "notes",
+      "defects": [
+        {
+          "imNumber": 1000,
+          "imDescription": "im description 1",
+          "additionalInformation": null,
+          "itemNumber": 1500,
+          "itemDescription": "item description 1",
+          "deficiencyRef": "deficiency reference (1)*",
+          "deficiencyId": "b",
+          "deficiencySubId": "d",
+          "deficiencyCategory": "advisory",
+          "deficiencyText": null,
+          "stdForProhibition": true,
+          "prs": true,
+          "prohibitionIssued": true
+        },
+        {
+          "imNumber": 2000,
+          "imDescription": "im description 2",
+          "additionalInformation": {
+            "location": {
+              "vertical": "upper",
+              "horizontal": null,
+              "lateral": "centre",
+              "longitudinal": null,
+              "rowNumber": 1,
+              "seatNumber": 2,
+              "axleNumber": null
+            },
+            "notes": "seatbelt missing"
+          },
+          "itemNumber": 2500,
+          "itemDescription": "item description 2",
+          "deficiencyRef": "deficiency reference 2",
+          "deficiencyId": "a",
+          "deficiencySubId": "m",
+          "deficiencyCategory": "minor",
+          "deficiencyText": "deficiency text 2",
+          "stdForProhibition": false,
+          "prs": false,
+          "prohibitionIssued": false
+        }
+      ],
+      "customDefects": [
+        {
+          "referenceNumber": "1",
+          "defectName": "custom defect 1",
+          "defectNotes": "custom defects 1 notes"
+        }
+      ],
+      "secondaryCertificateNumber": "123456"
+    }
+  ],
+  "systemNumber": "10000028",
+  "vrm": "CT70HHH",
+  "vin": "P012301270556",
+  "vehicleClass": {
+    "description": "heavy goods vehicle",
+    "code": "v"
+  },
+  "vehicleConfiguration": "semi-car transporter",
+  "vehicleType": "hgv",
+  "noOfAxles": 2,
+  "odometerReading": 55000,
+  "odometerReadingUnits": "kilometres",
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "numberOfWheelsDriven": 4,
+  "euVehicleCategory": "n2",
+  "countryOfRegistration": "gb",
+  "regnDate": "2019-06-24"
+}
