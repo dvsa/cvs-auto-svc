@@ -1,7 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.Location;
-import vott.databaseModels.Vehicle;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.Location;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;

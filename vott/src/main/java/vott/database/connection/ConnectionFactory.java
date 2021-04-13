@@ -1,4 +1,4 @@
-package vott.database;
+package vott.database.connection;
 
 import lombok.RequiredArgsConstructor;
 

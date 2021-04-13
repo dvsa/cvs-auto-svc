@@ -1,6 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.VehicleSubclass;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.VehicleSubclass;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;

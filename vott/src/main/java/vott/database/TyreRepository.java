@@ -1,7 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.Axles;
-import vott.databaseModels.Tyre;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.Tyre;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;

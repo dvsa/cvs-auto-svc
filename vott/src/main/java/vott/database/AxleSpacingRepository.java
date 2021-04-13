@@ -1,7 +1,7 @@
 package vott.database;
 
-import vott.databaseModels.AxleSpacing;
-import vott.databaseModels.Vehicle;
+import vott.database.connection.ConnectionFactory;
+import vott.models.dao.AxleSpacing;
 import vott.sqlgeneration.TableDetails;
 
 import java.sql.PreparedStatement;
