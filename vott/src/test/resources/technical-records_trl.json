@@ -1,0 +1,257 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "vin": "T72741234",
+  "partialVin": "741234",
+  "trailerId": "C100001",
+  "primaryVrm": "B2C1C11",
+  "secondaryVrms": [
+    "E5F1I00"
+  ],
+  "systemNumber": "10000026",
+  "techRecord": [
+    {
+      "adrDetails": {
+        "vehicleDetails": {
+          "type": "Centre axle battery",
+          "approvalDate": "2019-10-15"
+        },
+        "listStatementApplicable": true,
+        "batteryListNumber": "12345",
+        "declarationsSeen": true,
+        "brakeDeclarationsSeen": true,
+        "brakeDeclarationIssuer": "brake declaration issuer",
+        "brakeEndurance": true,
+        "weight": "1.5",
+        "compatibilityGroupJ": false,
+        "permittedDangerousGoods": [
+          "FP <61 (FL)",
+          "Explosives (type 3)"
+        ],
+        "additionalExaminerNotes": "additional examiner notes",
+        "applicantDetails": {
+          "name": "name",
+          "street": "street",
+          "town": "town",
+          "city": "city",
+          "postcode": "postcode"
+        },
+        "memosApply": [
+          "07/09 3mth leak ext"
+        ],
+        "additionalNotes": {
+          "number": [
+            "1",
+            "2"
+          ],
+          "guidanceNotes": [
+            "New certificate requested",
+            "Additional guidance note"
+          ]
+        },
+        "adrTypeApprovalNo": "1234",
+        "tank": {
+          "tankDetails": {
+            "tankManufacturer": "tank manufacturer",
+            "yearOfManufacture": 0,
+            "tankCode": "tank code",
+            "tc2Details": {
+              "tc2Type": "initial",
+              "tc2IntermediateApprovalNo": "456789",
+              "tc2IntermediateExpiryDate": "2020-12-01"
+            },
+            "tc3Details": [
+              {
+                "tc3Type": "intermediate",
+                "tc3PeriodicNumber": "567890",
+                "tc3PeriodicExpiryDate": "2020-06-01"
+              }
+            ],
+            "specialProvisions": "special provisions",
+            "tankManufacturerSerialNo": "123456",
+            "tankTypeAppNo": "123"
+          },
+          "tankStatement": {
+            "substancesPermitted": "Substances permitted under the tank code and any special provisions specified in 9 may be carried",
+            "statement": "statement_1234",
+            "productList": "additional product list details",
+            "productListRefNo": "productList_1234",
+            "productListUnNo": [
+              "123456",
+              "654321"
+            ]
+          }
+        }
+      },
+      "vehicleType": "trl",
+      "regnDate": "2019-06-07",
+      "firstUseDate": "2019-06-08",
+      "manufactureYear": 2019,
+      "noOfAxles": 2,
+      "brakes": {
+        "dtpNumber": "3798B",
+        "loadSensingValve": false,
+        "antilockBrakingSystem": true
+      },
+      "suspensionType": "F",
+      "roadFriendly": false,
+      "vehicleClass": {
+        "description": "3 wheelers"
+      },
+      "vehicleConfiguration": "dolly",
+      "couplingType": "Y",
+      "maxLoadOnCoupling": 10000,
+      "frameDescription": "Other",
+      "euVehicleCategory": "o2",
+      "alterationMarker": false,
+      "departmentalVehicleMarker": true,
+      "authIntoService": {
+        "cocIssueDate": "2019-06-25",
+        "dateReceived": "2019-06-09",
+        "datePending": "2019-06-26",
+        "dateAuthorised": "2019-06-27",
+        "dateRejected": "2019-06-28"
+      },
+      "lettersOfAuth": {
+        "letterType": "Trailer rejection",
+        "letterDateRequested": "2019-06-24",
+        "letterContents": "letter contents"
+      },
+      "approvalType": "ECTA",
+      "approvalTypeNumber": "123",
+      "ntaNumber": "1234",
+      "variantNumber": "123456",
+      "variantVersionNumber": "1234567",
+      "make": "Volvo",
+      "model": "X6",
+      "bodyType": {
+        "description": "tipper"
+      },
+      "functionCode": "R",
+      "conversionRefNo": "12345678",
+      "grossGbWeight": 40000,
+      "grossEecWeight": 41000,
+      "grossDesignWeight": 42000,
+      "tyreUseCode": "2C",
+      "axles": [
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 1,
+          "brakes": {
+            "brakeActuator": 150,
+            "leverLength": 151,
+            "springBrakeParking": false
+          },
+          "tyres": {
+            "dataTrAxles": 1,
+            "fitmentCode": "double",
+            "plyRating": "AA",
+            "tyreCode": 463,
+            "tyreSize": "11-21.5"
+          },
+          "weights": {
+            "designWeight": 10000,
+            "eecWeight": 11000,
+            "gbWeight": 12000
+          }
+        },
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 2,
+          "brakes": {
+            "brakeActuator": 140,
+            "leverLength": 141,
+            "springBrakeParking": true
+          },
+          "tyres": {
+            "dataTrAxles": 2,
+            "fitmentCode": "single",
+            "plyRating": "AB",
+            "tyreCode": 462,
+            "tyreSize": "10-20.5"
+          },
+          "weights": {
+            "designWeight": 20000,
+            "eecWeight": 21000,
+            "gbWeight": 22000
+          }
+        }
+      ],
+      "dimensions": {
+        "length": 10000,
+        "width": 3000,
+        "axleSpacing": [
+          {
+            "axles": "1-2",
+            "value": 11000
+          }
+        ]
+      },
+      "frontAxleToRearAxle": 1700,
+      "rearAxleToRearTrl": 400,
+      "couplingCenterToRearAxleMin": 1000,
+      "couplingCenterToRearAxleMax": 900,
+      "couplingCenterToRearTrlMin": 800,
+      "couplingCenterToRearTrlMax": 700,
+      "centreOfRearmostAxleToRearOfTrl": 600,
+      "applicantDetails": {
+        "address1": "applicant address 1",
+        "address2": "applicant address 2",
+        "address3": "applicant address 3",
+        "name": "applicant name",
+        "postCode": "PO16 7GZ",
+        "postTown": "applicant post town",
+        "telephoneNumber": "123456",
+        "emailAddress": "test@test.com"
+      },
+      "purchaserDetails": {
+        "address1": "purchaser address 1",
+        "address2": "purchaser address 2",
+        "address3": "purchaser address 3",
+        "name": "purchaser name",
+        "postCode": "PO16 7GA",
+        "postTown": "purchaser post town",
+        "telephoneNumber": "12345678",
+        "emailAddress": "test1@test1.com",
+        "faxNumber": "87654321",
+        "purchaserNotes": "purchaser notes"
+      },
+      "manufacturerDetails": {
+        "address1": "manufacturer address 1",
+        "address2": "manufacturer address 2",
+        "address3": "manufacturer address 3",
+        "name": "manufacturer name",
+        "postCode": "PO16 7GB",
+        "postTown": "manufacturer post town",
+        "telephoneNumber": "1234567890",
+        "emailAddress": "test2@test2.com",
+        "faxNumber": "0987654321",
+        "manufacturerNotes": "manufacturer notes"
+      },
+      "microfilm": {
+        "microfilmDocumentType": "Trailer COC + Int Plate",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "plates": [
+        {
+          "plateSerialNumber": "11111111",
+          "plateIssueDate": "2020-02-02",
+          "plateReasonForIssue": "Original",
+          "plateIssuer": "Mr Jones"
+        },
+        {
+          "plateSerialNumber": "22222222",
+          "plateIssueDate": "2020-01-01",
+          "plateReasonForIssue": "Replacement",
+          "plateIssuer": "Mr Johnson"
+        }
+      ],
+      "notes": "tech record note",
+      "reasonForCreation": "new record",
+      "recordCompleteness": "complete"
+    }
+  ]
+}

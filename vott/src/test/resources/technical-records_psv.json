@@ -1,0 +1,170 @@
+{
+  "msUserDetails": {
+    "msUser": "sean",
+    "msOid": "12345"
+  },
+  "vin": "P11122224",
+  "partialVin": "122223",
+  "primaryVrm": "PSV112244",
+  "systemNumber": "BSFD3244BDSGR",
+  "secondaryVrms": [
+    "PSV223344"
+  ],
+  "techRecord": [
+    {
+      "vehicleType": "psv",
+      "regnDate": "1995-01-01",
+      "manufactureYear": 1994,
+      "noOfAxles": 2,
+      "speedLimiterMrk": false,
+      "tachoExemptMrk": false,
+      "euroStandard": "2",
+      "fuelPropulsionSystem": "DieselPetrol",
+      "approvalType": "NTA",
+      "approvalTypeNumber": "1234",
+      "ntaNumber": "123456",
+      "coifSerialNumber": "12345678",
+      "coifCertifierName": "1234567890",
+      "coifDate": "2020-12-12",
+      "variantNumber": "12345",
+      "variantVersionNumber": "1234567",
+      "bodyMake": "Isuzu",
+      "bodyModel": "X40",
+      "modelLiteral": "123",
+      "chassisMake": "Isuzu",
+      "chassisModel": "X40",
+      "functionCode": "R",
+      "conversionRefNo": "12346",
+      "speedRestriction": 10,
+      "axles": [
+        {
+          "parkingBrakeMrk": true,
+          "axleNumber": 1,
+          "tyres": {
+            "plyRating": "1",
+            "speedCategorySymbol": "a7",
+            "fitmentCode": "double",
+            "dataTrAxles": 888,
+            "tyreCode": 383,
+            "tyreSize": "385/65-22.5"
+          },
+          "weights": {
+            "designWeight": 8000,
+            "gbWeight": 7000,
+            "kerbWeight": 9999,
+            "ladenWeight": 4000
+          }
+        },
+        {
+          "parkingBrakeMrk": false,
+          "axleNumber": 2,
+          "tyres": {
+            "plyRating": "2",
+            "speedCategorySymbol": "a8",
+            "fitmentCode": "single",
+            "dataTrAxles": 777,
+            "tyreCode": 282,
+            "tyreSize": "380/65-22.5"
+          },
+          "weights": {
+            "designWeight": 6000,
+            "gbWeight": 6500,
+            "kerbWeight": 7500,
+            "ladenWeight": 9000
+          }
+        }
+      ],
+      "bodyType": {
+        "description": "other"
+      },
+      "brakes": {
+        "dtpNumber": "3799A",
+        "brakeForceWheelsNotLocked": {
+          "parkingBrakeForceA": 2,
+          "secondaryBrakeForceA": 3,
+          "serviceBrakeForceA": 4
+        },
+        "brakeForceWheelsUpToHalfLocked": {
+          "parkingBrakeForceB": 5,
+          "secondaryBrakeForceB": 6,
+          "serviceBrakeForceB": 7
+        },
+        "brakeCode": "brCode",
+        "dataTrBrakeOne": "312677",
+        "dataTrBrakeTwo": "98765",
+        "dataTrBrakeThree": "9876543",
+        "retarderBrakeOne": "electric",
+        "retarderBrakeTwo": "exhaust"
+      },
+      "dda": {
+        "certificateIssued": true,
+        "wheelchairCapacity": 20,
+        "wheelchairFittings": "wheelchair fittings",
+        "wheelchairLiftPresent": false,
+        "wheelchairLiftInformation": "wheelchair lift info",
+        "wheelchairRampPresent": false,
+        "wheelchairRampInformation": "wheelchair ramp info",
+        "minEmergencyExits": 1,
+        "outswing": "100 cm",
+        "ddaSchedules": "schedule",
+        "seatbeltsFitted": 2,
+        "ddaNotes": "dda notes"
+      },
+      "departmentalVehicleMarker": false,
+      "alterationMarker": true,
+      "dimensions": {
+        "length": 13760,
+        "width": 2480,
+        "height": 4562
+      },
+      "emissionsLimit": 20,
+      "euVehicleCategory": "m2",
+      "frontAxleToRearAxle": 1000,
+      "grossDesignWeight": 38000,
+      "grossGbWeight": 39000,
+      "grossKerbWeight": 40000,
+      "grossLadenWeight": 41000,
+      "maxTrainGbWeight": 14000,
+      "microfilm": {
+        "microfilmDocumentType": "PSV Miscellaneous",
+        "microfilmRollNumber": "55555",
+        "microfilmSerialNumber": "4444"
+      },
+      "numberOfWheelsDriven": 4,
+      "numberOfSeatbelts": "56",
+      "plates": [
+        {
+          "plateSerialNumber": "11111111",
+          "plateIssueDate": "2020-02-02",
+          "plateReasonForIssue": "Original",
+          "plateIssuer": "Mr Jones"
+        }
+      ],
+      "applicantDetails": {
+        "address1": "applicant address 1",
+        "address2": "applicant address 2",
+        "address3": "applicant address 3",
+        "name": "applicant name",
+        "postCode": "PO16 7GZ",
+        "postTown": "applicant post town",
+        "telephoneNumber": "123456",
+        "emailAddress": "test@test.com"
+      },
+      "reasonForCreation": "because",
+      "remarks": "remarks",
+      "dispensations": "dispensations",
+      "seatbeltInstallationApprovalDate": "2020-02-02",
+      "seatsLowerDeck": 30,
+      "seatsUpperDeck": 26,
+      "standingCapacity": 10,
+      "trainDesignWeight": 13000,
+      "unladenWeight": 37000,
+      "vehicleSize": "large",
+      "vehicleClass": {
+        "description": "large psv(ie: greater than 23 seats)"
+      },
+      "vehicleConfiguration": "other",
+      "recordCompleteness": "testable"
+    }
+  ]
+}

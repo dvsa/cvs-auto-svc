@@ -1,0 +1,107 @@
+{
+  "testResultId": "836f7ce8-d146-47fd-bf05-c1cc662d7b33",
+  "testStationName": "Rowe, Wunsch and Wisoky",
+  "testStationPNumber": "87-1369561",
+  "testStationType": "gvts",
+  "testerName": "Gica",
+  "testerStaffId": "133",
+  "testerEmailAddress": "someone@email.com",
+  "testStartTimestamp": "2020-03-02T14:53:30.739Z",
+  "testEndTimestamp": "2020-03-02T14:57:31.067Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "testTypes": [
+    {
+      "name": "First test",
+      "testTypeName": "First test",
+      "testTypeId": "95",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2020-03-02T14:57:05.385Z",
+      "testTypeEndTimestamp": "2020-03-02T14:57:31.068Z",
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": [
+        {
+          "imNumber": 3000,
+          "imDescription": "im description 1",
+          "itemNumber": 3500,
+          "additionalInformation": {
+            "location": {
+              "vertical": null,
+              "horizontal": "inner",
+              "lateral": null,
+              "longitudinal": "front",
+              "rowNumber": null,
+              "seatNumber": null,
+              "axleNumber": 1
+            },
+            "notes": "missing trailer component"
+          },
+          "itemDescription": "item description 1",
+          "deficiencyRef": "deficiency reference 1",
+          "deficiencyId": "c",
+          "deficiencySubId": null,
+          "deficiencyCategory": "dangerous",
+          "deficiencyText": "deficiency text 1",
+          "stdForProhibition": false,
+          "prs": false,
+          "prohibitionIssued": false
+        },
+        {
+          "imNumber": 4000,
+          "imDescription": "im description 2",
+          "itemNumber": 4500,
+          "additionalInformation": {
+            "location": {
+              "vertical": "upper",
+              "horizontal": null,
+              "lateral": "centre",
+              "longitudinal": null,
+              "rowNumber": 1,
+              "seatNumber": 2,
+              "axleNumber": null
+            },
+            "notes": " "
+          },
+          "itemDescription": "item description 2",
+          "deficiencyRef": "deficiency reference 2",
+          "deficiencyId": "d",
+          "deficiencySubId": "v",
+          "deficiencyCategory": "major",
+          "deficiencyText": "deficiency text 2",
+          "stdForProhibition": true,
+          "prs": true,
+          "prohibitionIssued": true
+        }
+      ],
+      "customDefects": [
+        {
+          "referenceNumber": "2",
+          "defectName": "custom defect 2",
+          "defectNotes": "custom defects 2 notes"
+        }
+      ],
+      "secondaryCertificateNumber": "123456"
+    }
+  ],
+  "systemNumber": "123342131",
+  "vin": "gBHWhYwqFNTvEAYLYNfw3",
+  "trailerId": "C123456",
+  "vehicleClass": {
+    "code": "t",
+    "description": "trailer"
+  },
+  "vehicleConfiguration": "drawbar",
+  "vehicleType": "trl",
+  "noOfAxles": 2,
+  "preparerId": "BL5545",
+  "preparerName": "Durrell Vehicles Limited",
+  "numberOfWheelsDriven": 4,
+  "euVehicleCategory": "o2",
+  "countryOfRegistration": "not-known",
+  "firstUseDate": "2019-06-24"
+}
