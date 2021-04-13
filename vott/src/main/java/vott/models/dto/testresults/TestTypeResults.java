@@ -17,6 +17,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import vott.models.adapter.ExplicitNull;
+
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
@@ -64,10 +66,10 @@ public class TestTypeResults {
   private String certificateLink = null;
 
   @SerializedName("testExpiryDate")
-  private OffsetDateTime testExpiryDate = null;
+  private LocalDate testExpiryDate = null;
 
   @SerializedName("testAnniversaryDate")
-  private OffsetDateTime testAnniversaryDate = null;
+  private LocalDate testAnniversaryDate = null;
 
   @SerializedName("testTypeStartTimestamp")
   private OffsetDateTime testTypeStartTimestamp = null;
@@ -136,6 +138,7 @@ public class TestTypeResults {
   @SerializedName("prohibitionIssued")
   private Boolean prohibitionIssued = null;
 
+  @ExplicitNull
   @SerializedName("reasonForAbandoning")
   private String reasonForAbandoning = null;
 
@@ -462,7 +465,7 @@ public class TestTypeResults {
     this.certificateLink = certificateLink;
   }
 
-  public TestTypeResults testExpiryDate(OffsetDateTime testExpiryDate) {
+  public TestTypeResults testExpiryDate(LocalDate testExpiryDate) {
     this.testExpiryDate = testExpiryDate;
     return this;
   }
@@ -472,15 +475,15 @@ public class TestTypeResults {
    * @return testExpiryDate
   **/
   
-  public OffsetDateTime getTestExpiryDate() {
+  public LocalDate getTestExpiryDate() {
     return testExpiryDate;
   }
 
-  public void setTestExpiryDate(OffsetDateTime testExpiryDate) {
+  public void setTestExpiryDate(LocalDate testExpiryDate) {
     this.testExpiryDate = testExpiryDate;
   }
 
-  public TestTypeResults testAnniversaryDate(OffsetDateTime testAnniversaryDate) {
+  public TestTypeResults testAnniversaryDate(LocalDate testAnniversaryDate) {
     this.testAnniversaryDate = testAnniversaryDate;
     return this;
   }
@@ -490,11 +493,11 @@ public class TestTypeResults {
    * @return testAnniversaryDate
   **/
   
-  public OffsetDateTime getTestAnniversaryDate() {
+  public LocalDate getTestAnniversaryDate() {
     return testAnniversaryDate;
   }
 
-  public void setTestAnniversaryDate(OffsetDateTime testAnniversaryDate) {
+  public void setTestAnniversaryDate(LocalDate testAnniversaryDate) {
     this.testAnniversaryDate = testAnniversaryDate;
   }
 
