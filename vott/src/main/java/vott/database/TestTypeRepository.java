@@ -34,7 +34,10 @@ public class TestTypeRepository extends AbstractRepository<TestType> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, TestType entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(3, entity.getTestTypeClassification());
+        preparedStatement.setString(4, entity.getTestTypeName());
     }
 
     @Override

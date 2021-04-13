@@ -43,7 +43,14 @@ public class TyreRepository extends AbstractRepository<Tyre>
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Tyre entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(7, entity.getTyreSize());
+        preparedStatement.setString(8, entity.getPlyRating());
+        preparedStatement.setString(9, entity.getFitmentCode());
+        preparedStatement.setString(10, entity.getDataTrAxles());
+        preparedStatement.setString(11, entity.getSpeedCategorySymbol());
+        preparedStatement.setString(12, entity.getTyreCode());
     }
 
     @Override

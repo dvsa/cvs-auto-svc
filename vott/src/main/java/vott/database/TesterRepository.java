@@ -36,7 +36,11 @@ public class TesterRepository extends AbstractRepository<Tester> {
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, Tester entity) throws SQLException {
+        setParameters(preparedStatement, entity);
 
+        preparedStatement.setString(4, entity.getStaffID());
+        preparedStatement.setString(5, entity.getName());
+        preparedStatement.setString(6, entity.getEmailAddress());
     }
 
     @Override

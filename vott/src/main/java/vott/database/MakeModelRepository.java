@@ -50,7 +50,19 @@ public class MakeModelRepository extends AbstractRepository<MakeModel>{
 
     @Override
     protected void setParametersFull(PreparedStatement preparedStatement, MakeModel entity) throws SQLException {
+        setParameters(preparedStatement,entity);
 
+        preparedStatement.setString(12, entity.getMake());
+        preparedStatement.setString(13, entity.getModel());
+        preparedStatement.setString(14, entity.getChassisMake());
+        preparedStatement.setString(15, entity.getChassisModel());
+        preparedStatement.setString(16, entity.getBodyMake());
+        preparedStatement.setString(17, entity.getBodyModel());
+        preparedStatement.setString(18, entity.getModelLiteral());
+        preparedStatement.setString(19, entity.getBodyTypeCode());
+        preparedStatement.setString(20, entity.getBodyTypeDescription());
+        preparedStatement.setString(21, entity.getFuelPropulsionSystem());
+        preparedStatement.setString(22, entity.getDtpCode());
     }
 
     @Override

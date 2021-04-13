@@ -1,2 +1,0 @@
-test_result_id, defect_id, location_id, notes, prs, prohibitionIssued
-1, 1, 1, 'Test Notes', null , 1
