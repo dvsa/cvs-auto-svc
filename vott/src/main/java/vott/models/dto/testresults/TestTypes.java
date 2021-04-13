@@ -22,7 +22,7 @@ import java.util.Objects;
  */
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-04-13T13:44:54.508Z[GMT]")
-public class TestTypes extends ArrayList<TestTypeRecords> {
+public class TestTypes extends ArrayList<TestTypeResults> {
 
   @Override
   public boolean equals(Object o) {
