@@ -55,7 +55,10 @@ public class DatabaseProperties {
 
         databaseProperties.setEngine(properties.getProperty("database.engine"));
         databaseProperties.setHost(properties.getProperty("database.host"));
-        databaseProperties.setPort(Integer.parseInt(properties.getProperty("database.port")));
+
+        String port = properties.getProperty("database.port");
+        databaseProperties.setPort(port == null ? 0 : Integer.parseInt(port));
+
         databaseProperties.setUsername(properties.getProperty("database.username"));
         databaseProperties.setPassword(properties.getProperty("database.password"));
         databaseProperties.setDbName(properties.getProperty("database.db-name"));
