@@ -71,10 +71,10 @@ public class AWSSecrets {
     }
 
     public static String getSecret(Map<String, String> env) {
-        if (env.get("ENVIRONMENT").equals(null)){
-            return getSecretLocal();
-        } else {
+        if (env.get("ENVIRONMENT") != null){
             return getSecretAWS(env);
+        } else {
+            return getSecretLocal();
         }
     }
 
