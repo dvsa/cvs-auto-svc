@@ -41,7 +41,7 @@ public class TestResult {
   private TestType testType = null;
 
   @SerializedName("customDefect")
-  private CustomDefect customDefect = null;
+  private CustomDefects customDefect = null;
 
   @SerializedName("testStatus")
   private String testStatus = null;
@@ -233,7 +233,7 @@ public class TestResult {
     this.testType = testType;
   }
 
-  public TestResult customDefect(CustomDefect customDefect) {
+  public TestResult customDefects(CustomDefects customDefect) {
     this.customDefect = customDefect;
     return this;
   }
@@ -242,11 +242,11 @@ public class TestResult {
    * Get customDefect
    * @return customDefect
   **/
-  public CustomDefect getCustomDefect() {
+  public CustomDefects getCustomDefect() {
     return customDefect;
   }
 
-  public void setCustomDefect(CustomDefect customDefect) {
+  public void setCustomDefects(CustomDefects customDefect) {
     this.customDefect = customDefect;
   }
 
