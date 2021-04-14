@@ -5,8 +5,14 @@ import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
 import com.amazonaws.services.secretsmanager.model.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
+import java.util.Properties;
 
 public class AWSSecrets {
 
@@ -52,13 +58,21 @@ public class AWSSecrets {
 
     }
 
-    private static String getSecretLocal(Map<String, String> env){
-        return env.get("DB_CONFIG");
+    private static String getSecretLocal() {
+        Properties dbProperties = new Properties();
+
+        try (BufferedReader reader = Files.newBufferedReader(Path.of("database.properties"))) {
+            dbProperties.load(reader);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
+        return dbProperties.getProperty("database.config");
     }
 
     public static String getSecret(Map<String, String> env) {
-        if (env.get("ENVIRONMENT") == "local"){
-            return getSecretLocal(env);
+        if (env.get("ENVIRONMENT").equals(null)){
+            return getSecretLocal();
         } else {
             return getSecretAWS(env);
         }
