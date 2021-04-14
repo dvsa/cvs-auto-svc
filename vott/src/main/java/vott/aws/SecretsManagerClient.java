@@ -3,21 +3,17 @@ package vott.aws;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
-import com.amazonaws.services.secretsmanager.model.*;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
+import com.amazonaws.services.secretsmanager.model.InvalidParameterException;
+import com.amazonaws.services.secretsmanager.model.InvalidRequestException;
+import com.amazonaws.services.secretsmanager.model.ResourceNotFoundException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Map;
-import java.util.Properties;
 
-public class AWSSecrets {
+public class SecretsManagerClient {
 
-    private static String getSecretAWS(Map<String, String> env){
-        String secretName = env.get("SECRET");
+    public String getSecret(String secretName) {
         String endpoint = "secretsmanager.eu-west-1.amazonaws.com";
         String region = "eu-west-1";
 
@@ -55,27 +51,5 @@ public class AWSSecrets {
             binarySecretData = getSecretValueResult.getSecretBinary();
             return binarySecretData.toString();
         }
-
     }
-
-    private static String getSecretLocal() {
-        Properties dbProperties = new Properties();
-
-        try (BufferedReader reader = Files.newBufferedReader(Path.of("database.properties"))) {
-            dbProperties.load(reader);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-
-        return dbProperties.getProperty("database.config");
-    }
-
-    public static String getSecret(Map<String, String> env) {
-        if (env.get("ENVIRONMENT") != null){
-            return getSecretAWS(env);
-        } else {
-            return getSecretLocal();
-        }
-    }
-
 }
