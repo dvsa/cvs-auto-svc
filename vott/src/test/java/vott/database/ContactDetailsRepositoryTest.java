@@ -22,7 +22,7 @@ public class ContactDetailsRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         contactDetailsRepository = new ContactDetailsRepository(connectionFactory);

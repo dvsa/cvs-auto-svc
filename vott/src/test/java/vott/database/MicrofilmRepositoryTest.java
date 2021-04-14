@@ -22,7 +22,7 @@ public class MicrofilmRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         microfilmRepository = new MicrofilmRepository(connectionFactory);

@@ -22,7 +22,7 @@ public class VehicleRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-            DatabaseConfiguration.connectionBuilder()
+            DatabaseConfiguration.provide()
         );
 
         vehicleRepository = new VehicleRepository(connectionFactory);

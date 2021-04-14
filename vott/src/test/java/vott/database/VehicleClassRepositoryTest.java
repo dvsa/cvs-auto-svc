@@ -21,7 +21,7 @@ public class VehicleClassRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         vehicleClassRepository = new VehicleClassRepository(connectionFactory);

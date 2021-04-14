@@ -21,7 +21,7 @@ public class TestDefectRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         testDefectRepository = new TestDefectRepository(connectionFactory);

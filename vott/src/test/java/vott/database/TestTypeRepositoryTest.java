@@ -22,7 +22,7 @@ public class TestTypeRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         testTypeRepository = new TestTypeRepository(connectionFactory);

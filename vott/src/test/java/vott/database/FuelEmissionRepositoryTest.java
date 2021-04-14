@@ -22,7 +22,7 @@ public class FuelEmissionRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         fuelEmissionRepository = new FuelEmissionRepository(connectionFactory);

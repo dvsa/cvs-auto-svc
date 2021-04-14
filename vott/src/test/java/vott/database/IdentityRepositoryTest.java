@@ -22,7 +22,7 @@ public class IdentityRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         identityRepository = new IdentityRepository(connectionFactory);

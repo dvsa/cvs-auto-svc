@@ -21,7 +21,7 @@ public class TestStationRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         testStationRepository = new TestStationRepository(connectionFactory);

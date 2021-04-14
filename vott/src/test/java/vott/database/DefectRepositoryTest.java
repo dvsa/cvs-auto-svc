@@ -22,7 +22,7 @@ public class DefectRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         defectRepository = new DefectRepository(connectionFactory);

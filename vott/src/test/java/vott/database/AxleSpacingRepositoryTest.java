@@ -22,7 +22,7 @@ public class AxleSpacingRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         axleSpacingRepository = new AxleSpacingRepository(connectionFactory);

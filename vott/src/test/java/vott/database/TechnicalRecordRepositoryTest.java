@@ -22,7 +22,7 @@ public class TechnicalRecordRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         technicalRecordRepository = new TechnicalRecordRepository(connectionFactory);

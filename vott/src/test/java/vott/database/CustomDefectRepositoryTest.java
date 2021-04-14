@@ -10,7 +10,6 @@ import vott.models.dao.CustomDefect;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class CustomDefectRepositoryTest {
@@ -22,7 +21,7 @@ public class CustomDefectRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         customDefectRepository = new CustomDefectRepository(connectionFactory);

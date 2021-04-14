@@ -22,7 +22,7 @@ public class AxlesRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         axlesRepository = new AxlesRepository(connectionFactory);

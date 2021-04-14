@@ -21,7 +21,7 @@ public class MakeModelRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         makeModelRepository = new MakeModelRepository(connectionFactory);

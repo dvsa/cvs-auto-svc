@@ -22,7 +22,7 @@ public class LocationRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         locationRepository = new LocationRepository(connectionFactory);

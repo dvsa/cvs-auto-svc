@@ -22,7 +22,7 @@ public class PSVBrakesRepositoryTest {
     @Before
     public void setUp() {
         ConnectionFactory connectionFactory = new ConnectionFactory(
-                DatabaseConfiguration.connectionBuilder()
+                DatabaseConfiguration.provide()
         );
 
         psvBrakesRepository = new PSVBrakesRepository(connectionFactory);
