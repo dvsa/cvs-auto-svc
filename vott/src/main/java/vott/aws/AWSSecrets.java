@@ -10,8 +10,7 @@ import java.util.Map;
 
 public class AWSSecrets {
 
-    public static String getSecret(Map<String, String> env) {
-
+    private static String getSecretAWS(Map<String, String> env){
         String secretName = env.get("SECRET");
         String endpoint = "secretsmanager.eu-west-1.amazonaws.com";
         String region = "eu-west-1";
@@ -48,65 +47,21 @@ public class AWSSecrets {
         }
         else {
             binarySecretData = getSecretValueResult.getSecretBinary();
-             return binarySecretData.toString();
+            return binarySecretData.toString();
         }
 
     }
 
-//    public static String getSecret(Map<String, String> env) {
-//
-//        String secretName = env.get("SECRET");
-//        String region = "eu-west-1";
-//
-//        // Create a Secrets Manager client
-//        AWSSecretsManager client  = AWSSecretsManagerClientBuilder.standard()
-//                .withRegion(region)
-//                .build();
-//
-//        // In this sample we only handle the specific exceptions for the 'GetSecretValue' API.
-//        // See https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-//        // We rethrow the exception by default.
-//
-//        String decodedBinarySecret;
-//        GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest()
-//                .withSecretId(secretName);
-//        GetSecretValueResult getSecretValueResult = null;
-//
-//        try {
-//            getSecretValueResult = client.getSecretValue(getSecretValueRequest);
-//        } catch (DecryptionFailureException e) {
-//            // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
-//            // Deal with the exception here, and/or rethrow at your discretion.
-//            throw e;
-//        } catch (InternalServiceErrorException e) {
-//            // An error occurred on the server side.
-//            // Deal with the exception here, and/or rethrow at your discretion.
-//            throw e;
-//        } catch (InvalidParameterException e) {
-//            // You provided an invalid value for a parameter.
-//            // Deal with the exception here, and/or rethrow at your discretion.
-//            throw e;
-//        } catch (InvalidRequestException e) {
-//            // You provided a parameter value that is not valid for the current state of the resource.
-//            // Deal with the exception here, and/or rethrow at your discretion.
-//            throw e;
-//        } catch (ResourceNotFoundException e) {
-//            // We can't find the resource that you asked for.
-//            // Deal with the exception here, and/or rethrow at your discretion.
-//            throw e;
-//        }
-//
-//        // Decrypts secret using the associated KMS CMK.
-//        // Depending on whether the secret is a string or binary, one of these fields will be populated.
-//        if (getSecretValueResult.getSecretString() != null) {
-//            return getSecretValueResult.getSecretString();
-//        }
-//        else {
-//            decodedBinarySecret = new String(Base64.getDecoder().decode(getSecretValueResult.getSecretBinary()).array());
-//            return decodedBinarySecret;
-//        }
-//
-//        // Your code goes here.
-//    }
+    private static String getSecretLocal(Map<String, String> env){
+        return env.get("DB_CONFIG");
+    }
+
+    public static String getSecret(Map<String, String> env) {
+        if (env.get("ENVIRONMENT") == "local"){
+            return getSecretLocal(env);
+        } else {
+            return getSecretAWS(env);
+        }
+    }
 
 }

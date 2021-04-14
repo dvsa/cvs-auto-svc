@@ -37,7 +37,7 @@ public class DatabaseConfiguration {
                 .port(authSecret.getPort())
                 .username(authSecret.getUsername())
                 .password(authSecret.getPassword())
-                .dbName(env.get("SCHEMA_NAME"))
+                .dbName(authSecret.getDbName())
                 .engine(authSecret.getEngine())
                 .build();
     }
