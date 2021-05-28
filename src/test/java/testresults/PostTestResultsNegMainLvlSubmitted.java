@@ -816,7 +816,7 @@ public class PostTestResultsNegMainLvlSubmitted {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "odometerReading", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("odometerReading", "is mandatory");
+        testResultsSteps.validatePostErrorData("odometerReading", "is required");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - odometerReading")

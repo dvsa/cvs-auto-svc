@@ -450,7 +450,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
 
-        testResultsSteps.validatePostErrorDataContains("odometerReading", "is mandatory");
+        testResultsSteps.validatePostErrorDataContains("odometerReading", "is required");
     }
 
     @Title("CVSB-6805 - CVSB-7254 - API Consumer creates a new test results for the submitted test (PSV - missing mandatory fields - odometerReadingUnits )")
@@ -722,7 +722,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
 
-        testResultsSteps.validatePostErrorDataContains("odometerReading", "is mandatory");
+        testResultsSteps.validatePostErrorDataContains("odometerReading", "is required");
 
     }
 
