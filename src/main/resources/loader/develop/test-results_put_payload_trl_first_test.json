@@ -1,0 +1,72 @@
+{
+  "msUserDetails": {
+    "msUser": "catalin",
+    "msOid": "123243424-234234245"
+  },
+  "testResult": {
+    "testerStaffId": "133",
+    "createdByName": "Gica",
+    "testStartTimestamp": "2021-03-24T14:46:23.736Z",
+    "createdAt": "2021-03-24T14:46:36.344Z",
+    "testEndTimestamp": "2021-03-24T15:46:23.736Z",
+    "testStatus": "submitted",
+    "testTypes": [
+      {
+        "testCode": "fft1",
+        "lastUpdatedAt": "2021-03-24T14:46:36.344Z",
+        "testNumber": "W01B51339",
+        "testAnniversaryDate": "2022-03-31T00:00:00.000Z",
+        "testTypeClassification": "Annual With Certificate",
+        "additionalCommentsForAbandon": null,
+        "customDefects": [
+          {
+            "defectNotes": "custom defects 2 notes",
+            "referenceNumber": "2",
+            "defectName": "custom defect 2"
+          }
+        ],
+        "testTypeEndTimestamp": "2021-03-24T15:46:23.736Z",
+        "reasonForAbandoning": null,
+        "testExpiryDate": "2022-03-31T00:00:00.000Z",
+        "createdAt": "2021-03-24T14:46:36.344Z",
+        "testTypeId": "41",
+        "secondaryCertificateNumber": "123456",
+        "testTypeStartTimestamp": "2021-03-24T14:46:23.736Z",
+        "certificateNumber": "W01B51339",
+        "testTypeName": "First test",
+        "additionalNotesRecorded": null,
+        "defects": [
+
+        ],
+        "name": "First test",
+        "testResult": "pass"
+      }
+    ],
+    "vehicleClass": {
+      "code": "3",
+      "description": "3 wheelers"
+    },
+    "systemNumber": "10000003",
+    "testResultId": "e9e48c29-a5de-436e-8530-93e49bec402e",
+    "vin": "GQDIQJBKHKQJIE691320",
+    "testStationName": "Rowe, Wunsch and Wisoky",
+    "noOfAxles": 1,
+    "createdById": "133",
+    "vehicleType": "trl",
+    "countryOfRegistration": "gb",
+    "preparerId": "BL5545",
+    "preparerName": "Durrell Vehicles Limited",
+    "vehicleConfiguration": "dolly",
+    "testStationType": "gvts",
+    "testVersion": "current",
+    "reasonForCancellation": null,
+    "firstUseDate": "2019-06-08",
+    "testerName": "Gica",
+    "testStationPNumber": "87-1369561",
+    "reasonForCreation": "Test conducted",
+    "testerEmailAddress": "cvs.test2@dvsagov.onmicrosoft.com",
+    "euVehicleCategory": "o2",
+    "trailerId": "C530001",
+    "numberOfWheelsDriven": 5
+  }
+}

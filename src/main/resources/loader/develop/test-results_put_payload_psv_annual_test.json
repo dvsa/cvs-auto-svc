@@ -1,0 +1,74 @@
+{
+  "msUserDetails":{
+    "msUser":"catalin",
+    "msOid":"123243424-234234245"
+  },
+  "testResult":{
+    "countryOfRegistration":"gb",
+    "createdAt":"2021-04-01T10:27:09.349Z",
+    "createdById":"40286663-e09d-4348-a875-fa91cdd3f3b4",
+    "createdByName":"CVS Tester2",
+    "euVehicleCategory":"m3",
+    "noOfAxles":2,
+    "numberOfSeats":50,
+    "numberOfWheelsDriven":null,
+    "odometerReading":80,
+    "odometerReadingUnits":"kilometres",
+    "preparerId":"No preparer ID given",
+    "preparerName":"",
+    "reasonForCancellation":null,
+    "reasonForCreation":"Test conducted",
+    "regnDate":"2011-01-05",
+    "systemNumber":"HGSSZELQKDXMOOT5",
+    "testEndTimestamp":"2021-03-29T09:45:50.029Z",
+    "testerEmailAddress":"cvs.test2@dvsagov.onmicrosoft.com",
+    "testerName":"CVS Tester2",
+    "testerStaffId":"40286663-e09d-4348-a875-fa91cdd3f3b4",
+    "testResultId":"d9116f52-fb1a-4465-bce8-d4dbca94bf9a",
+    "testStartTimestamp":"2021-03-29T09:44:31.046Z",
+    "testStationName":"Bergnaum Group",
+    "testStationPNumber":"95-1291781",
+    "testStationType":"atf",
+    "testStatus":"submitted",
+    "testTypes":[
+      {
+        "additionalCommentsForAbandon":null,
+        "additionalNotesRecorded":null,
+        "certificateNumber":"W01A02235",
+        "createdAt":"2021-04-01T10:27:09.349Z",
+        "customDefects":null,
+        "defects":[
+
+        ],
+        "lastSeatbeltInstallationCheckDate":null,
+        "lastUpdatedAt":"2021-04-01T10:27:09.349Z",
+        "name":"Annual test",
+        "numberOfSeatbeltsFitted":null,
+        "reasonForAbandoning":null,
+        "seatbeltInstallationCheckDate":false,
+        "secondaryCertificateNumber":null,
+        "testAnniversaryDate":"2022-02-01T00:00:00.000Z",
+        "testCode":"aas",
+        "testExpiryDate":"2022-03-31T00:00:00.000Z",
+        "testNumber":"W01A02235",
+        "testResult":"pass",
+        "testTypeClassification":"Annual With Certificate",
+        "testTypeEndTimestamp":"2021-03-29T09:45:50.834Z",
+        "testTypeId":"1",
+        "testTypeName":"Annual test",
+        "testTypeStartTimestamp":"2021-03-29T09:45:35.353Z"
+      }
+    ],
+    "testVersion":"current",
+    "vehicleClass":{
+      "code":"s",
+      "description":"small psv (ie: less than or equal to 22 seats)"
+    },
+    "vehicleConfiguration":"rigid",
+    "vehicleId":"BQ91YHQ",
+    "vehicleSize":"small",
+    "vehicleType":"psv",
+    "vin":"M1ZVLH4QZG472529",
+    "vrm":"BQ91YHQ"
+  }
+}

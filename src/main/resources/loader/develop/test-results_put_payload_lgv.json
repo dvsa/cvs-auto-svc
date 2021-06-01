@@ -1,0 +1,65 @@
+{
+  "msUserDetails":{
+    "msUser":"catalin",
+    "msOid":"123243424-234234245"
+  },
+  "testResult":{
+    "testResultId":"5ce9448-855a-4f52-9a9e-ae2454366dc8",
+    "testStationName":"Abshire-Kub",
+    "testStationPNumber":"09-4129632",
+    "testStationType":"gvts",
+    "testerName":"cvs.automation4@dvsagov.onmicrosoft.com",
+    "testerStaffId":"c26d6b02-49b2-456a-ac20-7435e9397bac",
+    "testerEmailAddress":"cvs.test2@dvsagov.onmicrosoft.com",
+    "testStartTimestamp":"2020-03-11T13:45:39.979Z",
+    "testEndTimestamp":"2020-03-11T13:48:01.971Z",
+    "testStatus":"submitted",
+    "reasonForCancellation":null,
+    "vrm":"AS534TY",
+    "odometerReading":1345,
+    "odometerReadingUnits":"kilometres",
+    "systemNumber":"1000076",
+    "vin":"P0123010931264",
+    "vehicleClass":{
+      "description":"Not Known",
+      "code":"u"
+    },
+    "vehicleSubclass":[
+      "c"
+    ],
+    "vehicleConfiguration":null,
+    "vehicleType":"lgv",
+    "preparerId":"No preparer ID given",
+    "preparerName":"",
+    "euVehicleCategory":"n1",
+    "countryOfRegistration":"gb",
+    "noOfAxles":2,
+    "numberOfWheelsDriven":null,
+    "testTypes":[
+      {
+        "name":"Specialist test",
+        "testCode": "yxz",
+        "testTypeClassification": "Annual NO CERTIFICATE",
+        "testNumber": "W01C70843",
+        "testTypeName":"IVA mutual recognition/ end of series & inspection",
+        "testTypeId":"130",
+        "certificateNumber":"C12345",
+
+        "testTypeStartTimestamp":"2020-03-11T13:47:24.212Z",
+        "testTypeEndTimestamp":"2020-03-11T13:48:01.976Z",
+
+
+
+        "testResult":"pass",
+        "prohibitionIssued":false,
+        "reasonForAbandoning":null,
+        "additionalCommentsForAbandon":null,
+        "additionalNotesRecorded":null,
+
+        "customDefects":[
+
+        ]
+      }
+    ]
+  }
+}
