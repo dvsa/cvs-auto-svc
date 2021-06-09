@@ -221,6 +221,10 @@ public class GenericData {
         return RandomStringUtils.randomAlphanumeric(new Random().nextInt(6) + 3).toUpperCase();
     }
 
+    public static String generateRandomVinForTrailerRegistration() {
+        return RandomStringUtils.randomAlphabetic(17).toUpperCase();
+    }
+
     public static String generateRandomTrailerId() {
         return RandomStringUtils.randomAlphabetic(1).toUpperCase() + RandomStringUtils.randomNumeric(6);
     }

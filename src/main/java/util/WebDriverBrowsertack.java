@@ -19,23 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class WebDriverBrowsertack {
 
     static protected WebDriver driver;
-    private static Loader loader;
-
-    static {
-        EnvironmentType envType = TypeLoader.getType();
-
-        switch (envType) {
-            case CI_DEVELOP:
-                loader = new CIDevelopLoaderImpl();
-                break;
-            case LOCAL:
-                loader = new LocalLoaderImpl();
-                break;
-            default:
-                throw new AutomationException("Environment configuration not found");
-        }
-
-    }
+    private static Loader loader = new LocalLoaderImpl();
 
     public static void setup() {
 
@@ -110,7 +94,7 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='loginfmt']")),
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='loginfmt']"))
         ));
-        driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getEmailUserName());
+        driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getMicrosoftonlineUserName());
         driver.findElement(By.cssSelector("#idSIButton9")).click();
 
         System.out.println("Filling in password");
@@ -119,14 +103,14 @@ public class WebDriverBrowsertack {
                     ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']")),
                     ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
             ));
-            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getEmailPass());
+            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getMicrosoftonlinePass());
             driver.findElement(By.cssSelector("#idSIButton9")).click();
         } catch (StaleElementReferenceException e) {
             wait.until(ExpectedConditions.and(
                     ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']")),
                     ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
             ));
-            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getEmailPass());
+            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getMicrosoftonlinePass());
             driver.findElement(By.cssSelector("#idSIButton9")).click();
         }
 
@@ -248,7 +232,7 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='loginfmt']")),
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='loginfmt']"))
         ));
-        driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getEmailUserName());
+        driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getMicrosoftonlineUserName());
         driver.findElement(By.cssSelector("#idSIButton9")).click();
 
         System.out.println("Filling in password");
@@ -257,14 +241,14 @@ public class WebDriverBrowsertack {
                     ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']")),
                     ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
             ));
-            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getEmailPass());
+            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getMicrosoftonlinePass());
             driver.findElement(By.cssSelector("#idSIButton9")).click();
         } catch (StaleElementReferenceException e) {
             wait.until(ExpectedConditions.and(
                     ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']")),
                     ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
             ));
-            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getEmailPass());
+            driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getMicrosoftonlinePass());
             driver.findElement(By.cssSelector("#idSIButton9")).click();
         }
 

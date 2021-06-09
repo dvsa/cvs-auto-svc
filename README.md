@@ -51,14 +51,15 @@ The file should contain:
 ```properties
 base.path.url=https://api.nonprod.cvs.dvsacloud.uk/<environment>
 no.data.base.path.url=https://api.nonprod.cvs.dvsacloud.uk/<environment>
-s3.bucket="cert-gen-nonprod"
-s3.branch=<environment>
+s3.bucket="cvs-cert-develop"
+branch.name=<environment>
 microsoftonline.url=https://login.microsoftonline.com/<azure_app_id>/oauth2/authorize?client_id=<azure_client_id>&response_type=id_token&redirect_uri=http://localhost:3000&scope=openid&response_mode=fragment&nonce=678910
 microsoftonline.username=<automation_username>
 microsoftonline.pass=<automation_password>
 browserstack.username=<browserstack_username>
 browserstack.password=<browserstack_password>
 data.location=develop
+api.keys=<api_key>
 ```
 
 ## Running locally

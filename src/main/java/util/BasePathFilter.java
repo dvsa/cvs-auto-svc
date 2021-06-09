@@ -1,6 +1,5 @@
 package util;
 
-import exceptions.AutomationException;
 import io.restassured.config.SSLConfig;
 import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
@@ -15,29 +14,14 @@ import static util.TypeLoader.isWrongAuth;
 
 public class BasePathFilter implements Filter {
 
-    private static Loader loader;
-
-    static {
-        EnvironmentType envType = TypeLoader.getType();
-
-        switch (envType) {
-            case CI_DEVELOP:
-                loader = new CIDevelopLoaderImpl();
-                break;
-            case LOCAL:
-                loader = new LocalLoaderImpl();
-                break;
-            default:
-                throw new AutomationException("Environment configuration not found");
-        }
-    }
+    private static Loader loader = new LocalLoaderImpl();
 
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
 
         filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
-            filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken());
+            filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken()).header("X-Api-Key",loader.getApiKeys());
         } else if (isWrongAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));
         }

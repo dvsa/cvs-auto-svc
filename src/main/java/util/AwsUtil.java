@@ -30,21 +30,7 @@ import java.util.*;
 
 public class AwsUtil {
 
-    private static Loader loader;
-
-    static {
-        EnvironmentType envType = TypeLoader.getType();
-        switch (envType) {
-            case CI_DEVELOP:
-                loader = new CIDevelopLoaderImpl();
-                break;
-            case LOCAL:
-                loader = new LocalLoaderImpl();
-                break;
-            default:
-                throw new AutomationException("Environment configuration not found");
-        }
-    }
+    private static Loader loader = new LocalLoaderImpl();
 
     public static boolean isCertificateCreated(String testNumber, String vin){
 
@@ -113,7 +99,7 @@ public class AwsUtil {
                         assumeResult.getCredentials().getSessionToken());
 
         AWSLogs logsClient = new AWSLogsClient(temporaryCredentials).withRegion(clientRegion);
-        String logGroup = log + "-" + System.getProperty("BRANCH");
+        String logGroup = log + "-" + loader.getBranchName();
 
         for (int times = 0; times < 15; times++) {
 
@@ -177,7 +163,7 @@ public class AwsUtil {
                         assumeResult.getCredentials().getSessionToken());
 
         AWSLogs logsClient = new AWSLogsClient(temporaryCredentials).withRegion(clientRegion);
-        String logGroup = "/aws/lambda/edh-dispatcher-" + System.getProperty("BRANCH");
+        String logGroup = "/aws/lambda/edh-dispatcher-" + loader.getBranchName();
 
         logStreamLoop:
         for (int times = 0; times < 50; times++) {
@@ -247,7 +233,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-test-number";
+        String tableName = "cvs-" + loader.getBranchName() + "-test-number";
         Table table = dynamoDB.getTable(tableName);
         ItemCollection<ScanOutcome> items = table.scan("attribute_exists(systemNumber)", // FilterExpression
                 "systemNumber", // ProjectionExpression
@@ -289,7 +275,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-test-number";
+        String tableName = "cvs-" + loader.getBranchName() + "-test-number";
         Table table = dynamoDB.getTable(tableName);
         ItemCollection<ScanOutcome> items = table.scan("attribute_exists(trailerId)", // FilterExpression
                 "trailerId, sequenceNumber, trailerLetter", // ProjectionExpression
@@ -339,7 +325,7 @@ public class AwsUtil {
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
 
-        Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
+        Table table = dynamoDB.getTable("cvs-" + loader.getBranchName() + "-" + tableName);
         String vin = GenericData.getValueFromJsonPath(json, "$.vin");
 
         try {
@@ -376,7 +362,7 @@ public class AwsUtil {
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
 
-        Table table = dynamoDB.getTable("cvs-" + System.getProperty("BRANCH") + "-" + tableName);
+        Table table = dynamoDB.getTable("cvs-" + loader.getBranchName() + "-" + tableName);
         String valueForPrimaryKey = GenericData.getValueFromJsonPath(json, "$." + primaryKey);
 
         try {
@@ -413,7 +399,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-activities";
+        String tableName = "cvs-" + loader.getBranchName() + "-activities";
 
         Table table = dynamoDB.getTable(tableName);
 
@@ -452,7 +438,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-technical-records";
+        String tableName = "cvs-" + loader.getBranchName() + "-technical-records";
 
         Table table = dynamoDB.getTable(tableName);
 
@@ -491,7 +477,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-activities";
+        String tableName = "cvs-" + loader.getBranchName() + "-activities";
 
         Table table = dynamoDB.getTable(tableName);
 
@@ -530,7 +516,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String actualTableName = "cvs-" + System.getProperty("BRANCH") + "-test-stations";
+        String actualTableName = "cvs-" + loader.getBranchName() + "-test-stations";
         Table table = dynamoDB.getTable(actualTableName);
 
 
@@ -570,7 +556,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-activities";
+        String tableName = "cvs-" + loader.getBranchName() + "-activities";
 
         Table table = dynamoDB.getTable(tableName);
 
@@ -615,7 +601,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-test-results";
+        String tableName = "cvs-" + loader.getBranchName() + "-test-results";
 
         Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
         expressionAttributeValues.put(":result_id", new AttributeValue().withS(testResultId));
@@ -664,7 +650,7 @@ public class AwsUtil {
         AmazonDynamoDBClient client = new AmazonDynamoDBClient(temporaryCredentials);
         client.setRegion(Region.getRegion(clientRegion));
         DynamoDB dynamoDB = new DynamoDB(client);
-        String tableName = "cvs-" + System.getProperty("BRANCH") + "-technical-records";
+        String tableName = "cvs-" + loader.getBranchName() + "-technical-records";
 
         Map<String, AttributeValue> expressionAttributeValues = new HashMap<String, AttributeValue>();
         expressionAttributeValues.put(":system_no", new AttributeValue().withS(systemNumber));
