@@ -32,12 +32,26 @@ public class BasePathFilter implements Filter {
         }
     }
 
-    @Override
+   /*@Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
 
         filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken());
+        } else if (isWrongAuth()) {
+            filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));
+        }
+
+        return filterContext.next(filterableRequestSpecification, filterableResponseSpecification);
+    }*/
+
+    @Override
+    public Response filter (FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
+
+        filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
+        if (!isWrongAuth() && !isMissingAuth()) {
+            System.out.println("API key is " +loader.getApiKeys());
+            filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken()).header("X-Api-Key", loader.getApiKeys());
         } else if (isWrongAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));
         }

@@ -15,6 +15,16 @@ public class CIDevelopLoaderImpl implements Loader {
     }
 
     @Override
+    public String getApiKeys() {
+        String variable = System.getProperty("DEVELOP_BASE_PATH");
+        if (variable != null) {
+            return variable;
+        } else {
+            throw new AutomationException("Setup of variable DEVELOP_BASE_PATH failed, please pass in command or configure variable");
+        }
+    }
+
+    @Override
     public String getNoDataBasePathUrl() {
         String variable =  System.getProperty("DEVELOP_BASE_PATH_NO_DATA");
         if (variable != null) {

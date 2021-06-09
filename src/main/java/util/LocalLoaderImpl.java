@@ -25,6 +25,10 @@ public class LocalLoaderImpl implements Loader {
         return properties.getProperty("base.path.url");
     }
 
+    public String getApiKeys() {
+        return properties.getProperty("api.keys");
+    }
+
     public String getNoDataBasePathUrl() { return properties.getProperty("no.data.base.path.url"); }
 
 

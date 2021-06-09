@@ -530,6 +530,21 @@ public class TestResultsClient {
         return response;
     }
 
+    private Response callPostTrailerRegistrationWithAlterations(String body, List<JsonPathAlteration> alterations) {
+
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+        String alteredBody = GenericData.applyJsonAlterations(body, alterations);
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(alteredBody)
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .post("/v1/trailers");
+
+        return response;
+    }
+
     public Response callPostVehicleTestResultsWithNoAuthorization(String body) {
 
         Response response = given().filters(new BasePathFilter())
@@ -548,6 +563,17 @@ public class TestResultsClient {
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callPostVehicleTestResultsWithAlterations(body, alterations);
+        }
+
+        return response;
+    }
+
+    public Response postTrailerRegistrationWithAlterations(String body, List<JsonPathAlteration> alterations) {
+        Response response = callPostTrailerRegistrationWithAlterations(body, alterations);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPostTrailerRegistrationWithAlterations(body, alterations);
         }
 
         return response;
