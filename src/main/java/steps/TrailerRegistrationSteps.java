@@ -25,8 +25,16 @@ public class TrailerRegistrationSteps {
     }
 
     @Step
-    public void valueForFieldInPathShouldContain(String path, String expectedValue) {
+    public void valueForFieldInPathShouldBe(String path, String expectedValue) {
         System.out.println("Verifying that " + path + " has value " + expectedValue);
-        response.then().body(path, containsString(expectedValue));
+        response.then().body(path, equalTo(expectedValue));
     }
+
+    @Step
+    public void putTrailerRegistrationWithAlterations(String trn,String requestBody,List<JsonPathAlteration> alterations) {
+        this.response = trailerRegistrationClient.putTrailerRegistrationWithAlterations(trn,requestBody,alterations);
+    }
+
+
+
 }

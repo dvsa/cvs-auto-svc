@@ -50,7 +50,6 @@ public class BasePathFilter implements Filter {
 
         filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
-            System.out.println("API key is " +loader.getApiKeys());
             filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken()).header("X-Api-Key", loader.getApiKeys());
         } else if (isWrongAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));

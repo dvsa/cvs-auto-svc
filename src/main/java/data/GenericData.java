@@ -222,7 +222,7 @@ public class GenericData {
     }
 
     public static String generateRandomVinForTrailerRegistration() {
-        return RandomStringUtils.randomAlphabetic(20).toUpperCase();
+        return RandomStringUtils.randomAlphabetic(17).toUpperCase();
     }
 
     public static String generateRandomTrailerId() {
