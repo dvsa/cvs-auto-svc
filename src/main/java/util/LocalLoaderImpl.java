@@ -32,22 +32,28 @@ public class LocalLoaderImpl implements Loader {
     }
 
     @Override
-    public String getNoDataBasePathUrl() { return properties.getProperty("no.data.base.path.url"); }
+    public String getNoDataBasePathUrl() {
+        return properties.getProperty("no.data.base.path.url"); }
 
     @Override
-    public String getMicrosoftonlineUrl() { return properties.getProperty("microsoftonline.url"); }
+    public String getMicrosoftonlineUrl() {
+        return properties.getProperty("microsoftonline.url"); }
 
     @Override
-    public String getMicrosoftonlineUserName() { return properties.getProperty("microsoftonline.username"); }
+    public String getMicrosoftonlineUserName() {
+        return properties.getProperty("microsoftonline.username"); }
 
     @Override
-    public String getMicrosoftonlinePass() { return properties.getProperty("microsoftonline.pass"); }
+    public String getMicrosoftonlinePass() {
+        return properties.getProperty("microsoftonline.pass"); }
 
     @Override
-    public String getEmailUserName() { return properties.getProperty("email.username"); }
+    public String getEmailUserName() {
+        return properties.getProperty("email.username"); }
 
     @Override
-    public String getEmailPass() { return properties.getProperty("email.pass"); }
+    public String getEmailPass() {
+        return properties.getProperty("email.pass"); }
 
     @Override
     public String getUsername() {
@@ -73,6 +79,26 @@ public class LocalLoaderImpl implements Loader {
     @Override
     public String getBranchName() {
         return properties.getProperty("branch.name");
+    }
+
+    @Override
+    public  String getAppTokenUrl() {
+        return properties.getProperty("app.token.url");
+    }
+
+    @Override
+    public  String getAppClientId() {
+        return properties.getProperty("app.client.id");
+    }
+
+    @Override
+    public  String getAppClientSecret() {
+        return properties.getProperty("app.client.secret");
+    }
+
+    @Override
+    public  String getAppScope() {
+        return properties.getProperty("app.scope");
     }
 
 

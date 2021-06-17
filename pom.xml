@@ -17,6 +17,7 @@
         <jackson.version>2.9.8</jackson.version>
         <jsonpath.version>2.4.0</jsonpath.version>
         <sl4j.version>1.7.7</sl4j.version>
+        <unirest.version>1.4.9</unirest.version>
     </properties>
 
     <dependencies>
@@ -34,6 +35,11 @@
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit</artifactId>
             <version>${serenity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>${unirest.version}</version>
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>

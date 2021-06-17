@@ -4,13 +4,11 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import steps.*;
 import util.*;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -22,7 +20,6 @@ public class PostTestResultsCheckVsaEmail {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
 
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
@@ -61,6 +58,7 @@ public class PostTestResultsCheckVsaEmail {
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "95","","REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testName,"","REPLACE");
         JsonPathAlteration alterationTesterName = new JsonPathAlteration("$.testerName", "VSA Email Check","","REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", DataUtil.buildCurrentDateTime(), "", "REPLACE");
 
         String emailAddress = testResultsSteps.getOutlookEmailAddress();
         JsonPathAlteration alterationTesterEmailAddress = new JsonPathAlteration("$.testerEmailAddress", emailAddress,"","REPLACE");
@@ -73,7 +71,8 @@ public class PostTestResultsCheckVsaEmail {
                 alterationTestTypeId,
                 alterationTestTypeName,
                 alterationTesterEmailAddress,
-                alterationTesterName
+                alterationTesterName,
+                alterationTestTypeStartTimestamp
         ));
         alterations.remove(1);
         alterations.addAll(alterationsTr);

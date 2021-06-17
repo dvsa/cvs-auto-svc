@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.config;
 import static util.TypeLoader.isMissingAuth;
 import static util.TypeLoader.isWrongAuth;
 
-public class BasePathFilter implements Filter {
+public class DVLABasePathFilter implements Filter {
 
     private static Loader loader = new LocalLoaderImpl();
 
@@ -21,9 +21,9 @@ public class BasePathFilter implements Filter {
 
         filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
-            filterableRequestSpecification.header("Authorization", "Bearer " +WriterReader.getToken()).header("X-Api-Key",loader.getApiKeys());
+            filterableRequestSpecification.header("Authorization", "Bearer " +TokenGenerator.getDVLAToken()).header("X-Api-Key",loader.getApiKeys());
         } else if (isWrongAuth()) {
-            filterableRequestSpecification.header("Authorization", "Bearer " +RandomStringUtils.randomAlphanumeric(30));
+            filterableRequestSpecification.header("Authorization", "Bearer " + RandomStringUtils.randomAlphanumeric(30));
         }
         return filterContext.next(filterableRequestSpecification, filterableResponseSpecification);
     }
