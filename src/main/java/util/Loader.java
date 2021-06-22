@@ -4,6 +4,8 @@ public interface Loader {
 
     String getBasePathUrl();
 
+    String getApiKeys();
+
     String getNoDataBasePathUrl();
 
     String getMicrosoftonlineUrl();
