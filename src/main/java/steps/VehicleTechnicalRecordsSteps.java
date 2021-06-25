@@ -5,7 +5,6 @@ import clients.model.BodyType;
 import clients.VehicleTechnicalRecordsClient;
 import data.GenericData;
 import exceptions.AutomationException;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import model.vehicles.*;
@@ -17,17 +16,13 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
-import util.BasePathFilter;
+import static util.TypeLoader.*;
 import util.JsonPathAlteration;
-import util.TypeLoader;
-
 import java.util.*;
-
 import static data.GenericData.*;
-import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
-import static util.WriterReader.saveUtils;
+
 
 public class VehicleTechnicalRecordsSteps {
 
@@ -595,5 +590,22 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void getVehicleTechnicalRecordsCriteria(String searchIdentifier, String searchCriteria) {
         this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier, searchCriteria);
+    }
+
+    @Step
+    public void getTechnicalRecordsWithNoAuthorization(String searchIdentifier, VehicleTechnicalRecordSearchCriteria criteria) {
+        setMissingAuth();
+        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, criteria.getSearchCriteria()) ;
+        setRightAuth();
+    }
+
+    @Step
+    public void getTechnicalRecordsWithNoAuthorizationDVLAToken(String searchIdentifier, VehicleTechnicalRecordSearchCriteria criteria) {
+        this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(searchIdentifier, criteria.getSearchCriteria()) ;
+    }
+
+    @Step
+    public void validateMessage(String stringData) {
+        response.then().log().all().body("message ", equalTo(stringData));
     }
 }

@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
 import util.JsonPathAlteration;
 import java.util.List;
+import static util.TypeLoader.*;
 import static org.hamcrest.Matchers.*;
 
 public class TrailerRegistrationSteps {
@@ -35,6 +36,20 @@ public class TrailerRegistrationSteps {
         this.response = trailerRegistrationClient.putTrailerRegistrationWithAlterations(trn,requestBody,alterations);
     }
 
+    @Step
+    public void postTrailerRegistrationWithNoAuthorization(String requestBody) {
+        setMissingAuth();
+        this.response = trailerRegistrationClient.callPostTrailerRegistrationWithNoAuthorization(requestBody);
+        setRightAuth();
+    }
 
+    @Step
+    public void validateMessage(String stringData) {
+        response.then().log().all().body("message ", equalTo(stringData));
+    }
 
+    @Step
+    public void postTrailerRegistrationWithAlterationsDVLA(String requestBody, List<JsonPathAlteration> alterations) {
+        this.response = trailerRegistrationClient.postTrailerRegistrationWithAlterationsDVLA(requestBody, alterations);
+    }
 }

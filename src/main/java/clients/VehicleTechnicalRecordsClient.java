@@ -10,11 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import util.AwsUtil;
-import util.BasePathFilter;
-import util.JsonPathAlteration;
-import org.apache.http.HttpStatus;
-import util.TypeLoader;
+import util.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -68,6 +64,17 @@ public class VehicleTechnicalRecordsClient {
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
+        }
+
+        return response;
+    }
+
+    public Response getVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(String searchIdentifier, String searchCriteria) {
+        Response response = callGetVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(searchIdentifier, searchCriteria);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(searchIdentifier, searchCriteria);
         }
 
         return response;
@@ -143,6 +150,19 @@ public class VehicleTechnicalRecordsClient {
     private Response callGetVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,String searchCriteria) {
 
         Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("searchCriteria", searchCriteria)
+                .log().method().log().uri().log().body()
+                .get("/vehicles/{searchIdentifier}/tech-records");
+
+        return response;
+
+    }
+
+    private Response callGetVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(String searchIdentifier,String searchCriteria) {
+
+        Response response = given().filters(new DVLABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("searchCriteria", searchCriteria)

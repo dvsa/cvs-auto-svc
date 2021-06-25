@@ -28,4 +28,12 @@ public interface Loader {
 
     String getBranchName();
 
+    String getAppTokenUrl();
+
+    String getAppClientId();
+
+    String getAppClientSecret();
+
+    String getAppScope();
+
 }
