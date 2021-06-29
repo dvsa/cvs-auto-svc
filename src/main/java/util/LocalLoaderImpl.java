@@ -36,24 +36,34 @@ public class LocalLoaderImpl implements Loader {
         return properties.getProperty("no.data.base.path.url"); }
 
     @Override
-    public String getMicrosoftonlineUrl() {
-        return properties.getProperty("microsoftonline.url"); }
+    public String getMicrosoftOnlineUrlVersion2() {
+        return properties.getProperty("microsoftonline.url.v2");
+    }
 
     @Override
-    public String getMicrosoftonlineUserName() {
-        return properties.getProperty("microsoftonline.username"); }
+    public String getMicrosoftOnlineUserNameVersion2() {
+        return properties.getProperty("microsoftonline.username.v2");
+    }
 
     @Override
-    public String getMicrosoftonlinePass() {
-        return properties.getProperty("microsoftonline.pass"); }
+    public String getMicrosoftOnlinePassVersion2() {
+        return properties.getProperty("microsoftonline.pass.v2");
+    }
 
     @Override
-    public String getEmailUserName() {
-        return properties.getProperty("email.username"); }
+    public String getMicrosoftOnlineUrl() {
+        return properties.getProperty("microsoftonline.url");
+    }
 
     @Override
-    public String getEmailPass() {
-        return properties.getProperty("email.pass"); }
+    public String getMicrosoftOnlineUserName() {
+        return properties.getProperty("microsoftonline.username");
+    }
+
+    @Override
+    public String getMicrosoftOnlinePass() {
+        return properties.getProperty("microsoftonline.pass");
+    }
 
     @Override
     public String getUsername() {
