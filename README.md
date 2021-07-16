@@ -49,13 +49,16 @@ In the project structure create the file: `cvs-auto-svc/src/main/resources/conf/
 The file should contain:
 
 ```properties
-base.path.url=https://api.nonprod.cvs.dvsacloud.uk/<environment>
-no.data.base.path.url=https://api.nonprod.cvs.dvsacloud.uk/<environment>
+base.path.url=<test_environment_url>
+no.data.base.path.url=<test_environment_url>
 s3.bucket="cvs-cert-develop"
-branch.name=<environment>
+branch.name=<test_environment>
 microsoftonline.url=https://login.microsoftonline.com/<azure_app_id>/oauth2/authorize?client_id=<azure_client_id>&response_type=id_token&redirect_uri=http://localhost:3000&scope=openid&response_mode=fragment&nonce=678910
 microsoftonline.username=<automation_username>
 microsoftonline.pass=<automation_password>
+microsoftonline.url.v2=https://login.microsoftonline.com/<azure_app_id>/oauth2/v2.0/authorize?client_id=<azure_client_id>&response_type=id_token&scope=openid &redirect_uri=http://localhost:8100&nonce=12345
+microsoftonline.username.v2=<automation_username>
+microsoftonline.pass.v2=<automation_password>
 browserstack.username=<browserstack_username>
 browserstack.password=<browserstack_password>
 data.location=develop

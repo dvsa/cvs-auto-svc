@@ -8,15 +8,17 @@ public interface Loader {
 
     String getNoDataBasePathUrl();
 
-    String getMicrosoftonlineUrl();
+    String getMicrosoftOnlineUrl();
 
-    String getMicrosoftonlineUserName();
+    String getMicrosoftOnlineUserName();
 
-    String getMicrosoftonlinePass();
+    String getMicrosoftOnlinePass();
 
-    String getEmailUserName();
+    String getMicrosoftOnlineUrlVersion2();
 
-    String getEmailPass();
+    String getMicrosoftOnlineUserNameVersion2();
+
+    String getMicrosoftOnlinePassVersion2();
 
     String getUsername();
 
