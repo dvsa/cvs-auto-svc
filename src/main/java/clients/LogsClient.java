@@ -6,7 +6,7 @@ import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import model.logs.Logs;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.NoDataPathFilter;
 
 import static io.restassured.RestAssured.given;
@@ -15,7 +15,7 @@ import static util.WriterReader.saveUtils;
 public class LogsClient {
 
     public Response postLogs(Object logs) {
-        return postLogs(new BasePathFilter(), logs);
+        return postLogs(new DVSABasePathFilter(), logs);
     }
 
     public Response postLogsNoDataFilter(Object logs) {
@@ -23,7 +23,7 @@ public class LogsClient {
     }
 
     public Response putLogs(Object logs) {
-        return putLogs(new BasePathFilter(), logs);
+        return putLogs(new DVSABasePathFilter(), logs);
     }
 
     public Response putLogsNoDataFilter(Object logs) {
@@ -31,7 +31,7 @@ public class LogsClient {
     }
 
     public Response getLogs() {
-        return getLogs(new BasePathFilter());
+        return getLogs(new DVSABasePathFilter());
     }
 
     public Response getLogsNoDataFilter(Object logs) {
@@ -39,7 +39,7 @@ public class LogsClient {
     }
 
     public Response deleteLogs() {
-        return getLogs(new BasePathFilter());
+        return getLogs(new DVSABasePathFilter());
     }
 
     public Response deleteLogsNoDataFilter(Object logs) {
@@ -138,7 +138,7 @@ public class LogsClient {
     }
 
     public Response postLogsWithoutFields(Logs logs, String... nodes) {
-        return postLogsFieldRemove(new BasePathFilter(), logs, nodes);
+        return postLogsFieldRemove(new DVSABasePathFilter(), logs, nodes);
     }
 
     private Response postLogsFieldRemove(Filter filter, Logs logs, String... nodes) {

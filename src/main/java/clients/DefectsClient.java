@@ -3,7 +3,7 @@ package clients;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.NoDataPathFilter;
 
 import static io.restassured.RestAssured.given;
@@ -13,7 +13,7 @@ public class DefectsClient {
 
 
     public Response getDefectsWithData() {
-        return getDefects(new BasePathFilter());
+        return getDefects(new DVSABasePathFilter());
     }
 
     public Response getDefectsWithNoData() {

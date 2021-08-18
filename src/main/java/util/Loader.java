@@ -30,12 +30,20 @@ public interface Loader {
 
     String getBranchName();
 
-    String getAppTokenUrl();
+    String getAppTokenUrlDVLA();
 
-    String getAppClientId();
+    String getAppClientIdDVLA();
 
-    String getAppClientSecret();
+    String getAppClientSecretDVLA();
 
-    String getAppScope();
+    String getAppScopeDVLA();
+
+    String getAppTokenUrlDVSA();
+
+    String getAppClientIdDVSA();
+
+    String getAppClientSecretDVSA();
+
+    String getAppScopeDVSA();
 
 }

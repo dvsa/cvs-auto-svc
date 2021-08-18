@@ -11,7 +11,7 @@ import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.NoDataPathFilter;
 
 import java.util.Iterator;
@@ -24,7 +24,7 @@ import static util.WriterReader.saveUtils;
 public class TestTypesClient {
 
     public Response getTestTypesWithData() {
-        return getTestTypes(new BasePathFilter());
+        return getTestTypes(new DVSABasePathFilter());
     }
 
     public Response getTestTypesWithNoData() {
@@ -197,7 +197,7 @@ public class TestTypesClient {
     }
 
     private Response callTestTypes(String id, TestTypeQueryParam testTypeQueryParam) {
-        RequestSpecification responseSpec = given().filters(new BasePathFilter())
+        RequestSpecification responseSpec = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("id", id);
 

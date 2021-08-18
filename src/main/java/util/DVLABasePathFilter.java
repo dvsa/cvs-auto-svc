@@ -21,7 +21,7 @@ public class DVLABasePathFilter implements Filter {
 
         filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
-            filterableRequestSpecification.header("Authorization", "Bearer " +TokenGenerator.getDVLAToken()).header("X-Api-Key",loader.getApiKeys());
+            filterableRequestSpecification.header("Authorization", "Bearer " + TokenGeneratorDVLA.getDVLAToken()).header("X-Api-Key",loader.getApiKeys());
         } else if (isWrongAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " + RandomStringUtils.randomAlphanumeric(30));
         }

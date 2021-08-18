@@ -3,8 +3,6 @@ package testresults;
 import data.GenericData;
 import io.restassured.http.ContentType;
 import junit.framework.TestCase;
-import model.testresults.TestResultsStatus;
-import model.testresults.TestVersion;
 import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
@@ -19,7 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 import steps.TestResultsSteps;
 import static io.restassured.RestAssured.given;
@@ -55,14 +53,14 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
                 alterationTesterStaffId));
 
         String alteredBody = GenericData.applyJsonAlterations(postActivitiesBody, alterations);
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
                 .post("/activities");
         if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
             saveUtils();
-            response = given().filters(new BasePathFilter())
+            response = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBody)
                     .log().method().log().uri().log().body()

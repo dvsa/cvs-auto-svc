@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class PutVehicleWithoutMandatoryLgvField extends TestCase {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBody, alterations);
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
@@ -58,7 +58,7 @@ public class PutVehicleWithoutMandatoryLgvField extends TestCase {
 
         if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
             saveUtils();
-            response = given().filters(new BasePathFilter())
+            response = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBody)
                     .log().method().log().uri().log().body()

@@ -10,12 +10,11 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class PutVehicleWithoutMandatoryHgvField extends TestCase {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBodyHgv, alterations);
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
@@ -57,7 +56,7 @@ public class PutVehicleWithoutMandatoryHgvField extends TestCase {
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = given().filters(new BasePathFilter())
+            response = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBody)
                     .log().method().log().uri().log().body()

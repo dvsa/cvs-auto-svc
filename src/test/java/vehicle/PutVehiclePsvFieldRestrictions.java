@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class PutVehiclePsvFieldRestrictions {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBodyPsv, alterations);
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
@@ -61,7 +61,7 @@ public class PutVehiclePsvFieldRestrictions {
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = given().filters(new BasePathFilter())
+            response = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBody)
                     .log().method().log().uri().log().body()

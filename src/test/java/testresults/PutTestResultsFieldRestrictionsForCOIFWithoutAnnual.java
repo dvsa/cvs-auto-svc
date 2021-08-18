@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 
 import java.text.SimpleDateFormat;
@@ -55,14 +55,14 @@ public class PutTestResultsFieldRestrictionsForCOIFWithoutAnnual extends TestCas
                 alterationVinVehicle));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBody, alterationsVehicle);
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
                 .post("/vehicles");
         if (response.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || response.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
             saveUtils();
-            response = given().filters(new BasePathFilter())
+            response = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBody)
                     .log().method().log().uri().log().body()
@@ -97,14 +97,14 @@ public class PutTestResultsFieldRestrictionsForCOIFWithoutAnnual extends TestCas
                 alterationTestTypeEndTimestamp));
 
         String alteredBodyTestResult = GenericData.applyJsonAlterations(testResultRecord, alterationsTestResults);
-        Response responseTestResult = given().filters(new BasePathFilter())
+        Response responseTestResult = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBodyTestResult)
                 .log().method().log().uri().log().body()
                 .post("/test-results");
         if (responseTestResult.getStatusCode() == HttpStatus.SC_UNAUTHORIZED || responseTestResult.getStatusCode() == HttpStatus.SC_FORBIDDEN) {
             saveUtils();
-            responseTestResult = given().filters(new BasePathFilter())
+            responseTestResult = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBodyTestResult)
                     .log().method().log().uri().log().body()

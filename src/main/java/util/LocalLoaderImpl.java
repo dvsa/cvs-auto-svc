@@ -92,24 +92,43 @@ public class LocalLoaderImpl implements Loader {
     }
 
     @Override
-    public  String getAppTokenUrl() {
+    public  String getAppTokenUrlDVLA() {
         return properties.getProperty("app.token.url");
     }
 
     @Override
-    public  String getAppClientId() {
+    public  String getAppClientIdDVLA() {
         return properties.getProperty("app.client.id");
     }
 
     @Override
-    public  String getAppClientSecret() {
-        return properties.getProperty("app.client.secret");
-    }
-
-    @Override
-    public  String getAppScope() {
+    public  String getAppScopeDVLA() {
         return properties.getProperty("app.scope");
     }
 
+    @Override
+    public  String getAppClientSecretDVLA() {
+        return properties.getProperty("app.client.secret");
+    }
 
+
+    @Override
+    public  String getAppTokenUrlDVSA() {
+        return properties.getProperty("app.token.url.dvsa");
+    }
+
+    @Override
+    public  String getAppClientIdDVSA() {
+        return properties.getProperty("app.client.id.dvsa");
+    }
+
+    @Override
+    public  String getAppScopeDVSA() {
+        return properties.getProperty("app.scope.dvsa");
+    }
+
+    @Override
+    public  String getAppClientSecretDVSA() {
+        return properties.getProperty("app.client.secret.dvsa");
+    }
 }

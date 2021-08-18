@@ -4,7 +4,7 @@ package clients;
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.DVLABasePathFilter;
 import util.JsonPathAlteration;
 import java.util.*;
@@ -19,7 +19,7 @@ public class TrailerRegistrationClient {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(body, alterations);
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
@@ -44,7 +44,7 @@ public class TrailerRegistrationClient {
         String alteredBody = GenericData.applyJsonAlterations(body, alterations);
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("trn", trn)
                 .body(alteredBody)
@@ -67,7 +67,7 @@ public class TrailerRegistrationClient {
 
     public Response callPostTrailerRegistrationWithNoAuthorization(String body) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(body)
                 .log().method().log().uri().log().body()

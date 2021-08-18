@@ -13,10 +13,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class PutVehicleTrlFieldRestrictionsAdrUpdate {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
 
         String alteredBody = GenericData.applyJsonAlterations(postRequestBodyTrl, alterations);
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()
@@ -61,7 +60,7 @@ public class PutVehicleTrlFieldRestrictionsAdrUpdate {
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
-            response = given().filters(new BasePathFilter())
+            response = given().filters(new DVSABasePathFilter())
                     .contentType(ContentType.JSON)
                     .body(alteredBody)
                     .log().method().log().uri().log().body()

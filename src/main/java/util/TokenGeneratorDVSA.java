@@ -5,22 +5,22 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-public class TokenGenerator {
+public class TokenGeneratorDVSA {
 
     private static Loader loader = new LocalLoaderImpl();
 
-    public TokenGenerator(){}
+    public TokenGeneratorDVSA(){}
 
-    public static String getDVLAToken() {
+    public static String getDVSAToken() {
 
         Unirest.setTimeouts(0, 0);
         HttpResponse<JsonNode> jsonResponse  = null;
         try {
-            jsonResponse = Unirest.post(loader.getAppTokenUrl())
+            jsonResponse = Unirest.post(loader.getAppTokenUrlDVSA())
                     .field("grant_type", "client_credentials")
-                    .field("client_id", loader.getAppClientId())
-                    .field("scope", loader.getAppScope())
-                    .field("client_secret", loader.getAppClientSecret())
+                    .field("client_id", loader.getAppClientIdDVSA())
+                    .field("scope", loader.getAppScopeDVSA())
+                    .field("client_secret", loader.getAppClientSecretDVSA())
                     .asJson();
         } catch (UnirestException e) {
             e.printStackTrace();

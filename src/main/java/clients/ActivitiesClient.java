@@ -13,7 +13,7 @@ import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import util.AwsUtil;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.JsonPathAlteration;
 
 import java.lang.reflect.Field;
@@ -182,7 +182,7 @@ public class ActivitiesClient {
 
     private Response callPostActivities(Object object) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
 //                .log().all()
@@ -194,7 +194,7 @@ public class ActivitiesClient {
 
     private Response callPutActivitiesEnd(String id) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("id", id)
                 .log().method().log().uri().log().body()
@@ -205,7 +205,7 @@ public class ActivitiesClient {
 
     private Response callPutActivitiesUpdate(Object object) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body("[" + object + "]")
                 .log().method().log().uri().log().body()
@@ -217,7 +217,7 @@ public class ActivitiesClient {
 
     private Response callGetActivities(String activityType, String testerStaffId, String testStationPNumber, String fromStartTime, String toStartTime) {
 
-        RequestSpecification requestSpecification = given().filters(new BasePathFilter())
+        RequestSpecification requestSpecification = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON);
 
         if (activityType != null) {
@@ -267,7 +267,7 @@ public class ActivitiesClient {
         String alteredBody = GenericData.applyJsonAlterations(body, alterations);
 
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .log().method().log().uri().log().body()

@@ -39,40 +39,6 @@ public class WebDriverBrowsertack {
         }
     }
 
-    public static String getToken() {
-        WebDriverBrowsertack.setup();
-
-        driver.get(loader.getMicrosoftOnlineUrlVersion2());
-        driver.manage().window().maximize();
-        WebElement element = driver.findElement(By.xpath("//div[@class='placeholderContainer']/*[1]"));
-        element.sendKeys(loader.getMicrosoftOnlineUserNameVersion2());
-
-
-        WebElement element2 = driver.findElement(By.xpath("//input[@type='submit']"));
-        element2.click();
-
-        FluentWait wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofMillis(300))
-                .ignoring(NoSuchElementException.class);
-
-        wait.until(ExpectedConditions.and(
-                ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@id='loginMessage']")),
-                ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@id='loginMessage']"))
-        ));
-
-        WebElement element3 = driver.findElement(By.xpath("//input[@name='Password']"));
-        element3.sendKeys(loader.getMicrosoftOnlinePassVersion2());
-
-
-        WebElement element4 = driver.findElement(By.xpath("//span[@class='submit']"));
-        element4.click();
-
-        String token = driver.getCurrentUrl().split("id_token=")[1].split("&session_state=")[0];
-        driver.quit();
-        return token;
-    }
-
     public static WebDriver checkVsaEmail(String randomVrm) {
         WebDriverBrowsertack.setup();
         FluentWait wait = new FluentWait<>(driver)

@@ -19,7 +19,7 @@ import model.testresults.TestResultsGet;
 import model.testresults.TestTypesGet;
 import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.junit.Assert;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.EnvironmentType;
 import util.JsonPathAlteration;
 import util.TypeLoader;
@@ -334,7 +334,7 @@ public class TestResultsClient {
     public Response callPostTestResults(Object object) {
 
         Response response = given()
-                .filters(new BasePathFilter())
+                .filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(object)
 //                .log().all()
@@ -348,7 +348,7 @@ public class TestResultsClient {
     public Response callGetTestResults(String systemNumber) {
 
         Response response = given()
-                .filters(new BasePathFilter())
+                .filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
 //                .log().all()
@@ -361,7 +361,7 @@ public class TestResultsClient {
     public Response callGetTestResultsSysNum(String systemNumber) {
 
         Response response = given()
-                .filters(new BasePathFilter())
+                .filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
 //                .log().all()
@@ -373,7 +373,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsWithStatus(String systemNumber, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("status", status)
@@ -388,7 +388,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsWithStatusAndSysNumber(String systemNumber, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("status", status)
@@ -402,7 +402,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsFromDateTime(String systemNumber, String fromDateTime) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("fromDateTime", fromDateTime)
@@ -413,7 +413,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsFromSystemNumberDateTime(String systemNumber, String fromDateTime) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("fromDateTime", fromDateTime)
@@ -424,7 +424,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsFromDateTime(String systemNumber, String fromDateTime, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("status", status)
@@ -437,7 +437,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsToDateTime(String systemNumber, String toDateTime) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("toDateTime", toDateTime)
@@ -448,7 +448,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsToDateTime(String systemNumber, String toDateTime, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("status", status)
@@ -460,7 +460,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsBetweenDate(String systemNumber, String fromDateTime, String toDateTime) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("fromDateTime", fromDateTime)
@@ -473,7 +473,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsBetweenDate(String systemNumber, String fromDateTime, String toDateTime, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("status", status)
@@ -520,7 +520,7 @@ public class TestResultsClient {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(body, alterations);
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
 //                .log().all()
@@ -532,7 +532,7 @@ public class TestResultsClient {
 
     public Response callPostVehicleTestResultsWithNoAuthorization(String body) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
 //                .log().all()
                 .log().method().log().uri().log().body()
@@ -566,7 +566,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsWithVersion(String systemNumber, String testVersion , String testResultId) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("version", testVersion)
@@ -591,7 +591,7 @@ public class TestResultsClient {
 
     private Response callGetTestResultsWithVersionAndStatus(String systemNumber, String testVersion , String testResultId , String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("systemNumber", systemNumber)
                 .queryParam("version", testVersion)
@@ -667,7 +667,7 @@ public class TestResultsClient {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .pathParam("systemNumber", systemNumber)

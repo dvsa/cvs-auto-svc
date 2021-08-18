@@ -94,7 +94,7 @@ public class VehicleTechnicalRecordsClient {
 
     private Response callGetVehicleTechnicalRecords(String searchIdentifier) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
 
@@ -107,7 +107,7 @@ public class VehicleTechnicalRecordsClient {
 
     private Response callGetVehicleTechnicalRecordsBySystemNumber(String searchIdentifier) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", "provisional")
@@ -121,7 +121,7 @@ public class VehicleTechnicalRecordsClient {
 
     public Response callGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", status)
@@ -134,7 +134,7 @@ public class VehicleTechnicalRecordsClient {
 
     private Response callGetVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier, String status, String searchCriteria) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", status)
@@ -149,7 +149,7 @@ public class VehicleTechnicalRecordsClient {
 
     private Response callGetVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,String searchCriteria) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("searchCriteria", searchCriteria)
@@ -185,7 +185,7 @@ public class VehicleTechnicalRecordsClient {
 
     private Response callPostVehicleTechnicalRecords(String requestBody) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(requestBody)
                 .post("/vehicles");
@@ -199,7 +199,7 @@ public class VehicleTechnicalRecordsClient {
         String alteredBody = GenericData.applyJsonAlterations(body, alterations);
 
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
 //                .log().all()
@@ -214,7 +214,7 @@ public class VehicleTechnicalRecordsClient {
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .pathParam("vin", vin)
@@ -228,7 +228,7 @@ public class VehicleTechnicalRecordsClient {
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .pathParam("systemNumber", systemNumber)
@@ -253,7 +253,7 @@ public class VehicleTechnicalRecordsClient {
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .pathParam("systemNumber", systemNumber)
@@ -267,7 +267,7 @@ public class VehicleTechnicalRecordsClient {
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
                 .pathParam("systemNumber", systemNumber)
@@ -300,7 +300,7 @@ public class VehicleTechnicalRecordsClient {
     }
 
     private Response callPutVehicleTechnicalRecordsForVehicle(String vin, String body) {
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(body)
                 .pathParam("vin", vin)
@@ -354,7 +354,7 @@ public class VehicleTechnicalRecordsClient {
     }
 
     public Response downloadFile(String searchIdentifier, String fileName) {
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .pathParam("fileName", fileName)
@@ -378,7 +378,7 @@ public class VehicleTechnicalRecordsClient {
 
     private Response callGetVehicleTechnicalRecordsByStatusWithMetadata(String searchIdentifier, String status) {
 
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", status)
@@ -793,7 +793,7 @@ public class VehicleTechnicalRecordsClient {
     }
 
     public Response getVehicleTechnicalRecords(String searchIdentifier, String searchCriteria) {
-        Response response = given().filters(new BasePathFilter())
+        Response response = given().filters(new DVSABasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("searchCriteria", searchCriteria)

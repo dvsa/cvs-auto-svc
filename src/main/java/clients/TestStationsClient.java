@@ -3,7 +3,7 @@ package clients;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import util.BasePathFilter;
+import util.DVSABasePathFilter;
 import util.NoDataPathFilter;
 
 import static io.restassured.RestAssured.given;
@@ -12,7 +12,7 @@ import static util.WriterReader.saveUtils;
 public class TestStationsClient {
 
     public Response getTestStationsWithData() {
-        return getTestStations(new BasePathFilter());
+        return getTestStations(new DVSABasePathFilter());
     }
 
     public Response getTestStationsWithNoData() {
