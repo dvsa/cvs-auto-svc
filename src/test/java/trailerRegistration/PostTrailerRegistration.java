@@ -3,10 +3,14 @@ package trailerRegistration;
 import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
+import model.vehicles.VehicleTechnicalRecordStatus;
 import net.thucydides.core.annotations.Title;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import steps.TestResultsSteps;
 import steps.TrailerRegistrationSteps;
+import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
 
@@ -15,6 +19,12 @@ public class PostTrailerRegistration {
 
     @Steps
     TrailerRegistrationSteps trailerRegistrationSteps;
+
+    @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    @Steps
+    TestResultsSteps testResultsSteps;
 
     @Title("CVSB-18919 - AC1 - Saving 17 digit vin")
     @Test
@@ -264,5 +274,272 @@ public class PostTrailerRegistration {
         // Put the results, together with any alterations, and verify that an error response status code is retrieved
         trailerRegistrationSteps.putTrailerRegistrationWithAlterations(randomTrn,trailerDeRegistrationRecord,DeRegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(400);
+    }
+
+    @Title("CVSB-18921 - AC1 -  VTG5A TRN PRESENT - TRL Annual Test Pass - With TRN")
+    @Test
+    public void testPostTestResultPassTrailerRegistrationCertificateWithTrn() {
+
+        // Read the base test result JSON
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postTechnicalRecord, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String postTrailerRecord = GenericData.readJsonValueFromFile("trailer-registration_18919.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomTrn = GenericData.generateRandomVinForTrailerRegistration();
+        randomTrn = randomTrn.substring(0, randomTrn.length() - 9);
+        JsonPathAlteration alterationTrailerVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTrailerTrn = new JsonPathAlteration("$.trn", randomTrn,"","REPLACE");
+
+        // Collate the list of alterations
+        List<JsonPathAlteration> RegisterAlterations = new ArrayList<>(Arrays.asList(
+                alterationTrailerVin,
+                alterationTrailerTrn));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        trailerRegistrationSteps.postTrailerRegistrationWithAlterations(postTrailerRecord, RegisterAlterations);
+        trailerRegistrationSteps.statusCodeShouldBe(200);
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json","$");
+
+        String testResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+
+        List<JsonPathAlteration> TestResultAlterations = new ArrayList<>(Arrays.asList(
+                alterationTestResultVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, TestResultAlterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("CVSB-18921 - AC2 -  VTG5A NO TRN PRESENT - TRL First Test Pass - Without TRN")
+    @Test
+    public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrn() {
+
+        // Read the base test result JSON
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postTechnicalRecord, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
+
+        String testResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+
+        List<JsonPathAlteration> TestResultAlterations = new ArrayList<>(Arrays.asList(
+                alterationTestResultVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, TestResultAlterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("CVSB-18921 - AC3 - VTG30 TRN PRESENT - TRL Annual Test Fail - With TRN")
+    @Test
+    public void testPostTestResultFailTrailerRegistrationCertificateWithTrn() {
+
+        // Read the base test result JSON
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postTechnicalRecord, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+
+        String postTrailerRecord = GenericData.readJsonValueFromFile("trailer-registration_18919.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomTrn = GenericData.generateRandomVinForTrailerRegistration();
+        randomTrn = randomTrn.substring(0, randomTrn.length() - 9);
+        JsonPathAlteration alterationTrailerVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTrailerTrn = new JsonPathAlteration("$.trn", randomTrn,"","REPLACE");
+
+        // Collate the list of alterations
+        List<JsonPathAlteration> RegisterAlterations = new ArrayList<>(Arrays.asList(
+                alterationTrailerVin,
+                alterationTrailerTrn));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        trailerRegistrationSteps.postTrailerRegistrationWithAlterations(postTrailerRecord, RegisterAlterations);
+        trailerRegistrationSteps.statusCodeShouldBe(200);
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json","$");
+
+        String testResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail","","REPLACE");
+
+        List<JsonPathAlteration> TestResultAlterations = new ArrayList<>(Arrays.asList(
+                alterationTestResultVin,
+                alterationTestResultId,
+                alterationSystemNumber,
+                alterationTestResult
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, TestResultAlterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("CVSB-18921 - AC4 -  VTG30 NO TRN PRESENT - TRL First Test Fail - Without TRN")
+    @Test
+    public void testPostTestResultFailTrailerRegistrationCertificateWithoutTrn() {
+
+        // Read the base test result JSON
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postTechnicalRecord, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
+
+        String testResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail","","REPLACE");
+
+        List<JsonPathAlteration> TestResultAlterations = new ArrayList<>(Arrays.asList(
+                alterationTestResultVin,
+                alterationTestResultId,
+                alterationSystemNumber,
+                alterationTestResult
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, TestResultAlterations);
+
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
+
+    @Title("CVSB-18921 - AC4 -  VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
+    @Test
+    public void testPostTestResultFailTrailerRegistrationCertificateWithoutTrnHgv() {
+
+        // Read the base test result JSON
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postTechnicalRecord, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json","$");
+
+        String testResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+        JsonPathAlteration alterationTestResult = new JsonPathAlteration("$.testTypes[0].testResult", "fail","","REPLACE");
+
+        List<JsonPathAlteration> TestResultAlterations = new ArrayList<>(Arrays.asList(
+                alterationTestResultVin,
+                alterationTestResultId,
+                alterationSystemNumber,
+                alterationTestResult
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, TestResultAlterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 }
