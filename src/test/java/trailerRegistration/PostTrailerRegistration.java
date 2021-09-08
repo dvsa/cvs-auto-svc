@@ -542,4 +542,50 @@ public class PostTrailerRegistration {
 
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
+
+    @Title("CVSB-18921 - VTG5 NO TRN PRESENT - HGV Annual Test Pass - Without TRN")
+    @Test
+    public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrnHgv() {
+
+        // Read the base test result JSON
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin));
+
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postTechnicalRecord, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json","$");
+
+        String testResultId = UUID.randomUUID().toString();
+
+        JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", testResultId,"","REPLACE");
+        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
+
+
+        List<JsonPathAlteration> TestResultAlterations = new ArrayList<>(Arrays.asList(
+                alterationTestResultVin,
+                alterationTestResultId,
+                alterationSystemNumber
+        ));
+
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, TestResultAlterations);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+        testResultsSteps.getTestResults(systemNumber);
+        testResultsSteps.statusCodeShouldBe(200);
+        String testNumber = testResultsSteps.getTestNumber();
+
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+    }
 }
