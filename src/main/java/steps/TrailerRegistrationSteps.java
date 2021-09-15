@@ -35,6 +35,12 @@ public class TrailerRegistrationSteps {
     public void putTrailerRegistrationWithAlterations(String trn,String requestBody,List<JsonPathAlteration> alterations) {
         this.response = trailerRegistrationClient.putTrailerRegistrationWithAlterations(trn,requestBody,alterations);
     }
+    @Step
+    public void putTrailerRegistrationWithNoAuthorization(String trn, String requestBody) {
+        setMissingAuth();
+        this.response = trailerRegistrationClient.callPutTrailerRegistrationWithNoAuthorization(trn, requestBody);
+        setRightAuth();
+    }
 
     @Step
     public void postTrailerRegistrationWithNoAuthorization(String requestBody) {

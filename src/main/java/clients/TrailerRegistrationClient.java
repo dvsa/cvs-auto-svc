@@ -64,7 +64,16 @@ public class TrailerRegistrationClient {
 
         return response;
     }
+    public Response callPutTrailerRegistrationWithNoAuthorization(String trn, String body) {
 
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("trn", trn)
+                .log().method().log().uri().log().body()
+                .put("/v1/trailers/deregister/{trn}");
+
+        return response;
+    }
     public Response callPostTrailerRegistrationWithNoAuthorization(String body) {
 
         Response response = given().filters(new BasePathFilter())
