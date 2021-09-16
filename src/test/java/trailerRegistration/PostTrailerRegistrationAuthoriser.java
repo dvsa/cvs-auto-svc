@@ -161,13 +161,19 @@ public class PostTrailerRegistrationAuthoriser {
     @Title("CVSB-19442 - AC1. Deny clients without a token from accessing the new endpoint - VTA Endpoints")
     @Test
     public void testPostVTATechRecordWithNoAuthorization() {
-        // Read the base test result JSON
-        String trailerRegistrationRecord = GenericData.readJsonValueFromFile("trailer-registration_18927.json","$");
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
 
-        // Post the results, together with any alterations, and verify that they are accepted.
-        trailerRegistrationSteps.postTrailerRegistrationWithNoAuthorization(trailerRegistrationRecord);
-        trailerRegistrationSteps.statusCodeShouldBe(401);
-        trailerRegistrationSteps.validateMessage("Unauthorized");
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
 
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithNoAuthorization(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(401);
+        vehicleTechnicalRecordsSteps.validateMessage("Unauthorized");
     }
 }

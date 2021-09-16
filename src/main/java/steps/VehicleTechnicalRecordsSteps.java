@@ -281,6 +281,15 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public String postVehicleTechnicalRecordsWithNoAuthorization(String requestBody, List<JsonPathAlteration> alterations) {
+        setMissingAuth();
+        response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
+        setRightAuth();
+        return response.prettyPrint();
+
+    }
+
+    @Step
     public String putVehicleTechnicalRecordsForVehicle(String systemNumber, String requestBody) {
         response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
         return response.prettyPrint();
