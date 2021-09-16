@@ -68,6 +68,7 @@ public class TrailerRegistrationClient {
 
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
+                .body(body)
                 .pathParam("trn", trn)
                 .log().method().log().uri().log().body()
                 .put("/v1/trailers/deregister/{trn}");
