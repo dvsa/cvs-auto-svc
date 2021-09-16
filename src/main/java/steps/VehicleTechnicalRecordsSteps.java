@@ -603,6 +603,10 @@ public class VehicleTechnicalRecordsSteps {
     public void getTechnicalRecordsWithNoAuthorizationDVLAToken(String searchIdentifier, VehicleTechnicalRecordSearchCriteria criteria) {
         this.response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(searchIdentifier, criteria.getSearchCriteria()) ;
     }
+    @Step
+    public void putTechnicalRecordsWithNoAuthorizationDVLAToken(String systemNumber, String postRequestBody) {
+        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(systemNumber, postRequestBody) ;
+    }
 
     @Step
     public void validateMessage(String stringData) {
