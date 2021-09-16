@@ -101,4 +101,37 @@ public class TrailerRegistrationClient {
         return response;
     }
 
+    public Response callPutTrailerRegistrationWithNoAuthorization(String trn, String body) {
+
+        Response response = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("trn", trn)
+                .log().method().log().uri().log().body()
+                .put("/v1/trailers/deregister/{trn}");
+
+        return response;
+    }
+
+    public Response putTrailerRegistrationWithDVLAToken(String trn,String body) {
+        Response response = callPutTrailerRegistrationWithDVLAToken(trn,body);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPutTrailerRegistrationWithDVLAToken(trn,body);
+        }
+
+        return response;
+    }
+
+    private Response callPutTrailerRegistrationWithDVLAToken(String trn,String body) {
+
+        Response response = given().filters(new DVLABasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("trn", trn)
+                .body(body)
+                .log().method().log().uri().log().body()
+                .put("/v1/trailers/deregister/{trn}");
+
+        return response;
+    }
 }
