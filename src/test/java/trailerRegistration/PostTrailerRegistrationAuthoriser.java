@@ -128,4 +128,32 @@ public class PostTrailerRegistrationAuthoriser {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(403);
         vehicleTechnicalRecordsSteps.validateMessage("User is not authorized to access this resource");
     }
+
+    @Title("CVSB-19442 - AC4. Deny DVLA accessing VTA endpoint")
+    @Test
+
+    public void testGetTechnicalRecordWithDVLAToken(){
+        // POST tech-record,read the base tech-record JSON.
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
+
+        // Create alteration to edit one or more fields in the request body
+        String randomVin = GenericData.generateRandomVin();
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationVinVehicle));
+
+        // Post the tech-record, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        //get systemNumber from post tech-record to use in put request
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+
+        vehicleTechnicalRecordsSteps.putTechnicalRecordsWithNoAuthorizationDVLAToken(systemNumber, postRequestBody);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(403);
+        vehicleTechnicalRecordsSteps.validateMessage("User is not authorized to access this resource");
+    }
+
 }
