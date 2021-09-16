@@ -128,4 +128,33 @@ public class PostTrailerRegistrationAuthoriser {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(403);
         vehicleTechnicalRecordsSteps.validateMessage("User is not authorized to access this resource");
     }
+
+    @Title("CVSB-19442 - AC3. Permit DVLA accessing the new endpoint")
+    @Test
+    public void putTrailerRegistrationWithDVLAToken() {
+        // Read the base test result JSON
+        String trailerRegistrationRecord = GenericData.readJsonValueFromFile("trailer-registration_18927.json","$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomVin = GenericData.generateRandomVinForTrailerRegistration();
+        String randomTrn = GenericData.generateRandomVinForTrailerRegistration();
+        randomTrn = randomTrn.substring(0, randomTrn.length() - 9);
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        JsonPathAlteration alterationTrn = new JsonPathAlteration("$.trn", randomTrn,"","REPLACE");
+
+        // Collate the list of alterations
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationVin,alterationTrn));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        trailerRegistrationSteps.postTrailerRegistrationWithAlterationsDVLA(trailerRegistrationRecord, alterations);
+        trailerRegistrationSteps.statusCodeShouldBe(200);
+
+        // Read the base test result JSON
+        String trailerDeRegistrationRecord = GenericData.readJsonValueFromFile("trailer-deregistration_18919.json","$");
+
+        //Put Trailer Registration with DVLA Token
+        trailerRegistrationSteps.putTrailerRegistrationWithoutAlterationsDVLA(randomTrn,trailerDeRegistrationRecord);
+        trailerRegistrationSteps.statusCodeShouldBe(200);
+    }
 }

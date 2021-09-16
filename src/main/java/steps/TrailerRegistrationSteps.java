@@ -52,4 +52,9 @@ public class TrailerRegistrationSteps {
     public void postTrailerRegistrationWithAlterationsDVLA(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = trailerRegistrationClient.postTrailerRegistrationWithAlterationsDVLA(requestBody, alterations);
     }
+
+    @Step
+    public void putTrailerRegistrationWithoutAlterationsDVLA(String trn, String requestBody) {
+        this.response = trailerRegistrationClient.putTrailerRegistrationWithoutAlterationsDVLAToken(trn, requestBody);
+    }
 }

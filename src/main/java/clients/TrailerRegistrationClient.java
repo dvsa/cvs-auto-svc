@@ -54,12 +54,36 @@ public class TrailerRegistrationClient {
         return response;
     }
 
+    private Response callPutTrailerRegistrationWithoutAlterationsDVLAToken(String trn,String body) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+
+        Response response = given().filters(new DVLABasePathFilter())
+                .contentType(ContentType.JSON)
+                .pathParam("trn", trn)
+                .body(body)
+                .log().method().log().uri().log().body()
+                .put("/v1/trailers/deregister/{trn}");
+
+        return response;
+    }
+
     public Response putTrailerRegistrationWithAlterations(String trn,String body, List<JsonPathAlteration> alterations) {
         Response response = callPutTrailerRegistrationWithAlterations(trn,body,alterations);
 
         if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
             saveUtils();
             response = callPutTrailerRegistrationWithAlterations(trn,body,alterations);
+        }
+
+        return response;
+    }
+
+    public Response putTrailerRegistrationWithoutAlterationsDVLAToken(String trn,String body) {
+        Response response = callPutTrailerRegistrationWithoutAlterationsDVLAToken(trn,body);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPutTrailerRegistrationWithoutAlterationsDVLAToken(trn, body);
         }
 
         return response;
@@ -100,5 +124,4 @@ public class TrailerRegistrationClient {
 
         return response;
     }
-
 }
