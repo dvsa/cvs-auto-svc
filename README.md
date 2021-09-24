@@ -9,7 +9,7 @@ These instructions will get you up and running with the automation framework.
 
 - Browserstack credentials
 - Jenkins access
-- Java 1.8 SDK
+- Java 1.8 and above
 - Maven
 - Git
 - NodeJs
