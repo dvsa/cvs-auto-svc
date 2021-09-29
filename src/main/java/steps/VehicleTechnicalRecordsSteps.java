@@ -608,4 +608,9 @@ public class VehicleTechnicalRecordsSteps {
     public void validateMessage(String stringData) {
         response.then().log().all().body("message ", equalTo(stringData));
     }
+
+    @Step
+    public void putTechnicalRecordsWithDVLAToken(String systemNumber, String postRequestBody) {
+        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithDVLAToken(systemNumber, postRequestBody) ;
+    }
 }

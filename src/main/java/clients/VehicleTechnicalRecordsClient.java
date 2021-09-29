@@ -803,4 +803,28 @@ public class VehicleTechnicalRecordsClient {
 
         return response;
     }
+
+    private Response callPutVehicleTechnicalRecordsWithDVLAToken(String systemNumber, String postRequestBody) {
+        //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
+
+
+        Response response = given().filters(new DVLABasePathFilter())
+                .contentType(ContentType.JSON)
+                .body(postRequestBody)
+                .pathParam("systemNumber", systemNumber)
+                .log().method().log().uri().log().body()
+                .put("/vehicles/{systemNumber}");
+        return response;
+    }
+
+    public Response putVehicleTechnicalRecordsWithDVLAToken(String searchIdentifier, String searchCriteria) {
+        Response response = callPutVehicleTechnicalRecordsWithDVLAToken(searchIdentifier, searchCriteria);
+
+        if (response.getStatusCode() == 401 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callPutVehicleTechnicalRecordsWithDVLAToken(searchIdentifier, searchCriteria);
+        }
+
+        return response;
+    }
 }
