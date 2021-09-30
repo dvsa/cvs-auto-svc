@@ -28,6 +28,7 @@ import org.junit.Assert;
 
 
 @RunWith(SerenityParameterizedRunner.class)
+@WithTag("In_test")
 public class PutTestResultsCertificateGeneration extends TestCase {
 
     static String randomVin;
@@ -35,7 +36,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     static String randomTestResultId;
 
 
-
+    @WithTag("In_test")
     @BeforeClass
     public static void createRecord() {
 
@@ -115,6 +116,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    @WithTag("In_test")
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
@@ -137,7 +139,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
     }
 
-    @WithTag("annual_certificates")
+    @WithTag("annual_certificates, In_test")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
