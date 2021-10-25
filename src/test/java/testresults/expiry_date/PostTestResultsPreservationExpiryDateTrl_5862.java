@@ -209,7 +209,7 @@ public class PostTestResultsPreservationExpiryDateTrl_5862 {
 
     }
 
-    @WithTag("expiry_dates")
+    @WithTag("expiry_dates, In_test")
     @Title("CVSB-5862 - Expiry and anniversary dates for HGV & TRL certificates - TRL - Today is within one month before previous expiryDate")
     @Test
     public void testResultsFirstTestExpiryTrlTodayMoreThanOneMonthBeforePreviousExpiry() {
