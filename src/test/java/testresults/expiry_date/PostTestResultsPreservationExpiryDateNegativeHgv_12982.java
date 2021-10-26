@@ -67,7 +67,9 @@ public class PostTestResultsPreservationExpiryDateNegativeHgv_12982 {
         isAnnualWithCertificate = annualWithCertificate;
     }
 
-    @WithTag("expiry_dates")
+
+    @WithTag("In_test")
+//    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - wrong expiryDate format inserted - HGV")
     @Test
     public void testResultsExpiryDateWrongDateFormatHgv() {
