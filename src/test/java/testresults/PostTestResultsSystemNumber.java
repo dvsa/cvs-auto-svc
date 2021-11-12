@@ -29,9 +29,6 @@ public class PostTestResultsSystemNumber {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
-
-    @WithTag("In_test")
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")
     @Test
     public void testResultsAPIConsumerCreatesAndGetTestResultsWithSysNumSubmitted() {
@@ -63,8 +60,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testStatus", "submitted");
     }
-
-    @WithTag("In_test")
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Cancelled")
     @Test
     public void testResultsAPIConsumerCreatesAndGetTestResultsWithSysNumCancelled() {
@@ -101,8 +96,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testStatus", "cancelled");
 
     }
-
-    @WithTag("In_test")
     @Title("CVSB-10754 - TC - AC3 No data found")
     @Test
     public void testResultsSubmittedAndNotExistingSysNumber() {
@@ -139,8 +132,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
     }
-
-    @WithTag("In_test")
     @Title("CVSB-10754 - TC - AC6 When API is authenticated from the API gateway")
     @Test
     public void testResultsNoAuthorised() {
@@ -153,8 +144,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.statusCodeShouldBe(403);
         testResultsSteps.validateMessage("User is not authorized to access this resource with an explicit deny");
     }
-
-    @WithTag("In_test")
     @Title("CVSB-13903 - (IMPROVEMENT)[BE] Specialist tests, updating the test results API specs - vehicleClass mandatory only for motorcycles - AC2 - vehicleClass - mandatory for motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleVehicleCategoryMissing(){
@@ -184,8 +173,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.validatePostErrorData("vehicleClass", "is required");
 
     }
-
-    @WithTag("In_test")
     @Title("CVSB-13903 - (IMPROVEMENT)[BE] Specialist tests, updating the test results API specs - vehicleClass mandatory only for motorcycles - AC2 - vehicleClass - mandatory for motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleVehicleCategoryInvalid() {
@@ -214,8 +201,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("vehicleClass", "must be an object");
     }
-
-    @WithTag("In_test")
     @Title("CVSB-15036 - [BE] Backend service update, to allow testerEmailAddress and testStationType to be updated with new values")
     @Test
     public void testTestResultsUpdateTesterEmailAddressAndTestStationType() {
@@ -323,8 +308,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationType",testStationTypePost);
         testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testerEmailAddress",testerEmailAddressPost);
     }
-
-    @WithTag("In_test")
     @Title("CVSB - 17727 - To verify the cert is generated for a TRL with vin having spaces")
     @Test
     public void testCertGenerationForVinWithSpaces() {
