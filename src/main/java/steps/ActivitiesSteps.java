@@ -61,6 +61,11 @@ public class ActivitiesSteps {
     }
 
     @Step
+    public void getActivitiesOpenVisit(String activityType, String testerStaffId) {
+        response = activitiesClient.getActivitiesOpenVisit(activityType, testerStaffId);
+    }
+
+    @Step
     public void statusCodeShouldBe(int statusCode) {
         response.then().log().all()
                 .statusCode(statusCode);
