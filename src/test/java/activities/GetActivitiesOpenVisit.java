@@ -16,63 +16,49 @@ public class GetActivitiesOpenVisit {
 
     ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
-    @Title("CVSB-19924")
+    @Title("CVSB-19924 - Get open visit return 200 OK, false")
     @Test
     public void getOpenVisitFalse() {
         activitiesSteps.postActivities(activitiesData.setActivityType("visit").build());
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.getActivitiesOpenVisit("visit", "113");
+        activitiesSteps.getActivitiesOpenVisitFalse("visit", "113");
         activitiesSteps.statusCodeShouldBe(200);
 
     }
 
-    @Title("CVSB-19924")
+    @Title("CVSB-19924 - Get open visit return 200 OK, true")
     @Test
     public void getOpenVisitTrue() {
         activitiesSteps.postActivities(activitiesData.setActivityType("visit").build());
         activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.getActivitiesOpenVisit("visit", "132");
+        activitiesSteps.getActivitiesOpenVisitTrue("visit", "132");
         activitiesSteps.statusCodeShouldBe(200);
-
     }
 
+    @Title("CVSB-19924 - Get open visit with empty string testerStaffId return 400 Bad Request")
+    @Test
+    public void getOpenVisitWithEmptyStringStaffId() {
+        activitiesSteps.postActivities(activitiesData.setActivityType("visit").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.getActivitiesOpenVisitTrue("visit", "");
+        activitiesSteps.statusCodeShouldBe(400);
+    }
 
-//
-//    @Title("CVSB- / CVSB- - AC7 ")
-//    @Test
-//    public void postActivitiesActivityTypeVisiRt() {
-//        activitiesSteps.getActivities("", null, null, "", "");
-//        activitiesSteps.statusCodeShouldBe(400);
-//        activitiesSteps.validateData("Bad Request");
-//    }
-//
-//
-//    @Title("CVSB- / CVSB- - AC7 ")
-//    @Test
-//    public void postActivitiesActivityTypeVisiRts() {
-//        activitiesSteps.getActivities(RandomStringUtils.randomAlphanumeric(6), null, null, DataUtil.buildCurrentDateTime(-1), DataUtil.buildCurrentDateTime(-1));
-//        activitiesSteps.statusCodeShouldBe(404);
-//        activitiesSteps.validateData("No resources match the search criteria");
-//    }
-//
-//
-//
-//
-//
-//    @Title("CVSB- / CVSB- - AC7 ")
-//    @Test
-//    public void postActivitiesActivityTypeVisit2() {
-//        activitiesSteps.getActivities("visit", null, null, DataUtil.buildCurrentDateTime(-1), RandomStringUtils.randomAlphanumeric(45));
-//        activitiesSteps.statusCodeShouldBe(400);
-//        activitiesSteps.validateData("Bad Request");
-//    }
-//
-//    @Title("CVSB- / CVSB- - AC7 ")
-//    @Test
-//    public void postActivitiesActivityTypeVisit222() {
-//        activitiesSteps.getActivities("visit", null, null, RandomStringUtils.randomAlphanumeric(45), RandomStringUtils.randomAlphanumeric(45));
-//        activitiesSteps.statusCodeShouldBe(400);
-//        activitiesSteps.validateData("Bad Request");
-//    }
+    @Title("CVSB-19924 - Get open visit with null testerStaffId return 400 Bad Request\"")
+    @Test
+    public void getOpenVisitWithNullStaffId() {
+        activitiesSteps.postActivities(activitiesData.setActivityType("visit").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.getActivitiesOpenVisitTrue("visit", null);
+        activitiesSteps.statusCodeShouldBe(400);
+    }
 
+    @Title("CVSB-19924 - Get open visit with undefined testerStaffId return 400 Bad Request\"")
+    @Test
+    public void getOpenVisitWithUndefinedStaffId() {
+        activitiesSteps.postActivities(activitiesData.setActivityType("visit").build());
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.getActivitiesOpenVisitTrue("visit", "undefined");
+        activitiesSteps.statusCodeShouldBe(400);
+    }
 }
