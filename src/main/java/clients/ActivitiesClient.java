@@ -179,6 +179,19 @@ public class ActivitiesClient {
 
     }
 
+    public Response getActivitiesOpenVisit(String activityType, String testerStaffId) {
+
+        Response response = callGetActivitiesOpenVisit(activityType, testerStaffId);
+
+        if (response.getStatusCode() == 400 || response.getStatusCode() == 403) {
+            saveUtils();
+            response = callGetActivitiesOpenVisit(activityType, testerStaffId);
+        }
+        return response;
+
+    }
+
+
 
     private Response callPostActivities(Object object) {
 
@@ -244,6 +257,27 @@ public class ActivitiesClient {
 //                .log().all()
                 .log().method().log().uri().log().body()
                 .get("/activities/details");
+
+        return response;
+    }
+
+    private Response callGetActivitiesOpenVisit(String activityType, String testerStaffId) {
+
+        RequestSpecification requestSpecification = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON);
+
+        if (activityType != null) {
+            requestSpecification.queryParam("activityType", activityType);
+        }
+
+        if (testerStaffId != null) {
+            requestSpecification.queryParam("testerStaffId", testerStaffId);
+        }
+
+        Response response = requestSpecification
+//                .log().all()
+                .log().method().log().uri().log().body()
+                .get("/activities/open");
 
         return response;
     }
