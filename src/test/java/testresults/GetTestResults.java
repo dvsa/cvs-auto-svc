@@ -333,6 +333,8 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldExists("createdByName");
         testResultsSteps.validateVehicleFieldExists("createdById");
         testResultsSteps.validateVehicleFieldExists("createdAt");
+        testResultsSteps.validateTestFieldExists("lastUpdatedAt");
+        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
 
     }
 
