@@ -14,6 +14,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -322,7 +323,8 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldMayExist("firstUseDate");
     }
 
-    @WithTag("Vtm")
+
+    @Ignore("VTM")
     @Title("CVSB-10280 - AC1: Update the GET request in testResults API")
     @Test
     public void testResultsContains() {

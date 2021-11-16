@@ -8,12 +8,12 @@
   "preparerId": "bl5545",
   "preparerName": "Durrell Vehicles Limited",
   "reasonForCancellation": null,
-  "testEndTimestamp": "2019-11-12T16:56:01.101Z",
+  "testEndTimestamp": "2021-11-12T16:56:01.101Z",
   "testerEmailAddress": "paddy.cvstest@dvsagov.onmicrosoft.com",
   "testerName": "Paddy CVS Test",
   "testerStaffId": "09046052-7591-4706-b511-9cc8803eb0af",
   "testResultId": "9ac71ea0-7070-49ee-9095-2797f862d6bb",
-  "testStartTimestamp": "2019-11-12T16:54:13.950Z",
+  "testStartTimestamp": "2021-11-12T16:54:13.950Z",
   "testStationName": "Abshire-Kub",
   "testStationPNumber": "09-4129632",
   "testStationType": "gvts",
@@ -39,13 +39,13 @@
       "name": "Technical test",
       "prohibitionIssued": true,
       "reasonForAbandoning": null,
-      "testExpiryDate": "2021-10-12",
+      "testExpiryDate": "2022-10-12",
       "testResult": "pass",
-      "testTypeEndTimestamp": "2019-11-12T16:56:01.103Z",
+      "testTypeEndTimestamp": "2021-11-12T16:56:01.103Z",
       "testTypeId": "44",
       "certificateNumber": "12334",
       "testTypeName": "Low Emissions Certificate (LEC) with annual test",
-      "testTypeStartTimestamp": "2019-11-12T16:55:28.204Z"
+      "testTypeStartTimestamp": "2021-11-12T16:55:28.204Z"
     }
   ],
   "vehicleClass": {

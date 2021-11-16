@@ -6,7 +6,6 @@ import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -30,7 +29,6 @@ public class PostTestResultsSystemNumber {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-    @WithTag("In_test")
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")
     @Test
     public void testResultsAPIConsumerCreatesAndGetTestResultsWithSysNumSubmitted() {
@@ -209,7 +207,6 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.validatePostErrorData("vehicleClass", "must be an object");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-15036 - [BE] Backend service update, to allow testerEmailAddress and testStationType to be updated with new values")
     @Test
     public void testTestResultsUpdateTesterEmailAddressAndTestStationType() {
