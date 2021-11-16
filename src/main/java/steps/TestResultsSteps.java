@@ -132,6 +132,7 @@ public class TestResultsSteps {
     @Step
     public void getTestResultsFromDate(String systemNumber, String fromDate, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsFromDateTime(systemNumber, fromDate, testResultsStatus.getStatus());
+        System.out.println("system number" + systemNumber + ";" + "fromDate" + fromDate + ";" + ";"+ "status" + testResultsStatus.getStatus());
     }
 
     @Step
@@ -152,6 +153,7 @@ public class TestResultsSteps {
     @Step
     public void getTestResultsBetweenDate(String systemNumber, String fromDate, String toDate, TestResultsStatus testResultsStatus) {
         response = testResultsClient.getTestResultsBetweenDate(systemNumber, fromDate, toDate, testResultsStatus.getStatus());
+        System.out.println("system number" + systemNumber + ";" + "fromDate" + fromDate + ";" + "toDate" + toDate + ";"+ "status" + testResultsStatus.getStatus());
     }
 
     @Step
