@@ -60,6 +60,19 @@ public class ActivitiesSteps {
         response = activitiesClient.getActivities(activityType, testerStaffId, testStationPNumber, fromStartTime, toStartTime);
     }
 
+
+    @Step
+    public void getActivitiesOpenVisitFalse(String activityType, String testerStaffId) {
+        response = activitiesClient.getActivitiesOpenVisit(activityType, testerStaffId);
+        assertThat(response.equals(true));
+    }
+
+    @Step
+    public void getActivitiesOpenVisitTrue(String activityType, String testerStaffId) {
+        response = activitiesClient.getActivitiesOpenVisit(activityType, testerStaffId);
+        assertThat(response.equals(true));
+    }
+
     @Step
     public void statusCodeShouldBe(int statusCode) {
         response.then().log().all()

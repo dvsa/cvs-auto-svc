@@ -29,7 +29,6 @@ public class PostTestResultsSystemNumber {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")
     @Test
     public void testResultsAPIConsumerCreatesAndGetTestResultsWithSysNumSubmitted() {
