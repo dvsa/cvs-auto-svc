@@ -27,7 +27,7 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-
+@WithTag("In_Test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
 

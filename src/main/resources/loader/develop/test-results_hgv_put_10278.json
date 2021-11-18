@@ -14,12 +14,12 @@
     "preparerName": "RPT Logistics Limited",
     "reasonForCancellation": null,
     "systemNumber": "1L9GFP2CY5H5IIY9",
-    "testEndTimestamp": "2019-11-07T12:21:49.752Z",
+    "testEndTimestamp": "2021-11-07T12:21:49.752Z",
     "testerEmailAddress": "dorel.popescu@dvsagov.uk",
     "testerName": "Tester",
     "testerStaffId": "1",
     "testResultId": "74710ede-8bb2-4233-9bfd-4e0bfcc929f1",
-    "testStartTimestamp": "2019-11-07T12:16:44.944Z",
+    "testStartTimestamp": "2021-11-07T12:16:44.944Z",
     "testStationName": "Abshire-Kub",
     "testStationPNumber": "09-4129632",
     "testStationType": "gvts",
@@ -51,10 +51,10 @@
         "testNumber": "W01A60740",
         "testResult": "pass",
         "testTypeClassification": "Annual NO CERTIFICATE",
-        "testTypeEndTimestamp": "2019-11-07T12:21:49.754Z",
+        "testTypeEndTimestamp": "2021-11-07T12:21:49.754Z",
         "testTypeId": "44",
         "testTypeName": "Low Emissions Certificate (LEC) with annual test",
-        "testTypeStartTimestamp": "2019-11-07T12:20:29.601Z"
+        "testTypeStartTimestamp": "2021-11-07T12:20:29.601Z"
       }
     ],
     "vehicleClass": {
