@@ -14,6 +14,7 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
@@ -264,7 +265,9 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         this.testCode = testCode;
     }
 
-    @WithTag("annual_certificates")
+
+    @WithTag("In_test")
+//    @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Trl tests")
     @Test
     public void testResults_Annual_Certificate_Generation_Trl() {
