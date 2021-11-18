@@ -13,7 +13,7 @@
   "trailerId":"C000001",
   "vin":"T12341234",
   "vehicleClass":{
-    "description":"trailer"x,
+    "description":"trailer",
     "code":"t"
   },
   "vehicleType":"trl",
