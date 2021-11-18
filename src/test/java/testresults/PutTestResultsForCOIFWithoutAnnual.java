@@ -139,7 +139,7 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
 
 
 
-    @WithTag("Vtm")
+    @WithTag("In_Test")
     @Title("CVSB-10372 - AC1: PUT: Original Test Record is updated and attributes are automatically set ")
     @Test
     public void PutTestResultsForCoif() {
