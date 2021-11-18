@@ -18,7 +18,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@WithTag("expiry_dates")
+@WithTag("In_test")
+//@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value="loader/testdata/test_data_expiry_date_negative_hgv_12982.csv")
 public class PostTestResultsFirstExpiryDatesNegativeHgv_12982 {
@@ -58,7 +59,8 @@ public class PostTestResultsFirstExpiryDatesNegativeHgv_12982 {
     }
 
 
-    @WithTag("expiry_dates")
+    @WithTag("In_test")
+//    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - regnDate - wrong format - HGV")
     @Test
     public void testResultsNoPreviousExpiryRegnDateWrongFormatHgv() {
@@ -152,7 +154,8 @@ public class PostTestResultsFirstExpiryDatesNegativeHgv_12982 {
 
     }
 
-    @WithTag("expiry_dates")
+    @WithTag("In_test")
+//    @WithTag("expiry_dates")
     @Title("CVSB-12982 - expiryDate automation - edge cases and negatives - regnDate - wrong format - HGV")
     @Test
     public void testResultsNoPreviousExpiryRegnDateIncompleteHgv() {
