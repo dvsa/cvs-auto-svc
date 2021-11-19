@@ -27,7 +27,7 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@WithTag("In_Test")
+
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
 
@@ -139,7 +139,7 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
 
 
 
-    @WithTag("In_Test")
+    
     @Title("CVSB-10372 - AC1: PUT: Original Test Record is updated and attributes are automatically set ")
     @Test
     public void PutTestResultsForCoif() {
