@@ -21,7 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WithTag("In_test")
+
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
@@ -96,7 +96,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-8677 - AC1 - Add adrDetails object onto an existing tech record with status provisional " +
             "AC2 - Update adrDetails object on an existing tech record " +
@@ -221,7 +221,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
             "AC3 - Body type code is auto-populated when updating a hgv")
@@ -464,7 +464,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord.find { it.statusCode == 'provisional' }", alteredTechRecord);
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10244 - AC2 - Vehicle class code is auto-populated when updating a psv " +
             "AC3 - Body type code is auto-populated when updating a psv " +
@@ -830,7 +830,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedAt", createdAt);
     }
 
-    @WithTag("In_test")
+    
     @Title("CVSB-10478 - AC9 - PUT - trailerId is updated to a trailerId which DOES currently exist in DynamoDB")
     @Test
     public void testVehicleTechnicalRecords_Put_TrailerIdUpdates_Existing() {
@@ -875,7 +875,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("TrailerId " + trailerId1 + " already exists");
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10830 - AC1 - TRL vehicle is updated, and the appropriate attributes are automatically set")
     @Test
@@ -1134,7 +1134,7 @@ public class PutVehicleTechnicalRecords {
 
     }
 
-    @WithTag("In_test")
+    
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - MOTORCYCLE")
     @Test
     public void testUpdateVehicleTechnicalRecordForMotorcycle() {
@@ -1240,7 +1240,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("[0].techRecord[0]","vehicleClass");
     }
 
-    @WithTag("In_test")
+    
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - LGV")
     @Test
     public void testUpdateVehicleTechnicalRecordWithOptionalVehicleClassForLgv() {
@@ -1296,7 +1296,7 @@ public class PutVehicleTechnicalRecords {
 
     }
 
-    @WithTag("In_tet")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - First Test")
     @Test
@@ -1524,7 +1524,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - First Test")
     @Test
@@ -1640,7 +1640,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - First Test")
     @Test
@@ -1752,7 +1752,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - Notifiable Alteration")
     @Test
@@ -1868,7 +1868,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - Notifiable Alteration")
     @Test
@@ -2095,7 +2095,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("In_test")
+    
 //    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
@@ -2207,7 +2207,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("In_test")
+    
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - PSV")
     @Test
     public void testVehicleTechnicalRecordForTestablePsv() {

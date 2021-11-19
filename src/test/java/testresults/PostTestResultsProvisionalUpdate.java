@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RunWith(SerenityRunner.class)
+@WithTag("In_test")
 public class PostTestResultsProvisionalUpdate {
 
     @Steps
@@ -237,14 +238,13 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o2");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - LGV")
     @Test
     public void testVehicleTechRecordLgvEuVehicleCategoryNull(){
 
         // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00004";
-        String vin = "DP76UMK4DQLTOT400004";
+        String systemNumber = "XYZEP5JYOMM00055";
+        String vin = "DP76UMK4DQLTOT400055";
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -253,7 +253,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv2.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -274,7 +274,6 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
