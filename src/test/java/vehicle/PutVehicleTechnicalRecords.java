@@ -21,7 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
@@ -221,7 +221,8 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
     }
 
-    @WithTag("Vtm")
+    @WithTag("In_test")
+//    @WithTag("Vtm")
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
             "AC3 - Body type code is auto-populated when updating a hgv")
     @Test
@@ -829,6 +830,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedAt", createdAt);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-10478 - AC9 - PUT - trailerId is updated to a trailerId which DOES currently exist in DynamoDB")
     @Test
     public void testVehicleTechnicalRecords_Put_TrailerIdUpdates_Existing() {
@@ -873,7 +875,8 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("TrailerId " + trailerId1 + " already exists");
     }
 
-    @WithTag("Vtm")
+    @WithTag("In_test")
+//    @WithTag("Vtm")
     @Title("CVSB-10830 - AC1 - TRL vehicle is updated, and the appropriate attributes are automatically set")
     @Test
     public void testVehicleTechnicalRecordsUpdateAllTrlAttributes() {
@@ -1237,6 +1240,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("[0].techRecord[0]","vehicleClass");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - LGV")
     @Test
     public void testUpdateVehicleTechnicalRecordWithOptionalVehicleClassForLgv() {
