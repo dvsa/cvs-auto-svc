@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RunWith(SerenityRunner.class)
+@WithTag("In_test")
 public class PostTestResultsProvisionalUpdate {
 
     @Steps
@@ -242,7 +243,6 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o2");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - LGV")
     @Test
     public void testVehicleTechRecordLgvEuVehicleCategoryNull(){
@@ -258,7 +258,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv2.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");

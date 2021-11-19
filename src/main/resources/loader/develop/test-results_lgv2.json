@@ -1,0 +1,59 @@
+{
+  "testResultId": "5ce94248-855a-4f52-9a9e-ae2454366dc8",
+  "testStationName": "Abshire-Kub",
+  "testStationPNumber": "09-4129632",
+  "testStationType": "gvts",
+  "testerName": "cvs.automation4@dvsagov.onmicrosoft.com",
+  "testerStaffId": "239",
+  "testerEmailAddress": "cvs.automation4@dvsagov.onmicrosoft.com",
+  "testStartTimestamp": "2020-03-11T13:45:39.979Z",
+  "testEndTimestamp": "2020-03-11T13:48:01.971Z",
+  "testStatus": "submitted",
+  "reasonForCancellation": null,
+  "vrm": "AS234TY",
+  "odometerReading": 12345,
+  "odometerReadingUnits": "kilometres",
+  "systemNumber": "1000076",
+  "vin": "P0123010951264",
+  "vehicleClass": {
+    "description": "Not Known",
+    "code": "u"
+  },
+  "vehicleSubclass": [
+    "c"
+  ],
+  "vehicleConfiguration": null,
+  "vehicleType": "lgv",
+  "preparerId": "No preparer ID given",
+  "preparerName": "",
+  "euVehicleCategory": "n1",
+  "countryOfRegistration": "gb",
+  "noOfAxles": 2,
+  "numberOfWheelsDriven": null,
+  "testTypes": [
+    {
+      "name": "Specialist test",
+      "testTypeName": "IVA mutual recognition/ end of series & inspection",
+      "testTypeId": "130",
+      "certificateNumber": "C12345",
+      "secondaryCertificateNumber": null,
+      "testTypeStartTimestamp": "2020-03-11T13:47:24.212Z",
+      "testTypeEndTimestamp": "2020-03-11T13:48:01.976Z",
+      "modType": null,
+      "emissionStandard": null,
+      "fuelType": null,
+      "smokeTestKLimitApplied": null,
+      "particulateTrapFitted": null,
+      "particulateTrapSerialNumber": null,
+      "modificationTypeUsed": null,
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": [],
+      "customDefects": []
+    }
+  ]
+}
