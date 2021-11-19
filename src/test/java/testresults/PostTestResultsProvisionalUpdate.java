@@ -258,7 +258,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv2.json", "$");
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -334,8 +334,8 @@ public class PostTestResultsProvisionalUpdate {
     public void testVehicleTechRecordMotorcycleEuVehicleCategoryNull(){
 
         // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00006";
-        String vin = "DP76UMK4DQLTOT400006";
+        String systemNumber = "XYZEP5JYOMM00066";
+        String vin = "DP76UMK4DQLTOT400066";
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
