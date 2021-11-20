@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.UUID;
 
 @RunWith(SerenityRunner.class)
-@WithTag("In_test")
 public class PostTestResultsProvisionalUpdate {
 
     @Steps
