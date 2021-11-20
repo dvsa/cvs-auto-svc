@@ -98,7 +98,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-8677 - AC1 - Add adrDetails object onto an existing tech record with status provisional " +
             "AC2 - Update adrDetails object on an existing tech record " +
             "AC3 - All attributes are returned " +
@@ -223,7 +223,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
             "AC3 - Body type code is auto-populated when updating a hgv")
     @Test
@@ -466,7 +466,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10244 - AC2 - Vehicle class code is auto-populated when updating a psv " +
             "AC3 - Body type code is auto-populated when updating a psv " +
             "AC4 - Brake code fields are auto-populated")
@@ -877,7 +877,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10830 - AC1 - TRL vehicle is updated, and the appropriate attributes are automatically set")
     @Test
     public void testVehicleTechnicalRecordsUpdateAllTrlAttributes() {
@@ -1298,7 +1298,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - First Test")
     @Test
     public void testPostVehicleTechRecordHgvPrsFirstTest(){
@@ -1526,7 +1526,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - First Test")
     @Test
     public void testPostVehicleTechRecordTrlPrsFirstTest(){
@@ -1642,7 +1642,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - First Test")
     @Test
     public void testPostVehicleTechRecordTrlPassFirstTest(){
@@ -1754,7 +1754,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordHgvPrsNotifiableAlteration(){
@@ -1870,7 +1870,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordHgvPassNotifiableAlteration(){
@@ -2097,7 +2097,7 @@ public class PutVehicleTechnicalRecords {
     }
 
     
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordTrlPassNotifiableAlteration(){

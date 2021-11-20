@@ -527,7 +527,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
     }
 
     
-//    @WithTag("expiry_dates")
+    @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is in the same month as Registration Anniversary")
     @Test
     public void testResultsFirstTestExpiryHgvTodayIsInTheSameMonthAsAnniversary() {
