@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @RunWith(SerenityRunner.class)
+@WithTag("In_test")
 public class PutVehicleTechnicalRecords {
 
     @Steps
