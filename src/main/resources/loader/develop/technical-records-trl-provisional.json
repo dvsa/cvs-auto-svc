@@ -132,7 +132,7 @@
       "couplingCenterToRearTrlMax": 700,
       "couplingCenterToRearTrlMin": 800,
       "couplingType": "F",
-      "createdAt": "2019-06-24T10:26:54.903Z",
+      "createdAt": "2020-06-24T10:26:54.903Z",
       "dimensions": {
         "axleSpacing": [
           {
@@ -144,11 +144,11 @@
         "width": 2200
       },
       "drawbarCouplingFitted": true,
-      "firstUseDate": "2019-06-24",
+      "firstUseDate": "2020-06-24",
       "frontAxleToRearAxle": 1700,
       "grossKerbWeight": 2500,
       "grossLadenWeight": 3000,
-      "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
+      "lastUpdatedAt": "2020-06-24T10:26:54.903Z",
       "loadSensingValve": false,
       "make": "Isuzu",
       "manufactureYear": 2018,
@@ -159,7 +159,7 @@
       "ntaNumber": "123456",
       "rearAxleToRearTrl": 400,
       "reasonForCreation": "new trailer",
-      "regnDate": "2019-06-24",
+      "regnDate": "2020-06-24",
       "roadFriendly": true,
       "statusCode": "provisional",
       "suspensionType": "Y",
