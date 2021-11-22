@@ -159,7 +159,6 @@ public class PutVehicleTechnicalRecords {
         // Validate AC4
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].createdByName", "sean");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[1].createdById", "12345");
-        // Validate AC2
         alterationAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetailsTank,"adrDetails","ADD_FIELD");
         alterations.remove(alterations.size()-1);
         alterations.add(alterationAdrDetails);
