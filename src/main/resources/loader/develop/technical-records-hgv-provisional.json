@@ -66,7 +66,7 @@
         "dtpNumber": "sdgsd"
       },
       "conversionRefNo": "7891234",
-      "createdAt": "2019-06-24T10:26:54.903Z",
+      "createdAt": "2020-06-24T10:26:54.903Z",
       "dimensions": {
         "length": 7500,
         "width": 2200
@@ -78,7 +78,7 @@
       "frontAxleTo5thWheelMax": 1500,
       "frontAxleTo5thWheelMin": 1200,
       "functionCode": "A",
-      "lastUpdatedAt": "2019-06-24T10:26:54.903Z",
+      "lastUpdatedAt": "2020-06-24T10:26:54.903Z",
       "make": "Isuzu",
       "manufactureYear": 2018,
       "maxTrainDesignWeight": 500,
@@ -88,7 +88,7 @@
       "notes": "test note",
       "ntaNumber": "123456",
       "reasonForCreation": "new vehicle",
-      "regnDate": "2019-06-24",
+      "regnDate": "2020-06-24",
       "roadFriendly": true,
       "speedLimiterMrk": true,
       "tachoExemptMrk": true,

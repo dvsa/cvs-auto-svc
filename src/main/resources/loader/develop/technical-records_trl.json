@@ -16,7 +16,7 @@
       "adrDetails": {
         "vehicleDetails": {
           "type": "Centre axle battery",
-          "approvalDate": "2019-10-15"
+          "approvalDate": "2020-10-15"
         },
         "listStatementApplicable": true,
         "batteryListNumber": "12345",
@@ -86,8 +86,8 @@
         }
       },
       "vehicleType": "trl",
-      "regnDate": "2019-06-07",
-      "firstUseDate": "2019-06-08",
+      "regnDate": "2020-06-07",
+      "firstUseDate": "2020-06-08",
       "manufactureYear": 2019,
       "noOfAxles": 2,
       "brakes": {
@@ -108,15 +108,15 @@
       "alterationMarker": false,
       "departmentalVehicleMarker": true,
       "authIntoService": {
-        "cocIssueDate": "2019-06-25",
-        "dateReceived": "2019-06-09",
-        "datePending": "2019-06-26",
-        "dateAuthorised": "2019-06-27",
-        "dateRejected": "2019-06-28"
+        "cocIssueDate": "2020-06-25",
+        "dateReceived": "2020-06-09",
+        "datePending": "2020-06-26",
+        "dateAuthorised": "2020-06-27",
+        "dateRejected": "2020-06-28"
       },
       "lettersOfAuth": {
         "letterType": "Trailer rejection",
-        "letterDateRequested": "2019-06-24",
+        "letterDateRequested": "2020-06-24",
         "letterContents": "letter contents"
       },
       "approvalType": "ECTA",
