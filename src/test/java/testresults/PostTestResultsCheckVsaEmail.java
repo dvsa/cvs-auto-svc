@@ -4,6 +4,7 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import util.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@Ignore("Outlook link check")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsCheckVsaEmail {
 
