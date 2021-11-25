@@ -55,6 +55,7 @@ public class PostTestNumber {
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", "Part-paid retest", "", "REPLACE");
         JsonPathAlteration alterationTestTypeId = new JsonPathAlteration("$.testTypes[0].testTypeId", "1", "", "REPLACE");
 
+
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
                 alterationVin,
