@@ -742,6 +742,9 @@ public class TestResultsClient {
         JsonPathAlteration alterationTestResult =
                 new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
+        JsonPathAlteration alterationPreparerName =
+                new JsonPathAlteration("$.preparerName", "test","","REPLACE");
+
         LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         String endDate = currentDate.plusHours(1).format(formatter);
@@ -775,7 +778,7 @@ public class TestResultsClient {
         // add remaining alterations to list of test result alterations
         testResultAlterations.addAll(new ArrayList<>(Arrays.asList(alterationTestStatus, alterationTestResultId,
                 alterationTestResult, alterationTestExpiryDate, alterationTestStartTimestamp, alterationTestEndTimestamp,
-                alterationTestTypeStartTimestamp, alterationTestTypeEndTimestamp)));
+                alterationTestTypeStartTimestamp, alterationTestTypeEndTimestamp, alterationPreparerName)));
 
         // add alteration for adding
         DocumentContext jsonContext = JsonPath.parse(postTestResultBody);
