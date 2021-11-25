@@ -778,7 +778,7 @@ public class TestResultsClient {
         // add remaining alterations to list of test result alterations
         testResultAlterations.addAll(new ArrayList<>(Arrays.asList(alterationTestStatus, alterationTestResultId,
                 alterationTestResult, alterationTestExpiryDate, alterationTestStartTimestamp, alterationTestEndTimestamp,
-                alterationTestTypeStartTimestamp, alterationTestTypeEndTimestamp)));
+                alterationTestTypeStartTimestamp, alterationTestTypeEndTimestamp, alterationPreparerName)));
 
         // add alteration for adding
         DocumentContext jsonContext = JsonPath.parse(postTestResultBody);
