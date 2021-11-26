@@ -6,6 +6,7 @@ import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsSystemNumber {
 
@@ -525,7 +527,6 @@ public class PostTestResultsSystemNumber {
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
-
     @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - TRL")
     @Test
     public void testCreateTestResultGenerateCertTrl() {
