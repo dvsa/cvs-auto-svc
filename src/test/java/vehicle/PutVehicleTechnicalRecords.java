@@ -21,8 +21,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
-@Ignore("VTM to check PUT TECH RECORDS endpoint and fix these tests")
+@WithTag("In_test")
+//@Ignore("VTM to check PUT TECH RECORDS endpoint and fix these tests")
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
