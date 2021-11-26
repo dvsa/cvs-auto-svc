@@ -13,7 +13,6 @@ import util.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Ignore("Outlook link check")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsCheckVsaEmail {
 
