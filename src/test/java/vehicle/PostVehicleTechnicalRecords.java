@@ -18,6 +18,7 @@ import steps.TestResultsSteps;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostVehicleTechnicalRecords {
 
