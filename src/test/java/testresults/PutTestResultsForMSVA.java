@@ -30,7 +30,7 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@WithTag("In_test")
+//@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForMSVA extends TestCase {
 
