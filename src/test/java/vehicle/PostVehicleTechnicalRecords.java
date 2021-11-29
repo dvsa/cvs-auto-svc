@@ -18,7 +18,7 @@ import steps.TestResultsSteps;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WithTag("In_test")
+//@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostVehicleTechnicalRecords {
 
@@ -143,7 +143,6 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyTypeCode);
     }
 
-    @WithTag("In_test")
     @Title("CVSB-10752 - AC1 API Consumer retrieve the Vehicle Technical Records - Single Vehicle")
     @Test
     public void testTechnicalRecordForSingleVehicle() {
@@ -214,7 +213,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("systemNumber.size()", 2);
-//
+
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_duplicate_chassis_10752.json", "$");
 
@@ -443,8 +442,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", systemNumber);
     }
 
-    @WithTag("In_test")
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10598 - AC2 - PSV vehicle is created, and the next systemNumber is assigned")
     @Test
     public void testCreateVehiclePsvNewSystemNumberAssigned() {

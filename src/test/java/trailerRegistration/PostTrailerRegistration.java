@@ -15,7 +15,7 @@ import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
 
-@WithTag("In_test")
+//@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTrailerRegistration {
 
@@ -340,7 +340,6 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @WithTag("In_test")
     @Title("CVSB-18921 - AC2 -  VTG5A NO TRN PRESENT - TRL First Test Pass - Without TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrn() {
@@ -499,7 +498,6 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @WithTag("In_test")
     @Title("CVSB-18921 - AC4 -  VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
     @Test
     public void testPostTestResultFailTrailerRegistrationCertificateWithoutTrnHgv() {
