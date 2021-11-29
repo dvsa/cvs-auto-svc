@@ -411,8 +411,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.code", bodyTypeCode);
     }
 
-    @WithTag("In_test")
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10598 - AC1 - HGV vehicle is created, and the next systemNumber is assigned")
     @Test
     public void testCreateVehicleHgvNewSystemNumberAssigned() {
@@ -477,8 +476,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", systemNumber);
     }
 
-    @WithTag("In_test")
-//    @WithTag("Vtm")
+    @WithTag("Vtm")
     @Title("CVSB-10598 - AC3 - TRL vehicle is created, and the next systemNumber is assigned")
     @Test
     public void testCreateVehicleTrlNewSystemNumberAssigned() {
