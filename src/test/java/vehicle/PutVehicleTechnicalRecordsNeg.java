@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-//@WithTag("In_test")
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecordsNeg {
 
