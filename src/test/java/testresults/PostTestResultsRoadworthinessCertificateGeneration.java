@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsRoadworthinessCertificateGeneration {
 
@@ -997,8 +998,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
-
-    @WithTag("In_test")
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QQV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QQV_Fail_Certificate_Generation() {
