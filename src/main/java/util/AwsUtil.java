@@ -42,7 +42,7 @@ public class AwsUtil {
         String uuid = String.valueOf(UUID.randomUUID());
         AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
                 .withRoleArn(System.getProperty("AWS_ROLE"))
-                .withDurationSeconds(3600)
+                .withDurationSeconds(5000)
                 .withRoleSessionName(uuid);
         AssumeRoleResult assumeResult =
                 stsClient.assumeRole(assumeRequest);
