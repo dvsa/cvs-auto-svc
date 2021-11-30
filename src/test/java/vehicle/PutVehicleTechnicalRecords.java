@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Ignore;
+import org.springframework.core.annotation.Order;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
@@ -97,6 +98,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
     }
 
+    @Order(1)
     @WithTag("Vtm")
     @Title("CVSB-8677 - AC1 - Add adrDetails object onto an existing tech record with status provisional " +
             "AC2 - Update adrDetails object on an existing tech record " +
@@ -220,6 +222,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
     }
 
+    @Order(2)
     @WithTag("Vtm")
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
             "AC3 - Body type code is auto-populated when updating a hgv")
@@ -265,6 +268,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].bodyType.code", "a");
     }
 
+    @Order(3)
     @WithTag("Vtm")
     @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for non battery/tank " +
             "AC2 - JSON document contains 'nulls' for all optional fields for non battery/tank")
@@ -301,6 +305,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
     }
 
+    @Order(4)
     @WithTag("Vtm")
     @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for battery " +
             "AC2 - JSON document contains 'nulls' for all optional fields for battery")
@@ -338,6 +343,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
     }
 
+    @Order(5)
     @WithTag("Vtm")
     @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for tank " +
             "AC2 - JSON document contains 'nulls' for all optional fields for tank")
@@ -374,6 +380,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1].adrDetails", adrDetails);
     }
 
+    @Order(6)
     @WithTag("Vtm")
     @Title("CVSB-10209 - AC3 - HGV vehicle is updated, and the appropriate attributes are automatically set")
     @Test
@@ -417,6 +424,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord.find { it.statusCode == 'provisional' }", techRecord);
     }
 
+    @Order(7)
     @WithTag("Vtm")
     @Title("CVSB-10813 - AC1 - PSV vehicle is updated, and the appropriate attributes are automatically set")
     @Test
@@ -462,6 +470,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord.find { it.statusCode == 'provisional' }", alteredTechRecord);
     }
 
+    @Order(8)
     @WithTag("Vtm")
     @Title("CVSB-10244 - AC2 - Vehicle class code is auto-populated when updating a psv " +
             "AC3 - Body type code is auto-populated when updating a psv " +
@@ -515,6 +524,7 @@ public class PutVehicleTechnicalRecords {
                 "456");
     }
 
+    @Order(9)
     @Title("CVSB-10478 - AC1 - Vehicles PUT endpoint is updated to now use systemNumber, instead of Vin")
     @Test
     public void testVehicleTechnicalRecords_Put() {
@@ -551,6 +561,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].bodyType.description", "single decker");
     }
 
+    @Order(10)
     @Title("CVSB-10478 - AC4 - PUT: Permit the PUT of a primaryVrm which has special characters")
     @Test
     public void testVehicleTechnicalRecords_Put_SpecialCharacters_VRM() {
@@ -593,6 +604,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", specialCharsVrm.toUpperCase());
     }
 
+    @Order(11)
     @Title("CVSB-10478 - AC5 - PUT - Permit the PUT of a trailerId which has special characters")
     @Test
     public void testVehicleTechnicalRecords_Put_SpecialCharacters_TrailerId() {
@@ -635,6 +647,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", specialCharsTrailerId.toUpperCase());
     }
 
+    @Order(12)
     @Title("CVSB-10478 - AC6 - PUT - primaryVrm is updated to a primaryVrm which DOES NOT currently exist in DynamoDB")
     @Test
     public void testVehicleTechnicalRecords_Put_PrimaryVrmUpdates_NotExisting() {
@@ -709,6 +722,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedAt", createdAt);
     }
 
+    @Order(14)
     @Title("CVSB-10478 - AC7 - PUT - primaryVrm is updated to a primaryVrm which DOES currently exist in DynamoDB")
     @Test
     public void testVehicleTechnicalRecords_Put_PrimaryVrmUpdates_Existing() {
@@ -753,6 +767,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("Primary VRM " + randomVrm1 + " already exists");
     }
 
+    @Order(15)
     @Title("CVSB-10478 - AC8 - PUT - trailerId is updated to a trailerId which does not currently exist in DynamoDB")
     @Test
     public void testVehicleTechnicalRecords_Put_TrailerIdUpdates_NotExisting() {
@@ -827,6 +842,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].lastUpdatedAt", createdAt);
     }
 
+    @Order(16)
     @Title("CVSB-10478 - AC9 - PUT - trailerId is updated to a trailerId which DOES currently exist in DynamoDB")
     @Test
     public void testVehicleTechnicalRecords_Put_TrailerIdUpdates_Existing() {
@@ -871,6 +887,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("TrailerId " + trailerId1 + " already exists");
     }
 
+    @Order(17)
     @WithTag("Vtm")
     @Title("CVSB-10830 - AC1 - TRL vehicle is updated, and the appropriate attributes are automatically set")
     @Test
@@ -918,6 +935,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord.find { it.statusCode == 'provisional' }", techRecord);
     }
 
+    @Order(18)
     @WithTag("Vtm")
     @Title("CVSB-10249 - AC1 - Vehicle class code is auto-populated when updating a trl " +
             "AC2 - Body type code is auto-populated when updating a trl")
@@ -968,6 +986,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].bodyType.code", "a");
     }
 
+    @Order(19)
     @WithTag("Vtm")
     @Title("CVSB-14486 - AC4 - All error messages are returned")
     @Test
@@ -1026,6 +1045,7 @@ public class PutVehicleTechnicalRecords {
                 "{ it.contains('adrDetails.tank.tankDetails.tc2Details.tc2Type') }.size()", 1);
     }
 
+    @Order(20)
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - CAR")
     @Test
     public void testUpdateVehicleTechnicalRecordForCar() {
@@ -1077,6 +1097,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].updateType","techRecordUpdate" );
     }
 
+    @Order(21)
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - LGV")
     @Test
     public void testUpdateVehicleTechnicalRecordForLgv() {
@@ -1129,6 +1150,7 @@ public class PutVehicleTechnicalRecords {
 
     }
 
+    @Order(22)
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - MOTORCYCLE")
     @Test
     public void testUpdateVehicleTechnicalRecordForMotorcycle() {
@@ -1180,6 +1202,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].updateType","techRecordUpdate" );
     }
 
+    @Order(23)
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - CAR")
     @Test
     public void testUpdateVehicleTechnicalRecordOptionalVehicleClassForCar() {
@@ -1234,6 +1257,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.fieldInPathShouldNotExist("[0].techRecord[0]","vehicleClass");
     }
 
+    @Order(24)
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - LGV")
     @Test
     public void testUpdateVehicleTechnicalRecordWithOptionalVehicleClassForLgv() {
@@ -1289,6 +1313,7 @@ public class PutVehicleTechnicalRecords {
 
     }
 
+    @Order(25)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - First Test")
     @Test
@@ -1404,6 +1429,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(26)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - First Test")
     @Test
@@ -1510,6 +1536,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(27)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - First Test")
     @Test
@@ -1625,6 +1652,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(28)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - First Test")
     @Test
@@ -1736,6 +1764,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(29)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - Notifiable Alteration")
     @Test
@@ -1851,6 +1880,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(30)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - Notifiable Alteration")
     @Test
@@ -1962,6 +1992,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(31)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - Notifiable Alteration")
     @Test
@@ -2077,6 +2108,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(32)
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
@@ -2188,6 +2220,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
+    @Order(33)
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - PSV")
     @Test
     public void testVehicleTechnicalRecordForTestablePsv() {
@@ -2244,6 +2277,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","testable" );
     }
 
+    @Order(34)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - HGV")
     @Test
@@ -2292,6 +2326,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","testable" );
     }
 
+    @Order(35)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - Trailer")
     @Test
@@ -2353,6 +2388,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","testable" );
     }
 
+    @Order(26)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Skeleton - Complete - PSV")
     @Test
@@ -2402,6 +2438,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
+    @Order(37)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Skeleton - Complete - HGV")
     @Test
@@ -2447,6 +2484,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
+    @Order(38)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Skeleton - Complete - Trailer")
     @Test
@@ -2500,6 +2538,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
+    @Order(39)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC2 - Record completeness = complete (only core attributes) - Skeleton - Complete - Car")
     @Test
@@ -2555,6 +2594,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
+    @Order(40)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC2 - Record completeness = complete (only core attributes) - Skeleton - Complete - LGV")
     @Test
@@ -2610,6 +2650,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
+    @Order(41)
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC2 - Record completeness = complete (only core attributes) - Skeleton - Complete - Motorcycle")
     @Test
