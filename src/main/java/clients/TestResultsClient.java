@@ -747,7 +747,7 @@ public class TestResultsClient {
 
         LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        String endDate = currentDate.plusHours(1).format(formatter);
+        String endDate = currentDate.plusMinutes(50).format(formatter);
         String expiryDate = currentDate.plusYears(1).format(formatter);
         // create alteration to change testStartTimestamp
         JsonPathAlteration alterationTestStartTimestamp =
