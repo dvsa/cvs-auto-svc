@@ -26,7 +26,7 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@WithTag("In_test")
+//@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateNotGenerated extends TestCase {
 
@@ -137,7 +137,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
     }
 
 
-    @WithTag("In_test")
+    //@WithTag("In_test")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
