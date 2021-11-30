@@ -22,7 +22,7 @@ import java.util.List;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTag("In_test")
+//@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegDefectsLvlCancelled {
 
