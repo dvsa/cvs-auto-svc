@@ -7,6 +7,7 @@ import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import model.testresults.TestResults;
 import model.vehicles.*;
 import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
