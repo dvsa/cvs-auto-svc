@@ -18,7 +18,7 @@ import steps.TestResultsSteps;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//@WithTag("In_test")
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostVehicleTechnicalRecords {
 
@@ -365,6 +365,7 @@ public class PostVehicleTechnicalRecords {
         // TEST
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        System.out.println("RANDOM" + "" + randomVin);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
 
