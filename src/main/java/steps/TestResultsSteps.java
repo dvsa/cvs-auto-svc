@@ -852,11 +852,11 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void waitForTestResultsToBeUpdated(String sn, int seconds) {
+    public void waitForTestResultsToBeUpdated(String sn, int iteration) {
 
-        System.out.println("...waiting " + seconds + " seconds for the record to be updated...\n");
+        System.out.println("...waiting " + iteration + " seconds for the record to be updated...\n");
 
-        for (int i = 0; i < seconds; i++) {
+        for (int i = 0; i < iteration; i++) {
             response = testResultsClient.getTestResults(sn);
 
             int status = response.getStatusCode();
