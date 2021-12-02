@@ -337,10 +337,11 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void waitForVehicleTechRecordsToBeUpdated(String vin, int iteration) {
 
-        System.out.println("...waiting " + iteration + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + iteration + " iterations for the vehicle tech record to be updated...\n");
 
         for(int i=0; i < iteration; i++) {
-            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+//            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatusAndSearchCriteria(vin, "all", "vin");
 
             int status = response.getStatusCode();
             int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
@@ -367,7 +368,7 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + iteration +" iterations...");
     }
 
     @Step
