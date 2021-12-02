@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-//@WithTag("In_test")
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostVehicleTechnicalRecords {
 

@@ -20,6 +20,8 @@ import util.AwsUtil;
 import static util.TypeLoader.*;
 import util.JsonPathAlteration;
 import java.util.*;
+import java.util.logging.Logger;
+import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import static data.GenericData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -350,6 +352,8 @@ public class VehicleTechnicalRecordsSteps {
 
                 System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
+                Logger.getLogger("for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
+
                 if (status == 200 && recordsNumber > 1) {
                     try {
                         Thread.sleep(5000);
@@ -367,7 +371,8 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + iteration +" iterations...");
+        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
+        Logger.getLogger("\n...Vehicle status has not been updated in " + iteration +" seconds...");
     }
 
     @Step
@@ -395,6 +400,7 @@ public class VehicleTechnicalRecordsSteps {
                     return;
                 } else {
                     System.out.println("\n...waiting one more second (" + i + ")...\n");
+                    Logger.getLogger("\n...waiting one more second (" + i + ")...\n");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -403,6 +409,7 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
+        Logger.getLogger("\n...Vehicle status has not been updated in " + seconds +" seconds...");
         System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
     }
 
