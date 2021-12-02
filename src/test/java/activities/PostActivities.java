@@ -32,6 +32,7 @@ public class PostActivities {
         activitiesSteps.responseShouldContainId();
     }
 
+
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: wait")
     @Test
     public void postActivitiesActivityTypeWait() {
