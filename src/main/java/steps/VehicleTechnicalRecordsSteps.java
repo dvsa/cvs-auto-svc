@@ -340,8 +340,7 @@ public class VehicleTechnicalRecordsSteps {
         System.out.println("...waiting " + iteration + " iterations for the vehicle tech record to be updated...\n");
 
         for(int i=0; i < iteration; i++) {
-//            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
-            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatusAndSearchCriteria(vin, "all", "vin");
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
             int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
