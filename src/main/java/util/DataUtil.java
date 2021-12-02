@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class DataUtil {
 
-
     public static String buildDate(String date, long offsetYears,long offsetMounts, long offsetDays) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -59,6 +58,4 @@ public class DataUtil {
 
         return value;
     }
-
-
 }

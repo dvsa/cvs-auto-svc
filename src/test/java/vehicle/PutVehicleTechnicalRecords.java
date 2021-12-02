@@ -11,9 +11,11 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.Ignore;
+import org.junit.runners.MethodSorters;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
@@ -21,8 +23,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//@WithTag("In_test")
-//@Ignore("VTM to check PUT TECH RECORDS endpoint and fix these tests")
+@WithTag("In_test")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
@@ -40,7 +42,7 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM " +
             "AC7 - Can not update VIN, partial vin or primary/secondary vrm " +
             "AC9 - Can add or remove tech records for a vehicle entry")
-    public void testUpdateVehicleTechnicalRecord() {
+    public void test01_UpdateVehicleTechnicalRecord() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -105,7 +107,7 @@ public class PutVehicleTechnicalRecords {
             "AC4 - Adding of adrDetails is audited " +
             "AC5 - Updating of adrDetails is audited")
     @Test
-    public void testAddAdrDetailsObjectVehicleTechnicalRecord() {
+    public void test02_AddAdrDetailsObjectVehicleTechnicalRecord() {
         //TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -179,7 +181,7 @@ public class PutVehicleTechnicalRecords {
     @Ignore("No longer a valid test")
     @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
             "AC2 - Document is removed from the ADR record")
-    public void testAddAdrDetailsUploadDocumentAdrRecord() {
+    public void test03_AddAdrDetailsUploadDocumentAdrRecord() {
         //TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -226,7 +228,7 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
             "AC3 - Body type code is auto-populated when updating a hgv")
     @Test
-    public void testUpdateVehicleHgvAutoPopulateFields() {
+    public void test04_UpdateVehicleHgvAutoPopulateFields() {
         // TEST SETUP
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -271,7 +273,7 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for non battery/tank " +
             "AC2 - JSON document contains 'nulls' for all optional fields for non battery/tank")
     @Test
-    public void testValidateAdrDetailsNullsOptionalNotApplicableFieldsNonTankBattery() {
+    public void test05_ValidateAdrDetailsNullsOptionalNotApplicableFieldsNonTankBattery() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -307,7 +309,7 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for battery " +
             "AC2 - JSON document contains 'nulls' for all optional fields for battery")
     @Test
-    public void testValidateAdrDetailsNullsOptionalNotApplicableFieldsBattery() {
+    public void test06_ValidateAdrDetailsNullsOptionalNotApplicableFieldsBattery() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -344,7 +346,7 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-11487 - AC1 - JSON document contains 'nulls' for all not applicable fields for tank " +
             "AC2 - JSON document contains 'nulls' for all optional fields for tank")
     @Test
-    public void testValidateAdrDetailsNullsOptionalNotApplicableFieldsTank() {
+    public void test07_ValidateAdrDetailsNullsOptionalNotApplicableFieldsTank() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -379,7 +381,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10209 - AC3 - HGV vehicle is updated, and the appropriate attributes are automatically set")
     @Test
-    public void testVehicleTechnicalRecordsUpdateAllHgvAttributes() {
+    public void test08_VehicleTechnicalRecordsUpdateAllHgvAttributes() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -422,7 +424,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10813 - AC1 - PSV vehicle is updated, and the appropriate attributes are automatically set")
     @Test
-    public void testVehicleTechnicalRecordsUpdateAllPsvAttributes() {
+    public void test09_VehicleTechnicalRecordsUpdateAllPsvAttributes() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -469,7 +471,7 @@ public class PutVehicleTechnicalRecords {
             "AC3 - Body type code is auto-populated when updating a psv " +
             "AC4 - Brake code fields are auto-populated")
     @Test
-    public void testUpdateVehiclePsvAutoPopulateFields() {
+    public void test10_UpdateVehiclePsvAutoPopulateFields() {
         // TEST SETUP
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -519,7 +521,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC1 - Vehicles PUT endpoint is updated to now use systemNumber, instead of Vin")
     @Test
-    public void testVehicleTechnicalRecords_Put() {
+    public void test11_VehicleTechnicalRecords_Put() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -555,7 +557,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC4 - PUT: Permit the PUT of a primaryVrm which has special characters")
     @Test
-    public void testVehicleTechnicalRecords_Put_SpecialCharacters_VRM() {
+    public void test12_VehicleTechnicalRecords_Put_SpecialCharacters_VRM() {
         // TEST SETUP
         String specialCharacters = "/ \\*-";
 
@@ -597,7 +599,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC5 - PUT - Permit the PUT of a trailerId which has special characters")
     @Test
-    public void testVehicleTechnicalRecords_Put_SpecialCharacters_TrailerId() {
+    public void test13_VehicleTechnicalRecords_Put_SpecialCharacters_TrailerId() {
         // TEST SETUP
         String specialCharacters = "/ \\*-";
 
@@ -639,7 +641,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC6 - PUT - primaryVrm is updated to a primaryVrm which DOES NOT currently exist in DynamoDB")
     @Test
-    public void testVehicleTechnicalRecords_Put_PrimaryVrmUpdates_NotExisting() {
+    public void test14_VehicleTechnicalRecords_Put_PrimaryVrmUpdates_NotExisting() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -713,7 +715,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC7 - PUT - primaryVrm is updated to a primaryVrm which DOES currently exist in DynamoDB")
     @Test
-    public void testVehicleTechnicalRecords_Put_PrimaryVrmUpdates_Existing() {
+    public void test15_VehicleTechnicalRecords_Put_PrimaryVrmUpdates_Existing() {
         // TEST SETUP
         // generate random Vin
         String randomVin1 = GenericData.generateRandomVin();
@@ -757,7 +759,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC8 - PUT - trailerId is updated to a trailerId which does not currently exist in DynamoDB")
     @Test
-    public void testVehicleTechnicalRecords_Put_TrailerIdUpdates_NotExisting() {
+    public void test16_VehicleTechnicalRecords_Put_TrailerIdUpdates_NotExisting() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -831,7 +833,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-10478 - AC9 - PUT - trailerId is updated to a trailerId which DOES currently exist in DynamoDB")
     @Test
-    public void testVehicleTechnicalRecords_Put_TrailerIdUpdates_Existing() {
+    public void test17_VehicleTechnicalRecords_Put_TrailerIdUpdates_Existing() {
         // TEST SETUP
         // generate random Vin
         String randomVin1 = GenericData.generateRandomVin();
@@ -877,7 +879,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10830 - AC1 - TRL vehicle is updated, and the appropriate attributes are automatically set")
     @Test
-    public void testVehicleTechnicalRecordsUpdateAllTrlAttributes() {
+    public void test18_VehicleTechnicalRecordsUpdateAllTrlAttributes() {
         // TEST SETUP
         // generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -925,7 +927,7 @@ public class PutVehicleTechnicalRecords {
     @Title("CVSB-10249 - AC1 - Vehicle class code is auto-populated when updating a trl " +
             "AC2 - Body type code is auto-populated when updating a trl")
     @Test
-    public void testUpdateVehicleTrlAutoPopulateFields() {
+    public void test19_UpdateVehicleTrlAutoPopulateFields() {
         // TEST SETUP
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -974,7 +976,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-14486 - AC4 - All error messages are returned")
     @Test
-    public void testUpdateVehicleErrorOnMultipleAdrFields() {
+    public void test_20UpdateVehicleErrorOnMultipleAdrFields() {
         // TEST SETUP
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -1031,7 +1033,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - CAR")
     @Test
-    public void testUpdateVehicleTechnicalRecordForCar() {
+    public void test21_UpdateVehicleTechnicalRecordForCar() {
 
         // Generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -1082,7 +1084,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - LGV")
     @Test
-    public void testUpdateVehicleTechnicalRecordForLgv() {
+    public void test22_UpdateVehicleTechnicalRecordForLgv() {
 
         // Generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -1134,7 +1136,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - MOTORCYCLE")
     @Test
-    public void testUpdateVehicleTechnicalRecordForMotorcycle() {
+    public void test23_UpdateVehicleTechnicalRecordForMotorcycle() {
 
         // Generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -1185,7 +1187,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - CAR")
     @Test
-    public void testUpdateVehicleTechnicalRecordOptionalVehicleClassForCar() {
+    public void test24_UpdateVehicleTechnicalRecordOptionalVehicleClassForCar() {
 
         // Generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -1239,7 +1241,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-11814 - AC1. PUT: Successfully update a vehicle - Optional VehicleClass - LGV")
     @Test
-    public void testUpdateVehicleTechnicalRecordWithOptionalVehicleClassForLgv() {
+    public void test25_UpdateVehicleTechnicalRecordWithOptionalVehicleClassForLgv() {
 
         // Generate random Vin
         String randomVin = GenericData.generateRandomVin();
@@ -1295,7 +1297,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - First Test")
     @Test
-    public void testPostVehicleTechRecordHgvPrsFirstTest(){
+    public void test26_PostVehicleTechRecordHgvPrsFirstTest(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
@@ -1410,7 +1412,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - First Test")
     @Test
-    public void testPostVehicleTechRecordHgvPassFirstTest(){
+    public void test27_PostVehicleTechRecordHgvPassFirstTest(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
@@ -1516,7 +1518,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - First Test")
     @Test
-    public void testPostVehicleTechRecordTrlPrsFirstTest(){
+    public void test28_PostVehicleTechRecordTrlPrsFirstTest(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
@@ -1631,7 +1633,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - First Test")
     @Test
-    public void testPostVehicleTechRecordTrlPassFirstTest(){
+    public void test29_PostVehicleTechRecordTrlPassFirstTest(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
@@ -1742,7 +1744,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - Notifiable Alteration")
     @Test
-    public void testPostVehicleTechRecordHgvPrsNotifiableAlteration(){
+    public void test30_PostVehicleTechRecordHgvPrsNotifiableAlteration(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
@@ -1857,7 +1859,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - Pass - Notifiable Alteration")
     @Test
-    public void testPostVehicleTechRecordHgvPassNotifiableAlteration(){
+    public void test31_PostVehicleTechRecordHgvPassNotifiableAlteration(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
@@ -1968,7 +1970,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - Notifiable Alteration")
     @Test
-    public void testPostVehicleTechRecordTrlPrsNotifiableAlteration(){
+    public void test32_PostVehicleTechRecordTrlPrsNotifiableAlteration(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
@@ -2083,7 +2085,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
-    public void testPostVehicleTechRecordTrlPassNotifiableAlteration(){
+    public void test33_PostVehicleTechRecordTrlPassNotifiableAlteration(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
@@ -2193,7 +2195,7 @@ public class PutVehicleTechnicalRecords {
 
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - PSV")
     @Test
-    public void testVehicleTechnicalRecordForTestablePsv() {
+    public void test34_VehicleTechnicalRecordForTestablePsv() {
 
         // TEST SETUP
         //generate random system number
@@ -2250,7 +2252,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - HGV")
     @Test
-    public void testVehicleTechnicalRecordForTestableHgv() {
+    public void test35_VehicleTechnicalRecordForTestableHgv() {
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
@@ -2298,7 +2300,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Testable - Complete - Trailer")
     @Test
-    public void testVehicleTechnicalRecordForTestableTrailer() {
+    public void test36_VehicleTechnicalRecordForTestableTrailer() {
         // TEST SETUP
         //generate random system number
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -2359,7 +2361,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Skeleton - Complete - PSV")
     @Test
-    public void testVehicleTechnicalRecordForSkeletonPsv() {
+    public void test37_VehicleTechnicalRecordForSkeletonPsv() {
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_psv_all_fields_skeleton_11794.json", "$");
@@ -2408,7 +2410,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Skeleton - Complete - HGV")
     @Test
-    public void testVehicleTechnicalRecordForSkeletonHgv() {
+    public void test38_VehicleTechnicalRecordForSkeletonHgv() {
 
 
         // POST tech-record,read the base tech-record JSON.
@@ -2453,7 +2455,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC1 - Record completeness = complete (core and non-core attributes) - Skeleton - Complete - Trailer")
     @Test
-    public void testVehicleTechnicalRecordForSkeletonTrailer() {
+    public void test39_VehicleTechnicalRecordForSkeletonTrailer() {
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields_skeleton_11794.json", "$");
@@ -2506,7 +2508,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC2 - Record completeness = complete (only core attributes) - Skeleton - Complete - Car")
     @Test
-    public void testVehicleTechnicalRecordForSkeletonCar() {
+    public void test40_VehicleTechnicalRecordForSkeletonCar() {
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_car_skeleton_11794.json", "$");
@@ -2561,7 +2563,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC2 - Record completeness = complete (only core attributes) - Skeleton - Complete - LGV")
     @Test
-    public void testVehicleTechnicalRecordForSkeletonLgv() {
+    public void test41_VehicleTechnicalRecordForSkeletonLgv() {
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_lgv_skeleton_11794.json", "$");
@@ -2616,7 +2618,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-11794 - AC2 - Record completeness = complete (only core attributes) - Skeleton - Complete - Motorcycle")
     @Test
-    public void testVehicleTechnicalRecordForSkeletonMotorcycle() {
+    public void test42_VehicleTechnicalRecordForSkeletonMotorcycle() {
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_motorcycle_skeleton_11794.json", "$");
@@ -2671,7 +2673,7 @@ public class PutVehicleTechnicalRecords {
     @Ignore("Wait untill CVSB-15252 / CVSB-15896 is merged")
     @WithTag("Vtm")
     @Title("CVSB-15252 / CVSB-15896 - Updating the Vehicles API to support plate generation + saving of the new tech record")
-    public void testVehicleTechnicalRecordPlateGeneration_Trl() {
+    public void test43_VehicleTechnicalRecordPlateGeneration_Trl() {
 
         // TEST SETUP
         // generate random Vin
