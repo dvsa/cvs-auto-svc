@@ -52,7 +52,7 @@ public class DataUtil {
 
         String value = RandomStringUtils.randomAlphabetic(count);
         for (String currentListValue : values) {
-            if (value.equalsIgnoreCase(currentListValue)) {
+            if(value.toLowerCase().contains(currentListValue.toLowerCase())) {
                 value = generateRandomExcludingValues(count,values);
             }
         }

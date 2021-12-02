@@ -438,6 +438,7 @@ public class TestResultsSteps {
     public void validatePostErrorData(String field, String errorMessage) {
         Object fieldName = "\"" + field + "\" ";
         response.then().body("size()", is(1));
+        System.out.println("RESPONSE ERRORS" + " " + " " +response.then().body("errors.size()", greaterThanOrEqualTo(1)));
         response.then().body("errors.size()", greaterThanOrEqualTo(1));
         response.then().body("errors[0]", equalTo( fieldName + errorMessage));
     }
