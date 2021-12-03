@@ -59,9 +59,9 @@ public class AwsUtil {
 
         System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
 
-        for(int i = 0; i < 240 ; i++) {
+        for(int i = 0; i < 480 ; i++) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(600);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -73,7 +73,7 @@ public class AwsUtil {
                 return s3Client.doesObjectExist(bucketName, key);
             }
         }
-        System.out.println("file " + key + " was not created in 120 seconds or less...");
+        System.out.println("file " + key + " was not created in 240 seconds or less...");
         return false;
     }
 

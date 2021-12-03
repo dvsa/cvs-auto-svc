@@ -362,25 +362,26 @@ public class VehicleTechnicalRecordsSteps {
                     }
                     return;
                 } else {
-                    System.out.println("\n...waiting one more second (" + i + ")...\n");
+                    System.out.println("\n...waiting five more seconds (" + i + ")...\n");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
-        Logger.getLogger("\n...Vehicle status has not been updated in " + iteration +" seconds...");
+        System.err.println("\n...Vehicle status has not been updated in " + iteration +"iteration...");
+//        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
+//        Logger.getLogger("\n...Vehicle status has not been updated in " + iteration +" seconds...");
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds, int numberOfTechRecords) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iteration, int numberOfTechRecords) {
 
-        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + iteration + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < seconds; i++) {
+        for(int i=0; i < iteration; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -399,18 +400,19 @@ public class VehicleTechnicalRecordsSteps {
                     }
                     return;
                 } else {
-                    System.out.println("\n...waiting one more second (" + i + ")...\n");
-                    Logger.getLogger("\n...waiting one more second (" + i + ")...\n");
+                    System.out.println("\n...waiting five more seconds (" + i + ")...\n");
+                    Logger.getLogger("\n...waiting five more seconds (" + i + ")...\n");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-        Logger.getLogger("\n...Vehicle status has not been updated in " + seconds +" seconds...");
-        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+        System.err.println("\n...Vehicle status has not been updated in " + iteration +"iteration...");
+//        Logger.getLogger("\n...Vehicle status has not been updated in " + iteration +" iteration...");
+//        System.out.println("\n...Vehicle status has not been updated in " + iteration +" iteration...");
     }
 
     @Step
