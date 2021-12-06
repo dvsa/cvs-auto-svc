@@ -1376,7 +1376,14 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1488,7 +1495,14 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1597,7 +1611,14 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1708,7 +1729,14 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1823,7 +1851,14 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1934,7 +1969,14 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -2050,6 +2092,13 @@ public class PutVehicleTechnicalRecords {
 
         // wait until the tech-record is updated
 
+        try{
+            Thread.sleep(5000);
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
@@ -2159,7 +2208,12 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-
+      try{
+          Thread.sleep(5000);
+      }
+      catch(Exception e) {
+          System.out.println(e);
+      }
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
