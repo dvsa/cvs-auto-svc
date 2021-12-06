@@ -7,7 +7,6 @@ import data.GenericData;
 import exceptions.AutomationException;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import model.testresults.TestResults;
 import model.vehicles.*;
 import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
@@ -20,8 +19,6 @@ import util.AwsUtil;
 import static util.TypeLoader.*;
 import util.JsonPathAlteration;
 import java.util.*;
-import java.util.logging.Logger;
-import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import static data.GenericData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -337,11 +334,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iteration) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds) {
 
-        System.out.println("...waiting " + iteration + " iterations for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < iteration; i++) {
+        for(int i=0; i < seconds; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -352,8 +349,6 @@ public class VehicleTechnicalRecordsSteps {
 
                 System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
-                Logger.getLogger("for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
-
                 if (status == 200 && recordsNumber > 1) {
                     try {
                         Thread.sleep(5000);
@@ -362,26 +357,24 @@ public class VehicleTechnicalRecordsSteps {
                     }
                     return;
                 } else {
-                    System.out.println("\n...waiting five more seconds (" + i + ")...\n");
+                    System.out.println("\n...waiting one more second (" + i + ")...\n");
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-        System.err.println("\n...Vehicle status has not been updated in " + iteration +"iteration...");
-//        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
-//        Logger.getLogger("\n...Vehicle status has not been updated in " + iteration +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iteration, int numberOfTechRecords) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds, int numberOfTechRecords) {
 
-        System.out.println("...waiting " + iteration + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < iteration; i++) {
+        for(int i=0; i < seconds; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -400,19 +393,16 @@ public class VehicleTechnicalRecordsSteps {
                     }
                     return;
                 } else {
-                    System.out.println("\n...waiting five more seconds (" + i + ")...\n");
-                    Logger.getLogger("\n...waiting five more seconds (" + i + ")...\n");
+                    System.out.println("\n...waiting one more second (" + i + ")...\n");
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-        System.err.println("\n...Vehicle status has not been updated in " + iteration +"iteration...");
-//        Logger.getLogger("\n...Vehicle status has not been updated in " + iteration +" iteration...");
-//        System.out.println("\n...Vehicle status has not been updated in " + iteration +" iteration...");
+        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
     }
 
     @Step
