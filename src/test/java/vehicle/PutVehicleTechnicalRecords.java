@@ -34,68 +34,67 @@ public class PutVehicleTechnicalRecords {
 
     Date date  = new Date();
 
-//    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
-//    @WithTag("Vtm")
-//    @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM " +
-//            "AC7 - Can not update VIN, partial vin or primary/secondary vrm " +
-//            "AC9 - Can add or remove tech records for a vehicle entry")
-//    public void testUpdateVehicleTechnicalRecord() {
-//        // TEST SETUP
-//        // generate random Vin
-//        String randomVin = GenericData.generateRandomVin();
-//        //generate random Vrm
-//        String randomVrm = GenericData.generateRandomVrm();
-//        // read post request body from file
-//        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
-//        // read put request body from file
-//        String putRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
-//        // read the tech record from the file used for post request body
-//        String oldTechRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$.techRecord[0]");
-//        // read the tech record from the file used for post request body
-//        String newTechRecord = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$.techRecord[0]");
-//        // create alteration to change Vin in the post request body with the random generated Vin
-//        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-//        // create alteration to change primary vrm in the request body with the random generated primary vrm
-//        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
-//        // create alteration to add one more tech record to in the put request body
-//        JsonPathAlteration alterationAddTechRecord = new JsonPathAlteration("$.techRecord", oldTechRecord,"","ADD_VALUE");
-//        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
-//        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
-//
-//        // TEST
-//        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-//        // validate AC6
-//        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBody);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
-//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
-//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1]", newTechRecord);
-//        // validate AC7
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", randomVrm);
-//        // add alteration for adding one more tech record for the randomVin used above
-//        alterations.add(alterationAddTechRecord);
-//        // validate AC9
-//        // add tech record to vehicle with random Vin
-//        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBody, alterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
-//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", newTechRecord);
-//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1]", oldTechRecord);
-//        // remove tech record to vehicle with random Vin
-//        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBody);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
-//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
-//    }
-//
+    @Ignore("Remove the ignore annotation when the updates on tech record will be enabled for vehicles without adr details")
+    @WithTag("Vtm")
+    @Title("CVSB-7885 - AC6 - Can update all fields for a vehicle entry, except the VIN, partial VIN, trailer id, primary and secondary VRM " +
+            "AC7 - Can not update VIN, partial vin or primary/secondary vrm " +
+            "AC9 - Can add or remove tech records for a vehicle entry")
+    public void testUpdateVehicleTechnicalRecord() {
+        // TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+        // read put request body from file
+        String putRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$");
+        // read the tech record from the file used for post request body
+        String oldTechRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$.techRecord[0]");
+        // read the tech record from the file used for post request body
+        String newTechRecord = GenericData.readJsonValueFromFile("technical-records_hgv_mandatory_fields.json","$.techRecord[0]");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        // create alteration to add one more tech record to in the put request body
+        JsonPathAlteration alterationAddTechRecord = new JsonPathAlteration("$.techRecord", oldTechRecord,"","ADD_VALUE");
+        // initialize the alterations list with only the alterations for changing the Vin and the primary vrm
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+
+        // TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // validate AC6
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBody);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1]", newTechRecord);
+        // validate AC7
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vin", randomVin);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("vrms[0].vrm", randomVrm);
+        // add alteration for adding one more tech record for the randomVin used above
+        alterations.add(alterationAddTechRecord);
+        // validate AC9
+        // add tech record to vehicle with random Vin
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, putRequestBody, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", newTechRecord);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[1]", oldTechRecord);
+        // remove tech record to vehicle with random Vin
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicle(randomVin, putRequestBody);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
+        vehicleTechnicalRecordsSteps.validateResponseContainsJson("techRecord[0]", oldTechRecord);
+    }
 
     @WithTag("Vtm")
     @Title("CVSB-8677 - AC1 - Add adrDetails object onto an existing tech record with status provisional " +
@@ -175,51 +174,51 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[2].adrDetails", adrDetailsTank);
     }
 
-//    @Ignore("No longer a valid test")
-//    @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
-//            "AC2 - Document is removed from the ADR record")
-//    public void testAddAdrDetailsUploadDocumentAdrRecord() {
-//        //TEST SETUP
-//        // generate random Vin
-//        String randomVin = GenericData.generateRandomVin();
-//        //generate random Vrm
-//        String randomVrm = GenericData.generateRandomVrm();
-//        // read post request body from file
-//        String requestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
-//        // read the adr details from the file used for put request body with battery adr details
-//        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
-//        // create alteration to change Vin in the post request body with the random generated Vin
-//        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-//        // create alteration to change primary vrm in the request body with the random generated primary vrm
-//        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
-//        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
-//        // get pdf content as base64 encoded string
-//        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
-//        // create alteration to add files field in the request body as array with an element the previously encoded string
-//        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
-//        JsonPathAlteration alterationRemoveFiles = new JsonPathAlteration("$.techRecord[0].adrDetails.documents","[]","","REPLACE");
-//
-//        //TEST
-//        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyHgv, alterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-//        // create alteration to add adr details
-//        JsonPathAlteration alterationAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetailsBattery,"adrDetails","ADD_FIELD");
-//        alterations.add(alterationAdrDetails);
-//        alterations.add(alterationAddFiles);
-//        // validate AC1
-//        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].adrDetails.documents.size()", 2);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[1].adrDetails.documents[1]", ".pdf");
-//        // validate AC2
-//        alterations.remove(alterations.size()-1);
-//        alterations.add(alterationRemoveFiles);
-//        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
-//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
-//    }
+    @Ignore("No longer a valid test")
+    @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
+            "AC2 - Document is removed from the ADR record")
+    public void testAddAdrDetailsUploadDocumentAdrRecord() {
+        //TEST SETUP
+        // generate random Vin
+        String randomVin = GenericData.generateRandomVin();
+        //generate random Vrm
+        String randomVrm = GenericData.generateRandomVrm();
+        // read post request body from file
+        String requestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
+        // read the adr details from the file used for put request body with battery adr details
+        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
+        // create alteration to change Vin in the post request body with the random generated Vin
+        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+        // create alteration to change primary vrm in the request body with the random generated primary vrm
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
+        // get pdf content as base64 encoded string
+        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
+        // create alteration to add files field in the request body as array with an element the previously encoded string
+        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
+        JsonPathAlteration alterationRemoveFiles = new JsonPathAlteration("$.techRecord[0].adrDetails.documents","[]","","REPLACE");
+
+        //TEST
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        // create alteration to add adr details
+        JsonPathAlteration alterationAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetailsBattery,"adrDetails","ADD_FIELD");
+        alterations.add(alterationAdrDetails);
+        alterations.add(alterationAddFiles);
+        // validate AC1
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].adrDetails.documents.size()", 2);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[1].adrDetails.documents[1]", ".pdf");
+        // validate AC2
+        alterations.remove(alterations.size()-1);
+        alterations.add(alterationRemoveFiles);
+        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
+    }
 
     @WithTag("Vtm")
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
@@ -1377,7 +1376,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1489,7 +1488,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1598,7 +1597,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1709,7 +1708,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1741,7 +1740,7 @@ public class PutVehicleTechnicalRecords {
     @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - HGV - PRS - Notifiable Alteration")
     @Test
-    public void test30_PostVehicleTechRecordHgvPrsNotifiableAlteration(){
+    public void testPostVehicleTechRecordHgvPrsNotifiableAlteration(){
 
         // POST tech-record,read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
@@ -1824,7 +1823,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1935,7 +1934,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -2050,7 +2049,6 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 120, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -2104,7 +2102,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
 
-        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber()      ;
 
         System.out.println(systemNumber);
 
@@ -2161,7 +2159,6 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
