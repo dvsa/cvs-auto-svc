@@ -1495,14 +1495,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1510,17 +1503,23 @@ public class PutVehicleTechnicalRecords {
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedById", "133");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains
+                ("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'Gica'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.findAll { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.size()", 1);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedById", "123243424-234234245");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.lastUpdatedAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'archived' && it.lastUpdatedByName == 'catalin'}.updateType", "techRecordUpdate");
 
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
+                ("[0].techRecord.find { it.statusCode == 'current' }.createdByName", "catalin");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.find { it.statusCode == 'current' }.createdById", "123243424-234234245");
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
@@ -1611,14 +1610,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1729,14 +1721,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 60, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1851,14 +1836,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1969,14 +1947,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -2091,13 +2062,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 120, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -2151,7 +2116,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
 
-        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber()      ;
+        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
         System.out.println(systemNumber);
 
@@ -2208,12 +2173,8 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-      try{
-          Thread.sleep(5000);
-      }
-      catch(Exception e) {
-          System.out.println(e);
-      }
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
