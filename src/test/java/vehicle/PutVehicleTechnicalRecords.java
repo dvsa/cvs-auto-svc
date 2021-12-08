@@ -871,7 +871,6 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("TrailerId " + trailerId1 + " already exists");
     }
 
-
     @WithTag("Vtm")
     @Title("CVSB-10830 - AC1 - TRL vehicle is updated, and the appropriate attributes are automatically set")
     @Test
@@ -1376,14 +1375,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         // wait until the tech-record is updated
-        try{
-            Thread.sleep(5000);
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
-
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20, 3);
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
