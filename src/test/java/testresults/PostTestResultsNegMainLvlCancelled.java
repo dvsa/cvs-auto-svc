@@ -7,6 +7,7 @@ import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import steps.TestResultsSteps;
 import static util.DataUtil.generateRandomExcludingValues;
 
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegMainLvlCancelled {
 
@@ -23,7 +25,7 @@ public class PostTestResultsNegMainLvlCancelled {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
-    private static final String VRM = "SL72XD";
+    private static final String VRM = "JY58FPP";
 
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - vehicleId")
