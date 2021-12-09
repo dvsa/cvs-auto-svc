@@ -17,7 +17,6 @@ import steps.TestResultsSteps;
 import static util.DataUtil.generateRandomExcludingValues;
 
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegMainLvlCancelled {
 
