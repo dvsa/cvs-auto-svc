@@ -334,11 +334,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iterations) {
 
-        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < seconds; i++) {
+        for(int i=0; i < iterations; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -366,15 +366,15 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" seconds...");
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds, int numberOfTechRecords) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iterations, int numberOfTechRecords) {
 
-        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < seconds; i++) {
+        for(int i=0; i < iterations; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -402,7 +402,7 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" seconds...");
     }
 
     @Step
