@@ -1814,6 +1814,12 @@ public class PutVehicleTechnicalRecords {
             System.out.println(e);
         }
 
+        try {
+            Thread.sleep(10000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1852,6 +1858,12 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.sleep();
+
+        try {
+            Thread.sleep(10000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
 
         try {
             Thread.sleep(10000);
