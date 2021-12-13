@@ -379,11 +379,6 @@ public class VehicleTechnicalRecordsSteps {
 
         for(int i=0; i < iterations; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
-            try {
-                Thread.sleep(10000);
-            } catch(Exception e) {
-                System.out.println(e);
-            }
 
             int status = response.getStatusCode();
             int noVehicles = response.then().extract().jsonPath().getInt("$.size()");

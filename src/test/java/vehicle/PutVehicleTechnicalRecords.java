@@ -1548,6 +1548,12 @@ public class PutVehicleTechnicalRecords {
         this.testStartDate = LocalDateTime.now();
 
 
+        try {
+            Thread.sleep(10000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1587,6 +1593,12 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.validateData("Test records created");
         vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
         this.testStartDate = LocalDateTime.now();
+
+        try {
+            Thread.sleep(10000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
 
         // Read the base JSON for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_trl_put_payload_10316.json","$");
