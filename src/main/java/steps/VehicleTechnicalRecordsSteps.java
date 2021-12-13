@@ -617,7 +617,7 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void sleep() {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(6000);
         } catch(Exception e) {
             System.out.println(e);
         }
