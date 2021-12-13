@@ -26,7 +26,7 @@ import static util.WriterReader.saveUtils;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-//@WithTag("In_test")
+
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForCOIFWithAnnual extends TestCase {
 
@@ -132,7 +132,7 @@ public class PutTestResultsForCOIFWithAnnual extends TestCase {
         this.value = value;
     }
 
-    
+    @WithTag("Vtm")
     @Title("CVSB-10372 - AC1: PUT: Original Test Record is updated and attributes are automatically set")
     @Test
     public void PutTestResultsForCoif() {
