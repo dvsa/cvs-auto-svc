@@ -30,7 +30,7 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-//@WithTag("In_test")
+
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForMSVA extends TestCase {
 
@@ -139,7 +139,7 @@ public class PutTestResultsForMSVA extends TestCase {
 
 
 
-    
+    @WithTag("Vtm")
     @Title("CVSB-10372 - AC1: PUT: Original Test Record is updated and attributes are automatically set")
     @Test
     public void PutTestResultsForMVSA() {

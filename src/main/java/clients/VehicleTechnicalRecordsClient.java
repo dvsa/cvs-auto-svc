@@ -98,7 +98,6 @@ public class VehicleTechnicalRecordsClient {
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("status", "provisional_over_current")
-                .queryParam("status", "provisional_over_current")
 
 //                .log().all()
                 .log().method().log().uri().log().body()
