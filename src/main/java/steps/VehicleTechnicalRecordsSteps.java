@@ -613,4 +613,13 @@ public class VehicleTechnicalRecordsSteps {
     public void putTechnicalRecordsWithDVLAToken(String systemNumber, String postRequestBody) {
         this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithDVLAToken(systemNumber, postRequestBody) ;
     }
+
+    @Step
+    public void sleep() {
+        try {
+            Thread.sleep(10000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
 }
