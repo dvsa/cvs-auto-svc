@@ -61,20 +61,20 @@ public class AwsUtil {
 
         for(int i = 0; i < 240 ; i++) {
             try {
-                Thread.sleep(6000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             if (i % 2 == 0) {
                 int j = i % 2;
 
-                System.out.println("waited for: " + i + " seconds...");
+                System.out.println("waited for: " + j + " iterations...");
             }
             if (s3Client.doesObjectExist(bucketName, key)) {
                 return s3Client.doesObjectExist(bucketName, key);
             }
         }
-        System.out.println("file " + key + " was not created in 120 seconds or less...");
+        System.out.println("file " + key + " was not created in 120 iterations or less...");
         return false;
     }
 
