@@ -14,7 +14,6 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
-
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationHgv {
 

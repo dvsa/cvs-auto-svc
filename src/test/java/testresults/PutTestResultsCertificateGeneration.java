@@ -27,7 +27,6 @@ import static util.WriterReader.saveUtils;
 import org.junit.Assert;
 
 
-//@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateGeneration extends TestCase {
 
@@ -138,6 +137,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
     }
 
+    @WithTag("annual_certificates")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
