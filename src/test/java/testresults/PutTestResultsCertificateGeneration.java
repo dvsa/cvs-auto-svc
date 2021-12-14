@@ -26,7 +26,8 @@ import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 import org.junit.Assert;
 
-
+@WithTag("In_test")
+//@WithTag("annual_certificates")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateGeneration extends TestCase {
 
