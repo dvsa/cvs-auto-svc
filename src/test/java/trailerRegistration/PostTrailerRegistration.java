@@ -15,7 +15,7 @@ import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
 
-//@WithTag("In_test")
+
 @RunWith(SerenityRunner.class)
 public class PostTrailerRegistration {
 

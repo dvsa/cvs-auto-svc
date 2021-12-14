@@ -14,8 +14,6 @@ import util.JsonPathAlteration;
 
 import java.util.*;
 
-@WithTag("In_test")
-//@WithTag("annual_certificates")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
