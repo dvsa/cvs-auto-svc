@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-//@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsRoadworthinessCertificateGeneration {
 
@@ -598,7 +597,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    //@WithTag("In_test")
+    
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT1_Fail_Certificate_Generation() {
