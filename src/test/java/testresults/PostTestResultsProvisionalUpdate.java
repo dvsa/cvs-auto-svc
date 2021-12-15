@@ -119,7 +119,6 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", null);
 
-
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
@@ -137,12 +136,7 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
-
-//        // Wait for the vehicle tech records to be updated
-//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
+        testResultsSteps.sleep();
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);

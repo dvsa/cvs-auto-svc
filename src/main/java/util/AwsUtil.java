@@ -61,13 +61,12 @@ public class AwsUtil {
 
         for(int i = 0; i < 240 ; i++) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             if (i % 2 == 0) {
                 int j = i % 2;
-
                 System.out.println("waited for: " + j + " iterations...");
             }
             if (s3Client.doesObjectExist(bucketName, key)) {
@@ -177,8 +176,6 @@ public class AwsUtil {
 
             LogStream logStream = describeLogStreamsResult.getLogStreams().get(0);
             GetLogEventsRequest getLogEventsRequest = new GetLogEventsRequest()
-//                    .withStartTime(currentTimestamp.getMillis())
-//                    .withEndTime(currentTimestamp.plusMinutes(1).getMillis())
                     .withLogGroupName(logGroup)
                     .withLogStreamName(logStream.getLogStreamName());
 

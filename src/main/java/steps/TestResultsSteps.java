@@ -889,4 +889,13 @@ public class TestResultsSteps {
     public String getTesterStaffId() {
         return response.jsonPath().getString("[0].testerStaffId");
     }
+
+    @Step
+    public void sleep() {
+        try {
+            Thread.sleep(7000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
 }

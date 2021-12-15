@@ -1113,6 +1113,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.sleep();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -1142,8 +1143,10 @@ public class PostVehicleTechnicalRecords {
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
 
-        // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
+        vehicleTechnicalRecordsSteps.sleep();
+
+//        // wait until the tech-record is updated
+//        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
 
         // GET test - results to validate the expected response
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);

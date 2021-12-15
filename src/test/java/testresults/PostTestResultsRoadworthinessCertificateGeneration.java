@@ -57,8 +57,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -94,8 +93,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -129,6 +127,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.sleep();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -157,8 +156,8 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
-        vehicleTechnicalRecordsSteps.sleep();
         testResultsSteps.getTestResults(systemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
@@ -185,6 +184,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.sleep();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -207,8 +207,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(systemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -242,8 +241,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -277,8 +275,8 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
-        vehicleTechnicalRecordsSteps.sleep();
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
@@ -311,8 +309,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -340,6 +337,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.sleep();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -362,8 +360,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(systemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -397,8 +394,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -433,8 +429,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -468,6 +463,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -503,8 +499,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -539,8 +534,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -574,8 +568,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        vehicleTechnicalRecordsSteps.sleep();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -609,7 +602,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
         vehicleTechnicalRecordsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
@@ -841,13 +833,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        try {
-            Thread.sleep(10000);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -1102,6 +1088,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.sleep();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -1223,8 +1210,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        vehicleTechnicalRecordsSteps.sleep();
-
+        testResultsSteps.sleep();
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
