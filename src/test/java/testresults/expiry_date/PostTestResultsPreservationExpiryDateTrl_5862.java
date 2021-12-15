@@ -338,6 +338,7 @@ public class PostTestResultsPreservationExpiryDateTrl_5862 {
 
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        ;
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsBetweenDate(randomSystemNo, submittedTestStartTimestamp.minusMinutes(10).toInstant().toString(), submittedEndTimestamp.plusMinutes(10).toInstant().toString());
