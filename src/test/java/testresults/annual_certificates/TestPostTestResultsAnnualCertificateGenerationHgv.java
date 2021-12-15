@@ -281,6 +281,8 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.sleep();
+
         String testNumber = testResultsSteps.getTestNumber();
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
         Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
