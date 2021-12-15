@@ -103,7 +103,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-        vehicleTechnicalRecordsSteps.sleep();
+        
 
         // Read the base test-result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
@@ -144,7 +144,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.sleep();
+        ;
 
         //Read the base json for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_12378.json","$");
