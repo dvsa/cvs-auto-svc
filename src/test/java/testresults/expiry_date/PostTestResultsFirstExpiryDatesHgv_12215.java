@@ -129,7 +129,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -221,7 +221,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -314,7 +314,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -410,7 +410,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -506,7 +506,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -603,7 +603,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -699,7 +699,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        // testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);

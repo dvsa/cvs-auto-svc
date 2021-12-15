@@ -113,8 +113,8 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        // wait a maximum of seconds for the vehicle tech records to be updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+//        // wait a maximum of seconds for the vehicle tech records to be updated
+//        // vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
 
         // retrieve the tech record of the vehicle and verify whether the status has changed to current
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
