@@ -57,12 +57,11 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        ;
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
-
 
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
@@ -93,7 +92,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        ;
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);

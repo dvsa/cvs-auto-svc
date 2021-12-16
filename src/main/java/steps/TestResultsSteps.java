@@ -88,11 +88,6 @@ public class TestResultsSteps {
     @Step
     public void postTestResults(TestResults testResults) {
         response = testResultsClient.postTestResults(testResults);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
     }
 
     @Step
@@ -112,21 +107,11 @@ public class TestResultsSteps {
     @Step
     public void postTestResultsFieldChange(TestResults testResults, String propertyField, String value, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
         response = testResultsClient.postTestResultsFieldChange(testResults, propertyField, value, toType, testResultsLevel);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
     }
 
     @Step
     public void postTestResultsFieldChange(TestResults testResults, String propertyField, ToTypeConvertor toType, TestResultsLevel testResultsLevel) {
         response = testResultsClient.postTestResultsFieldChange(testResults, propertyField, null, toType, testResultsLevel);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
     }
 
     @Step
@@ -684,11 +669,6 @@ public class TestResultsSteps {
     @Step
     public void postTestResultsPayload(ObjectNode payload) {
         response = testResultsClient.postTestResults(payload);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
     }
 
     @Step
@@ -748,32 +728,17 @@ public class TestResultsSteps {
     @Step
     public void postVehicleTestResultsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         this.response = testResultsClient.postVehicleTestResultsWithAlterations(requestBody, alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
     }
 
     @Step
     public String putTestResultsWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
         response = testResultsClient.putTestResultsWithAlterations(systemNumber, putRequestBody, alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
     @Step
     public String putTestResultsWithAlterationsNo400(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
         response = testResultsClient.putTestResultsWithAlterationsNo400(systemNumber, putRequestBody, alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
@@ -923,5 +888,14 @@ public class TestResultsSteps {
     @Step
     public String getTesterStaffId() {
         return response.jsonPath().getString("[0].testerStaffId");
+    }
+
+    @Step
+    public void sleep() {
+        try {
+            Thread.sleep(6000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }

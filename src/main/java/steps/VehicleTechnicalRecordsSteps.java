@@ -277,33 +277,18 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public String postVehicleTechnicalRecordsWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {
         response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsWithAlterations(requestBody, alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
     @Step
     public String putVehicleTechnicalRecordsForVehicle(String systemNumber, String requestBody) {
         response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForVehicle(systemNumber, requestBody);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
     @Step
     public String putVehicleTechnicalRecordsForVehicleWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
         response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithAlterations(systemNumber, putRequestBody, alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
@@ -641,12 +626,15 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void putTechnicalRecordsWithDVLAToken(String systemNumber, String postRequestBody) {
-        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithDVLAToken(systemNumber, postRequestBody);
+        this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithDVLAToken(systemNumber, postRequestBody) ;
+    }
+
+    @Step
+    public void sleep() {
         try {
             Thread.sleep(6000);
         } catch(Exception e) {
             System.out.println(e);
         }
     }
-
 }
