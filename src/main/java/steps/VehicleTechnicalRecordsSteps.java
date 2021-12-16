@@ -638,23 +638,24 @@ public class VehicleTechnicalRecordsSteps {
             for (int j = 0; j < noVehicles; j++) {
 
                 int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
-                String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + j + "].createdAt");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
-                System.out.println("CREATED AT" + " " + createdAt);
+                for (int k = 0; k < recordsNumber; k++) {
+                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].createdAt");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
+                    System.out.println("CREATED AT" + " " + createdAt);
 
-                System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
+                    System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
-                if (status == 200 && createdAt.isAfter(testStartDate) ) {
-                    return;
+                    if (status == 200 && createdAt.isAfter(testStartDate) ) {
+                        return;
+                    }
                 }
-
             }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println("\n...waiting 1 more second (" + i + ")...\n");
 
         }
