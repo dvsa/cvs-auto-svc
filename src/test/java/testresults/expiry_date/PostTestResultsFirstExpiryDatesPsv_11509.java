@@ -434,7 +434,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-         testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResults(randomSystemNo);
@@ -533,7 +533,7 @@ public class PostTestResultsFirstExpiryDatesPsv_11509 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-         testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResults(randomSystemNo);
