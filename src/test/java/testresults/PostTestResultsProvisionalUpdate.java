@@ -137,6 +137,9 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
+        // Wait for the vehicle tech records to be updated
+        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -263,7 +266,6 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
