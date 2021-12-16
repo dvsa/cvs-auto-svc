@@ -18,6 +18,8 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
 import static util.TypeLoader.*;
 import util.JsonPathAlteration;
+
+import java.time.LocalDateTime;
 import java.util.*;
 import static data.GenericData.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -567,33 +569,18 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public String putVehicleTechnicalRecordsForArchivedWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
         response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForArchivedWithAlterations(systemNumber, putRequestBody, alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
     @Step
     public String postVehicleTechnicalRecordsForProvisionalWithAlterations(String systemNumber, String postRequestBody, List<JsonPathAlteration> alterations) {
         response = vehicleTechnicalRecordsClient.postVehicleTechnicalRecordsForProvisionalWithAlterations(systemNumber, postRequestBody,alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
     @Step
     public String putVehicleTechnicalRecordsForCurrentWithAlterations(String systemNumber, OldStatusCode oldStatusCode , String postRequestBody, List<JsonPathAlteration> alterations) {
         response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsForCurrentWithAlterations(systemNumber,oldStatusCode.getOldStatusCode(),postRequestBody,alterations);
-        try {
-            Thread.sleep(6000);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
         return response.prettyPrint();
     }
 
@@ -636,5 +623,41 @@ public class VehicleTechnicalRecordsSteps {
         } catch(Exception e) {
             System.out.println(e);
         }
+    }
+
+    @Step
+    public void waitForVehicleRecordUpdate(String vin, int iterations, LocalDateTime testStartDate) {
+
+
+        System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
+
+        for(int i=0; i < iterations; i++) {
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+
+            int status = response.getStatusCode();
+            int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
+            for (int j = 0; j < noVehicles; j++) {
+
+                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
+                String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + j + "].createdAt");
+                LocalDateTime createdAt = LocalDateTime.parse(createdAtString);
+                System.out.println("CREATED AT" + " " + createdAt);
+
+                System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
+
+                if (status == 200 && createdAt.isAfter(testStartDate) ) {
+                    return;
+                }
+
+            }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            System.out.println("\n...waiting 1 more second (" + i + ")...\n");
+
+        }
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" seconds...");
     }
 }

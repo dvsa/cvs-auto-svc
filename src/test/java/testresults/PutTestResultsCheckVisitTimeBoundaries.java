@@ -26,6 +26,7 @@ import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RunWith(SerenityRunner.class)
@@ -86,6 +87,8 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
     @Test
     public void testPutTestResultsInvalidTestTypeStartTimestamp() {
 
+        LocalDateTime testStartDate = LocalDateTime.now();
+
         // Read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
 
@@ -103,6 +106,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, testStartDate);
 
         // Read the base test-result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
