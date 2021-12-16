@@ -314,7 +314,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-         testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -410,7 +410,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-         testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
@@ -526,7 +526,6 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
 
     }
 
-    
     @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - HGV - NO Previous Expiry Date - Today is in the same month as Registration Anniversary")
     @Test
@@ -603,7 +602,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-         testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo,60);
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResultsSysNumber(randomSystemNo);
