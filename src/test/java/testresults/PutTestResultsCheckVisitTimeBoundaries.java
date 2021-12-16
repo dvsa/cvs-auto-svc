@@ -15,6 +15,7 @@ import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,11 +30,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
 
     static String testerStaffId;
 
+    LocalDateTime testStartDate;
     @BeforeClass
     public static void createActivity() {
 
@@ -72,6 +75,10 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         }
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
     }
+    @Before
+    public void beforeTest() {
+        this.testStartDate = LocalDateTime.now();
+    }
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -86,8 +93,6 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
     @Title("CVSB-12378 - AC9. PUT: Attempt to update a test record with a testTypeStartTimestamp outside of the visit time boundaries")
     @Test
     public void testPutTestResultsInvalidTestTypeStartTimestamp() {
-
-        LocalDateTime testStartDate = LocalDateTime.now();
 
         // Read the base tech-record JSON.
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json", "$");
@@ -106,7 +111,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, testStartDate);
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         // Read the base test-result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
@@ -212,6 +217,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
@@ -319,6 +325,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -406,6 +413,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);

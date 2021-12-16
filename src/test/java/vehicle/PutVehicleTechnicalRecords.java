@@ -21,7 +21,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
