@@ -20,6 +20,7 @@ import static util.TypeLoader.*;
 import util.JsonPathAlteration;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import static data.GenericData.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -627,8 +628,6 @@ public class VehicleTechnicalRecordsSteps {
 
     @Step
     public void waitForVehicleRecordUpdate(String vin, int iterations, LocalDateTime testStartDate) {
-
-
         System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
 
         for(int i=0; i < iterations; i++) {
@@ -640,7 +639,8 @@ public class VehicleTechnicalRecordsSteps {
 
                 int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
                 String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + j + "].createdAt");
-                LocalDateTime createdAt = LocalDateTime.parse(createdAtString);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
                 System.out.println("CREATED AT" + " " + createdAt);
 
                 System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
