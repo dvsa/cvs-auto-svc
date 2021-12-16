@@ -238,7 +238,6 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         JsonPathAlteration alterationTesterStaffId = new JsonPathAlteration("$.testerStaffId", testerStaffId, "",
                 "REPLACE");
 
-
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberTestResults,

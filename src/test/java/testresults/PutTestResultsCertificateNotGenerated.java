@@ -26,6 +26,7 @@ import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
+
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateNotGenerated extends TestCase {
 

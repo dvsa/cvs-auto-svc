@@ -181,7 +181,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-        
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -395,7 +394,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QPV) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QPV_Pass_Certificate_Generation() {
@@ -457,8 +455,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
-
-        
 
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
@@ -596,7 +592,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (TRL)(QJT1) - FAIL ")
     @Test
     public void testResults_Roadworthiness_TRL_QJT1_Fail_Certificate_Generation() {
@@ -721,7 +716,6 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV2) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV2_Fail_Certificate_Generation() {
@@ -783,6 +777,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
+
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
@@ -1001,6 +996,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
+
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QQV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QQV_Fail_Certificate_Generation() {
