@@ -30,7 +30,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
 
