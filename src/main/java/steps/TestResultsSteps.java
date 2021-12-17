@@ -906,41 +906,50 @@ public class TestResultsSteps {
         }
     }
 
-    @Step
-    public void waitForTestResultsUpdate(String systemNumber, int iteration, LocalDateTime testStartDate) {
-        System.out.println("...waiting " + iteration + " iterations for test results to be updated...\n");
-
-        for(int i=0; i < iteration; i++) {
-            response = testResultsClient.getTestResults(systemNumber);
-
-            int status = response.getStatusCode();
-            int noTestResults = response.then().extract().jsonPath().getInt("$.size()");
-            for (int j = 0; j < noTestResults; j++) {
-                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].testTypes.size()");
-                for (int k = 0; k < recordsNumber; k++) {
-                    String testTypeEndTimeStampString = response.then().log().all().extract().jsonPath().get("[" + j +"].testTypes[" + k + "].testTypeEndTypeStamp");
-
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                    LocalDateTime testTypeEndTypeStamp = LocalDateTime.parse(testTypeEndTimeStampString, formatter);
-                    System.out.println("TestTypeEndTimeStamp" + " " + testTypeEndTypeStamp);
-
-                    System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + noTestResults);
-
-                    if (status == 200 && testTypeEndTypeStamp.isAfter(testStartDate) ) {
-                        return;
-                    }
-                }
-
-
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("\n...waiting 1 more second (" + i + ")...\n");
-
-        }
-        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
-    }
+//    @Step
+//    public void waitForTestResultsUpdate(String systemNumber, int iteration, LocalDateTime testStartDate) {
+//        System.out.println("...waiting " + iteration + " iterations for test results to be updated...\n");
+//
+//        for(int i=0; i < iteration; i++) {
+//            response = testResultsClient.getTestResults(systemNumber);
+//
+//            int status = response.getStatusCode();
+//            if (status != 200) {
+//                try {
+//                    Thread.sleep(5000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println("WAITING");
+//                continue;
+//            }
+////            int noTestResults = response.then().extract().jsonPath().getInt("$.size()");
+//            for (int j = 0; j < 1; j++) {
+//                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].testTypes.size()");
+//                for (int k = 0; k < recordsNumber; k++) {
+//                    String testTypeEndTimeStampString = response.then().log().all().extract().jsonPath().get("[" + j +"].testTypes[" + k + "].testTypeEndTypeStamp");
+//
+//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+//                    LocalDateTime testTypeEndTypeStamp = LocalDateTime.parse(testTypeEndTimeStampString, formatter);
+//                    System.out.println("TestTypeEndTimeStamp" + " " + testTypeEndTypeStamp);
+//
+//                    System.out.println(" for vehicle [" + j + "] status is: " + status);
+//
+//                    if (status == 200 && testTypeEndTypeStamp.isAfter(testStartDate) ) {
+//                        return;
+//                    }
+//                }
+//
+//
+//            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println("\n...waiting 1 more second (" + i + ")...\n");
+//
+//        }
+//        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
+//    }
 }

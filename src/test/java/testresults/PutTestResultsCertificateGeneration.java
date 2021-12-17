@@ -10,7 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
-import org.apache.commons.lang3.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,8 +19,7 @@ import util.BasePathFilter;
 import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
@@ -34,8 +33,6 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     static String randomVin;
     static String randomSystemNumber;
     static String randomTestResultId;
-
-
 
     @BeforeClass
     public static void createRecord() {
@@ -68,7 +65,6 @@ public class PutTestResultsCertificateGeneration extends TestCase {
                     .log().method().log().uri().log().body()
                     .post("/vehicles");
         }
-
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
 
@@ -112,9 +108,6 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
     @Steps
     TestResultsSteps testResultsSteps;
-
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @TestData
     public static Collection<Object[]> testData(){
@@ -181,7 +174,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
         System.out.println("TestNumber is " +testNumber);
 
-        // verify that the certificate is created in the S3 bucket
+        //verify that the certificate is created in the S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 }

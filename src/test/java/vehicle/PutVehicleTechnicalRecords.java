@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
@@ -2147,8 +2148,6 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-//        testResultsSteps.waitForTestResultsUpdate(systemNumber, 25, this.testStartDate);
-//        this.testStartDate = LocalDateTime.now();
 
         // Read the base JSON for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl_put_payload_10316.json","$");
@@ -2606,7 +2605,6 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].recordCompleteness", "Skeleton");
-
 
         // Read post request body from file
         String putRequestBody = GenericData.readJsonValueFromFile("technical-records_put_payload_lgv_11814.json","$");
