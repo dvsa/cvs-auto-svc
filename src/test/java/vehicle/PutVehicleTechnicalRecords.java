@@ -1775,6 +1775,8 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -1813,6 +1815,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         // Read the base JSON for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv_put_payload_10316.json","$");
