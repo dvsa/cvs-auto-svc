@@ -403,6 +403,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
         vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         String putRequestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields_put.json", "$");
         String techRecord = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields_put.json", "$.techRecord[0]");
@@ -1546,6 +1547,8 @@ public class PutVehicleTechnicalRecords {
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -1580,6 +1583,7 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         // Read the base JSON for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_trl_put_payload_10316.json","$");
@@ -1657,6 +1661,8 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -1884,6 +1890,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        this.testStartDate = LocalDateTime.now();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
