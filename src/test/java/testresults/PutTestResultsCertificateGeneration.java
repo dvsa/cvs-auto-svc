@@ -20,13 +20,14 @@ import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 import org.junit.Assert;
 
-
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateGeneration extends TestCase {
 
@@ -156,9 +157,6 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
-
-
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
