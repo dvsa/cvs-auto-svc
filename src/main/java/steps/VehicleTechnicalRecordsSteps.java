@@ -633,16 +633,29 @@ public class VehicleTechnicalRecordsSteps {
         for(int i=0; i < iterations; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
+            int noVehicles = 0;
             int status = response.getStatusCode();
-            int noVehicles = response.then().extract().jsonPath().getInt("$.size()");
+
+            try {
+                noVehicles = response.then().extract().jsonPath().getInt("$.size()");
+            }
+            catch(Exception e) {
+                System.out.println( e + " " + "NO TECH RECORD IS RETURNED");
+            }
             for (int j = 0; j < noVehicles; j++) {
 
                 int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
                 for (int k = 0; k < recordsNumber; k++) {
-                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].createdAt");
+//                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].createdAt");
+
+                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].lastUpdatedAt");
+                    if (createdAtString == null) {
+                        createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].createdAt");
+                    }
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                     LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
                     System.out.println("CREATED AT" + " " + createdAt);
+                    System.out.println("TEST START" + " " + testStartDate);
 
                     System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
 
@@ -659,6 +672,6 @@ public class VehicleTechnicalRecordsSteps {
             System.out.println("\n...waiting 1 more second (" + i + ")...\n");
 
         }
-        System.out.println("\n...Vehicle status has not been updated in " + iterations +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" iterations...");
     }
 }

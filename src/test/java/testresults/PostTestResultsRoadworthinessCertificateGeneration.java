@@ -784,8 +784,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
-        this.testStartDate = LocalDateTime.now();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -1186,8 +1185,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
-        this.testStartDate = LocalDateTime.now();
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
