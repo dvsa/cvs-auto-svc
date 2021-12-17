@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.time.DateUtils;;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,18 +21,23 @@ import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
 
 import java.text.SimpleDateFormat;;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 import org.junit.Assert;
 
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateGeneration extends TestCase {
 
     static String randomVin;
     static String randomSystemNumber;
     static String randomTestResultId;
+
+    @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @BeforeClass
     public static void createRecord() {
@@ -104,6 +110,11 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         }
         Assert.assertEquals(HttpStatus.SC_CREATED, responseTestResult.getStatusCode());
     }
+        LocalDateTime testStartDate;
+        @Before
+        public void beforeTest() {
+            this.testStartDate = LocalDateTime.now();
+        }
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -170,6 +181,8 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         String testNumber = testResultsSteps.getTestNumber();
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         System.out.println("TestNumber is " +testNumber);
 

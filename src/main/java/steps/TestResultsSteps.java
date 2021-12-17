@@ -925,22 +925,20 @@ public class TestResultsSteps {
 //            }
 ////            int noTestResults = response.then().extract().jsonPath().getInt("$.size()");
 //            for (int j = 0; j < 1; j++) {
-//                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].testTypes.size()");
-//                for (int k = 0; k < recordsNumber; k++) {
-//                    String testTypeEndTimeStampString = response.then().log().all().extract().jsonPath().get("[" + j +"].testTypes[" + k + "].testTypeEndTypeStamp");
+////                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].testTypes.size()");
+////                for (int k = 0; k < recordsNumber; k++) {
+//                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j +"].testTypes.testTypeEndTypeStamp");
 //
 //                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//                    LocalDateTime testTypeEndTypeStamp = LocalDateTime.parse(testTypeEndTimeStampString, formatter);
-//                    System.out.println("TestTypeEndTimeStamp" + " " + testTypeEndTypeStamp);
+//                    LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
+//                    System.out.println("createdAt" + " " + createdAt);
 //
 //                    System.out.println(" for vehicle [" + j + "] status is: " + status);
 //
-//                    if (status == 200 && testTypeEndTypeStamp.isAfter(testStartDate) ) {
+//                    if (createdAt.isAfter(testStartDate)) {
 //                        return;
 //                    }
-//                }
-//
-//
+////                }
 //            }
 //            try {
 //                Thread.sleep(1000);

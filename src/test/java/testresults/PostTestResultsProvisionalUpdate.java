@@ -7,17 +7,20 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsProvisionalUpdate {
 
@@ -27,6 +30,11 @@ public class PostTestResultsProvisionalUpdate {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    LocalDateTime testStartDate;
+    @Before
+    public void beforeTest() {
+        this.testStartDate = LocalDateTime.now();
+    }
 
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
@@ -139,6 +147,8 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(vin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
