@@ -742,6 +742,9 @@ public class TestResultsClient {
         JsonPathAlteration alterationTestResult =
                 new JsonPathAlteration("$.testTypes[0].testResult", testResult,"","REPLACE");
 
+        JsonPathAlteration alterationPreparerName =
+                new JsonPathAlteration("$.preparerName", "test","","REPLACE");
+
         LocalDateTime currentDate = LocalDateTime.now(ZoneId.of("Europe/London"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         String endDate = currentDate.plusMinutes(50).format(formatter);
