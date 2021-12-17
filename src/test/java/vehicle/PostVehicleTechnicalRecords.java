@@ -379,8 +379,6 @@ public class PostVehicleTechnicalRecords {
         System.out.println("RANDOM" + "" + randomVin);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
-        this.testStartDate = LocalDateTime.now();
 
         // Validate VIN and VRM.
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
@@ -678,6 +676,8 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         // GET tech-records and verify the expected response
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVin);
@@ -707,6 +707,8 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -739,7 +741,8 @@ public class PostVehicleTechnicalRecords {
         testResultsSteps.validateData("Test records created");
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 10);
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         // GET test - results to validate the expected response
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -776,9 +779,8 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 30, this.testStartDate);
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
         this.testStartDate = LocalDateTime.now();
-
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -808,9 +810,8 @@ public class PostVehicleTechnicalRecords {
         testResultsSteps.validateData("Test records created");
 
         // wait until the tech-record is updated
-        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 10, this.testStartDate);
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
         this.testStartDate = LocalDateTime.now();
-
         // GET test - results to validate the expected response
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1127,7 +1128,6 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
         vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
-        this.testStartDate = LocalDateTime.now();
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);

@@ -1584,7 +1584,8 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.sleep();
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         // Read the base JSON for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_first_test_trl_put_payload_10316.json","$");
@@ -2047,7 +2048,8 @@ public class PutVehicleTechnicalRecords {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-        testResultsSteps.sleep();
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         // Read the base JSON for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl_put_payload_10316.json","$");
