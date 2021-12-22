@@ -2,6 +2,7 @@ package testresults;
 
 import data.TestResultsData;
 import data.GenericData;
+import net.thucydides.core.annotations.WithTag;
 import util.JsonPathAlteration;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -567,6 +568,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         testResultsSteps.validateData("Test records created");
     }
 
+    @WithTag("In_Test")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult pass")
     @Test
     public void testResultsTestResultValueTwo() {
