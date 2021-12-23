@@ -23,7 +23,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
-//WE@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecords {
 
@@ -1992,8 +1991,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-//WE    @WithTag("Vtm")
-    @WithTag("In_Test")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 -statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - PRS - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordTrlPrsNotifiableAlteration(){
@@ -2115,8 +2113,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    //WE@WithTag("Vtm")
-    @WithTag("In_test")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordTrlPassNotifiableAlteration(){
