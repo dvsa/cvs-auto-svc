@@ -2087,7 +2087,7 @@ public class PutVehicleTechnicalRecords {
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin,VehicleTechnicalRecordStatus.ALL,VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 3);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 2);
 
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'archived'}.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.findAll { it.statusCode == 'current'}.size()", 1);
@@ -2112,7 +2112,8 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord.find { it.statusCode == 'current' }.createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("Vtm")
+    //WE@WithTag("Vtm")
+    @WithTag("In_Test")
     @Title("CVSB-10316 - AC7 - statusCode updated in vehicle API + AC6 - testResult updated in the test Results API - TRL - Pass - Notifiable Alteration")
     @Test
     public void testPostVehicleTechRecordTrlPassNotifiableAlteration(){

@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-//WE@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsRoadworthinessCertificateGeneration {
 
