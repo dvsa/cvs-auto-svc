@@ -4,6 +4,7 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +21,8 @@ public class PostTestResultsCheckVsaEmail {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
+    //WE
+    @WithTag("In_Test")
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {

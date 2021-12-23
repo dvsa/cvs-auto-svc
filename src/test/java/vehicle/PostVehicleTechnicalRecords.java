@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
-//WE@WithTag("In_test")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SerenityRunner.class)
 public class PostVehicleTechnicalRecords {
@@ -346,7 +345,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].brakes.brakeCodeOriginal",
                 brakeCode.substring(brakeCode.length() - 3));
     }
-    @WithTag("In_Test")
+
     @Title("CVSB-10478 - AC2 - POST: Permit the POST of a vin which has special characters (i.e, remove the restriction that vins can only contain letters + numbers) " +
             "CVSB-10478 - AC3 - POST: Permit the POST of a primaryVrm which has special characters")
     @Test
