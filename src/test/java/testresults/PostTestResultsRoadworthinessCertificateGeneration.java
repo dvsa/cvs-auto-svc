@@ -286,6 +286,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QJV5) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QJV5_Pass_Certificate_Generation() {

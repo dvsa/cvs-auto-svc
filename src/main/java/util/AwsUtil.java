@@ -25,6 +25,8 @@ import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.jayway.jsonpath.JsonPath;
 import data.GenericData;
 import exceptions.AutomationException;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.util.*;
 
@@ -65,8 +67,11 @@ public class AwsUtil {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+            System.out.println("time checking " + currentTimestamp);
             if (i % 2 == 0) {
                 int j = i % 2;
+
                 System.out.println("waited for: " + j + " iterations...");
             }
             if (s3Client.doesObjectExist(bucketName, key)) {

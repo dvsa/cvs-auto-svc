@@ -5,6 +5,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -543,6 +544,7 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-18921 - VTG5 NO TRN PRESENT - HGV Annual Test Pass - Without TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrnHgv() {
