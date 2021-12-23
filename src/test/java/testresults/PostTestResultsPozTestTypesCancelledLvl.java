@@ -359,7 +359,6 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult pass")
     @Test
-    @WithTag("In_Test")
     public void testResultsTestResultValueTwo() {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
