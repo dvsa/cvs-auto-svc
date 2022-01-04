@@ -6,6 +6,7 @@ import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -490,6 +491,7 @@ public class PostTestResultsSystemNumber {
         //testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    @WithTag("In_test")
     @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - PSV")
     @Test
     public void testCreateTestResultGenerateCertPsv() {

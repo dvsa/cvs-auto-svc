@@ -339,6 +339,7 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-18921 - AC2 -  VTG5A NO TRN PRESENT - TRL First Test Pass - Without TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrn() {
