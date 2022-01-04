@@ -21,8 +21,7 @@ public class PostTestResultsCheckVsaEmail {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-    //WE
-    @WithTag("In_Test")
+
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {

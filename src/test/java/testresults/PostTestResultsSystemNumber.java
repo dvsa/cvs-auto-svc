@@ -491,7 +491,7 @@ public class PostTestResultsSystemNumber {
         //testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @WithTag("In_test")
+
     @Title("VOTT-15 - AC1 - When a test-result is created, I want a new certificate to be produced - PSV")
     @Test
     public void testCreateTestResultGenerateCertPsv() {
