@@ -71,9 +71,8 @@ public class AwsUtil {
             System.out.println("time checking " + currentTimestamp);
             if (i % 2 == 0) {
                 int j = i % 2;
-                j++;
 
-                System.out.println("waited for: " + j + " iterations...");
+                System.out.println("waited for: " + i + " iterations...");
             }
             if (s3Client.doesObjectExist(bucketName, key)) {
                 return s3Client.doesObjectExist(bucketName, key);
