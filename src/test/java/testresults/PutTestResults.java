@@ -2620,7 +2620,6 @@ public class PutTestResults extends TestCase{
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @WithTag("In_test")
     @Title("CVSB-10372 - AC8. Generate a certificate - PSV + PASSED Specialist test only - COIF with annual test retest - CKL, CKS")
     @Test
     public void PutTestResultsCertificateGenerationForCOIFRetest() {
