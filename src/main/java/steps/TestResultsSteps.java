@@ -7,11 +7,9 @@ import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.GenericData;
-import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
@@ -21,9 +19,7 @@ import util.JsonPathAlteration;
 import util.WebDriverBrowsertack;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -906,48 +902,4 @@ public class TestResultsSteps {
         }
     }
 
-//    @Step
-//    public void waitForTestResultsUpdate(String systemNumber, int iteration, LocalDateTime testStartDate) {
-//        System.out.println("...waiting " + iteration + " iterations for test results to be updated...\n");
-//
-//        for(int i=0; i < iteration; i++) {
-//            response = testResultsClient.getTestResults(systemNumber);
-//
-//            int status = response.getStatusCode();
-//            if (status != 200) {
-//                try {
-//                    Thread.sleep(5000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                System.out.println("WAITING");
-//                continue;
-//            }
-////            int noTestResults = response.then().extract().jsonPath().getInt("$.size()");
-//            for (int j = 0; j < 1; j++) {
-////                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].testTypes.size()");
-////                for (int k = 0; k < recordsNumber; k++) {
-//                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j +"].testTypes.testTypeEndTypeStamp");
-//
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//                    LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
-//                    System.out.println("createdAt" + " " + createdAt);
-//
-//                    System.out.println(" for vehicle [" + j + "] status is: " + status);
-//
-//                    if (createdAt.isAfter(testStartDate)) {
-//                        return;
-//                    }
-////                }
-//            }
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            System.out.println("\n...waiting 1 more second (" + i + ")...\n");
-//
-//        }
-//        System.out.println("\n...Vehicle status has not been updated in " + iteration +" seconds...");
-//    }
 }

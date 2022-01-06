@@ -151,7 +151,6 @@ public class WebDriverBrowsertack {
             e.printStackTrace();
         }
 
-//        driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(Keys.ENTER);
         driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
         new WebDriverWait(driver, 1).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
