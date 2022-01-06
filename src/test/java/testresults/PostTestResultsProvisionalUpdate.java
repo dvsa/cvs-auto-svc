@@ -5,13 +5,16 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +29,11 @@ public class PostTestResultsProvisionalUpdate {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    LocalDateTime testStartDate;
+    @Before
+    public void beforeTest() {
+        this.testStartDate = LocalDateTime.now();
+    }
 
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
@@ -118,7 +126,6 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", null);
 
-
         // Read test result base json + Generate random values
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
@@ -139,7 +146,8 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(vin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -183,7 +191,6 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -229,7 +236,6 @@ public class PostTestResultsProvisionalUpdate {
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
 
-
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -241,8 +247,8 @@ public class PostTestResultsProvisionalUpdate {
     public void testVehicleTechRecordLgvEuVehicleCategoryNull(){
 
         // Tech record exists already in dynamoDb with a null euVehicleCategory
-        String systemNumber = "XYZEP5JYOMM00004";
-        String vin = "DP76UMK4DQLTOT400004";
+        String systemNumber = "XYZEP5JYOMM00055";
+        String vin = "DP76UMK4DQLTOT400055";
 
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -272,7 +278,6 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -317,7 +322,6 @@ public class PostTestResultsProvisionalUpdate {
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
 
-
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -360,8 +364,6 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
-
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -402,8 +404,6 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
-
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -443,10 +443,8 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -488,10 +486,8 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -532,11 +528,8 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
-
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -580,7 +573,6 @@ public class PostTestResultsProvisionalUpdate {
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
 
-
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(vin);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -620,10 +612,8 @@ public class PostTestResultsProvisionalUpdate {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
 
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
@@ -691,8 +681,6 @@ public class PostTestResultsProvisionalUpdate {
 
         // Wait for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(vin, 10);
-
-
         // Get both tech records, and verify that ONLY record 1 has been updated.
         // Verify tech record 1
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber_1);

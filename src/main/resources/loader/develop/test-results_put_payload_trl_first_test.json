@@ -46,7 +46,7 @@
       "code": "3",
       "description": "3 wheelers"
     },
-    "systemNumber": "10000003",
+    "systemNumber": "84612025",
     "testResultId": "e9e48c29-a5de-436e-8530-93e49bec402e",
     "vin": "GQDIQJBKHKQJIE691320",
     "testStationName": "Rowe, Wunsch and Wisoky",
@@ -60,7 +60,7 @@
     "testStationType": "gvts",
     "testVersion": "current",
     "reasonForCancellation": null,
-    "firstUseDate": "2019-06-08",
+    "firstUseDate": "2020-06-08",
     "testerName": "Gica",
     "testStationPNumber": "87-1369561",
     "reasonForCreation": "Test conducted",

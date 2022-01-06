@@ -95,6 +95,7 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='loginfmt']"))
         ));
         driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getMicrosoftOnlineUserName());
+
         driver.findElement(By.cssSelector("#idSIButton9")).click();
 
         System.out.println("Filling in password");
@@ -104,6 +105,7 @@ public class WebDriverBrowsertack {
                     ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
             ));
             driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getMicrosoftOnlinePass());
+
             driver.findElement(By.cssSelector("#idSIButton9")).click();
         } catch (StaleElementReferenceException e) {
             wait.until(ExpectedConditions.and(
@@ -140,7 +142,15 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']")),
                 ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']"))
         ));
-        driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
+
+        driver.findElement(By.cssSelector("#searchBoxId-Mail input")).clear();
+        driver.findElement(By.cssSelector("#searchBoxId-Mail input")).sendKeys(randomVrm);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
         new WebDriverWait(driver, 1).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));

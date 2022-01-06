@@ -7,8 +7,8 @@
   "testerName": "Tester",
   "testerStaffId": "1",
   "testerEmailAddress": "dorel.popescu@dvsagov.uk",
-  "testStartTimestamp": "2019-11-07T12:16:44.944Z",
-  "testEndTimestamp": "2019-11-07T12:21:49.752Z",
+  "testStartTimestamp": "2021-11-07T12:16:44.944Z",
+  "testEndTimestamp": "2021-11-07T12:21:49.752Z",
   "testStatus": "submitted",
   "reasonForCancellation": null,
   "vrm": "CT90TTT",
@@ -37,8 +37,8 @@
       "testTypeId": "125",
       "certificateNumber": null,
       "secondaryCertificateNumber": "1234",
-      "testTypeStartTimestamp": "2019-11-07T12:20:29.601Z",
-      "testTypeEndTimestamp": "2019-11-07T12:21:49.754Z",
+      "testTypeStartTimestamp": "2021-11-07T12:20:29.601Z",
+      "testTypeEndTimestamp": "2021-11-07T12:21:49.754Z",
       "modType": {
         "code": "m",
         "description": "modification or change of engine"

@@ -7,8 +7,8 @@
   "testerName": "cvs.automation3@dvsagov.onmicrosoft.com",
   "testerStaffId": "d463f9f3-1ce7-4944-930a-ce9fd51e506b",
   "testerEmailAddress": "cvs.automation3@dvsagov.onmicrosoft.com",
-  "testStartTimestamp": "2019-11-26T13:13:05.473Z",
-  "testEndTimestamp": "2019-11-26T13:18:30.324Z",
+  "testStartTimestamp": "2020-11-26T13:13:05.473Z",
+  "testEndTimestamp": "2020-11-26T13:18:30.324Z",
   "testStatus": "submitted",
   "reasonForCancellation": null,
   "vrm": "GH389BH",
@@ -33,8 +33,8 @@
       "testTypeName": "Low Emissions Certificate (LEC)",
       "testTypeId": "45",
       "certificateNumber": null,
-      "testTypeStartTimestamp": "2019-11-26T13:16:47.009Z",
-      "testTypeEndTimestamp": "2019-11-26T13:18:30.325Z",
+      "testTypeStartTimestamp": "2020-11-26T13:16:47.009Z",
+      "testTypeEndTimestamp": "2020-11-26T13:18:30.325Z",
       "modType": {
         "code": "m",
         "description": "modification or change of engine"

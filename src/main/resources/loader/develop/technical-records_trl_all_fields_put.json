@@ -15,8 +15,8 @@
     {
       "statusCode": "provisional",
       "vehicleType": "trl",
-      "regnDate": "2019-06-24",
-      "firstUseDate": "2019-06-24",
+      "regnDate": "2021-06-24",
+      "firstUseDate": "2021-06-24",
       "manufactureYear": 2018,
       "noOfAxles": 2,
       "brakes": {
@@ -37,15 +37,15 @@
       "alterationMarker": true,
       "departmentalVehicleMarker": false,
       "authIntoService": {
-        "cocIssueDate": "2019-06-24",
-        "dateReceived": "2019-06-24",
-        "datePending": "2019-06-24",
-        "dateAuthorised": "2019-06-24",
-        "dateRejected": "2019-06-24"
+        "cocIssueDate": "2021-06-24",
+        "dateReceived": "2021-06-24",
+        "datePending": "2021-06-24",
+        "dateAuthorised": "2021-06-24",
+        "dateRejected": "2021-06-24"
       },
       "lettersOfAuth": {
         "letterType": "Trailer authorization",
-        "letterDateRequested": "2019-06-24",
+        "letterDateRequested": "2021-06-24",
         "letterContents": "contents"
       },
       "approvalType": "NTA",

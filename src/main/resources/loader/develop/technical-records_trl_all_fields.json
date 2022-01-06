@@ -14,8 +14,8 @@
   "techRecord": [
     {
       "vehicleType": "trl",
-      "regnDate": "2019-06-25",
-      "firstUseDate": "2019-06-25",
+      "regnDate": "2021-06-25",
+      "firstUseDate": "2021-06-25",
       "manufactureYear": 2019,
       "noOfAxles": 1,
       "brakes": {
@@ -36,15 +36,15 @@
       "alterationMarker": false,
       "departmentalVehicleMarker": true,
       "authIntoService": {
-        "cocIssueDate": "2019-06-25",
-        "dateReceived": "2019-06-25",
-        "datePending": "2019-06-25",
-        "dateAuthorised": "2019-06-25",
-        "dateRejected": "2019-06-25"
+        "cocIssueDate": "2021-06-25",
+        "dateReceived": "2021-06-25",
+        "datePending": "2021-06-25",
+        "dateAuthorised": "2021-06-25",
+        "dateRejected": "2021-06-25"
       },
       "lettersOfAuth": {
         "letterType": "Trailer rejection",
-        "letterDateRequested": "2019-06-25",
+        "letterDateRequested": "2020-06-25",
         "letterContents": "other"
       },
       "approvalType": "ECTA",

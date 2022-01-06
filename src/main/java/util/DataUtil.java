@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 
 public class DataUtil {
 
-
     public static String buildDate(String date, long offsetYears,long offsetMounts, long offsetDays) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -52,13 +51,11 @@ public class DataUtil {
 
         String value = RandomStringUtils.randomAlphabetic(count);
         for (String currentListValue : values) {
-            if (value.equalsIgnoreCase(currentListValue)) {
+            if(value.toLowerCase().contains(currentListValue.toLowerCase())) {
                 value = generateRandomExcludingValues(count,values);
             }
         }
 
         return value;
     }
-
-
 }

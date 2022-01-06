@@ -8,8 +8,8 @@
   "testerName": "Gica",
   "testerStaffId": "133",
   "testerEmailAddress": "someone@email.com",
-  "testStartTimestamp": "2019-01-14T10:36:33.987Z",
-  "testEndTimestamp": "2019-01-14T10:36:33.987Z",
+  "testStartTimestamp": "2021-01-14T10:36:33.987Z",
+  "testEndTimestamp": "2021-01-14T10:36:33.987Z",
   "testStatus": "submitted",
   "reasonForCancellation": null,
   "vehicleClass": {
@@ -35,9 +35,9 @@
       "name": "Technical test",
       "testTypeId": "39",
       "certificateNumber": "12334",
-      "testTypeStartTimestamp": "2019-01-14T10:36:33.987Z",
-      "testTypeEndTimestamp": "2019-01-14T10:36:33.987Z",
-      "testExpiryDate": "2019-09-19",
+      "testTypeStartTimestamp": "2021-01-14T10:36:33.987Z",
+      "testTypeEndTimestamp": "2021-01-14T10:36:33.987Z",
+      "testExpiryDate": "2021-09-19",
       "modType": {
         "code": "p",
         "description": "particulate trap"
@@ -49,7 +49,7 @@
       "emissionStandard": "0.10 g/kWh Euro 3 PM",
       "fuelType": "diesel",
       "numberOfSeatbeltsFitted": 2,
-      "lastSeatbeltInstallationCheckDate": "2019-01-14",
+      "lastSeatbeltInstallationCheckDate": "2021-01-14",
       "seatbeltInstallationCheckDate": true,
       "prohibitionIssued": false,
       "reasonForAbandoning": "none",

@@ -25,6 +25,8 @@ import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.jayway.jsonpath.JsonPath;
 import data.GenericData;
 import exceptions.AutomationException;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import java.util.*;
 
@@ -65,15 +67,18 @@ public class AwsUtil {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+            System.out.println("time checking " + currentTimestamp);
             if (i % 2 == 0) {
                 int j = i % 2;
-                System.out.println("waited for: " + j + " seconds...");
+
+                System.out.println("waited for: " + i + " iterations...");
             }
             if (s3Client.doesObjectExist(bucketName, key)) {
                 return s3Client.doesObjectExist(bucketName, key);
             }
         }
-        System.out.println("file " + key + " was not created in 120 seconds or less...");
+        System.out.println("file " + key + " was not created in 120 iterations or less...");
         return false;
     }
 
@@ -113,8 +118,6 @@ public class AwsUtil {
 
             LogStream logStream = describeLogStreamsResult.getLogStreams().get(0);
             GetLogEventsRequest getLogEventsRequest = new GetLogEventsRequest()
-//                    .withStartTime(currentTimestamp.getMillis())
-//                    .withEndTime(currentTimestamp.plusMinutes(1).getMillis())
                     .withLogGroupName(logGroup)
                     .withLogStreamName(logStream.getLogStreamName());
 
@@ -178,8 +181,6 @@ public class AwsUtil {
 
             LogStream logStream = describeLogStreamsResult.getLogStreams().get(0);
             GetLogEventsRequest getLogEventsRequest = new GetLogEventsRequest()
-//                    .withStartTime(currentTimestamp.getMillis())
-//                    .withEndTime(currentTimestamp.plusMinutes(1).getMillis())
                     .withLogGroupName(logGroup)
                     .withLogStreamName(logStream.getLogStreamName());
 
@@ -565,12 +566,6 @@ public class AwsUtil {
             System.out.println("deleting item with id: " + id + " ....");
             DeleteItemSpec deleteItemSpec = new DeleteItemSpec()
                     .withPrimaryKey("id", id);
-//                    .withConditionExpression("#ip = :val")
-//                    .withNameMap(new NameMap()
-//                            .with("#ip", "InProduction"))
-//                    .withValueMap(new ValueMap()
-//                            .withBoolean(":val", false))
-//                    .withReturnValues(ReturnValue.ALL_OLD);
             DeleteItemOutcome outcome = table.deleteItem(deleteItemSpec);
             System.out.println("Printing item that was deleted...");
         } catch (Exception e) {
@@ -677,6 +672,5 @@ public class AwsUtil {
         }
 
     }
-
 
 }
