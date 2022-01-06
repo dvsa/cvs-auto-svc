@@ -568,7 +568,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         testResultsSteps.validateData("Test records created");
     }
 
-        @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult pass")
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testResult pass")
     @Test
     public void testResultsTestResultValueTwo() {
 
