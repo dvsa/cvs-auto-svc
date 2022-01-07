@@ -265,7 +265,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     }
 
     //WE@WithTag("annual_certificates")
-    @WithTag("In_test")
+    //@WithTag("In_test")
     @Title("CVSB-8798 - Annual certificate is generate for all Trl tests")
     @Test
     public void testResults_Annual_Certificate_Generation_Trl() {
