@@ -156,12 +156,6 @@ public class TestResultsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("wait done");
         response.then().log().all()
                 .statusCode(statusCode);
     }
