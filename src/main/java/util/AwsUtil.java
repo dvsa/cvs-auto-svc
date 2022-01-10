@@ -70,13 +70,9 @@ public class AwsUtil {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            if (i % 2 == 0) {
-//                int j = i % 2;
-//                System.out.println("waited for: " + j + " iterations...");
-//            }
 
             if (s3Client.doesObjectExist(bucketName, key)) {
-                System.out.println("file found in the s3 bucket...");
+                System.out.println("file found in the s3 bucket... after "+i+" iterations");
                 return true;
             }
         }
