@@ -270,7 +270,6 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @Title("CVSB-8798 - Annual certificate is generate for all Trl tests")
     @Test
     public void testResults_Annual_Certificate_Generation_Trl() {
-        if (!"warm up".equals(name)) {
             // Read the base test result JSON.
             String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json", "$");
 
@@ -307,7 +306,11 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            testResultsSteps.statusCodeShouldBe(201);
+            if ("warm up".equals(name)) {
+                testResultsSteps.statusCodeShouldBe(504);
+            }else
+                testResultsSteps.statusCodeShouldBe(201);
+
 
             testResultsSteps.validateData("Test records created");
             testResultsSteps.getTestResults(randomSystemNumber);
@@ -318,7 +321,5 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
             //Verify that the certificate is generated in S3 bucket
             testResultsSteps.validateCertificateIsGenerated(testNumber, randomVin);
-
-        }
     }
 }
