@@ -61,8 +61,7 @@ public class AwsUtil {
 
         System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
 
-        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-        System.out.println("time started checking " + currentTimestamp);
+        System.out.println("time started checking " + DateTime.now().withZone(DateTimeZone.UTC));
 
         for(int i = 0; i < 60 ; i++) {
             try {
@@ -72,14 +71,12 @@ public class AwsUtil {
             }
 
             if (s3Client.doesObjectExist(bucketName, key)) {
-                DateTime currentTimestamp2 = DateTime.now().withZone(DateTimeZone.UTC);
-                System.out.println("time stopped checking " + currentTimestamp2);
+                System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
                 System.out.println("file found in the s3 bucket... after "+i+" iterations");
                 return true;
             }
         }
-        DateTime currentTimestamp3 = DateTime.now().withZone(DateTimeZone.UTC);
-        System.out.println("time stopped checking " + currentTimestamp3);
+        System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
         System.out.println("file " + key + " was not created in 240 iterations or less...");
         return false;
     }
