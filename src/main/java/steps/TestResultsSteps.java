@@ -162,6 +162,7 @@ public class TestResultsSteps {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("wait done");
         }
         response.then().log().all()
                 .statusCode(statusCode);
