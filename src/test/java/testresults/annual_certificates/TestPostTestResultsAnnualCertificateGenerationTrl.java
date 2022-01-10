@@ -23,6 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
+                {"warmup test", "First test", "41", 1, "pass", "fft0"},
                 {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
@@ -306,21 +307,22 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
                 e.printStackTrace();
             }
 
-            if ("fft1".equals(testCode) && "pass".equals(testResult)) {
+            if ("warmup test".equals(testCode) && "pass".equals(testResult)) {
                 testResultsSteps.statusCodeShouldBe(504);
             }
             else {
                 testResultsSteps.statusCodeShouldBe(201);
                 testResultsSteps.validateData("Test records created");
+
+
+                testResultsSteps.getTestResults(randomSystemNumber);
+                testResultsSteps.statusCodeShouldBe(200);
+                String testNumber = testResultsSteps.getTestNumber();
+                testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
+                Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
+
+                //Verify that the certificate is generated in S3 bucket
+                testResultsSteps.validateCertificateIsGenerated(testNumber, randomVin);
             }
-
-            testResultsSteps.getTestResults(randomSystemNumber);
-            testResultsSteps.statusCodeShouldBe(200);
-            String testNumber = testResultsSteps.getTestNumber();
-            testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
-            Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
-
-            //Verify that the certificate is generated in S3 bucket
-            testResultsSteps.validateCertificateIsGenerated(testNumber, randomVin);
     }
 }
