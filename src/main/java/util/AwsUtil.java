@@ -65,6 +65,7 @@ public class AwsUtil {
         System.out.println("time started checking " + currentTimestamp);
 
         for(int i = 0; i < 30 ; i++) {
+            System.out.println("i: " + i);
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
