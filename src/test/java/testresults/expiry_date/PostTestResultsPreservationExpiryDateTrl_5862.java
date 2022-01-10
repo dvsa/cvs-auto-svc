@@ -333,7 +333,11 @@ public class PostTestResultsPreservationExpiryDateTrl_5862 {
                 alterationTestResult
         ));
 
-
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);
 
