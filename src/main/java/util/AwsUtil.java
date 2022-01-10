@@ -64,9 +64,9 @@ public class AwsUtil {
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
         System.out.println("time started checking " + currentTimestamp);
 
-        for(int i = 0; i < 240 ; i++) {
+        for(int i = 0; i < 120 ; i++) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -76,6 +76,7 @@ public class AwsUtil {
                 return true;
             }
         }
+        System.out.println("time stopped checking " + currentTimestamp);
         System.out.println("file " + key + " was not created in 240 iterations or less...");
         return false;
     }
