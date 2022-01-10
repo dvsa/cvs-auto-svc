@@ -23,7 +23,6 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"warm up", "First test", "41", 1, "pass", "fft0"},
                 {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
@@ -306,7 +305,8 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if ("warm up".equals(name)) {
+
+            if ("fft1".equals(testCode) && "pass".equals(testResult)) {
                 testResultsSteps.statusCodeShouldBe(504);
             }else
                 testResultsSteps.statusCodeShouldBe(201);
