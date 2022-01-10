@@ -23,7 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                //{"First test", "First test", "41", 1, "pass", "fft1"},
+                {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
                 {"First test", "First test", "95", 4, "pass", "fft4"},
@@ -302,7 +302,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
