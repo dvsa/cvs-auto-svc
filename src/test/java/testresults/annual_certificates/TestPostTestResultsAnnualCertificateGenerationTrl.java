@@ -23,7 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"warmup test", "First test", "41", 1, "pass", "fft0"},
+                {"warmup test", "warmup test", "41", 1, "pass", "fft0"},
                 {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
@@ -33,7 +33,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
                 {"First test", "First test", "95", 7, "pass", "fft5"},
                 {"First test", "First test", "95", 8, "pass", "fft5"},
                 {"First test", "First test", "95", 9, "pass", "fft5"},
-                {"First test", "First test", "95", 10, "pass", "fft5"}
+                {"First test", "First test", "95", 10, "pass", "fft5"},
 //                {"Paid", "Paid first test retest", "103", 1, "pass", "rgt1"},
 //                {"Paid", "Paid first test retest", "65", 2, "pass", "rgt2"},
 //                {"Paid", "Paid first test retest", "65", 3, "pass", "rgt3"},
@@ -301,19 +301,12 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
             // Post the results, together with any alterations, and verify that they are accepted.
             testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             if ("warmup test".equals(name)) {
                 testResultsSteps.statusCodeShouldBe(504);
             }
             else {
                 testResultsSteps.statusCodeShouldBe(201);
                 testResultsSteps.validateData("Test records created");
-
 
                 testResultsSteps.getTestResults(randomSystemNumber);
                 testResultsSteps.statusCodeShouldBe(200);
