@@ -301,6 +301,11 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         testResultsSteps.statusCodeShouldBe(201);
 
         testResultsSteps.validateData("Test records created");
