@@ -65,7 +65,6 @@ public class AwsUtil {
         System.out.println("time started checking " + currentTimestamp);
 
         for(int i = 0; i < 30 ; i++) {
-            System.out.println("i: " + i);
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -73,11 +72,14 @@ public class AwsUtil {
             }
 
             if (s3Client.doesObjectExist(bucketName, key)) {
+                DateTime currentTimestamp2 = DateTime.now().withZone(DateTimeZone.UTC);
+                System.out.println("time stopped checking " + currentTimestamp2);
                 System.out.println("file found in the s3 bucket... after "+i+" iterations");
                 return true;
             }
         }
-        System.out.println("time stopped checking " + currentTimestamp);
+        DateTime currentTimestamp3 = DateTime.now().withZone(DateTimeZone.UTC);
+        System.out.println("time stopped checking " + currentTimestamp3);
         System.out.println("file " + key + " was not created in 240 iterations or less...");
         return false;
     }
