@@ -61,24 +61,26 @@ public class AwsUtil {
 
         System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
 
+        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+        System.out.println("time started checking " + currentTimestamp);
+
         for(int i = 0; i < 240 ; i++) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-            System.out.println("time checking " + currentTimestamp);
-            if (i % 2 == 0) {
-                int j = i % 2;
+//            if (i % 2 == 0) {
+//                int j = i % 2;
+//                System.out.println("waited for: " + j + " iterations...");
+//            }
 
-                System.out.println("waited for: " + i + " iterations...");
-            }
             if (s3Client.doesObjectExist(bucketName, key)) {
-                return s3Client.doesObjectExist(bucketName, key);
+                System.out.println("file found in the s3 bucket...");
+                return true;
             }
         }
-        System.out.println("file " + key + " was not created in 120 iterations or less...");
+        System.out.println("file " + key + " was not created in 240 iterations or less...");
         return false;
     }
 

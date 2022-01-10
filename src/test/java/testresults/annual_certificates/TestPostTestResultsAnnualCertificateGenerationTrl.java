@@ -301,7 +301,9 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNumber, 10);
         testResultsSteps.statusCodeShouldBe(201);
+
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -309,7 +311,6 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", testCode);
         Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
 
-        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNumber, 10);
         //Verify that the certificate is generated in S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
 
