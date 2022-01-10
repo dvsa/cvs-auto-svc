@@ -64,7 +64,7 @@ public class AwsUtil {
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
         System.out.println("time started checking " + currentTimestamp);
 
-        for(int i = 0; i < 30 ; i++) {
+        for(int i = 0; i < 60 ; i++) {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
