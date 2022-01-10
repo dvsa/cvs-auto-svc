@@ -156,6 +156,13 @@ public class TestResultsSteps {
 
     @Step
     public void statusCodeShouldBe(int statusCode) {
+        if (response.getStatusCode() == 504) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         response.then().log().all()
                 .statusCode(statusCode);
     }
