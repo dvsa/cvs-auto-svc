@@ -308,11 +308,11 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
             if ("fft1".equals(testCode) && "pass".equals(testResult)) {
                 testResultsSteps.statusCodeShouldBe(504);
-            }else
+            }
+            else
                 testResultsSteps.statusCodeShouldBe(201);
+                testResultsSteps.validateData("Test records created");
 
-
-            testResultsSteps.validateData("Test records created");
             testResultsSteps.getTestResults(randomSystemNumber);
             testResultsSteps.statusCodeShouldBe(200);
             String testNumber = testResultsSteps.getTestNumber();
