@@ -307,7 +307,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
                 e.printStackTrace();
             }
 
-            if ("warmup test".equals(testCode) && "pass".equals(testResult)) {
+            if ("warmup test".equals(name)) {
                 testResultsSteps.statusCodeShouldBe(504);
             }
             else {
