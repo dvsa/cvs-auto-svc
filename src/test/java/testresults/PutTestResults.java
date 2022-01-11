@@ -1039,7 +1039,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
-    @WithTag("Vtm")
+    //WE@WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - TestTypeId = 60")
     @Test
     public void testResultsPutApplicableFreeAdrRetest() {
