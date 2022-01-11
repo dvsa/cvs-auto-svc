@@ -63,9 +63,9 @@ public class AwsUtil {
 
         System.out.println("time started checking " + DateTime.now().withZone(DateTimeZone.UTC));
 
-        for(int i = 0; i < 60 ; i++) {
+        for(int i = 0; i < 240 ; i++) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
