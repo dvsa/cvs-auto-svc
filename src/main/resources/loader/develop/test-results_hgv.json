@@ -28,7 +28,7 @@
       "particulateTrapFitted": "yes",
       "particulateTrapSerialNumber": "1234",
       "modificationTypeUsed": "modification",
-      "testExpiryDate": "2019-06-24",
+      "testExpiryDate": "2020-06-24",
       "testResult": "pass",
       "prohibitionIssued": false,
       "reasonForAbandoning": null,
@@ -104,5 +104,5 @@
   "numberOfWheelsDriven": 4,
   "euVehicleCategory": "n2",
   "countryOfRegistration": "gb",
-  "regnDate": "2019-06-24"
+  "regnDate": "2020-06-24"
 }

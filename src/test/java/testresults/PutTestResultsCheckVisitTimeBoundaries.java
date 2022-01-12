@@ -15,6 +15,7 @@ import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,6 +27,7 @@ import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RunWith(SerenityRunner.class)
@@ -33,6 +35,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
 
     static String testerStaffId;
 
+    LocalDateTime testStartDate;
     @BeforeClass
     public static void createActivity() {
 
@@ -71,6 +74,10 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         }
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
     }
+    @Before
+    public void beforeTest() {
+        this.testStartDate = LocalDateTime.now();
+    }
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -103,6 +110,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         // Read the base test-result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
@@ -143,7 +151,6 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         testResultsSteps.validateData("Test records created");
-
 
         //Read the base json for PUT test-results
         String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_12378.json","$");
@@ -209,6 +216,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_12378.json", "$");
@@ -234,7 +242,6 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
                 "", "REPLACE");
         JsonPathAlteration alterationTesterStaffId = new JsonPathAlteration("$.testerStaffId", testerStaffId, "",
                 "REPLACE");
-
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
@@ -317,6 +324,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -404,6 +412,7 @@ public class PutTestResultsCheckVisitTimeBoundaries extends TestCase{
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatusAndSearchCriteria(randomVin, VehicleTechnicalRecordStatus.ALL, VehicleTechnicalRecordSearchCriteria.VIN);

@@ -82,6 +82,7 @@ public class PostTrailerRegistrationAuthoriser {
         trailerRegistrationSteps.statusCodeShouldBe(200);
     }
 
+    
     @Title("CVSB-18927 - AC3. Permit DVLA accessing the new endpoint")
     @Test
     public void testTrailerRegistrationWithDVLAToken() {

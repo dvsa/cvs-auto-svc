@@ -10,13 +10,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.*;
+import steps.TestResultsSteps;
+import steps.TestTypeSteps;
+import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
 import java.util.*;
 
+
 @RunWith(SerenityParameterizedRunner.class)
-public class PutTestResultsUpdateTestCode {
+public class PutTestResultsUpdateTestCodeHGV {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
@@ -30,22 +33,6 @@ public class PutTestResultsUpdateTestCode {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                //aal (1 + psv + large + rigid)
-                {"aal", "{\"vehicleType\":\"psv\", \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"rigid\"}", "$.testResult.testTypes[0].testTypeId", "3", "wdl"},
-                {"aal", "{\"vehicleType\":\"psv\", \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"rigid\"}", "$.testResult.vehicleSize", "small", "aas"},
-                {"aal", "{\"vehicleType\":\"psv\", \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"rigid\"}", "$.testResult.vehicleConfiguration", "articulated", "adl"},
-                //phl (15 + psv + rigid + large)
-                {"phl", "{\"vehicleType\":\"psv\", \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"rigid\"}", "$.testResult.testTypes[0].testTypeId", "1", "aal"},
-                {"phl", "{\"vehicleType\":\"psv\", \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"rigid\"}", "$.testResult.vehicleSize", "small", "phs"},
-                //qal (30 + psv + large + rigid + 2 axles)
-                {"qal", "{\"vehicleType\":\"psv\", \"noOfAxles\":2, \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"articulated\"}", "$.testResult.testTypes[0].testTypeId", "1", "adl"},
-                {"qal", "{\"vehicleType\":\"psv\", \"noOfAxles\":2, \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"articulated\"}", "$.testResult.vehicleSize", "small", "qas"},
-                {"qal", "{\"vehicleType\":\"psv\", \"noOfAxles\":2, \"vehicleSize\":\"large\",\"vehicleConfiguration\":\"articulated\"}", "$.testResult.noOfAxles", 3, "qgl"},
-                //qbv (86 + hgv)
-                {"qbv", "{\"vehicleType\":\"hgv\"}", "$.testResult.testTypes[0].testTypeId", "88", "bif"},
-                //trv (56 + hgv)
-                {"trv", "{\"vehicleType\":\"hgv\"}", "$.testResult.testTypes[0].testTypeId", "49", "tiv"},
-                {"trv", "{\"vehicleType\":\"hgv\"}", "$.testResult.vehicleType", "trl", "trt"},
                 //qpv (62 + hgv + 3 axles)
                 {"qpv", "{\"vehicleType\":\"hgv\", \"noOfAxles\":3}", "$.testResult.testTypes[0].testTypeId", "122", "qjv3"},
                 {"qpv", "{\"vehicleType\":\"hgv\", \"noOfAxles\":3}", "$.testResult.vehicleType", "trl", "qqt"},
@@ -61,22 +48,7 @@ public class PutTestResultsUpdateTestCode {
                 {"p3v2", "{\"vehicleType\":\"hgv\", \"noOfAxles\":2}", "$.testResult.testTypes[0].testTypeId", "95", "ffv2"},
                 {"p3v2", "{\"vehicleType\":\"hgv\", \"noOfAxles\":2}", "$.testResult.vehicleType", "trl", "p3t2"},
                 {"p3v2", "{\"vehicleType\":\"hgv\", \"noOfAxles\":2}", "$.testResult.noOfAxles", 7, "p3v5"},
-                //fft1 (41+ trl)
-                {"fft1", "{\"vehicleType\":\"trl\", \"noOfAxles\":1}", "$.testResult.testTypes[0].testTypeId", "40", "aat1"},
-                //qjt1 (91 + trl)
-                {"qjt1", "{\"vehicleType\":\"trl\", \"noOfAxles\":1}", "$.testResult.testTypes[0].testTypeId", "40", "aat1"},
-                //p2t1 (117 + trl)
-                {"p2t1", "{\"vehicleType\":\"trl\", \"noOfAxles\":1}", "$.testResult.testTypes[0].testTypeId", "108", "pbt1"},
-                //rft (57 + trl + 3 axles)
-                {"rft", "{\"vehicleType\":\"trl\", \"noOfAxles\":3}", "$.testResult.testTypes[0].testTypeId", "67", "rht"},
-                //pbv2 (71 + hgv + 2 axles)
-                {"pbv2", "{\"vehicleType\":\"hgv\", \"noOfAxles\":2}", "$.testResult.testTypes[0].testTypeId", "72", "pov2"},
-                {"pbv2", "{\"vehicleType\":\"hgv\", \"noOfAxles\":2}", "$.testResult.vehicleType", "trl", "pbt2"},
-                {"pbv2", "{\"vehicleType\":\"hgv\", \"noOfAxles\":2}", "$.testResult.noOfAxles", 4, "pbv4"},
-                //lbp (39 + psv + large + rigid)
-                {"lbp", "{\"vehicleType\":\"psv\", \"vehicleConfiguration\":\"rigid\"}", "$.testResult.testTypes[0].testTypeId", "1", "aal"},
-                //lev (45) -> vehicle is hgv
-                {"lev", "{\"vehicleType\":\"hgv\"}", "$.testResult.testTypes[0].testTypeId", "44", "ldv"}
+
         });
     }
 
@@ -86,7 +58,7 @@ public class PutTestResultsUpdateTestCode {
     private final Object value;
     private final String newTestCode;
 
-    public PutTestResultsUpdateTestCode(String initialTestCode, String restrictions, String jsonPath, Object value, String newTestCode) throws JSONException {
+    public PutTestResultsUpdateTestCodeHGV(String initialTestCode, String restrictions, String jsonPath, Object value, String newTestCode) throws JSONException {
         this.initialTestCode = initialTestCode;
         this.restrictions = new JSONObject(restrictions);
         this.jsonPath = jsonPath;

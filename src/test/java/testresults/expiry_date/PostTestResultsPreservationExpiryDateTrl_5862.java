@@ -331,7 +331,7 @@ public class PostTestResultsPreservationExpiryDateTrl_5862 {
                 alterationSysNo,
                 alterationTestResult
         ));
-
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNo, 100);
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(postTestResultRecord, alterations);

@@ -11,6 +11,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.time.DateUtils;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,12 +21,12 @@ import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 import org.junit.Assert;
-
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateGeneration extends TestCase {
@@ -34,7 +35,8 @@ public class PutTestResultsCertificateGeneration extends TestCase {
     static String randomSystemNumber;
     static String randomTestResultId;
 
-
+    @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @BeforeClass
     public static void createRecord() {
@@ -67,7 +69,6 @@ public class PutTestResultsCertificateGeneration extends TestCase {
                     .log().method().log().uri().log().body()
                     .post("/vehicles");
         }
-
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
 
@@ -108,12 +109,14 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         }
         Assert.assertEquals(HttpStatus.SC_CREATED, responseTestResult.getStatusCode());
     }
+        LocalDateTime testStartDate;
+        @Before
+        public void beforeTest() {
+            this.testStartDate = LocalDateTime.now();
+        }
 
     @Steps
     TestResultsSteps testResultsSteps;
-
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @TestData
     public static Collection<Object[]> testData(){
@@ -157,9 +160,6 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
 
-
-
-
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberPutTestResults,
@@ -180,10 +180,12 @@ public class PutTestResultsCertificateGeneration extends TestCase {
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         String testNumber = testResultsSteps.getTestNumber();
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         System.out.println("TestNumber is " +testNumber);
 
-        // verify that the certificate is created in the S3 bucket
+        //verify that the certificate is created in the S3 bucket
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 }

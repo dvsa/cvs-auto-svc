@@ -7,11 +7,10 @@ import clients.util.ToTypeConvertor;
 import clients.util.testresult.TestResultsLevel;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.GenericData;
-import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
-import org.json.JSONObject;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -19,8 +18,8 @@ import util.AwsUtil;
 import util.JsonPathAlteration;
 import util.WebDriverBrowsertack;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +39,12 @@ public class TestResultsSteps {
     TestTypesClient testTypesClient = new TestTypesClient();
     Response response;
     private static String nextTestNumber = "";
+
+    LocalDateTime testStartDate;
+    @Before
+    public void beforeTest() {
+        this.testStartDate = LocalDateTime.now();
+    }
 
     @Step
     public Response getTestResults(String systemNumber) {
@@ -436,6 +441,7 @@ public class TestResultsSteps {
     public void validatePostErrorData(String field, String errorMessage) {
         Object fieldName = "\"" + field + "\" ";
         response.then().body("size()", is(1));
+        System.out.println("RESPONSE ERRORS" + " " + " " +response.then().body("errors.size()", greaterThanOrEqualTo(1)));
         response.then().body("errors.size()", greaterThanOrEqualTo(1));
         response.then().body("errors[0]", equalTo( fieldName + errorMessage));
     }
@@ -850,11 +856,11 @@ public class TestResultsSteps {
     }
 
     @Step
-    public void waitForTestResultsToBeUpdated(String sn, int seconds) {
+    public void waitForTestResultsToBeUpdated(String sn, int iteration) {
 
-        System.out.println("...waiting " + seconds + " seconds for the record to be updated...\n");
+        System.out.println("...waiting " + iteration + " iterations for the record to be updated...\n");
 
-        for (int i = 0; i < seconds; i++) {
+        for (int i = 0; i < iteration; i++) {
             response = testResultsClient.getTestResults(sn);
 
             int status = response.getStatusCode();
@@ -886,4 +892,14 @@ public class TestResultsSteps {
     public String getTesterStaffId() {
         return response.jsonPath().getString("[0].testerStaffId");
     }
+
+    @Step
+    public void sleep() {
+        try {
+            Thread.sleep(6000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

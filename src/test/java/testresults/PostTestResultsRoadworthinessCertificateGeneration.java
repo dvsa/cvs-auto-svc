@@ -1,23 +1,19 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import model.testresults.TestResults;
-import model.testresults.TestResultsGet;
-import model.testresults.TestResultsStatus;
 import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.http.HttpStatus;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +24,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    LocalDateTime testStartDate;
+    @Before
+    public void beforeTest() {
+        this.testStartDate = LocalDateTime.now();
+    }
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -57,6 +59,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -91,6 +94,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -481,6 +485,8 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -770,6 +776,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
@@ -845,6 +852,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    
     @Title("CVSB-7677 - TC - AC2 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QKV) - FAIL ")
     @Test
     public void testResults_Roadworthiness_HGV_QKV_Fail_Certificate_Generation() {
@@ -1169,6 +1177,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.sleep();
 
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);

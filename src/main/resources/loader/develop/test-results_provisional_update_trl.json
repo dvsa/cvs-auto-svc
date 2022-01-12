@@ -11,17 +11,17 @@
   "vin": "9LGDIXLEI5BQYV",
   "testerName": "cvs.automation4@dvsagov.onmicrosoft.com",
   "vehicleType": "trl",
-  "testEndTimestamp": "2019-12-20T15:18:26.616Z",
+  "testEndTimestamp": "2020-12-20T15:18:26.616Z",
   "testStationType": "gvts",
   "vehicleConfiguration": "centre axle drawbar",
   "euVehicleCategory": "o2",
   "testResultId": "59ae2562-ca7f-47ac-984b-24d4642cafbe",
   "testTypes": [
     {
-      "testTypeEndTimestamp": "2019-12-20T15:18:26.619Z",
+      "testTypeEndTimestamp": "2020-12-20T15:18:26.619Z",
       "certificateNumber": null,
       "name": "Retest",
-      "testTypeStartTimestamp": "2019-12-20T15:18:12.176Z",
+      "testTypeStartTimestamp": "2020-12-20T15:18:12.176Z",
       "testTypeId": "66",
       "prohibitionIssued": false,
       "additionalCommentsForAbandon": null,
@@ -42,6 +42,6 @@
   "testerStaffId": "c26d6b02-49b2-456a-ac20-7435e9397bac",
   "preparerName": "",
   "testStatus": "submitted",
-  "testStartTimestamp": "2019-12-20T15:15:10.741Z",
-  "firstUseDate": "2019-06-24"
+  "testStartTimestamp": "2020-12-20T15:15:10.741Z",
+  "firstUseDate": "2020-06-24"
 }

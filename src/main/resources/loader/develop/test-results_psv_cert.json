@@ -9,12 +9,12 @@
   "numberOfWheelsDriven": 4,
   "preparerName": "Durrell Vehicles Limited",
   "reasonForCancellation": null,
-  "testEndTimestamp": "2019-11-25T12:48:26.012Z",
+  "testEndTimestamp": "2020-11-25T12:48:26.012Z",
   "testerEmailAddress": "cvs.automation6@dvsagov.onmicrosoft.com",
   "testerName": "cvs.automation6@dvsagov.onmicrosoft.com",
   "testerStaffId": "b358e472-007d-438c-9d0d-75f243a8cce6",
   "testResultId": "0528f56d-633f-4cad-9bfd-1d938d4f7cc0",
-  "testStartTimestamp": "2019-11-25T12:43:46.167Z",
+  "testStartTimestamp": "2020-11-25T12:43:46.167Z",
   "testStationName": "Abshire-Kub",
   "testStationPNumber": "09-4129632",
   "testStationType": "gvts",
@@ -44,12 +44,12 @@
       "seatbeltInstallationCheckDate": null,
       "testResult": "pass",
       "customDefects": [],
-      "testTypeEndTimestamp": "2019-11-25T12:48:26.013Z",
+      "testTypeEndTimestamp": "2020-11-25T12:48:26.013Z",
       "testTypeId": "39",
       "testTypeName": "Low Emissions Certificate (LEC) with annual test",
-      "testTypeStartTimestamp": "2019-11-25T12:46:54.382Z",
+      "testTypeStartTimestamp": "2020-11-25T12:46:54.382Z",
       "smokeTestKLimitApplied": "2.2",
-      "testExpiryDate": "2019-09-19"
+      "testExpiryDate": "2021-09-19"
     }
   ],
   "vehicleClass": {

@@ -21,11 +21,11 @@
       "approvalType": "ECTA",
       "approvalTypeNumber": "12345",
       "authIntoService": {
-        "cocIssueDate": "2019-06-25",
-        "dateAuthorised": "2019-06-25",
-        "datePending": "2019-06-25",
-        "dateReceived": "2019-06-25",
-        "dateRejected": "2019-06-25"
+        "cocIssueDate": "2020-06-25",
+        "dateAuthorised": "2020-06-25",
+        "datePending": "2020-06-25",
+        "dateReceived": "2020-06-25",
+        "dateRejected": "2020-06-25"
       },
       "axles": [
         {
@@ -81,7 +81,7 @@
         "width": 3000
       },
       "euVehicleCategory": "o2",
-      "firstUseDate": "2019-06-25",
+      "firstUseDate": "2020-06-25",
       "frameDescription": "Other",
       "frontAxleToRearAxle": 1700,
       "functionCode": "R",
@@ -90,7 +90,7 @@
       "grossGbWeight": 40000,
       "lettersOfAuth": {
         "letterContents": "other",
-        "letterDateRequested": "2019-06-25",
+        "letterDateRequested": "2020-06-25",
         "letterType": "Trailer rejection"
       },
       "make": "Volvo",
@@ -139,7 +139,7 @@
       "rearAxleToRearTrl": 400,
       "reasonForCreation": "new record",
       "recordCompleteness": "Skeleton",
-      "regnDate": "2019-06-25",
+      "regnDate": "2020-06-25",
       "roadFriendly": false,
       "statusCode": "provisional",
       "suspensionType": "F",

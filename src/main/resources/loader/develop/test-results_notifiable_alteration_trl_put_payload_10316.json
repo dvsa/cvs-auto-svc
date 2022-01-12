@@ -12,12 +12,12 @@
     "preparerName": "Durrell Vehicles Limited",
     "reasonForCancellation": "none",
     "systemNumber": "10000166",
-    "testEndTimestamp": "2019-01-05T20:36:33.987Z",
+    "testEndTimestamp": "2021-01-05T20:36:33.987Z",
     "testerEmailAddress": "someone@email.com",
     "testerName": "Gica",
     "testerStaffId": "133",
     "testResultId": "55554",
-    "testStartTimestamp": "2019-01-05T10:36:33.987Z",
+    "testStartTimestamp": "2021-01-05T10:36:33.987Z",
     "testStationName": "Rowe, Wunsch and Wisoky",
     "testStationPNumber": "87-1369569",
     "testStationType": "gvts",
@@ -35,10 +35,10 @@
         "reasonForAbandoning": null,
         "secondaryCertificateNumber": null,
         "testResult": "pass",
-        "testTypeEndTimestamp": "2019-01-05T11:39:33.987Z",
+        "testTypeEndTimestamp": "2021-01-05T11:39:33.987Z",
         "testTypeId": "47",
         "testTypeName": "Free notifiable alteration",
-        "testTypeStartTimestamp": "2019-01-05T11:36:33.987Z"
+        "testTypeStartTimestamp": "2021-01-05T11:36:33.987Z"
       }
     ],
     "trailerId": "C530033",

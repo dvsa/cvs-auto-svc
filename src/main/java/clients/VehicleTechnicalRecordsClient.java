@@ -97,6 +97,7 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .pathParam("searchIdentifier", searchIdentifier)
+                .queryParam("status", "provisional_over_current")
 
 //                .log().all()
                 .log().method().log().uri().log().body()
@@ -209,7 +210,7 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
-    private Response callPutVehicleTechnicalRecordsWithAlterations(String vin, String requestBody, List<JsonPathAlteration> alterations) {
+    private Response callPutVehicleTechnicalRecordsWithAlterations(String systemNumber, String requestBody, List<JsonPathAlteration> alterations) {
         //the only actions accepted are ADD_FIELD, ADD_VALUE, DELETE and REPLACE
         String alteredBody = GenericData.applyJsonAlterations(requestBody, alterations);
 
@@ -217,9 +218,9 @@ public class VehicleTechnicalRecordsClient {
         Response response = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
                 .body(alteredBody)
-                .pathParam("vin", vin)
+                .pathParam("systemNumber", systemNumber)
                 .log().method().log().uri().log().body()
-                .put("/vehicles/{vin}");
+                .put("/vehicles/{systemNumber}");
         return response;
     }
 

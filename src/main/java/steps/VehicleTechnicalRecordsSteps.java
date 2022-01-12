@@ -18,6 +18,8 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
 import static util.TypeLoader.*;
 import util.JsonPathAlteration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import static data.GenericData.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -334,11 +336,11 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iterations) {
 
-        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < seconds; i++) {
+        for(int i=0; i < iterations; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -366,15 +368,15 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" seconds...");
     }
 
     @Step
-    public void waitForVehicleTechRecordsToBeUpdated(String vin, int seconds, int numberOfTechRecords) {
+    public void waitForVehicleTechRecordsToBeUpdated(String vin, int iterations, int numberOfTechRecords) {
 
-        System.out.println("...waiting " + seconds + " seconds for the vehicle tech record to be updated...\n");
+        System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
 
-        for(int i=0; i < seconds; i++) {
+        for(int i=0; i < iterations; i++) {
             response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
 
             int status = response.getStatusCode();
@@ -402,7 +404,7 @@ public class VehicleTechnicalRecordsSteps {
                 }
             }
         }
-        System.out.println("\n...Vehicle status has not been updated in " + seconds +" seconds...");
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" seconds...");
     }
 
     @Step
@@ -612,5 +614,62 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void putTechnicalRecordsWithDVLAToken(String systemNumber, String postRequestBody) {
         this.response = vehicleTechnicalRecordsClient.putVehicleTechnicalRecordsWithDVLAToken(systemNumber, postRequestBody) ;
+    }
+
+    @Step
+    public void sleep() {
+        try {
+            Thread.sleep(6000);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @Step
+    public void waitForVehicleRecordUpdate(String vin, int iterations, LocalDateTime testStartDate) {
+        System.out.println("...waiting " + iterations + " seconds for the vehicle tech record to be updated...\n");
+
+        for(int i=0; i < iterations; i++) {
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(vin, "all");
+
+            int noVehicles = 0;
+            int status = response.getStatusCode();
+
+            try {
+                noVehicles = response.then().extract().jsonPath().getInt("$.size()");
+            }
+            catch(Exception e) {
+                System.out.println( e + " " + "NO TECH RECORD IS RETURNED");
+            }
+            for (int j = 0; j < noVehicles; j++) {
+
+                int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
+                for (int k = 0; k < recordsNumber; k++) {
+
+                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].lastUpdatedAt");
+                    if (createdAtString == null) {
+                        createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].createdAt");
+                    }
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    LocalDateTime createdAt = LocalDateTime.parse(createdAtString, formatter);
+                    System.out.println("CREATED AT" + " " + createdAt);
+                    System.out.println("TEST START" + " " + testStartDate);
+
+                    System.out.println(" for vehicle [" + j + "] status is: " + status + " and number of records: " + recordsNumber);
+
+                    if (status == 200 && createdAt.isAfter(testStartDate) ) {
+                        return;
+                    }
+                }
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("\n...waiting 1 more second (" + i + ")...\n");
+
+        }
+        System.out.println("\n...Vehicle status has not been updated in " + iterations +" iterations...");
     }
 }

@@ -26,7 +26,6 @@ public class PostTestResultsMoreVinNotifiableAlteration {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
-
     @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = FAIL - HGV")
     @Test
     public void testResultsNotifiableAlterationHgvFail() {

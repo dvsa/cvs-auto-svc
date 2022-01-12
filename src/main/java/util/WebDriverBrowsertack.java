@@ -140,7 +140,15 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']")),
                 ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("[placeholder='Search']"))
         ));
-        driver.findElement(By.cssSelector("[placeholder='Search']")).sendKeys(randomVrm);
+
+        driver.findElement(By.cssSelector("#searchBoxId-Mail input")).clear();
+        driver.findElement(By.cssSelector("#searchBoxId-Mail input")).sendKeys(randomVrm);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         driver.findElement(By.cssSelector("button[aria-label='Search']")).click();
         new WebDriverWait(driver, 1).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));

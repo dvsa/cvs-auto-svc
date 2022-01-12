@@ -5,8 +5,6 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
-import model.testresults.TestTypes;
-import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -14,12 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static util.DataUtil.generateRandomExcludingValues;
 
 
 @RunWith(SerenityRunner.class)

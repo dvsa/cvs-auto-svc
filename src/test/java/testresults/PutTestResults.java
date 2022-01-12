@@ -12,8 +12,6 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.HttpStatus;
-import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
@@ -809,7 +807,7 @@ public class PutTestResults extends TestCase{
         // PUT test-results together with any alterations, and verify that they are accepted
         testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
-        testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testExpiryDate", "2020-04-29");
+        testResultsSteps.valueForFieldInPathShouldBe("testTypes[0].testExpiryDate", "2022-04-29");
         testResultsSteps.valueForFieldInPathShouldBe("testVersion","current");
         testResultsSteps.valueForFieldInPathShouldBe("testHistory[0].testVersion","archived");
 
