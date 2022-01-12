@@ -136,14 +136,15 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
 
     }
 
-    @WithTag("annual_certificates")
+    //WE@WithTag("annual_certificates")
+    @WithTag("In_test")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
 
         Date date  = new Date();
 
-       String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
@@ -155,8 +156,6 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
         JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeStartTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationPutTestTypeEndTimestamp = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
-
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
