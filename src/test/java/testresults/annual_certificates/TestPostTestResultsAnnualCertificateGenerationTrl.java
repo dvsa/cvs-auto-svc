@@ -27,7 +27,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
                 {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
-                {"First test", "First test", "95", 4, "pass", "fft4"},
+                {"First test", "First test", "95", 4, "pass", "fft4"}
 //                {"First test", "First test", "95", 5, "pass", "fft5"},
 //                {"First test", "First test", "95", 6, "pass", "fft5"},
 //                {"First test", "First test", "95", 7, "pass", "fft5"},
