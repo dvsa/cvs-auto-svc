@@ -5,22 +5,16 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
-import model.testresults.TestTypes;
-import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static util.DataUtil.generateRandomExcludingValues;
 
 
 @RunWith(SerenityRunner.class)
@@ -745,7 +739,6 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[1].testCode", "lcp");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 2 - Data Set 2")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario2DataSet2() {
