@@ -10,7 +10,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
-import org.apache.commons.lang3.time.DateUtils;;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import util.BasePathFilter;
 import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
 
-import java.text.SimpleDateFormat;;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 

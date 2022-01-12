@@ -49,7 +49,7 @@ public class GenericData {
 
     public static ArrayList<String> readFile(String fileName) throws IOException {
         File file = new File(Paths.get("src/main/resources/loader/" + BaseData.getDataLocation() + "/" + fileName).toString());    //creates a new file instance
-        FileReader fr = new FileReader(file);;   //reads the file
+        FileReader fr = new FileReader(file);   //reads the file
 
         BufferedReader br = new BufferedReader(fr);  //creates a buffering character input stream
         String line;

@@ -646,7 +646,6 @@ public class VehicleTechnicalRecordsSteps {
 
                 int recordsNumber = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord.size()");
                 for (int k = 0; k < recordsNumber; k++) {
-//                    String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].createdAt");
 
                     String createdAtString = response.then().log().all().extract().jsonPath().get("[" + j + "].techRecord[" + k + "].lastUpdatedAt");
                     if (createdAtString == null) {
