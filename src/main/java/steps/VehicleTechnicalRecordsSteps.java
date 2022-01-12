@@ -18,7 +18,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
 import static util.TypeLoader.*;
 import util.JsonPathAlteration;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;

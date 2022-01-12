@@ -95,7 +95,6 @@ public class WebDriverBrowsertack {
                 ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='loginfmt']"))
         ));
         driver.findElement(By.cssSelector("input[name='loginfmt']")).sendKeys(loader.getMicrosoftOnlineUserName());
-
         driver.findElement(By.cssSelector("#idSIButton9")).click();
 
         System.out.println("Filling in password");
@@ -105,7 +104,6 @@ public class WebDriverBrowsertack {
                     ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("input[name='passwd']"))
             ));
             driver.findElement(By.cssSelector("input[name='passwd']")).sendKeys(loader.getMicrosoftOnlinePass());
-
             driver.findElement(By.cssSelector("#idSIButton9")).click();
         } catch (StaleElementReferenceException e) {
             wait.until(ExpectedConditions.and(
