@@ -140,7 +140,7 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.sleep();
+        //testResultsSteps.sleep();
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();

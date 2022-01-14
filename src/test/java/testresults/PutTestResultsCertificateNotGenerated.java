@@ -174,7 +174,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
         testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
-        testResultsSteps.sleep();
+        //testResultsSteps.sleep();
         testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         String testNumber = testResultsSteps.getTestNumber();
