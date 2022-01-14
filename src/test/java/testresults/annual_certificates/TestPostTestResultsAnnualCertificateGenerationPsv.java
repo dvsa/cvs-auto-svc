@@ -98,8 +98,7 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
         this.testCode = testCode;
     }
 
-    //@WithTag("annual_certificates")**HL**
-    @WithTag("In_test")
+    @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Psv tests ")
     @Test
     public void testResults_Annual_Certificate_Generation_Psv() {
@@ -139,8 +138,6 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-
-        //testResultsSteps.sleep();
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();

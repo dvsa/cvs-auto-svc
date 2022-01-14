@@ -264,8 +264,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         this.testCode = testCode;
     }
 
-    //@WithTag("annual_certificates") **HL**
-    @WithTag("In_test")
+    @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Trl tests")
     @Test
     public void testResults_Annual_Certificate_Generation_Trl() {
@@ -306,7 +305,6 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
             testResultsSteps.statusCodeShouldBe(201);
             testResultsSteps.validateData("Test records created");
 
-            //testResultsSteps.sleep();
             testResultsSteps.getTestResults(randomSystemNumber);
             testResultsSteps.statusCodeShouldBe(200);
             String testNumber = testResultsSteps.getTestNumber();

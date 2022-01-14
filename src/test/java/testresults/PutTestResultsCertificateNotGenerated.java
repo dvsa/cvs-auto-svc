@@ -136,8 +136,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
 
     }
 
-    //@WithTag("annual_certificates")**HL**
-    @WithTag("In_test")
+    @WithTag("annual_certificates")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
@@ -174,7 +173,6 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
         testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
-        //testResultsSteps.sleep();
         testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         String testNumber = testResultsSteps.getTestNumber();
