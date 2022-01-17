@@ -9,6 +9,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +37,7 @@ public class PostTestResults_LEC_731 {
         testResultsSteps.validateDataForExpiry(data);
     }
 
-    @BeforeClass
+    @Before
     @Title("warm up test")
     @Test
     public void testResultsWarmUpTest() {
