@@ -9,6 +9,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -21,6 +22,7 @@ import java.util.List;
 @RunWith(SerenityRunner.class)
 public class PostTestResults_LEC_731 {
 
+
     @Steps
     TestResultsSteps testResultsSteps;
 
@@ -32,6 +34,19 @@ public class PostTestResults_LEC_731 {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
         testResultsSteps.validateDataForExpiry(data);
+    }
+
+    @BeforeClass
+    @Title("warm up test")
+    @Test
+    public void testResultsWarmUpTest() {
+
+        // Read the base test result JSON.
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_731.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
     }
 
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")
