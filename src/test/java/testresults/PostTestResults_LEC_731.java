@@ -41,13 +41,7 @@ public class PostTestResults_LEC_731 {
     @Title("warm up test")
     @Test
     public void testResultsWarmUpTest() {
-
-        // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_731.json", "$");
-
-        // Create alteration to add one more tech record to in the request body
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        String randomVin = GenericData.generateRandomVin();
+        testResultsSteps.postTestResults(vehicleSubmittedData.build());
     }
 
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")
