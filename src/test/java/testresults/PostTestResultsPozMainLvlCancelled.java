@@ -17,7 +17,7 @@ import util.DataUtil;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTag("In_test")
+
 @RunWith(SerenityRunner.class)
 public class PostTestResultsPozMainLvlCancelled {
 
@@ -713,7 +713,7 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
-
+    @WithTag("In_test")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerId")
     @Test
     public void testResultsRandomStringPreparerId() {
