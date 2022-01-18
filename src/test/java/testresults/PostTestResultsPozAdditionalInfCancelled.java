@@ -7,7 +7,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,6 @@ import steps.TestResultsSteps;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-//@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsPozAdditionalInfCancelled {
 
