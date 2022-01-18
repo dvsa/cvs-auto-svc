@@ -18,8 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-//@WithTag("expiry_dates")
-@WithTag("In_test")
+@WithTag("expiry_dates")
 @RunWith(SerenityParameterizedRunner.class)
 @UseTestDataFrom(value="loader/testdata/test_data_expiry_date_annual_trl_5862.csv")
 public class PostTestResultsPreservationExpiryDateTrl_5862 {
