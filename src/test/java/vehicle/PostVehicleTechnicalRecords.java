@@ -1104,8 +1104,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-//    @WithTag("Vtm")
-    @WithTag("In_test")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC2 - statusCode updated in vehicle API + AC1 - testResults created in test results API - TRL - PASS - Notifiable Alteration")
     @Test
     public void test24_PostVehicleTechRecordTrlPassNotifiableAlteration() {
