@@ -23,7 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"warmup test", "warmup test", "1", "large", "rigid", "pass", "aal"}
+                {"warmup test", "warmup test", "1", "large", "rigid", "pass", "aal"},
                 {"Annual test", "Annual test", "1", "large", "rigid", "pass", "aal"},
                 {"Annual test", "Annual test", "1", "small", "rigid", "pass", "aas"},
                 {"Annual test", "Annual test", "1", "large", "articulated", "pass", "adl"},
