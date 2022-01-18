@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
@@ -395,6 +396,7 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-7677 - TC - AC1 - CERTIFICATE GENERATED ON CORRECT TEST CODES (HGV)(QPV) - PASS ")
     @Test
     public void testResults_Roadworthiness_HGV_QPV_Pass_Certificate_Generation() {
