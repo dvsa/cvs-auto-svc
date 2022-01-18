@@ -11,9 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.*;
 
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
@@ -299,7 +299,11 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         if ("warmup test".equals(name)) {
-            //ignoring results
+            try {
+                testResultsSteps.statusCodeShouldBe(201);
+            } catch (Exception e) {
+                testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+            }
         }
         else {
             testResultsSteps.statusCodeShouldBe(201);

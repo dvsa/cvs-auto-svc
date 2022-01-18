@@ -13,7 +13,7 @@ import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 
 import java.util.*;
-
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationPsv {
 
@@ -23,6 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
+                {"warmup test", "warmup test", "1", "large", "rigid", "pass", "aal"}
                 {"Annual test", "Annual test", "1", "large", "rigid", "pass", "aal"},
                 {"Annual test", "Annual test", "1", "small", "rigid", "pass", "aas"},
                 {"Annual test", "Annual test", "1", "large", "articulated", "pass", "adl"},
@@ -136,6 +137,13 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        if ("warmup test".equals(name)) {
+            try {
+                testResultsSteps.statusCodeShouldBe(201);
+            } catch (Exception e) {
+                testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+            }
+        }
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(randomSystemNumber);
