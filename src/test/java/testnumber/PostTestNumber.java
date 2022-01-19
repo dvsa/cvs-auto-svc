@@ -29,7 +29,7 @@ import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTag("In_test")
+
 @RunWith(SerenityRunner.class)
 public class PostTestNumber {
 
