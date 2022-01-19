@@ -120,7 +120,7 @@
       "plates": [
         {
           "plateSerialNumber": "123456",
-          "plateIssueDate": "2100-12-31",
+          "plateIssueDate": "2020-12-31",
           "plateReasonForIssue": "Replacement",
           "plateIssuer": "issuer"
         }
