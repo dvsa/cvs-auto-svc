@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
-
 import java.util.*;
+
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsFieldsNotApplicable {

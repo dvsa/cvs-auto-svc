@@ -14,7 +14,6 @@ import steps.TestResultsSteps;
 import steps.TestTypeSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
-
 import java.util.*;
 
 

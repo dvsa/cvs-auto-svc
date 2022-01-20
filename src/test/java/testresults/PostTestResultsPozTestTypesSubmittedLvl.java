@@ -2,7 +2,6 @@ package testresults;
 
 import data.TestResultsData;
 import data.GenericData;
-import net.thucydides.core.annotations.WithTag;
 import util.JsonPathAlteration;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
@@ -17,9 +16,7 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.DataUtil;
 import java.util.*;
-
 import java.util.Random;
-
 import static util.DataUtil.generateRandomExcludingValues;
 
 

@@ -16,12 +16,10 @@ import org.junit.runner.RunWith;
 import steps.*;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
