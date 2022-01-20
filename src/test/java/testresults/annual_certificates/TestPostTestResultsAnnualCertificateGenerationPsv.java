@@ -141,6 +141,7 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
             try {
                 testResultsSteps.statusCodeShouldBe(201);
             } catch (Exception e) {
+                System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
             }
         }
