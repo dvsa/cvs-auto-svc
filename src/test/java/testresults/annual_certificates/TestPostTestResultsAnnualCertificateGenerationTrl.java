@@ -1,6 +1,7 @@
 package testresults.annual_certificates;
 
 import data.GenericData;
+import exceptions.AutomationException;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -302,6 +303,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
             try {
                 testResultsSteps.statusCodeShouldBe(201);
             } catch (Exception e) {
+                System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
             }
         }
