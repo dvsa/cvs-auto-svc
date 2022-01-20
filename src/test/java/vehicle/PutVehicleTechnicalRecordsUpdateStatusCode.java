@@ -14,9 +14,9 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecordsUpdateStatusCode {

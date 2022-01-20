@@ -8,12 +8,12 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 
 import static util.DataUtil.generateRandomExcludingValues;
-
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsPozAdditionalInfCancelled {
@@ -28,6 +28,13 @@ public class PostTestResultsPozAdditionalInfCancelled {
         testResultsSteps.getTestResults(vehicleCancelledDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData((TestResultsGet) vehicleCancelledDataOld.build());
+    }
+
+    @Before
+    @Title("warm up test")
+    @Test
+    public void testResultsWarmUpTest() {
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
     }
     
 

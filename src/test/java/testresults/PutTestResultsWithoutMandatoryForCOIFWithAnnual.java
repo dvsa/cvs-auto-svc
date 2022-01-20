@@ -17,13 +17,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
-import steps.VehicleTechnicalRecordsSteps;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 

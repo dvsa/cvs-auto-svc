@@ -19,14 +19,13 @@ import steps.*;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 import org.apache.http.HttpStatus;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
-
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 import org.junit.Assert;
+
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsCertificateGeneration extends TestCase {

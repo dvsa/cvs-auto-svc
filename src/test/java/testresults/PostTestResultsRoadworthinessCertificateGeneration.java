@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsRoadworthinessCertificateGeneration {

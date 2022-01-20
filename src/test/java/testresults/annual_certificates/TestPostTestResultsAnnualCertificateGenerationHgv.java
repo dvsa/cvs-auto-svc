@@ -11,8 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.*;
+
 
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationHgv {
@@ -23,6 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
+                {"warmup test", "warmup test", "95", 1, "pass", "ffv2"},
                 {"First test", "First test", "95", 2, "pass", "ffv2"},
                 {"First test", "First test", "95", 3, "pass", "ffv3"},
                 {"First test", "First test", "95", 4, "pass", "ffv4"},
@@ -277,6 +278,14 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        if ("warmup test".equals(name)) {
+            try {
+                testResultsSteps.statusCodeShouldBe(201);
+            } catch (Exception e) {
+                System.out.println("Retry" + " " + e);
+                testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+            }
+        }
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         testResultsSteps.getTestResults(randomSystemNumber);

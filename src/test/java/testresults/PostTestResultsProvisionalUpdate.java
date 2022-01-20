@@ -5,7 +5,6 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -13,12 +12,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsProvisionalUpdate {
@@ -34,6 +33,7 @@ public class PostTestResultsProvisionalUpdate {
     public void beforeTest() {
         this.testStartDate = LocalDateTime.now();
     }
+
 
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
@@ -625,21 +625,6 @@ public class PostTestResultsProvisionalUpdate {
     @Ignore("Test dropped out until duplicate-vin issue is dealt with")
     @Title("CVSB-12449 - 'EU vehicle category' updated based on systemNumber")
     public void testVehicleTechRecordeuVehicleCategoryUpdatedBasedOnSystemNumber(){
-
-        // Given 2 technical records, such that:
-        // - both have different system numbers
-        // - both have the same VIN
-        // - both have a null euVehicleCategory
-        // When the test result is submitted for one of the tech records
-        // - with the test result containing an euVehicleCategory
-        // Then the tech records are updated so that
-        // - the tech record with the matching systemNumber is updated to use the new euVehicleCategory
-        // - the tech record which doesn't match systemNumber remains with a null euVehicleCategory
-
-        // Tech records 1 and 2 pre-exist in the db:
-        // - Car 1: systemNumber XYZEP5JYOMM00020
-        // - Car 2: systemNumber XYZEP5JYOMM00021
-        // - Car1 and Car2 both have VIN of DP76UMK4DQLTOT400020
 
         String systemNumber_1 = "XYZEP5JYOMM00020";
         String systemNumber_2 = "XYZEP5JYOMM00021";

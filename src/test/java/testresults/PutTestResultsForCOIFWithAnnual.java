@@ -15,14 +15,12 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import steps.VehicleTechnicalRecordsSteps;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 import steps.TestResultsSteps;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 

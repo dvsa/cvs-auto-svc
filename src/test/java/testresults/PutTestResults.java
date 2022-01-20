@@ -17,8 +17,6 @@ import org.junit.runner.RunWith;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 import steps.TestResultsSteps;
-
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 

@@ -9,7 +9,7 @@
   "testerStaffId": "15",
   "testerEmailAddress": "gica.petrescuf@dvsagov.uk",
   "testStartTimestamp": "2021-01-14T10:36:33.987Z",
-  "testEndTimestamp": "2021-01-14T10:36:33.987Z",
+  "testEndTimestamp": "2021-01-14T10:40:33.987Z",
   "testStatus": "submitted",
   "reasonForCancellation": null,
   "vehicleClass": {
@@ -36,7 +36,7 @@
       "testTypeId": "39",
       "certificateNumber": "12334",
       "testTypeStartTimestamp": "2021-01-14T10:36:33.987Z",
-      "testTypeEndTimestamp": "2021-01-14T10:36:33.987Z",
+      "testTypeEndTimestamp": "2021-01-14T10:40:33.987Z",
       "testExpiryDate": "2022-09-19",
       "modType": {
         "code": "p",

@@ -10,11 +10,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsMoreVinFirstTest {

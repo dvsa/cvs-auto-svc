@@ -19,11 +19,11 @@ import util.BasePathFilter;
 import util.JsonPathAlteration;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 import static util.WriterReader.saveUtils;
 import org.junit.Assert;
+
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsDefectsFieldRestrictions extends TestCase {
