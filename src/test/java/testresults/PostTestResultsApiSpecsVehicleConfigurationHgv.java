@@ -51,7 +51,6 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private String vehicleConfiguration;
 
-//    @WithTag("In_test")
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (HGV) - cancelled")
     @Test
     public void testTestResultsPostVehicleConfigurationCancelledHgv() {

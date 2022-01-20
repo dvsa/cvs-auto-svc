@@ -14,11 +14,10 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WithTag("In_test")
+
 @RunWith(SerenityRunner.class)
 public class PutVehicleTechnicalRecordsUpdateStatusCode {
 
