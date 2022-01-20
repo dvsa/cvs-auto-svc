@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +51,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private String vehicleConfiguration;
 
+    @WithTag("In_test")
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (HGV) - cancelled")
     @Test
     public void testTestResultsPostVehicleConfigurationCancelledHgv() {
