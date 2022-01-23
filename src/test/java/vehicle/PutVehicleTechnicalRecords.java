@@ -179,52 +179,6 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[2].adrDetails", adrDetailsTank);
     }
 
-    @Ignore("No longer a valid test")
-    @Title("CVSB-9317 - AC1 - Document is attached to the ADR record" +
-            "AC2 - Document is removed from the ADR record")
-    public void testAddAdrDetailsUploadDocumentAdrRecord() {
-        //TEST SETUP
-        // generate random Vin
-        String randomVin = GenericData.generateRandomVin();
-        //generate random Vrm
-        String randomVrm = GenericData.generateRandomVrm();
-        // read post request body from file
-        String requestBodyHgv = GenericData.readJsonValueFromFile("technical-records_hgv_all_fields.json","$");
-        // read the adr details from the file used for put request body with battery adr details
-        String adrDetailsBattery = GenericData.readJsonValueFromFile("technical-records_adr_details_battery.json","$.techRecord[0].adrDetails");
-        // create alteration to change Vin in the post request body with the random generated Vin
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-        // create alteration to change primary vrm in the request body with the random generated primary vrm
-        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm));
-        // get pdf content as base64 encoded string
-        String encodedFileContent = GenericData.readBytesFromFile("sample.pdf");
-        // create alteration to add files field in the request body as array with an element the previously encoded string
-        JsonPathAlteration alterationAddFiles = new JsonPathAlteration("$","[" + encodedFileContent + "]","files","ADD_FIELD");
-        JsonPathAlteration alterationRemoveFiles = new JsonPathAlteration("$.techRecord[0].adrDetails.documents","[]","","REPLACE");
-
-        //TEST
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        // create alteration to add adr details
-        JsonPathAlteration alterationAdrDetails = new JsonPathAlteration("$.techRecord[0]", adrDetailsBattery,"adrDetails","ADD_FIELD");
-        alterations.add(alterationAdrDetails);
-        alterations.add(alterationAddFiles);
-        // validate AC1
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[1].adrDetails.documents.size()", 2);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldEndWith("techRecord[1].adrDetails.documents[1]", ".pdf");
-        // validate AC2
-        alterations.remove(alterations.size()-1);
-        alterations.add(alterationRemoveFiles);
-        vehicleTechnicalRecordsSteps.putVehicleTechnicalRecordsForVehicleWithAlterations(randomVin, requestBodyHgv, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 3);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[2].adrDetails.documents.size()", 0);
-    }
-
     @WithTag("Vtm")
     @Title("CVSB-10214 - AC2 - Vehicle class code is auto-populated when updating a hgv " +
             "AC3 - Body type code is auto-populated when updating a hgv")
