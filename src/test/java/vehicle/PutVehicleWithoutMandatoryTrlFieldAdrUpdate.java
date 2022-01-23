@@ -26,7 +26,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@Ignore
+@Ignore("vtm test ignored with no description")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutVehicleWithoutMandatoryTrlFieldAdrUpdate extends TestCase {
 
