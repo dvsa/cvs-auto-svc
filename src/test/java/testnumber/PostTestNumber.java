@@ -394,35 +394,6 @@ public class PostTestNumber {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].certificateNumber", testResultsSteps.getTestNumber());
     }
 
-    @Ignore("Deprecated by CVSB-731")
-    @Title("CVSB-2157/CVSB-3279 AC B3. VSA submits test results which contain an LEC Test Type (testNumber and certificate number are not the same)")
-    public void validTestNumberGeneratedForLecTestTypeIsNotEqualToCertificateNumber() {
-
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
-
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationSystemNumber,
-                alterationTestResultId));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-
-        testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateTestNumberNotEqualCertificateNumber();
-    }
-
     @Title("CVSB-2157/CVSB-3287 AC B1. VSA submits test results where at least one test type has test type classification 'Annual With Certificate' and the test type result is PASSED (testNumber is generated)")
     @Test
     public void validTestNumberGenerationForAtLeastTwoTestTypes(){
