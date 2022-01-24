@@ -771,7 +771,7 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("odometerReading", "must be a number");
     }
 
-
+    @WithTag("In_test")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - odometerReading")
     @Test
     public void testResultsStringOdometerReading() {

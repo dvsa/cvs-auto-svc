@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -328,6 +329,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - Motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleEuVehicleCategoryNull(){

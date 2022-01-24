@@ -15,7 +15,6 @@ public class GetDefectsNoData {
     @Steps
     DefectsSteps defectsSteps;
 
-    @Ignore ("no data test")
     @Title("CVSB-279 / CVSB-741 - AC2 - The defects reference data are not retrieved")
     public void defectsNoData() {
         defectsSteps.getDefectsWithNoData();

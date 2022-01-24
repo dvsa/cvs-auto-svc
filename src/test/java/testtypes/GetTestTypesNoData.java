@@ -15,7 +15,6 @@ public class GetTestTypesNoData {
     @Steps
     TestTypeSteps testTypeSteps;
 
-    @Ignore ("no data test")
     @Title("CVSB-996 / CVSB-1869 - CVSB-579 / CVSB-747 - AC2 - No data returned")
     public void testTypeNoData() {
         testTypeSteps.getTestTypesWithNoData();
