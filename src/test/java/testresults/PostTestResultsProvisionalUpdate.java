@@ -329,7 +329,6 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - Motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleEuVehicleCategoryNull(){
