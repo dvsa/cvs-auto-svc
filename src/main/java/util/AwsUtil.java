@@ -81,6 +81,53 @@ public class AwsUtil {
         return false;
     }
 
+    public static boolean certificateIsNotCreated(String testNumber, String vin){
+
+        Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+        String uuid = String.valueOf(UUID.randomUUID());
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
+        String bucketName = loader.getS3Bucket();
+
+        String fileName = testNumber + "_" + vin + ".pdf";
+        String key =  loader.getBranchName()+ "/" + fileName;
+
+        AmazonS3 s3Client = new AmazonS3Client(temporaryCredentials);
+
+        System.out.println("Waiting on file " + key + " to be created... on bucket: " + bucketName);
+
+        System.out.println("time started checking " + DateTime.now().withZone(DateTimeZone.UTC));
+
+        for(int i = 0; i < 240 ; i++) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (s3Client.doesObjectExist(bucketName, key)) {
+                System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
+                System.out.println("file found in the s3 bucket... after "+i+" iterations");
+                return false;
+            }
+        }
+        System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
+        System.out.println("file " + key + " was not created in 60 iterations or less...");
+        return true;
+    }
+
     public static boolean checkLogsFor(String log, String keyValuePair) {
 
         Regions clientRegion = Regions.EU_WEST_1;
