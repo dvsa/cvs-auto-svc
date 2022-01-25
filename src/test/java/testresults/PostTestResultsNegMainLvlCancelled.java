@@ -7,7 +7,6 @@ import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -761,7 +760,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("odometerReading", "is required");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - odometerReading")
     @Test
     public void testResultsStringOdometerReading() {
