@@ -845,19 +845,6 @@ public class TestResultsClient {
         return response;
     }
 
-    //option 1
-    public void applyJsonAlterations(String body, List<JsonPathAlteration> alterations, String fileName) {
-        String alteredBody = GenericData.applyJsonAlterations(body, alterations);
-        try {
-            FileWriter file = new FileWriter("src/main/resources/loader/develop" + "altered_"+fileName);
-            file.write(alteredBody);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    //option 2
     public String applyJsonAlterations(String body, List<JsonPathAlteration> alterations) {
         return GenericData.applyJsonAlterations(body, alterations);
     }
