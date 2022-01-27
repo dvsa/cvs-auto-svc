@@ -734,6 +734,11 @@ public class TestResultsSteps {
     }
 
     @Step
+    public String applyJsonAlterations(String requestBody, List<JsonPathAlteration> alterations) {
+        return testResultsClient.applyJsonAlterations(requestBody,alterations);
+    }
+
+    @Step
     public String putTestResultsWithAlterations(String systemNumber, String putRequestBody, List<JsonPathAlteration> alterations) {
         response = testResultsClient.putTestResultsWithAlterations(systemNumber, putRequestBody, alterations);
         return response.prettyPrint();

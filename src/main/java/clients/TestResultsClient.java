@@ -19,11 +19,9 @@ import model.testresults.TestResultsGet;
 import model.testresults.TestTypesGet;
 import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.junit.Assert;
-import util.BasePathFilter;
-import util.EnvironmentType;
-import util.JsonPathAlteration;
-import util.TypeLoader;
+import util.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -845,6 +843,23 @@ public class TestResultsClient {
                 .log().method().log().uri().log().body()
                 .post("/test-results");
         return response;
+    }
+
+    //option 1
+    public void applyJsonAlterations(String body, List<JsonPathAlteration> alterations, String fileName) {
+        String alteredBody = GenericData.applyJsonAlterations(body, alterations);
+        try {
+            FileWriter file = new FileWriter("src/main/resources/loader/develop" + "altered_"+fileName);
+            file.write(alteredBody);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //option 2
+    public String applyJsonAlterations(String body, List<JsonPathAlteration> alterations) {
+        return GenericData.applyJsonAlterations(body, alterations);
     }
 
 }
