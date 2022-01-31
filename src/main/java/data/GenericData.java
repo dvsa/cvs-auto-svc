@@ -10,15 +10,11 @@ import data.config.DataMapper;
 import exceptions.AutomationException;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
-import net.thucydides.core.annotations.Steps;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.springframework.lang.NonNull;
-import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 
 import java.io.BufferedReader;

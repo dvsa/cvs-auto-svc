@@ -242,8 +242,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         this.testCode = testCode;
     }
 
-//    @WithTag("annual_certificates")
-    @WithTag("In_test")
+    @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Hgv tests ")
     @Test
     public void testResults_Annual_Certificate_Generation_Hgv() {
@@ -296,7 +295,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
 
         //Verify that the certificate is generated in S3 bucket
-        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+//        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
 
     }
 }
