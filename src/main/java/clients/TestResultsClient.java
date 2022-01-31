@@ -844,9 +844,4 @@ public class TestResultsClient {
                 .post("/test-results");
         return response;
     }
-
-    public String applyJsonAlterations(String body, List<JsonPathAlteration> alterations) {
-        return GenericData.applyJsonAlterations(body, alterations);
-    }
-
 }

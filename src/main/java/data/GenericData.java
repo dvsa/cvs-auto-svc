@@ -460,39 +460,4 @@ public class GenericData {
         }
         return actualRestrictions;
     }
-
-    public static String updateJson(TestResultsSteps testResultsSteps, String jsonFileName, String $) {
-        // read post request body from file
-        String body = GenericData.readJsonValueFromFile(jsonFileName,"$");
-
-        //generate datetime
-        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-        DateTime testStartTimestamp = currentTimestamp.minusDays(1).minusHours(2);
-        DateTime endTimestamp = currentTimestamp.minusDays(1).minusHours(1);
-
-
-        String startTime = testStartTimestamp.toInstant().toString();
-        String endTime = endTimestamp.toInstant().toString();
-
-        // create alterations
-        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.testStartTimestamp",startTime ,"","REPLACE");
-        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.testEndTimestamp", endTime,"","REPLACE");
-        JsonPathAlteration alterationTestStartTime = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", startTime,"","REPLACE");
-        JsonPathAlteration alterationTestEndTime = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", endTime,"","REPLACE");
-        JsonPathAlteration alterationTestStartTime2 = new JsonPathAlteration("$.testTypes[1].testTypeStartTimestamp", endTime,"","REPLACE");
-        JsonPathAlteration alterationTestEndTime2 = new JsonPathAlteration("$.testTypes[1].testTypeEndTimestamp", endTime,"","REPLACE");
-
-
-        // initialize the alterations list with both declared alteration
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationStartTime,
-                alterationEndTime,
-                alterationTestStartTime,
-                alterationTestEndTime,
-                alterationTestStartTime2,
-                alterationTestEndTime2));
-
-        return testResultsSteps.applyJsonAlterations(body, alterations);
-
-    }
 }
