@@ -295,7 +295,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         Assert.assertTrue(testResultsSteps.validateCertificateNumberLength());
 
         //Verify that the certificate is generated in S3 bucket
-//        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
 
     }
 }
