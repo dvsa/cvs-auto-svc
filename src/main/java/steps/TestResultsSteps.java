@@ -774,12 +774,12 @@ public class TestResultsSteps {
 
     @Step
     public void validateCertificateIsGenerated(String testNumber, String vin) {
-        assertThat(AwsUtil.isCertificateCreated(testNumber, vin)).isTrue();
+        assertThat(AwsUtil.isCertificateCreated(testNumber, vin, 60)).isTrue();
     }
 
     @Step
     public void validateCertificateIsNotGenerated(String testNumber, String vin) {
-        assertThat(AwsUtil.certificateIsNotCreated(testNumber,vin));
+        assertThat(AwsUtil.isCertificateCreated(testNumber,vin, 24)).isFalse();
     }
 
     @Step

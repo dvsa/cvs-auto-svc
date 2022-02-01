@@ -25,7 +25,6 @@ import com.amazonaws.services.securitytoken.model.AssumeRoleResult;
 import com.jayway.jsonpath.JsonPath;
 import data.GenericData;
 import exceptions.AutomationException;
-import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
@@ -35,9 +34,24 @@ public class AwsUtil {
 
     private static Loader loader = new LocalLoaderImpl();
 
-    public static boolean isCertificateCreated(String testNumber, String vin){
+    public static boolean isCertificateCreated(String testNumber, String vin, int iterations){
 
-        BasicSessionCredentials temporaryCredentials = getBasicSessionCredentials();
+        Regions clientRegion = Regions.EU_WEST_1;
+        AWSSecurityTokenService stsClient =
+                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
+        String uuid = String.valueOf(UUID.randomUUID());
+        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
+                .withRoleArn(System.getProperty("AWS_ROLE"))
+                .withDurationSeconds(3600)
+                .withRoleSessionName(uuid);
+        AssumeRoleResult assumeResult =
+                stsClient.assumeRole(assumeRequest);
+
+        BasicSessionCredentials temporaryCredentials =
+                new BasicSessionCredentials(
+                        assumeResult.getCredentials().getAccessKeyId(),
+                        assumeResult.getCredentials().getSecretAccessKey(),
+                        assumeResult.getCredentials().getSessionToken());
         String bucketName = loader.getS3Bucket();
 
         String fileName = testNumber + "_" + vin + ".pdf";
@@ -49,7 +63,7 @@ public class AwsUtil {
 
         System.out.println("time started checking " + DateTime.now().withZone(DateTimeZone.UTC));
 
-        for(int i = 0; i < 60 ; i++) {
+        for(int i = 0; i < iterations ; i++) {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -65,56 +79,6 @@ public class AwsUtil {
         System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
         System.out.println("file " + key + " was not created in 60 iterations or less...");
         return false;
-    }
-
-    @NotNull
-    private static BasicSessionCredentials getBasicSessionCredentials() {
-        Regions clientRegion = Regions.EU_WEST_1;
-        AWSSecurityTokenService stsClient =
-                AWSSecurityTokenServiceClientBuilder.standard().withRegion(clientRegion).build();
-        String uuid = String.valueOf(UUID.randomUUID());
-        AssumeRoleRequest assumeRequest = new AssumeRoleRequest()
-                .withRoleArn(System.getProperty("AWS_ROLE"))
-                .withDurationSeconds(3600)
-                .withRoleSessionName(uuid);
-        AssumeRoleResult assumeResult =
-                stsClient.assumeRole(assumeRequest);
-
-        return new BasicSessionCredentials(
-                assumeResult.getCredentials().getAccessKeyId(),
-                assumeResult.getCredentials().getSecretAccessKey(),
-                assumeResult.getCredentials().getSessionToken());
-    }
-
-    public static boolean certificateIsNotCreated(String testNumber, String vin){
-
-        BasicSessionCredentials temporaryCredentials = getBasicSessionCredentials();
-        String bucketName = loader.getS3Bucket();
-        String fileName = testNumber + "_" + vin + ".pdf";
-        String key =  loader.getBranchName()+ "/" + fileName;
-
-        AmazonS3 s3Client = new AmazonS3Client(temporaryCredentials);
-
-        System.out.println("Checking whether file " + key + " was created... on bucket: " + bucketName);
-
-        System.out.println("time started checking " + DateTime.now().withZone(DateTimeZone.UTC));
-
-        for(int i = 0; i < 24 ; i++) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (s3Client.doesObjectExist(bucketName, key)) {
-                System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
-                System.out.println("file found in the s3 bucket...");
-                return false;
-            }
-        }
-        System.out.println("time stopped checking " + DateTime.now().withZone(DateTimeZone.UTC));
-        System.out.println("file/certificate " + key + " was not created...");
-        return true;
     }
 
     public static boolean checkLogsFor(String log, String keyValuePair) {
