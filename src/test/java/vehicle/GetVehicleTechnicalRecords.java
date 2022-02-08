@@ -116,14 +116,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("No resources match the search criteria.");
     }
 
-    @Ignore("No longer a valid test case")
-    @WithTag("Vtm")
-    @Title("CVSB-1057 / CVSB-1161 - AC5 - Multiple results returned")
-    public void testVehicleTechnicalRecordsSearchMultipleResults() {
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("678413");
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(422);
-        vehicleTechnicalRecordsSteps.validateData("The provided partial VIN returned more than one match.");
-    }
 
     @WithTag("Vtm")
     @Title("CVSB-1057 / CVSB-1162 - API Consumer when the input searchIdentifier has less than 3 characters")

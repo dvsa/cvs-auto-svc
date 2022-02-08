@@ -13,7 +13,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.BasePathFilter;
@@ -27,7 +26,6 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@Ignore
 @RunWith(SerenityParameterizedRunner.class)
 public class PutVehicleHgvFieldRestrictionsAdrUpdate {
 
@@ -264,9 +262,9 @@ public class PutVehicleHgvFieldRestrictionsAdrUpdate {
         this.jsonPath = jsonPath;
         this.value = value;
     }
-    
 
-    @Ignore
+
+    @Ignore("outdated vtm test")
     @WithTag("Vtm")
     @Title("CVSB-14145 - AC1 - Only the validations on the adrDetails{} level are adhered to")
     public void testValidateHgvAttributesDataTypesAndRestrictionsAdrUpdate() {

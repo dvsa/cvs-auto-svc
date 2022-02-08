@@ -34,7 +34,7 @@ public class AwsUtil {
 
     private static Loader loader = new LocalLoaderImpl();
 
-    public static boolean isCertificateCreated(String testNumber, String vin){
+    public static boolean isCertificateCreated(String testNumber, String vin, int iterations){
 
         Regions clientRegion = Regions.EU_WEST_1;
         AWSSecurityTokenService stsClient =
@@ -63,7 +63,7 @@ public class AwsUtil {
 
         System.out.println("time started checking " + DateTime.now().withZone(DateTimeZone.UTC));
 
-        for(int i = 0; i < 60 ; i++) {
+        for(int i = 0; i < iterations ; i++) {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {

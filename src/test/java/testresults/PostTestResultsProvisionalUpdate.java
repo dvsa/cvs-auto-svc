@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Ignore;

@@ -24,7 +24,6 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@Ignore
 @RunWith(SerenityParameterizedRunner.class)
 public class PutVehicleWithoutMandatoryHgvFieldAdrUpdate extends TestCase {
 
@@ -121,7 +120,7 @@ public class PutVehicleWithoutMandatoryHgvFieldAdrUpdate extends TestCase {
     }
 
 
-    @Ignore
+    @Ignore("outdated vtm test")
     @WithTag("Vtm")
     @Title("CVSB-14145 - AC1 - Only the validations on the adrDetails{} level are adhered to")
     public void testValidatePutRequestWithoutMandatoryHgvAttributeAdrUpdate() {

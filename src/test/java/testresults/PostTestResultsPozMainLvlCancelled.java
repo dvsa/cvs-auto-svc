@@ -668,7 +668,6 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - odometerReadingUnits")
     @Test
     public void testResultsNullOdometerReadingUnits() {

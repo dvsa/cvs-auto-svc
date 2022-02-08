@@ -19,11 +19,9 @@ import model.testresults.TestResultsGet;
 import model.testresults.TestTypesGet;
 import org.apache.commons.exec.environment.EnvironmentUtils;
 import org.junit.Assert;
-import util.BasePathFilter;
-import util.EnvironmentType;
-import util.JsonPathAlteration;
-import util.TypeLoader;
+import util.*;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -846,5 +844,4 @@ public class TestResultsClient {
                 .post("/test-results");
         return response;
     }
-
 }
