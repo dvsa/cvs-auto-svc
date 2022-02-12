@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -25,6 +26,17 @@ public class PostTrailerRegistration {
 
     @Steps
     TestResultsSteps testResultsSteps;
+
+    private String technical_records_trl_all_fields_json;
+
+    @Before
+    @Test
+    public void updateJsonDates(){
+        String jsonFileName = "technical-records_trl_all_fields.json";
+
+        technical_records_trl_all_fields_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+
+    }
 
     @Title("CVSB-18919 - AC1 - Saving 17 digit vin")
     @Test
@@ -275,13 +287,13 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.putTrailerRegistrationWithAlterations(randomTrn,trailerDeRegistrationRecord,DeRegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(400);
     }
-
-    @Title("CVSB-18921 - AC1 -  VTG5A TRN PRESENT - TRL Annual Test Pass - With TRN")
+//this one
+    @Title("CVSB-18921 - AC1 - VTG5A TRN PRESENT - TRL Annual Test Pass - With TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithTrn() {
 
         // Read the base test result JSON
-        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+        String postTechnicalRecord = technical_records_trl_all_fields_json;
 
         String randomVin = GenericData.generateRandomVinForTrailerRegistration();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
@@ -383,7 +395,7 @@ public class PostTrailerRegistration {
 
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
-
+//this one
     @Title("CVSB-18921 - AC3 - VTG30 TRN PRESENT - TRL Annual Test Fail - With TRN")
     @Test
     public void testPostTestResultFailTrailerRegistrationCertificateWithTrn() {
@@ -496,8 +508,8 @@ public class PostTrailerRegistration {
 
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
-
-    @Title("CVSB-18921 - AC4 -  VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
+//this one
+    @Title("CVSB-18921 - AC4 - VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
     @Test
     public void testPostTestResultFailTrailerRegistrationCertificateWithoutTrnHgv() {
 
@@ -544,7 +556,7 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-
+//this one
     @Title("CVSB-18921 - VTG5 NO TRN PRESENT - HGV Annual Test Pass - Without TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrnHgv() {
