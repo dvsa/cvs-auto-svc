@@ -8,6 +8,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import util.JsonPathAlteration;
@@ -25,12 +26,31 @@ public class GetTestResultsApiSpecs {
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
+    private String test_results_CVSB_10220_json;
+    private String test_results_CVSB_10220_Amended_json;
+    private String test_results_CVSB_10220_Scenario_json;
+    private String test_results_CVSB_10220_Scenario3_json;
+
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_CVSB-10220.json";
+        String jsonFileName2 = "test-results_CVSB-10220-Amended.json";
+        String jsonFileName3 = "test-results_CVSB-10220-Scenario.json";
+        String jsonFileName4 = "test-results_CVSB-10220-Scenario3.json";
+
+        test_results_CVSB_10220_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        test_results_CVSB_10220_Amended_json = GenericData.updateJson(testResultsSteps,jsonFileName2,"$");
+        test_results_CVSB_10220_Scenario_json = GenericData.updateJson(testResultsSteps,jsonFileName3,"$");
+        test_results_CVSB_10220_Scenario3_json = GenericData.updateJson(testResultsSteps,jsonFileName4,"$");
+    }
+
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")
     @Test
     public void testPostTestResultsUsingSystemNumberAndGetResultsScenarios156() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_CVSB-10220.json","$");
+        String testResultRecord = test_results_CVSB_10220_json;
         String testStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC).minusMinutes(1000).toString();
 
         // AC4 API Consumer creates a new test results for the submitted test
@@ -91,7 +111,7 @@ public class GetTestResultsApiSpecs {
 
         // Read the base test result JSON.
         //Amended JSON Config file contains 2 custom defect, vehicle subClass added, no of wheel driven removed and vehicleType and EUVehicleCategory values changed
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_CVSB-10220-Amended.json","$");
+        String testResultRecord = test_results_CVSB_10220_Amended_json;
         String testStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC).minusMinutes(1000).toString();
 
         // Create alteration to add one more tech record to in the request body
@@ -144,7 +164,7 @@ public class GetTestResultsApiSpecs {
 
         // Read the base test result JSON.
         //Amended JSON Config file contains 2 custom defect, vehicle subClass added, no of wheel driven removed and vehicleType and EUVehicleCategory values changed
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_CVSB-10220-Scenario.json","$");
+        String testResultRecord = test_results_CVSB_10220_Scenario_json;
         String testStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC).minusMinutes(1000).toString();
 
         // Create alteration to add one more tech record to in the request body
@@ -197,7 +217,7 @@ public class GetTestResultsApiSpecs {
 
         // Read the base test result JSON.
         //Amended JSON Config file contains 2 custom defect, vehicle subClass added, no of wheel driven removed and vehicleType and EUVehicleCategory values changed
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_CVSB-10220-Scenario3.json","$");
+        String testResultRecord = test_results_CVSB_10220_Scenario3_json;
         String testStartTimestamp = DateTime.now().withZone(DateTimeZone.UTC).minusMinutes(1000).toString();
 
         // Create alteration to add one more tech record to in the request body
