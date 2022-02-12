@@ -27,15 +27,17 @@ public class PostTrailerRegistration {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private String technical_records_trl_all_fields_json;
+    private String test_results_post_expiry_date_trl_8798_json;
+    private String test_results_post_expiry_date_hgv_8798_json;
 
     @Before
     @Test
     public void updateJsonDates(){
-        String jsonFileName = "technical-records_trl_all_fields.json";
+        String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
+        String jsonFileName2 = "test-results_post_expiry_date_hgv_8798.json";
 
-        technical_records_trl_all_fields_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
-
+        test_results_post_expiry_date_trl_8798_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson(testResultsSteps,jsonFileName2,"$");
     }
 
     @Title("CVSB-18919 - AC1 - Saving 17 digit vin")
@@ -293,7 +295,7 @@ public class PostTrailerRegistration {
     public void testPostTestResultPassTrailerRegistrationCertificateWithTrn() {
 
         // Read the base test result JSON
-        String postTechnicalRecord = technical_records_trl_all_fields_json;
+        String postTechnicalRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
 
         String randomVin = GenericData.generateRandomVinForTrailerRegistration();
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
@@ -325,7 +327,7 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.postTrailerRegistrationWithAlterations(postTrailerRecord, RegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(200);
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_trl_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -434,7 +436,7 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.postTrailerRegistrationWithAlterations(postTrailerRecord, RegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(200);
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_trl_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -529,7 +531,7 @@ public class PostTrailerRegistration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_hgv_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -577,7 +579,7 @@ public class PostTrailerRegistration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_hgv_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 

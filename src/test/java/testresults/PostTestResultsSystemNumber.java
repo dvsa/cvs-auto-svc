@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -29,6 +30,14 @@ public class PostTestResultsSystemNumber {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    private String test_results_post_expiry_date_trl_8798_json;
+
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
+        test_results_post_expiry_date_trl_8798_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+    }
 
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")
     @Test
@@ -321,7 +330,7 @@ public class PostTestResultsSystemNumber {
     public void testCertGenerationForVinWithSpaces() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json", "$");
+        String testResultRecord = test_results_post_expiry_date_trl_8798_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomVinWithSpecialCharacters = "B " + randomVin.substring(5);
