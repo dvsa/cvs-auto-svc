@@ -8,6 +8,7 @@ import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -30,6 +31,20 @@ public class PostTestResultsPsvHgvTrlSubmitted {
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
+
+    private String technical_records_tir_trl_json;
+    private String technical_records_tir_hgv_json;
+    private String technical_records_tir_57_trl_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "technical-records_tir_trl.json";
+        String jsonFileName2 = "technical-records_tir_hgv.json";
+        String jsonFileName3 = "technical-records_tir_57_trl.json";
+        technical_records_tir_trl_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        technical_records_tir_hgv_json = GenericData.updateJson(testResultsSteps,jsonFileName2,"$");
+        technical_records_tir_57_trl_json = GenericData.updateJson(testResultsSteps,jsonFileName3,"$");
+    }
 
     @Title("CVSB-6805 CVSB-7259 - API Consumer creates a new test results for the submitted test (TRL)")
     @Test
@@ -1791,7 +1806,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     public void testTirCertificateMissingTrl() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_trl.json","$");
+        String testResultRecord = technical_records_tir_trl_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1824,7 +1839,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     public void testTirCertificateMissingHgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_hgv.json","$");
+        String testResultRecord = technical_records_tir_hgv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1857,7 +1872,7 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     public void testTirCertificateFreeTirTrl() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_57_trl.json","$");
+        String testResultRecord = technical_records_tir_57_trl_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -24,6 +25,17 @@ public class PostTestResultsMoreVinNotifiableAlteration {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    private String test_results_notifiable_alteration_hgv_json;
+    private String test_results_notifiable_alteration_trl_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_notifiable_alteration_hgv.json";
+        String jsonFileName2 = "test-results_notifiable_alteration_trl.json";
+        test_results_notifiable_alteration_hgv_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_notifiable_alteration_trl_json = GenericData.updateJson(testResultsSteps, jsonFileName2, "$");
+    }
 
     @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = FAIL - HGV")
     @Test
@@ -78,7 +90,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
+        String testResultRecord = test_results_notifiable_alteration_hgv_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "fail";
 
@@ -167,7 +179,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
+        String testResultRecord = test_results_notifiable_alteration_hgv_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "pass";
 
@@ -262,7 +274,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl.json","$");
+        String testResultRecord = test_results_notifiable_alteration_trl_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "fail";
 
@@ -352,7 +364,7 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_trl.json","$");
+        String testResultRecord = test_results_notifiable_alteration_trl_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "pass";
 

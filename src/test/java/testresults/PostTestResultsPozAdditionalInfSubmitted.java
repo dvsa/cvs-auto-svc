@@ -9,6 +9,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -37,14 +38,20 @@ public class PostTestResultsPozAdditionalInfSubmitted {
         testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOld.build());
     }
 
-
+    private String test_results_post_payload_psv_10300_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_post_payload_psv_10300.json";
+        test_results_post_payload_psv_10300_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - notes")
     @Test
     public void testResultsRandomNotes() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -73,7 +80,7 @@ public class PostTestResultsPozAdditionalInfSubmitted {
     public void testResultsNullNotes() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -102,7 +109,7 @@ public class PostTestResultsPozAdditionalInfSubmitted {
     public void testResultsEmptyNotes() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -132,7 +139,7 @@ public class PostTestResultsPozAdditionalInfSubmitted {
     public void testResultsAdvisoryAndNullLocation() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -25,6 +26,16 @@ public class PostTestResultsMoreVinFirstTest {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    private String test_results_first_test_hgv_json;
+    private String test_results_first_test_trl_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_first_test_hgv.json";
+        String jsonFileName2 = "test-results_first_test_trl.json";
+        test_results_first_test_hgv_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_first_test_trl_json = GenericData.updateJson(testResultsSteps, jsonFileName2, "$");
+    }
 
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = FAIL - HGV")
     @Test
@@ -77,7 +88,7 @@ public class PostTestResultsMoreVinFirstTest {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json","$");
+        String testResultRecord = test_results_first_test_hgv_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "fail";
 
@@ -169,7 +180,7 @@ public class PostTestResultsMoreVinFirstTest {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json", "$");
+        String testResultRecord = test_results_first_test_hgv_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "pass";
 
@@ -256,7 +267,7 @@ public class PostTestResultsMoreVinFirstTest {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
+        String testResultRecord = test_results_first_test_trl_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "fail";
 
@@ -345,7 +356,7 @@ public class PostTestResultsMoreVinFirstTest {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
+        String testResultRecord = test_results_first_test_trl_json;
         String testResultId = UUID.randomUUID().toString();
         String testResult = "pass";
 

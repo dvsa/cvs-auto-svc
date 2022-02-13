@@ -9,6 +9,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,13 @@ public class PostTestResultsNegDefectsLvlCancelled {
     private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
     private static final String VRM = "SL72XD";
 
-
+    private String test_results_cancelled_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_cancelled.json";
+        test_results_cancelled_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - imNumber")
     @Test
@@ -225,7 +232,7 @@ public class PostTestResultsNegDefectsLvlCancelled {
     @Test
     public void testResultsRandomAlphabeticStringDeficiencySubId() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
+        String testResultRecord = test_results_cancelled_json;
 
         String propertyValue = generateRandomExcludingValues(2, "m", "d", "c", "l", "x", "v", "i").toLowerCase();
 
@@ -256,7 +263,7 @@ public class PostTestResultsNegDefectsLvlCancelled {
     @Test
     public void testResultsRandomInvalidLowerCaseDeficiencySubId() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
+        String testResultRecord = test_results_cancelled_json;
 
         String propertyValue = generateRandomExcludingValues(1, "m", "d", "c", "l", "x", "v", "i").toLowerCase();
 

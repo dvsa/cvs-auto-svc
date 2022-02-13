@@ -8,6 +8,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,12 +30,19 @@ public class GetTestResultsToDate {
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
+    private String test_results_roadworthiness_hgv_pass_7675_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+    }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2455 - To Date data found and status default")
     @Test
     public void testResultsSubmittedToDateExisting() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -94,7 +102,7 @@ public class GetTestResultsToDate {
     @Test
     public void testResultsSubmittedToDateExistingWithStatusSubmitted() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();

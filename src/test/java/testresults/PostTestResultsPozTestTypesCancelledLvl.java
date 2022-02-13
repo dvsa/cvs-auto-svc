@@ -11,6 +11,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +36,14 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         testResultsSteps.validateData((TestResultsGet) vehicleCancelledDataOld.build());
     }
 
+    private String test_results_cancelled_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_cancelled.json";
+        test_results_cancelled_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+    }
+    
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeName")
     @Test
     public void testResultsRandomTestTypeName() {
@@ -546,7 +555,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     @Test
     public void testResultsReasonForAbandoningFail() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
+        String testResultRecord = test_results_cancelled_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomVrm = GenericData.generateRandomVrm();
@@ -688,7 +697,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     @Test
     public void testResultsNullReasonForAbandoningPrs() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
+        String testResultRecord = test_results_cancelled_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomVrm = GenericData.generateRandomVrm();

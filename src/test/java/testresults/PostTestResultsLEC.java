@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,13 +35,26 @@ public class PostTestResultsLEC {
         testResultsSteps.validateDataForExpiry(data);
     }
 
+    private String test_results_LEC_PSV_json;
+    private String test_results_LEC_HGV_json;
+    private String test_results_LEC_HGV2_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_LEC_PSV.json";
+        String jsonFileName2 = "test-results_LEC_HGV.json";
+        String jsonFileName3 = "test-results_LEC_HGV2.json";
+        test_results_LEC_PSV_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_LEC_HGV_json = GenericData.updateJson(testResultsSteps, jsonFileName2, "$");
+        test_results_LEC_HGV2_json = GenericData.updateJson(testResultsSteps, jsonFileName3, "$");
+    }
 
     @Title("CVSB-7964 - TC4 - AC4 - API Consumer creates a new test results for the submitted test (PSV, Pass)")
     @Test
     public void testResultsAPIConsumerCreatesANewTestResultLEC_PSV_Pass() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -84,7 +98,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_HGV_Pass() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_HGV.json","$");
+        String testResultRecord = test_results_LEC_HGV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -128,7 +142,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_HGV2_Pass() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_HGV2.json","$");
+        String testResultRecord = test_results_LEC_HGV2_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -172,7 +186,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_PSV_Fail() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -217,7 +231,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_HGV_Fail() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_HGV.json","$");
+        String testResultRecord = test_results_LEC_HGV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -262,7 +276,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_HGV2_Fail() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_HGV2.json","$");
+        String testResultRecord = test_results_LEC_HGV2_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -307,7 +321,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerErrorLECNoExpiryDate() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -330,7 +344,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerErrorLECNoCertificateNumber_Pass() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -357,7 +371,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerErrorLECNoCertificateNumber_Fail() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -384,7 +398,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerErrorLECNoModType() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -407,7 +421,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerErrorLECNoEmissionStandard() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -430,7 +444,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerErrorLECNoFuelType() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

@@ -6,6 +6,7 @@ import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -26,11 +27,19 @@ public class GetTestResultsVinSpecialCharacters {
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
 
+    private String test_results_roadworthiness_hgv_pass_7675_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+    }
+
     @Title("CVSB-12013 - TC - AC2 BE API consumer performs a GET call for tech records microservice")
     @Test
     public void testTestResultsPostVinWithSpecialCharacters() {
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
