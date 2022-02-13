@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.http.HttpStatus;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -25,6 +26,16 @@ public class PutTestResultsNegAdditionalValidationsLEC {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    private String test_results_post_payload_psv_10300_json;
+    private String test_results_put_payload_psv_10300_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_post_payload_psv_10300.json";
+        String jsonFileName2 = "test-results_put_payload_psv_10300.json";
+        test_results_post_payload_psv_10300_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_put_payload_psv_10300_json = GenericData.updateJson(testResultsSteps, jsonFileName2, "$");
+    }
 
     @WithTag("Vtm")
     @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - LEC - Negative")
@@ -47,7 +58,7 @@ public class PutTestResultsNegAdditionalValidationsLEC {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
 
@@ -69,7 +80,7 @@ public class PutTestResultsNegAdditionalValidationsLEC {
 
 
         // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_psv_10300.json","$");
+        String putRequestBody = test_results_put_payload_psv_10300_json;
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
