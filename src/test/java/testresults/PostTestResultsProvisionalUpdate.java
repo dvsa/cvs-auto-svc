@@ -369,7 +369,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = test_results_motorcycle_json;
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle.json", "$");
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");

@@ -5,7 +5,6 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -39,20 +38,12 @@ public class PostTestResultsTirHgv {
     private String testTypeName;
     private String certificateNumber;
 
-    private String technical_records_tir_hgv_json;
-    @Before
-    @Test
-    public void updateJson(){
-        String jsonFileName = "technical-records_tir_hgv.json";
-        technical_records_tir_hgv_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
-    }
-
     @Title("CVSB-3946 - API changes related to test records to enable TIR testing - HGV")
     @Test
     public void testTirCertificateHgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = technical_records_tir_hgv_json;
+        String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_hgv.json","$");
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
