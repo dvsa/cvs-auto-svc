@@ -8,7 +8,6 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -266,20 +265,14 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         this.testCode = testCode;
     }
 
-    private String test_results_post_expiry_date_trl_8798_json;
-    @Before
-    @Test
-    public void updateJson(){
-        String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
-        test_results_post_expiry_date_trl_8798_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
-    }
-
     @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Trl tests")
     @Test
     public void testResults_Annual_Certificate_Generation_Trl() {
         // Read the base test result JSON.
-        String testResultRecord = test_results_post_expiry_date_trl_8798_json;
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json", "$");
+        String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
+        testResultRecord = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
