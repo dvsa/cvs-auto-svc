@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -23,7 +24,6 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"warmup test", "warmup test", "1", "large", "rigid", "pass", "aal"},
                 {"Annual test", "Annual test", "1", "large", "rigid", "pass", "aal"},
                 {"Annual test", "Annual test", "1", "small", "rigid", "pass", "aas"},
                 {"Annual test", "Annual test", "1", "large", "articulated", "pass", "adl"},
@@ -99,13 +99,21 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
         this.testCode = testCode;
     }
 
+    private String test_results_post_expiry_date_psv_8798_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_post_expiry_date_psv_8798.json";
+        test_results_post_expiry_date_psv_8798_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+    }
+
     @WithTag("annual_certificates")
     @Title("CVSB-8798 - Annual certificate is generate for all Psv tests ")
     @Test
     public void testResults_Annual_Certificate_Generation_Psv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_8798.json", "$");
+        String testResultRecord = test_results_post_expiry_date_psv_8798_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
