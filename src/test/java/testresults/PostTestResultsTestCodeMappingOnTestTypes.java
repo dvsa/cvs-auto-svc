@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -1093,6 +1094,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[1].testCode", "qgl");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-840 / CVSB-3364 - AC2 Map the test code with the test type - linked test type with a specific linked test code - Scenario 3 - Data Set 4")
     @Test
     public void testTestCodeMappingSpecificLinkedTestTypeScenario3DataSet4() {

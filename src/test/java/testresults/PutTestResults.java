@@ -578,7 +578,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-12378 - AC6. PUT request: Test record is updated and existing business logic is not triggered")
     @Test
     public void testPutTestResultsLogic() {

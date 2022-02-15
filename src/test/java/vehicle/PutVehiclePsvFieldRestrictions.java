@@ -333,7 +333,8 @@ public class PutVehiclePsvFieldRestrictions {
         this.value = value;
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10242 - AC3 - Attempt to update a vehicle with unexpected values for a field that accepts only specific values " +
             "AC4 - Attempt to update a vehicle, using a field with its value outside of the min/max length for that field")
     @Test
