@@ -111,7 +111,9 @@ public class PutTestResultsWithoutMandatoryField extends TestCase {
             "CVSB-10280 - AC4: Update the PUT request in testResults API ")
     @Test
     public void testValidatePutRequestWithoutMandatoryAttribute() {
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_duplicate_chassis_10752.json", "$");
+        String jsonFileName = "test-results_duplicate_chassis_10752.json";
+        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, "", "", "DELETE");
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction));
         testResultsSteps.putTestResultsWithAlterations(randomVin,putRequestBody,alterations);

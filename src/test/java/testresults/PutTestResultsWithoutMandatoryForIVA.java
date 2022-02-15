@@ -152,7 +152,8 @@ public class PutTestResultsWithoutMandatoryForIVA extends TestCase {
         Date date = new Date();
 
         // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_car_put_payload_10372.json", "$");
+        String jsonFileName = "test-results_car_put_payload_10372.json";
+        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

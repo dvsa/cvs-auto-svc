@@ -485,4 +485,33 @@ public class GenericData {
 
         return finalBody;
     }
+
+    public static String updateJson2(TestResultsSteps testResultsSteps, String jsonFileName, String $) {
+        // read post request body from file
+        String body = GenericData.readJsonValueFromFile(jsonFileName,"$");
+
+        //generate datetime
+        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+        DateTime testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2);
+        DateTime endTimestamp = currentTimestamp.minusYears(1).minusHours(1);
+
+        String startTime = testStartTimestamp.toString();
+        String endTime = endTimestamp.toString();
+
+        // create alterations
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.testResult.testStartTimestamp",startTime ,"","REPLACE");
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.testResult.testEndTimestamp", endTime,"","REPLACE");
+        JsonPathAlteration alterationTestStartTime = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", startTime,"","REPLACE");
+        JsonPathAlteration alterationTestEndTime = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", endTime,"","REPLACE");
+
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationStartTime,
+                alterationEndTime,
+                alterationTestStartTime,
+                alterationTestEndTime));
+
+        String updatedJson = applyJsonAlterations(body, alterations);
+        return updatedJson;
+    }
 }
