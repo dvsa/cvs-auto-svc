@@ -24,7 +24,6 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"warmup test", "warmup test", "41", 1, "pass", "fft0"},
                 {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
@@ -270,9 +269,8 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @Test
     public void testResults_Annual_Certificate_Generation_Trl() {
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json", "$");
         String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
-        testResultRecord = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String testResultRecord = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
