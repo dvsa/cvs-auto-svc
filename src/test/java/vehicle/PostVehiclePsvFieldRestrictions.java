@@ -290,8 +290,7 @@ public class PostVehiclePsvFieldRestrictions {
         this.value = value;
     }
 
-//    @WithTag("Vtm")
-    @WithTag("In_test")
+    @WithTag("Vtm")
     @Title("CVSB-10241 - AC3 - Attempt to create a new psv with unexpected values for a field that accepts only specific values " +
             "AC4 - Attempt to create a new psv, using a field with its value outside of the min/max length for that field")
     @Test

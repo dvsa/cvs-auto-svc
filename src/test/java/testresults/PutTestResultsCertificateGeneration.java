@@ -139,15 +139,14 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
     }
 
-//    @WithTag("annual_certificates")
-    @WithTag("In_test")
+    @WithTag("annual_certificates")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
 
         Date date  = new Date();
 
-       String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

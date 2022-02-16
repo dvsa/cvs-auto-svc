@@ -7,7 +7,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -742,7 +741,6 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
-    @WithTag("In_test")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerName")
     @Test
     public void testResultsRandomStringPreparerName() {
