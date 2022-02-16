@@ -139,8 +139,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
     }
 
-//    @WithTag("annual_certificates")
-    @WithTag("In_test")
+    @WithTag("annual_certificates")
     @Title("CVSB-10711 - AC1: PUT: Trigger certificate generation process")
     @Test
     public void testResultsPut() {
