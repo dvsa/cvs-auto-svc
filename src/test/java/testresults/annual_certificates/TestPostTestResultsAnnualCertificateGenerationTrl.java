@@ -24,6 +24,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
+                {"warmup test", "warmup test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "41", 1, "pass", "fft1"},
                 {"First test", "First test", "95", 2, "pass", "fft2"},
                 {"First test", "First test", "95", 3, "pass", "fft3"},
