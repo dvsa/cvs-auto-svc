@@ -303,7 +303,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         if ("warmup test".equals(name)) {
             try {
-                testResultsSteps.statusCodeShouldBe(201);
+                testResultsSteps.statusCodeShouldBe(504);
             } catch (Exception e) {
                 System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
