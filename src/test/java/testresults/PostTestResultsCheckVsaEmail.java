@@ -4,6 +4,7 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ public class PostTestResultsCheckVsaEmail {
         test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {
