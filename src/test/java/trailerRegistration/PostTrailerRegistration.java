@@ -289,7 +289,7 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.putTrailerRegistrationWithAlterations(randomTrn,trailerDeRegistrationRecord,DeRegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(400);
     }
-//this one
+
     @Title("CVSB-18921 - AC1 - VTG5A TRN PRESENT - TRL Annual Test Pass - With TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithTrn() {
@@ -397,7 +397,7 @@ public class PostTrailerRegistration {
 
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
-//this one
+
     @Title("CVSB-18921 - AC3 - VTG30 TRN PRESENT - TRL Annual Test Fail - With TRN")
     @Test
     public void testPostTestResultFailTrailerRegistrationCertificateWithTrn() {
@@ -510,7 +510,7 @@ public class PostTrailerRegistration {
 
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
-//this one
+
     @Title("CVSB-18921 - AC4 - VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
     @Test
     public void testPostTestResultFailTrailerRegistrationCertificateWithoutTrnHgv() {
@@ -558,7 +558,6 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-//this one
     @Title("CVSB-18921 - VTG5 NO TRN PRESENT - HGV Annual Test Pass - Without TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrnHgv() {
