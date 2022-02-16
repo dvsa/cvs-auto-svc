@@ -1428,8 +1428,7 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
     }
 
-//    @WithTag("Vtm")
-    @WithTag("In_test")
+    @WithTag("Vtm")
     @Title("CVSB-10316 - AC5 - testResults created in test results API - TRL - FAIL - Notifiable Alteration")
     @Test
     public void test29_PostVehicleTechRecordTrlFailNotifiableAlteration() {
