@@ -1,7 +1,6 @@
 package testresults;
 
 import data.GenericData;
-
 import io.restassured.http.ContentType;
 import junit.framework.TestCase;
 import io.restassured.response.Response;

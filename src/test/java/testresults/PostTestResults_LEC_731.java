@@ -1,10 +1,6 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import model.testresults.TestResults;
-import model.testresults.TestResultsGet;
-import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -21,26 +17,15 @@ import java.util.List;
 @RunWith(SerenityRunner.class)
 public class PostTestResults_LEC_731 {
 
-
     @Steps
     TestResultsSteps testResultsSteps;
-
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-
-    private void validateSavedData(List<String> data) {
-
-        testResultsSteps.getTestResults(vehicleSubmittedData.build().getVin(), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedData.build());
-        testResultsSteps.validateDataForExpiry(data);
-    }
 
     private String test_results_LEC_731_json;
     @Before
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_LEC_731.json";
-        test_results_LEC_731_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_LEC_731_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")

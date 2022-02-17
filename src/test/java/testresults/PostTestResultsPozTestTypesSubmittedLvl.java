@@ -40,7 +40,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_post_payload_psv_10300.json";
-        test_results_post_payload_psv_10300_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_post_payload_psv_10300_json = GenericData.updateJson( jsonFileName, false);
     }
     
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeName")

@@ -1,8 +1,6 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -24,8 +22,6 @@ public class GetTestResultsApiSpecs {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-
     private String test_results_CVSB_10220_json;
     private String test_results_CVSB_10220_Amended_json;
     private String test_results_CVSB_10220_Scenario_json;
@@ -39,10 +35,10 @@ public class GetTestResultsApiSpecs {
         String jsonFileName3 = "test-results_CVSB-10220-Scenario.json";
         String jsonFileName4 = "test-results_CVSB-10220-Scenario3.json";
 
-        test_results_CVSB_10220_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
-        test_results_CVSB_10220_Amended_json = GenericData.updateJson(testResultsSteps,jsonFileName2,"$");
-        test_results_CVSB_10220_Scenario_json = GenericData.updateJson(testResultsSteps,jsonFileName3,"$");
-        test_results_CVSB_10220_Scenario3_json = GenericData.updateJson(testResultsSteps,jsonFileName4,"$");
+        test_results_CVSB_10220_json = GenericData.updateJson(jsonFileName,false);
+        test_results_CVSB_10220_Amended_json = GenericData.updateJson(jsonFileName2,false);
+        test_results_CVSB_10220_Scenario_json = GenericData.updateJson(jsonFileName3,false);
+        test_results_CVSB_10220_Scenario3_json = GenericData.updateJson(jsonFileName4,false);
     }
 
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")

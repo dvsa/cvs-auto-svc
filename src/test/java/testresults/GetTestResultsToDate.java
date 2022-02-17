@@ -9,7 +9,6 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -35,7 +34,7 @@ public class GetTestResultsToDate {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2455 - To Date data found and status default")

@@ -18,8 +18,6 @@ import java.util.*;
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsIntegrationAdr {
 
-
-
     @Steps
     TestResultsSteps testResultsSteps;
 
@@ -53,7 +51,7 @@ public class PostTestResultsIntegrationAdr {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_integration_trl_10773.json";
-        test_results_integration_trl_10773_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_integration_trl_10773_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")

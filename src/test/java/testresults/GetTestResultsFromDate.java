@@ -34,7 +34,7 @@ public class GetTestResultsFromDate {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2447 - From Date data not found and status default")

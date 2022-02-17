@@ -112,7 +112,7 @@ public class PutTestResultsWithoutMandatoryField extends TestCase {
     @Test
     public void testValidatePutRequestWithoutMandatoryAttribute() {
         String jsonFileName = "test-results_duplicate_chassis_10752.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration restriction = new JsonPathAlteration(jsonPath, "", "", "DELETE");
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(restriction));

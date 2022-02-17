@@ -142,7 +142,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
         Date date  = new Date();
 
         String jsonFileName = "test-results_put_payload_10711.json";
-        String putRequestBody = GenericData.updateJson2(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName, true);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

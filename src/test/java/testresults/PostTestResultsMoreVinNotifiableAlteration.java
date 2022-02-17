@@ -33,8 +33,8 @@ public class PostTestResultsMoreVinNotifiableAlteration {
     public void updateJson(){
         String jsonFileName = "test-results_notifiable_alteration_hgv.json";
         String jsonFileName2 = "test-results_notifiable_alteration_trl.json";
-        test_results_notifiable_alteration_hgv_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
-        test_results_notifiable_alteration_trl_json = GenericData.updateJson(testResultsSteps, jsonFileName2, "$");
+        test_results_notifiable_alteration_hgv_json = GenericData.updateJson( jsonFileName, false);
+        test_results_notifiable_alteration_trl_json = GenericData.updateJson( jsonFileName2, false);
     }
 
     @Title("CVSB-12445 - TC - AC1 - VSA submits notifiable alteration test = FAIL - HGV")

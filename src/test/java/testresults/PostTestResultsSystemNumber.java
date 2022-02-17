@@ -36,7 +36,7 @@ public class PostTestResultsSystemNumber {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
-        test_results_post_expiry_date_trl_8798_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_post_expiry_date_trl_8798_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")

@@ -1,10 +1,6 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import model.testresults.TestResults;
-import model.testresults.TestResultsGet;
-import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -14,13 +10,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
-import static util.DataUtil.generateRandomExcludingValues;
 
 
 @RunWith(SerenityRunner.class)
@@ -29,21 +22,12 @@ public class PostTestResultsPozAdditionalInfSubmitted {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
-
-    private void validateSavedDataOld() {
-
-        testResultsSteps.getTestResults(vehicleSubmittedDataOld.build().getSystemNumber(), TestResultsStatus.SUBMITTED);
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOld.build());
-    }
-
     private String test_results_post_payload_psv_10300_json;
     @Before
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_post_payload_psv_10300.json";
-        test_results_post_payload_psv_10300_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_post_payload_psv_10300_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - notes")

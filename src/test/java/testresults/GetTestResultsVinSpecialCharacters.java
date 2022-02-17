@@ -24,15 +24,12 @@ public class GetTestResultsVinSpecialCharacters {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
-
     private String test_results_roadworthiness_hgv_pass_7675_json;
     @Before
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-12013 - TC - AC2 BE API consumer performs a GET call for tech records microservice")

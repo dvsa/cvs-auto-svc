@@ -115,7 +115,7 @@ public class PutTestResultsNegFieldValidationsLEC extends TestCase {
     public void testResultsPutWithNotApplicableFields() {
 
         String jsonFileName = "test-results_put_payload_hgv_10300.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

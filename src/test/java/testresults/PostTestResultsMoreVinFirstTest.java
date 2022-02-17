@@ -33,8 +33,8 @@ public class PostTestResultsMoreVinFirstTest {
     public void updateJson(){
         String jsonFileName = "test-results_first_test_hgv.json";
         String jsonFileName2 = "test-results_first_test_trl.json";
-        test_results_first_test_hgv_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
-        test_results_first_test_trl_json = GenericData.updateJson(testResultsSteps, jsonFileName2, "$");
+        test_results_first_test_hgv_json = GenericData.updateJson( jsonFileName, false);
+        test_results_first_test_trl_json = GenericData.updateJson( jsonFileName2, false);
     }
 
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = FAIL - HGV")

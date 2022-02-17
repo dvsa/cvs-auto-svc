@@ -1,6 +1,5 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -28,7 +27,6 @@ import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
-
 
     static String randomVin;
     static String randomSystemNumber;
@@ -68,7 +66,6 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
         }
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
-
 
         // Read base JSON to create test-results
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
@@ -135,8 +132,6 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
         this.value = value;
     }
 
-
-
     @WithTag("Vtm")
     @Title("CVSB-10372 - AC1: PUT: Original Test Record is updated and attributes are automatically set ")
     @Test
@@ -146,7 +141,7 @@ public class PutTestResultsForCOIFWithoutAnnual extends TestCase {
 
         // Read the base JSON for PUT test-results
         String jsonFileName = "test-results_psv_put_payload_10372.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

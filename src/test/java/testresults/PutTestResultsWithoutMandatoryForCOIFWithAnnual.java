@@ -158,7 +158,7 @@ public class PutTestResultsWithoutMandatoryForCOIFWithAnnual extends TestCase {
 
         // Read the base JSON for PUT test-results
         String jsonFileName = "test-results_psv_put_payload_10372.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

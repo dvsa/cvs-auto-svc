@@ -28,7 +28,6 @@ public class GetTestResultsBetweenDate {
     TestResultsSteps testResultsSteps;
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
-    private TestResultsGet vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
     private String test_results_roadworthiness_hgv_pass_7675_json;
@@ -36,7 +35,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFileName,false);
     }
 
 

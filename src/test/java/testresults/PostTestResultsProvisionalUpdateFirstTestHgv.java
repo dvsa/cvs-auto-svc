@@ -50,7 +50,7 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_notifiable_alteration_hgv.json";
-        test_results_notifiable_alteration_hgv_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_notifiable_alteration_hgv_json = GenericData.updateJson(jsonFileName,false);
     }
 
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - HGV")

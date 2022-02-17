@@ -1,6 +1,5 @@
 package testresults;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.GenericData;
@@ -27,15 +26,11 @@ import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-
 @RunWith(SerenityRunner.class)
 public class GetTestResults {
 
     @Steps
     TestResultsSteps testResultsSteps;
-
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     private TestResults.Builder vehicleDefaultSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
@@ -50,8 +45,8 @@ public class GetTestResults {
     public void updateJson(){
         String jsonFilename = "test-results_roadworthiness_hgv_pass_7675.json";
         String jsonFilename2 = "test-results_cancelled.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps,jsonFilename,"$");
-        test_results_cancelled_json = GenericData.updateJson(testResultsSteps,jsonFilename2,"$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFilename, false);
+        test_results_cancelled_json = GenericData.updateJson(jsonFilename2,false);
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-3513 - Un-authorised consumer retrieves results for submitted tests.")

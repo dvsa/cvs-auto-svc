@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.springframework.lang.NonNull;
-import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 
 import java.io.BufferedReader;
@@ -460,7 +459,7 @@ public class GenericData {
         return actualRestrictions;
     }
 
-    public static String updateJson(TestResultsSteps testResultsSteps, String jsonFileName, String $) {
+    public static String updateJson(String jsonFileName, boolean isAlternateJsonShape) {
         // read post request body from file
         String body = GenericData.readJsonValueFromFile(jsonFileName,"$");
 
@@ -468,35 +467,23 @@ public class GenericData {
         DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
         DateTime testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2);
         DateTime endTimestamp = currentTimestamp.minusYears(1).minusHours(1);
-
-
         String startTime = testStartTimestamp.toString();
         String endTime = endTimestamp.toString();
 
-        String body2 =  body.replaceAll("testStartTimestamp.*?\\,", "testStartTimestamp\":\""+startTime+"\",");
 
-        String body3 =  body2.replaceAll("testEndTimestamp.*?\\,", "testEndTimestamp\":\""+endTime+"\",");
+        if(!isAlternateJsonShape) {
+            String body2 = body.replaceAll("testStartTimestamp.*?\\,", "testStartTimestamp\":\"" + startTime + "\",");
 
-        String body4 =  body3.replaceAll("testTypeStartTimestamp.*?\\,", "testTypeStartTimestamp\":\""+startTime+"\",");
+            String body3 = body2.replaceAll("testEndTimestamp.*?\\,", "testEndTimestamp\":\"" + endTime + "\",");
 
-        String body5 =  body4.replaceAll("testTypeEndTimestamp.*?\\,", "testTypeEndTimestamp\":\""+endTime+"\",");
+            String body4 = body3.replaceAll("testTypeStartTimestamp.*?\\,", "testTypeStartTimestamp\":\"" + startTime + "\",");
 
-        String finalBody = body5;
+            String body5 = body4.replaceAll("testTypeEndTimestamp.*?\\,", "testTypeEndTimestamp\":\"" + endTime + "\",");
 
-        return finalBody;
-    }
+            String finalBody = body5;
 
-    public static String updateJson2(TestResultsSteps testResultsSteps, String jsonFileName, String $) {
-        // read post request body from file
-        String body = GenericData.readJsonValueFromFile(jsonFileName,"$");
-
-        //generate datetime
-        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-        DateTime testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2);
-        DateTime endTimestamp = currentTimestamp.minusYears(1).minusHours(1);
-
-        String startTime = testStartTimestamp.toString();
-        String endTime = endTimestamp.toString();
+            return finalBody;
+        }
 
         // create alterations
         JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.testResult.testStartTimestamp",startTime ,"","REPLACE");

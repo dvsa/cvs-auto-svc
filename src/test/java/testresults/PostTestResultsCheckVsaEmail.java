@@ -27,7 +27,7 @@ public class PostTestResultsCheckVsaEmail {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_post_expiry_date_hgv_8798.json";
-        test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-9194 - Check email to VSA lands in inbox")

@@ -1,6 +1,5 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -27,7 +26,6 @@ import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsWithoutMandatoryForIVA extends TestCase {
-
 
     static String randomVin;
     static String randomSystemNumber;
@@ -153,7 +151,7 @@ public class PutTestResultsWithoutMandatoryForIVA extends TestCase {
 
         // Read the base JSON for PUT test-results
         String jsonFileName = "test-results_car_put_payload_10372.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

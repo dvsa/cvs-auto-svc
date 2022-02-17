@@ -1,8 +1,6 @@
 package testresults;
 
 import data.GenericData;
-import data.TestResultsData;
-import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -23,15 +21,12 @@ public class PostTestResultsEmissionStandard {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
-    private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
-
     private String test_results_roadworthiness_hgv_pass_7675_json;
     @Before
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-12015 - AC3 API Consumer creates a new test results for the submitted test (emissionStandard)")

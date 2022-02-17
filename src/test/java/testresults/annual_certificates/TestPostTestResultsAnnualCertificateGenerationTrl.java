@@ -271,7 +271,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
     public void testResults_Annual_Certificate_Generation_Trl() {
         // Read the base test result JSON.
         String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
-        String testResultRecord = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String testResultRecord = GenericData.updateJson(jsonFileName,false);
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();

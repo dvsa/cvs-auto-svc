@@ -36,7 +36,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_psv_cert.json";
-        test_results_psv_cert_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_psv_cert_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - createdAt")

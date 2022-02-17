@@ -15,13 +15,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static util.DataUtil.generateRandomExcludingValues;
-
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegDefectsLvlCancelled {
@@ -37,7 +35,7 @@ public class PostTestResultsNegDefectsLvlCancelled {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_cancelled.json";
-        test_results_cancelled_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_cancelled_json = GenericData.updateJson( jsonFileName, false);
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - imNumber")

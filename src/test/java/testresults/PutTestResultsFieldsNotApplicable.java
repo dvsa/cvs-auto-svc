@@ -122,7 +122,7 @@ public class PutTestResultsFieldsNotApplicable {
 
         // Read the request payload
         String jsonFileName = "test-results_put_payload_11504.json";
-        String putRequestBody = GenericData.updateJson2(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,true);
 
         // Generate random vin, systemNumber and TestResultID
         String randomSystemNumber = GenericData.generateRandomSystemNumber();

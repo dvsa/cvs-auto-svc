@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.util.*;
+
 
 @Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
 @RunWith(SerenityParameterizedRunner.class)
@@ -52,7 +52,7 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_provisional_update_trl.json";
-        test_results_provisional_update_trl_json = GenericData.updateJson(testResultsSteps, jsonFileName, "$");
+        test_results_provisional_update_trl_json = GenericData.updateJson(jsonFileName,false);
     }
 
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - TRL")

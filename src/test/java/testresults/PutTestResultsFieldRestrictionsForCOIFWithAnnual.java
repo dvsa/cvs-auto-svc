@@ -1,12 +1,9 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import junit.framework.TestCase;
-import model.vehicles.VehicleTechnicalRecordSearchCriteria;
-import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -20,7 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
-import steps.VehicleTechnicalRecordsSteps;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 import java.text.SimpleDateFormat;
@@ -31,7 +27,6 @@ import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsFieldRestrictionsForCOIFWithAnnual extends TestCase {
-
 
     static String randomVin;
     static String randomSystemNumber;
@@ -85,7 +80,6 @@ public class PutTestResultsFieldRestrictionsForCOIFWithAnnual extends TestCase {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
 
-
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberTestResults,
@@ -116,10 +110,6 @@ public class PutTestResultsFieldRestrictionsForCOIFWithAnnual extends TestCase {
 
     @Steps
     TestResultsSteps testResultsSteps;
-
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
 
     @TestData
     public static Collection<Object[]> testData(){
@@ -180,7 +170,7 @@ public class PutTestResultsFieldRestrictionsForCOIFWithAnnual extends TestCase {
 
         // Read the base JSON for PUT test-results
         String jsonFileName = "test-results_psv_put_payload_10372.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

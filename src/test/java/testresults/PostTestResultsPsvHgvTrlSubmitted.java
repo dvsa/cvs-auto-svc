@@ -14,12 +14,10 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.DataUtil;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import static util.DataUtil.generateRandomExcludingValues;
 
 
@@ -41,9 +39,9 @@ public class PostTestResultsPsvHgvTrlSubmitted {
         String jsonFileName = "technical-records_tir_trl.json";
         String jsonFileName2 = "technical-records_tir_hgv.json";
         String jsonFileName3 = "technical-records_tir_57_trl.json";
-        technical_records_tir_trl_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
-        technical_records_tir_hgv_json = GenericData.updateJson(testResultsSteps,jsonFileName2,"$");
-        technical_records_tir_57_trl_json = GenericData.updateJson(testResultsSteps,jsonFileName3,"$");
+        technical_records_tir_trl_json = GenericData.updateJson(jsonFileName,false);
+        technical_records_tir_hgv_json = GenericData.updateJson(jsonFileName2,false);
+        technical_records_tir_57_trl_json = GenericData.updateJson(jsonFileName3,false);
     }
 
     @Title("CVSB-6805 CVSB-7259 - API Consumer creates a new test results for the submitted test (TRL)")

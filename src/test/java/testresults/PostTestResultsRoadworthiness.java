@@ -38,10 +38,10 @@ public class PostTestResultsRoadworthiness {
         String jsonFileName2 = "test-results_roadworthiness_trl_pass_7675.json";
         String jsonFileName3 = "test-results_roadworthiness_hgv_fail_7675.json";
         String jsonFileName4 = "test-results_roadworthiness_trl_fail_7675.json";
-        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
-        test_results_roadworthiness_trl_pass_7675_json = GenericData.updateJson(testResultsSteps,jsonFileName2,"$");
-        test_results_roadworthiness_hgv_fail_7675_json = GenericData.updateJson(testResultsSteps,jsonFileName3,"$");
-        test_results_roadworthiness_trl_fail_7675_json = GenericData.updateJson(testResultsSteps,jsonFileName4,"$");
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFileName,false);
+        test_results_roadworthiness_trl_pass_7675_json = GenericData.updateJson(jsonFileName2,false);
+        test_results_roadworthiness_hgv_fail_7675_json = GenericData.updateJson(jsonFileName3,false);
+        test_results_roadworthiness_trl_fail_7675_json = GenericData.updateJson(jsonFileName4,false);
     }
 
     @Title("CVSB-7675 - TC1 - AC1 - ROADWORTHINESS certificate number generated (HGV) - PASS")

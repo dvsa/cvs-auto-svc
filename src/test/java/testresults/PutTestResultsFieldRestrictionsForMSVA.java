@@ -1,6 +1,5 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -69,7 +68,6 @@ public class PutTestResultsFieldRestrictionsForMSVA extends TestCase {
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
 
-
         // Read base JSON to create test-results
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle_post_payload_10372.json", "$");
 
@@ -82,7 +80,6 @@ public class PutTestResultsFieldRestrictionsForMSVA extends TestCase {
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
-
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
@@ -145,6 +142,7 @@ public class PutTestResultsFieldRestrictionsForMSVA extends TestCase {
                 {"$.testResult.testTypes[0].customDefects[0].defectNotes",true},
         });
     }
+
     private String jsonPath;
     private final Object value;
 
@@ -163,7 +161,7 @@ public class PutTestResultsFieldRestrictionsForMSVA extends TestCase {
 
         // Read the base JSON for PUT test-results
         String jsonFileName = "test-results_motorcycle_put_payload_10372.json";
-        String putRequestBody = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

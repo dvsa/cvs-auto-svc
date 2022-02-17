@@ -248,7 +248,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
 
         // Read the base test result JSON.
         String jsonFileName = "test-results_post_expiry_date_hgv_8798.json";
-        String testResultRecord = GenericData.updateJson(testResultsSteps,jsonFileName,"$");
+        String testResultRecord = GenericData.updateJson(jsonFileName,false);
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -280,7 +280,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         if ("warmup test".equals(name)) {
             try {
-                testResultsSteps.statusCodeShouldBe(201);
+                testResultsSteps.statusCodeShouldBe(504);
             } catch (Exception e) {
                 System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
