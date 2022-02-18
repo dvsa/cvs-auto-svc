@@ -65,7 +65,8 @@ public class PutTestResultsUpdateTestCodeHGV {
         this.newTestCode = newTestCode;
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-12378 - AC8 - PUT request: Test result is updated with a new test code")
     @Test
     public void testValidateTrlAttributesDataTypesAndRestrictions() {

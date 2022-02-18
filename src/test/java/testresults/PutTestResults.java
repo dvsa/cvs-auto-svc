@@ -1866,7 +1866,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - TestTypeId = 63")
     @Test
     public void testResultsPutApplicableRoadPartPaidRwRetest() {
@@ -2997,6 +2998,7 @@ public class PutTestResults extends TestCase{
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
+    @WithTag("In_test")
     @Title("VOTT-15 - AC1 - When a test-result is updated, I want a new certificate to be produced - PSV")
     @Test
     public void PutTestResultsCertificateGenerationForPsv() {
