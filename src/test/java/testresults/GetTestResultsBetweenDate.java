@@ -39,7 +39,6 @@ public class GetTestResultsBetweenDate {
         test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFileName,false);
     }
 
-    @WithTag("In_test")
     @Title("CVSB-416 - CVSB-949 / CVSB-2434 - Between Date data found and status default")
     @Test
     public void testResultsBetweenDateExisting() {
