@@ -1265,7 +1265,6 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[1].testCode", "qal");
     }
 
-    @WithTag("In_test")
     @Title("CVSB-840 / CVSB-3368 - AC3 Map the test code with the test type - linked test type without a specific linked test code - Data Set 2")
     @Test
     public void testTestCodeMappingNoSpecificLinkedTestCodeDataSet2() {

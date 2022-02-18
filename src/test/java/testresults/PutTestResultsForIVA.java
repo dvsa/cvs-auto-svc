@@ -130,8 +130,7 @@ public class PutTestResultsForIVA extends TestCase {
         this.value = value;
     }
 
-//    @WithTag("Vtm")
-    @WithTag("In_test")
+    @WithTag("Vtm")
     @Title("CVSB-10372 - AC1: PUT: Original Test Record is updated and attributes are automatically set")
     @Test
     public void PutTestResultsForIVA() {
