@@ -337,8 +337,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
 
     }
 
-//    @WithTag("expiry_dates")
-    @WithTag("In_test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is one month before FirstUseDate Anniversary")
     @Test
     public void testResultsFirstTestExpiryTrlTodayIsInMonthBeforeRegAnniversary() {
@@ -432,8 +431,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
 
     }
 
-//    @WithTag("expiry_dates")
-    @WithTag("In_test")
+    @WithTag("expiry_dates")
     @Title("CVSB-12215 - AS a VSA I want the first expiry date to be calculated using reg/ first use anniversary so that it is accurately recorded for annual tests - TRL - NO Previous Expiry Date - Today is in the same month as FirstUseDate Anniversary")
     @Test
     public void testResultsFirstTestExpiryTrlTodayIsInTheSameMonthAsAnniversary() {
