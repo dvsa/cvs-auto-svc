@@ -1,6 +1,5 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
-import steps.VehicleTechnicalRecordsSteps;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
 import java.text.SimpleDateFormat;
@@ -28,7 +26,6 @@ import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForIVA extends TestCase {
-
 
     static String randomVin;
     static String randomSystemNumber;
@@ -115,8 +112,6 @@ public class PutTestResultsForIVA extends TestCase {
     @Steps
     TestResultsSteps testResultsSteps;
 
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
   @TestData
     public static Collection<Object[]> testData(){
@@ -143,7 +138,8 @@ public class PutTestResultsForIVA extends TestCase {
         Date date = new Date();
 
         // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_car_put_payload_10372.json", "$");
+        String jsonFileName = "test-results_car_put_payload_10372.json";
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

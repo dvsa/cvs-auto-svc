@@ -4,6 +4,7 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,14 @@ public class PostTestResultsCheckVsaEmail {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
+
+    private String test_results_post_expiry_date_hgv_8798_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_post_expiry_date_hgv_8798.json";
+        test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson( jsonFileName, false);
+    }
 
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
@@ -50,7 +59,7 @@ public class PostTestResultsCheckVsaEmail {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json", "$");
+        String testResultRecord = test_results_post_expiry_date_hgv_8798_json;
 
         JsonPathAlteration alterationVrm = new JsonPathAlteration("$.vrm", randomVrm, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");

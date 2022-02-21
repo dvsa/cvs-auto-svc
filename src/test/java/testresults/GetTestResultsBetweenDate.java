@@ -7,7 +7,9 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -27,15 +29,21 @@ public class GetTestResultsBetweenDate {
     TestResultsSteps testResultsSteps;
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
-    private TestResultsGet vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
 
+    private String test_results_roadworthiness_hgv_pass_7675_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFileName,false);
+    }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2434 - Between Date data found and status default")
     @Test
     public void testResultsBetweenDateExisting() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -106,7 +114,7 @@ public class GetTestResultsBetweenDate {
     @Test
     public void testResultsBetweenDateExistingWithStatusSubmitted() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();

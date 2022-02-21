@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -25,6 +26,19 @@ public class PostTrailerRegistration {
 
     @Steps
     TestResultsSteps testResultsSteps;
+
+    private String test_results_post_expiry_date_trl_8798_json;
+    private String test_results_post_expiry_date_hgv_8798_json;
+
+    @Before
+    @Test
+    public void updateJsonDates(){
+        String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
+        String jsonFileName2 = "test-results_post_expiry_date_hgv_8798.json";
+
+        test_results_post_expiry_date_trl_8798_json = GenericData.updateJson(jsonFileName,false);
+        test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson(jsonFileName2,false);
+    }
 
     @Title("CVSB-18919 - AC1 - Saving 17 digit vin")
     @Test
@@ -276,7 +290,7 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.statusCodeShouldBe(400);
     }
 
-    @Title("CVSB-18921 - AC1 -  VTG5A TRN PRESENT - TRL Annual Test Pass - With TRN")
+    @Title("CVSB-18921 - AC1 - VTG5A TRN PRESENT - TRL Annual Test Pass - With TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithTrn() {
 
@@ -313,7 +327,7 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.postTrailerRegistrationWithAlterations(postTrailerRecord, RegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(200);
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_trl_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -422,7 +436,7 @@ public class PostTrailerRegistration {
         trailerRegistrationSteps.postTrailerRegistrationWithAlterations(postTrailerRecord, RegisterAlterations);
         trailerRegistrationSteps.statusCodeShouldBe(200);
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_trl_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_trl_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -497,7 +511,7 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-    @Title("CVSB-18921 - AC4 -  VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
+    @Title("CVSB-18921 - AC4 - VTG30 NO TRN PRESENT - HGV Annual Test Fail - Without TRN")
     @Test
     public void testPostTestResultFailTrailerRegistrationCertificateWithoutTrnHgv() {
 
@@ -517,7 +531,7 @@ public class PostTrailerRegistration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_hgv_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -544,7 +558,6 @@ public class PostTrailerRegistration {
         testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 
-
     @Title("CVSB-18921 - VTG5 NO TRN PRESENT - HGV Annual Test Pass - Without TRN")
     @Test
     public void testPostTestResultPassTrailerRegistrationCertificateWithoutTrnHgv() {
@@ -565,7 +578,7 @@ public class PostTrailerRegistration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json","$");
+        String testResultRecord = test_results_post_expiry_date_hgv_8798_json;
 
         String testResultId = UUID.randomUUID().toString();
 

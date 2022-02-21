@@ -1,6 +1,5 @@
 package testresults;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import data.GenericData;
@@ -14,6 +13,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -26,20 +26,28 @@ import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-
 @RunWith(SerenityRunner.class)
 public class GetTestResults {
 
     @Steps
     TestResultsSteps testResultsSteps;
 
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
     private TestResults.Builder vehicleDefaultSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
+
+    private String test_results_roadworthiness_hgv_pass_7675_json;
+    private String test_results_cancelled_json;
+
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFilename = "test-results_roadworthiness_hgv_pass_7675.json";
+        String jsonFilename2 = "test-results_cancelled.json";
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFilename, false);
+        test_results_cancelled_json = GenericData.updateJson(jsonFilename2,false);
+    }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-3513 - Un-authorised consumer retrieves results for submitted tests.")
     @Test
@@ -61,7 +69,7 @@ public class GetTestResults {
     @Test
     public void testResultsSubmittedReferenceData() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -91,7 +99,7 @@ public class GetTestResults {
     @Title("CVSB-416 - CVSB-949 / CVSB-2213 - API Consumer retrieve the Test results for the input Vin (SUBMITTED)")
     @Test
     public void testResultsWithStatusSubmittedReferenceData() {
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -122,7 +130,7 @@ public class GetTestResults {
     @Test
     public void testResultsWithStatusCanceledReferenceData() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_cancelled.json", "$");
+        String testResultRecord = test_results_cancelled_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();

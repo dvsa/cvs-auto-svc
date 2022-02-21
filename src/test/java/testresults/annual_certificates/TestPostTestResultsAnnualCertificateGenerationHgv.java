@@ -23,7 +23,6 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"warmup test", "warmup test", "95", 1, "pass", "ffv2"},
                 {"First test", "First test", "95", 2, "pass", "ffv2"},
                 {"First test", "First test", "95", 3, "pass", "ffv3"},
                 {"First test", "First test", "95", 4, "pass", "ffv4"},
@@ -248,7 +247,8 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
     public void testResults_Annual_Certificate_Generation_Hgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_hgv_8798.json", "$");
+        String jsonFileName = "test-results_post_expiry_date_hgv_8798.json";
+        String testResultRecord = GenericData.updateJson(jsonFileName,false);
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -280,7 +280,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         if ("warmup test".equals(name)) {
             try {
-                testResultsSteps.statusCodeShouldBe(201);
+                testResultsSteps.statusCodeShouldBe(504);
             } catch (Exception e) {
                 System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);

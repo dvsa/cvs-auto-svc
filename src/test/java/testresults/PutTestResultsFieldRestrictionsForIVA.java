@@ -1,6 +1,5 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -28,7 +27,6 @@ import static util.WriterReader.saveUtils;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsFieldRestrictionsForIVA extends TestCase {
-
 
     static String randomVin;
     static String randomSystemNumber;
@@ -69,7 +67,6 @@ public class PutTestResultsFieldRestrictionsForIVA extends TestCase {
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
 
-
         // Read base JSON to create test-results
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_car_post_payload_10372.json", "$");
 
@@ -109,7 +106,6 @@ public class PutTestResultsFieldRestrictionsForIVA extends TestCase {
                     .post("/test-results");
         }
         Assert.assertEquals(HttpStatus.SC_CREATED, responseTestResult.getStatusCode());
-
     }
 
     @Steps
@@ -144,6 +140,7 @@ public class PutTestResultsFieldRestrictionsForIVA extends TestCase {
                 {"$.testResult.testTypes[0].customDefects[0].defectNotes",true},
         });
     }
+
     private String jsonPath;
     private final Object value;
 
@@ -161,7 +158,8 @@ public class PutTestResultsFieldRestrictionsForIVA extends TestCase {
         Date date = new Date();
 
         // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_car_put_payload_10372.json", "$");
+        String jsonFileName = "test-results_car_put_payload_10372.json";
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

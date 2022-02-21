@@ -105,7 +105,8 @@ public class TestPostTestResultsAnnualCertificateGenerationPsv {
     public void testResults_Annual_Certificate_Generation_Psv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_expiry_date_psv_8798.json", "$");
+        String jsonFileName = "test-results_post_expiry_date_psv_8798.json";
+        String testResultRecord = GenericData.updateJson(jsonFileName,false);
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();

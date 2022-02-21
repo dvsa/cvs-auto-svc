@@ -7,12 +7,14 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.util.*;
+
 
 @Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
 @RunWith(SerenityParameterizedRunner.class)
@@ -43,6 +45,14 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
         this.name = name;
         this.testTypeName = testTypeName;
         this.testTypeId = testTypeId;
+    }
+
+    private String test_results_provisional_update_trl_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_provisional_update_trl.json";
+        test_results_provisional_update_trl_json = GenericData.updateJson(jsonFileName,false);
     }
 
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - TRL")
@@ -85,7 +95,7 @@ public class PostTestResultsProvisionalUpdateFirstTestTrl {
 
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_provisional_update_trl.json","$");
+        String testResultRecord = test_results_provisional_update_trl_json;
 
         String testResultId = UUID.randomUUID().toString();
 

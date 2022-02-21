@@ -11,6 +11,8 @@ import exceptions.AutomationException;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -455,5 +457,48 @@ public class GenericData {
             }
         }
         return actualRestrictions;
+    }
+
+    public static String updateJson(String jsonFileName, boolean isAlternateJsonShape) {
+        // read post request body from file
+        String body = GenericData.readJsonValueFromFile(jsonFileName,"$");
+
+        //generate datetime
+        DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+        DateTime testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2);
+        DateTime endTimestamp = currentTimestamp.minusYears(1).minusHours(1);
+        String startTime = testStartTimestamp.toString();
+        String endTime = endTimestamp.toString();
+
+
+        if(!isAlternateJsonShape) {
+            String body2 = body.replaceAll("testStartTimestamp.*?\\,", "testStartTimestamp\":\"" + startTime + "\",");
+
+            String body3 = body2.replaceAll("testEndTimestamp.*?\\,", "testEndTimestamp\":\"" + endTime + "\",");
+
+            String body4 = body3.replaceAll("testTypeStartTimestamp.*?\\,", "testTypeStartTimestamp\":\"" + startTime + "\",");
+
+            String body5 = body4.replaceAll("testTypeEndTimestamp.*?\\,", "testTypeEndTimestamp\":\"" + endTime + "\",");
+
+            String finalBody = body5;
+
+            return finalBody;
+        }
+
+        // create alterations
+        JsonPathAlteration alterationStartTime = new JsonPathAlteration("$.testResult.testStartTimestamp",startTime ,"","REPLACE");
+        JsonPathAlteration alterationEndTime = new JsonPathAlteration("$.testResult.testEndTimestamp", endTime,"","REPLACE");
+        JsonPathAlteration alterationTestStartTime = new JsonPathAlteration("$.testResult.testTypes[0].testTypeStartTimestamp", startTime,"","REPLACE");
+        JsonPathAlteration alterationTestEndTime = new JsonPathAlteration("$.testResult.testTypes[0].testTypeEndTimestamp", endTime,"","REPLACE");
+
+        // initialize the alterations list with both declared alteration
+        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
+                alterationStartTime,
+                alterationEndTime,
+                alterationTestStartTime,
+                alterationTestEndTime));
+
+        String updatedJson = applyJsonAlterations(body, alterations);
+        return updatedJson;
     }
 }

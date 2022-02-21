@@ -5,6 +5,7 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +17,6 @@ import java.util.*;
 @Ignore("Cert generation switched off for ADR, wait untill CVSB-9134 is merged")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsAdrCertificate {
-
-
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -37,18 +36,26 @@ public class PostTestResultsAdrCertificate {
         this.testTypeName = testTypeName;
     }
 
-
-
     private String testTypeId;
     private String name;
     private String testTypeName;
 
+    private String test_results_ADR_TRL_json;
+    private String test_results_ADR_HGV_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_ADR_TRL.json";
+        String jsonFileName2 = "test-results_ADR_HGV.json";
+        test_results_ADR_TRL_json = GenericData.updateJson( jsonFileName, false);
+        test_results_ADR_HGV_json = GenericData.updateJson( jsonFileName2, false);
+    }
 
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")
     public void testResultsADRCertificateTrl() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_ADR_TRL.json","$");
+        String testResultRecord = test_results_ADR_TRL_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -89,7 +96,7 @@ public class PostTestResultsAdrCertificate {
     public void testResultsADRCertificateHgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_ADR_HGV.json","$");
+        String testResultRecord = test_results_ADR_HGV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

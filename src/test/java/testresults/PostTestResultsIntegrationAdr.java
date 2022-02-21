@@ -6,6 +6,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -16,8 +17,6 @@ import java.util.*;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsIntegrationAdr {
-
-
 
     @Steps
     TestResultsSteps testResultsSteps;
@@ -46,6 +45,14 @@ public class PostTestResultsIntegrationAdr {
     private String name;
     private String testTypeName;
     private String testResult;
+
+    private String test_results_integration_trl_10773_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_integration_trl_10773.json";
+        test_results_integration_trl_10773_json = GenericData.updateJson( jsonFileName, false);
+    }
 
     @Title("CVSB-8798 / CVSB-3952 - As a VSA I want to be able to generate the ADR certificate so that I can receive it via email - TRL")
     @Test
@@ -94,7 +101,7 @@ public class PostTestResultsIntegrationAdr {
         //POST a test-result for the newly created TRL vehicle (use an ADR test - pass)
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_integration_trl_10773.json","$");
+        String testResultRecord = test_results_integration_trl_10773_json;
 
         // Create alteration to add one more tech record to in the request body
         JsonPathAlteration postAlterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");

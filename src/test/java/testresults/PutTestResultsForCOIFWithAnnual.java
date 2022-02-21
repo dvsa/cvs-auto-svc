@@ -1,6 +1,5 @@
 package testresults;
 
-
 import data.GenericData;
 import io.restassured.http.ContentType;
 import junit.framework.TestCase;
@@ -27,7 +26,6 @@ import java.util.*;
 
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForCOIFWithAnnual extends TestCase {
-
 
     static String randomVin;
     static String randomSystemNumber;
@@ -67,7 +65,6 @@ public class PutTestResultsForCOIFWithAnnual extends TestCase {
         }
 
         Assert.assertEquals(HttpStatus.SC_CREATED, response.getStatusCode());
-
 
         // Read base JSON to create test-results
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_post_payload_10372.json", "$");
@@ -138,7 +135,8 @@ public class PutTestResultsForCOIFWithAnnual extends TestCase {
         Date date = new Date();
 
         // Read the base JSON for PUT test-results
-        String putRequestBody = GenericData.readJsonValueFromFile("test-results_psv_put_payload_10372.json", "$");
+        String jsonFileName = "test-results_psv_put_payload_10372.json";
+        String putRequestBody = GenericData.updateJson(jsonFileName,false);
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");

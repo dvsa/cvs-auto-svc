@@ -10,6 +10,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -30,6 +31,13 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private static final String VRM = "SL72XD";
 
+    private String test_results_psv_cert_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_psv_cert.json";
+        test_results_psv_cert_json = GenericData.updateJson( jsonFileName, false);
+    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3510 API Consumer tries to create a new test result for submitted/canceled with extra field defined as calculated - createdAt")
     @Test
@@ -535,7 +543,7 @@ public class PostTestResultsNegTestTypesSubmittedLvl {
     @Test
     public void testResultsLengthMaxReasonForAbandoning() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv_cert.json", "$");
+        String testResultRecord = test_results_psv_cert_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

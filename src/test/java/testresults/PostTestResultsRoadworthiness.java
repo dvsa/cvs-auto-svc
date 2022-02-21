@@ -6,6 +6,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -26,13 +27,29 @@ public class PostTestResultsRoadworthiness {
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
+    private String test_results_roadworthiness_hgv_pass_7675_json;
+    private String test_results_roadworthiness_trl_pass_7675_json;
+    private String test_results_roadworthiness_hgv_fail_7675_json;
+    private String test_results_roadworthiness_trl_fail_7675_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_roadworthiness_hgv_pass_7675.json";
+        String jsonFileName2 = "test-results_roadworthiness_trl_pass_7675.json";
+        String jsonFileName3 = "test-results_roadworthiness_hgv_fail_7675.json";
+        String jsonFileName4 = "test-results_roadworthiness_trl_fail_7675.json";
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson(jsonFileName,false);
+        test_results_roadworthiness_trl_pass_7675_json = GenericData.updateJson(jsonFileName2,false);
+        test_results_roadworthiness_hgv_fail_7675_json = GenericData.updateJson(jsonFileName3,false);
+        test_results_roadworthiness_trl_fail_7675_json = GenericData.updateJson(jsonFileName4,false);
+    }
 
     @Title("CVSB-7675 - TC1 - AC1 - ROADWORTHINESS certificate number generated (HGV) - PASS")
     @Test
     public void testResults_Roadworthiness_HGV_Pass_Certificate_Number() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -70,7 +87,7 @@ public class PostTestResultsRoadworthiness {
     public void testResults_Roadworthiness_TRL_Pass_Certificate_Number() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_trl_pass_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -130,7 +147,7 @@ public class PostTestResultsRoadworthiness {
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_fail_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_fail_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomTestResultId = UUID.randomUUID().toString();
@@ -189,7 +206,7 @@ public class PostTestResultsRoadworthiness {
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_fail_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_trl_fail_7675_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomTestResultId = UUID.randomUUID().toString();

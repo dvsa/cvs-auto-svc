@@ -5,7 +5,6 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -35,7 +34,32 @@ public class PostTestResultsProvisionalUpdate {
         this.testStartDate = LocalDateTime.now();
     }
 
-
+    private String test_results_notifiable_alteration_hgv_json;
+    private String test_results_psv_json;
+    private String test_results_roadworthiness_hgv_pass_7675_json;
+    private String test_results_roadworthiness_trl_pass_7675_json;
+    private String test_results_lgv_json;
+    private String test_results_car_json;
+    private String test_results_motorcycle_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_notifiable_alteration_hgv.json";
+        String jsonFileName2 = "test-results_psv.json";
+        String jsonFileName3 = "test-results_roadworthiness_hgv_pass_7675.json";
+        String jsonFileName4 = "test-results_roadworthiness_trl_pass_7675.json";
+        String jsonFileName5 = "test-results_lgv.json";
+        String jsonFileName6 = "test-results_car.json";
+        String jsonFileName7 = "test-results_motorcycle.json";
+        test_results_notifiable_alteration_hgv_json = GenericData.updateJson( jsonFileName, false);
+        test_results_psv_json = GenericData.updateJson( jsonFileName2, false);
+        test_results_roadworthiness_hgv_pass_7675_json = GenericData.updateJson( jsonFileName3, false);
+        test_results_roadworthiness_trl_pass_7675_json = GenericData.updateJson( jsonFileName4, false);
+        test_results_lgv_json = GenericData.updateJson( jsonFileName5, false);
+        test_results_car_json = GenericData.updateJson( jsonFileName6, false);
+        test_results_motorcycle_json = GenericData.updateJson( jsonFileName7, false);
+    }
+    
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
     public void testResultsNotifiableAlteration_Pass() {
@@ -74,7 +98,7 @@ public class PostTestResultsProvisionalUpdate {
         // build and post a notifiable alteration test results
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
+        String testResultRecord = test_results_notifiable_alteration_hgv_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -128,7 +152,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", null);
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -171,7 +195,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv.json", "$");
+        String testResultRecord = test_results_psv_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -214,7 +238,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_trl_pass_7675_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -258,7 +282,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
+        String testResultRecord = test_results_lgv_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -301,7 +325,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_car.json", "$");
+        String testResultRecord = test_results_car_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -386,7 +410,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_hgv_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_hgv_pass_7675_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -426,7 +450,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_psv.json", "$");
+        String testResultRecord = test_results_psv_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -468,7 +492,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_roadworthiness_trl_pass_7675.json", "$");
+        String testResultRecord = test_results_roadworthiness_trl_pass_7675_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -511,7 +535,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
+        String testResultRecord = test_results_lgv_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -552,7 +576,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_car.json", "$");
+        String testResultRecord = test_results_car_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
@@ -595,7 +619,7 @@ public class PostTestResultsProvisionalUpdate {
 
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle.json", "$");
+        String testResultRecord = test_results_motorcycle_json;
         String randomTestResultId = UUID.randomUUID().toString();
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");

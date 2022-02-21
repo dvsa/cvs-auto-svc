@@ -7,6 +7,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -44,6 +45,13 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
         this.testTypeId = testTypeId;
     }
 
+    private String test_results_notifiable_alteration_hgv_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_notifiable_alteration_hgv.json";
+        test_results_notifiable_alteration_hgv_json = GenericData.updateJson(jsonFileName,false);
+    }
 
     @Title("CVSB-7049 - AC2 - VSA submits first test = PASS - HGV")
     @Test
@@ -83,7 +91,7 @@ public class PostTestResultsProvisionalUpdateFirstTestHgv {
 
 
         // read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_notifiable_alteration_hgv.json","$");
+        String testResultRecord = test_results_notifiable_alteration_hgv_json;
 
         String testResultId = UUID.randomUUID().toString();
 

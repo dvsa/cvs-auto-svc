@@ -291,7 +291,7 @@ public class PutVehicleTechnicalRecordsUpdateStatusCode {
     }
 
     @WithTag("Vtm")
-    @Title("CVSB-10195 - AC2: Add a provisional tech record, to a vehicle  - Current - Add Prov")
+    @Title("CVSB-10195 - AC2: Add a provisional tech record, to a vehicle - Current - Add Prov")
     @Test
     public void testPostVehicleTechRecordToAddCurrentProvisional() {
 

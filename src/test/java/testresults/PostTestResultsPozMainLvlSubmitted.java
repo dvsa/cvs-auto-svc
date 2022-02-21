@@ -10,6 +10,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,13 +37,21 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateData((TestResultsGet) vehicleSubmittedDataOld.build());
     }
+
+    private String test_results_post_payload_psv_10300_json;
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_post_payload_psv_10300.json";
+        test_results_post_payload_psv_10300_json = GenericData.updateJson( jsonFileName, false);
+    }
     
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testStationName")
     @Test
     public void testResultsTestStationNameRandString() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -71,7 +80,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsTestStationNameEmpty() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -101,7 +110,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsTestStationPNumberRandString() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -130,7 +139,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsTestStationPNumberEmpty() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -159,7 +168,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueTestStationTypeAtf() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -188,7 +197,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueTestStationTypeGvts() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -217,7 +226,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueTestStationTypeHq() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -246,7 +255,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomTesterName() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -275,7 +284,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsEmptyTesterName() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -305,7 +314,7 @@ public class PostTestResultsPozMainLvlSubmitted {
         public void testResultsRandomTesterStaffId() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -350,7 +359,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomTesterEmailAddress() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -379,7 +388,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsEmptyTesterEmailAddress() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -408,7 +417,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsTestStartTimestamp() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -437,7 +446,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsTestEndTimestamp() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -467,7 +476,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsLengthMaxReasonForCancellation() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -498,7 +507,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsNullReasonForCancellation() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -527,7 +536,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsEmptyReasonForCancellation() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -557,7 +566,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCode1() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -586,7 +595,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCode2() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -615,7 +624,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCode3() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -644,7 +653,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCoden() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -673,7 +682,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCodet() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -702,7 +711,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCodel() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -731,7 +740,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCodes() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -760,7 +769,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassCodev() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -789,7 +798,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesOne() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -818,7 +827,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesTwo() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -848,7 +857,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesThree() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -877,7 +886,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesFour() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -906,7 +915,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesFive() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -935,7 +944,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesSix() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -964,7 +973,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesSeven() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -993,7 +1002,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleClassDescriptionValuesEight() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1023,7 +1032,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueVehicleTypeValueOne() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1052,7 +1061,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomNumberOfSeats() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1081,7 +1090,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomNumberNoOfAxles2() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1110,7 +1119,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomNumberNoOfAxles3() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1140,7 +1149,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsVehicleConfigurationValueOne() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1184,7 +1193,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomOdometerReading() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1214,7 +1223,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsOdometerReadingUnitsValueOne() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1243,7 +1252,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsOdometerReadingUnitsValueTwo() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1272,7 +1281,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomStringPreparerId() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1301,7 +1310,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsEmptyPreparerId() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1330,7 +1339,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomStringPreparerName() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1359,7 +1368,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsEmptyPreparerName() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1389,7 +1398,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueOne() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1418,7 +1427,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueTwo() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1447,7 +1456,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueThree() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1476,7 +1485,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueFour() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1505,7 +1514,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueFive() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1534,7 +1543,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueSix() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1563,7 +1572,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueSeven() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1592,7 +1601,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueEight() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1621,7 +1630,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueNine() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1650,7 +1659,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleCategoryValueTen() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1679,7 +1688,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsRandomValueCountryOfRegistration() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1722,7 +1731,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleSizeValueOne() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -1751,7 +1760,7 @@ public class PostTestResultsPozMainLvlSubmitted {
     public void testResultsValueEuVehicleSizeValueTwo() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_payload_psv_10300.json", "$");
+        String testResultRecord = test_results_post_payload_psv_10300_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

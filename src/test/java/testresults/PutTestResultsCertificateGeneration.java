@@ -1,7 +1,6 @@
 package testresults;
 
 import data.GenericData;
-
 import io.restassured.http.ContentType;
 import junit.framework.TestCase;
 import io.restassured.response.Response;
@@ -146,7 +145,7 @@ public class PutTestResultsCertificateGeneration extends TestCase {
 
         Date date  = new Date();
 
-       String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
