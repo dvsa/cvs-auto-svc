@@ -1,7 +1,6 @@
 package testresults.annual_certificates;
 
 import data.GenericData;
-import exceptions.AutomationException;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -14,7 +13,6 @@ import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
 
-@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
