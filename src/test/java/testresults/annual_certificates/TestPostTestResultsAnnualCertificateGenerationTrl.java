@@ -14,7 +14,7 @@ import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
 
-
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationTrl {
 
@@ -302,7 +302,7 @@ public class TestPostTestResultsAnnualCertificateGenerationTrl {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         if ("warmup test".equals(name)) {
             try {
-                testResultsSteps.statusCodeShouldBe(504);
+                testResultsSteps.statusCodeShouldBe(201);
             } catch (Exception e) {
                 System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
