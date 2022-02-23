@@ -6,6 +6,7 @@ import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsSystemNumber {
@@ -325,6 +325,7 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testerEmailAddress",testerEmailAddressPost);
     }
 
+    @WithTag("In_test")
     @Title("CVSB - 17727 - To verify the cert is generated for a TRL with vin having spaces")
     @Test
     public void testCertGenerationForVinWithSpaces() {

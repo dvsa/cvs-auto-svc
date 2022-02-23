@@ -5,6 +5,7 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import model.vehicles.VehicleTechnicalRecordStatus;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import steps.VehicleTechnicalRecordsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
 
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTrailerRegistration {
 
