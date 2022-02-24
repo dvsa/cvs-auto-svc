@@ -31,7 +31,6 @@ public class PostTestResultsCheckVsaEmail {
         test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson( jsonFileName, false);
     }
 
-    @WithTag("In_test")
     @Title("CVSB-9194 - Check email to VSA lands in inbox")
     @Test
     public void testResults_Check_Vsa_Email() {
