@@ -179,7 +179,6 @@ public class ActivitiesClient {
 
     }
 
-
     private Response callPostActivities(Object object) {
 
         Response response = given().filters(new BasePathFilter())
@@ -284,4 +283,37 @@ public class ActivitiesClient {
     public void deleteActivity(String id) {
         AwsUtil.deleteActivityById(id);
     }
+
+    private Response callOpenVisitCheck(String activityType, String testerStaffId) {
+
+        RequestSpecification requestSpecification = given().filters(new BasePathFilter())
+                .contentType(ContentType.JSON);
+
+        if (activityType != null) {
+            requestSpecification.queryParam("activityType", activityType);
+        }
+
+        if (testerStaffId != null) {
+            requestSpecification.queryParam("testerStaffId", testerStaffId);
+        }
+
+        Response response = requestSpecification
+                .log().method().log().uri().log().body()
+                .get("/activities/open");
+
+        return response;
+    }
+
+    public Response openVisitCheck(String activityType, String testerStaffId) {
+
+        Response response = callOpenVisitCheck(activityType, testerStaffId);
+
+        if (response.getStatusCode() == 403) {
+            saveUtils();
+            response = callOpenVisitCheck(activityType, testerStaffId);
+        }
+        return response;
+
+    }
+
 }
