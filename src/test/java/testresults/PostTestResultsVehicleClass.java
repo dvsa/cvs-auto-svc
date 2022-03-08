@@ -35,11 +35,9 @@ public class PostTestResultsVehicleClass {
     }
 
         private String vehicle;
-        private int statusCode;
 
     public PostTestResultsVehicleClass(String vehicle, int statusCode) {
             this.vehicle = vehicle;
-            this.statusCode = statusCode;
         }
 
     @Title("CVSB-13903 - (IMPROVEMENT)[BE] Specialist tests, updating the test results API specs - vehicleClass mandatory only for motorcycles - AC1 - vehicleClass - optional for other than motorcycle")
@@ -68,7 +66,7 @@ public class PostTestResultsVehicleClass {
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
         testResultsSteps.waitForTestResultsToBeUpdated(systemNumber, 50);
-        testResultsSteps.statusCodeShouldBe(statusCode);
+        testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.getTestResultsSysNumber(systemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         testResultsSteps.validateTestFieldNotPresent("vehicleClass");
