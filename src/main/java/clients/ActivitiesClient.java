@@ -284,14 +284,10 @@ public class ActivitiesClient {
         AwsUtil.deleteActivityById(id);
     }
 
-    private Response callOpenVisitCheck(String activityType, String testerStaffId) {
+    private Response callOpenVisitCheck(String testerStaffId) {
 
         RequestSpecification requestSpecification = given().filters(new BasePathFilter())
                 .contentType(ContentType.JSON);
-
-        if (activityType != null) {
-            requestSpecification.queryParam("activityType", activityType);
-        }
 
         if (testerStaffId != null) {
             requestSpecification.queryParam("testerStaffId", testerStaffId);
@@ -304,13 +300,13 @@ public class ActivitiesClient {
         return response;
     }
 
-    public Response openVisitCheck(String activityType, String testerStaffId) {
+    public Response openVisitCheck(String testerStaffId) {
 
-        Response response = callOpenVisitCheck(activityType, testerStaffId);
+        Response response = callOpenVisitCheck(testerStaffId);
 
         if (response.getStatusCode() == 403) {
             saveUtils();
-            response = callOpenVisitCheck(activityType, testerStaffId);
+            response = callOpenVisitCheck(testerStaffId);
         }
         return response;
 
