@@ -6,8 +6,8 @@
   "testerName": "Gica",
   "testerStaffId": "133",
   "testerEmailAddress": "someone@email.com",
-  "testStartTimestamp": "2020-03-02T14:42:05.280Z",
-  "testEndTimestamp": "2020-03-02T14:45:06.915Z",
+  "testStartTimestamp": "2021-03-02T14:42:05.280Z",
+  "testEndTimestamp": "2021-03-02T14:45:06.915Z",
   "testStatus": "submitted",
   "reasonForCancellation": null,
   "testTypes": [
