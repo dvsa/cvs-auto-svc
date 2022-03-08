@@ -67,6 +67,7 @@ public class PostTestResultsVehicleClass {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResult);
+        testResultsSteps.waitForTestResultsToBeUpdated(systemNumber, 50);
         testResultsSteps.statusCodeShouldBe(statusCode);
         testResultsSteps.getTestResultsSysNumber(systemNumber);
         testResultsSteps.statusCodeShouldBe(200);
