@@ -25,7 +25,6 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
 
-@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class PutVehicleAdrFieldRestrictions {
 
