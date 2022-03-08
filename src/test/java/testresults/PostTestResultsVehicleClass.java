@@ -47,7 +47,7 @@ public class PostTestResultsVehicleClass {
     public void testVehicleTechRecordMotorcycleVehicleCategoryOptional() {
 
         // Tech record exists already in dynamoDb with a prep-populated euVehicleCategory
-        String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
+        String systemNumber = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         String randomVin = GenericData.generateRandomVin();
         String randomTestResultId = UUID.randomUUID().toString();
 
