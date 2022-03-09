@@ -257,7 +257,7 @@ public class ActivitiesSteps {
     }
 
     @Step
-    public boolean checkOpenVisit(String activityType, String testerStaffId,  boolean expectedValue) {
+    public boolean checkOpenVisit(String testerStaffId,  boolean expectedValue) {
         response = activitiesClient.openVisitCheck(testerStaffId);
         if(response.statusCode() == 200) {
             assertThat(response.getBody().equals(expectedValue));
@@ -267,7 +267,6 @@ public class ActivitiesSteps {
             System.out.println(response.statusCode());
         }
         return expectedValue;
-
     }
 
     @Step

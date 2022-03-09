@@ -17,22 +17,22 @@ public class OpenVisitCheck {
     @Test
     public void getOpenVisitOk() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
-        activitiesSteps.checkOpenVisit("visit", "113", false);
+        activitiesSteps.checkOpenVisit("113", false);
         activitiesSteps.statusCodeShouldBe(200);
-        activitiesSteps.checkOpenVisit("visit", "132", true);
+        activitiesSteps.checkOpenVisit("132", true);
         activitiesSteps.statusCodeShouldBe(200);
     }
 
     @Title("VTA-300 - Get open visit with empty string testerStaffId return 400 Bad Request")
     @Test
     public void getOpenVisitWithEmptyStringStaffId() {
-        activitiesSteps.checkOpenVisit("visit", "", false);
+        activitiesSteps.checkOpenVisit( "", false);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateResp("\"Bad Request\"");
-        activitiesSteps.checkOpenVisit("visit", null, false);
+        activitiesSteps.checkOpenVisit(null, false);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateResp("\"Bad Request\"");
-        activitiesSteps.checkOpenVisit("visit", "undefined", false);
+        activitiesSteps.checkOpenVisit("undefined", false);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateResp("\"Bad Request\"");
     }
