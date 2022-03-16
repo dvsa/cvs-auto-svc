@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -128,7 +129,7 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
     }
 
-
+    @WithTag("In_test")
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = PASS - HGV")
     @Test
     public void testResultsFirstTestHgvPass() {
@@ -307,7 +308,7 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberTwo, randomVin, "statusCode", "provisional");
     }
 
-
+    @WithTag("In_test")
     @Title("CVSB-12445 - TC - AC1 - VSA submits First test = PASS - TRL")
     @Test
     public void testResultsFirstTestTrlPass() {

@@ -5,6 +5,7 @@ import model.vehicles.VehicleTechnicalRecordStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -59,7 +60,8 @@ public class PostTestResultsProvisionalUpdate {
         test_results_car_json = GenericData.updateJson( jsonFileName6, false);
         test_results_motorcycle_json = GenericData.updateJson( jsonFileName7, false);
     }
-    
+
+    @WithTag("In_test")
     @Title("CVSB-4867 - AC2 - VSA submits notifiable alteration test = PASS")
     @Test
     public void testResultsNotifiableAlteration_Pass() {
@@ -138,6 +140,7 @@ public class PostTestResultsProvisionalUpdate {
 
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - HGV")
     @Test
     public void testVehicleTechRecordHgvEuVehicleCategoryNull(){
@@ -180,6 +183,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n2");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - PSV")
     @Test
     public void testVehicleTechRecordPsvEuVehicleCategoryNull(){
@@ -267,6 +271,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o2");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - LGV")
     @Test
     public void testVehicleTechRecordLgvEuVehicleCategoryNull(){
@@ -310,6 +315,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "n1");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - Car")
     @Test
     public void testVehicleTechRecordCarEuVehicleCategoryNull(){
@@ -353,6 +359,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "m1");
     }
 
+    @WithTag("In_test")
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - Motorcycle")
     @Test
     public void testVehicleTechRecordMotorcycleEuVehicleCategoryNull(){

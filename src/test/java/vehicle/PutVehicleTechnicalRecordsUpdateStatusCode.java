@@ -82,7 +82,8 @@ public class PutVehicleTechnicalRecordsUpdateStatusCode {
 
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10195 - AC1: Change current or provisional status to archived - Current - Archived")
     @Test
     public void testPutVehicleTechRecordStatusCodeCurrentToArchive(){
@@ -290,7 +291,8 @@ public class PutVehicleTechnicalRecordsUpdateStatusCode {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10195 - AC2: Add a provisional tech record, to a vehicle - Current - Add Prov")
     @Test
     public void testPostVehicleTechRecordToAddCurrentProvisional() {

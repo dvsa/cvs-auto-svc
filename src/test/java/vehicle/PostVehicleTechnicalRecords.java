@@ -345,6 +345,7 @@ public class PostVehicleTechnicalRecords {
                 brakeCode.substring(brakeCode.length() - 3));
     }
 
+    @WithTag("In_test")
     @Title("CVSB-10478 - AC2 - POST: Permit the POST of a vin which has special characters (i.e, remove the restriction that vins can only contain letters + numbers) " +
             "CVSB-10478 - AC3 - POST: Permit the POST of a primaryVrm which has special characters")
     @Test
@@ -758,7 +759,8 @@ public class PostVehicleTechnicalRecords {
 
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10316 - AC4 - statusCode updated in vehicle API + AC3 - testResults created in test results API - HGV - PASS - First Test")
     @Test
     public void test19_PostVehicleTechRecordHgvPassFirstTest() {
@@ -827,7 +829,8 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10316 - AC2 - statusCode updated in vehicle API + AC1 - testResults created in test results API - HGV - PASS - Notifiable Alteration")
     @Test
     public void test20_PostVehicleTechRecordHgvPassNotifiableAlteration() {
@@ -1033,7 +1036,8 @@ public class PostVehicleTechnicalRecords {
     }
 
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10316 - AC4 - statusCode updated in vehicle API + AC3 - testResults created in test results API - TRL - PRS - First Test")
     @Test
     public void test23_PostVehicleTechRecordTrlPrsFirstTest() {
@@ -1104,7 +1108,8 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10316 - AC2 - statusCode updated in vehicle API + AC1 - testResults created in test results API - TRL - PASS - Notifiable Alteration")
     @Test
     public void test24_PostVehicleTechRecordTrlPassNotifiableAlteration() {
@@ -1174,7 +1179,8 @@ public class PostVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldContains("[0].techRecord[1].createdAt", new SimpleDateFormat("yyyy-MM-dd").format(date));
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10316 - AC2 - statusCode updated in vehicle API + AC1 - testResults created in test results API  - TRL - PRS - Notifiable Alteration")
     @Test
     public void test25_PostVehicleTechRecordTrlPrsNotifiableAlteration() {

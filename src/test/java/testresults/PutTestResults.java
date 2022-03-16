@@ -461,7 +461,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
     }
 
-    @WithTag("Vtm")
+    @WithTag("In_test")
+//    @WithTag("Vtm")
     @Title("CVSB-12378 - AC8. PUT request: Test result is updated with a new test code")
     @Test
     public void testPutTestResultsUpdateFields() {
@@ -1357,7 +1358,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - TestTypeId = 57")
     @Test
     public void testResultsPutApplicableFreeTirRetest() {
@@ -1656,7 +1658,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
-    @WithTag("Vtm")
+    @WithTag("In_test")
+//    @WithTag("Vtm")
     @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - TestTypeId = 45")
     @Test
     public void testResultsPutApplicableWithoutLinkedLecTest() {
@@ -1866,7 +1869,8 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
     }
 
-    @WithTag("Vtm")
+//    @WithTag("Vtm")
+    @WithTag("In_test")
     @Title("CVSB-10300 - AC1 PUT: Attempt to update a test record with a not applicable field - TestTypeId = 63")
     @Test
     public void testResultsPutApplicableRoadPartPaidRwRetest() {
@@ -2524,6 +2528,7 @@ public class PutTestResults extends TestCase{
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_BAD_REQUEST);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-10372 - AC8. Generate a certificate - PSV + PASSED Specialist test only - COIF with annual test - CEL, CES")
     @Test
     public void PutTestResultsCertificateGenerationForCOIFTest() {

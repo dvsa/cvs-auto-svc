@@ -4,6 +4,7 @@ import data.GenericData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Before;
@@ -207,6 +208,7 @@ public class GetTestResultsApiSpecs {
         testResultsSteps.statusCodeShouldBe(200);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-8380 - Iteration on test results API specs to cover the additional LEC test details fields")
     @Test
     public void testPostTestResultsUsingSystemNumberAndGetResultsScenario4() {
