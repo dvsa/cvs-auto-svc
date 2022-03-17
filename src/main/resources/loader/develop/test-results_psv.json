@@ -6,8 +6,8 @@
   "testerName": "Gica",
   "testerStaffId": "133",
   "testerEmailAddress": "someone@email.com",
-  "testStartTimestamp": "2020-03-02T14:42:05.280Z",
-  "testEndTimestamp": "2020-03-02T14:45:06.915Z",
+  "testStartTimestamp": "2021-03-02T14:42:05.280Z",
+  "testEndTimestamp": "2021-03-02T14:45:06.915Z",
   "testStatus": "submitted",
   "reasonForCancellation": null,
   "testTypes": [
@@ -16,8 +16,8 @@
       "name": "Technical test",
       "testTypeId": "39",
       "certificateNumber": "12334",
-      "testTypeStartTimestamp": "2021-01-14T10:36:33.987Z",
-      "testTypeEndTimestamp": "2021-01-14T10:36:33.987Z",
+      "testTypeStartTimestamp": "2021-03-02T14:42:05.280Z",
+      "testTypeEndTimestamp": "2021-03-02T14:45:06.915Z",
       "testExpiryDate": "2021-09-19",
       "modType": {
         "code": "p",

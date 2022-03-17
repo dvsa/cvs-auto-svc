@@ -13,7 +13,6 @@ import util.AwsUtil;
 import util.JsonPathAlteration;
 import util.WebDriverBrowsertack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,6 +27,12 @@ public class ActivitiesSteps {
     @Step
     public void postActivities(Activities activities) {
         response = activitiesClient.postActivities(activities);
+    }
+
+    @Step
+    public Response postActivitiesGetResponse(Activities activities) {
+        response = activitiesClient.postActivities(activities);
+        return response;
     }
 
     @Step
@@ -249,5 +254,35 @@ public class ActivitiesSteps {
         String keyValuePair2 = "statusCode: " + httpCode;
         String keyValuePair3 = "method: '" + httpMethod +"'";
         assertThat(AwsUtil.checkDispatcherLogsForData(keyValuePair1, keyValuePair2, keyValuePair3)).isTrue();
+    }
+
+    @Step
+    public boolean checkOpenVisit(String testerStaffId,  boolean expectedValue) {
+        response = activitiesClient.openVisitCheck(testerStaffId);
+        if(response.statusCode() == 200) {
+            assertThat(response.getBody().equals(expectedValue));
+            System.out.println("THIS IS THE EXPECTED VALUE" + " " + expectedValue);
+        }
+        else {
+            System.out.println(response.statusCode());
+        }
+        return expectedValue;
+    }
+
+    @Step
+    public void closeOpenVisit(String activityId) {
+        response = activitiesClient.putActivitiesEnd(activityId);
+        if(response.statusCode() == 200) {
+            assertThat(response.then().body("$", hasKey("wasVisitAlreadyClosed")));
+        }
+        else {
+            System.out.println(response.statusCode());
+        }
+
+    }
+
+    @Step
+    public void validateResp(String stringData) {
+        response.then().body(is(stringData));
     }
 }
