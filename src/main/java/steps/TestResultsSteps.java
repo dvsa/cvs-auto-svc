@@ -799,20 +799,20 @@ public class TestResultsSteps {
         AwsUtil.deleteActivitiesForUser(user);
     }
 
-    @Step
-    public WebDriver validateVsaEmail(String randomVrm) {
-        return WebDriverBrowsertack.checkVsaEmail(randomVrm);
-    }
+//    @Step
+//    public WebDriver validateVsaEmail(String randomVrm) {
+//        return WebDriverBrowsertack.checkVsaEmail(randomVrm);
+//    }
 
     @Step
     public String getOutlookEmailAddress() {
         return testResultsClient.getOutlookEmailAddress();
     }
 
-    @Step
-    public void validateVsaEmailDetails(WebDriver driver, String randomVrm, String testName, String date) {
-        WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
-    }
+//    @Step
+//    public void validateVsaEmailDetails(WebDriver driver, String randomVrm, String testName, String date) {
+//        WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
+//    }
 
     @Step
     public void valueForFieldInPathShouldStartWith(String path, String expectedValue) {
