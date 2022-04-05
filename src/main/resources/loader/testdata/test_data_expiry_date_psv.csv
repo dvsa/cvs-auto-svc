@@ -2,3 +2,4 @@ NAME, TEST TYPE NAME, TEST TYPE ID, VEHICLE SIZE, VEHICLE CONFIGURATION, TEST RE
 Annual test, Annual test, 1, large, rigid, pass, aal, aal, true
 Annual test, Annual test, 1, small, rigid, pass, aal, aas, true
 Annual test, Annual test, 1, large, articulated, pass, aal, adl, true
+
