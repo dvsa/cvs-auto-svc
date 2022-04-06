@@ -1,36 +1,40 @@
-package testresults;
+package testresults.annual_certificates;
 
 import data.GenericData;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import junit.framework.TestCase;
-import model.testresults.TestResultsStatus;
+import io.restassured.response.Response;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.http.HttpStatus;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.BasePathFilter;
 import util.JsonPathAlteration;
+import org.apache.http.HttpStatus;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
+import org.junit.Assert;
 
 
 @RunWith(SerenityParameterizedRunner.class)
-public class PutTestResultsCertificateNotGenerated extends TestCase {
+public class PutTestResultsCertificateGeneration extends TestCase {
 
     static String randomVin;
     static String randomSystemNumber;
     static String randomTestResultId;
+
+    @Steps
+    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     @BeforeClass
     public static void createRecord() {
@@ -77,6 +81,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
         JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 2)), "", "REPLACE");
         JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 3)), "", "REPLACE");
 
+
         List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(alterationSystemNumberTestResults,
                 alterationVinTestResults,
                 alterationTestResultIdPost,
@@ -102,24 +107,23 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
         }
         Assert.assertEquals(HttpStatus.SC_CREATED, responseTestResult.getStatusCode());
     }
+        LocalDateTime testStartDate;
+        @Before
+        public void beforeTest() {
+            this.testStartDate = LocalDateTime.now();
+        }
 
     @Steps
     TestResultsSteps testResultsSteps;
 
-    @Steps
-    VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
-                {"fail","cancelled","Annual With Certificate"},
-                {"fail","cancelled","Annual No Certificate"},
-                {"pass","cancelled","Annual With Certificate"},
-                {"pass","cancelled","Annual No Certificate"},
-                {"prs","cancelled","Annual With Certificate"},
-                {"prs","cancelled","Annual No Certificate"},
-                {"abandoned","cancelled","Annual With Certificate"},
-                {"abandoned","cancelled","Annual No Certificate"},
+                {"pass","submitted","Annual With Certificate"},
+                {"fail","submitted","Annual With Certificate"},
+                {"prs","submitted","Annual With Certificate"},
+                {"abandoned","submitted","Annual With Certificate"},
+                {"abandoned","submitted","Annual No Certificate"},
         });
     }
 
@@ -127,7 +131,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
     private String testStatus;
     private String testTypeClassification;
 
-    public PutTestResultsCertificateNotGenerated(String testResult, String testStatus, String testTypeClassification) {
+    public PutTestResultsCertificateGeneration(String testResult, String testStatus, String testTypeClassification) {
         this.testResult = testResult;
         this.testStatus = testStatus;
         this.testTypeClassification = testTypeClassification;
@@ -141,8 +145,7 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
 
         Date date  = new Date();
 
-        String jsonFileName = "test-results_put_payload_10711.json";
-        String putRequestBody = GenericData.updateJson(jsonFileName, true);
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_put_payload_10711.json","$");
 
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
@@ -169,16 +172,18 @@ public class PutTestResultsCertificateNotGenerated extends TestCase {
                 alterationPutTestTypeEndTimestamp
         ));
 
-        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber, putRequestBody, alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
-        testResultsSteps.getTestResults(randomSystemNumber, TestResultsStatus.CANCELED);
+        testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
         String testNumber = testResultsSteps.getTestNumber();
+        vehicleTechnicalRecordsSteps.waitForVehicleRecordUpdate(randomVin, 25, this.testStartDate);
+        this.testStartDate = LocalDateTime.now();
 
         System.out.println("TestNumber is " +testNumber);
 
-        // verify that the certificate is created in the S3 bucket
-        testResultsSteps.validateCertificateIsNotGenerated(testNumber,randomVin);
+        //verify that the certificate is created in the S3 bucket
+        testResultsSteps.validateCertificateIsGenerated(testNumber,randomVin);
     }
 }
