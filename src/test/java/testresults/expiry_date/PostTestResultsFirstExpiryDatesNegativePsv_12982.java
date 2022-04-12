@@ -1,6 +1,8 @@
 package testresults.expiry_date;
 
 import data.GenericData;
+import data.TestResultsData;
+import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
@@ -8,6 +10,7 @@ import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.UseTestDataFrom;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -33,6 +36,14 @@ public class PostTestResultsFirstExpiryDatesNegativePsv_12982 {
     private String vehicleConfiguration;
     private String testResult;
     private String testCode;
+    private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
+
+    @Before
+    @Title("warm up test")
+    @Test
+    public void testResultsWarmUpTest() {
+        testResultsSteps.postTestResults(vehicleCancelledData.build());
+    }
 
     public void setName(String name) {
         this.name = name;
