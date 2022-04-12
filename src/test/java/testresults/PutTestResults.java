@@ -31,7 +31,6 @@ public class PutTestResults extends TestCase{
 
     Date date  = new Date();
 
-
     @WithTag("Vtm")
     @Title("CVSB-12378 - AC2. PUT: Attempt to update the defect array when a defect is deleted/removed from a test record")
     @Test
@@ -2138,12 +2137,16 @@ public class PutTestResults extends TestCase{
         JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
         JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationPutTestStartTimestamp = new JsonPathAlteration("$.testResult.testStartTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 1)), "", "REPLACE");
+        JsonPathAlteration alterationPutTestEndTimestamp = new JsonPathAlteration("$.testResult.testEndTimestamp", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateUtils.addMinutes(date, 4)), "", "REPLACE");
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
                 alterationSystemNumberPutTestResults,
                 alterationVinPutTestResults,
-                alterationTestResultIdPut));
+                alterationTestResultIdPut,
+                alterationPutTestStartTimestamp,
+                alterationPutTestEndTimestamp));
 
         testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
         testResultsSteps.statusCodeShouldBe(200);
