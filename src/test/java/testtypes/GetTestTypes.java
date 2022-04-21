@@ -27,7 +27,7 @@ public class GetTestTypes {
     @Steps
     TestTypeSteps testTypeSteps;
 
-//    @Ignore("Bad test design - requires maintenance for every change in taxonomy")
+    //@Ignore("Bad test design - requires maintenance for every change in taxonomy")
     @Title("CVSB-579 / CVSB-746 - CVSB-996 / CVSB-2391 AC1 - API Consumer retrieve all the test types and test codes reference data")
     public void testTypesReferenceData() throws Exception {
         Response resp = testTypeSteps.getTestTypesWithData();

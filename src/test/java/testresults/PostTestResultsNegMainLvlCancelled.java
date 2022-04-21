@@ -461,7 +461,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testStatus")
     public void testResultsMissingTestStatus() {
 
@@ -471,7 +471,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStatus")
     public void testResultsNullTestStatus() {
 
@@ -481,7 +481,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testStatus")
     public void testResultsIntegerTestStatus() {
 
@@ -491,7 +491,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStatus random")
     public void testResultsValueTestStatus() {
 
@@ -501,7 +501,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStatus empty")
     public void testResultsValueTestStatusEmpty() {
 
@@ -612,7 +612,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - vehicleType")
     public void testResultsMissingVehicleType() {
 
@@ -622,7 +622,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - vehicleType")
     public void testResultsNullVehicleType() {
 
@@ -632,7 +632,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - vehicleType")
     public void testResultsIntegerVehicleType() {
 
@@ -642,7 +642,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+    //@Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicleType random")
     public void testResultsValueVehicleType() {
 
@@ -652,7 +652,7 @@ public class PostTestResultsNegMainLvlCancelled {
     }
 
 
-    @Ignore("Ignored until CVSB-9015 is fixed")
+   // @Ignore("Ignored until CVSB-9015 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - vehicleType empty")
     public void testResultsValueVehicleTypeEmpty() {
 

@@ -338,7 +338,7 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.validateData("Test records created");
     }
 
-    @Ignore ("empty testerStaffId should be accepted but returned an error - instead returns bad Gateway - defect id CVSB-9018")
+   // @Ignore ("empty testerStaffId should be accepted but returned an error - instead returns bad Gateway - defect id CVSB-9018")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - testerStaffId")
     public void testResultsEmptyTesterStaffId() {
 
@@ -1173,7 +1173,7 @@ public class PostTestResultsPozMainLvlSubmitted {
         testResultsSteps.validateData("Test records created");
     }
 
-    @Ignore ("vehicleConfiguration = articulated should have returned 201 - instead returns bad Gateway - defect Id CVSB-9017")
+   // @Ignore ("vehicleConfiguration = articulated should have returned 201 - instead returns bad Gateway - defect Id CVSB-9017")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration articulated")
     public void testResultVehicleConfigurationValueTwo() {
 
