@@ -130,7 +130,7 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         testResultsSteps.validateData("Test records created");
     }
 
-   // @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway - defect CVSB-9011")
+    @Ignore ("random testTypeId should have returned an error - instead returns bad Gateway - defect CVSB-9011")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeId")
     public void testResultsRandomTestTypeId() {
 

@@ -2660,7 +2660,7 @@ public class PutVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord[0].recordCompleteness","Skeleton" );
     }
 
-    //@Ignore("Wait untill CVSB-15252 / CVSB-15896 is merged")
+    @Ignore("Wait untill CVSB-15252 / CVSB-15896 is merged")
     @WithTag("Vtm")
     @Title("CVSB-15252 / CVSB-15896 - Updating the Vehicles API to support plate generation + saving of the new tech record")
     public void testVehicleTechnicalRecordPlateGeneration_Trl() {

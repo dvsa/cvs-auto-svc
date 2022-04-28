@@ -4252,7 +4252,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateData("No resources match the search criteria.");
     }
 
-   // @Ignore("Till the time LEC certificates are turned off")
+    @Ignore("Till the time LEC certificates are turned off")
     @Title("CVSB-7523 - CVSB-7679 - TC - AC1 - GET to testTypes service and confirm 'Annual With Certificate' is retrieved - LBP")
     public void testTypeLecAnnualCertificatePsvSmallRigidLbp() {
 
@@ -4270,7 +4270,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateData("linkedTestCode","lcp");
     }
 
-   // @Ignore("Till the time LEC certificates are turned off")
+    @Ignore("Till the time LEC certificates are turned off")
     @Title("CVSB-7523 - CVSB-7679 - TC - AC1 - GET to testTypes service and confirm 'Annual With Certificate' is retrieved - LCP")
     public void testTypeLecAnnualCertificatePsvSmallRigidLcp() {
 
@@ -4287,7 +4287,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateData("linkedTestCode","lcp");
     }
 
-   // @Ignore("Till the time LEC certificates are turned off")
+    @Ignore("Till the time LEC certificates are turned off")
     @Title("CVSB-7523 - CVSB-7679 - TC - AC2 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification='Annual With Certificate' - LDV")
     public void testTypeLecAnnualCertificateHgvLdv() {
 
@@ -4304,7 +4304,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.validateData("defaultTestCode","ldv");
     }
 
-   // @Ignore("Till the time LEC certificates are turned off")
+    @Ignore("Till the time LEC certificates are turned off")
     @Title("CVSB-7523 - CVSB-7679 - TC - AC2 - UPDATE THE HGV & TRL TEST TYPE IN TAXONOMY BY SETTING testTypeClassification='Annual With Certificate' - LEV")
     public void testTypeLecAnnualCertificateHgvLev() {
 
