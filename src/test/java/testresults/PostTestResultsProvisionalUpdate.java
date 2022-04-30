@@ -647,7 +647,7 @@ public class PostTestResultsProvisionalUpdate {
     }
 
 
-    @Ignore("Test dropped out until duplicate-vin issue is dealt with")
+    //@Ignore("Test dropped out until duplicate-vin issue is dealt with")
     @Title("CVSB-12449 - 'EU vehicle category' updated based on systemNumber")
     public void testVehicleTechRecordeuVehicleCategoryUpdatedBasedOnSystemNumber(){
 

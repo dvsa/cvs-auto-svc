@@ -534,7 +534,7 @@ public class PostTestResultsNegDefectsLvlSubmitted {
     }
 
 
-    @Ignore("Ignored until CVSB-9010 is fixed")
+    //@Ignore("Ignored until CVSB-9010 is fixed")
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - additionalInformation")
     public void testResultsAdditionalInformationMissing() {
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "additionalInformation", ToTypeConvertor.MISSING, TestResultsLevel.DEFECTS);
