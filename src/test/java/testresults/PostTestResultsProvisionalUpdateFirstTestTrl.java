@@ -16,7 +16,7 @@ import util.JsonPathAlteration;
 import java.util.*;
 
 
-//@Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
+@Ignore("Ignoring these tests until there is support to making post request on tech records endpoint for trailers")
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsProvisionalUpdateFirstTestTrl {
 
