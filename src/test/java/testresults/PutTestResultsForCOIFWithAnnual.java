@@ -23,7 +23,7 @@ import static util.WriterReader.saveUtils;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@WithTag("In_test")
+
 @RunWith(SerenityParameterizedRunner.class)
 public class PutTestResultsForCOIFWithAnnual extends TestCase {
 

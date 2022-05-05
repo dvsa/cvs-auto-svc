@@ -2,7 +2,6 @@ package testresults;
 
 import data.TestResultsData;
 import data.GenericData;
-import net.thucydides.core.annotations.WithTag;
 import org.junit.Before;
 import util.JsonPathAlteration;
 import model.testresults.TestResults;
@@ -21,7 +20,7 @@ import java.util.*;
 import java.util.Random;
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTag("In_test")
+
 @RunWith(SerenityRunner.class)
 public class PostTestResultsPozTestTypesSubmittedLvl {
 

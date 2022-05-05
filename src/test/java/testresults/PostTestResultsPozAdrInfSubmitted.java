@@ -8,7 +8,6 @@ import model.testresults.TestResultsGet;
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import net.thucydides.junit.annotations.TestData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static util.DataUtil.generateRandomExcludingValues;
-@WithTag("In_test")
+
 @RunWith(SerenityParameterizedRunner.class)
 public class PostTestResultsPozAdrInfSubmitted {
 
