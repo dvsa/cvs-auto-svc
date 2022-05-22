@@ -9,18 +9,16 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.DataUtil;
 import util.JsonPathAlteration;
+import utils.TestUtils;
+
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @RunWith(SerenityRunner.class)
@@ -29,6 +27,7 @@ public class PostActivitiesNeg {
     @Steps
     ActivitiesSteps activitiesSteps;
 
+    TestUtils testUtils =new TestUtils();
     private Activities.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
 
@@ -37,8 +36,7 @@ public class PostActivitiesNeg {
     public void activityActivityTypeMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "activityType", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"activityType", "is required");
     }
 
 
@@ -47,8 +45,7 @@ public class PostActivitiesNeg {
     public void activityActivityTypeNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "activityType", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps,400,"activityType", "must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - activityType")
@@ -56,8 +53,7 @@ public class PostActivitiesNeg {
     public void activityActivityTypeInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "activityType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps,400,"activityType","must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2940 - API Consumer tries to create an activity with different range or format body property value - activityType")
@@ -65,8 +61,7 @@ public class PostActivitiesNeg {
     public void activityActivityTypeRandomString() {
 
         activitiesSteps.postActivities(activitiesData.setActivityType(RandomStringUtils.randomAlphanumeric(6)).build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps,400,"activityType","must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testStationName")
@@ -74,8 +69,7 @@ public class PostActivitiesNeg {
     public void testStationNameMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationName", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationName", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps,400,"testStationName","is required");
     }
 
 
@@ -84,8 +78,7 @@ public class PostActivitiesNeg {
     public void testStationNameNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationName", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationName", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationName","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testStationName")
@@ -93,8 +86,7 @@ public class PostActivitiesNeg {
     public void testStationNameInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationName", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationName", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationName","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testStationPNumber")
@@ -102,8 +94,7 @@ public class PostActivitiesNeg {
     public void testStationPNumberMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationPNumber", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationPNumber", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationPNumber","is required");
     }
 
 
@@ -112,8 +103,7 @@ public class PostActivitiesNeg {
     public void testStationPNumberNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationPNumber", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationPNumber", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationPNumber","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testStationPNumber")
@@ -121,8 +111,7 @@ public class PostActivitiesNeg {
     public void testStationPNumberInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationPNumber", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationPNumber", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationPNumber","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testStationEmail")
@@ -130,8 +119,7 @@ public class PostActivitiesNeg {
     public void testStationEmailMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationEmail", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationEmail","is required");
     }
 
 
@@ -140,8 +128,7 @@ public class PostActivitiesNeg {
     public void testStationEmailNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationEmail", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationEmail","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testStationEmail")
@@ -149,8 +136,7 @@ public class PostActivitiesNeg {
     public void testStationEmailInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationEmail", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationEmail","must be a string");
     }
 
 
@@ -159,8 +145,7 @@ public class PostActivitiesNeg {
     public void testStationEmailRandomString() {
 
         activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6)).build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a valid email");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationEmail","must be a valid email");
     }
 
 
@@ -169,8 +154,7 @@ public class PostActivitiesNeg {
     public void testStationEmailRandomString2() {
 
         activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6) + "@" + RandomStringUtils.randomAlphanumeric(6) + ".").build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a valid email");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationEmail","must be a valid email");
     }
 
     @Title("CVSB-163 / CVSB-2940 - API Consumer tries to create an activity with different range or format body property value - testStationEmail")
@@ -178,8 +162,7 @@ public class PostActivitiesNeg {
     public void testStationEmailRandomString3() {
 
         activitiesSteps.postActivities(activitiesData.setTestStationEmail(RandomStringUtils.randomAlphanumeric(6) + "@." + RandomStringUtils.randomAlphanumeric(6)).build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationEmail", "must be a valid email");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationEmail","must be a valid email");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - activityType")
@@ -187,8 +170,7 @@ public class PostActivitiesNeg {
     public void activityTestStationTypeMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationType", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationType","is required");
     }
 
 
@@ -197,8 +179,7 @@ public class PostActivitiesNeg {
     public void activityTestStationTypeNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationType", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationType","must be one of [atf, gvts, hq]");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testStationType")
@@ -206,8 +187,7 @@ public class PostActivitiesNeg {
     public void activityTestStationTypeInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationType","must be one of [atf, gvts, hq]");
     }
 
     @Title("CVSB-163 / CVSB-2940 - API Consumer tries to create an activity with different range or format body property value - testStationType")
@@ -215,8 +195,7 @@ public class PostActivitiesNeg {
     public void activityTestStationTypeString() {
 
         activitiesSteps.postActivities(activitiesData.setTestStationType(RandomStringUtils.randomAlphanumeric(6)).build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationType","must be one of [atf, gvts, hq]");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testerName")
@@ -224,8 +203,7 @@ public class PostActivitiesNeg {
     public void testerNameMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testerName", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testerName", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testerName","is required");
     }
 
 
@@ -234,8 +212,7 @@ public class PostActivitiesNeg {
     public void testerNameNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testerName", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testerName", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testerName","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testerName")
@@ -243,8 +220,7 @@ public class PostActivitiesNeg {
     public void testerNameInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testerName", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testerName", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testerName","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testerStaffId")
@@ -252,8 +228,7 @@ public class PostActivitiesNeg {
     public void testerStaffIdMissing() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testerStaffId", ToTypeConvertor.MISSING);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testerStaffId", "is required");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testerStaffId", "is required");
     }
 
 
@@ -262,8 +237,7 @@ public class PostActivitiesNeg {
     public void testerStaffIdNull() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testerStaffId", ToTypeConvertor.NULL);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testerStaffId", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testerStaffId","must be a string");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testerStaffId")
@@ -271,8 +245,7 @@ public class PostActivitiesNeg {
     public void testerStaffIdInteger() {
 
         activitiesSteps.postActivities(activitiesData.build(), "testerStaffId", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testerStaffId", "must be a string");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testerStaffId","must be a string");
     }
 
 
@@ -292,8 +265,8 @@ public class PostActivitiesNeg {
         String propertyName = RandomStringUtils.randomAlphanumeric(10);
 
         activitiesSteps.postActivities(activitiesData.build(), propertyName, RandomStringUtils.randomAlphanumeric(6), ToTypeConvertor.NEW_PROPERTY);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty(propertyName, "is not allowed");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,propertyName,"is not allowed");
+
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - activityType visit")
@@ -311,24 +284,21 @@ public class PostActivitiesNeg {
     public void postActivitiesActivityTypeWaitCaseSensitive() {
 
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("Wait").build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("activityType", "must be one of [visit, wait, unaccountable time]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"activityType","must be one of [visit, wait, unaccountable time]");
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType atf")
     @Test
     public void postActivitiesTestStationTypeAtfCaseSensitive() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Atf").build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationType","must be one of [atf, gvts, hq]");
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType gvts")
     @Test
     public void postActivitiesTestStationTypeGvtsCaseSensitive() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Gvts").build());
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        testUtils.postActivitiesNegTestParams(activitiesSteps, 400,"testStationType","must be one of [atf, gvts, hq]");
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType hq")
