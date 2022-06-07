@@ -8,4 +8,14 @@ public class TestUtils {
         activitiesSteps.validateActivityErrorTypeWithProperty(field, errorMessage);
     }
 
+    public void getActivitiesTestParams(ActivitiesSteps activitiesSteps, Integer statusCode, String stringData) {
+        activitiesSteps.statusCodeShouldBe(statusCode);
+        activitiesSteps.validateData(stringData);
+    }
+
+    public void postActivitiesTestParams(ActivitiesSteps activitiesSteps) {
+        activitiesSteps.statusCodeShouldBe(201);
+        activitiesSteps.responseShouldContainId();
+
+    }
 }

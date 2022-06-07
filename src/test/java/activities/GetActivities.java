@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.DataUtil;
 import util.JsonPathAlteration;
+import util.TestUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,7 +23,7 @@ public class GetActivities {
 
     @Steps
     ActivitiesSteps activitiesSteps;
-
+    TestUtils testUtils =new TestUtils();
     ActivitiesGet.Builder activitiesData = ActivitiesData.buildActivitiesIdData();
 
 
@@ -30,8 +31,8 @@ public class GetActivities {
     @Test
     public void postActivitiesActivityTypeVisiRt() {
         activitiesSteps.getActivities("", null, null, "", "");
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateData("Bad Request");
+        testUtils.getActivitiesTestParams(activitiesSteps, 400,"Bad Request");
+
     }
 
 
@@ -39,8 +40,8 @@ public class GetActivities {
     @Test
     public void postActivitiesActivityTypeVisiRts() {
         activitiesSteps.getActivities(RandomStringUtils.randomAlphanumeric(6), null, null, DataUtil.buildCurrentDateTime(-1), DataUtil.buildCurrentDateTime(-1));
-        activitiesSteps.statusCodeShouldBe(404);
-        activitiesSteps.validateData("No resources match the search criteria");
+        testUtils.getActivitiesTestParams(activitiesSteps, 404,"No resources match the search criteria");
+
     }
 
 
@@ -48,8 +49,8 @@ public class GetActivities {
     @Test
     public void postActivitiesActivityTypeVisiRt2s() {
         activitiesSteps.getActivities("visit", RandomStringUtils.randomAlphanumeric(45), null, DataUtil.buildCurrentDateTime(-1), DataUtil.buildCurrentDateTime(-1));
-        activitiesSteps.statusCodeShouldBe(404);
-        activitiesSteps.validateData("No resources match the search criteria");
+        testUtils.getActivitiesTestParams(activitiesSteps, 404,"No resources match the search criteria");
+
     }
 
 
@@ -57,24 +58,24 @@ public class GetActivities {
     @Test
     public void postActivitiesActivityTypeVisit() {
         activitiesSteps.getActivities("visit", null, RandomStringUtils.randomAlphanumeric(45), DataUtil.buildCurrentDateTime(-1), DataUtil.buildCurrentDateTime(-1));
-        activitiesSteps.statusCodeShouldBe(404);
-        activitiesSteps.validateData("No resources match the search criteria");
+        testUtils.getActivitiesTestParams(activitiesSteps, 404,"No resources match the search criteria");
+
     }
 
     @Title("CVSB- / CVSB- - AC7 ")
     @Test
     public void postActivitiesActivityTypeVisit2() {
         activitiesSteps.getActivities("visit", null, null, DataUtil.buildCurrentDateTime(-1), RandomStringUtils.randomAlphanumeric(45));
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateData("Bad Request");
+        testUtils.getActivitiesTestParams(activitiesSteps, 400,"Bad Request");
+
     }
 
     @Title("CVSB- / CVSB- - AC7 ")
     @Test
     public void postActivitiesActivityTypeVisit222() {
         activitiesSteps.getActivities("visit", null, null, RandomStringUtils.randomAlphanumeric(45), RandomStringUtils.randomAlphanumeric(45));
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateData("Bad Request");
+        testUtils.getActivitiesTestParams(activitiesSteps, 400,"Bad Request");
+
     }
 
     @Title("CVSB- / CVSB- - AC7 ")
@@ -205,8 +206,8 @@ public class GetActivities {
         String id = activitiesSteps.checkAndGetResponseId();
         activitiesData.setId(id);
         activitiesSteps.getActivities(null, DataUtil.generateRandomExcludingValues(activitiesData.build().getTesterStaffId().length(), activitiesData.build().getTesterStaffId()), null, DataUtil.buildCurrentDateTime(-1), null);
-        activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateData("Bad Request");
+        testUtils.getActivitiesTestParams(activitiesSteps, 400,"Bad Request");
+
     }
 
 

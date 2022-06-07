@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 import util.JsonPathAlteration;
+import util.TestUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,14 +24,15 @@ import java.util.List;
 public class PostActivities {
     @Steps
     ActivitiesSteps activitiesSteps;
+    TestUtils testUtils =new TestUtils();
+
 
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: visit")
     @Test
     public void postActivitiesActivityTypeVisit() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setActivityType("visit").build());
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+ }
 
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - activity type: wait")
     @Test
@@ -56,9 +58,8 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+ }
 
     @Title("CVSB-179 / CVSB-4545 / CVSB-4547 - Save wait time in the BE (time is Equal to 5 minutes)")
     @Test
@@ -84,9 +85,8 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+ }
 
     @Title("CVSB-179 / CVSB-4544 / CVSB-4543 - Save wait time in the BE (time is Greater than 5 minutes)")
     @Test
@@ -112,9 +112,8 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+ }
 
     @Title("CVSB-179 / CVSB-4545 / CVSB-4547 / CVSB-4551 / CVSB-4552 / CVSB-4554 / CVSB-4556 - Save wait time in the BE (time is Equal to 5 minutes)")
     @Test
@@ -140,9 +139,8 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+  }
 
     @Title("CVSB-179 / CVSB-4548 / CVSB-4543 / CVSB-4549 / CVSB-4553 / CVSB-4555 - Save wait time in the BE (time is Greater than 5 minutes)")
     @Test
@@ -168,9 +166,8 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+  }
 
     @Title("CVSB-179 / CVSB-4557 / CVSB-4558 / CVSB-4562 - AC M5 Save wait time in the BE")
     @Test
@@ -197,9 +194,8 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationActivityType, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+   }
 
     @Title("CVSB-179 / CVSB-4559 / CVSB-4560 / CVSB-4561 /  - AC M6 Save wait time in the BE")
     @Test
@@ -227,33 +223,29 @@ public class PostActivities {
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationParentId, alterationStartTime,
                 alterationEndTime, alterationActivityType, alterationTestStationPNumber));
         activitiesSteps.postActivitiesParentIdWithAlterations(postRequestBody, alterations);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+   }
 
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: atf")
     @Test
     public void postActivitiesTestStationTypeAtf() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("atf").build());
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
+        testUtils.postActivitiesTestParams(activitiesSteps);
     }
 
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: gvts")
     @Test
     public void postActivitiesTestStationTypeGvts() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("gvts").build());
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+ }
 
     @Title("CVSB-163 / CVSB-2874 - AC8 API Consumer creates a new activity - test station type: hq")
     @Test
     public void postActivitiesTestStationTypeHq() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("hq").build());
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+  }
 
 
     @Title("CVSB-163 / CVSB-2928 -  API Consumer with ended activity creates a new activity")
@@ -269,9 +261,7 @@ public class PostActivities {
         activitiesSteps.putActivitiesEnd(id);
         activitiesSteps.statusCodeShouldBe(200);
         activitiesSteps.postActivities(activitiesData);
-        activitiesSteps.statusCodeShouldBe(201);
-        activitiesSteps.responseShouldContainId();
-
-    }
+        testUtils.postActivitiesTestParams(activitiesSteps);
+ }
 
 }
