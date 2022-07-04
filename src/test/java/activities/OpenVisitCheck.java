@@ -30,12 +30,12 @@ public class OpenVisitCheck {
     public void getOpenVisitWithEmptyStringStaffId() {
         activitiesSteps.checkOpenVisit( "", false);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value\"");
+        activitiesSteps.validateResp("Missing parameter value");
         activitiesSteps.checkOpenVisit(null, false);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value\"");
+        activitiesSteps.validateResp("Missing parameter value");
         activitiesSteps.checkOpenVisit("undefined", false);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value\"");
+        activitiesSteps.validateResp("Missing parameter value");
     }
 }

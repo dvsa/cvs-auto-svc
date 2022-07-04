@@ -34,13 +34,12 @@ public class CloseOpenVisit {
     public void closeOpenVisitMissingParameter() {
         activitiesSteps.closeOpenVisit(" ");
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("Missing parameter value");
+        activitiesSteps.validateResp("\"Missing parameter value\"");
         activitiesSteps.closeOpenVisit("undefined");
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("Missing parameter value");
-        activitiesSteps.closeOpenVisit(null);
+        activitiesSteps.validateResp("\"Missing parameter value\"");
+        activitiesSteps.closeOpenVisit("null");
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("Missing parameter value");
+        activitiesSteps.validateResp("\"Missing parameter value\"");
     }
-
 }
