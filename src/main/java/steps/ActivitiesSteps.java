@@ -285,6 +285,6 @@ public class ActivitiesSteps {
     @Step
     public void validateResp(String stringData) {
         response.then().body(is(stringData));
-        System.out.println("String data"  + response.body().toString() );
+        assertThat(response.getBody().equals(stringData));
     }
 }
