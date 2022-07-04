@@ -16,6 +16,7 @@ import util.WebDriverBrowsertack;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasKey;
 
