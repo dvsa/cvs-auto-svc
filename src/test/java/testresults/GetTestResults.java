@@ -26,6 +26,8 @@ import java.util.UUID;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
+
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class GetTestResults {
 
@@ -186,6 +188,23 @@ public class GetTestResults {
         testResultsSteps.getTestResults(RandomStringUtils.randomAlphanumeric(17));
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
+    }
+
+    @Title("VTA-695 - Get test results Missing parameter value check")
+    @Test
+    public void testResultsMissingParameter() {
+
+        testResultsSteps.getTestResults(" ");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+
+        testResultsSteps.getTestResults("undefined");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+
+        testResultsSteps.getTestResults(null);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2431 - Status submitted and no data found")
