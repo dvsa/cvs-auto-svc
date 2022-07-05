@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class CloseOpenVisit {
     @Steps
@@ -32,7 +31,6 @@ public class CloseOpenVisit {
     @Title("VTA-470 - Close open visit call with undefined/empty string/null id return 400 status code and return Missing parameter value.")
     @Test
     public void closeOpenVisitMissingParameter() {
-//        Object resp = "Missing parameter value.";
         activitiesSteps.closeOpenVisit(" ");
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateResp("\"Missing parameter value.\"");
