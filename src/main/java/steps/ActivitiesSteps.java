@@ -2,6 +2,7 @@ package steps;
 
 import clients.ActivitiesClient;
 import clients.util.ToTypeConvertor;
+import com.amazonaws.http.HttpResponse;
 import io.restassured.response.Response;
 import model.activities.Activities;
 import model.activities.ActivitiesGet;
@@ -284,8 +285,7 @@ public class ActivitiesSteps {
 
     @Step
     public void validateResp(String stringData) {
-        response.then().body(is(stringData));
-//        assertThat(response.getBody().equals(stringData));
-        Assert.assertEquals(response.body().toString(), stringData);
+        System.out.println("PRINT " + response.body().toString());
+        Assert.assertEquals(response.body().asString(), stringData);
     }
 }
