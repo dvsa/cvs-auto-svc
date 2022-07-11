@@ -747,7 +747,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", generatedTrailerId);
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(generatedTrailerId, VehicleTechnicalRecordStatus.ALL);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("size()", 1);
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("size()", 2);
     }
 
     @WithTag("Vtm")
