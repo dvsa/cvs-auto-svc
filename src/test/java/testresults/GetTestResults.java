@@ -18,14 +18,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import static util.DataUtil.generateRandomExcludingValues;
-
 
 @WithTag("In_test")
 @RunWith(SerenityRunner.class)
@@ -33,6 +30,8 @@ public class GetTestResults {
 
     @Steps
     TestResultsSteps testResultsSteps;
+    @Steps
+    ActivitiesSteps activitiesSteps;
 
     private TestResults.Builder vehicleDefaultSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
@@ -196,15 +195,15 @@ public class GetTestResults {
 
         testResultsSteps.getTestResults(" ");
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateResp("\"Missing parameter value.\"");
+        activitiesSteps.validateResp("\"Missing parameter value.\"");
 
         testResultsSteps.getTestResults("undefined");
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateResp("\"Missing parameter value.\"");
+        activitiesSteps.validateResp("\"Missing parameter value.\"");
 
         testResultsSteps.getTestResults(null);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validateResp("\"Missing parameter value.\"");
+        activitiesSteps.validateResp("\"Missing parameter value.\"");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2431 - Status submitted and no data found")

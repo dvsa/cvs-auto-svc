@@ -264,9 +264,6 @@ public class TestResultsClient {
         return response;
     }
 
-
-
-
     public Response getTestResultsFromDateTime(String systemNumber, String fromDateTime, String status) {
 
         Response response = callGetTestResultsFromDateTime(systemNumber, fromDateTime, status);
