@@ -22,8 +22,6 @@ public class GetVehicleTechnicalRecords {
 
     @Steps
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
-    @Steps
-    ActivitiesSteps activitiesSteps;
 
     private Vehicle vehicleCurrentData = VehicleTechRecordsData.buildVehicleTechRecordsCurrentData();
     private Vehicle vehicleArchivedData = VehicleTechRecordsData.buildVehicleTechRecordsArchivedData();
@@ -798,14 +796,14 @@ public class GetVehicleTechnicalRecords {
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(" ");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("undefined");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
 
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("null");
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
     }
 }

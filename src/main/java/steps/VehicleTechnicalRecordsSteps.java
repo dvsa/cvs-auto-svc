@@ -671,4 +671,9 @@ public class VehicleTechnicalRecordsSteps {
         }
         System.out.println("\n...Vehicle status has not been updated in " + iterations +" iterations...");
     }
+
+    @Step
+    public void validateResp(String stringData) {
+        Assert.assertEquals(response.body().asString(), stringData);
+    }
 }

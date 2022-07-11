@@ -30,8 +30,6 @@ public class GetTestResults {
 
     @Steps
     TestResultsSteps testResultsSteps;
-    @Steps
-    ActivitiesSteps activitiesSteps;
 
     private TestResults.Builder vehicleDefaultSubmittedData = TestResultsData.buildTestResultsSubmittedData();
 
@@ -195,15 +193,15 @@ public class GetTestResults {
 
         testResultsSteps.getTestResults(" ");
         testResultsSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
 
         testResultsSteps.getTestResults("undefined");
         testResultsSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
 
         testResultsSteps.getTestResults(null);
         testResultsSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2431 - Status submitted and no data found")

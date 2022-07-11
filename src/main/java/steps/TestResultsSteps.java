@@ -902,4 +902,8 @@ public class TestResultsSteps {
             System.out.println(e);
         }
     }
+    @Step
+    public void validateResp(String stringData) {
+        Assert.assertEquals(response.body().asString(), stringData);
+    }
 }
