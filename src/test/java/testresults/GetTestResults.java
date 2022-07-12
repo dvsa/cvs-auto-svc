@@ -330,41 +330,41 @@ public class GetTestResults {
         testResultsSteps.validateVehicleFieldMayExist("firstUseDate");
     }
 
-    @WithTag("Vtm")
-    @Title("CVSB-10280 - AC1: Update the GET request in testResults API")
-    @Test
-    public void testResultsContains() {
-        testResultsSteps.getTestResults("10000013");
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.validateVehicleFieldExists("testVersion");
-        testResultsSteps.validateVehicleFieldExists("reasonForCreation");
-        testResultsSteps.validateVehicleFieldExists("createdByName");
-        testResultsSteps.validateVehicleFieldExists("createdById");
-        testResultsSteps.validateVehicleFieldExists("createdAt");
-        testResultsSteps.validateVehicleFieldExists("lastUpdatedByName");
-        testResultsSteps.validateVehicleFieldExists("lastUpdatedByID");
-        testResultsSteps.validateVehicleFieldExists("lastUpdatedAt");
+//    @WithTag("Vtm")
+//    @Title("CVSB-10280 - AC1: Update the GET request in testResults API")
+//    @Test
+//    public void testResultsContains() {
+//        testResultsSteps.getTestResults("10000013");
+//        testResultsSteps.statusCodeShouldBe(200);
+//        testResultsSteps.validateVehicleFieldExists("testVersion");
+//        testResultsSteps.validateVehicleFieldExists("reasonForCreation");
+//        testResultsSteps.validateVehicleFieldExists("createdByName");
+//        testResultsSteps.validateVehicleFieldExists("createdById");
+//        testResultsSteps.validateVehicleFieldExists("createdAt");
+//        testResultsSteps.validateVehicleFieldExists("lastUpdatedByName");
+//        testResultsSteps.validateVehicleFieldExists("lastUpdatedByID");
+//        testResultsSteps.validateVehicleFieldExists("lastUpdatedAt");
+//
+//    }
 
-    }
-
-    @WithTag("Vtm")
-    @Title("CVSB-10280 - AC7: PUT request: Original Test Record is updated and attributes are automatically set - Archived and Archived " +
-            "AC6: GET request returns all 'archived' test records")
-    @Test
-    public void testResultsWithTestVersionAutomaticallySetSame() {
-        testResultsSteps.getTestResults("1000000114", TestVersion.ARCHIVED ,"114");
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
-        testResultsSteps.valueForFieldInPathShouldBe("[1].testVersion","archived");
-        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
-
-        testResultsSteps.getTestResults("1000000114", TestVersion.CURRENT ,"114");
-        testResultsSteps.statusCodeShouldBe(404);
-        testResultsSteps.validateData("No resources match the search criteria");
-
-        testResultsSteps.getTestResults("1000000114", TestVersion.ALL ,"114");
-        testResultsSteps.statusCodeShouldBe(200);
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testVersion","archived");
-    }
+//    @WithTag("Vtm")
+//    @Title("CVSB-10280 - AC7: PUT request: Original Test Record is updated and attributes are automatically set - Archived and Archived " +
+//            "AC6: GET request returns all 'archived' test records")
+//    @Test
+//    public void testResultsWithTestVersionAutomaticallySetSame() {
+//        testResultsSteps.getTestResults("1000000114", TestVersion.ARCHIVED ,"114");
+//        testResultsSteps.statusCodeShouldBe(200);
+//        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
+//        testResultsSteps.valueForFieldInPathShouldBe("[1].testVersion","archived");
+//        testResultsSteps.fieldInPathShouldNotExist("[0]","testHistory");
+//
+//        testResultsSteps.getTestResults("1000000114", TestVersion.CURRENT ,"114");
+//        testResultsSteps.statusCodeShouldBe(404);
+//        testResultsSteps.validateData("No resources match the search criteria");
+//
+//        testResultsSteps.getTestResults("1000000114", TestVersion.ALL ,"114");
+//        testResultsSteps.statusCodeShouldBe(200);
+//        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","archived");
+//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testVersion","archived");
+//    }
 }
