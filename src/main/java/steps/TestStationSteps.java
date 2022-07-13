@@ -72,14 +72,8 @@ public class TestStationSteps {
 
     @Step
     public void validateData(String stringData) {
-//        response.then().body("", is(stringData));
         Assert.assertEquals(response.body().asString(), stringData);
     }
-
-//    @Step
-//    public void validateResp(String stringData) {
-//        Assert.assertEquals(response.body().asString(), stringData);
-//    }
 
     @Step
     public void validateEveryRecordHasField(String field) {
