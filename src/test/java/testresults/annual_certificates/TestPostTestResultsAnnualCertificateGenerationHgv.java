@@ -23,6 +23,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
     @TestData
     public static Collection<Object[]> testData(){
         return Arrays.asList(new Object[][]{
+                {"warmup test", "warmup test", "95", 2, "pass", "ffv2"},
                 {"First test", "First test", "95", 2, "pass", "ffv2"},
                 {"Paid", "Paid first test retest", "65", 10, "pass", "rgv5"},
                 {"Part paid", "Part paid first test retest", "66", 3, "pass", "riv3"},
@@ -104,7 +105,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         if ("warmup test".equals(name)) {
             try {
-                testResultsSteps.statusCodeShouldBe(504);
+                testResultsSteps.statusCodeShouldBe(201);
             } catch (Exception e) {
                 System.out.println("Retry" + " " + e);
                 testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
