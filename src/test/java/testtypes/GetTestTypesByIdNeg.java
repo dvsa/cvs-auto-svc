@@ -6,6 +6,7 @@ import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -13,7 +14,7 @@ import steps.TestTypeSteps;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class GetTestTypesByIdNeg {
 
