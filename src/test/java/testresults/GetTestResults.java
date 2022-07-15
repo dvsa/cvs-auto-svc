@@ -199,7 +199,7 @@ public class GetTestResults {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validateResp("\"Missing parameter value.\"");
 
-        testResultsSteps.getTestResults(null);
+        testResultsSteps.getTestResults("null");
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validateResp("\"Missing parameter value.\"");
     }
