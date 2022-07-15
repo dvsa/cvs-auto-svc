@@ -218,7 +218,7 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testStationType", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq]");
+        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
 
@@ -228,7 +228,7 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testStationType", RandomStringUtils.randomNumeric(1, 9), ToTypeConvertor.INTEGER, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq]");
+        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
 
@@ -238,7 +238,7 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVrm(VRM).setTestStationType(RandomStringUtils.randomAlphanumeric(10)).build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq]");
+        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - testStationType empty")
@@ -247,7 +247,7 @@ public class PostTestResultsNegMainLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledData.setVrm(VRM).setTestStationType("").build());
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq]");
+        testResultsSteps.validatePostErrorData("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testerName")
