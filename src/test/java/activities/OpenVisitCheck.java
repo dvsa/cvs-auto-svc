@@ -25,7 +25,7 @@ public class OpenVisitCheck {
 
     @Title("VTA-300 - Get open visit with empty string testerStaffId return 400 Missing parameter value.")
     @Test
-    public void getOpenVisitWithEmptyStringStaffId() {
+    public void getOpenVisitWithMissingStaffId() {
         activitiesSteps.checkOpenVisit( "", false);
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateResp("\"Missing parameter value.\"");
