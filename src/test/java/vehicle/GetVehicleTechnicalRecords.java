@@ -16,7 +16,6 @@ import util.JsonPathAlteration;
 import java.io.IOException;
 import java.util.*;
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class GetVehicleTechnicalRecords {
 
