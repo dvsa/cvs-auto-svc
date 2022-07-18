@@ -217,113 +217,113 @@ public class PostTestResultsSystemNumber {
         testResultsSteps.validatePostErrorData("vehicleClass", "must be an object");
     }
 
-//    @Title("CVSB-15036 - [BE] Backend service update, to allow testerEmailAddress and testStationType to be updated with new values")
-//    @Test
-//    public void testTestResultsUpdateTesterEmailAddressAndTestStationType() {
-//
-//        // CREATE A NEW VEHICLE
-//        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_post_10278.json","$");
-//
-//        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-//        String randomVin = GenericData.generateRandomVin();
-//
-//        // Create alteration
-//        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-//        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-//
-//        // Collate the list of alterations.
-//        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle, alterationVinVehicle));
-//
-//        // Post the results, together with any alterations, and verify that they are accepted.
-//        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
-//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-//        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
-//
-//        // CREATE A TEST-RESULT FOR THE VEHICLE
-//
-//        String testResultRecord = GenericData.readJsonValueFromFile("test-results_hgv_post_10278.json", "$");
-//
-//        // Create alteration to add one more tech record to in the request body
-//        String randomTestResultId = UUID.randomUUID().toString();
-//        String testerEmailAddressPost = "namePost@mailPost.com";
-//        String testStationNamePost = "Abshire-Kub";
-//        String testStationPNumberPost = "09-4129632";
-//        String testStationTypePost = "gvts";
-//
-//        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
-//        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-//        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-//        JsonPathAlteration alterationTestStationNamePost = new JsonPathAlteration("$.testStationName", testStationNamePost, "", "REPLACE");
-//        JsonPathAlteration alterationTestStationPNumberPost = new JsonPathAlteration("$.testStationPNumber", testStationPNumberPost, "", "REPLACE");
-//        JsonPathAlteration alterationTestStationTypePost = new JsonPathAlteration("$.testStationType", testStationTypePost, "", "REPLACE");
-//        JsonPathAlteration alterationTesterEmailAddressPost = new JsonPathAlteration("$.testerEmailAddress", testerEmailAddressPost, "", "REPLACE");
-//
-//        // Collate the list of alterations.
-//        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
-//                alterationSystemNumberTestResults,
-//                alterationVinTestResults,
-//                alterationTestResultIdPost,
-//                alterationTestStationNamePost,
-//                alterationTestStationPNumberPost,
-//                alterationTestStationTypePost,
-//                alterationTesterEmailAddressPost
-//
-//        ));
-//
-//        // Post the results, together with any alterations, and verify that they are accepted.
-//        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
-//        testResultsSteps.statusCodeShouldBe(201);
-//        testResultsSteps.validateData("Test records created");
-//
-//
-//        // UPDATE THE TEST-RESULT FOR THE VEHICLE
-//
-//        String putRequestBody = GenericData.readJsonValueFromFile("test-results_hgv_put_10278.json","$");
-//        String testerEmailAddressPut = "namePut@mailPut.com";
-//        String testStationNamePut = "Jacobson and Sons";
-//        String testStationPNumberPut = "14-8817748";
-//        String testStationTypePut = "atf";
-//
-//        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
-//        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
-//        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
-//        JsonPathAlteration alterationTestStationNamePut = new JsonPathAlteration("$.testResult.testStationName", testStationNamePut, "", "REPLACE");
-//        JsonPathAlteration alterationTestStationPNumberPut = new JsonPathAlteration("$.testResult.testStationPNumber", testStationPNumberPut, "", "REPLACE");
-//        JsonPathAlteration alterationTestStationTypePut = new JsonPathAlteration("$.testResult.testStationType", testStationTypePut, "", "REPLACE");
-//        JsonPathAlteration alterationTesterEmailAddressPut = new JsonPathAlteration("$.testResult.testerEmailAddress", testerEmailAddressPut, "", "REPLACE");
-//        JsonPathAlteration alterationCertNumber = new JsonPathAlteration("$.testResult.testTypes[0]", "12345","certificateNumber","ADD_FIELD");
-//
-//        // Collate the list of alterations.
-//        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
-//                alterationSystemNumberPutTestResults,
-//                alterationVinPutTestResults,
-//                alterationTestResultIdPut,
-//                alterationTestStationNamePut,
-//                alterationTestStationPNumberPut,
-//                alterationTestStationTypePut,
-//                alterationTesterEmailAddressPut,
-//                alterationCertNumber
-//                ));
-//
-//        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
-//        testResultsSteps.statusCodeShouldBe(200);
-//
-//        testResultsSteps.getTestResults(randomSystemNumber, TestVersion.ALL, randomTestResultId);
-//        testResultsSteps.statusCodeShouldBe(200);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testStationName",testStationNamePut);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testStationPNumber", testStationPNumberPut);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testStationType",testStationTypePut);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testerEmailAddress",testerEmailAddressPut);
-//
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory.size",1);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testVersion","archived");
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testResultId",randomTestResultId);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationName",testStationNamePost);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationPNumber",testStationPNumberPost);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationType",testStationTypePost);
-//        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testerEmailAddress",testerEmailAddressPost);
-//    }
+    @Title("CVSB-15036 - [BE] Backend service update, to allow testerEmailAddress and testStationType to be updated with new values")
+    @Test
+    public void testTestResultsUpdateTesterEmailAddressAndTestStationType() {
+
+        // CREATE A NEW VEHICLE
+        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_hgv_post_10278.json","$");
+
+        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+        String randomVin = GenericData.generateRandomVin();
+
+        // Create alteration
+        JsonPathAlteration alterationSystemNumberVehicle = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinVehicle = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsVehicle = new ArrayList<>(Arrays.asList(alterationSystemNumberVehicle, alterationVinVehicle));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+        vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        // CREATE A TEST-RESULT FOR THE VEHICLE
+
+        String testResultRecord = GenericData.readJsonValueFromFile("test-results_hgv_post_10278.json", "$");
+
+        // Create alteration to add one more tech record to in the request body
+        String randomTestResultId = UUID.randomUUID().toString();
+        String testerEmailAddressPost = "namePost@mailPost.com";
+        String testStationNamePost = "Abshire-Kub";
+        String testStationPNumberPost = "09-4129632";
+        String testStationTypePost = "gvts";
+
+        JsonPathAlteration alterationSystemNumberTestResults = new JsonPathAlteration("$.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinTestResults = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPost = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStationNamePost = new JsonPathAlteration("$.testStationName", testStationNamePost, "", "REPLACE");
+        JsonPathAlteration alterationTestStationPNumberPost = new JsonPathAlteration("$.testStationPNumber", testStationPNumberPost, "", "REPLACE");
+        JsonPathAlteration alterationTestStationTypePost = new JsonPathAlteration("$.testStationType", testStationTypePost, "", "REPLACE");
+        JsonPathAlteration alterationTesterEmailAddressPost = new JsonPathAlteration("$.testerEmailAddress", testerEmailAddressPost, "", "REPLACE");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberTestResults,
+                alterationVinTestResults,
+                alterationTestResultIdPost,
+                alterationTestStationNamePost,
+                alterationTestStationPNumberPost,
+                alterationTestStationTypePost,
+                alterationTesterEmailAddressPost
+
+        ));
+
+        // Post the results, together with any alterations, and verify that they are accepted.
+        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterationsTestResults);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+
+
+        // UPDATE THE TEST-RESULT FOR THE VEHICLE
+
+        String putRequestBody = GenericData.readJsonValueFromFile("test-results_hgv_put_10278.json","$");
+        String testerEmailAddressPut = "namePut@mailPut.com";
+        String testStationNamePut = "Jacobson and Sons";
+        String testStationPNumberPut = "14-8817748";
+        String testStationTypePut = "atf";
+
+        JsonPathAlteration alterationSystemNumberPutTestResults = new JsonPathAlteration("$.testResult.systemNumber", randomSystemNumber, "", "REPLACE");
+        JsonPathAlteration alterationVinPutTestResults = new JsonPathAlteration("$.testResult.vin", randomVin, "", "REPLACE");
+        JsonPathAlteration alterationTestResultIdPut = new JsonPathAlteration("$.testResult.testResultId", randomTestResultId, "", "REPLACE");
+        JsonPathAlteration alterationTestStationNamePut = new JsonPathAlteration("$.testResult.testStationName", testStationNamePut, "", "REPLACE");
+        JsonPathAlteration alterationTestStationPNumberPut = new JsonPathAlteration("$.testResult.testStationPNumber", testStationPNumberPut, "", "REPLACE");
+        JsonPathAlteration alterationTestStationTypePut = new JsonPathAlteration("$.testResult.testStationType", testStationTypePut, "", "REPLACE");
+        JsonPathAlteration alterationTesterEmailAddressPut = new JsonPathAlteration("$.testResult.testerEmailAddress", testerEmailAddressPut, "", "REPLACE");
+        JsonPathAlteration alterationCertNumber = new JsonPathAlteration("$.testResult.testTypes[0]", "12345","certificateNumber","ADD_FIELD");
+
+        // Collate the list of alterations.
+        List<JsonPathAlteration> alterationsPutTestResults = new ArrayList<>(Arrays.asList(
+                alterationSystemNumberPutTestResults,
+                alterationVinPutTestResults,
+                alterationTestResultIdPut,
+                alterationTestStationNamePut,
+                alterationTestStationPNumberPut,
+                alterationTestStationTypePut,
+                alterationTesterEmailAddressPut,
+                alterationCertNumber
+                ));
+
+        testResultsSteps.putTestResultsWithAlterations(randomSystemNumber,putRequestBody,alterationsPutTestResults);
+        testResultsSteps.statusCodeShouldBe(200);
+
+        testResultsSteps.getTestResults(randomSystemNumber, TestVersion.ALL, randomTestResultId);
+        testResultsSteps.statusCodeShouldBe(200);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testVersion","current");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testStationName",testStationNamePut);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testStationPNumber", testStationPNumberPut);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testStationType",testStationTypePut);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testerEmailAddress",testerEmailAddressPut);
+
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory.size",1);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testVersion","archived");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testResultId",randomTestResultId);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationName",testStationNamePost);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationPNumber",testStationPNumberPost);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testStationType",testStationTypePost);
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testHistory[0].testerEmailAddress",testerEmailAddressPost);
+    }
 
     @Title("CVSB - 17727 - To verify the cert is generated for a TRL with vin having spaces")
     @Test
