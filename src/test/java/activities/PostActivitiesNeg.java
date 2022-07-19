@@ -9,7 +9,6 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
@@ -198,7 +197,7 @@ public class PostActivitiesNeg {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationType", ToTypeConvertor.NULL);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-163 / CVSB-2931 - API Consumer tries to create an activity with different request body property type - testStationType")
@@ -207,7 +206,7 @@ public class PostActivitiesNeg {
 
         activitiesSteps.postActivities(activitiesData.build(), "testStationType", RandomStringUtils.randomNumeric(6), ToTypeConvertor.INTEGER);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-163 / CVSB-2940 - API Consumer tries to create an activity with different range or format body property value - testStationType")
@@ -216,7 +215,7 @@ public class PostActivitiesNeg {
 
         activitiesSteps.postActivities(activitiesData.setTestStationType(RandomStringUtils.randomAlphanumeric(6)).build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-163 / CVSB-2929 - API Consumer tries to create an activity with missing request body property - testerName")
@@ -320,7 +319,7 @@ public class PostActivitiesNeg {
     public void postActivitiesTestStationTypeAtfCaseSensitive() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Atf").build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType gvts")
@@ -328,7 +327,7 @@ public class PostActivitiesNeg {
     public void postActivitiesTestStationTypeGvtsCaseSensitive() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Gvts").build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-163 / CVSB-2943 - API Consumer tries to create an activity with different case for range body property value - testStationType hq")
@@ -336,7 +335,7 @@ public class PostActivitiesNeg {
     public void postActivitiesTestStationTypeHqCaseSensitive() {
         activitiesSteps.postActivities(ActivitiesData.buildActivitiesIdData().setTestStationType("Hq").build());
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq]");
+        activitiesSteps.validateActivityErrorTypeWithProperty("testStationType", "must be one of [atf, gvts, hq, potf]");
     }
 
     @Title("CVSB-163 / CVSB-2882 - AC9 API Consumer tries to create an already existent activity")
