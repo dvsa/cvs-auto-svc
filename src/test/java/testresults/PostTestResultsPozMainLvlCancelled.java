@@ -741,6 +741,18 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
+    @Title("CB2-4804 - API Consumer creates a new test results for submitted/canceled with null - preparerId")
+    @Test
+    public void testResultsNullPreparerId() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setPreparerId(null).build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+    }
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerName")
     @Test
     public void testResultsRandomStringPreparerName() {
@@ -768,6 +780,18 @@ public class PostTestResultsPozMainLvlCancelled {
         vehicleCancelledDataOld.setPreparerName(null);
         testResultsSteps.validateData("Test records created");
         validateSavedDataOld();
+    }
+
+    @Title("CB2-4804 - API Consumer creates a new test results for submitted/canceled with null - preparerName")
+    @Test
+    public void testResultsNullPreparerName() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setPreparerName(null).build());
+
+        testResultsSteps.statusCodeShouldBe(201);
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - euVehicleCategory")
