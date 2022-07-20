@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestStationSteps;
 
-
 @RunWith(SerenityRunner.class)
 public class GetTestStations {
 
