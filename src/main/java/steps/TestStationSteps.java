@@ -81,7 +81,7 @@ public class TestStationSteps {
     }
 
     @Step
-    public void validateEveryRecordHasFieldValue(String field, TestStations testStation) {
-        response.then().body(field, hasItem(equalTo(testStation.getTestStationStatus())));
+    public void validateEveryRecordHasFieldValue(String field, String value) {
+        response.then().body("$", everyItem(hasEntry(field,value)));
     }
 }

@@ -52,13 +52,13 @@ public class TestStationsClient {
         return response;
     }
 
-    private Response callGetTestStationsEmail(String p_umber) {
+    private Response callGetTestStationsEmail(String p_number) {
         Response response = given().filters(new BasePathFilter())
 //                .filters(new BasePathFilter())
                 .contentType(ContentType.JSON)
-                .pathParam("p_umber", p_umber)
+                .pathParam("p_number", p_number)
                 .log().method().log().uri().log().body()
-                .get("/test-stations/{p_umber}");
+                .get("/test-stations/{p_number}");
 
         return response;
     }
