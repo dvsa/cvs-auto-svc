@@ -4,9 +4,7 @@ import clients.DefectsClient;
 import io.restassured.response.Response;
 import model.defects.*;
 import net.thucydides.core.annotations.Step;
-
 import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.*;
 
