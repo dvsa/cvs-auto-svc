@@ -11,17 +11,12 @@ public class VehicleTechRecordsData {
         Vehicle vehicle = DataMapper.getValue(Vehicle.class, "loader/" + BaseData.getDataLocation() + "/technical-records_current.json");
 
         return vehicle;
-
     }
-
 
     public static Vehicle buildVehicleTechRecordsArchivedData() {
 
         Vehicle vehicle = DataMapper.getValue(Vehicle.class, "loader/" + BaseData.getDataLocation() + "/technical-records_archived.json");
-
         return vehicle;
-
-
     }
 
     public static Vehicle buildVehicleTechRecordsProvisionalData() {

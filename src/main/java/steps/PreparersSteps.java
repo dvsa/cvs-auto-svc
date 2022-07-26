@@ -4,7 +4,6 @@ import clients.PreparersClient;
 import io.restassured.response.Response;
 import model.Preparer;
 import net.thucydides.core.annotations.Step;
-
 import static org.hamcrest.Matchers.*;
 
 public class PreparersSteps {
