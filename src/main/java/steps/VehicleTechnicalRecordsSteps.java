@@ -25,7 +25,6 @@ import static data.GenericData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
-
 public class VehicleTechnicalRecordsSteps {
 
     VehicleTechnicalRecordsClient vehicleTechnicalRecordsClient = new VehicleTechnicalRecordsClient();
@@ -671,5 +670,10 @@ public class VehicleTechnicalRecordsSteps {
 
         }
         System.out.println("\n...Vehicle status has not been updated in " + iterations +" iterations...");
+    }
+
+    @Step
+    public void validateResp(String stringData) {
+        Assert.assertEquals(response.body().asString(), stringData);
     }
 }
