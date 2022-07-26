@@ -10,6 +10,7 @@ import data.GenericData;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
@@ -904,5 +905,8 @@ public class TestResultsSteps {
             System.out.println(e);
         }
     }
-
+    @Step
+    public void validateResp(String stringData) {
+        Assert.assertEquals(response.body().asString(), stringData);
+    }
 }
