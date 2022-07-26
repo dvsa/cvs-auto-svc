@@ -215,4 +215,8 @@ public class TestTypeSteps {
     public String getActualTestCode(String testCode) {
         return testTypesClient.getActualTestCode(testCode);
     }
+    @Step
+    public void validateResp(String stringData) {
+        response.then().body(is(stringData));
+    }
 }
