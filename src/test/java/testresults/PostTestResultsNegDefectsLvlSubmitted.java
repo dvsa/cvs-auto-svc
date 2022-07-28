@@ -62,14 +62,6 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("imDescription", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - imDescription")
-    @Test
-    public void testResultsNullImDescription() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "imDescription", ToTypeConvertor.NULL, TestResultsLevel.DEFECTS);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("imDescription", "must be a string");
-    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - imDescription")
     @Test
@@ -89,14 +81,7 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("itemDescription", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - itemDescription")
-    @Test
-    public void testResultsNullItemDescription() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "itemDescription", ToTypeConvertor.NULL, TestResultsLevel.DEFECTS);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("itemDescription", "must be a string");
-    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - itemDescription")
     @Test
@@ -116,14 +101,6 @@ public class PostTestResultsNegDefectsLvlSubmitted {
         testResultsSteps.validatePostErrorData("deficiencyRef", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - deficiencyRef")
-    @Test
-    public void testResultsNullDeficiencyRef() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "deficiencyRef", ToTypeConvertor.NULL, TestResultsLevel.DEFECTS);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("deficiencyRef", "must be a string");
-    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - deficiencyRef")
     @Test
