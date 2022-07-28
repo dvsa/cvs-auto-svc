@@ -1,7 +1,5 @@
 package testresults;
 
-import clients.util.ToTypeConvertor;
-import clients.util.testresult.TestResultsLevel;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import data.GenericData;
