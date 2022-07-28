@@ -163,16 +163,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("testStationName", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStationName")
-    @Test
-    public void testResultsNullTestStationName() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testStationName", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationName", "must be a string");
-    }
-
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testStationName")
     @Test
     public void testResultsIntegerTestStationName() {
@@ -199,15 +189,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testStationPNumber", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testStationPNumber", "is required");
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStationPNumber")
-    @Test
-    public void testResultsNullTestStationPNumber() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testStationPNumber", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationPNumber", "must be a string");
     }
 
 
@@ -286,16 +267,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.validatePostErrorData("testerName", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerName")
-    @Test
-    public void testResultsNullTesterName() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testerName", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testerName", "must be a string");
-    }
-
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testerName")
     @Test
     public void testResultsIntegerTesterName() {
@@ -324,14 +295,7 @@ public class PostTestResultsNegMainLvlSubmitted {
     }
 
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerStaffId")
-    @Test
-    public void testResultsNullTesterStaffId() {
 
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testerStaffId", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testerStaffId", "must be a string");
-    }
 
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testerStaffId")
@@ -361,16 +325,6 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testerEmailAddress", "is required");
     }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerEmailAddress")
-    @Test
-    public void testResultsNullTesterEmailAddress() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleSubmittedDataOld.setVrm(VRM).build(), "testerEmailAddress", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testerEmailAddress", "must be a string");
-    }
-
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testerEmailAddress")
     @Test

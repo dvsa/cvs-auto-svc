@@ -1,5 +1,7 @@
 package testresults;
 
+import clients.util.ToTypeConvertor;
+import clients.util.testresult.TestResultsLevel;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import data.GenericData;
@@ -148,6 +150,20 @@ public class PostTestResultsPozDefectsLvlCancelled {
         validateSavedDataOld();
     }
 
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value - imDescription")
+    @Test
+    public void testResultsNullImDescription() {
+
+        ((TestTypes) vehicleCancelledDataOld.getTestTypes().get(0)).getDefects().get(0).setImDescription(null);
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setImDescription(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - itemDescription")
     @Test
@@ -178,6 +194,21 @@ public class PostTestResultsPozDefectsLvlCancelled {
         validateSavedDataOld();
     }
 
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value - itemDescription")
+    @Test
+    public void testResultsNullItemDescription() {
+
+        ((TestTypes) vehicleCancelledDataOld.getTestTypes().get(0)).getDefects().get(0).setItemDescription(null);
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
+        vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setItemDescription(null);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - deficiencyRef")
     @Test
@@ -198,6 +229,22 @@ public class PostTestResultsPozDefectsLvlCancelled {
     public void testResultsEmptyDeficiencyRef() {
 
         ((TestTypes) vehicleCancelledDataOld.getTestTypes().get(0)).getDefects().get(0).setDeficiencyRef("");
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyRef(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - API Consumer tries to create a new test result for submitted/canceled with null value - deficiencyRef")
+    @Test
+    public void testResultsNullDeficiencyRef() {
+
+        ((TestTypes) vehicleCancelledDataOld.getTestTypes().get(0)).getDefects().get(0).setDeficiencyRef(null);
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
