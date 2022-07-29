@@ -257,7 +257,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("testerName", "length must be less than or equal to 60 characters long");
     }
 
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testerStaffId")
     @Test
     public void testResultsMissingTesterStaffId() {
@@ -267,9 +266,14 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("testerStaffId", "is required");
     }
 
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerStaffId")
+    @Test
+    public void testResultsNullTesterStaffId() {
 
-
-
+        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testerStaffId", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validatePostErrorData("testerStaffId", "must be a string");
+    }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testerStaffId")
     @Test
