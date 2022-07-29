@@ -12,8 +12,9 @@ import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
 import util.JsonPathAlteration;
 import java.util.*;
+import net.thucydides.core.annotations.WithTag;
 
-
+@WithTag("In_test")
 @RunWith(SerenityParameterizedRunner.class)
 public class TestPostTestResultsAnnualCertificateGenerationPsv {
 

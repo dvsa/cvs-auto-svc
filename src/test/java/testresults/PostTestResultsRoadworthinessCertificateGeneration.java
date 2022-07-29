@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import net.thucydides.core.annotations.WithTag;
 
-
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsRoadworthinessCertificateGeneration {
 
