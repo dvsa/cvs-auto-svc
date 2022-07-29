@@ -440,22 +440,6 @@ public class PostTestResultsPozMainLvlSubmitted {
         validateSavedDataOld();
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value - testerStaffId")
-    @Test
-    public void testResultsNullTesterStaffId() {
-
-        testResultsSteps.postTestResults(vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
-                .setTesterStaffId(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        vehicleSubmittedDataOld.setTesterStaffId(null);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testerEmailAddress")
     @Test
     public void testResultsRandomTesterEmailAddress() {
