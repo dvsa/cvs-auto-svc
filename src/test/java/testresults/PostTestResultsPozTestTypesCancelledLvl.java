@@ -43,7 +43,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         String jsonFileName = "test-results_cancelled.json";
         test_results_cancelled_json = GenericData.updateJson( jsonFileName, false);
     }
-    
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeName")
     @Test
     public void testResultsRandomTestTypeName() {
@@ -67,6 +67,22 @@ public class PostTestResultsPozTestTypesCancelledLvl {
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeName("");
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
+        vehicleCancelledDataOld.build().getTestTypes().get(0).setTestTypeName(null);
+        testResultsSteps.statusCodeShouldBe(201);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value - testTypeName")
+    @Test
+    public void testResultsNullTestTypeName() {
+
+        vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
+                .getTestTypes().get(0).setTestTypeName(null);
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.build());
         vehicleCancelledDataOld.build().getTestTypes().get(0).setTestTypeName(null);
@@ -315,7 +331,7 @@ public class PostTestResultsPozTestTypesCancelledLvl {
         testResultsSteps.validateData("Test records created");
         validateSavedDataOld();
     }
-    
+
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - seatbeltInstallationCheckDate")
     @Test
     public void testResultsNullSeatbeltInstallationCheckDate() {

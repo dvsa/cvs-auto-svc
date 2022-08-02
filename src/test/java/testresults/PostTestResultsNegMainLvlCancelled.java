@@ -137,16 +137,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("testStationName", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStationName")
-    @Test
-    public void testResultsNullTestStationName() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testStationName", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationName", "must be a string");
-    }
-
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testStationName")
     @Test
     public void testResultsIntegerTestStationName() {
@@ -174,16 +164,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testStationPNumber", "is required");
     }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testStationPNumber")
-    @Test
-    public void testResultsNullTestStationPNumber() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testStationPNumber", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testStationPNumber", "must be a string");
-    }
-
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testStationPNumber")
     @Test
@@ -259,16 +239,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("testerName", "is required");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerName")
-    @Test
-    public void testResultsNullTesterName() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testerName", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testerName", "must be a string");
-    }
-
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testerName")
     @Test
     public void testResultsIntegerTesterName() {
@@ -287,7 +257,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("testerName", "length must be less than or equal to 60 characters long");
     }
 
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - testerStaffId")
     @Test
     public void testResultsMissingTesterStaffId() {
@@ -297,7 +266,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.validatePostErrorData("testerStaffId", "is required");
     }
 
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerStaffId")
     @Test
     public void testResultsNullTesterStaffId() {
@@ -306,7 +274,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testerStaffId", "must be a string");
     }
-
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3508 API Consumer tries to create a new test result for submitted/canceled with different property type - testerStaffId")
     @Test
@@ -334,15 +301,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testerEmailAddress", ToTypeConvertor.MISSING, TestResultsLevel.MAIN_LEVEL);
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testerEmailAddress", "is required");
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - testerEmailAddress")
-    @Test
-    public void testResultsNullTesterEmailAddress() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "testerEmailAddress", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("testerEmailAddress", "must be a string");
     }
 
 
@@ -508,16 +466,6 @@ public class PostTestResultsNegMainLvlCancelled {
         testResultsSteps.postTestResults(vehicleCancelledData.setVrm(VRM).setTestStatus("").build());
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testStatus", "should be one of [\"submitted\", \"cancelled\"]");
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - reasonForCancellation")
-    @Test
-    public void testResultsNullReasonForCancellation() {
-
-        testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.setVrm(VRM).build(), "reasonForCancellation", ToTypeConvertor.NULL, TestResultsLevel.MAIN_LEVEL);
-        testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("reasonForCancellation", "must be a string");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - reasonForCancellation")

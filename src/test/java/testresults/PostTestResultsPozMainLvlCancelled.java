@@ -60,6 +60,21 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 - API Consumer creates a new test results for submitted/canceled with null value - testStationName")
+    @Test
+    public void testResultsTestStationNameNull() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setTestStationName(null).build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.setTestStationName(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testStationPNumber")
     @Test
@@ -83,6 +98,21 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .setTestStationPNumber("").build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.setTestStationPNumber(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value - testStationPNumber")
+    @Test
+    public void testResultsNullTestStationPNumber() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setTestStationPNumber(null).build());
 
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.setTestStationPNumber(null);
@@ -161,6 +191,21 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with null value - testerName")
+    @Test
+    public void testResultsNullTesterName() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setTesterName(null).build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.setTesterName(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testerStaffId")
     @Test
@@ -191,7 +236,6 @@ public class PostTestResultsPozMainLvlCancelled {
         validateSavedDataOld();
     }
 
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testerEmailAddress")
     @Test
     public void testResultsRandomTesterEmailAddress() {
@@ -214,6 +258,21 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .setTesterEmailAddress("").build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.setTesterEmailAddress(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value - testerEmailAddress")
+    @Test
+    public void testResultsNullTesterEmailAddress() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setTesterEmailAddress(null).build());
 
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.setTesterEmailAddress(null);
@@ -272,6 +331,21 @@ public class PostTestResultsPozMainLvlCancelled {
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .setReasonForCancellation("").build());
+
+        testResultsSteps.statusCodeShouldBe(201);
+        vehicleCancelledDataOld.setReasonForCancellation(null);
+        testResultsSteps.validateData("Test records created");
+        validateSavedDataOld();
+    }
+
+    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3506 - API Consumer tries to create a new test result for submitted/canceled with null value for not nullable - reasonForCancellation")
+    @Test
+    public void testResultsNullReasonForCancellation() {
+
+        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+                .setReasonForCancellation(null).build());
 
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.setReasonForCancellation(null);
