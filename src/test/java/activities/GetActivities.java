@@ -16,6 +16,7 @@ import util.JsonPathAlteration;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
 @RunWith(SerenityRunner.class)
 public class GetActivities {
 
@@ -207,6 +208,9 @@ public class GetActivities {
         activitiesSteps.statusCodeShouldBe(400);
         activitiesSteps.validateData("Bad Request");
     }
+
+
+
 
     @Title("CVSB- / CVSB- - AC7 ")
     @Test

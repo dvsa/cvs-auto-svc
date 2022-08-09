@@ -4,6 +4,7 @@ import clients.model.*;
 import data.TestTypeByIdData;
 import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Ignore;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import steps.TestTypeSteps;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
 
 @RunWith(SerenityRunner.class)
 public class GetTestTypesByIdNeg {
@@ -234,25 +236,4 @@ public class GetTestTypesByIdNeg {
         return Arrays.stream(classOfEnum.getEnumConstants()).filter(e -> !("invalid" .equalsIgnoreCase(e.name()) || "empty".equalsIgnoreCase(e.name()))).map(e -> e.getValue()).collect(Collectors.joining(", "));
     }
 
-    @Title("VTA-696 - Get test types Missing parameter value check")
-    @Test
-    public void testResultsMissingParameter() {
-        TestTypeQueryParam testTypeQueryParam = new TestTypeQueryParam()
-                .setFields(Arrays.asList(TestTypeField.TEST_TYPE_CLASSIFICATION, TestTypeField.DEFAULT_TEST_CODE, TestTypeField.LINKED_TEST_CODE))
-                .setVehicleType(VehicleType.PSV)
-                .setVehicleSize(VehicleSize.LARGE)
-                .setVehicleConfiguration(VehicleConfiguration.ARTICULATED);
-
-        testTypeSteps.getTestTypesById(" ", testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateResp("\"Missing parameter value.\"");
-
-        testTypeSteps.getTestTypesById("undefined", testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateResp("\"Missing parameter value.\"");
-
-        testTypeSteps.getTestTypesById("null", testTypeQueryParam);
-        testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateResp("\"Missing parameter value.\"");
-    }
 }

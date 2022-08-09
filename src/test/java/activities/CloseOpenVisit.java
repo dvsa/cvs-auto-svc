@@ -27,17 +27,15 @@ public class CloseOpenVisit {
         activitiesSteps.valueForFieldInPathShouldBe("wasVisitAlreadyClosed",true);
     }
 
-    @Title("VTA-470 - Close open visit call with undefined/empty string/null id return 400 status code and return Missing parameter value.")
+    @Title("VTA-470 - Close open visit call with undefined/empty string/null id return 400 status code")
     @Test
-    public void closeOpenVisitMissingParameter() {
-        activitiesSteps.closeOpenVisit(" ");
+    public void closeOpenVisitBadRequest() {
+        activitiesSteps.closeOpenVisit("");
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
         activitiesSteps.closeOpenVisit("undefined");
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
         activitiesSteps.closeOpenVisit("null");
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
     }
+
 }

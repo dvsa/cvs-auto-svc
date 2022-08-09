@@ -1,5 +1,6 @@
 package steps;
 
+
 import clients.TrailerRegistrationClient;
 import io.restassured.response.Response;
 import net.thucydides.core.annotations.Step;
