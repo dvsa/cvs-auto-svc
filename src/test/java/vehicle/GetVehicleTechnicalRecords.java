@@ -1,5 +1,6 @@
 package vehicle;
 
+
 import data.GenericData;
 import data.VehicleTechRecordsData;
 import model.vehicles.Vehicle;
@@ -9,12 +10,16 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 @RunWith(SerenityRunner.class)
 public class GetVehicleTechnicalRecords {
@@ -787,22 +792,5 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "hgv" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","current");
-    }
-
-    @Title("VTA-695 - Get tech records Missing parameter value check")
-    @Test
-    public void getTechRecordsWithMissingParameter() {
-
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(" ");
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
-
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("undefined");
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
-
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("null");
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
-        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
     }
 }

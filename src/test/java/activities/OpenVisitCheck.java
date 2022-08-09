@@ -23,17 +23,18 @@ public class OpenVisitCheck {
         activitiesSteps.statusCodeShouldBe(200);
     }
 
-    @Title("VTA-300 - Get open visit with empty string testerStaffId return 400 Missing parameter value.")
+    @Title("VTA-300 - Get open visit with empty string testerStaffId return 400 Bad Request")
     @Test
-    public void getOpenVisitWithMissingStaffId() {
+    public void getOpenVisitWithEmptyStringStaffId() {
         activitiesSteps.checkOpenVisit( "", false);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        activitiesSteps.validateResp("\"Bad Request\"");
         activitiesSteps.checkOpenVisit(null, false);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        activitiesSteps.validateResp("\"Bad Request\"");
         activitiesSteps.checkOpenVisit("undefined", false);
         activitiesSteps.statusCodeShouldBe(400);
-        activitiesSteps.validateResp("\"Missing parameter value.\"");
+        activitiesSteps.validateResp("\"Bad Request\"");
     }
+
 }

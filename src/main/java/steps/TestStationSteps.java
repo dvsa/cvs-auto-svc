@@ -5,7 +5,6 @@ import exceptions.AutomationException;
 import io.restassured.response.Response;
 import model.TestStations;
 import net.thucydides.core.annotations.Step;
-import org.junit.Assert;
 import util.AwsUtil;
 
 import static org.hamcrest.Matchers.*;
@@ -23,11 +22,6 @@ public class TestStationSteps {
     @Step
     public void getTestStationsWithNoData() {
         response = testStationsClient.getTestStationsWithNoData();
-    }
-
-    @Step
-    public void getTestStationsEmail(String p_number) {
-        response = testStationsClient.getTestStationsEmail(p_number);
     }
 
     @Step
@@ -72,7 +66,7 @@ public class TestStationSteps {
 
     @Step
     public void validateData(String stringData) {
-        Assert.assertEquals(response.body().asString(), stringData);
+        response.then().body("", is(stringData));
     }
 
     @Step

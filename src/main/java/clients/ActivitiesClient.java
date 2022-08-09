@@ -12,7 +12,9 @@ import model.activities.Activities;
 import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
-import util.*;
+import util.AwsUtil;
+import util.BasePathFilter;
+import util.JsonPathAlteration;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -199,6 +201,7 @@ public class ActivitiesClient {
 
         return response;
     }
+
     private Response callPutActivitiesUpdate(Object object) {
 
         Response response = given().filters(new BasePathFilter())
