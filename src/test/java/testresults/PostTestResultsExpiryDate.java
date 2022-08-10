@@ -7,7 +7,9 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -18,7 +20,7 @@ import java.util.List;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsExpiryDate {
 
@@ -26,6 +28,15 @@ public class PostTestResultsExpiryDate {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
+
+    @Before
+    @Title("warm up test")
+    @Test
+    public void testResultsWarmUpTest() {
+        testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
+        vehicleSubmittedDataOld.build()
+                .getTestTypes().get(0).setTestTypeId("16").setTestResult("pass");
+    }
 
     private void validateSavedDataOld(List<String> data) {
 
