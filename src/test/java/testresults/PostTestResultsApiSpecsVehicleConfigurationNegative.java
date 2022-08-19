@@ -86,7 +86,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
+        testResultsSteps.validatePostErrorData("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, long semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
     }
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (HGV) - null value")
@@ -153,7 +153,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorDataContains("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
+        testResultsSteps.validatePostErrorDataContains("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, long semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
     }
 
 @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (HGV) - missing field")
@@ -280,7 +280,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorDataContains("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
+        testResultsSteps.validatePostErrorDataContains("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, long semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
     }
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (TRL) - null value")
@@ -339,7 +339,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationNegative {
 
         testResultsSteps.postTestResultsPayload(payload);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorDataContains("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
+        testResultsSteps.validatePostErrorDataContains("vehicleConfiguration", "must be one of [rigid, articulated, centre axle drawbar, semi-car transporter, semi-trailer, long semi-trailer, low loader, other, drawbar, four-in-line, dolly, full drawbar]");
     }
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (TRL) - missing")
