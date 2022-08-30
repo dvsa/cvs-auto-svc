@@ -4,10 +4,13 @@ import data.ActivitiesData;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 
+
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class CloseOpenVisit {
     @Steps
