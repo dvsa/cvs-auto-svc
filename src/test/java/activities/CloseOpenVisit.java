@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.ActivitiesSteps;
 
-
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class CloseOpenVisit {
     @Steps
