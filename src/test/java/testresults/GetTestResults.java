@@ -51,7 +51,7 @@ public class GetTestResults {
 
     @Title("CVSB-416 - CVSB-949 / CVSB-3513 - Un-authorised consumer retrieves results for submitted tests.")
     @Test
-    public void testResultsNoAuthorised() throws InterruptedException {
+    public void testResultsNoAuthorised() {
         testResultsSteps.getTestResultsNotAuthorised(vehicleSubmittedData.getVin());
         testResultsSteps.statusCodeShouldBe(403);
         testResultsSteps.validateMessage("User is not authorized to access this resource with an explicit deny");

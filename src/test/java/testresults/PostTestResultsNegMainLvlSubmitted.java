@@ -14,7 +14,6 @@ import steps.TestResultsSteps;
 
 import static util.DataUtil.generateRandomExcludingValues;
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsNegMainLvlSubmitted {
 
@@ -961,6 +960,5 @@ public class PostTestResultsNegMainLvlSubmitted {
         testResultsSteps.statusCodeShouldBe(400);
         testResultsSteps.validatePostErrorData("testTypes", "is required");
     }
-
 }
 
