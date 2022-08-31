@@ -172,8 +172,14 @@ public class TestResultsSteps {
 
     @Step
     public void validateMessage(String stringData) {
-        response.then().log().all()
-                .body("message", equalTo(stringData));
+
+        System.out.println("LOG THIS" + response.getBody().print().toLowerCase());
+
+        if (response.getBody().asString().contains("message")) {
+            response.then().body("message", equalTo(stringData));
+        } else {
+            response.then().body("Message", equalTo(stringData));
+        }
     }
 
     @Step
