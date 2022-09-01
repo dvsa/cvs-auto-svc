@@ -14,6 +14,7 @@ import static util.TypeLoader.isWrongAuth;
 
 public class BasePathFilter implements Filter {
     private static final Loader loader = new LocalLoaderImpl();
+
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
         filterableRequestSpecification.given().baseUri(returnBaseUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
@@ -27,16 +28,14 @@ public class BasePathFilter implements Filter {
 
     /**
      * Simple method to construct the base URL with the new format following the APIG restructure
+     *
      * @return Base url as String
      */
     private String returnBaseUrl() {
         String baseUrl = loader.getBasePathUrl();
         String branchName = loader.getBranchName();
-        if (branchName.equalsIgnoreCase("develop")) {
-            return baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName);
-        } else {
-            return baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
-        }
+        return branchName.equalsIgnoreCase("develop") ?
+                baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName) :
+                baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
     }
 }
-
