@@ -117,7 +117,7 @@ public class PostTestResultsNegLocationSubmitted {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lateral", RandomStringUtils.randomNumeric(1, 9), ToTypeConvertor.INTEGER, TestResultsLevel.LOCATION);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("lateral", "must be one of [nearside, centre, offside, null]");
+        testResultsSteps.validatePostErrorData("lateral", "must be one of [nearside, centre, offside, rear, null]");
     }
 
 
@@ -127,7 +127,7 @@ public class PostTestResultsNegLocationSubmitted {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lateral", RandomStringUtils.randomAlphanumeric(1, 9), ToTypeConvertor.STRING, TestResultsLevel.LOCATION);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("lateral", "must be one of [nearside, centre, offside, null]");
+        testResultsSteps.validatePostErrorData("lateral", "must be one of [nearside, centre, offside, rear, null]");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3509 - API Consumer tries to create a new test result for submitted/canceled with different format or allowed values - lateral empty")
@@ -136,7 +136,7 @@ public class PostTestResultsNegLocationSubmitted {
 
         testResultsSteps.postTestResultsFieldChange(vehicleSubmittedData.setVrm(VRM).build(), "lateral", "", ToTypeConvertor.STRING, TestResultsLevel.LOCATION);
         testResultsSteps.statusCodeShouldBe(400);
-        testResultsSteps.validatePostErrorData("lateral", "must be one of [nearside, centre, offside, null]");
+        testResultsSteps.validatePostErrorData("lateral", "must be one of [nearside, centre, offside, rear, null]");
     }
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3505 - API Consumer tries to create a new test result for submitted/canceled with missing property - longitudinal")
