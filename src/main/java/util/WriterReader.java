@@ -5,14 +5,14 @@ import exceptions.AutomationException;
 import java.io.*;
 
 public class WriterReader {
-
+    public static String instanceToken="";
 
     private static final String FILE_NAME = "fileUtils.txt";
 
     public static void saveUtils() {
-
-
-        FileUtils p1 = new FileUtils(WebDriverBrowsertack.getToken());
+        System.out.println(instanceToken);
+        FileUtils p1 = new FileUtils(instanceToken);
+//        FileUtils p1 = new FileUtils(WebDriverBrowsertack.getToken());
         try(FileOutputStream f = new FileOutputStream(new File(FILE_NAME));ObjectOutputStream o = new ObjectOutputStream(f) ) {
 
             o.writeObject(p1);
@@ -50,7 +50,9 @@ public class WriterReader {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        UserNamePasswordFlow.createToken();
+        instanceToken=UserNamePasswordFlow.token;
         getToken();
     }
 

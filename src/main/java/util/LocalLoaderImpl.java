@@ -111,5 +111,15 @@ public class LocalLoaderImpl implements Loader {
         return properties.getProperty("app.scope");
     }
 
+    @Override
+    public String getAUTHORITY() {
+        return properties.getProperty("AUTHORITY");
+    }
+
+    @Override
+    public String getCLIENT_ID() {
+        return properties.getProperty("CLIENT_ID");
+    }
+
 
 }

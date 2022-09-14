@@ -106,6 +106,11 @@
             <artifactId>aws-java-sdk-cloudwatch</artifactId>
             <version>1.11.942</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>msal4j</artifactId>
+            <version>1.13.0</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>

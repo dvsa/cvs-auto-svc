@@ -38,4 +38,10 @@ public interface Loader {
 
     String getAppScope();
 
+    String getAUTHORITY();
+
+    String getCLIENT_ID();
+
+
+
 }
