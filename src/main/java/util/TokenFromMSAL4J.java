@@ -3,12 +3,10 @@ package util;
 import com.microsoft.aad.msal4j.*;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Collections;
-import java.util.Properties;
 import java.util.Set;
 
-public class UserNamePasswordFlow {
+public class TokenFromMSAL4J {
     private static Loader loader = new LocalLoaderImpl();
     private static String authority;
     private static Set<String> scope;
@@ -16,11 +14,9 @@ public class UserNamePasswordFlow {
     private static String username;
     private static String password;
     public static  String token;
-
-    public static void main(String[] args)  { }
-    public static String createToken() throws Exception {
+    public static void main(String args[]) throws Exception {}
+        public static String createToken() throws Exception {
         setUpSampleData();
-
 
         PublicClientApplication pca = PublicClientApplication.builder(clientId)
                 .authority(authority)
@@ -38,7 +34,6 @@ public class UserNamePasswordFlow {
 //        System.out.println("Id token:         " + result.idToken());
 //        System.out.println();
         token=result.accessToken();
-//        System.out.println(token);
         accountsInCache = pca.getAccounts().join();
         account = getAccountByUsername(accountsInCache, username);
 
@@ -48,13 +43,8 @@ public class UserNamePasswordFlow {
 //        System.out.println("Access token:     " + result.accessToken());
 //        System.out.println("Id token:         " + result.idToken());
         token=result.accessToken();
-        //System.out.println(token);
-
-
         return token;
-
     }
-
     private static IAuthenticationResult acquireTokenUsernamePassword(PublicClientApplication pca,
                                                                       Set<String> scope,
                                                                       IAccount account,
@@ -113,11 +103,11 @@ public class UserNamePasswordFlow {
      * values such as username/password would come from the user, and different users may require different scopes
      */
     private static void setUpSampleData() throws IOException {
+        // Load properties file and set properties used throughout the sample
         authority = loader.getAUTHORITY();
         scope = Collections.singleton(loader.getAppScope());
         clientId = loader.getCLIENT_ID();
         username = loader.getMicrosoftOnlineUserName();
         password = loader.getMicrosoftOnlinePassVersion2();
-
     }
 }

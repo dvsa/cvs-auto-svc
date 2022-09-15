@@ -21,7 +21,7 @@ public class WebDriverBrowsertack {
     static protected WebDriver driver;
     private static Loader loader = new LocalLoaderImpl();
 
-    public static void setup() {
+        public static void setup() {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("os", "Windows");
@@ -40,6 +40,12 @@ public class WebDriverBrowsertack {
     }
 
     public static String getToken() {
+//        try{
+//            return TokenFromMSAL4J.createToken();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return "";
         WebDriverBrowsertack.setup();
 
         driver.get(loader.getMicrosoftOnlineUrlVersion2());
@@ -71,6 +77,7 @@ public class WebDriverBrowsertack {
         String token = driver.getCurrentUrl().split("id_token=")[1].split("&session_state=")[0];
         driver.quit();
         return token;
+
     }
 
     public static WebDriver checkVsaEmail(String randomVrm) {
