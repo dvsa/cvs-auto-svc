@@ -3879,7 +3879,7 @@ public class GetTestTypesByIdData {
         testTypeSteps.getTestTypesById(TestTypes.AAL.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(400);
         testTypeSteps.validateData("Query parameter \\\"vehicleConfiguration\\\" must be one of [articulated, " +
-                "rigid, centre axle drawbar, semi-car transporter, semi-trailer, low loader, other, drawbar, " +
+                "rigid, centre axle drawbar, semi-car transporter, semi-trailer, long semi-trailer, low loader, other, drawbar, " +
                 "four-in-line, dolly, full drawbar, null]");
     }
 
