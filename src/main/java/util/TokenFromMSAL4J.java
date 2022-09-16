@@ -33,7 +33,7 @@ public class TokenFromMSAL4J {
 //        System.out.println("Access token:     " + result.accessToken());
 //        System.out.println("Id token:         " + result.idToken());
 //        System.out.println();
-        token=result.accessToken();
+        token=result.idToken();
         accountsInCache = pca.getAccounts().join();
         account = getAccountByUsername(accountsInCache, username);
 
@@ -42,7 +42,7 @@ public class TokenFromMSAL4J {
 //        System.out.println("Account username: " + result.account().username());
 //        System.out.println("Access token:     " + result.accessToken());
 //        System.out.println("Id token:         " + result.idToken());
-        token=result.accessToken();
+        token=result.idToken();
         return token;
     }
     private static IAuthenticationResult acquireTokenUsernamePassword(PublicClientApplication pca,

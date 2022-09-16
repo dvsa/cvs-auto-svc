@@ -26,6 +26,7 @@ public class WriterReader {
         }
 
     }
+
     public static String getToken() {
 
         FileUtils fileUtils;
@@ -49,7 +50,7 @@ public class WriterReader {
     }
 
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         getToken();
     }
 
