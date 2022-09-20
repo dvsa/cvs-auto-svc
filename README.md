@@ -59,14 +59,14 @@ microsoftonline.pass=<automation_password>
 microsoftonline.url.v2=https://login.microsoftonline.com/<azure_app_id>/oauth2/v2.0/authorize?client_id=<azure_client_id>&response_type=id_token&scope=openid &redirect_uri=http://localhost:8100&nonce=12345
 microsoftonline.username.v2=<automation_username>
 microsoftonline.pass.v2=<automation_password>
-browserstack.username=<browserstack_username>
-browserstack.password=<browserstack_password>
 data.location=develop
 api.keys=<api_key>
 app.token.url=https://login.microsoftonline.com/<azure_app_id>/oauth2/v2.0/token
 app.client.id=<app_client_id>
 app.scope=<app_scope>
 app.client.secret=<app_client_secret>
+client_id=<client_id>
+authority=<authority>
 ```
 
 ## Running locally

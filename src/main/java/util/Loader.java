@@ -38,9 +38,9 @@ public interface Loader {
 
     String getAppScope();
 
-    String getAUTHORITY();
+    String getAuthority();
 
-    String getCLIENT_ID();
+    String getClient_Id();
 
 
 

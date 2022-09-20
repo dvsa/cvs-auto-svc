@@ -94,9 +94,9 @@ public class TokenFromMSAL4J {
      */
     private static void setUpSampleData() throws IOException {
         // Loader bringing the data from  environment.properties file
-        authority = loader.getAUTHORITY();
+        authority = loader.getAuthority();
         scope = Collections.singleton(loader.getAppScope());
-        clientId = loader.getCLIENT_ID();
+        clientId = loader.getClient_Id();
         username = loader.getMicrosoftOnlineUserNameVersion2();
         password = loader.getMicrosoftOnlinePassVersion2();
     }

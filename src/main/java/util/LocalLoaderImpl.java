@@ -112,13 +112,13 @@ public class LocalLoaderImpl implements Loader {
     }
 
     @Override
-    public String getAUTHORITY() {
-        return properties.getProperty("AUTHORITY");
+    public String getAuthority() {
+        return properties.getProperty("authority");
     }
 
     @Override
-    public String getCLIENT_ID() {
-        return properties.getProperty("CLIENT_ID");
+    public String getClient_Id() {
+        return properties.getProperty("client_id");
     }
 
 

@@ -12,7 +12,7 @@ public class WriterReader {
     public static void saveUtils() {
 
 
-        FileUtils p1 = new FileUtils(WebDriverBrowsertack.getToken());
+        FileUtils p1 = new FileUtils(InstanceToken.getToken());
         try(FileOutputStream f = new FileOutputStream(new File(FILE_NAME));ObjectOutputStream o = new ObjectOutputStream(f) ) {
 
             o.writeObject(p1);
