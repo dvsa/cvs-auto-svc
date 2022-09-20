@@ -1,7 +1,6 @@
 package util;
 
 import com.microsoft.aad.msal4j.*;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
@@ -13,8 +12,6 @@ public class TokenFromMSAL4J {
     private static String clientId;
     private static String username;
     private static String password;
-    public static  String token;
-    public static void main(String args[]) throws Exception {}
         public static String createToken() throws Exception {
         setUpSampleData();
 
@@ -29,21 +26,14 @@ public class TokenFromMSAL4J {
 
         //Attempt to acquire token when user's account is not in the application's token cache
         IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);
-//        System.out.println("Account username: " + result.account().username());
-//        System.out.println("Access token:     " + result.accessToken());
-//        System.out.println("Id token:         " + result.idToken());
-//        System.out.println();
-        token=result.idToken();
+
         accountsInCache = pca.getAccounts().join();
         account = getAccountByUsername(accountsInCache, username);
 
         //Attempt to acquire token again, now that the user's account and a token are in the application's token cache
         result = acquireTokenUsernamePassword(pca, scope, account, username, password);
-//        System.out.println("Account username: " + result.account().username());
-//        System.out.println("Access token:     " + result.accessToken());
-//        System.out.println("Id token:         " + result.idToken());
-        token=result.idToken();
-        return token;
+
+        return result.idToken();
     }
     private static IAuthenticationResult acquireTokenUsernamePassword(PublicClientApplication pca,
                                                                       Set<String> scope,
@@ -103,11 +93,11 @@ public class TokenFromMSAL4J {
      * values such as username/password would come from the user, and different users may require different scopes
      */
     private static void setUpSampleData() throws IOException {
-        // Load properties file and set properties used throughout the sample
+        // Loader bringing the data from  environment.properties file
         authority = loader.getAUTHORITY();
         scope = Collections.singleton(loader.getAppScope());
         clientId = loader.getCLIENT_ID();
-        username = loader.getMicrosoftOnlineUserName();
+        username = loader.getMicrosoftOnlineUserNameVersion2();
         password = loader.getMicrosoftOnlinePassVersion2();
     }
 }

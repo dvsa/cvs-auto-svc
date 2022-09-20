@@ -8,10 +8,8 @@ import model.activities.ActivitiesGet;
 import model.activities.ActivitiesPost;
 import model.activities.ActivitiesPut;
 import net.thucydides.core.annotations.Step;
-import org.openqa.selenium.WebDriver;
 import util.AwsUtil;
 import util.JsonPathAlteration;
-import util.WebDriverBrowsertack;
 
 import java.util.List;
 
@@ -201,18 +199,6 @@ public class ActivitiesSteps {
     public void deleteActivitiesForUser(String user) {
         AwsUtil.deleteActivitiesForUser(user);
     }
-//
-//    @Step
-//    public WebDriver validateAtfEmail(String testerName) {
-//        return WebDriverBrowsertack.checkAtfEmail(testerName);
-//    }
-//
-//    @Step
-//    public void validateAtfEmailDetails(WebDriver driver, String testStationName, String testStationPNumber,
-//                                        String testerName, String startDate, String startTime) {
-//        WebDriverBrowsertack.checkAtfEmailDetails(driver, testStationName, testStationPNumber, testerName, startDate,
-//                startTime);
-//    }
 
     @Step
     public void postActivitiesParentIdWithAlterations(String requestBody, List<JsonPathAlteration> alterations) {

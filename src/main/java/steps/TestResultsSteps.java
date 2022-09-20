@@ -11,12 +11,10 @@ import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
 import org.junit.Before;
-import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
 import org.skyscreamer.jsonassert.JSONAssert;
 import util.AwsUtil;
 import util.JsonPathAlteration;
-import util.WebDriverBrowsertack;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -801,21 +799,11 @@ public class TestResultsSteps {
     public void deleteActivitiesForUser(String user) {
         AwsUtil.deleteActivitiesForUser(user);
     }
-//
-//    @Step
-//    public WebDriver validateVsaEmail(String randomVrm) {
-//        return WebDriverBrowsertack.checkVsaEmail(randomVrm);
-//    }
 
     @Step
     public String getOutlookEmailAddress() {
         return testResultsClient.getOutlookEmailAddress();
     }
-
-//    @Step
-//    public void validateVsaEmailDetails(WebDriver driver, String randomVrm, String testName, String date) {
-//        WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
-//    }
 
     @Step
     public void valueForFieldInPathShouldStartWith(String path, String expectedValue) {
