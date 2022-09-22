@@ -10,8 +10,6 @@ public class WriterReader {
     private static final String FILE_NAME = "fileUtils.txt";
 
     public static void saveUtils() {
-
-
         FileUtils p1 = new FileUtils(InstanceToken.getToken());
         try(FileOutputStream f = new FileOutputStream(new File(FILE_NAME));ObjectOutputStream o = new ObjectOutputStream(f) ) {
 

@@ -117,8 +117,8 @@ public class LocalLoaderImpl implements Loader {
     }
 
     @Override
-    public String getClient_Id() {
-        return properties.getProperty("client_id");
+    public String getClientId() {
+        return properties.getProperty("clientId");
     }
 
 

@@ -96,7 +96,7 @@ public class TokenFromMSAL4J {
         // Loader bringing the data from  environment.properties file
         authority = loader.getAuthority();
         scope = Collections.singleton(loader.getAppScope());
-        clientId = loader.getClient_Id();
+        clientId = loader.getClientId();
         username = loader.getMicrosoftOnlineUserNameVersion2();
         password = loader.getMicrosoftOnlinePassVersion2();
     }

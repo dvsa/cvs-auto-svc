@@ -63,10 +63,10 @@ data.location=develop
 api.keys=<api_key>
 app.token.url=https://login.microsoftonline.com/<azure_app_id>/oauth2/v2.0/token
 app.client.id=<app_client_id>
-app.scope=<app_scope>
 app.client.secret=<app_client_secret>
-client_id=<client_id>
+clientId=<clientId>
 authority=<authority>
+app.scope=<app_scope>
 ```
 
 ## Running locally
