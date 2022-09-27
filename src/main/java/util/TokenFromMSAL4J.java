@@ -19,19 +19,19 @@ public class TokenFromMSAL4J {
                 .authority(authority)
                 .build();
 
-        //Get list of accounts from the application's token cache, and search them for the configured username
-        //getAccounts() will be empty on this first call, as accounts are added to the cache when acquiring a token
+        /*Get list of accounts from the application's token cache, and search them for the configured username
+        getAccounts() will be empty on this first call, as accounts are added to the cache when acquiring a token*/
         Set<IAccount> accountsInCache = pca.getAccounts().join();
         IAccount account = getAccountByUsername(accountsInCache, username);
 
-        //Attempt to acquire token when user's account is not in the application's token cache
-        IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);
+        /*Attempt to acquire token when user's account is not in the application's token cache
+        IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);*/
 
         accountsInCache = pca.getAccounts().join();
         account = getAccountByUsername(accountsInCache, username);
 
         //Attempt to acquire token again, now that the user's account and a token are in the application's token cache
-        result = acquireTokenUsernamePassword(pca, scope, account, username, password);
+            IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);
 
         return result.idToken();
     }
@@ -47,8 +47,8 @@ public class TokenFromMSAL4J {
                             .builder(scope)
                             .account(account)
                             .build();
-            // Try to acquire token silently. This will fail on the first acquireTokenUsernamePassword() call
-            // because the token cache does not have any data for the user you are trying to acquire a token for
+            /* Try to acquire token silently. This will fail on the first acquireTokenUsernamePassword() call
+             because the token cache does not have any data for the user you are trying to acquire a token for*/
             result = pca.acquireTokenSilently(silentParameters).join();
             System.out.println("==acquireTokenSilently call succeeded");
         } catch (Exception ex) {
@@ -58,8 +58,8 @@ public class TokenFromMSAL4J {
                         UserNamePasswordParameters
                                 .builder(scope, username, password.toCharArray())
                                 .build();
-                // Try to acquire a token via username/password. If successful, you should see
-                // the token and account information printed out to console
+                /* Try to acquire a token via username/password. If successful, you should see
+                 the token and account information printed out to console*/
                 result = pca.acquireToken(parameters).join();
                 System.out.println("==username/password flow succeeded");
             } else {
