@@ -24,14 +24,14 @@ public class TokenFromMSAL4J {
         Set<IAccount> accountsInCache = pca.getAccounts().join();
         IAccount account = getAccountByUsername(accountsInCache, username);
 
-        /*Attempt to acquire token when user's account is not in the application's token cache
-        IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);*/
+        //Attempt to acquire token when user's account is not in the application's token cache
+        IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);
 
         accountsInCache = pca.getAccounts().join();
         account = getAccountByUsername(accountsInCache, username);
 
         //Attempt to acquire token again, now that the user's account and a token are in the application's token cache
-            IAuthenticationResult result = acquireTokenUsernamePassword(pca, scope, account, username, password);
+            result = acquireTokenUsernamePassword(pca, scope, account, username, password);
 
         return result.idToken();
     }
@@ -58,8 +58,8 @@ public class TokenFromMSAL4J {
                         UserNamePasswordParameters
                                 .builder(scope, username, password.toCharArray())
                                 .build();
-                /* Try to acquire a token via username/password. If successful, you should see
-                 the token and account information printed out to console*/
+                // Try to acquire a token via username/password. If successful, you should see
+                // the token and account information printed out to console
                 result = pca.acquireToken(parameters).join();
                 System.out.println("==username/password flow succeeded");
             } else {
