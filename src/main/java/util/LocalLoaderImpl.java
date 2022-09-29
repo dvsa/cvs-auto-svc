@@ -30,6 +30,10 @@ public class LocalLoaderImpl implements Loader {
     public String getApiKeys() {
         return properties.getProperty("api.keys");
     }
+    @Override
+    public String getTokenUrlApiKey() {
+        return properties.getProperty("token.url.api.key");
+    }
 
     @Override
     public String getNoDataBasePathUrl() {

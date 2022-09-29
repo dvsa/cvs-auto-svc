@@ -204,14 +204,15 @@ public class ActivitiesSteps {
 
     @Step
     public WebDriver validateAtfEmail(String testerName) {
-        return WebDriverBrowsertack.checkAtfEmail(testerName);
+//        return WebDriverBrowsertack.checkAtfEmail(testerName);
+        return null;
     }
 
     @Step
     public void validateAtfEmailDetails(WebDriver driver, String testStationName, String testStationPNumber,
                                         String testerName, String startDate, String startTime) {
-        WebDriverBrowsertack.checkAtfEmailDetails(driver, testStationName, testStationPNumber, testerName, startDate,
-                startTime);
+//        WebDriverBrowsertack.checkAtfEmailDetails(driver, testStationName, testStationPNumber, testerName, startDate,
+//                startTime);
     }
 
     @Step

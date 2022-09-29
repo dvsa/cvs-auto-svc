@@ -6,6 +6,8 @@ public interface Loader {
 
     String getApiKeys();
 
+    String getTokenUrlApiKey();
+
     String getNoDataBasePathUrl();
 
     String getMicrosoftOnlineUrl();

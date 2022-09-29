@@ -801,7 +801,8 @@ public class TestResultsSteps {
 
     @Step
     public WebDriver validateVsaEmail(String randomVrm) {
-        return WebDriverBrowsertack.checkVsaEmail(randomVrm);
+//        return WebDriverBrowsertack.checkVsaEmail(randomVrm);
+        return null;
     }
 
     @Step
@@ -811,7 +812,7 @@ public class TestResultsSteps {
 
     @Step
     public void validateVsaEmailDetails(WebDriver driver, String randomVrm, String testName, String date) {
-        WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
+//        WebDriverBrowsertack.checkVsaEmailDetails(driver, randomVrm, testName, date);
     }
 
     @Step
