@@ -31,7 +31,7 @@ public class PostTestResultsPozMainLvlCancelled {
 
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testStationName")
+    /*@Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testStationName")
     @Test
     public void testResultsTestStationNameRandString() {
 
@@ -608,7 +608,7 @@ public class PostTestResultsPozMainLvlCancelled {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
         validateSavedDataOld();
-    }
+    }*/
 
 
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleType hgv")
@@ -640,461 +640,461 @@ public class PostTestResultsPozMainLvlCancelled {
 
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - numberOfSeats")
-    @Test
-    public void testResultsRandomNumberOfSeats() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setNumberOfSeats(Integer.valueOf(RandomStringUtils.randomNumeric(5))).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - noOfAxles")
-    @Test
-    public void testResultsRandomNumberNoOfAxles2() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setNoOfAxles(2).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - noOfAxles")
-    @Test
-    public void testResultsRandomNumberNoOfAxles3() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setNoOfAxles(3).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration rigid")
-    @Test
-    public void testResultsVehicleConfigurationValueOne() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setVehicleConfiguration("rigid").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Ignore ("vehicleConfiguration = articulated should have returned 201 - instead returns bad Gateway - defect Id CVSB-9017")
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration articulated")
-    public void testResultsVehicleConfigurationValueTwo() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setVehicleConfiguration("articulated").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - odometerReading")
-    @Test
-    public void testResultsRandomOdometerReading() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setOdometerReading(Integer.valueOf(RandomStringUtils.randomNumeric(5))).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - odometerReading")
-    @Test
-    public void testResultsNullOdometerReading() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setOdometerReading(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - odometerReadingUnits")
-    @Test
-    public void testResultsNullOdometerReadingUnits() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setOdometerReadingUnits(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - odometerReadingUnits kilometres")
-    @Test
-    public void testResultsOdometerReadingUnitsValueOne() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setOdometerReadingUnits("kilometres").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - odometerReadingUnits miles")
-    @Test
-    public void testResultsOdometerReadingUnitsValueTwo() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setOdometerReadingUnits("miles").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerId")
-    @Test
-    public void testResultsRandomStringPreparerId() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setPreparerId(RandomStringUtils.randomAlphanumeric(14)).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - preparerId")
-    @Test
-    public void testResultsEmptyPreparerId() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setPreparerId("").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        vehicleCancelledDataOld.setPreparerId(null);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CB2-4804 - API Consumer creates a new test results for submitted/canceled with null - preparerId")
-    @Test
-    public void testResultsNullPreparerId() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setPreparerId(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerName")
-    @Test
-    public void testResultsRandomStringPreparerName() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setPreparerName(RandomStringUtils.randomAlphanumeric(14)).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - preparerName")
-    @Test
-    public void testResultsEmptyPreparerName() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setPreparerName("").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        vehicleCancelledDataOld.setPreparerName(null);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CB2-4804 - API Consumer creates a new test results for submitted/canceled with null - preparerName")
-    @Test
-    public void testResultsNullPreparerName() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setPreparerName(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - euVehicleCategory")
-    @Test
-    public void testResultsValueEuVehicleCategoryNull() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory m1")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueOne() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("m1").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory m2")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueTwo() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("m2").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory m3")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueThree() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("m3").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory n1")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueFour() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("n1").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory n2")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueFive() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("n2").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory n3")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueSix() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("n3").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o1")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueSeven() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("o1").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o2")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueEight() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("o2").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o3")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueNine() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("o3").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o4")
-    @Test
-    public void testResultsValueEuVehicleCategoryValueTen() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setEuVehicleCategory("o4").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - countryOfRegistration")
-    @Test
-    public void testResultsNullValueCountryOfRegistration() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setCountryOfRegistration(null).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - countryOfRegistration")
-    @Test
-    public void testResultsRandomValueCountryOfRegistration() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setCountryOfRegistration(RandomStringUtils.randomAlphanumeric(14)).build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - countryOfRegistration")
-    @Test
-    public void testResultsEmptyValueCountryOfRegistration() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setCountryOfRegistration("").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        vehicleCancelledDataOld.setCountryOfRegistration(null);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleSize large")
-    @Test
-    public void testResultsValueEuVehicleSizeValueOne() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setVehicleSize("large").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleSize small")
-    @Test
-    public void testResultsValueEuVehicleSizeValueTwo() {
-
-        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
-                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
-                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
-                .setVehicleSize("small").build());
-
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-        validateSavedDataOld();
-    }
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - numberOfSeats")
+//    @Test
+//    public void testResultsRandomNumberOfSeats() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setNumberOfSeats(Integer.valueOf(RandomStringUtils.randomNumeric(5))).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - noOfAxles")
+//    @Test
+//    public void testResultsRandomNumberNoOfAxles2() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setNoOfAxles(2).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - noOfAxles")
+//    @Test
+//    public void testResultsRandomNumberNoOfAxles3() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setNoOfAxles(3).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration rigid")
+//    @Test
+//    public void testResultsVehicleConfigurationValueOne() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setVehicleConfiguration("rigid").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Ignore ("vehicleConfiguration = articulated should have returned 201 - instead returns bad Gateway - defect Id CVSB-9017")
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleConfiguration articulated")
+//    public void testResultsVehicleConfigurationValueTwo() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setVehicleConfiguration("articulated").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - odometerReading")
+//    @Test
+//    public void testResultsRandomOdometerReading() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setOdometerReading(Integer.valueOf(RandomStringUtils.randomNumeric(5))).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - odometerReading")
+//    @Test
+//    public void testResultsNullOdometerReading() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setOdometerReading(null).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - odometerReadingUnits")
+//    @Test
+//    public void testResultsNullOdometerReadingUnits() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setOdometerReadingUnits(null).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - odometerReadingUnits kilometres")
+//    @Test
+//    public void testResultsOdometerReadingUnitsValueOne() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setOdometerReadingUnits("kilometres").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - odometerReadingUnits miles")
+//    @Test
+//    public void testResultsOdometerReadingUnitsValueTwo() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setOdometerReadingUnits("miles").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerId")
+//    @Test
+//    public void testResultsRandomStringPreparerId() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setPreparerId(RandomStringUtils.randomAlphanumeric(14)).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - preparerId")
+//    @Test
+//    public void testResultsEmptyPreparerId() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setPreparerId("").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        vehicleCancelledDataOld.setPreparerId(null);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CB2-4804 - API Consumer creates a new test results for submitted/canceled with null - preparerId")
+//    @Test
+//    public void testResultsNullPreparerId() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setPreparerId(null).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - preparerName")
+//    @Test
+//    public void testResultsRandomStringPreparerName() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setPreparerName(RandomStringUtils.randomAlphanumeric(14)).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - preparerName")
+//    @Test
+//    public void testResultsEmptyPreparerName() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setPreparerName("").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        vehicleCancelledDataOld.setPreparerName(null);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CB2-4804 - API Consumer creates a new test results for submitted/canceled with null - preparerName")
+//    @Test
+//    public void testResultsNullPreparerName() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setPreparerName(null).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - euVehicleCategory")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryNull() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory(null).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory m1")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueOne() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("m1").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory m2")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueTwo() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("m2").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory m3")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueThree() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("m3").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory n1")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueFour() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("n1").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory n2")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueFive() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("n2").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory n3")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueSix() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("n3").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o1")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueSeven() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("o1").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o2")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueEight() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("o2").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o3")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueNine() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("o3").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - euVehicleCategory o4")
+//    @Test
+//    public void testResultsValueEuVehicleCategoryValueTen() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setEuVehicleCategory("o4").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - countryOfRegistration")
+//    @Test
+//    public void testResultsNullValueCountryOfRegistration() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setCountryOfRegistration(null).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - countryOfRegistration")
+//    @Test
+//    public void testResultsRandomValueCountryOfRegistration() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setCountryOfRegistration(RandomStringUtils.randomAlphanumeric(14)).build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - countryOfRegistration")
+//    @Test
+//    public void testResultsEmptyValueCountryOfRegistration() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setCountryOfRegistration("").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        vehicleCancelledDataOld.setCountryOfRegistration(null);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleSize large")
+//    @Test
+//    public void testResultsValueEuVehicleSizeValueOne() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setVehicleSize("large").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
+//
+//    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - vehicleSize small")
+//    @Test
+//    public void testResultsValueEuVehicleSizeValueTwo() {
+//
+//        testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
+//                .setSystemNumber(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getSystemNumber()))
+//                .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
+//                .setVehicleSize("small").build());
+//
+//        testResultsSteps.statusCodeShouldBe(201);
+//        testResultsSteps.validateData("Test records created");
+//        validateSavedDataOld();
+//    }
 
 }
