@@ -30,6 +30,7 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 {"centre axle drawbar"},
                 {"semi-car transporter"},
                 {"semi-trailer"},
+                {"long semi-trailer"},
                 {"low loader"},
                 {"other"},
                 {"drawbar"},

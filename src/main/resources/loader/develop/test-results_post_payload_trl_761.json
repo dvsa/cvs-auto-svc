@@ -1,0 +1,47 @@
+{
+  "testResultId":"ffd02799-c781-45c8-9fd6-ef5e64b7h6k8",
+  "testStationName":"Rowe, Wunsch and Wisoky",
+  "testStationPNumber":"87-1369569",
+  "testStationType":"gvts",
+  "testerName":"Gica",
+  "testerStaffId":"133",
+  "testerEmailAddress":"someone@email.com",
+  "testStartTimestamp":"2023-07-17T15:38:30.007Z",
+  "testEndTimestamp":"2023-07-17T15:40:30.007Z",
+  "testStatus":"submitted",
+  "reasonForCancellation":null,
+  "trailerId":"AB01234",
+  "systemNumber":"1110009",
+  "vin":"ABCDEF111223",
+  "vehicleClass":{
+    "code": "t",
+    "description": "trailer"
+  },
+  "vehicleType":"trl",
+  "vehicleConfiguration":"long semi-trailer",
+  "preparerId":"No preparer ID given",
+  "preparerName":"",
+  "euVehicleCategory":"o1",
+  "countryOfRegistration":"gb",
+  "noOfAxles":3,
+  "numberOfWheelsDriven":null,
+  "testTypes":[
+    {
+      "name": "Annual test",
+      "testTypeName": "Annual test",
+      "testTypeId": "94",
+      "certificateNumber": null,
+      "testTypeStartTimestamp": "2022-07-17T15:32:30.007Z",
+      "testTypeEndTimestamp": "2022-07-17T15:32:53.151Z",
+      "testExpiryDate": null,
+      "testResult": "pass",
+      "prohibitionIssued": false,
+      "reasonForAbandoning": null,
+      "additionalCommentsForAbandon": null,
+      "additionalNotesRecorded": null,
+      "defects": [],
+      "customDefects": [],
+      "secondaryCertificateNumber": "21323"
+    }
+  ]
+}
