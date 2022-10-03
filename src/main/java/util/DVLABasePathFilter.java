@@ -19,12 +19,25 @@ public class DVLABasePathFilter implements Filter {
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
 
-        filterableRequestSpecification.given().baseUri(loader.getBasePathUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
+        filterableRequestSpecification.given().baseUri(returnBaseUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " +TokenGenerator.getDVLAToken()).header("X-Api-Key",loader.getApiKeys());
         } else if (isWrongAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " + RandomStringUtils.randomAlphanumeric(30));
         }
         return filterContext.next(filterableRequestSpecification, filterableResponseSpecification);
+    }
+
+    /**
+     * Simple method to construct the base URL with the new format following the APIG restructure
+     *
+     * @return Base url as String
+     */
+    private String returnBaseUrl() {
+        String baseUrl = loader.getBasePathUrl();
+        String branchName = loader.getBranchName();
+        return branchName.equalsIgnoreCase("develop") ?
+                baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName) :
+                baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
     }
 }
