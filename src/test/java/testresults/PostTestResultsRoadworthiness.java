@@ -4,6 +4,7 @@ import data.GenericData;
 import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.WithTag;
 import net.thucydides.core.annotations.Title;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsRoadworthiness {
 
