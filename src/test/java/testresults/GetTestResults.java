@@ -7,11 +7,9 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
-import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -186,7 +184,6 @@ public class GetTestResults {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
-    @WithTag("In_test")
     @Title("VTA-695 - Get test results Missing parameter value check")
     @Test
     public void testResultsMissingParameter() {
