@@ -186,6 +186,7 @@ public class GetTestResults {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
+    @WithTag("In_test")
     @Title("VTA-695 - Get test results Missing parameter value check")
     @Test
     public void testResultsMissingParameter() {

@@ -6,6 +6,7 @@ import model.testtypeid.TestTypeById;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestTypeSteps;
@@ -234,6 +235,7 @@ public class GetTestTypesByIdNeg {
         return Arrays.stream(classOfEnum.getEnumConstants()).filter(e -> !("invalid" .equalsIgnoreCase(e.name()) || "empty".equalsIgnoreCase(e.name()))).map(e -> e.getValue()).collect(Collectors.joining(", "));
     }
 
+    @WithTag("In_test")
     @Title("VTA-696 - Get test types Missing parameter value check")
     @Test
     public void testResultsMissingParameter() {
