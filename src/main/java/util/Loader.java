@@ -41,7 +41,4 @@ public interface Loader {
     String getAuthority();
 
     String getClientId();
-
-
-
 }

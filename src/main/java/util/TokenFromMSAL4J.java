@@ -1,5 +1,4 @@
 package util;
-
 import com.microsoft.aad.msal4j.*;
 import java.io.IOException;
 import java.util.Collections;

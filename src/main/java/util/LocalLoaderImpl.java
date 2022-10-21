@@ -121,5 +121,4 @@ public class LocalLoaderImpl implements Loader {
         return properties.getProperty("clientId");
     }
 
-
 }
