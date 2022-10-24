@@ -5,6 +5,8 @@ import model.vehicles.VehicleTechnicalRecordSearchCriteria;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.core.annotations.WithTag;
+
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,6 +85,7 @@ public class PostTrailerRegistrationAuthoriser {
     }
 
     
+    @WithTag("In_test")
     @Title("CVSB-18927 - AC3. Permit DVLA accessing the new endpoint")
     @Test
     public void testTrailerRegistrationWithDVLAToken() {
@@ -106,6 +109,7 @@ public class PostTrailerRegistrationAuthoriser {
         trailerRegistrationSteps.statusCodeShouldBe(200);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-18927 - AC4. Deny DVLA accessing existing endpoints")
     @Test
     public void testGetTechnicalRecordsWithDVLAToken() {
@@ -223,6 +227,7 @@ public class PostTrailerRegistrationAuthoriser {
         trailerRegistrationSteps.statusCodeShouldBe(200);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-19442 - AC3. Permit DVLA accessing the new endpoint")
     @Test
     public void putTrailerRegistrationWithDVLAToken() {
@@ -253,6 +258,7 @@ public class PostTrailerRegistrationAuthoriser {
         trailerRegistrationSteps.statusCodeShouldBe(200);
     }
 
+    @WithTag("In_test")
     @Title("CVSB-19442 - AC4. Deny DVLA accessing VTA endpoint")
     @Test
     public void testGetTechnicalRecordWithDVLAToken(){
