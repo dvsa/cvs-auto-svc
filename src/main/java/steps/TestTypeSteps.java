@@ -8,13 +8,9 @@ import io.restassured.response.Response;
 import model.TestType;
 import model.testtypeid.TestTypeById;
 import net.thucydides.core.annotations.Step;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.Matchers.*;
 
@@ -218,5 +214,9 @@ public class TestTypeSteps {
 
     public String getActualTestCode(String testCode) {
         return testTypesClient.getActualTestCode(testCode);
+    }
+    @Step
+    public void validateResp(String stringData) {
+        response.then().body(is(stringData));
     }
 }

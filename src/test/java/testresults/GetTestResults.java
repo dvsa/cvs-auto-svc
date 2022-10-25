@@ -7,23 +7,19 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
-import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import static util.DataUtil.generateRandomExcludingValues;
 
 @RunWith(SerenityRunner.class)
@@ -186,6 +182,23 @@ public class GetTestResults {
         testResultsSteps.getTestResults(RandomStringUtils.randomAlphanumeric(17));
         testResultsSteps.statusCodeShouldBe(404);
         testResultsSteps.validateData("No resources match the search criteria");
+    }
+
+    @Title("VTA-695 - Get test results Missing parameter value check")
+    @Test
+    public void testResultsMissingParameter() {
+
+        testResultsSteps.getTestResults(" ");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+
+        testResultsSteps.getTestResults("undefined");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+
+        testResultsSteps.getTestResults("null");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
     }
 
     @Title("CVSB-416 - CVSB-949 / CVSB-2431 - Status submitted and no data found")

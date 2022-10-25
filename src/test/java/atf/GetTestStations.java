@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestStationSteps;
 
-
 @RunWith(SerenityRunner.class)
 public class GetTestStations {
 
@@ -35,4 +34,20 @@ public class GetTestStations {
         testStationSteps.validateEveryRecordHasFieldValue("testStationStatus", "active");
     }
 
+    @Title("VTA-695 - Get test station email Missing parameter value check")
+    @Test
+    public void testStationsEmailMissingParameter() {
+
+        testStationSteps.getTestStationsEmail(" ");
+        testStationSteps.statusCodeShouldBe(400);
+        testStationSteps.validateData("\"Missing parameter value.\"");
+
+        testStationSteps.getTestStationsEmail("null");
+        testStationSteps.statusCodeShouldBe(400);
+        testStationSteps.validateData("\"Missing parameter value.\"");
+
+        testStationSteps.getTestStationsEmail("undefined");
+        testStationSteps.statusCodeShouldBe(400);
+        testStationSteps.validateData("\"Missing parameter value.\"");
+    }
 }

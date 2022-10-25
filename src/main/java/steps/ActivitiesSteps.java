@@ -12,10 +12,9 @@ import org.openqa.selenium.WebDriver;
 import util.AwsUtil;
 import util.JsonPathAlteration;
 import util.WebDriverBrowsertack;
-
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Assert;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasKey;
 
@@ -278,11 +277,10 @@ public class ActivitiesSteps {
         else {
             System.out.println(response.statusCode());
         }
-
     }
 
     @Step
     public void validateResp(String stringData) {
-        response.then().body(is(stringData));
+        Assert.assertEquals(response.body().asString(), stringData);
     }
 }
