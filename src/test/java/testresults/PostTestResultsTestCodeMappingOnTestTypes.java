@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsTestCodeMappingOnTestTypes {
 
@@ -349,7 +349,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lbp");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lcp");
     }
 
     @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 8")
@@ -397,7 +397,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lbp");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lcp");
     }
 
     @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 9")
