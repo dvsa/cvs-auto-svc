@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WithTag("In_test")
 @RunWith(SerenityRunner.class)
 public class PostTestResultsTestCodeMappingOnTestTypes {
 
