@@ -8,7 +8,6 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -16,7 +15,6 @@ import util.JsonPathAlteration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 @RunWith(SerenityRunner.class)
 public class PostTestResultsTestCodeMappingOnTestTypes {
@@ -304,7 +302,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "qgl");
     }
 
-    @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 7")
+    @Title("VTA-298- Map the test code with the test type - with linked test type - Data Set 7")
     @Test
     public void testTestCodeMappingNoLinkedTestTypeDataSet7() {
         // TEST SETUP
@@ -349,7 +347,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         testResultsSteps.postVehicleTestResultsWithAlterations(postRequestBody, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.getTestResults(randomSystemNumber);
-        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lbp");
+        testResultsSteps.valueForFieldInPathShouldBe("[0].testTypes[0].testCode", "lcp");
     }
 
     @Title("CVSB-840 / CVSB-3360 - Map the test code with the test type - not a linked test type - Data Set 8")
@@ -379,7 +377,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         // create alteration to change no of axles in the request body
         JsonPathAlteration alterationNoOfAxles = new JsonPathAlteration("$.noOfAxles", 3,"","REPLACE");
         // create alteration to change test type in the request body
-        JsonPathAlteration alterationTestType = new JsonPathAlteration("$.testTypes[0].testTypeId", "39","","REPLACE");
+        JsonPathAlteration alterationTestType = new JsonPathAlteration("$.testTypes[0].testTypeId", "201","","REPLACE");
         // create alteration to add test expiry date
         JsonPathAlteration alterationExpiryDate = new JsonPathAlteration("$.testTypes[0]", "2019-02-22T08:50:16.706Z","testExpiryDate","ADD_FIELD");
         // initialize the alterations list with both declared alteration
