@@ -132,7 +132,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].systemNumber", systemNumber);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
-                ("[0].techRecord.findAll { it.statusCode == 'archived' }.size()", 1);
+                ("[0].techRecord.findAll { it.statusCode == 'removed' }.size()", 1);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe
                 ("[0].techRecord.findAll { it.statusCode == 'current' }.size()", 1);
 
