@@ -214,7 +214,6 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "removed");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "current");
     }
 
@@ -390,7 +389,6 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
 
-        vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "removed");
         vehicleTechnicalRecordsSteps.valueForFieldInAnyTechRecordShouldBe(systemNumberOne, randomVin, "statusCode", "current");
 
     }
