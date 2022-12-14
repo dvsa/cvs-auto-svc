@@ -5,6 +5,8 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -38,12 +40,31 @@ public class PostTestResultsTirHgv {
     private String testTypeName;
     private String certificateNumber;
 
+
+
+
     @Title("CVSB-3946 - API changes related to test records to enable TIR testing - HGV")
     @Test
     public void testTirCertificateHgv() {
 
         // Read the base test result JSON.
         String testResultRecord = GenericData.readJsonValueFromFile("technical-records_tir_hgv.json","$");
+
+        // Create timestamps based on current time
+        DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
+        DateTime submittedTestStartTimestamp = currentTime.minusMinutes(15);
+        DateTime submittedTestTypeStartTimestamp = currentTime.minus(10);
+        DateTime submittedTestTypeEndTimestamp = currentTime.minusMinutes(5);
+        DateTime submittedTestEndTimestamp = currentTime;
+
+        // Create alteration to add one more tech record to in the request body
+        String testStartTimestamp = submittedTestStartTimestamp.toInstant().toString();
+        String testTypeStartTimestamp = submittedTestTypeStartTimestamp.toInstant().toString();
+        String testTypeEndTimestamp = submittedTestTypeEndTimestamp.toInstant().toString();
+        String testEndTimestamp = submittedTestEndTimestamp.toInstant().toString();
+
+        // Create expected testExpiryDate based on submitted test end timestamp
+        String expectedTestExpiryDate = currentTime.plusYears(1).minusDays(1).toInstant().toString();
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -56,6 +77,11 @@ public class PostTestResultsTirHgv {
         JsonPathAlteration alterationName = new JsonPathAlteration("$.testTypes[0].name", name,"","REPLACE");
         JsonPathAlteration alterationTestTypeName = new JsonPathAlteration("$.testTypes[0].testTypeName", testTypeName,"","REPLACE");
         JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testTypes[0].certificateNumber", certificateNumber,"","REPLACE");
+        JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeStartTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeStartTimestamp", testTypeStartTimestamp, "", "REPLACE");
+        JsonPathAlteration alterationTestTypeEndTimestamp = new JsonPathAlteration("$.testTypes[0].testTypeEndTimestamp", testTypeEndTimestamp, "", "REPLACE");
+
 
         // Collate the list of alterations.
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
@@ -65,7 +91,12 @@ public class PostTestResultsTirHgv {
                 alterationTestTypeId,
                 alterationName,
                 alterationTestTypeName,
-                alterationCertificateNumber));
+                alterationCertificateNumber,
+                alterationTestStartTimestamp,
+                alterationTestEndTimestamp,
+                alterationTestTypeStartTimestamp,
+                alterationTestTypeEndTimestamp
+                ));
 
         // Post the results, together with any alterations, and verify that they are handled correctly.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
