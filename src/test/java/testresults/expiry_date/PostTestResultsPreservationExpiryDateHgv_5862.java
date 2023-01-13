@@ -293,7 +293,7 @@ public class PostTestResultsPreservationExpiryDateHgv_5862 {
         String testEndTimestamp = submittedEndTimestamp.toInstant().toString();
 
         // Expected recalculated testExpiryDate
-        String testExpiryDate = insertedTestExpiryDate.plusYears(1).toInstant().toString();
+        String testExpiryDate = insertedTestExpiryDate.plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         System.out.println("\n******************************************************");
         System.out.println("Inserted testCode: " + insertedTestCode);
