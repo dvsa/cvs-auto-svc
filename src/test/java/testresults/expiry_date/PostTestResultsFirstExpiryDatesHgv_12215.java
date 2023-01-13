@@ -457,7 +457,7 @@ public class PostTestResultsFirstExpiryDatesHgv_12215 {
         String randomTestResultId = UUID.randomUUID().toString();
         String regnDate = submittedRegnDate.toInstant().toString().substring(0,10);
 
-        String expectedTestExpiryDate = regAnniversary.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = regAnniversary.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationRegnDate = new JsonPathAlteration("$.regnDate", regnDate, "", "REPLACE");
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
