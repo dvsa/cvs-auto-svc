@@ -3,6 +3,8 @@ package testresults;
 import data.TestResultsData;
 import model.testresults.TestResults;
 import data.GenericData;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import util.JsonPathAlteration;
 import model.testresults.TestResultsGet;
@@ -26,6 +28,9 @@ public class PostTestResultsPozDefectsLvlCancelled {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleCancelledDataOld = TestResultsData.buildTestResultsCancelledDataOld();
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     private void validateSavedDataOld() {
 
@@ -141,6 +146,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setImDescription(null);
@@ -156,6 +163,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setImDescription(null);
@@ -171,6 +180,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -185,6 +196,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setItemDescription(null);
         testResultsSteps.statusCodeShouldBe(201);
@@ -200,6 +213,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setItemDescription(null);
         testResultsSteps.statusCodeShouldBe(201);
@@ -216,6 +231,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -230,6 +247,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyRef(null);
@@ -246,6 +265,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         vehicleCancelledDataOld.build().getTestTypes().get(0).getDefects().get(0).setDeficiencyRef(null);
@@ -262,6 +283,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -276,6 +299,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -292,6 +317,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -306,6 +333,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -320,6 +349,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -334,6 +365,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -348,6 +381,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -406,6 +441,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -420,6 +457,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -434,6 +473,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -448,6 +489,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -462,6 +505,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -476,6 +521,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         testResultsSteps.postTestResults(vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -489,6 +536,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build().getTestTypes().get(0).getDefects().get(0)
                 .setDeficiencyCategory("advisory").setDeficiencyText(null);
 
@@ -505,6 +554,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setDeficiencyText("");
 
@@ -523,6 +574,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setStdForProhibition(false);
 
@@ -539,6 +592,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setStdForProhibition(true);
 
@@ -555,6 +610,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setProhibitionIssued(false);
 
@@ -571,6 +628,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setProhibitionIssued(true);
 
@@ -589,6 +648,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setPrs(false);
 
@@ -605,6 +666,8 @@ public class PostTestResultsPozDefectsLvlCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).getDefects().get(0).setPrs(true);
 

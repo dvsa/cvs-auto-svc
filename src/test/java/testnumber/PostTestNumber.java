@@ -39,6 +39,8 @@ public class PostTestNumber {
     private TestResults.Builder vehicleSubmittedDataTwo = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
 
+    private String test_results_lec_psv_json;
+
     @Before
     @Title("warm up test")
     @Test
@@ -46,11 +48,18 @@ public class PostTestNumber {
         testResultsSteps.postTestResults(vehicleCancelledData.build());
     }
 
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFilename = "test-results_LEC_PSV.json";
+        test_results_lec_psv_json = GenericData.updateJson(jsonFilename, false);
+    }
+
     @Title("CVSB-2157/CVSB-3287 AC B1. VSA submits test results where at least one test type has test type classification 'Annual With Certificate' and the test type result is PASSED (testNumber is generated)")
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificate() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -89,7 +98,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForLecTestType() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -127,7 +136,7 @@ public class PostTestNumber {
     public void validTestNumberGeneratedForAnnualWithCertificatePRS() {
 
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -171,7 +180,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForAbandonedTestType() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -213,7 +222,7 @@ public class PostTestNumber {
     @Test
     public void validateCertificateNumberIsNotGeneratedForAbandonedTestType() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -318,7 +327,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificateIsEqualToCertificateNumber() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -356,7 +365,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificatePRSIsEqualToCertificateNumber() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -398,7 +407,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGenerationForAtLeastTwoTestTypes(){
 
-        String testResultRecordOne = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecordOne = test_results_lec_psv_json;
 
         String randomSystemNumber1 = GenericData.generateRandomSystemNumber();
         String randomVin1 = GenericData.generateRandomVin();
@@ -418,7 +427,7 @@ public class PostTestNumber {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber2 = GenericData.generateRandomSystemNumber();
@@ -457,7 +466,7 @@ public class PostTestNumber {
     @Test
     public void verifyNextTestNumberGeneration() {
 
-        String testResultRecord1 = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord1 = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber1 = GenericData.generateRandomSystemNumber();
@@ -494,7 +503,7 @@ public class PostTestNumber {
         testResultsSteps.statusCodeShouldBe(200);
         String nextTestNumber = testResultsSteps.nextTestNumber();
 
-        String testResultRecord2 = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord2 = test_results_lec_psv_json;
 
         String randomSystemNumber2 = GenericData.generateRandomSystemNumber();
         String randomVin2 = GenericData.generateRandomVin();
