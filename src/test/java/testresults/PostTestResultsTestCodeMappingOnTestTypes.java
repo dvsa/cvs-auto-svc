@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -24,6 +25,14 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
 
     private TestResults.Builder vehicleSubmittedDataOne = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleSubmittedDataTwo = TestResultsData.buildTestResultsSubmittedData();
+    private String test_results_submitted_post_json;
+
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFilename = "test-results_submitted_post.json";
+        test_results_submitted_post_json = GenericData.updateJson(jsonFilename, false);
+    }
 
     private void validateSavedData(String... testCodes) {
 
@@ -43,7 +52,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -88,7 +97,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -133,7 +142,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -178,7 +187,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -223,7 +232,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -268,7 +277,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -313,7 +322,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -361,7 +370,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -409,7 +418,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
         // create alteration to change Vin in the request body with the random generated Vin
@@ -454,7 +463,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -513,7 +522,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -572,7 +581,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -631,7 +640,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -690,7 +699,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -749,7 +758,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -808,7 +817,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -867,7 +876,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -926,7 +935,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -985,7 +994,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1044,7 +1053,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1103,7 +1112,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1162,7 +1171,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1221,7 +1230,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1274,7 +1283,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1327,7 +1336,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1380,7 +1389,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1433,7 +1442,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
@@ -1486,7 +1495,7 @@ public class PostTestResultsTestCodeMappingOnTestTypes {
         //generate random Vrm
         String randomVrm = GenericData.generateRandomVrm();
         // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$");
+        String postRequestBody = test_results_submitted_post_json;
         String testType = GenericData.readJsonValueFromFile("test-results_submitted_post.json","$.testTypes[0]");
         // create alteration to change system number in the request body with the random system number
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");

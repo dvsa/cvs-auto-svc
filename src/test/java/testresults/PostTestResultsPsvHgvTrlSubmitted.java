@@ -8,6 +8,8 @@ import model.testresults.TestResults;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +35,10 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     private String technical_records_tir_trl_json;
     private String technical_records_tir_hgv_json;
     private String technical_records_tir_57_trl_json;
+
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String endTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
     @Before
     @Test
     public void updateJson(){
@@ -55,7 +61,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -114,7 +121,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -172,7 +180,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -232,7 +241,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -293,6 +303,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
                 .setTestResultId(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .build();
 
         vehicleSubmittedDataOld.build().getTestTypes().get(0).setTestTypeId("1");
@@ -331,6 +343,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getSystemNumber()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -607,6 +621,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -676,6 +692,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -745,6 +763,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -814,6 +834,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -887,6 +909,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -958,6 +982,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -1026,6 +1052,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -1094,6 +1122,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -1165,7 +1195,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -1395,7 +1426,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -1459,6 +1491,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -1538,7 +1572,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -1595,12 +1630,13 @@ public class PostTestResultsPsvHgvTrlSubmitted {
     @Title("CVSB-8703 - Iteration on test results API specs to cover the logic of First test expiry date generation for HGV/TRL certificates (HGV - null)")
     @Test
     public void testTestResultsRegnDateNullHgv() {
-
         vehicleSubmittedData
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -1678,7 +1714,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2021-01-16T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -1737,6 +1774,8 @@ public class PostTestResultsPsvHgvTrlSubmitted {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedData.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3,vehicleSubmittedData.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(endTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)

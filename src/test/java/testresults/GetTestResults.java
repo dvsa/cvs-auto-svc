@@ -11,6 +11,8 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +34,9 @@ public class GetTestResults {
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     private String test_results_roadworthiness_hgv_pass_7675_json;
     private String test_results_cancelled_json;
@@ -268,7 +273,8 @@ public class GetTestResults {
             .setEuVehicleCategory("o3")
             .setNoOfAxles(6)
             .setReasonForCancellation(null)
-            .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+            .setTestStartTimestamp(testStartTimestamp)
+            .setTestEndTimestamp(testEndTimestamp)
             .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
             .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
             .setTestStationName("Abshire-Kub")

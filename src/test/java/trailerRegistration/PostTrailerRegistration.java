@@ -29,15 +29,18 @@ public class PostTrailerRegistration {
 
     private String test_results_post_expiry_date_trl_8798_json;
     private String test_results_post_expiry_date_hgv_8798_json;
+    private String test_results_first_test_trl_json;
 
     @Before
     @Test
     public void updateJsonDates(){
         String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
         String jsonFileName2 = "test-results_post_expiry_date_hgv_8798.json";
+        String jsonFileName3 = "test-results_first_test_trl.json";
 
         test_results_post_expiry_date_trl_8798_json = GenericData.updateJson(jsonFileName,false);
         test_results_post_expiry_date_hgv_8798_json = GenericData.updateJson(jsonFileName2,false);
+        test_results_first_test_trl_json = GenericData.updateJson(jsonFileName3,false);
     }
 
     @Title("CVSB-18919 - AC1 - Saving 17 digit vin")
@@ -373,7 +376,7 @@ public class PostTrailerRegistration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
+        String testResultRecord = test_results_first_test_trl_json;
 
         String testResultId = UUID.randomUUID().toString();
 
@@ -483,7 +486,7 @@ public class PostTrailerRegistration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_trl.json","$");
+        String testResultRecord = test_results_first_test_trl_json;
 
         String testResultId = UUID.randomUUID().toString();
 

@@ -8,6 +8,8 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -26,6 +28,9 @@ public class PostTestResultsExpiryDate {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     private void validateSavedDataOld(List<String> data) {
 
@@ -41,6 +46,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("10").setTestResult("pass");
 
@@ -57,6 +64,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
 
@@ -73,6 +82,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("fail");
 
@@ -89,6 +100,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
@@ -105,6 +118,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
 
@@ -121,6 +136,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
 
@@ -137,6 +154,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("fail");
 
@@ -153,6 +172,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
@@ -169,6 +190,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
@@ -192,6 +215,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
 
@@ -217,6 +242,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
@@ -240,6 +267,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
@@ -264,6 +293,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
@@ -287,6 +318,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
@@ -310,6 +343,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
@@ -333,6 +368,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
 
@@ -356,6 +393,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
@@ -380,6 +419,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 
@@ -403,6 +444,8 @@ public class PostTestResultsExpiryDate {
 
         vehicleSubmittedDataOld.setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("abandoned");
 

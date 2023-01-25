@@ -9,6 +9,8 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -51,6 +53,10 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private String vehicleConfiguration;
 
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
+
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (TRL) - submitted")
     @Test
 
@@ -60,11 +66,13 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setVin(generateRandomExcludingValues(21, vehicleSubmittedDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
                 .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
+                .setTestStartTimestamp(vehicleSubmittedDataOld.build().getTestStartTimestamp())
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -130,7 +138,8 @@ public class PostTestResultsApiSpecsVehicleConfigurationTrl {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation("era naspa")
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")

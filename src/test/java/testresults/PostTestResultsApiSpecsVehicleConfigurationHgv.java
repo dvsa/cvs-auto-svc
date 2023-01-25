@@ -9,6 +9,8 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -49,6 +51,9 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
 
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private String vehicleConfiguration;
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     @Title("CVSB-7391 - TC - POST values for vehicleConfiguration (HGV) - cancelled")
     @Test
@@ -59,6 +64,8 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)
@@ -134,6 +141,8 @@ public class PostTestResultsApiSpecsVehicleConfigurationHgv {
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleSubmittedDataOld.build().getSystemNumber()))
                 .setVrm(generateRandomExcludingValues(7, vehicleSubmittedDataOld.build().getVrm()))
                 .setTestResultId(generateRandomExcludingValues(3, vehicleSubmittedDataOld.build().getTestResultId()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setCountryOfRegistration("a")
                 .setEuVehicleCategory("n2")
                 .setNoOfAxles(2)

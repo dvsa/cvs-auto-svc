@@ -14,6 +14,8 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -39,6 +41,11 @@ public class PostTestNumber {
     private TestResults.Builder vehicleSubmittedDataTwo = TestResultsData.buildTestResultsSubmittedData();
     private TestResults.Builder vehicleCancelledData = TestResultsData.buildTestResultsCancelledData();
 
+    private String test_results_lec_psv_json;
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
+
     @Before
     @Title("warm up test")
     @Test
@@ -46,11 +53,18 @@ public class PostTestNumber {
         testResultsSteps.postTestResults(vehicleCancelledData.build());
     }
 
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFilename = "test-results_LEC_PSV.json";
+        test_results_lec_psv_json = GenericData.updateJson(jsonFilename, false);
+    }
+
     @Title("CVSB-2157/CVSB-3287 AC B1. VSA submits test results where at least one test type has test type classification 'Annual With Certificate' and the test type result is PASSED (testNumber is generated)")
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificate() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -89,7 +103,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForLecTestType() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -127,7 +141,7 @@ public class PostTestNumber {
     public void validTestNumberGeneratedForAnnualWithCertificatePRS() {
 
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -171,7 +185,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForAbandonedTestType() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -213,7 +227,7 @@ public class PostTestNumber {
     @Test
     public void validateCertificateNumberIsNotGeneratedForAbandonedTestType() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -258,8 +272,9 @@ public class PostTestNumber {
     public void validTestNumberGeneratedForCancelledTestType() {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
-
         testResultsSteps.postTestResults(vehicleCancelledData.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
@@ -273,6 +288,8 @@ public class PostTestNumber {
     public void validCertificateNumberNotGeneratedForCancelledTestType() {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResults(vehicleCancelledData.build());
@@ -288,6 +305,8 @@ public class PostTestNumber {
     public void validTestNumberNotGeneratedForCancelledTWithoutTestType() {
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.build(),"testTypes","[]", ToTypeConvertor.EMPTY_ARRAY, TestResultsLevel.MAIN_LEVEL);
@@ -304,6 +323,8 @@ public class PostTestNumber {
 
         vehicleCancelledData.setVin(generateRandomExcludingValues(21, vehicleCancelledData.build().getVin()))
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledData.build().getVrm()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setSystemNumber(generateRandomExcludingValues(7,vehicleCancelledData.build().getSystemNumber())).build();
 
         testResultsSteps.postTestResultsFieldChange(vehicleCancelledData.build(),"testTypes","[]", ToTypeConvertor.EMPTY_ARRAY, TestResultsLevel.MAIN_LEVEL);
@@ -318,7 +339,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificateIsEqualToCertificateNumber() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -356,7 +377,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGeneratedForAnnualWithCertificatePRSIsEqualToCertificateNumber() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -398,7 +419,7 @@ public class PostTestNumber {
     @Test
     public void validTestNumberGenerationForAtLeastTwoTestTypes(){
 
-        String testResultRecordOne = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecordOne = test_results_lec_psv_json;
 
         String randomSystemNumber1 = GenericData.generateRandomSystemNumber();
         String randomVin1 = GenericData.generateRandomVin();
@@ -418,7 +439,7 @@ public class PostTestNumber {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber2 = GenericData.generateRandomSystemNumber();
@@ -457,7 +478,7 @@ public class PostTestNumber {
     @Test
     public void verifyNextTestNumberGeneration() {
 
-        String testResultRecord1 = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord1 = test_results_lec_psv_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomSystemNumber1 = GenericData.generateRandomSystemNumber();
@@ -494,7 +515,7 @@ public class PostTestNumber {
         testResultsSteps.statusCodeShouldBe(200);
         String nextTestNumber = testResultsSteps.nextTestNumber();
 
-        String testResultRecord2 = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json", "$");
+        String testResultRecord2 = test_results_lec_psv_json;
 
         String randomSystemNumber2 = GenericData.generateRandomSystemNumber();
         String randomVin2 = GenericData.generateRandomVin();
