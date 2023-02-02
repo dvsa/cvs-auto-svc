@@ -270,7 +270,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         String randomTestResultId = UUID.randomUUID().toString();
         String firstUseDate = submittedFirstUseDate.toInstant().toString().substring(0,10);
 
-        String expectedTestExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
@@ -459,7 +459,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         String randomTestResultId = UUID.randomUUID().toString();
         String firstUseDate = submittedFirstUseDate.toInstant().toString().substring(0,10);
 
-        String expectedTestExpiryDate = firstAnniversary.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = firstAnniversary.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
@@ -554,7 +554,7 @@ public class PostTestResultsFirstExpiryDatesTrl_12215 {
         String randomTestResultId = UUID.randomUUID().toString();
         String firstUseDate = submittedFirstUseDate.toInstant().toString().substring(0,10);
 
-        String expectedTestExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationFirstUseDate = new JsonPathAlteration("$.firstUseDate", firstUseDate, "", "REPLACE");
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
