@@ -187,7 +187,7 @@ public class PostTestResultsFirstExpiryDatesNegativeTrl_12982 {
         String randomTestResultId = UUID.randomUUID().toString();
         String firstUseDate = "2020-0";
 
-        String expectedTestExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = submittedEndTimestamp.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationTestStartTimestamp = new JsonPathAlteration("$.testStartTimestamp", testStartTimestamp, "", "REPLACE");
         JsonPathAlteration alterationTestEndTimestamp = new JsonPathAlteration("$.testEndTimestamp", testEndTimestamp, "", "REPLACE");
