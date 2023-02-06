@@ -400,7 +400,7 @@ public class PostTestResultsSystemNumber {
         String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
-        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
@@ -435,7 +435,7 @@ public class PostTestResultsSystemNumber {
         String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
-        DateTime insertedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1);
+        DateTime insertedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue();
         String insertTestExpiryDate = insertedTestExpiryDate.toInstant().toString();
 
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
@@ -455,7 +455,7 @@ public class PostTestResultsSystemNumber {
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
 
-        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
 
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_free_loaded_tests_18974.json", "$");
