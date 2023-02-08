@@ -195,7 +195,7 @@ public class GetTestTypesByIdNeg {
 
         testTypeSteps.getTestTypesById(testTypeById.getId(), testTypeQueryParam);
         testTypeSteps.statusCodeShouldBe(400);
-        testTypeSteps.validateData("Query parameter \\\"vehicleType\\\" must be one of [" + buildAvailableValuesOfProperties(VehicleType.class) + "]");
+        testTypeSteps.validateData("Query parameter \\\"vehicleType\\\" must be one of [hgv, psv, trl, lgv, car, small trl, motorcycle]");
     }
 
     @Title("CVSB-1073 / CVSB-2025 - Query param 'vehicleSize' invalid")
