@@ -192,8 +192,8 @@
       },
       "frontAxleTo5thWheelMin": 400,
       "frontAxleTo5thWheelMax": 1600,
-      "frontAxleTo5thWheelCouplingMin": 900,
-      "frontAxleTo5thWheelCouplingMax": 1000,
+      "frontVehicleTo5thWheelCouplingMin": 900,
+      "frontVehicleTo5thWheelCouplingMax": 1000,
       "frontAxleToRearAxle": 1800,
       "applicantDetails": {
         "address1": "applicant address 1",
