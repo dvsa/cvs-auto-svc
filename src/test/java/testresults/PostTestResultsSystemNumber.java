@@ -37,6 +37,7 @@ public class PostTestResultsSystemNumber {
     private String test_results_insert_expiry_date_trl_5862_json;
     private String test_results_post_free_loaded_tests_18974_json;
     private String test_results_motorcycle_json;
+    private String test_results_first_test_hgv_json;
 
     @Before
     @Test
@@ -48,6 +49,7 @@ public class PostTestResultsSystemNumber {
         String jsonFileName4 = "test-results_insert_expiry_date_trl_5862.json";
         String jsonFileName5 = "test-results_post_free_loaded_tests_18974.json";
         String jsonFileName6 = "test-results_motorcycle.json";
+        String jsonFileName7 = "test-results_first_test_hgv.json";
         test_results_post_expiry_date_trl_8798_json = GenericData.updateJson( jsonFileName, false);
         test_results_car_json = GenericData.updateJson( jsonFileName1, false);
         test_results_lgv_json = GenericData.updateJson( jsonFileName2, false);
@@ -55,6 +57,7 @@ public class PostTestResultsSystemNumber {
         test_results_insert_expiry_date_trl_5862_json = GenericData.updateJson( jsonFileName4, false);
         test_results_post_free_loaded_tests_18974_json = GenericData.updateJson( jsonFileName5, false);
         test_results_motorcycle_json = GenericData.updateJson( jsonFileName6, false);
+        test_results_first_test_hgv_json = GenericData.updateJson( jsonFileName7, false);
     }
 
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")
@@ -486,7 +489,7 @@ public class PostTestResultsSystemNumber {
     public void testCreateTestResultGenerateCertHgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json", "$");
+        String testResultRecord = test_results_first_test_hgv_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
