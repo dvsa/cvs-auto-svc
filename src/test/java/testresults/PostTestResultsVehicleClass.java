@@ -5,6 +5,7 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
@@ -33,6 +34,13 @@ public class PostTestResultsVehicleClass {
     }
 
         private String vehicle;
+        private String test_results_vehicle_json;
+        @Before
+        @Test
+        public void updateJson(){
+            String jsonFileName = "test-results_" + vehicle + ".json";
+            test_results_vehicle_json = GenericData.updateJson( jsonFileName, false);
+        }
 
     public PostTestResultsVehicleClass(String vehicle, int statusCode) {
             this.vehicle = vehicle;
@@ -48,7 +56,7 @@ public class PostTestResultsVehicleClass {
         String randomTestResultId = UUID.randomUUID().toString();
 
         // Read test result base json + Generate random values
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_" + vehicle + ".json", "$");
+        String testResultRecord = test_results_vehicle_json;
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber, "", "REPLACE");
