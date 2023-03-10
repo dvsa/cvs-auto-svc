@@ -1,6 +1,5 @@
 package vehicle;
 
-
 import data.GenericData;
 import data.VehicleTechRecordsData;
 import model.vehicles.Vehicle;
@@ -10,16 +9,12 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
 
 @RunWith(SerenityRunner.class)
 public class GetVehicleTechnicalRecords {
@@ -712,8 +707,7 @@ public class GetVehicleTechnicalRecords {
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
-        //generate random Vrm
-        String randomVrm = GenericData.generateRandomVrm();
+
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
         String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
@@ -728,7 +722,7 @@ public class GetVehicleTechnicalRecords {
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
-        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", "","","DELETE");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
@@ -744,7 +738,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdByName", name);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", randomVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
         // for CVSB-10131 we validate that the generated trailerId from the backend is unique
@@ -792,5 +785,22 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].vehicleType", "hgv" );
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","current");
+    }
+
+    @Title("VTA-695 - Get tech records Missing parameter value check")
+    @Test
+    public void getTechRecordsWithMissingParameter() {
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(" ");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("undefined");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
+
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords("null");
+        vehicleTechnicalRecordsSteps.statusCodeShouldBe(400);
+        vehicleTechnicalRecordsSteps.validateResp("\"Missing parameter value.\"");
     }
 }

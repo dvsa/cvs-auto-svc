@@ -42,8 +42,8 @@
         "dateAuthorised": "2021-06-25",
         "dateRejected": "2021-06-25"
       },
-      "lettersOfAuth": {
-        "letterType": "Trailer rejection",
+      "letterOfAuth": {
+        "letterType": "trailer rejection",
         "letterDateRequested": "2021-01-16",
         "letterContents": "other"
       },

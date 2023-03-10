@@ -8,6 +8,7 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +26,14 @@ public class PostTestResultsLEC {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private String test_results_LEC_PSV_json;
+
+    @Before
+    @Test
+    public void updateJson(){
+        String jsonFileName = "test-results_LEC_PSV.json";
+        test_results_LEC_PSV_json = GenericData.updateJson( jsonFileName, false);
+    }
 
     private void validateSavedData(List<String> data) {
 
@@ -40,7 +49,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_PSV_Pass() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();
@@ -172,7 +181,7 @@ public class PostTestResultsLEC {
     public void testResultsAPIConsumerCreatesANewTestResultLEC_PSV_Fail() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_LEC_PSV.json","$");
+        String testResultRecord = test_results_LEC_PSV_json;
 
         // Create alteration to add one more tech record to in the request body
         String randomVin = GenericData.generateRandomVin();

@@ -64,7 +64,7 @@ public class GetTestResultsBetweenDate {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResultsBetweenDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 0), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 2));
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.valueForFieldInPathShouldBe("testTypes.size()", 1);
@@ -132,10 +132,11 @@ public class GetTestResultsBetweenDate {
 
         // Post the results, together with any alterations, and verify that they are accepted.
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
+        System.out.println("**** system print ln ****" +  testResultRecord + "**** system print ln ****");
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResultsBetweenDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), -1), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResultsBetweenDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 0), DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 2), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.valueForFieldInPathShouldBe("testTypes.size()", 1);

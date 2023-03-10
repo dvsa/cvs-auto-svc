@@ -9,6 +9,8 @@ import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import net.thucydides.junit.annotations.TestData;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -44,6 +46,9 @@ public class PostTestResultsPozAdrInfSubmitted {
 
     private String testTypeId;
     private TestResults.Builder vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedData();
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     @Title("CVSB-4927 - TC - API Consumer receives error when submitting an ADR test without sending an expiryDate")
     @Test
@@ -56,7 +61,8 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -115,7 +121,8 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -175,7 +182,8 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(6)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -236,7 +244,8 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(1)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")
@@ -305,7 +314,8 @@ public class PostTestResultsPozAdrInfSubmitted {
                 .setEuVehicleCategory("o3")
                 .setNoOfAxles(1)
                 .setReasonForCancellation(null)
-                .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
                 .setTestStationName("Abshire-Kub")

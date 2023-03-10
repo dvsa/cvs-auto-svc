@@ -11,6 +11,8 @@ import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,7 +31,9 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     TestResultsSteps testResultsSteps;
 
     private TestResults.Builder vehicleCancelledDataOld = TestResultsData.buildTestResultsCancelledDataOld();
-
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
     private void validateSavedDataOld() {
         testResultsSteps.getTestResults(vehicleCancelledDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
@@ -50,6 +54,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeName(RandomStringUtils.randomAlphanumeric(50));
 
@@ -65,6 +71,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeName("");
 
@@ -81,6 +89,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeName(null);
 
@@ -96,6 +106,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
     public void testResultsRandomName() {
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setName(RandomStringUtils.randomAlphanumeric(50));
 
@@ -141,6 +153,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setCertificateNumber(RandomStringUtils.randomAlphanumeric(50));
 
@@ -156,6 +170,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("19").setCertificateNumber("");
 
@@ -172,6 +188,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeId("19").setCertificateNumber(null);
 
@@ -187,6 +205,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeStartTimestamp(DataUtil.buildCurrentDateTime());
 
@@ -202,6 +222,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeEndTimestamp(DataUtil.buildCurrentDateTime());
 
@@ -217,6 +239,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestTypeEndTimestamp(null);
 
@@ -232,6 +256,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setNumberOfSeatbeltsFitted(new Random().nextInt(999) + 10);
 
@@ -247,6 +273,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setNumberOfSeatbeltsFitted(0);
 
@@ -262,6 +290,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setNumberOfSeatbeltsFitted(null);
 
@@ -277,6 +307,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setLastSeatbeltInstallationCheckDate(DataUtil.buildCurrentDateTime());
 
@@ -292,6 +324,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setLastSeatbeltInstallationCheckDate(null);
 
@@ -308,6 +342,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setSeatbeltInstallationCheckDate(true);
 
@@ -323,6 +359,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setSeatbeltInstallationCheckDate(false);
 
@@ -338,6 +376,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setSeatbeltInstallationCheckDate(null);
 
@@ -354,6 +394,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult(null);
 
@@ -369,6 +411,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("fail");
 
@@ -385,6 +429,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass");
 
@@ -416,6 +462,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("prs");
 
@@ -431,6 +479,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("abandoned");
 
@@ -447,6 +497,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setProhibitionIssued(null);
 
@@ -462,6 +514,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setProhibitionIssued(false);
 
@@ -477,6 +531,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setProhibitionIssued(true);
 
@@ -507,6 +563,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build().getTestTypes().get(0)
                 .setTestResult("fail").setReasonForAbandoning("");
 
@@ -525,6 +583,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
                 .setTestResultId(generateRandomExcludingValues(5,vehicleCancelledDataOld.build().getTestResultId()))
                 .build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning("");
         vehicleCancelledDataOld.build().getTestTypes().get(0).setReasonForAbandoning(null);
@@ -557,6 +617,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("prs").setReasonForAbandoning("");
 
@@ -619,6 +681,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning(RandomStringUtils.randomAlphanumeric(1, 499));
 
@@ -650,6 +714,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("prs").setReasonForAbandoning(RandomStringUtils.randomAlphanumeric(1, 499));
 
@@ -667,6 +733,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("fail").setReasonForAbandoning(null);
 
@@ -683,6 +751,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setTestResult("pass").setReasonForAbandoning(null);
 
@@ -761,6 +831,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build().getTestTypes()
                 .get(0).setAdditionalNotesRecorded(RandomStringUtils.randomAlphanumeric(1, 499));
 
@@ -777,6 +849,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalNotesRecorded(null);
 
@@ -793,6 +867,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalNotesRecorded("");
 
@@ -810,6 +886,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(RandomStringUtils.randomAlphanumeric(1, 499));
 
@@ -826,6 +904,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon(null);
 
@@ -841,6 +921,8 @@ public class PostTestResultsPozTestTypesCancelledLvl {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm())).build()
                 .getTestTypes().get(0).setAdditionalCommentsForAbandon("");
 

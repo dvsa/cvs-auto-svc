@@ -13,12 +13,11 @@ import static util.TypeLoader.isMissingAuth;
 import static util.TypeLoader.isWrongAuth;
 
 public class BasePathFilter implements Filter {
-
     private static final Loader loader = new LocalLoaderImpl();
 
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
-        filterableRequestSpecification.given().baseUri(returnBaseUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
+        filterableRequestSpecification.given().baseUri(createBaseUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation()));
         if (!isWrongAuth() && !isMissingAuth()) {
             filterableRequestSpecification.header("Authorization", "Bearer " + WriterReader.getToken()).header("X-Api-Key", loader.getApiKeys());
         } else if (isWrongAuth()) {
@@ -28,18 +27,15 @@ public class BasePathFilter implements Filter {
     }
 
     /**
-     * Simple method to construct the base URL with the new format following the APIG restructure
-     *
+     * This is a method to create the VTA base path
+     * depending whether you are running this method on a feature branch or on develop
      * @return Base url as String
      */
-    private String returnBaseUrl() {
+    private String createBaseUrl() {
         String baseUrl = loader.getBasePathUrl();
         String branchName = loader.getBranchName();
-
-        if (branchName.equalsIgnoreCase("develop")) {
-            return baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName);
-        } else {
-            return baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
-        }
+        return branchName.equalsIgnoreCase("develop") ?
+                baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName) :
+                baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
     }
 }

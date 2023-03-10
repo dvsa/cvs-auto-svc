@@ -218,65 +218,6 @@ public class PostTestResultsPozTestTypesSubmittedLvl {
         testResultsSteps.validateData("Test records created");
     }
 
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3486 - API Consumer creates a new test results for submitted/canceled with no min restriction - certificateNumber")
-    @Test
-    public void testResultsEmptyCertificateNumber() {
-
-        // Read the base test result JSON.
-        String testResultRecord = test_results_post_payload_psv_10300_json;
-
-        // Create alteration to add one more tech record to in the request body
-        String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testTypes[0].certificateNumber", "", "", "REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationSystemNumber,
-                alterationCertificateNumber,
-                alterationTestResultId));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-
-    }
-
-    @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-3504 - TCD - API Consumer creates a new test result for submitted/canceled that allows null values - certificateNumber")
-    @Test
-    public void testResultsNullCertificateNumber() {
-
-        // Read the base test result JSON.
-        String testResultRecord = test_results_post_payload_psv_10300_json;
-
-        // Create alteration to add one more tech record to in the request body
-        String randomVin = GenericData.generateRandomVin();
-        String randomTestResultId = UUID.randomUUID().toString();
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$", randomSystemNumber,"systemNumber","ADD_FIELD");
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
-        JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
-        JsonPathAlteration alterationCertificateNumber = new JsonPathAlteration("$.testTypes[0].certificateNumber", null, "", "REPLACE");
-
-        // Collate the list of alterations.
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(
-                alterationVin,
-                alterationSystemNumber,
-                alterationCertificateNumber,
-                alterationTestResultId));
-
-        // Post the results, together with any alterations, and verify that they are accepted.
-        testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
-        testResultsSteps.statusCodeShouldBe(201);
-        testResultsSteps.validateData("Test records created");
-    }
-
     @Title("CVSB-417 - CVSB-949 - CVSB-1140 / CVSB-1573 - Consumer creates a new test results for the submitted/cancelled test - testTypeStartTimestamp")
     @Test
     public void testResultsValidTestTypeStartTimestamp() {

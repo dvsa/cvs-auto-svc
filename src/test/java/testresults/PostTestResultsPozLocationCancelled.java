@@ -7,6 +7,8 @@ import model.testresults.TestResultsStatus;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.TestResultsSteps;
@@ -24,6 +26,10 @@ public class PostTestResultsPozLocationCancelled {
 
     private TestResults.Builder vehicleCancelledDataOld = TestResultsData.buildTestResultsCancelledDataOld();
 
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
+
     private void validateSavedDataOld() {
         testResultsSteps.getTestResults(vehicleCancelledDataOld.build().getSystemNumber(), TestResultsStatus.CANCELED);
         testResultsSteps.statusCodeShouldBe(200);
@@ -36,6 +42,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setVertical("upper");
 
@@ -51,6 +59,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setVertical("lower");
 
@@ -67,6 +77,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setVertical(null);
 
@@ -83,6 +95,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setHorizontal("inner");
 
@@ -99,6 +113,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setHorizontal("outer");
 
@@ -115,6 +131,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setHorizontal(null);
 
@@ -131,6 +149,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral("nearside");
 
@@ -147,6 +167,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral("centre");
 
@@ -163,6 +185,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral("offside");
 
@@ -179,6 +203,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLateral(null);
 
@@ -195,6 +221,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLongitudinal("front");
 
@@ -211,6 +239,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLongitudinal("rear");
 
@@ -227,6 +257,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setLongitudinal(null);
 
@@ -243,6 +275,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setRowNumber(new Random().nextInt(21));
 
@@ -259,6 +293,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setRowNumber(null);
 
@@ -275,6 +311,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setSeatNumber(new Random().nextInt(7));
 
@@ -291,6 +329,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setSeatNumber(null);
 
@@ -308,6 +348,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setAxleNumber(new Random().nextInt(11));
 
@@ -324,6 +366,8 @@ public class PostTestResultsPozLocationCancelled {
 
         vehicleCancelledDataOld.setVin(generateRandomExcludingValues(21, vehicleCancelledDataOld.build().getVin()))
                 .setSystemNumber(generateRandomExcludingValues(16, vehicleCancelledDataOld.build().getSystemNumber()))
+                .setTestStartTimestamp(testStartTimestamp)
+                .setTestEndTimestamp(testEndTimestamp)
                 .setVrm(generateRandomExcludingValues(7, vehicleCancelledDataOld.build().getVrm()))
                 .build().getTestTypes().get(0).getDefects().get(0).getAdditionalInformation().getLocation().setAxleNumber(null);
 

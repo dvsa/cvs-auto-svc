@@ -7,23 +7,21 @@ import data.TestResultsData;
 import model.testresults.TestResults;
 import model.testresults.TestResultsGet;
 import model.testresults.TestResultsStatus;
-import model.testresults.TestVersion;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
-import net.thucydides.core.annotations.WithTag;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import steps.*;
 import util.JsonPathAlteration;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import static util.DataUtil.generateRandomExcludingValues;
 
 @RunWith(SerenityRunner.class)
@@ -36,6 +34,9 @@ public class GetTestResults {
 
     private TestResultsGet vehicleSubmittedData = TestResultsData.buildTestResultsSubmittedDataWithCalculated().build();
     private TestResultsGet vehicleCancelledData = TestResultsData.buildTestResultsCancelleddDataWithCalculated().build();
+    private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     private String test_results_roadworthiness_hgv_pass_7675_json;
     private String test_results_cancelled_json;
@@ -188,6 +189,23 @@ public class GetTestResults {
         testResultsSteps.validateData("No resources match the search criteria");
     }
 
+    @Title("VTA-695 - Get test results Missing parameter value check")
+    @Test
+    public void testResultsMissingParameter() {
+
+        testResultsSteps.getTestResults(" ");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+
+        testResultsSteps.getTestResults("undefined");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+
+        testResultsSteps.getTestResults("null");
+        testResultsSteps.statusCodeShouldBe(400);
+        testResultsSteps.validateResp("\"Missing parameter value.\"");
+    }
+
     @Title("CVSB-416 - CVSB-949 / CVSB-2431 - Status submitted and no data found")
     @Test
     public void testResultsWithStatusSubmittedAndNotExistingVin() {
@@ -255,7 +273,8 @@ public class GetTestResults {
             .setEuVehicleCategory("o3")
             .setNoOfAxles(6)
             .setReasonForCancellation(null)
-            .setTestEndTimestamp("2019-09-12T16:42:14.757Z")
+            .setTestStartTimestamp(testStartTimestamp)
+            .setTestEndTimestamp(testEndTimestamp)
             .setTesterEmailAddress("cvs.automation3@dvsagov.onmicrosoft.com")
             .setTesterName("cvs.automation3@dvsagov.onmicrosoft.com")
             .setTestStationName("Abshire-Kub")

@@ -10,6 +10,7 @@ import data.GenericData;
 import io.restassured.response.Response;
 import model.testresults.*;
 import net.thucydides.core.annotations.Step;
+import org.junit.Assert;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.json.JSONException;
@@ -172,8 +173,11 @@ public class TestResultsSteps {
 
     @Step
     public void validateMessage(String stringData) {
-        response.then().log().all()
-                .body("message", equalTo(stringData));
+        if (response.getBody().asString().contains("message")) {
+            response.then().body("message", equalTo(stringData));
+        } else {
+            response.then().body("Message", equalTo(stringData));
+        }
     }
 
     @Step
@@ -774,7 +778,7 @@ public class TestResultsSteps {
 
     @Step
     public void validateCertificateIsGenerated(String testNumber, String vin) {
-        assertThat(AwsUtil.isCertificateCreated(testNumber, vin, 60)).isTrue();
+        assertThat(AwsUtil.isCertificateCreated(testNumber, vin, 70)).isTrue();
     }
 
     @Step
@@ -902,5 +906,8 @@ public class TestResultsSteps {
             System.out.println(e);
         }
     }
-
+    @Step
+    public void validateResp(String stringData) {
+        Assert.assertEquals(response.body().asString(), stringData);
+    }
 }

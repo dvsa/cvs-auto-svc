@@ -23,7 +23,7 @@
     {
       "additionalCommentsForAbandon": null,
       "additionalNotesRecorded": null,
-      "certificateNumber": null,
+      "certificateNumber": "123456",
       "secondaryCertificateNumber": "123456",
       "defects": [
       ],

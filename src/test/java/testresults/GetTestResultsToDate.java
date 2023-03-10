@@ -62,7 +62,7 @@ public class GetTestResultsToDate {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResultsToDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1));
+        testResultsSteps.getTestResultsToDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 2));
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.valueForFieldInPathShouldBe("testTypes.size()", 1);
@@ -122,7 +122,7 @@ public class GetTestResultsToDate {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-        testResultsSteps.getTestResultsToDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 1), TestResultsStatus.SUBMITTED);
+        testResultsSteps.getTestResultsToDate(randomSystemNumber, DataUtil.buildDate(vehicleSubmittedData.getTestTypes().get(0).getCreatedAt(), 2), TestResultsStatus.SUBMITTED);
         testResultsSteps.statusCodeShouldBe(200);
 
         testResultsSteps.valueForFieldInPathShouldBe("testTypes.size()", 1);

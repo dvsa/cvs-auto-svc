@@ -14,11 +14,9 @@ public class NoDataPathFilter implements Filter {
 
     @Override
     public Response filter(FilterableRequestSpecification filterableRequestSpecification, FilterableResponseSpecification filterableResponseSpecification, FilterContext filterContext) {
-
         filterableRequestSpecification.given().baseUri(returnBaseUrl()).config(config().sslConfig(new SSLConfig().relaxedHTTPSValidation())).header("Authorization",
                 "Bearer " + WriterReader.getToken());
-
-        return filterContext.next(filterableRequestSpecification,filterableResponseSpecification);
+        return filterContext.next(filterableRequestSpecification, filterableResponseSpecification);
     }
 
     /**
@@ -29,11 +27,8 @@ public class NoDataPathFilter implements Filter {
     private String returnBaseUrl() {
         String baseUrl = loader.getNoDataBasePathUrl();
         String branchName = loader.getBranchName();
-
-        if (branchName.equalsIgnoreCase("develop")) {
-            return baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName);
-        } else {
-            return baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
-        }
+        return branchName.equalsIgnoreCase("develop") ?
+                baseUrl.replaceFirst("(branch-)", "").replace("branch", branchName) :
+                baseUrl.replaceFirst("(branch)", branchName).replace("branch", branchName);
     }
 }

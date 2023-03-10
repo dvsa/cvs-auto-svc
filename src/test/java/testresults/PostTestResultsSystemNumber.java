@@ -31,12 +31,33 @@ public class PostTestResultsSystemNumber {
     VehicleTechnicalRecordsSteps vehicleTechnicalRecordsSteps;
 
     private String test_results_post_expiry_date_trl_8798_json;
+    private String test_results_car_json;
+    private String test_results_lgv_json;
+    private String test_results_trl_json;
+    private String test_results_insert_expiry_date_trl_5862_json;
+    private String test_results_post_free_loaded_tests_18974_json;
+    private String test_results_motorcycle_json;
+    private String test_results_first_test_hgv_json;
 
     @Before
     @Test
     public void updateJson(){
         String jsonFileName = "test-results_post_expiry_date_trl_8798.json";
+        String jsonFileName1 = "test-results_car.json";
+        String jsonFileName2 = "test-results_lgv.json";
+        String jsonFileName3 = "test-results_trl.json";
+        String jsonFileName4 = "test-results_insert_expiry_date_trl_5862.json";
+        String jsonFileName5 = "test-results_post_free_loaded_tests_18974.json";
+        String jsonFileName6 = "test-results_motorcycle.json";
+        String jsonFileName7 = "test-results_first_test_hgv.json";
         test_results_post_expiry_date_trl_8798_json = GenericData.updateJson( jsonFileName, false);
+        test_results_car_json = GenericData.updateJson( jsonFileName1, false);
+        test_results_lgv_json = GenericData.updateJson( jsonFileName2, false);
+        test_results_trl_json = GenericData.updateJson( jsonFileName3, false);
+        test_results_insert_expiry_date_trl_5862_json = GenericData.updateJson( jsonFileName4, false);
+        test_results_post_free_loaded_tests_18974_json = GenericData.updateJson( jsonFileName5, false);
+        test_results_motorcycle_json = GenericData.updateJson( jsonFileName6, false);
+        test_results_first_test_hgv_json = GenericData.updateJson( jsonFileName7, false);
     }
 
     @Title("CVSB-10754 - TC - AC1 - AC2 API Consumer retrieve the Test results for the input systemNumber - Submitted")
@@ -375,14 +396,14 @@ public class PostTestResultsSystemNumber {
     @Test
     public void testTestResultForFreeLoadedTestsWithoutHistory() {
 
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_free_loaded_tests_18974.json", "$");
+        String testResultRecord = test_results_post_free_loaded_tests_18974_json;
 
         DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
-        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
         JsonPathAlteration alterationSysNo = new JsonPathAlteration("$.systemNumber", randomSystemNo, "", "REPLACE");
@@ -410,14 +431,14 @@ public class PostTestResultsSystemNumber {
     @Test
     public void testTestResultForFreeLoadedTestsWithHistory() {
 
-        String insertedTestResultRecord = GenericData.readJsonValueFromFile("test-results_insert_expiry_date_trl_5862.json", "$");
+        String insertedTestResultRecord = test_results_post_free_loaded_tests_18974_json;
 
         DateTime currentTime = DateTime.now().withZone(DateTimeZone.UTC);
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNo = GenericData.generateRandomSystemNumber();
         String randomTestResultId = UUID.randomUUID().toString();
 
-        DateTime insertedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1);
+        DateTime insertedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue();
         String insertTestExpiryDate = insertedTestExpiryDate.toInstant().toString();
 
         JsonPathAlteration alterationInsertVin = new JsonPathAlteration("$.vin", randomVin, "", "REPLACE");
@@ -437,7 +458,7 @@ public class PostTestResultsSystemNumber {
         String alteredJson = GenericData.applyJsonAlterations(insertedTestResultRecord, insertAlterations);
         testResultsSteps.insertRecordInDynamo(alteredJson, "test-results", "vin");
 
-        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).toInstant().toString();
+        String expectedTestExpiryDate = currentTime.dayOfMonth().withMaximumValue().plusYears(1).dayOfMonth().withMaximumValue().toInstant().toString();
 
 
         String testResultRecord = GenericData.readJsonValueFromFile("test-results_post_free_loaded_tests_18974.json", "$");
@@ -468,7 +489,7 @@ public class PostTestResultsSystemNumber {
     public void testCreateTestResultGenerateCertHgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_first_test_hgv.json", "$");
+        String testResultRecord = test_results_first_test_hgv_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -541,7 +562,7 @@ public class PostTestResultsSystemNumber {
     public void testCreateTestResultGenerateCertTrl() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_trl.json", "$");
+        String testResultRecord = test_results_trl_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -577,7 +598,7 @@ public class PostTestResultsSystemNumber {
     public void testCreateTestResultGenerateCertCar() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_car.json", "$");
+        String testResultRecord = test_results_car_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -613,7 +634,7 @@ public class PostTestResultsSystemNumber {
     public void testCreateTestResultGenerateCertLgv() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_lgv.json", "$");
+        String testResultRecord = test_results_lgv_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
@@ -649,7 +670,7 @@ public class PostTestResultsSystemNumber {
     public void testCreateTestResultGenerateCertMotorcycle() {
 
         // Read the base test result JSON.
-        String testResultRecord = GenericData.readJsonValueFromFile("test-results_motorcycle.json", "$");
+        String testResultRecord = test_results_motorcycle_json;
 
         String randomVin = GenericData.generateRandomVin();
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
