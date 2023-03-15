@@ -72,7 +72,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
     }
 
 
@@ -206,7 +206,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(null, DataUtil.buildDate(testEndTimestamp, 1, -1)));
     }
 
     @Title("CVSB-197 / CVSB-3090 - AC B1. VSA submits results for a test type with test type classification 'Annual With Certificate' when the test type result is PRS (no previous test type records)")
@@ -231,7 +231,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(null, DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(null, DataUtil.buildDate(testEndTimestamp, 1, -1)));
     }
 
 
@@ -250,7 +250,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
 
         vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("pass");
@@ -258,7 +258,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1), DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1), DataUtil.buildDate(testEndTimestamp, 1, -1)));
     }
 
     @Title("CVSB-197 / CVSB-3095 - B3. VSA submits results for a test type with test type classification 'Annual With Certificate' when the test type result is PRS (at least 1 previous test type record + expired certificate more than 2 months after today's date) ")
@@ -275,7 +275,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
 
         vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("prs");
@@ -283,7 +283,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1), DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1), DataUtil.buildDate(testEndTimestamp, 1, -1)));
     }
 
 
@@ -301,7 +301,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
 
         vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("abandoned");
@@ -309,7 +309,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1), null));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1), null));
     }
 
     @Title("CVSB-197 / CVSB-3875 - VSA submits results for a test type with test type classification 'Annual With Certificate' when the test type result is NOT PASSED or PRS ")
@@ -326,7 +326,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
 
         vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("1").setTestResult("fail");
@@ -334,7 +334,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1), null));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1), null));
     }
 
     @Title("CVSB-197 / CVSB-3876 - VSA submits results for a test type which does NOT have test type classification 'Annual With Certificate'")
@@ -351,7 +351,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
 
         vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("pass");
@@ -359,7 +359,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1), null));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1), null));
     }
 
     @Title("CVSB-197 / CVSB-3876 - VSA submits results for a test type which does NOT have test type classification 'Annual With Certificate'")
@@ -376,7 +376,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
 
         vehicleSubmittedDataOld.build()
                 .getTestTypes().get(0).setTestTypeId("15").setTestResult("prs");
@@ -384,7 +384,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.setTestResultId(RandomStringUtils.randomAlphanumeric(30)).build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1), null));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1), null));
     }
 
     @Title("CVSB-197 / CVSB-3876 - VSA submits results for a test type which does NOT have test type classification 'Annual With Certificate'")
