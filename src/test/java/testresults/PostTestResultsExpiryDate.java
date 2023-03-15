@@ -29,8 +29,8 @@ public class PostTestResultsExpiryDate {
 
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-    private String testStartTimestamp = currentTimestamp.minusHours(2).toString();
-    private String testEndTimestamp = currentTimestamp.minusHours(1).toString();
+    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
 
     private void validateSavedDataOld(List<String> data) {
 
@@ -54,7 +54,7 @@ public class PostTestResultsExpiryDate {
         testResultsSteps.postTestResults(vehicleSubmittedDataOld.build());
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
-        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(DataUtil.buildCurrentDateTime(), 1, -1)));
+        validateSavedDataOld(Arrays.asList(DataUtil.buildDate(testEndTimestamp, 1, -1)));
     }
 
 
