@@ -707,8 +707,7 @@ public class GetVehicleTechnicalRecords {
         String randomSystemNumber = GenericData.generateRandomSystemNumber();
         //generate random Vin
         String randomVin = GenericData.generateRandomVin();
-        //generate random Vrm
-        String randomVrm = GenericData.generateRandomVrm();
+
         // read post request body from file
         String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
         String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
@@ -723,7 +722,7 @@ public class GetVehicleTechnicalRecords {
         // create alteration to change Vin in the request body with the random generated Vin
         JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
         // create alteration to change primary vrm in the request body with the random generated primary vrm
-        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", randomVrm,"","REPLACE");
+        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", "","","DELETE");
         // initialize the alterations list with both declared alteration
         List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
 
@@ -739,7 +738,6 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdByName", name);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[0].vrm", randomVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
         // for CVSB-10131 we validate that the generated trailerId from the backend is unique

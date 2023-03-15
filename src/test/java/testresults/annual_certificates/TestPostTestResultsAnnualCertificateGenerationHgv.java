@@ -113,6 +113,7 @@ public class TestPostTestResultsAnnualCertificateGenerationHgv {
         }
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+        testResultsSteps.waitForTestResultsToBeUpdated(randomSystemNumber, 5);
         testResultsSteps.getTestResults(randomSystemNumber);
         testResultsSteps.statusCodeShouldBe(200);
         String testNumber = testResultsSteps.getTestNumber();
