@@ -29,8 +29,8 @@ public class PostTestResultsExpiryDate {
 
     private TestResults.Builder vehicleSubmittedDataOld = TestResultsData.buildTestResultsSubmittedDataOld();
     private DateTime currentTimestamp = DateTime.now().withZone(DateTimeZone.UTC);
-    private String testStartTimestamp = currentTimestamp.minusYears(1).minusHours(2).toString();
-    private String testEndTimestamp = currentTimestamp.minusYears(1).minusHours(1).toString();
+    private String testStartTimestamp = currentTimestamp.minusHours(2).toString();
+    private String testEndTimestamp = currentTimestamp.minusHours(1).toString();
 
     private void validateSavedDataOld(List<String> data) {
 
