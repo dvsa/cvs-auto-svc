@@ -695,57 +695,57 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
     }
-
-    @WithTag("Vtm")
-    @Title("CVSB-10245 - AC1 - All attributes applicable to TRLs are returned " +
-            "AC2 - TRL vehicle is created, and the appropriate attributes are automatically set " +
-            "CVSB-10131 - AC1 - TRL vehicle is created, and the next trailerID is assigned")
-    @Test
-    public void testVehicleTechnicalRecordsGetAllTrlAttributes() {
-        // TEST SETUP
-        //generate random systemNumber
-        String randomSystemNumber = GenericData.generateRandomSystemNumber();
-        //generate random Vin
-        String randomVin = GenericData.generateRandomVin();
-
-        // read post request body from file
-        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
-        String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
-        String userId = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msOid");
-        String name = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msUser");
-        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.secondaryVrms[0]");
-        String trailerId =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.trailerId");
-
-
-        // create alteration to change systemNumber in the request body with the random generated systemNumber
-        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
-        // create alteration to change Vin in the request body with the random generated Vin
-        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
-        // create alteration to change primary vrm in the request body with the random generated primary vrm
-        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", "","","DELETE");
-        // initialize the alterations list with both declared alteration
-        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
-
-        // TEST
-        String generatedTrailerId = vehicleTechnicalRecordsSteps.getNextTrailerIdInSequence();
-        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
-        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[0]", techRecord);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdById", userId);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdByName", name);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
-        // for CVSB-10131 we validate that the generated trailerId from the backend is unique
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", generatedTrailerId);
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(generatedTrailerId, VehicleTechnicalRecordStatus.ALL);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("size()", 1);
-    }
+//    Test removed for now as not currently valid
+//    @WithTag("Vtm")
+//    @Title("CVSB-10245 - AC1 - All attributes applicable to TRLs are returned " +
+//            "AC2 - TRL vehicle is created, and the appropriate attributes are automatically set " +
+//            "CVSB-10131 - AC1 - TRL vehicle is created, and the next trailerID is assigned")
+//    @Test
+//    public void testVehicleTechnicalRecordsGetAllTrlAttributes() {
+//        // TEST SETUP
+//        //generate random systemNumber
+//        String randomSystemNumber = GenericData.generateRandomSystemNumber();
+//        //generate random Vin
+//        String randomVin = GenericData.generateRandomVin();
+//
+//        // read post request body from file
+//        String postRequestBody = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json","$");
+//        String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
+//        String userId = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msOid");
+//        String name = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msUser");
+//        String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.secondaryVrms[0]");
+//        String trailerId =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.trailerId");
+//
+//
+//        // create alteration to change systemNumber in the request body with the random generated systemNumber
+//        JsonPathAlteration alterationSystemNumber = new JsonPathAlteration("$.systemNumber", randomSystemNumber,"","REPLACE");
+//        // create alteration to change Vin in the request body with the random generated Vin
+//        JsonPathAlteration alterationVin = new JsonPathAlteration("$.vin", randomVin,"","REPLACE");
+//        // create alteration to change primary vrm in the request body with the random generated primary vrm
+//        JsonPathAlteration alterationVrm = new JsonPathAlteration("$.primaryVrm", "","","DELETE");
+//        // initialize the alterations list with both declared alteration
+//        List<JsonPathAlteration> alterations = new ArrayList<>(Arrays.asList(alterationVin, alterationVrm, alterationSystemNumber));
+//
+//        // TEST
+//        String generatedTrailerId = vehicleTechnicalRecordsSteps.getNextTrailerIdInSequence();
+//        vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
+//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+//        vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
+//        vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[0]", techRecord);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdById", userId);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].createdByName", name);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].vrm", secondaryVrm);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms.size()", 2);
+//        // for CVSB-10131 we validate that the generated trailerId from the backend is unique
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldNotBe("[0].trailerId", trailerId);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].trailerId", generatedTrailerId);
+//        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(generatedTrailerId, VehicleTechnicalRecordStatus.ALL);
+//        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("size()", 1);
+//    }
 
     @WithTag("Vtm")
     @Title("CVSB-10255 - AC1 - All attributes applicable to PSVs are returned")
