@@ -713,6 +713,7 @@ public class GetVehicleTechnicalRecords {
         String techRecord = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.techRecord[0]");
         String userId = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msOid");
         String name = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.msUserDetails.msUser");
+        String primaryVrm = GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.primaryVrm");
         String secondaryVrm =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.secondaryVrms[0]");
         String trailerId =  GenericData.readJsonValueFromFile("technical-records_trl_all_fields.json", "$.trailerId");
 
