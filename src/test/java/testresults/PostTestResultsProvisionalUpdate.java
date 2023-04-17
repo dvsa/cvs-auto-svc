@@ -243,7 +243,7 @@ public class PostTestResultsProvisionalUpdate {
         JsonPathAlteration alterationTestResultVin = new JsonPathAlteration("$.vin", vin, "", "REPLACE");
         JsonPathAlteration alterationTestResultId = new JsonPathAlteration("$.testResultId", randomTestResultId, "", "REPLACE");
         JsonPathAlteration trAlterationSystemNumber = new JsonPathAlteration("$.systemNumber", systemNumber,"","REPLACE");
-        JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "o2","","REPLACE");
+        JsonPathAlteration trEuVehicleCategory = new JsonPathAlteration("$.euVehicleCategory", "o3","","REPLACE");
 
 
         // Collate the list of alterations.
@@ -264,7 +264,7 @@ public class PostTestResultsProvisionalUpdate {
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o2");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o3");
     }
 
     @Title("CVSB-11333 - 'EU vehicle category' updated - NULL - LGV")
@@ -488,7 +488,7 @@ public class PostTestResultsProvisionalUpdate {
         // Get the created technical record, verify the status code and the fields
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o2");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o3");
 
 
         // Read test result base json + Generate random values
@@ -517,7 +517,7 @@ public class PostTestResultsProvisionalUpdate {
         // Get the tech record, and verify that the fields are present.
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySystemNumber(systemNumber);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
-        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o2");
+        vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].euVehicleCategory", "o3");
     }
 
     @Title("CVSB-11333 - 'EU vehicle category' NOT updated - LGV")

@@ -32,7 +32,7 @@
       "couplingType": "Y",
       "maxLoadOnCoupling": 10000,
       "frameDescription": "Other",
-      "euVehicleCategory": "o2",
+      "euVehicleCategory": "o3",
       "alterationMarker": false,
       "departmentalVehicleMarker": true,
       "authIntoService": {
