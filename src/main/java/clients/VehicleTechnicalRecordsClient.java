@@ -101,7 +101,7 @@ public class VehicleTechnicalRecordsClient {
 
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
@@ -115,7 +115,7 @@ public class VehicleTechnicalRecordsClient {
 
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records?searchCriteria=systemNumber");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records?searchCriteria=systemNumber");
 
         return response;
     }
@@ -128,7 +128,7 @@ public class VehicleTechnicalRecordsClient {
                 .queryParam("status", status)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
@@ -142,7 +142,7 @@ public class VehicleTechnicalRecordsClient {
                 .queryParam("searchCriteria", searchCriteria)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
 
@@ -155,7 +155,7 @@ public class VehicleTechnicalRecordsClient {
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("searchCriteria", searchCriteria)
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
 
@@ -168,7 +168,7 @@ public class VehicleTechnicalRecordsClient {
                 .pathParam("searchIdentifier", searchIdentifier)
                 .queryParam("searchCriteria", searchCriteria)
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
 
@@ -386,7 +386,7 @@ public class VehicleTechnicalRecordsClient {
                 .queryParam("metadata", true)
 //                .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
@@ -789,7 +789,7 @@ public class VehicleTechnicalRecordsClient {
                 .queryParam("status", "all")
                 .queryParam("searchCriteria", "vin")
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
         return response;
     }
 
@@ -800,7 +800,7 @@ public class VehicleTechnicalRecordsClient {
                 .queryParam("searchCriteria", searchCriteria)
 //               .log().all()
                 .log().method().log().uri().log().body()
-                .get("/vehicles/{searchIdentifier}/tech-records");
+                .get("/v2/vehicles/{searchIdentifier}/tech-records");
 
         return response;
     }
