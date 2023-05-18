@@ -170,6 +170,12 @@ public class PostTestResultsMoreVinFirstTest {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
+
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);

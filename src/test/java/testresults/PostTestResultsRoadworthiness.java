@@ -140,6 +140,12 @@ public class PostTestResultsRoadworthiness {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
+
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -165,6 +171,8 @@ public class PostTestResultsRoadworthiness {
         testResultsSteps.postVehicleTestResultsWithAlterations(testResultRecord, alterations);
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
+
+
 
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResults(systemNumber);
@@ -198,6 +206,12 @@ public class PostTestResultsRoadworthiness {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);

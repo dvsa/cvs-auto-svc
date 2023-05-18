@@ -221,6 +221,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
+
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -275,6 +281,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -423,6 +435,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -778,6 +796,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
+         try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }       
+
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -963,6 +987,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
@@ -1151,6 +1181,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
+
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
@@ -1211,6 +1247,12 @@ public class PostTestResultsRoadworthinessCertificateGeneration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsVehicle);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
+
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         //GET tech-records
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);

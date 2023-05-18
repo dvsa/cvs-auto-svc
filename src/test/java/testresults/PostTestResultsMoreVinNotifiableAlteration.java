@@ -79,6 +79,12 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
 
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
+
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
@@ -168,6 +174,12 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+
+	try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -263,6 +275,12 @@ public class PostTestResultsMoreVinNotifiableAlteration {
         String systemNumberTwo = vehicleTechnicalRecordsSteps.getNextSystemNumberInSequence();
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
+
+ 	try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }       
 
         // retrieve the vehicle and check the status code and the techRecord size
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
@@ -391,6 +409,12 @@ public class PostTestResultsMoreVinNotifiableAlteration {
 
         // wait a maximum of seconds for the vehicle tech records to be updated
         vehicleTechnicalRecordsSteps.waitForVehicleTechRecordsToBeUpdated(randomVin, 20);
+
+        try {
+                Thread.sleep(10000);
+        } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+        }
 
         // retrieve the tech record of the vehicle and verify whether the status has changed to current
         vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
