@@ -196,7 +196,7 @@ public class VehicleTechnicalRecordsSteps {
         System.out.println("################################");
         System.out.println("################################");
         System.out.println("################################");
-        System.out.println(Vehicle.class.getDeclaredFields());
+        System.out.println(Arrays.toString(Vehicle.class.getDeclaredFields()));
         System.out.println("################################");
         System.out.println("################################");
         System.out.println("################################");
