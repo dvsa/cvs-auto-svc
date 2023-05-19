@@ -52,9 +52,14 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
-        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
+    public String getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status, Boolean poll) {
+        response = vehicleTechnicalRecordsClient.pollGetVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
         return response.prettyPrint();
+    }
+
+    @Step
+    public String getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
+        return getVehicleTechnicalRecordsByStatus(searchIdentifier, status, false);
     }
 
     @Step
@@ -78,11 +83,19 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public void getVehicleTechnicalRecordsByPartialVin(String searchIdentifier) {
+    public void getVehicleTechnicalRecordsByPartialVin(String searchIdentifier, Boolean poll) {
         String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
-        getVehicleTechnicalRecords(partialVin);
+        if (poll) {
+            pollGetVehicleTechnicalRecords(partialVin);
+        } else {
+            getVehicleTechnicalRecords(partialVin);
+        } 
     }
 
+    @Step
+    public void getVehicleTechnicalRecordsByPartialVin(String searchIdentifier) {
+        getVehicleTechnicalRecordsByPartialVin(searchIdentifier, false);
+    }
 
     @Step
     public void getVehicleTechnicalRecordsByPartialVinAndStatus(String searchIdentifier, VehicleTechnicalRecordStatus status) {

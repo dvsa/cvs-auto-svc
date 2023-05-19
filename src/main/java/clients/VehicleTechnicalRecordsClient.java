@@ -44,7 +44,9 @@ public class VehicleTechnicalRecordsClient {
             response = getVehicleTechnicalRecords(searchIdentifier);
             try {
                 TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted");
+            }
             tries++;
         }
 
@@ -63,6 +65,25 @@ public class VehicleTechnicalRecordsClient {
         return response;
 
     }
+
+    public Response pollGetVehicleTechnicalRecordsByStatus(String searchIdentifier, String status){
+
+            int tries = 0;
+
+            Response response = getVehicleTechnicalRecordsByStatus(searchIdentifier, status);
+
+            while (tries < 3 && response.getStatusCode() == 404) {
+                response = getVehicleTechnicalRecordsByStatus(searchIdentifier, status);
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    System.out.println("Interrupted");
+                }
+                tries++;
+            }
+
+            return response;
+        }
 
     public Response getVehicleTechnicalRecordsByStatusAndSearchCriteria(String searchIdentifier, String status,
                                                                           String searchCriteria) {
