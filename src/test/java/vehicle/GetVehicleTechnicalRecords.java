@@ -54,7 +54,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVrm);
+        vehicleTechnicalRecordsSteps.pollGetVehicleTechnicalRecords(randomVrm);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
     }

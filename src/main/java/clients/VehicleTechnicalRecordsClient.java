@@ -14,6 +14,7 @@ import util.*;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
@@ -31,6 +32,23 @@ public class VehicleTechnicalRecordsClient {
 
         return response;
 
+    }
+
+    public Response pollGetVehicleTechnicalRecords(String searchIdentifier){
+
+        int tries = 0;
+
+        Response response = getVehicleTechnicalRecords(searchIdentifier);
+
+        while (tries < 3 && response.getStatusCode() == 404) {
+            response = getVehicleTechnicalRecords(searchIdentifier);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {}
+            tries++;
+        }
+
+        return response;
     }
 
     public Response getVehicleTechnicalRecordsByStatus(String searchIdentifier, String status) {

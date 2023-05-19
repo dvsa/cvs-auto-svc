@@ -46,6 +46,12 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
+    public String pollGetVehicleTechnicalRecords(String searchIdentifier) {
+        response = vehicleTechnicalRecordsClient.pollGetVehicleTechnicalRecords(searchIdentifier);
+        return response.prettyPrint();
+    }
+
+    @Step
     public String getVehicleTechnicalRecordsByStatus(String searchIdentifier, @NotNull VehicleTechnicalRecordStatus status) {
         response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsByStatus(searchIdentifier, status.getStatus());
         return response.prettyPrint();
