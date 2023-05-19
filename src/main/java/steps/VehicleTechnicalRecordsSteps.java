@@ -189,6 +189,7 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     private void validateDataByIndex(Vehicle vehicle, int index) {
+        System.out.println(Vehicle.class.getDeclaredFields());
         response.then().body("[0].size()", is(Vehicle.class.getDeclaredFields().length-1));
         response.then().body("[0].vrms.vrm", hasItem(equalTo(vehicle.getVrms().get(0).getVrm())));
         response.then().body("[0].vrms.isPrimary", hasItem(equalTo(vehicle.getVrms().get(0).getPrimary())));
