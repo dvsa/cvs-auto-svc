@@ -88,7 +88,7 @@ public class PostTestResultsProvisionalUpdate {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         // retrieve the vehicle and check the status code and the techRecord size
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL, true);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vin", randomVin);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");

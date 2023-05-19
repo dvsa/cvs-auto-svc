@@ -14,7 +14,6 @@ import util.*;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static util.WriterReader.saveUtils;
@@ -43,9 +42,9 @@ public class VehicleTechnicalRecordsClient {
         while (tries < 3 && response.getStatusCode() == 404) {
             response = getVehicleTechnicalRecords(searchIdentifier);
             try {
-                TimeUnit.SECONDS.sleep(2);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
-                System.out.println("Interrupted");
+                e.printStackTrace();
             }
             tries++;
         }
@@ -75,9 +74,9 @@ public class VehicleTechnicalRecordsClient {
             while (tries < 3 && response.getStatusCode() == 404) {
                 response = getVehicleTechnicalRecordsByStatus(searchIdentifier, status);
                 try {
-                    TimeUnit.SECONDS.sleep(2);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
-                    System.out.println("Interrupted");
+                    e.printStackTrace();;
                 }
                 tries++;
             }

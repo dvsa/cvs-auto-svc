@@ -543,16 +543,25 @@ public class VehicleTechnicalRecordsSteps {
         vehicleTechnicalRecordsClient.insertVehicle(requestBody, alterations);
     }
 
-
     @Step
-    public String getSystemNumberUsingVin(String vin) {
+    public String getSystemNumberUsingVin(String vin, Boolean poll) {
         String systemNumber = "";
         System.out.println("Retrieving systemNumber for vin: " + vin);
-        getVehicleTechnicalRecords(vin);
+
+        if (poll) {
+            pollGetVehicleTechnicalRecords(vin);
+        } else {
+            getVehicleTechnicalRecords(vin);
+        }
+
         statusCodeShouldBe(200);
         systemNumber = getValueFromBody("[0].systemNumber");
         System.out.println("- systemNumber = " + systemNumber);
         return systemNumber;
+    }
+
+    @Step public String getSystemNumberUsingVin(String vin) {
+        return getSystemNumberUsingVin(vin, false);
     }
 
     @Step

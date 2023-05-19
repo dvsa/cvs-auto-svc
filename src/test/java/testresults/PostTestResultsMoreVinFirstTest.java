@@ -72,14 +72,14 @@ public class PostTestResultsMoreVinFirstTest {
 
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin, true);
 
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin, true);
 
         // retrieve the vehicle and check the status code and the techRecord size
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(randomVin, VehicleTechnicalRecordStatus.ALL, true);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("$.size()", 2);
         vehicleTechnicalRecordsSteps.valueForFieldInTechRecordShouldBe(systemNumberOne, randomVin, 0, "statusCode", "provisional");
@@ -164,11 +164,11 @@ public class PostTestResultsMoreVinFirstTest {
 
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsOne);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        systemNumberOne = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin, true);
 
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterationsTwo);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
-        systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin);
+        systemNumberTwo = vehicleTechnicalRecordsSteps.getSystemNumberUsingVin(randomVin, true);
 
         try {
                 Thread.sleep(10000);
