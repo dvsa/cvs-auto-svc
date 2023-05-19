@@ -27,7 +27,7 @@ public class GetVehicleTechnicalRecords {
     private Vehicle vehicleProvisionalData = VehicleTechRecordsData.buildVehicleTechRecordsProvisionalData();
 
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-1057 / CVSB-1157 - AC1 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - VRM")
     @Test
     public void testVehicleTechnicalRecordsSearchVrm() {
@@ -59,7 +59,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-1057 / CVSB-1158 - AC2 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - last 6 digits of the VIN")
     @Test
     public void testVehicleTechnicalRecordsSearchPartialVin() {
@@ -130,7 +130,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.validateData("The search identifier should be between 3 and 21 characters.");
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-1057 / CVSB-1264 - API Consumer retrieve the Vehicle Technical Records for the input searchIdentifier - VRM when the statusCode is archived")
     @Test
     public void testVehicleTechnicalRecordsSearchVrmAndStatusArchived() {
@@ -268,7 +268,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional");
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-7051 - TC - AC1.1 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has both 'current' and 'provisional' technical records HGV")
     @Test
     public void testVehicleTechnicalRecordsStatusNotProvidedCurrentProvisionalHgv() {
@@ -318,7 +318,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","current");
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-7051 - TC - AC1.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' not provided & vehicle has only one 'current' OR 'provisional' technical record (PROVISIONAL) PSV")
     @Test
     public void testVehicleTechnicalRecordsStatusNotProvidedProvisionalPsv() {
@@ -390,7 +390,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","current");
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-7051 - TC - AC2.2 API Consumer retrieve the Vehicle Technical Records for - query parameter 'status' is 'provisional_over_current' & vehicle has only one 'current' OR 'provisional' technical record (CURRENT) PSV")
     @Test
     public void testVehicleTechnicalRecordsStatusProvidedProvisionalPsv() {
@@ -430,7 +430,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional");
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-3963 - TC - AC1 - VSA identifies a vehicle with a provisional tech record (HGV)")
     @Test
     public void testVehicleTechnicalRecordsStatusProvisionalHgv() {
@@ -463,7 +463,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","provisional");
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
     @Test
     public void testAllVehicleTechnicalRecordsSearchVin() {
@@ -474,7 +474,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord.size", 10);
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-7743 / CVSB-8623 - AC1 - API Consumer retrieves all Vehicle Technical Records for a specific vehicle, no matter the status")
     @Test
     public void testAllVehicleTechnicalRecordsSearchVrm() {
@@ -517,7 +517,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].vrms[1].isPrimary", false);
     }
 
-    @WithTag("Vtm")
+    @WithTag("IN_TEST")
     @Title("CVSB-10209 - AC1 - All attributes applicable to HGVs are returned " +
             "AC2 - HGV vehicle is created, and the appropriate attributes are automatically set")
     @Test
@@ -794,6 +794,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode","current");
     }
 
+    @WithTag("IN_TEST")
     @Title("VTA-695 - Get tech records Missing parameter value check")
     @Test
     public void getTechRecordsWithMissingParameter() {
