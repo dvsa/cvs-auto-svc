@@ -189,20 +189,6 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     private void validateDataByIndex(Vehicle vehicle, int index) {
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println(Arrays.toString(Vehicle.class.getDeclaredFields()));
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        System.out.println("################################");
-        response.then().body("[0].size()", is(Vehicle.class.getDeclaredFields().length-1));
         response.then().body("[0].vrms.vrm", hasItem(equalTo(vehicle.getVrms().get(0).getVrm())));
         response.then().body("[0].vrms.isPrimary", hasItem(equalTo(vehicle.getVrms().get(0).getPrimary())));
 
@@ -210,7 +196,6 @@ public class VehicleTechnicalRecordsSteps {
 
 
         response.then().body("[0].techRecord.size", equalTo(1));
-        //response.then().body("[0].techRecord[0].size()", is(TechRecord.class.getDeclaredFields().length));
         response.then().body("[0].techRecord.createdAt", hasItem(equalTo(vehicle.getTechRecord().get(index).getCreatedAt())));
         response.then().body("[0].techRecord.lastUpdatedAt", hasItem(equalTo(vehicle.getTechRecord().get(index).getLastUpdatedAt())));
         response.then().body("[0].techRecord.chassisMake", hasItem(equalTo(vehicle.getTechRecord().get(index).getChassisMake())));
