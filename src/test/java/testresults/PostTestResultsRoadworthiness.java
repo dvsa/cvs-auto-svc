@@ -166,8 +166,6 @@ public class PostTestResultsRoadworthiness {
         testResultsSteps.statusCodeShouldBe(201);
         testResultsSteps.validateData("Test records created");
 
-
-
         // Retrieve the created record, and verify that the fields are present.
         testResultsSteps.getTestResults(systemNumber);
         testResultsSteps.statusCodeShouldBe(200);
