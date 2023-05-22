@@ -40,15 +40,18 @@ public class VehicleTechnicalRecordsSteps {
     }
 
     @Step
-    public String getVehicleTechnicalRecords(String searchIdentifier) {
-        response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier);
+    public String getVehicleTechnicalRecords(String searchIdentifier, Boolean poll) {
+        if (poll) {
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecords(searchIdentifier);
+        } else {
+            response = vehicleTechnicalRecordsClient.pollGetVehicleTechnicalRecords(searchIdentifier);
+        }
         return response.prettyPrint();
     }
 
     @Step
-    public String pollGetVehicleTechnicalRecords(String searchIdentifier) {
-        response = vehicleTechnicalRecordsClient.pollGetVehicleTechnicalRecords(searchIdentifier);
-        return response.prettyPrint();
+    public String getVehicleTechnicalRecords(String searchIdentifier) {
+        return getVehicleTechnicalRecords(searchIdentifier,false);
     }
 
     @Step
@@ -85,11 +88,7 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public void getVehicleTechnicalRecordsByPartialVin(String searchIdentifier, Boolean poll) {
         String partialVin = searchIdentifier.substring(searchIdentifier.length() - 6);
-        if (poll) {
-            pollGetVehicleTechnicalRecords(partialVin);
-        } else {
-            getVehicleTechnicalRecords(partialVin);
-        } 
+        getVehicleTechnicalRecords(partialVin, poll);
     }
 
     @Step
@@ -547,13 +546,7 @@ public class VehicleTechnicalRecordsSteps {
     public String getSystemNumberUsingVin(String vin, Boolean poll) {
         String systemNumber = "";
         System.out.println("Retrieving systemNumber for vin: " + vin);
-
-        if (poll) {
-            pollGetVehicleTechnicalRecords(vin);
-        } else {
-            getVehicleTechnicalRecords(vin);
-        }
-
+        getVehicleTechnicalRecords(vin, poll);
         statusCodeShouldBe(200);
         systemNumber = getValueFromBody("[0].systemNumber");
         System.out.println("- systemNumber = " + systemNumber);
@@ -578,6 +571,16 @@ public class VehicleTechnicalRecordsSteps {
     @Step
     public Map<String,Object> createTechRecord(JSONObject restrictions) {
         return vehicleTechnicalRecordsClient.createTechRecord(restrictions);
+    }
+
+    @Step
+    public String getVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier,@NotNull VehicleTechnicalRecordSearchCriteria criteria, Boolean poll) {
+        if (poll) {
+            response = vehicleTechnicalRecordsClient.pollGetVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, criteria.getSearchCriteria());
+        } else {
+            response = vehicleTechnicalRecordsClient.getVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, criteria.getSearchCriteria());
+        }
+        return response.prettyPrint();
     }
 
     @Step

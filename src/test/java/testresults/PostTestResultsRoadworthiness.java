@@ -140,14 +140,8 @@ public class PostTestResultsRoadworthiness {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        try {
-                Thread.sleep(10000);
-        } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-        }
-
         //GET tech-records
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN, true);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();
@@ -207,14 +201,8 @@ public class PostTestResultsRoadworthiness {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_CREATED);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        try {
-                Thread.sleep(10000);
-        } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-        }
-
         //GET tech-records
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsBySearchCriteria(randomVin, VehicleTechnicalRecordSearchCriteria.VIN, true);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(HttpStatus.SC_OK);
 
         String systemNumber = vehicleTechnicalRecordsSteps.getSystemNumber();

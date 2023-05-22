@@ -107,6 +107,25 @@ public class VehicleTechnicalRecordsClient {
         return response;
     }
 
+    public Response pollGetVehicleTechnicalRecordsBySearchCriteria(String searchIdentifier, String searchCriteria) {
+
+        int tries = 0;
+
+        Response response = getVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
+
+        while (tries < 3 && response.getStatusCode() == 404) {
+            response = getVehicleTechnicalRecordsBySearchCriteria(searchIdentifier, searchCriteria);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tries++;
+        }
+
+        return response;
+    }
+
     public Response getVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(String searchIdentifier, String searchCriteria) {
         Response response = callGetVehicleTechnicalRecordsBySearchCriteriaWithDVLAToken(searchIdentifier, searchCriteria);
 
@@ -866,4 +885,6 @@ public class VehicleTechnicalRecordsClient {
 
         return response;
     }
+
+    
 }

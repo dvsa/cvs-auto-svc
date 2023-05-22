@@ -54,7 +54,7 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
         vehicleTechnicalRecordsSteps.validateData("Technical Record created");
 
-        vehicleTechnicalRecordsSteps.pollGetVehicleTechnicalRecords(randomVrm);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecords(randomVrm, true);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("techRecord.size()", 1);
     }
@@ -685,13 +685,8 @@ public class GetVehicleTechnicalRecords {
         vehicleTechnicalRecordsSteps.postVehicleTechnicalRecordsWithAlterations(postRequestBody, alterations);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(201);
 
-        try {
-                Thread.sleep(10000);
-        } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-        }        
 
-        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL);
+        vehicleTechnicalRecordsSteps.getVehicleTechnicalRecordsByStatus(GenericData.getPartialVinFromVin(randomVin), VehicleTechnicalRecordStatus.ALL, true);
         vehicleTechnicalRecordsSteps.statusCodeShouldBe(200);
         vehicleTechnicalRecordsSteps.validateResponseContainsJson("[0].techRecord[0]", techRecord);
         vehicleTechnicalRecordsSteps.valueForFieldInPathShouldBe("[0].techRecord[0].statusCode", "provisional");
