@@ -1,0 +1,10 @@
+{
+  "name": "svc",
+  "description": "",
+  "team": "",
+  "documentation": "",
+  "language": "java",
+  "terraform": false,
+  "monorepo": false,
+  "dynamo_tables": []
+}
